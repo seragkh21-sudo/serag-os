@@ -1,0 +1,11 @@
+{
+  "name":"Serag OS",
+  "short_name":"Serag OS",
+  "start_url":"/",
+  "display":"standalone",
+  "background_color":"#f7f7f8",
+  "theme_color":"#ffffff",
+  "lang":"ar",
+  "dir":"rtl",
+  "icons":[{"src":"/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}
