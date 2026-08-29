@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="theme-color" content="#ffffff" />
+<link rel="manifest" href="/manifest.webmanifest" />
+<link rel="icon" href="/icon.svg" type="image/svg+xml" />
+<title>Serag OS</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+<div id="authView" class="auth">
+  <h1>Serag OS</h1>
+  <div class="muted">منظم يومك وشغلك والجيم والإنجليزي والكريتف — وكل بياناتك محفوظة Online.</div>
+  <div class="tabs"><button id="loginTab" class="tab active" type="button">تسجيل دخول</button><button id="signupTab" class="tab" type="button">حساب جديد</button></div>
+  <div class="form">
+    <input id="email" type="email" autocomplete="email" placeholder="Email" />
+    <input id="password" type="password" autocomplete="current-password" placeholder="Password — 6 حروف على الأقل" />
+    <button id="authSubmit" class="btn primary" type="button">دخول</button>
+    <div id="authMsg" class="muted"></div>
+  </div>
+</div>
+
+<div id="appView" class="app hidden">
+  <aside class="sidebar">
+    <div class="brand">Serag OS<small>Personal Life OS</small></div>
+    <nav class="nav">
+      <button data-page="today" class="active" type="button">الرئيسية</button>
+      <button data-page="fitness" type="button">الجيم والأكل</button>
+      <button data-page="english" type="button">الإنجليزي</button>
+      <button data-page="work" type="button">الشغل</button>
+      <button data-page="creative" type="button">الكريتف</button>
+      <button data-page="tasks" type="button">المهام</button>
+    </nav>
+    <div class="sidebar-foot"><button id="logoutBtn" class="btn" style="width:100%" type="button">تسجيل خروج</button></div>
+  </aside>
+
+  <main class="content">
+    <section id="page-today">
+      <header class="top"><div><div class="date" id="todayDate"></div><h2>عامل إيه النهارده؟ 👋</h2><div class="muted">ملخص سريع من غير زحمة.</div></div><button class="btn desktop-only" id="refreshBtn" type="button">تحديث</button></header>
+      <div class="grid">
+        <div class="card span4"><h3>المياه</h3><div class="big"><span id="homeWater">0</span> / 8</div><div class="progress"><div class="bar" id="homeWaterBar" style="width:0%"></div></div></div>
+        <div class="card span4"><h3>السعرات</h3><div class="big"><span id="homeCalories">0</span> <span class="muted">/ 2800</span></div><div class="progress"><div class="bar" id="homeCaloriesBar" style="width:0%"></div></div></div>
+        <div class="card span4"><h3>المهام المفتوحة</h3><div class="big" id="homeTasks">0</div><div class="muted">كل الأقسام</div></div>
+        <div class="card span8"><h3>اللي عليك</h3><div id="homeTaskList" class="rows"></div></div>
+        <div class="card span4"><h3>ملاحظة اليوم</h3><div id="homeTip" class="notice">سجّل أول كوب مياه وأول وجبة، وبعدها الملخص هيبقى أدق.</div></div>
+      </div>
+    </section>
+
+    <section id="page-fitness" class="hidden">
+      <header class="top"><div><h2>الجيم والأكل</h2><div class="muted">مياه، وجبات، سعرات وتمرين.</div></div></header>
+      <div class="grid">
+        <div class="card span6"><h3>المياه</h3><div class="muted">كل ضغطة = 250 ml</div><div id="waterCups" class="water"></div><div class="big"><span id="waterCount">0</span> / 8 أكواب</div><div class="actions"><button id="addWater" class="btn primary" type="button">+ شربت كوب</button><button id="undoWater" class="btn" type="button">تراجع</button></div></div>
+        <div class="card span6"><h3>أضف وجبة</h3><form id="mealForm" class="form"><input id="mealName" required placeholder="مثال: سندوتشين بيض + زبادي"/><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><input id="mealCalories" type="number" min="0" placeholder="السعرات"/><input id="mealProtein" type="number" min="0" step="0.1" placeholder="البروتين g"/></div><button class="btn primary" type="submit">حفظ الوجبة</button></form></div>
+        <div class="card span6"><h3>وجبات اليوم</h3><div id="mealsList" class="rows"></div></div>
+        <div class="card span6"><h3>سجل تمرين</h3><form id="workoutForm" class="form"><input id="workoutTitle" placeholder="مثال: Push Day" required/><textarea id="workoutNotes" placeholder="التمارين / الأوزان / ملاحظات"></textarea><button class="btn primary">حفظ التمرين</button></form><div id="workoutsList" class="rows"></div></div>
+      </div>
+    </section>
+
+    <section id="page-english" class="hidden">
+      <header class="top"><div><h2>English</h2><div class="muted">الكتابة + الكلمات + القواعد + الكورس.</div></div></header>
+      <div class="grid">
+        <div class="card span6"><h3>الكلمات الجديدة</h3><form id="wordForm" class="form"><input id="newWord" required placeholder="Word"/><input id="wordMeaning" placeholder="المعنى"/><input id="wordExample" placeholder="Example sentence"/><button class="btn primary">إضافة كلمة</button></form><div id="wordsList" class="rows"></div></div>
+        <div class="card span6"><h3>القواعد</h3><form id="grammarForm" class="form"><input id="grammarTitle" required placeholder="مثال: Present Perfect"/><textarea id="grammarNotes" placeholder="ملاحظاتك"></textarea><button class="btn primary">إضافة قاعدة</button></form><div id="grammarList" class="rows"></div></div>
+        <div class="card span6"><h3>الكورس</h3><form id="englishCourseForm" class="form"><input id="englishCourseTitle" required placeholder="اسم الكورس / الوحدة"/><input id="englishCourseUrl" placeholder="الرابط"/><input id="englishCourseProgress" type="number" min="0" max="100" placeholder="Progress %"/><button class="btn primary">حفظ</button></form><div id="englishCoursesList" class="rows"></div></div>
+        <div class="card span6"><h3>الكتابة</h3><form id="writingForm" class="form"><input id="writingTitle" placeholder="عنوان التمرين"/><textarea id="writingContent" required placeholder="Write something in English..."></textarea><button class="btn primary">حفظ الكتابة</button></form><div id="writingList" class="rows"></div></div>
+      </div>
+    </section>
+
+    <section id="page-work" class="hidden">
+      <header class="top"><div><h2>الشغل</h2><div class="muted">مهام الشغل والـdeadlines فقط.</div></div></header>
+      <div class="grid"><div class="card span12"><div id="workTaskList" class="rows"></div></div></div>
+    </section>
+
+    <section id="page-creative" class="hidden">
+      <header class="top"><div><h2>Creative Hub</h2><div class="muted">مشاريعك، الكورسات، المواقع اللي بترجع لها، والمساعد.</div></div></header>
+      <div class="grid">
+        <div class="card span6"><h3>مشاريع الكريتف</h3><form id="projectForm" class="form"><input id="projectTitle" required placeholder="اسم المشروع"/><input id="projectType" placeholder="Motion / Graphic / Writing"/><textarea id="projectBrief" placeholder="Brief أو ملاحظات"></textarea><button class="btn primary">إضافة مشروع</button></form><div id="projectsList" class="rows"></div></div>
+        <div class="card span6"><h3>References & Sources</h3><form id="resourceForm" class="form"><input id="resourceTitle" required placeholder="اسم الموقع / المصدر"/><input id="resourceUrl" placeholder="https://..."/><input id="resourceType" placeholder="Inspiration / Motion / Fonts / Material"/><button class="btn primary">إضافة مصدر</button></form><div id="resourcesList" class="rows"></div></div>
+        <div class="card span6"><h3>كورسات الكريتف</h3><form id="creativeCourseForm" class="form"><input id="creativeCourseTitle" required placeholder="اسم الكورس"/><input id="creativeCourseUrl" placeholder="الرابط"/><input id="creativeCourseProgress" type="number" min="0" max="100" placeholder="Progress %"/><button class="btn primary">إضافة كورس</button></form><div id="creativeCoursesList" class="rows"></div></div>
+        <div class="card span6"><h3>المساعد الذكي</h3><div class="notice">الواجهة جاهزة. ربط الذكاء الاصطناعي الحقيقي محتاج API على الـbackend علشان المفتاح مايتحطش في المتصفح.</div><div class="assistant section"><textarea id="assistantPrompt" placeholder="مثال: عندي فيديو جديد وعايز Direction للـcomposition..."></textarea><button id="assistantSend" class="btn primary" type="button">اسأل</button></div><div id="assistantAnswer" class="notice hidden section"></div></div>
+      </div>
+    </section>
+
+    <section id="page-tasks" class="hidden">
+      <header class="top"><div><h2>المهام</h2><div class="muted">كل حاجة مطلوبة منك في قائمة واحدة.</div></div></header>
+      <div class="grid">
+        <div class="card span4"><h3>مهمة جديدة</h3><form id="taskForm" class="form"><input id="taskTitle" required placeholder="اسم المهمة"/><select id="taskCategory"><option value="general">عام</option><option value="work">شغل</option><option value="english">English</option><option value="fitness">Gym</option><option value="creative">Creative</option></select><input id="taskDue" type="datetime-local"/><select id="taskPriority"><option value="normal">عادية</option><option value="high">مهمة</option><option value="urgent">عاجلة</option><option value="low">منخفضة</option></select><button class="btn primary">إضافة</button></form></div>
+        <div class="card span8"><h3>المهام المفتوحة</h3><div id="tasksList" class="rows"></div></div>
+      </div>
+    </section>
+  </main>
+</div>
+<div id="toast" class="toast hidden"></div>
+
+<script src="/app.js"></script>
+</body>
+</html>
