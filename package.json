@@ -1,0 +1,10 @@
+{
+  "name": "serag-os",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "ai": "^6.0.0",
+    "zod": "^4.0.0"
+  }
+}
