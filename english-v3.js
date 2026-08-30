@@ -1,6 +1,6 @@
 (()=>{
   const q=id=>document.getElementById(id);
-  const ev3Esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const ev3Esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[c]));
   const ev3SafeUrl=v=>{try{const u=new URL(v);return ['http:','https:'].includes(u.protocol)?u.href:''}catch{return ''}};
   const ev3WordsCount=s=>String(s||'').trim()?String(s||'').trim().split(/\s+/).length:0;
   const ev3Date=v=>v?new Date(v).toLocaleDateString('ar-EG',{day:'numeric',month:'short',year:'numeric'}):'';
@@ -39,7 +39,11 @@
       const patch={phonetic:ev3Phonetic(info.phonetic)||null,audio_url:ev3SafeUrl(info.audio)||null,part_of_speech:String(info.partOfSpeech||'').slice(0,40)||null};
       await sb.from('english_words').update(patch).eq('id',row.id);
       Object.assign(row,patch);
-      if(play)ev3PlayWord(row);
+      if(play){
+        const url=ev3SafeUrl(row.audio_url);
+        if(url){const audio=new Audio(url);audio.play().catch(()=>ev3Speak(row.word,{word:true}))}
+        else ev3Speak(row.word,{word:true});
+      }
       return patch;
     }
     if(play)ev3Speak(row.word,{word:true});
@@ -53,6 +57,7 @@
       audio.play().catch(()=>ev3Speak(row.word,{word:true}));
       return;
     }
+    if(ev3PronunciationAttempts.has(String(row?.id)))return ev3Speak(row.word,{word:true});
     ev3EnrichWord(row,{play:true});
   }
 
@@ -272,8 +277,8 @@
   function ev3CloseArticle(){window.speechSynthesis?.cancel?.();document.querySelector('[data-english-modal]')?.classList.add('english-hidden');document.body.style.overflow='';ev3ActiveArticleId=null;ev3CancelArticleEdit()}
   function ev3StartArticleEdit(){const a=ev3Writing.find(x=>String(x.id)===String(ev3ActiveArticleId));if(!a)return;q('articleEditTitle').value=a.title||'';q('articleEditContent').value=a.content||'';q('articleViewPane').classList.add('english-hidden');q('articleEditPane').classList.remove('english-hidden');q('articleEditBtn').classList.add('english-hidden');q('articleReadBtn').classList.add('english-hidden');q('articleCopyBtn').classList.add('english-hidden');q('articleCancelEditBtn').classList.remove('english-hidden');q('articleSaveEditBtn').classList.remove('english-hidden')}
   function ev3CancelArticleEdit(){q('articleViewPane')?.classList.remove('english-hidden');q('articleEditPane')?.classList.add('english-hidden');q('articleEditBtn')?.classList.remove('english-hidden');q('articleReadBtn')?.classList.remove('english-hidden');q('articleCopyBtn')?.classList.remove('english-hidden');q('articleCancelEditBtn')?.classList.add('english-hidden');q('articleSaveEditBtn')?.classList.add('english-hidden')}
-  async function ev3SaveArticleEdit(){if(!ev3ActiveArticleId)return;const title=q('articleEditTitle').value.trim()||'Untitled Article',content=q('articleEditContent').value.trim();if(!content)return toast('المقال فاضي');const {error}=await sb.from('english_writing').update({title,content,updated_at:new Date().toISOString()}).eq('id',ev3ActiveArticleId);if(error)return toast(error.message);toast('المقال اتعدل');await ev3LoadEnglish();ev3OpenArticle(ev3ActiveArticleId)}
-  async function ev3DeleteActiveArticle(){if(!ev3ActiveArticleId||!confirm('Delete this article?'))return;const {error}=await sb.from('english_writing').delete().eq('id',ev3ActiveArticleId);if(error)return toast(error.message);ev3CloseArticle();toast('المقال اتمسح');ev3LoadEnglish()}
+  async function ev3SaveArticleEdit(){if(!ev3ActiveArticleId)return;const id=ev3ActiveArticleId,title=q('articleEditTitle').value.trim()||'Untitled Article',content=q('articleEditContent').value.trim();if(!content)return toast('المقال فاضي');const {error}=await sb.from('english_writing').update({title,content,updated_at:new Date().toISOString()}).eq('id',id);if(error)return toast(error.message);toast('المقال اتعدل');await ev3LoadEnglish();ev3OpenArticle(id)}
+  async function ev3DeleteActiveArticle(){if(!ev3ActiveArticleId||!confirm('Delete this article?'))return;const id=ev3ActiveArticleId;const {error}=await sb.from('english_writing').delete().eq('id',id);if(error)return toast(error.message);ev3CloseArticle();toast('المقال اتمسح');ev3LoadEnglish()}
 
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',ev3Mount,{once:true});else ev3Mount();
 })();
