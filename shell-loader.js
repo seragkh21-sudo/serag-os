@@ -17,7 +17,7 @@
 
     const mainClose='\n  </main>\n</div>\n\n<button id="quickFab"';
     html=html.replace(mainClose,calendarPage+mainClose);
-    html=html.replace('</body>','<script src="/dashboard-v2.js"></script>\n<script src="/english-v3.js"></script>\n<script src="/english-audio-v4.js"></script>\n<script src="/microsoft-tts-v1.js"></script>\n</body>');
+    html=html.replace('</body>','<script src="/dashboard-v2.js"></script>\n<script src="/english-v3.js"></script>\n<script src="/english-audio-v4.js"></script>\n<script src="/microsoft-tts-v1.js"></script>\n<script src="/nutrition-v2.js"></script>\n</body>');
 
     document.open();
     document.write(html);
