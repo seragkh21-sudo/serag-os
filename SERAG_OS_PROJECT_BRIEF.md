@@ -19,7 +19,8 @@ Core loop: **Plan → track → analyze → remind → improve.**
 
 ### Home / Dashboard
 - Daily summary.
-- Water, calories and open-task stats.
+- Water, calories, protein and open-task stats.
+- Daily protein progress uses the authenticated profile's `protein_target` and updates from logged meals.
 - Upcoming tasks.
 - **Weekly Progress:** one switchable 7-day chart for water, calories, completed tasks, and workouts.
 - **Mini Calendar:** the next 7 days plus the nearest upcoming items.
@@ -29,6 +30,7 @@ Core loop: **Plan → track → analyze → remind → improve.**
 ### Gym & Food
 - Meals and calories.
 - Protein / carbs / fat.
+- Dedicated daily protein total and progress toward `protein_target`.
 - Workouts and exercises.
 - Daily / weekly / monthly progress.
 - Water tracking with quick cup logging.
@@ -131,6 +133,7 @@ Hard requirement:
 Current production implementation is a lightweight static web app rather than Next.js:
 - `index.html` + `app.js` + `styles.css` — existing application.
 - `shell-loader.js` + `dashboard-v2.js` + `dashboard-v2.css` — progressive dashboard/calendar enhancement layer.
+- `nutrition-v2.js` + `nutrition-v2.css` — daily protein summary/progress enhancement for Home and Gym & Food.
 - `english-v3.js` + `english-v3.css` — professional English workspace enhancement layer.
 - `english-audio-v4.js` + `english-audio-v4.css` — custom article-audio upload, playback, resume and speed layer.
 - `api/pronunciation.js` — normalized pronunciation/phonetics lookup endpoint used by Vocabulary.
@@ -172,6 +175,14 @@ Existing relevant tables include:
 - `assistant_messages`
 - `food_catalog`
 
+Nutrition tracking uses:
+- `meals.calories`
+- `meals.protein_g`
+- `meals.carbs_g`
+- `meals.fat_g`
+- `profiles.calorie_target`
+- `profiles.protein_target`
+
 `english_words` also stores:
 - `status` — learning/mastered state.
 - `phonetic` — compact phonetic transcription when found.
@@ -203,6 +214,13 @@ Any website work belongs to **Serag OS Website**, including:
 When a decision changes, update this file.
 
 ## 9) Change log
+### 2026-08-30 — Daily Protein Tracking
+- Added protein as a first-class daily metric beside calories and water.
+- Home now shows protein consumed against the user's profile target.
+- Gym & Food now shows the same protein progress with a compact progress bar.
+- Protein totals are calculated from the day's logged meals and refresh whenever meals refresh.
+- Added `nutrition-v2.js` and `nutrition-v2.css` as a small progressive enhancement instead of expanding the base app UI directly.
+
 ### 2026-08-30 — Custom Article Audio
 - Added optional user-uploaded audio to English Writing articles.
 - Added private Supabase Storage persistence using the existing user-scoped attachment bucket.
