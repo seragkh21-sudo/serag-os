@@ -40,11 +40,44 @@ Core loop: **Plan → track → analyze → remind → improve.**
 - Deadlines and status.
 
 ### English
-- Writing.
-- Vocabulary / New Words.
-- Grammar.
-- Course.
-- Homework / review / progress where useful.
+The English area is a focused learning workspace rather than a collection of basic forms.
+
+#### Writing Studio
+- Write and save full English articles.
+- Live word count while writing.
+- `My Articles` library with search, preview, word count, estimated reading time and date.
+- Every saved article can be opened in a dedicated reading view.
+- Open articles can be read aloud with browser English speech, copied, edited, saved again, or deleted.
+
+#### Vocabulary
+- Add a word, Arabic meaning and example sentence.
+- Automatic pronunciation lookup after adding a word.
+- Show compact IPA/phonetic transcription beside the word when available.
+- Use dictionary audio when available, with browser English speech as fallback.
+- Store pronunciation metadata in Supabase so it persists across devices.
+- Show part of speech when the dictionary provides it.
+- Search and filter vocabulary by `Learning` / `Mastered`.
+- Edit and delete words.
+
+#### Quick Review
+- Review non-mastered words one at a time.
+- Reveal meaning on demand.
+- Play pronunciation while reviewing.
+- Mark a word `Mastered` or move to the next word.
+- A mastered word can be returned to `Learning` / review later.
+
+#### Grammar
+- Save grammar topics and notes.
+- Edit/delete saved grammar notes.
+
+#### Course
+- Save English courses / units and links.
+- Track progress percentage with a visible progress bar.
+- English overview shows average course progress.
+
+#### English overview
+- Compact KPI row for vocabulary count, mastered words, saved writing, grammar topics, and course progress.
+- Keep the section visually calm and avoid turning it into a dense analytics dashboard.
 
 ### Creative
 - Creative projects and progress.
@@ -88,7 +121,9 @@ Hard requirement:
 ## 5) Current technical implementation
 Current production implementation is a lightweight static web app rather than Next.js:
 - `index.html` + `app.js` + `styles.css` — existing application.
-- `shell.html` + `dashboard-v2.js` + `dashboard-v2.css` — progressive dashboard/calendar enhancement layer.
+- `shell-loader.js` + `dashboard-v2.js` + `dashboard-v2.css` — progressive dashboard/calendar enhancement layer.
+- `english-v3.js` + `english-v3.css` — professional English workspace enhancement layer.
+- `api/pronunciation.js` — normalized pronunciation/phonetics lookup endpoint used by Vocabulary.
 - Supabase — PostgreSQL database + Authentication + Storage.
 - Vercel — production hosting and GitHub deployments.
 - Vercel AI SDK / API route — AI assistant implementation where configured.
@@ -127,6 +162,12 @@ Existing relevant tables include:
 - `assistant_messages`
 - `food_catalog`
 
+`english_words` now also stores:
+- `status` — learning/mastered state.
+- `phonetic` — compact phonetic transcription when found.
+- `audio_url` — pronunciation audio URL when found.
+- `part_of_speech` — dictionary part of speech when found.
+
 The Calendar intentionally reuses the existing tables instead of introducing duplicate event records.
 
 ## 8) Product rule
@@ -143,6 +184,16 @@ Any website work belongs to **Serag OS Website**, including:
 When a decision changes, update this file.
 
 ## 9) Change log
+### 2026-08-30 — English Workspace v3
+- Reworked English into a professional learning workspace while keeping the UI calm.
+- Replaced the Writing preview-only experience with `My Articles` and a full article reader.
+- Added article search, word count, reading-time estimate, read-aloud, copy, edit and delete.
+- Added automatic vocabulary phonetics and pronunciation lookup.
+- Added dictionary audio with browser speech fallback.
+- Added persistent `phonetic`, `audio_url`, and `part_of_speech` fields to `english_words`.
+- Added Learning/Mastered vocabulary states, filtering and Quick Review mode.
+- Added compact English KPI summary and improved course progress presentation.
+
 ### 2026-08-30 — Calendar + Weekly Progress
 - Added one calm, switchable 7-day chart to Home: Water / Calories / Tasks / Workouts.
 - Added a compact upcoming-week calendar card to Home.
