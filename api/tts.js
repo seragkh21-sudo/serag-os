@@ -1,4 +1,4 @@
-import { generateSpeech } from '@bestcodes/edge-tts';
+import { generateSpeech } from '@bestcodes/edge-tts/dist/index.mjs';
 
 const VOICE='en-US-EmmaMultilingualNeural';
 const MAX_WORD_CHARS=120;
