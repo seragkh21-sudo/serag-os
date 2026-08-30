@@ -47,7 +47,16 @@ The English area is a focused learning workspace rather than a collection of bas
 - Live word count while writing.
 - `My Articles` library with search, preview, word count, estimated reading time and date.
 - Every saved article can be opened in a dedicated reading view.
-- Open articles can be read aloud with browser English speech, copied, edited, saved again, or deleted.
+- Open articles can be copied, edited, saved again, or deleted.
+- Browser English read-aloud remains the fallback listening option.
+- Each article can optionally have a private custom audio file uploaded by the user.
+- Custom article audio takes priority over browser TTS when present.
+- Supported uploads use the existing private `serag-attachments` Supabase Storage bucket and allow audio files up to 50MB.
+- Custom audio supports native playback controls plus 0.75x / 1x / 1.25x / 1.5x playback speeds.
+- Replace and remove audio actions are available from the article reader.
+- Playback position and preferred playback speed are persisted in Supabase so listening can resume across devices.
+- Removing custom audio automatically returns the article to browser read-aloud fallback.
+- Deleting an article with custom audio also removes the associated Storage object.
 
 #### Vocabulary
 - Add a word, Arabic meaning and example sentence.
@@ -123,8 +132,9 @@ Current production implementation is a lightweight static web app rather than Ne
 - `index.html` + `app.js` + `styles.css` — existing application.
 - `shell-loader.js` + `dashboard-v2.js` + `dashboard-v2.css` — progressive dashboard/calendar enhancement layer.
 - `english-v3.js` + `english-v3.css` — professional English workspace enhancement layer.
+- `english-audio-v4.js` + `english-audio-v4.css` — custom article-audio upload, playback, resume and speed layer.
 - `api/pronunciation.js` — normalized pronunciation/phonetics lookup endpoint used by Vocabulary.
-- Supabase — PostgreSQL database + Authentication + Storage.
+- Supabase — PostgreSQL database + Authentication + private Storage.
 - Vercel — production hosting and GitHub deployments.
 - Vercel AI SDK / API route — AI assistant implementation where configured.
 
@@ -162,11 +172,20 @@ Existing relevant tables include:
 - `assistant_messages`
 - `food_catalog`
 
-`english_words` now also stores:
+`english_words` also stores:
 - `status` — learning/mastered state.
 - `phonetic` — compact phonetic transcription when found.
 - `audio_url` — pronunciation audio URL when found.
 - `part_of_speech` — dictionary part of speech when found.
+
+`english_writing` also stores custom listening metadata:
+- `audio_storage_path` — private Supabase Storage path for the article audio.
+- `audio_name` — uploaded file name.
+- `audio_mime_type` — stored audio MIME type.
+- `audio_position_seconds` — last listening position for resume.
+- `audio_playback_rate` — preferred listening speed.
+
+Audio-progress-only updates preserve the article's editorial `updated_at` date so normal listening does not make the article look newly edited.
 
 The Calendar intentionally reuses the existing tables instead of introducing duplicate event records.
 
@@ -184,6 +203,17 @@ Any website work belongs to **Serag OS Website**, including:
 When a decision changes, update this file.
 
 ## 9) Change log
+### 2026-08-30 — Custom Article Audio
+- Added optional user-uploaded audio to English Writing articles.
+- Added private Supabase Storage persistence using the existing user-scoped attachment bucket.
+- Added a custom article player with 0.75x / 1x / 1.25x / 1.5x speeds.
+- Added playback-position and playback-speed resume across devices.
+- Added Replace / Remove audio controls.
+- Custom audio now takes priority over browser TTS, with automatic TTS fallback when no upload exists.
+- Article deletion now cleans up its linked custom-audio Storage object.
+- Added `audio_storage_path`, `audio_name`, `audio_mime_type`, `audio_position_seconds`, and `audio_playback_rate` to `english_writing`.
+- Preserved editorial article `updated_at` while only listening progress changes.
+
 ### 2026-08-30 — English Workspace v3
 - Reworked English into a professional learning workspace while keeping the UI calm.
 - Replaced the Writing preview-only experience with `My Articles` and a full article reader.
