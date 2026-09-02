@@ -4,7 +4,7 @@
     if(!res.ok)throw new Error('Legacy app failed to load');
     let html=await res.text();
 
-    html=html.replace('</head>','<link rel="stylesheet" href="/dashboard-v2.css"/>\n<link rel="stylesheet" href="/english-learning-v6.css"/>\n<link rel="stylesheet" href="/english-focus-v7.css"/>\n<style>#appView.hidden~#v5BottomNav,#appView.hidden~#v5MobileMore{display:none!important}</style>\n</head>');
+    html=html.replace('</head>','<link rel="stylesheet" href="/dashboard-v2.css"/>\n<link rel="stylesheet" href="/english-learning-v6.css"/>\n<link rel="stylesheet" href="/english-focus-v7.css"/>\n<link rel="stylesheet" href="/english-v8.css"/>\n<style>#appView.hidden~#v5BottomNav,#appView.hidden~#v5MobileMore{display:none!important}</style>\n</head>');
 
     const tasksNav='<button data-page="tasks" type="button">المهام</button>';
     html=html.replace(tasksNav,tasksNav+'\n      <button data-page="calendar" type="button">التقويم</button>');
