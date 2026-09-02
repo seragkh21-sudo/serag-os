@@ -9,7 +9,7 @@
     el.parentNode.insertBefore(d,el);d.append(summary,panel);panel.append(el);
   }
   function mount(){
-    const page=qs('#page-english'),hub=qs('#page-english .el6-hub');if(!page||!hub||page.dataset.el7)return false;page.dataset.el7='1';
+    const page=qs('#page-english'),hub=qs('#page-english .el6-hub');if(!page||!hub||page.dataset.el7||hub.querySelector('.el8-today-nav'))return false;page.dataset.el7='1';
     if(!document.querySelector('link[href="/english-focus-v7.css"]')){const l=document.createElement('link');l.rel='stylesheet';l.href='/english-focus-v7.css';document.head.appendChild(l)}
     const hero=hub.querySelector('.el6-hero');
     const focus=document.createElement('section');focus.className='card el7-focusbar';focus.innerHTML=`<div><div class="el6-eyebrow">Focus Mode</div><h3>اعمل المطلوب النهارده وبس</h3><p class="el6-muted">ابدأ بالمهمة اليومية. افتح الكلمات أو الجرامر أو الخطة فقط لما تحتاجهم.</p></div><div class="el7-focus-actions"><button class="btn primary" id="el7StartToday">ابدأ 15 دقيقة</button><button class="btn" id="el7OpenWords">الكلمات</button><button class="btn" id="el7OpenGrammar">الجرامر</button></div>`;
