@@ -280,7 +280,7 @@ async function loadCaptures(){
     sb.from('quick_notes').select('*').order('pinned',{ascending:false}).order('created_at',{ascending:false}).limit(30),
     sb.from('attachments').select('*').order('created_at',{ascending:false}).limit(30)
   ]);
-  const notes=n.data||[],atts=a.data||[];
+  const notes=(n.data||[]).filter(x=>x.category!=='system_english'),atts=a.data||[];
   const combined=[
     ...notes.map(x=>({...x,_type:'note',_date:x.created_at})),
     ...atts.map(x=>({...x,_type:'attachment',_date:x.created_at}))
