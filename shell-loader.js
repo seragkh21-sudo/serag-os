@@ -4,7 +4,7 @@
     if(!res.ok)throw new Error('Legacy app failed to load');
     let html=await res.text();
 
-    html=html.replace('</head>','<link rel="stylesheet" href="/dashboard-v2.css"/>\n<link rel="stylesheet" href="/english-learning-v6.css"/>\n<link rel="stylesheet" href="/english-focus-v7.css"/>\n<link rel="stylesheet" href="/english-v8.css"/>\n<style>#appView.hidden~#v5BottomNav,#appView.hidden~#v5MobileMore{display:none!important}</style>\n</head>');
+    html=html.replace('</head>','<link rel="stylesheet" href="/dashboard-v2.css"/>\n<link rel="stylesheet" href="/english-learning-v6.css"/>\n<link rel="stylesheet" href="/english-focus-v7.css"/>\n<link rel="stylesheet" href="/english-v8.css"/>\n<link rel="stylesheet" href="/english-v9.css"/>\n<style>#appView.hidden~#v5BottomNav,#appView.hidden~#v5MobileMore{display:none!important}</style>\n</head>');
 
     const tasksNav='<button data-page="tasks" type="button">المهام</button>';
     html=html.replace(tasksNav,tasksNav+'\n      <button data-page="calendar" type="button">التقويم</button>');
@@ -17,7 +17,7 @@
 
     const mainClose='\n  </main>\n</div>\n\n<button id="quickFab"';
     html=html.replace(mainClose,calendarPage+mainClose);
-    html=html.replace('</body>','<script src="/dashboard-v2.js"></script>\n<script src="/english-v3.js"></script>\n<script src="/english-audio-v4.js"></script>\n<script src="/microsoft-tts-v1.js"></script>\n<script src="/serag-v5.js"></script>\n<script src="/english-learning-v6.js"></script>\n<script src="/english-focus-v7.js"></script>\n<script>document.addEventListener("click",function(e){if(e.target.closest&&e.target.closest("[data-open-article]")){var p=document.getElementById("articleViewPane");if(p)p.dataset.v5Words=""}},true);</script>\n</body>');
+    html=html.replace('</body>','<script src="/dashboard-v2.js"></script>\n<script src="/english-v3.js"></script>\n<script src="/english-audio-v4.js"></script>\n<script src="/microsoft-tts-v1.js"></script>\n<script src="/serag-v5.js"></script>\n<script src="/english-content-v9.js"></script>\n<script src="/english-learning-v6.js"></script>\n<script src="/english-focus-v7.js"></script>\n<script>document.addEventListener("click",function(e){if(e.target.closest&&e.target.closest("[data-open-article]")){var p=document.getElementById("articleViewPane");if(p)p.dataset.v5Words=""}},true);</script>\n</body>');
 
     document.open();
     document.write(html);
