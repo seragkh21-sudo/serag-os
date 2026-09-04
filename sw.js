@@ -1,5 +1,14 @@
-const CACHE='serag-os-v11';
+const CACHE='serag-os-v12';
 const CORE=['/','/index','/manifest.webmanifest','/icon.svg','/styles.css','/app.js','/shell-loader.js','/dashboard-v2.css','/dashboard-v2.js','/english-v3.css','/english-v3.js','/english-audio-v4.css','/english-audio-v4.js','/microsoft-tts-v1.js','/serag-v5.css','/serag-v5.js','/english-learning-v6.css','/english-learning-v6.js','/english-content-v9.js','/english-review-v10-data.js','/english-review-v10.js','/english-review-v10-fallback.js','/english-focus-v7.css','/english-focus-v7.js','/english-v8.css','/english-v9.css'];
 self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).catch(()=>{}))});
 self.addEventListener('activate',e=>e.waitUntil(Promise.all([caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))),self.clients.claim()])));
-self.addEventListener('fetch',e=>{if(e.request.method!=='GET')return;e.respondWith(fetch(e.request).then(r=>{const copy=r.clone();caches.open(CACHE).then(c=>c.put(e.request,copy));return r}).catch(()=>caches.match(e.request)))})
+self.addEventListener('fetch',e=>{
+  if(e.request.method!=='GET')return;
+  const url=new URL(e.request.url);
+  const isCode=url.origin===self.location.origin&&(e.request.mode==='navigate'||/\.(?:html|js|css)$/.test(url.pathname));
+  const network=()=>fetch(e.request,isCode?{cache:'no-store'}:undefined).then(r=>{
+    if(r&&r.ok){const copy=r.clone();caches.open(CACHE).then(c=>c.put(e.request,copy)).catch(()=>{})}
+    return r;
+  });
+  e.respondWith(network().catch(()=>caches.match(e.request).then(r=>r||caches.match('/'))));
+});
