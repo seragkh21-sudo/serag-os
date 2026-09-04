@@ -44,7 +44,7 @@
   }
   function reviewHTML(){
     return `<div class="sr10-topic-grid">${TOPICS.map(t=>`<article class="sr10-topic"><b>${esc(t.title)}</b><p>${esc(t.tip)}</p></article>`).join('')}</div>
-      <div class="sr10-start"><div><b>Ready for the checkpoint?</b><p>53 سؤال على كل اللي راجعته — الإجابات والشرح مقفولين لحد ما تخلص.</p></div><button class="sr10-btn" data-sr10-start>ابدأ الامتحان</button></div>`;
+      <div class="sr10-start"><div><b>Ready for the checkpoint?</b><p>53 سؤال على كل اللي راجعته — الإجابات والشرح مقفولين لحد ما تخلص.</p></div><button class="sr10-btn" type="button" data-sr10-start>ابدأ الامتحان</button></div>`;
   }
   function questionHTML(q){
     const chosen=state.answers[q.n];
@@ -70,7 +70,15 @@
     }).join('');
     let result='';
     if(state.submitted){const sc=score(),p=Math.round(sc/QUESTIONS.length*100);result=`<div class="sr10-result show"><div class="sr10-score">${sc}/${QUESTIONS.length}</div><div><h4>${resultLabel(p)}</h4><p>نتيجتك ${p}%. تحت كل سؤال هتلاقي الإجابة الصحيحة والشرح. ركّز على الأسئلة الغلط وارجع حل الامتحان بعد المراجعة.</p></div></div>`}
-    return `${result}<div class="sr10-progress-card"><div class="sr10-progress-line"><span>${state.submitted?'Exam finished':'Progress'}</span><span>${answered}/${QUESTIONS.length} answered</span></div><div class="sr10-bar"><i style="width:${pct}%"></i></div></div>${sections}<div class="sr10-actions">${state.submitted?'<button class="sr10-btn danger" data-sr10-reset>إعادة الامتحان من الأول</button>':'<button class="sr10-btn" data-sr10-submit>خلصت — ورّيني النتيجة والشرح</button>'}<span class="sr10-missing" id="sr10Missing"></span></div><div class="sr10-lock">الإجابات مش بتظهر أثناء الحل؛ بتتفك مرة واحدة بعد إنهاء كل الأسئلة.</div>`;
+    return `${result}<div class="sr10-progress-card"><div class="sr10-progress-line"><span>${state.submitted?'Exam finished':'Progress'}</span><span>${answered}/${QUESTIONS.length} answered</span></div><div class="sr10-bar"><i style="width:${pct}%"></i></div></div>${sections}<div class="sr10-actions">${state.submitted?'<button class="sr10-btn danger" type="button" data-sr10-reset>إعادة الامتحان من الأول</button>':'<button class="sr10-btn" type="button" data-sr10-submit>خلصت — ورّيني النتيجة والشرح</button>'}<span class="sr10-missing" id="sr10Missing"></span></div><div class="sr10-lock">الإجابات مش بتظهر أثناء الحل؛ بتتفك مرة واحدة بعد إنهاء كل الأسئلة.</div>`;
+  }
+  function updateProgress(root){
+    const answered=QUESTIONS.filter(isAnswered).length;
+    const card=$('.sr10-progress-card',root);
+    if(!card)return;
+    const label=$('.sr10-progress-line span:last-child',card),bar=$('.sr10-bar i',card);
+    if(label)label.textContent=`${answered}/${QUESTIONS.length} answered`;
+    if(bar)bar.style.width=Math.round(answered/QUESTIONS.length*100)+'%';
   }
   function render(root){
     const review=$('[data-sr10-panel="review"]',root),exam=$('[data-sr10-panel="exam"]',root);
@@ -79,23 +87,23 @@
     const active=state.submitted?'exam':(root.dataset.active||'review');
     $$('[data-sr10-panel]',root).forEach(p=>p.classList.toggle('active',p.dataset.sr10Panel===active));
   }
-  function setActive(root,name){root.dataset.active=name;$$('[data-sr10-tab]',root).forEach(b=>b.classList.toggle('active',b.dataset.sr10Tab===name));$$('[data-sr10-panel]',root).forEach(p=>p.classList.toggle('active',p.dataset.sr10Panel===name));if(name==='exam')root.scrollIntoView({behavior:'smooth',block:'start'})}
+  function setActive(root,name){root.dataset.active=name;$$('[data-sr10-tab]',root).forEach(b=>b.classList.toggle('active',b.dataset.sr10Tab===name));$$('[data-sr10-panel]',root).forEach(p=>p.classList.toggle('active',p.dataset.sr10Panel===name))}
   function mount(){
     const grammar=$('#el9Grammar'),hub=grammar?.closest('.el9-hub');if(!grammar||!hub)return false;if($('#seragReviewWrap'))return true;
     injectStyle();load();
-    const wrap=document.createElement('details');wrap.id='seragReviewWrap';wrap.className='el7-accordion';wrap.innerHTML=`<summary><div class="el7-summary-left"><div class="el7-summary-icon">✓</div><div class="el7-summary-copy"><b>Review & Grammar Checkpoint</b><span>مراجعة مركزة + امتحان 53 سؤال على اللي خلصته لحد Past Perfect</span></div></div><span class="el7-chevron">⌄</span></summary><div class="el7-panel"><div class="sr10-shell"><div class="sr10-hero"><div><div class="el6-eyebrow">YOUR CURRENT CHECKPOINT</div><h3>راجع اللي اتعلمته، وبعدها اختبر نفسك من غير hints.</h3><p>Articles، prepositions، simple & continuous tenses، Present Perfect وPast Perfect — بنفس مستوى المراجعة اللي وصلته.</p></div><div class="sr10-kpis"><div class="sr10-kpi"><strong>11</strong><span>topics</span></div><div class="sr10-kpi"><strong>53</strong><span>questions</span></div><div class="sr10-kpi"><strong>100%</strong><span>explained</span></div></div></div><div class="sr10-tabs"><button class="sr10-tab active" data-sr10-tab="review">المراجعة</button><button class="sr10-tab" data-sr10-tab="exam">الامتحان</button></div><div class="sr10-panel active" data-sr10-panel="review"></div><div class="sr10-panel" data-sr10-panel="exam"></div></div></div>`;
+    const wrap=document.createElement('details');wrap.id='seragReviewWrap';wrap.className='el7-accordion';wrap.innerHTML=`<summary><div class="el7-summary-left"><div class="el7-summary-icon">✓</div><div class="el7-summary-copy"><b>Review & Grammar Checkpoint</b><span>مراجعة مركزة + امتحان 53 سؤال على اللي خلصته لحد Past Perfect</span></div></div><span class="el7-chevron">⌄</span></summary><div class="el7-panel"><div class="sr10-shell"><div class="sr10-hero"><div><div class="el6-eyebrow">YOUR CURRENT CHECKPOINT</div><h3>راجع اللي اتعلمته، وبعدها اختبر نفسك من غير hints.</h3><p>Articles، prepositions، simple & continuous tenses، Present Perfect وPast Perfect — بنفس مستوى المراجعة اللي وصلته.</p></div><div class="sr10-kpis"><div class="sr10-kpi"><strong>11</strong><span>topics</span></div><div class="sr10-kpi"><strong>53</strong><span>questions</span></div><div class="sr10-kpi"><strong>100%</strong><span>explained</span></div></div></div><div class="sr10-tabs"><button class="sr10-tab active" type="button" data-sr10-tab="review">المراجعة</button><button class="sr10-tab" type="button" data-sr10-tab="exam">الامتحان</button></div><div class="sr10-panel active" data-sr10-panel="review"></div><div class="sr10-panel" data-sr10-panel="exam"></div></div></div>`;
     grammar.insertAdjacentElement('afterend',wrap);
-    const nav=$('.el9-today-nav',hub);if(nav&&!$('[data-jump="seragReviewWrap"]',nav))nav.insertAdjacentHTML('beforeend','<button data-jump="seragReviewWrap">Review Exam</button>');
+    const nav=$('.el9-today-nav',hub);if(nav&&!$('[data-jump="seragReviewWrap"]',nav))nav.insertAdjacentHTML('beforeend','<button type="button" data-jump="seragReviewWrap">Review Exam</button>');
     render(wrap);
-    wrap.addEventListener('change',e=>{const radio=e.target.closest('input[type="radio"][name^="sr10q"]');if(!radio||state.submitted)return;state.answers[Number(radio.name.replace('sr10q',''))]=radio.value;save();render(wrap);setActive(wrap,'exam')});
-    wrap.addEventListener('input',e=>{const inp=e.target.closest('[data-sr10-text]');if(!inp||state.submitted)return;state.answers[Number(inp.dataset.sr10Text)]=inp.value;save();const answered=QUESTIONS.filter(isAnswered).length;const card=$('.sr10-progress-card',wrap);if(card){$('.sr10-progress-line span:last-child',card).textContent=`${answered}/${QUESTIONS.length} answered`;$('.sr10-bar i',card).style.width=Math.round(answered/QUESTIONS.length*100)+'%'}});
+    wrap.addEventListener('change',e=>{const radio=e.target.closest('input[type="radio"][name^="sr10q"]');if(!radio||state.submitted)return;state.answers[Number(radio.name.replace('sr10q',''))]=radio.value;save();updateProgress(wrap)});
+    wrap.addEventListener('input',e=>{const inp=e.target.closest('[data-sr10-text]');if(!inp||state.submitted)return;state.answers[Number(inp.dataset.sr10Text)]=inp.value;save();updateProgress(wrap)});
     wrap.addEventListener('click',e=>{
       const tab=e.target.closest('[data-sr10-tab]');if(tab)return setActive(wrap,tab.dataset.sr10Tab);
       if(e.target.closest('[data-sr10-start]')){wrap.open=true;setActive(wrap,'exam');return}
       if(e.target.closest('[data-sr10-submit]')){
         $$('.sr10-text',wrap).forEach(inp=>{state.answers[Number(inp.dataset.sr10Text)]=inp.value});
         const missing=QUESTIONS.filter(q=>!isAnswered(q));if(missing.length){const box=$('#sr10Missing',wrap);if(box)box.textContent=`لسه ${missing.length} سؤال — أول واحد رقم ${missing[0].n}.`;wrap.querySelector(`[data-q="${missing[0].n}"]`)?.scrollIntoView({behavior:'smooth',block:'center'});return}
-        state.submitted=true;save();render(wrap);wrap.open=true;setActive(wrap,'exam');return
+        state.submitted=true;save();render(wrap);wrap.open=true;setActive(wrap,'exam');$('.sr10-result',wrap)?.scrollIntoView({behavior:'smooth',block:'center'});return
       }
       if(e.target.closest('[data-sr10-reset]')){if(!confirm('تمسح إجابات الامتحان وتبدأ من الأول؟'))return;state={answers:{},submitted:false};save();render(wrap);setActive(wrap,'review');return}
     });
