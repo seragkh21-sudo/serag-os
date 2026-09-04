@@ -17,7 +17,7 @@
 
     const mainClose='\n  </main>\n</div>\n\n<button id="quickFab"';
     html=html.replace(mainClose,calendarPage+mainClose);
-    html=html.replace('</body>','<script src="/dashboard-v2.js"></script>\n<script src="/english-v3.js"></script>\n<script src="/english-audio-v4.js"></script>\n<script src="/microsoft-tts-v1.js"></script>\n<script src="/serag-v5.js"></script>\n<script src="/english-content-v9.js"></script>\n<script src="/english-learning-v6.js"></script>\n<script src="/english-focus-v7.js"></script>\n<script>document.addEventListener("click",function(e){if(e.target.closest&&e.target.closest("[data-open-article]")){var p=document.getElementById("articleViewPane");if(p)p.dataset.v5Words=""}},true);</script>\n</body>');
+    html=html.replace('</body>','<script src="/dashboard-v2.js"></script>\n<script src="/english-v3.js"></script>\n<script src="/english-audio-v4.js"></script>\n<script src="/microsoft-tts-v1.js"></script>\n<script src="/serag-v5.js"></script>\n<script src="/english-content-v9.js"></script>\n<script src="/english-learning-v6.js"></script>\n<script src="/english-review-v10-data.js"></script>\n<script src="/english-review-v10.js"></script>\n<script src="/english-focus-v7.js"></script>\n<script>document.addEventListener("click",function(e){if(e.target.closest&&e.target.closest("[data-open-article]")){var p=document.getElementById("articleViewPane");if(p)p.dataset.v5Words=""}},true);</script>\n</body>');
 
     document.open();
     document.write(html);
