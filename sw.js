@@ -1,14 +1,37 @@
-const CACHE='serag-os-v13';
-const CORE=['/','/index','/manifest.webmanifest','/icon.svg','/styles.css','/app.js','/shell-loader.js','/dashboard-v2.css','/dashboard-v2.js','/english-v3.css','/english-v3.js','/english-audio-v4.css','/english-audio-v4.js','/microsoft-tts-v1.js','/serag-v5.css','/serag-v5.js','/english-learning-v6.css','/english-learning-v6.js','/english-content-v9.js','/english-review-v10-data.js','/english-review-v10.js','/english-review-v10-fallback.js','/english-attempt-sync-v11.js','/english-focus-v7.css','/english-focus-v7.js','/english-v8.css','/english-v9.css'];
-self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).catch(()=>{}))});
-self.addEventListener('activate',e=>e.waitUntil(Promise.all([caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))),self.clients.claim()])));
-self.addEventListener('fetch',e=>{
-  if(e.request.method!=='GET')return;
-  const url=new URL(e.request.url);
-  const isCode=url.origin===self.location.origin&&(e.request.mode==='navigate'||/\.(?:html|js|css)$/.test(url.pathname));
-  const network=()=>fetch(e.request,isCode?{cache:'no-store'}:undefined).then(r=>{
-    if(r&&r.ok){const copy=r.clone();caches.open(CACHE).then(c=>c.put(e.request,copy)).catch(()=>{})}
-    return r;
-  });
-  e.respondWith(network().catch(()=>caches.match(e.request).then(r=>r||caches.match('/'))));
+const CACHE='serag-os-static-v14';
+const STATIC=['/icon.svg'];
+
+self.addEventListener('install',event=>{
+  self.skipWaiting();
+  event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(STATIC)).catch(()=>{}));
+});
+
+self.addEventListener('activate',event=>{
+  event.waitUntil((async()=>{
+    const keys=await caches.keys();
+    await Promise.all(keys.filter(key=>key.startsWith('serag-os-')&&key!==CACHE).map(key=>caches.delete(key)));
+    await self.clients.claim();
+  })());
+});
+
+self.addEventListener('fetch',event=>{
+  if(event.request.method!=='GET')return;
+  const url=new URL(event.request.url);
+  if(url.origin!==self.location.origin)return;
+
+  const isCode=event.request.mode==='navigate'||/\.(?:html|js|css|webmanifest)$/.test(url.pathname);
+  if(isCode){
+    event.respondWith(fetch(event.request,{cache:'no-store'}));
+    return;
+  }
+
+  event.respondWith(
+    fetch(event.request).then(response=>{
+      if(response&&response.ok){
+        const copy=response.clone();
+        caches.open(CACHE).then(cache=>cache.put(event.request,copy)).catch(()=>{});
+      }
+      return response;
+    }).catch(()=>caches.match(event.request))
+  );
 });
