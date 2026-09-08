@@ -89,6 +89,7 @@
 <script src="/english-review-v10-fallback.js?v=${V}"></script>
 <script src="/english-attempt-sync-v11.js?v=${V}"></script>
 <script src="/english-focus-v7.js?v=${V}"></script>
+<script src="/voice-commands-v1.js?v=1"></script>
 <script>document.addEventListener("click",function(e){if(e.target.closest&&e.target.closest("[data-open-article]")){var p=document.getElementById("articleViewPane");if(p)p.dataset.v5Words=""}},true);</script>
 </body>`);
 
