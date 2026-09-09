@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="theme-color" content="#ffffff" />
+<title>Serag OS — Quick Action</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{--bg:#f7f7f8;--card:#fff;--line:#e7e7eb;--text:#18181b;--muted:#777783;--accent:#7058e8;--soft:#f0edff;--good:#1f8f5f}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;display:grid;place-items:center;padding:18px}.card{width:min(440px,100%);background:var(--card);border:1px solid var(--line);border-radius:24px;padding:22px;box-shadow:0 18px 60px rgba(24,24,27,.08)}.eyebrow{font-size:11px;color:var(--muted);font-weight:800;letter-spacing:.08em;text-transform:uppercase}.title{font-size:25px;font-weight:900;margin:7px 0 5px}.sub{font-size:13px;color:var(--muted);line-height:1.7}.result{margin-top:18px;border-radius:18px;background:#f7f7f8;padding:17px;min-height:110px;display:grid;place-items:center;text-align:center}.big{font-size:28px;font-weight:950}.meaning{font-size:15px;margin-top:8px}.example{font-size:13px;color:var(--muted);margin-top:7px;line-height:1.65}.actions{display:flex;gap:9px;margin-top:14px}.btn{flex:1;min-height:46px;border:1px solid var(--line);background:#fff;border-radius:13px;font:inherit;font-weight:800;color:var(--text);cursor:pointer;text-decoration:none;display:flex;align-items:center;justify-content:center}.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}.ok{color:var(--good)}.err{color:#b42318}.spinner{width:26px;height:26px;border:3px solid #e5e5e8;border-top-color:var(--accent);border-radius:50%;animation:s .8s linear infinite}@keyframes s{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="eyebrow">Serag OS • Quick Action</div>
+  <div id="title" class="title">جاري التنفيذ…</div>
+  <div id="sub" class="sub">بننفذ الأمر من نفس حساب Serag OS.</div>
+  <div id="result" class="result"><div class="spinner"></div></div>
+  <div class="actions"><a class="btn" href="/">الرئيسية</a><a class="btn primary" href="/assistant.html">🎙️ كلم Serag</a></div>
+</div>
+<script>
+const SUPABASE_URL='https://kdfbxcdxdhofqidczbot.supabase.co';
+const SUPABASE_KEY='sb_publishable_51lY0ST_vE6v0nogH5RGkQ_z8lJ5EAM';
+const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+const qs=new URLSearchParams(location.search), action=qs.get('action')||'';
+const title=document.getElementById('title'),sub=document.getElementById('sub'),result=document.getElementById('result');
+function show(html){result.innerHTML=html}
+function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+async function getSession(){const {data:{session}}=await sb.auth.getSession();return session}
+async function requireSession(){const s=await getSession();if(s)return s;title.textContent='سجّل دخول الأول';sub.textContent='افتح Serag OS وسجّل دخول، وبعدها الـQuick Actions هتشتغل من نفس الحساب.';show('<div class="err">مفيش Session نشطة حاليًا.</div>');throw new Error('NO_SESSION')}
+async function addWater(){
+  const amount=Math.max(50,Math.min(2000,Number(qs.get('amount')||250)));
+  const s=await requireSession(); title.textContent=`💧 +${amount} ml مياه`;
+  const {error}=await sb.from('water_logs').insert({user_id:s.user.id,amount_ml:amount});
+  if(error)throw error;
+  sub.textContent='اتسجلت فورًا في Serag OS.';show(`<div><div class="big ok">+${amount} ml ✓</div><div class="meaning">تم تسجيل المياه</div></div>`);
+}
+async function randomWord(){
+  await requireSession();title.textContent='🇬🇧 كلمة عشوائية';sub.textContent='من الكلمات المحفوظة عندك في Serag OS.';
+  const {data,error}=await sb.from('english_words').select('word,meaning,example').limit(200);if(error)throw error;
+  if(!data?.length){show('<div>لسه مفيش كلمات محفوظة.</div>');return}
+  const w=data[Math.floor(Math.random()*data.length)];show(`<div><div class="big">${esc(w.word)}</div><div class="meaning">${esc(w.meaning||'')}</div><div class="example">${esc(w.example||'')}</div><button class="btn" style="margin-top:13px;width:100%" onclick="location.reload()">🔄 كلمة تانية</button></div>`);
+}
+async function todayTasks(){
+  await requireSession();title.textContent='✅ مهام اليوم';sub.textContent='أهم المهام المفتوحة عندك.';
+  const start=new Date();start.setHours(0,0,0,0);const end=new Date(start);end.setDate(end.getDate()+1);
+  const {data,error}=await sb.from('tasks').select('title,priority,due_at,status').neq('status','done').gte('due_at',start.toISOString()).lt('due_at',end.toISOString()).order('due_at',{ascending:true}).limit(5);if(error)throw error;
+  if(!data?.length){show('<div class="ok">مفيش مهام محددة لليوم 🎉</div>');return}
+  show(`<div style="width:100%;text-align:right">${data.map(t=>`<div style="padding:10px 0;border-bottom:1px solid #e7e7eb">• ${esc(t.title)}</div>`).join('')}</div>`);
+}
+(async()=>{try{if(action==='water')await addWater();else if(action==='random-word')await randomWord();else if(action==='today')await todayTasks();else{title.textContent='Quick Actions';sub.textContent='اختار أمر من اختصارات Serag OS.';show('<div>💧 مياه &nbsp; • &nbsp; 🇬🇧 كلمة &nbsp; • &nbsp; ✅ مهام</div>')}}catch(e){if(e.message==='NO_SESSION')return;console.error(e);title.textContent='حصلت مشكلة';sub.textContent='الأمر متنفذش.';show(`<div class="err">${esc(e.message||'خطأ غير معروف')}</div>`)}})();
+</script>
+</body>
+</html>
