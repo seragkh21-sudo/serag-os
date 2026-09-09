@@ -3,7 +3,6 @@ package com.serag.os;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
 import android.webkit.CookieManager;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
@@ -16,48 +15,40 @@ import org.json.JSONObject;
 public class MainActivity extends Activity {
     private static final String HOME = "https://serag-os.vercel.app/";
     private WebView webView;
-    private WebView syncWebView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         FrameLayout root = new FrameLayout(this);
-        webView = createWebView(false);
-        syncWebView = createWebView(true);
-        syncWebView.setVisibility(View.GONE);
-
+        webView = createWebView();
         root.addView(webView, new FrameLayout.LayoutParams(
             FrameLayout.LayoutParams.MATCH_PARENT,
             FrameLayout.LayoutParams.MATCH_PARENT
         ));
-        root.addView(syncWebView, new FrameLayout.LayoutParams(1, 1));
         setContentView(root);
 
-        WidgetBridge bridge = new WidgetBridge();
-        webView.addJavascriptInterface(bridge, "SeragAndroid");
-        syncWebView.addJavascriptInterface(bridge, "SeragAndroid");
-
+        webView.addJavascriptInterface(new WidgetBridge(), "SeragAndroid");
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                syncWidgetData();
+                ensureWidgetSyncFrame(false);
             }
         });
 
         webView.loadUrl(HOME);
     }
 
-    private WebView createWebView(boolean hidden) {
+    private WebView createWebView() {
         WebView view = new WebView(this);
         WebSettings settings = view.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setDomStorageEnabled(true);
         settings.setDatabaseEnabled(true);
-        settings.setLoadsImagesAutomatically(!hidden);
+        settings.setLoadsImagesAutomatically(true);
         settings.setMediaPlaybackRequiresUserGesture(false);
-        settings.setUserAgentString(settings.getUserAgentString() + " SeragOS-Android/0.3");
+        settings.setUserAgentString(settings.getUserAgentString() + " SeragOS-Android/0.3.1");
 
         CookieManager cookies = CookieManager.getInstance();
         cookies.setAcceptCookie(true);
@@ -65,18 +56,45 @@ public class MainActivity extends Activity {
         return view;
     }
 
-    private void syncWidgetData() {
-        if (syncWebView == null) return;
-        syncWebView.loadUrl(HOME + "android-sync.html?t=" + System.currentTimeMillis());
+    private void ensureWidgetSyncFrame(boolean forceReload) {
+        if (webView == null) return;
+        String syncUrl = HOME + "android-sync.html?t=" + System.currentTimeMillis();
+        String quotedUrl = JSONObject.quote(syncUrl);
+        String js = "(function(){try{" +
+            "var id='__serag_widget_sync_frame';" +
+            "var f=document.getElementById(id);" +
+            "if(!f){" +
+                "f=document.createElement('iframe');" +
+                "f.id=id;" +
+                "f.setAttribute('aria-hidden','true');" +
+                "f.style.cssText='display:none!important;width:0;height:0;border:0';" +
+                "f.src=" + quotedUrl + ";" +
+                "(document.body||document.documentElement).appendChild(f);" +
+            "}else if(" + forceReload + "){f.src=" + quotedUrl + ";}" +
+        "}catch(e){}})();";
+        webView.evaluateJavascript(js, null);
     }
 
     private class WidgetBridge {
+        @JavascriptInterface
+        public void requestWidgetSync() {
+            runOnUiThread(() -> ensureWidgetSyncFrame(true));
+        }
+
         @JavascriptInterface
         public void syncSnapshot(String json) {
             runOnUiThread(() -> {
                 try {
                     JSONObject data = new JSONObject(json);
                     SharedPreferences.Editor editor = WidgetRepository.prefs(MainActivity.this).edit();
+
+                    if (data.has("error")) {
+                        editor.putString("last_sync_error", data.optString("error", "sync error"));
+                        editor.apply();
+                        return;
+                    }
+
+                    editor.remove("last_sync_error");
                     boolean loggedIn = data.optBoolean("loggedIn", false);
                     editor.putBoolean("logged_in", loggedIn);
                     if (loggedIn) {
@@ -101,6 +119,14 @@ public class MainActivity extends Activity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        if (webView != null) {
+            webView.postDelayed(() -> ensureWidgetSyncFrame(true), 700);
+        }
+    }
+
+    @Override
     @SuppressWarnings("deprecation")
     public void onBackPressed() {
         if (webView != null && webView.canGoBack()) webView.goBack();
@@ -110,7 +136,6 @@ public class MainActivity extends Activity {
     @Override
     protected void onDestroy() {
         if (webView != null) webView.destroy();
-        if (syncWebView != null) syncWebView.destroy();
         super.onDestroy();
     }
 }
