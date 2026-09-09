@@ -86,6 +86,11 @@ public class MainActivity extends Activity {
                         if (!deviceToken.isEmpty()) editor.putString("device_token", deviceToken);
                         if (data.has("words")) editor.putString("words_json", data.getJSONArray("words").toString());
                         editor.putLong("last_sync", System.currentTimeMillis());
+                    } else {
+                        editor.remove("device_token");
+                        editor.remove("words_json");
+                        editor.putInt("water_today", 0);
+                        editor.putInt("word_index", 0);
                     }
                     editor.apply();
                     WaterWidgetProvider.refreshAll(MainActivity.this);
