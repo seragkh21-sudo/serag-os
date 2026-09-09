@@ -33,6 +33,7 @@ async function addWater(){
   const s=await requireSession(); title.textContent=`💧 +${amount} ml مياه`;
   const {error}=await sb.from('water_logs').insert({user_id:s.user.id,amount_ml:amount});
   if(error)throw error;
+  try{window.SeragAndroid?.waterAdded(amount)}catch(_){ }
   sub.textContent='اتسجلت فورًا في Serag OS.';show(`<div><div class="big ok">+${amount} ml ✓</div><div class="meaning">تم تسجيل المياه</div></div>`);
 }
 async function randomWord(){
