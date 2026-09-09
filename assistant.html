@@ -7,13 +7,13 @@
 <title>Serag OS — المساعد الذكي</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
-:root{--bg:#f7f7f8;--card:#fff;--line:#e7e7eb;--text:#18181b;--muted:#777783;--accent:#7058e8;--soft:#f0edff}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif}.wrap{max-width:820px;margin:auto;padding:20px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}.top h1{font-size:24px;margin:0}.muted{font-size:12px;color:var(--muted);line-height:1.6}.btn{border:1px solid var(--line);background:#fff;color:var(--text);border-radius:10px;padding:10px 13px;min-height:42px;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}.chat{background:#fff;border:1px solid var(--line);border-radius:17px;padding:14px;min-height:360px}.messages{display:grid;gap:10px}.msg{max-width:82%;padding:11px 13px;border-radius:14px;font-size:14px;line-height:1.75;white-space:pre-wrap}.user{justify-self:start;background:var(--accent);color:#fff;border-bottom-left-radius:5px}.assistant{justify-self:end;background:#f2f2f4;border-bottom-right-radius:5px}.empty{text-align:center;padding:70px 18px;color:var(--muted);font-size:13px}.chips{display:flex;gap:7px;overflow-x:auto;padding:12px 0}.chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 11px;white-space:nowrap;font-size:12px}.composer{display:grid;grid-template-columns:1fr auto;gap:8px;margin-top:10px}.composer textarea{width:100%;resize:vertical;min-height:70px;max-height:180px;border:1px solid var(--line);background:#fff;border-radius:13px;padding:12px;font:inherit;outline:none}.composer textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--soft)}.send{border:0;background:var(--accent);color:#fff;border-radius:12px;min-width:72px;font-weight:800}.send:disabled{opacity:.55;cursor:wait}.status{min-height:18px;margin-top:7px;font-size:11px;color:var(--muted)}@media(max-width:620px){.wrap{padding:12px}.msg{max-width:92%}.composer{grid-template-columns:1fr}.send{min-height:46px}.top h1{font-size:21px}}
+:root{--bg:#f7f7f8;--card:#fff;--line:#e7e7eb;--text:#18181b;--muted:#777783;--accent:#7058e8;--soft:#f0edff;--danger:#ef4444}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif}.wrap{max-width:820px;margin:auto;padding:20px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}.top h1{font-size:24px;margin:0}.muted{font-size:12px;color:var(--muted);line-height:1.6}.btn{border:1px solid var(--line);background:#fff;color:var(--text);border-radius:10px;padding:10px 13px;min-height:42px;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}.chat{background:#fff;border:1px solid var(--line);border-radius:17px;padding:14px;min-height:360px}.messages{display:grid;gap:10px}.msg{max-width:82%;padding:11px 13px;border-radius:14px;font-size:14px;line-height:1.75;white-space:pre-wrap}.user{justify-self:start;background:var(--accent);color:#fff;border-bottom-left-radius:5px}.assistant{justify-self:end;background:#f2f2f4;border-bottom-right-radius:5px}.empty{text-align:center;padding:70px 18px;color:var(--muted);font-size:13px}.chips{display:flex;gap:7px;overflow-x:auto;padding:12px 0}.chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 11px;white-space:nowrap;font-size:12px;cursor:pointer}.composer{display:grid;grid-template-columns:1fr auto;gap:8px;margin-top:10px}.composer textarea{width:100%;resize:vertical;min-height:70px;max-height:180px;border:1px solid var(--line);background:#fff;border-radius:13px;padding:12px;font:inherit;outline:none}.composer textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--soft)}.composer-actions{display:flex;gap:8px;align-items:stretch}.send,.mic{border:0;border-radius:12px;min-width:72px;font-weight:800;cursor:pointer}.send{background:var(--accent);color:#fff}.send:disabled{opacity:.55;cursor:wait}.mic{border:1px solid var(--line);background:#fff;color:var(--text);padding:0 13px;transition:.18s ease}.mic:hover{border-color:#cfcbdc;background:#fafafa}.mic.listening{background:#fff2f2;border-color:#f9b7b7;color:#c62828;box-shadow:0 0 0 4px rgba(239,68,68,.08)}.mic:disabled{opacity:.5;cursor:not-allowed}.voice-row{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:8px}.voice-toggle{border:1px solid var(--line);background:#fff;color:var(--text);border-radius:999px;padding:7px 10px;font-size:11px;cursor:pointer}.voice-toggle.off{color:var(--muted);background:#f7f7f8}.voice-badge{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:6px 9px;background:#f1faF5;color:#287a4b;font-size:10px;font-weight:700}.voice-badge::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}.status{min-height:18px;margin-top:7px;font-size:11px;color:var(--muted)}@media(max-width:620px){.wrap{padding:12px}.msg{max-width:92%}.composer{grid-template-columns:1fr}.composer-actions{min-height:46px}.send,.mic{flex:1}.top h1{font-size:21px}}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header class="top"><div><h1>المساعد الذكي ✦</h1><div class="muted">يقرأ بيانات Serag OS ويقدر ينفّذ أوامر جوه التطبيق.</div></div><a class="btn" href="/">رجوع</a></header>
-  <main class="chat"><div id="messages" class="messages"><div class="empty" id="empty">اكتب له بشكل طبيعي.<br>مثال: «شربت كوبين مياه وضيفلي مهمة أخلص الفيديو بكرة الساعة 7».</div></div></main>
+  <main class="chat"><div id="messages" class="messages"><div class="empty" id="empty">اكتب أو اتكلم بشكل طبيعي.<br>مثال: «شربت كوبين مياه وضيفلي مهمة أخلص الفيديو بكرة الساعة 7».</div></div></main>
   <div class="chips">
     <button class="chip" type="button">شربت كوب مياه</button>
     <button class="chip" type="button">إيه اللي عليا النهارده؟</button>
@@ -21,19 +21,104 @@
     <button class="chip" type="button">رتبلي الكورسات اللي عندي</button>
     <button class="chip" type="button">قيّم تقدمي في الأكل والمياه</button>
   </div>
-  <form id="form" class="composer"><textarea id="input" placeholder="اطلب أي حاجة..."></textarea><button id="send" class="send" type="submit">إرسال</button></form>
+  <form id="form" class="composer">
+    <textarea id="input" placeholder="اكتب أو دوس على المايك واتكلم..."></textarea>
+    <div class="composer-actions">
+      <button id="mic" class="mic" type="button" aria-label="ابدأ الكلام">🎙️ تكلم</button>
+      <button id="send" class="send" type="submit">إرسال</button>
+    </div>
+  </form>
+  <div class="voice-row">
+    <button id="voiceToggle" class="voice-toggle" type="button">🔊 الرد الصوتي: شغال</button>
+    <span class="voice-badge">Free Voice</span>
+    <span id="voiceHint" class="muted">الصوت يعمل من المتصفح بدون استهلاك دقائق ElevenLabs.</span>
+  </div>
   <div id="status" class="status"></div>
 </div>
 <script>
 const SUPABASE_URL='https://kdfbxcdxdhofqidczbot.supabase.co';
 const SUPABASE_KEY='sb_publishable_51lY0ST_vE6v0nogH5RGkQ_z8lJ5EAM';
 const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
-const messages=document.getElementById('messages'),empty=document.getElementById('empty'),input=document.getElementById('input'),send=document.getElementById('send'),status=document.getElementById('status');
+const messages=document.getElementById('messages'),empty=document.getElementById('empty'),input=document.getElementById('input'),send=document.getElementById('send'),status=document.getElementById('status'),mic=document.getElementById('mic'),voiceToggle=document.getElementById('voiceToggle'),voiceHint=document.getElementById('voiceHint');
+const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
+const canSpeak='speechSynthesis' in window;
+let recognition=null,listening=false,voiceFinalText='',autoSpeak=true;
+
 function add(role,text){if(empty)empty.style.display='none';const d=document.createElement('div');d.className='msg '+(role==='user'?'user':'assistant');d.textContent=text;messages.appendChild(d);d.scrollIntoView({behavior:'smooth',block:'end'});}
 async function session(){const {data:{session}}=await sb.auth.getSession();return session}
+
+function chooseArabicVoice(){
+  if(!canSpeak)return null;
+  const voices=window.speechSynthesis.getVoices();
+  return voices.find(v=>String(v.lang).toLowerCase()==='ar-eg')||voices.find(v=>String(v.lang).toLowerCase().startsWith('ar'))||null;
+}
+function speak(text){
+  if(!autoSpeak||!canSpeak||!text)return;
+  window.speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(String(text).replace(/[*_#`]/g,''));
+  u.lang='ar-EG';u.rate=.98;u.pitch=1;
+  const v=chooseArabicVoice();if(v)u.voice=v;
+  u.onerror=()=>{status.textContent='الرد وصل، لكن المتصفح مقدرش يشغّل الصوت.';};
+  window.speechSynthesis.speak(u);
+}
+
 async function loadHistory(){const s=await session();if(!s){status.textContent='لازم تسجل دخول الأول من الصفحة الرئيسية.';return}const r=await fetch('/api/assistant',{headers:{Authorization:`Bearer ${s.access_token}`}});if(!r.ok)return;const data=await r.json();(data.messages||[]).forEach(m=>add(m.role,m.content));}
+
+async function sendMessage(rawText){
+  const text=String(rawText||'').trim();if(!text||send.disabled)return;
+  const s=await session();if(!s){status.textContent='سجل دخول الأول من Serag OS.';return}
+  if(canSpeak)window.speechSynthesis.cancel();
+  add('user',text);input.value='';send.disabled=true;mic.disabled=true;status.textContent='المساعد بيفكر وبيحدّث بياناتك لو الطلب محتاج...';
+  try{
+    const r=await fetch('/api/assistant',{method:'POST',headers:{'Content-Type':'application/json',Authorization:`Bearer ${s.access_token}`},body:JSON.stringify({message:text,timezone:Intl.DateTimeFormat().resolvedOptions().timeZone})});
+    const data=await r.json();if(!r.ok)throw new Error(data.error||'حصل خطأ');
+    const answer=data.answer||'تم.';add('assistant',answer);
+    status.textContent=(data.actions||[]).length?`تم تنفيذ ${(data.actions||[]).length} إجراء داخل Serag OS.`:'';
+    speak(answer);
+  }catch(err){add('assistant','حصلت مشكلة: '+err.message);status.textContent='';}
+  finally{send.disabled=false;mic.disabled=!SpeechRecognition;input.focus();}
+}
+
 document.querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>{input.value=b.textContent.trim();input.focus()}));
-document.getElementById('form').addEventListener('submit',async e=>{e.preventDefault();const text=input.value.trim();if(!text)return;const s=await session();if(!s){status.textContent='سجل دخول الأول من Serag OS.';return}add('user',text);input.value='';send.disabled=true;status.textContent='المساعد بيفكر وبيحدّث بياناتك لو الطلب محتاج...';try{const r=await fetch('/api/assistant',{method:'POST',headers:{'Content-Type':'application/json',Authorization:`Bearer ${s.access_token}`},body:JSON.stringify({message:text,timezone:Intl.DateTimeFormat().resolvedOptions().timeZone})});const data=await r.json();if(!r.ok)throw new Error(data.error||'حصل خطأ');add('assistant',data.answer||'تم.');status.textContent=(data.actions||[]).length?`تم تنفيذ ${(data.actions||[]).length} إجراء داخل Serag OS.`:'';}catch(err){add('assistant','حصلت مشكلة: '+err.message);status.textContent='';}finally{send.disabled=false;input.focus();}});
+document.getElementById('form').addEventListener('submit',e=>{e.preventDefault();sendMessage(input.value);});
+voiceToggle.addEventListener('click',()=>{
+  autoSpeak=!autoSpeak;
+  voiceToggle.classList.toggle('off',!autoSpeak);
+  voiceToggle.textContent=autoSpeak?'🔊 الرد الصوتي: شغال':'🔇 الرد الصوتي: مقفول';
+  if(!autoSpeak&&canSpeak)window.speechSynthesis.cancel();
+});
+
+if(SpeechRecognition){
+  recognition=new SpeechRecognition();
+  recognition.lang='ar-EG';recognition.interimResults=true;recognition.continuous=false;recognition.maxAlternatives=1;
+  recognition.onstart=()=>{listening=true;voiceFinalText='';mic.classList.add('listening');mic.textContent='⏹️ بسمعك...';status.textContent='اتكلم طبيعي، ولما تخلص هبعت الأمر تلقائيًا.';};
+  recognition.onresult=e=>{
+    let interim='',finalText='';
+    for(let i=e.resultIndex;i<e.results.length;i++){
+      const t=e.results[i][0].transcript;
+      if(e.results[i].isFinal)finalText+=t;else interim+=t;
+    }
+    if(finalText)voiceFinalText=(voiceFinalText+' '+finalText).trim();
+    input.value=(voiceFinalText+' '+interim).trim();
+  };
+  recognition.onerror=e=>{
+    const msg=e.error==='not-allowed'?'اسمح للمتصفح باستخدام المايك من علامة القفل جنب عنوان الموقع.':e.error==='no-speech'?'مسمعتش كلام واضح، جرّب تاني.':'حصلت مشكلة في المايك: '+e.error;
+    status.textContent=msg;
+  };
+  recognition.onend=()=>{
+    listening=false;mic.classList.remove('listening');mic.textContent='🎙️ تكلم';
+    const text=voiceFinalText.trim();voiceFinalText='';
+    if(text&&!send.disabled)sendMessage(text);
+  };
+  mic.addEventListener('click',()=>{
+    try{if(listening)recognition.stop();else recognition.start();}catch(_){status.textContent='استنى ثانية وجرب المايك تاني.';}
+  });
+}else{
+  mic.disabled=true;mic.textContent='🎙️ غير مدعوم';
+  voiceHint.textContent='المتصفح ده لا يدعم الإدخال الصوتي. افتح Serag OS على Chrome أو Edge للحصول على وضع الصوت المجاني.';
+}
+if(!canSpeak){autoSpeak=false;voiceToggle.disabled=true;voiceToggle.textContent='🔇 إخراج الصوت غير مدعوم';}
+if(canSpeak)window.speechSynthesis.onvoiceschanged=()=>chooseArabicVoice();
 loadHistory();
 </script>
 </body>
