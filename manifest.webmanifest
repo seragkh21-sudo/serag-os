@@ -2,12 +2,44 @@
   "id":"/",
   "name":"Serag OS",
   "short_name":"Serag OS",
-  "start_url":"/?build=14",
+  "start_url":"/?build=15",
   "scope":"/",
   "display":"standalone",
   "background_color":"#f7f7f8",
   "theme_color":"#ffffff",
   "lang":"ar",
   "dir":"rtl",
-  "icons":[{"src":"/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+  "icons":[{"src":"/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}],
+  "shortcuts":[
+    {
+      "name":"سجل كوب مياه",
+      "short_name":"+250 مياه",
+      "description":"تسجيل 250 مل مياه في Serag OS",
+      "url":"/quick-action.html?action=water&amount=250"
+    },
+    {
+      "name":"سجل زجاجة مياه",
+      "short_name":"+500 مياه",
+      "description":"تسجيل 500 مل مياه في Serag OS",
+      "url":"/quick-action.html?action=water&amount=500"
+    },
+    {
+      "name":"كلمة إنجليزي عشوائية",
+      "short_name":"كلمة عشوائية",
+      "description":"عرض كلمة عشوائية من كلماتك المحفوظة",
+      "url":"/quick-action.html?action=random-word"
+    },
+    {
+      "name":"مهام اليوم",
+      "short_name":"مهام اليوم",
+      "description":"عرض مهام اليوم المفتوحة",
+      "url":"/quick-action.html?action=today"
+    },
+    {
+      "name":"كلم Serag",
+      "short_name":"🎙️ Serag",
+      "description":"فتح المساعد الصوتي",
+      "url":"/assistant.html"
+    }
+  ]
 }
