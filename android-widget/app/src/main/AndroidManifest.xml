@@ -20,14 +20,29 @@
         </activity>
 
         <receiver
-            android:name=".SeragWidgetProvider"
+            android:name=".WidgetActionReceiver"
+            android:exported="false" />
+
+        <receiver
+            android:name=".WaterWidgetProvider"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/serag_widget_info" />
+                android:resource="@xml/water_widget_info" />
+        </receiver>
+
+        <receiver
+            android:name=".WordWidgetProvider"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/word_widget_info" />
         </receiver>
     </application>
 </manifest>
