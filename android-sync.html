@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Serag OS Android Sync</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+<script>
+const SUPABASE_URL='https://kdfbxcdxdhofqidczbot.supabase.co';
+const SUPABASE_KEY='sb_publishable_51lY0ST_vE6v0nogH5RGkQ_z8lJ5EAM';
+const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+function send(payload){try{window.SeragAndroid?.syncSnapshot(JSON.stringify(payload))}catch(e){console.error(e)}}
+(async()=>{
+  try{
+    const {data:{session}}=await sb.auth.getSession();
+    if(!session){send({loggedIn:false});return}
+    const start=new Date();start.setHours(0,0,0,0);
+    const [profileRes,waterRes,wordsRes]=await Promise.all([
+      sb.from('profiles').select('water_target').limit(1),
+      sb.from('water_logs').select('amount_ml').gte('logged_at',start.toISOString()).limit(500),
+      sb.from('english_words').select('word,meaning').limit(200)
+    ]);
+    const waterToday=(waterRes.data||[]).reduce((sum,row)=>sum+(Number(row.amount_ml)||0),0);
+    const target=Number(profileRes.data?.[0]?.water_target)||2500;
+    const words=(wordsRes.data||[]).filter(w=>w?.word).map(w=>({word:String(w.word),meaning:String(w.meaning||'')}));
+    send({loggedIn:true,waterToday,waterTarget:target,words,updatedAt:Date.now()});
+  }catch(error){send({loggedIn:true,error:String(error?.message||error)})}
+})();
+</script>
+</body>
+</html>
