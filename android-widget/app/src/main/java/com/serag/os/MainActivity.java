@@ -1,9 +1,7 @@
 package com.serag.os;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.CookieManager;
@@ -17,7 +15,6 @@ import org.json.JSONObject;
 
 public class MainActivity extends Activity {
     private static final String HOME = "https://serag-os.vercel.app/";
-    private static final String PREFS = "serag_widget";
     private WebView webView;
     private WebView syncWebView;
 
@@ -49,7 +46,7 @@ public class MainActivity extends Activity {
             }
         });
 
-        loadFromIntent(getIntent());
+        webView.loadUrl(HOME);
     }
 
     private WebView createWebView(boolean hidden) {
@@ -60,7 +57,7 @@ public class MainActivity extends Activity {
         settings.setDatabaseEnabled(true);
         settings.setLoadsImagesAutomatically(!hidden);
         settings.setMediaPlaybackRequiresUserGesture(false);
-        settings.setUserAgentString(settings.getUserAgentString() + " SeragOS-Android/0.2");
+        settings.setUserAgentString(settings.getUserAgentString() + " SeragOS-Android/0.3");
 
         CookieManager cookies = CookieManager.getInstance();
         cookies.setAcceptCookie(true);
@@ -73,60 +70,27 @@ public class MainActivity extends Activity {
         syncWebView.loadUrl(HOME + "android-sync.html?t=" + System.currentTimeMillis());
     }
 
-    @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        setIntent(intent);
-        loadFromIntent(intent);
-    }
-
-    private void loadFromIntent(Intent intent) {
-        String target = HOME;
-        Uri data = intent != null ? intent.getData() : null;
-        if (data != null && "serag".equals(data.getScheme())) {
-            String host = data.getHost() == null ? "" : data.getHost();
-            if ("water".equals(host)) {
-                String amount = data.getQueryParameter("amount");
-                if (!"500".equals(amount)) amount = "250";
-                target = HOME + "quick-action.html?action=water&amount=" + amount;
-            } else if ("word".equals(host)) {
-                target = HOME + "quick-action.html?action=random-word";
-            } else if ("today".equals(host)) {
-                target = HOME + "quick-action.html?action=today";
-            } else if ("assistant".equals(host)) {
-                target = HOME + "assistant.html";
-            }
-        }
-        webView.loadUrl(target);
-    }
-
     private class WidgetBridge {
         @JavascriptInterface
         public void syncSnapshot(String json) {
             runOnUiThread(() -> {
                 try {
                     JSONObject data = new JSONObject(json);
-                    SharedPreferences.Editor editor = getSharedPreferences(PREFS, MODE_PRIVATE).edit();
-                    editor.putBoolean("logged_in", data.optBoolean("loggedIn", false));
-                    if (data.optBoolean("loggedIn", false)) {
+                    SharedPreferences.Editor editor = WidgetRepository.prefs(MainActivity.this).edit();
+                    boolean loggedIn = data.optBoolean("loggedIn", false);
+                    editor.putBoolean("logged_in", loggedIn);
+                    if (loggedIn) {
                         editor.putInt("water_today", data.optInt("waterToday", 0));
                         editor.putInt("water_target", data.optInt("waterTarget", 2500));
+                        String deviceToken = data.optString("deviceToken", "");
+                        if (!deviceToken.isEmpty()) editor.putString("device_token", deviceToken);
                         if (data.has("words")) editor.putString("words_json", data.getJSONArray("words").toString());
                         editor.putLong("last_sync", System.currentTimeMillis());
                     }
                     editor.apply();
-                    SeragWidgetProvider.refreshAll(MainActivity.this);
+                    WaterWidgetProvider.refreshAll(MainActivity.this);
+                    WordWidgetProvider.refreshAll(MainActivity.this);
                 } catch (Exception ignored) { }
-            });
-        }
-
-        @JavascriptInterface
-        public void waterAdded(int amount) {
-            runOnUiThread(() -> {
-                SharedPreferences prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
-                int current = prefs.getInt("water_today", 0);
-                prefs.edit().putInt("water_today", current + Math.max(0, amount)).apply();
-                SeragWidgetProvider.refreshAll(MainActivity.this);
             });
         }
     }
