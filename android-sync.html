@@ -12,20 +12,28 @@ const SUPABASE_URL='https://kdfbxcdxdhofqidczbot.supabase.co';
 const SUPABASE_KEY='sb_publishable_51lY0ST_vE6v0nogH5RGkQ_z8lJ5EAM';
 const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 function send(payload){try{window.SeragAndroid?.syncSnapshot(JSON.stringify(payload))}catch(e){console.error(e)}}
+function makeToken(){
+  const bytes=new Uint8Array(32);crypto.getRandomValues(bytes);
+  return Array.from(bytes,b=>b.toString(16).padStart(2,'0')).join('');
+}
 (async()=>{
   try{
     const {data:{session}}=await sb.auth.getSession();
     if(!session){send({loggedIn:false});return}
-    const start=new Date();start.setHours(0,0,0,0);
-    const [profileRes,waterRes,wordsRes]=await Promise.all([
-      sb.from('profiles').select('water_target').limit(1),
-      sb.from('water_logs').select('amount_ml').gte('logged_at',start.toISOString()).limit(500),
-      sb.from('english_words').select('word,meaning').limit(200)
-    ]);
-    const waterToday=(waterRes.data||[]).reduce((sum,row)=>sum+(Number(row.amount_ml)||0),0);
-    const target=Number(profileRes.data?.[0]?.water_target)||2500;
-    const words=(wordsRes.data||[]).filter(w=>w?.word).map(w=>({word:String(w.word),meaning:String(w.meaning||'')}));
-    send({loggedIn:true,waterToday,waterTarget:target,words,updatedAt:Date.now()});
+    let deviceToken=localStorage.getItem('serag_widget_device_token');
+    if(!deviceToken){deviceToken=makeToken();localStorage.setItem('serag_widget_device_token',deviceToken)}
+    const {error:registerError}=await sb.rpc('register_widget_device',{p_token:deviceToken});
+    if(registerError)throw registerError;
+    const {data,error}=await sb.rpc('widget_snapshot',{p_token:deviceToken});
+    if(error)throw error;
+    send({
+      loggedIn:true,
+      deviceToken,
+      waterToday:Number(data?.waterToday)||0,
+      waterTarget:Number(data?.waterTarget)||2500,
+      words:Array.isArray(data?.words)?data.words:[],
+      updatedAt:Date.now()
+    });
   }catch(error){send({loggedIn:true,error:String(error?.message||error)})}
 })();
 </script>
