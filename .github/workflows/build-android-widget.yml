@@ -11,6 +11,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: serag-android-widget-main
+  cancel-in-progress: true
+
 jobs:
   build-apk:
     runs-on: ubuntu-latest
@@ -39,20 +43,20 @@ jobs:
         run: gradle -p android-widget :app:assembleDebug --stacktrace
 
       - name: Prepare APK
-        run: cp android-widget/app/build/outputs/apk/debug/app-debug.apk Serag-OS-Android-v0.1.0.apk
+        run: cp android-widget/app/build/outputs/apk/debug/app-debug.apk Serag-OS-Android-v0.2.0.apk
 
       - name: Upload workflow artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Serag-OS-Android-v0.1.0
-          path: Serag-OS-Android-v0.1.0.apk
+          name: Serag-OS-Android-v0.2.0
+          path: Serag-OS-Android-v0.2.0.apk
 
       - name: Publish APK release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          if gh release view serag-android-v0.1.0 >/dev/null 2>&1; then
-            gh release upload serag-android-v0.1.0 Serag-OS-Android-v0.1.0.apk --clobber
+          if gh release view serag-android-v0.2.0 >/dev/null 2>&1; then
+            gh release upload serag-android-v0.2.0 Serag-OS-Android-v0.2.0.apk --clobber
           else
-            gh release create serag-android-v0.1.0 Serag-OS-Android-v0.1.0.apk --title 'Serag OS Android v0.1.0' --notes 'First experimental Android build with a Samsung/Android home-screen widget for water, English words, and Serag voice assistant.' --prerelease
+            gh release create serag-android-v0.2.0 Serag-OS-Android-v0.2.0.apk --title 'Serag OS Android v0.2.0' --notes 'Android home-screen widget with synced water progress, random English words from Serag OS, quick water logging, and voice assistant access.' --prerelease
           fi
