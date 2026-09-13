@@ -1,6 +1,6 @@
 (async()=>{
   try{
-    const V='14';
+    const V='16';
     const res=await fetch(`/legacy.html?v=${V}`,{cache:'no-store',headers:{'Cache-Control':'no-cache'}});
     if(!res.ok)throw new Error('Legacy app failed to load');
     let html=await res.text();
@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="/english-focus-v7.css?v=${V}"/>
 <link rel="stylesheet" href="/english-v8.css?v=${V}"/>
 <link rel="stylesheet" href="/english-v9.css?v=${V}"/>
+<link rel="stylesheet" href="/creative-workspace.css?v=${V}"/>
 <style>#appView.hidden~#v5BottomNav,#appView.hidden~#v5MobileMore{display:none!important}</style>
 </head>`);
 
@@ -90,6 +91,7 @@
 <script src="/english-attempt-sync-v11.js?v=${V}"></script>
 <script src="/english-focus-v7.js?v=${V}"></script>
 <script src="/voice-commands-v1.js?v=1"></script>
+<script src="/creative-workspace.js?v=${V}"></script>
 <script>document.addEventListener("click",function(e){if(e.target.closest&&e.target.closest("[data-open-article]")){var p=document.getElementById("articleViewPane");if(p)p.dataset.v5Words=""}},true);</script>
 </body>`);
 
