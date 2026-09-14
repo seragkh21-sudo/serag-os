@@ -75,8 +75,7 @@ export default async function handler(req,res){
     res.setHeader('Content-Type','audio/mpeg');
     res.setHeader('Content-Length',String(bytes.length));
     res.setHeader('X-Serag-TTS-Voice',VOICE);
-    if(req.method==='GET')res.setHeader('Cache-Control','public, max-age=86400, s-maxage=604800, stale-while-revalidate=2592000');
-    else res.setHeader('Cache-Control','private, no-store');
+    res.setHeader('Cache-Control','private, no-store');
     return res.status(200).send(bytes);
   }catch(error){
     console.error('Azure Speech request failed',error);
