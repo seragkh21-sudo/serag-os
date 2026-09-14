@@ -1,6 +1,8 @@
 const VOICE='en-US-JennyNeural';
 const MAX_WORD_CHARS=120;
 const MAX_ARTICLE_CHARS=5000;
+const SUPABASE_URL='https://kdfbxcdxdhofqidczbot.supabase.co';
+const SUPABASE_KEY='sb_publishable_51lY0ST_vE6v0nogH5RGkQ_z8lJ5EAM';
 
 function readBody(req){
   if(!req?.body)return {};
@@ -18,6 +20,13 @@ function escapeXml(value){
   }[c]));
 }
 
+async function verify(req){
+  const header=req.headers.authorization||'';
+  if(!header.startsWith('Bearer '))return null;
+  const r=await fetch(`${SUPABASE_URL}/auth/v1/user`,{headers:{apikey:SUPABASE_KEY,Authorization:header}});
+  return r.ok?r.json():null;
+}
+
 export default async function handler(req,res){
   if(!['GET','POST'].includes(req.method))return res.status(405).json({error:'Method not allowed'});
 
@@ -29,6 +38,9 @@ export default async function handler(req,res){
     res.setHeader('Cache-Control','private, max-age=60');
     return res.status(200).json({configured:Boolean(key&&region),provider:'Microsoft Azure Speech',voice:VOICE});
   }
+
+  const user=await verify(req);
+  if(!user)return res.status(401).json({error:'Session expired. Sign in again.'});
 
   if(!key||!region)return res.status(503).json({error:'Azure Speech is not configured'});
 
