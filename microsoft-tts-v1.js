@@ -46,6 +46,15 @@
     return true;
   }
 
+  async function authHeaders(extra={}){
+    try{
+      if(typeof sb==='undefined')return extra;
+      const {data}=await sb.auth.getSession();
+      const token=data?.session?.access_token;
+      return token?{...extra,Authorization:`Bearer ${token}`}:{...extra};
+    }catch{return {...extra}}
+  }
+
   async function detectAzure(){
     try{
       const r=await fetch('/api/tts?mode=status',{cache:'no-store'});
@@ -63,7 +72,8 @@
       const key=value.toLowerCase();
       const cached=wordAudioCache.get(key);
       if(cached)return {url:cached,cached:true};
-      const res=await fetch(`/api/tts?mode=word&text=${encodeURIComponent(value)}`,{headers:{accept:'audio/mpeg'}});
+      const headers=await authHeaders({accept:'audio/mpeg'});
+      const res=await fetch(`/api/tts?mode=word&text=${encodeURIComponent(value)}`,{headers});
       if(!res.ok)throw new Error(`TTS ${res.status}`);
       const blob=await res.blob();
       const url=URL.createObjectURL(blob);
@@ -76,9 +86,10 @@
       }
       return {url,cached:true};
     }
+    const headers=await authHeaders({'content-type':'application/json',accept:'audio/mpeg'});
     const res=await fetch('/api/tts',{
       method:'POST',
-      headers:{'content-type':'application/json',accept:'audio/mpeg'},
+      headers,
       body:JSON.stringify({mode:'article',text:value})
     });
     if(!res.ok)throw new Error(`TTS ${res.status}`);
