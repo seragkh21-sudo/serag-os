@@ -26,11 +26,11 @@
   function visibleResources(){return filterRows(allResources.filter(x=>!x.project_id));}
   function siteIcon(x,klass='cl2-site-icon'){
     const src=favicon(x.url),fallback=esc(initials(x.title));
-    return `<span class="${klass}">${src?`<img src="${esc(src)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">`:''}<span class="cl2-fav-fallback" style="${src?'display:none':''}">${fallback}</span></span>`;
+    return `<span class="${klass}">${src?`<img src="${esc(src)}" alt="" loading="lazy" referrerpolicy="no-referrer">`:''}<span class="cl2-fav-fallback" style="${src?'display:none':''}">${fallback}</span></span>`;
   }
   function folderIcon(x){
     const src=favicon(x.url),fallback=esc(initials(x.title));
-    return `<span class="cl2-fav">${src?`<img src="${esc(src)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">`:''}<span class="cl2-fav-fallback" style="${src?'display:none':''}">${fallback}</span></span>`;
+    return `<span class="cl2-fav">${src?`<img src="${esc(src)}" alt="" loading="lazy" referrerpolicy="no-referrer">`:''}<span class="cl2-fav-fallback" style="${src?'display:none':''}">${fallback}</span></span>`;
   }
 
   function mount(){
@@ -65,6 +65,10 @@
       const folder=e.target.closest('[data-cl2-category]');if(folder){activeCategory=folder.dataset.cl2Category;shell.dataset.view='folder';renderBrowser(activeCategory);return}
       const chip=e.target.closest('[data-cl2-filter]');if(chip){activeFilter=chip.dataset.cl2Filter;shell.querySelectorAll('[data-cl2-filter]').forEach(b=>b.classList.toggle('active',b===chip));render();return}
     });
+    shell.addEventListener('error',e=>{
+      const img=e.target;if(!(img instanceof HTMLImageElement))return;
+      img.style.display='none';const fallback=img.nextElementSibling;if(fallback?.classList.contains('cl2-fav-fallback'))fallback.style.display='grid';
+    },true);
     document.addEventListener('click',e=>{if(e.target.closest?.('[data-page="creative"],[data-v5-page="creative"]'))setTimeout(refresh,120)});
     try{
       if(typeof loadCreative==='function'&&!window.__creativeLibraryV2Wrapped){
