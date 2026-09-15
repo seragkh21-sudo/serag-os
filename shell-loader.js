@@ -1,6 +1,6 @@
 (async()=>{
   try{
-    const V='18';
+    const V='19';
     const res=await fetch(`/legacy.html?v=${V}`,{cache:'no-store',headers:{'Cache-Control':'no-cache'}});
     if(!res.ok)throw new Error('Legacy app failed to load');
     let html=await res.text();
@@ -12,7 +12,13 @@
 <link rel="stylesheet" href="/english-v9.css?v=${V}"/>
 <link rel="stylesheet" href="/creative-workspace.css?v=${V}"/>
 <link rel="stylesheet" href="/creative-workspace-tools.css?v=${V}"/>
-<style>#appView.hidden~#v5BottomNav,#appView.hidden~#v5MobileMore{display:none!important}</style>
+<style>
+#appView.hidden~#v5BottomNav,#appView.hidden~#v5MobileMore{display:none!important}
+.resource-category-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:16px 0 4px;padding:9px 10px;border:1px solid var(--line);border-radius:10px;background:var(--soft,#f6f6f8)}
+.resource-category-head strong{font-size:11px}.resource-category-head span{font-size:9px;color:var(--muted)}
+#resourcesList>.resource-category-head:first-child{margin-top:8px}
+@media(max-width:820px){.v5-resource-toolbar{position:sticky;top:6px;z-index:5;background:var(--bg,#fff);padding:6px;border-radius:12px}.resource-category-head{margin-top:12px}}
+</style>
 </head>`);
 
     const tasksNav='<button data-page="tasks" type="button">المهام</button>';
@@ -95,6 +101,35 @@
 <script src="/creative-workspace.js?v=${V}"></script>
 <script src="/creative-workspace-tools.js?v=${V}"></script>
 <script>document.addEventListener("click",function(e){if(e.target.closest&&e.target.closest("[data-open-article]")){var p=document.getElementById("articleViewPane");if(p)p.dataset.v5Words=""}},true);</script>
+<script>
+(()=>{
+  const cats=['Inspiration','Motion','Editing','Assets','Stock','3D','Audio','Typography','Color','Learning','AI'];
+  const labels={Inspiration:'Inspiration & References',Motion:'Motion Design',Editing:'Editing & Post',Assets:'Assets & Templates',Stock:'Stock Footage & Photos','3D':'3D Resources',Audio:'Audio & SFX',Typography:'Typography & Fonts',Color:'Color Tools',Learning:'Learning',AI:'AI Creative Tools'};
+  let scheduled=false;
+  function rowType(row){const meta=row.querySelector('.row-meta');if(!meta)return '';const text=meta.textContent.trim();return cats.find(c=>text===c||text.startsWith(c+' ')||text.startsWith(c+'#'))||'';}
+  function groupRows(){
+    const list=document.getElementById('resourcesList');if(!list||list.querySelector(':scope > .resource-category-head'))return;
+    const rows=[...list.children].filter(x=>x.classList.contains('row'));if(!rows.length)return;
+    const buckets=new Map(cats.map(c=>[c,[]])),other=[];
+    rows.forEach(row=>{const type=rowType(row);(buckets.get(type)||other).push(row)});
+    const frag=document.createDocumentFragment();
+    cats.forEach(cat=>{const items=buckets.get(cat);if(!items.length)return;const head=document.createElement('div');head.className='resource-category-head';head.innerHTML='<strong>'+labels[cat]+'</strong><span>'+items.length+' sources</span>';frag.appendChild(head);items.forEach(row=>frag.appendChild(row));});
+    if(other.length){const head=document.createElement('div');head.className='resource-category-head';head.innerHTML='<strong>Other</strong><span>'+other.length+' sources</span>';frag.appendChild(head);other.forEach(row=>frag.appendChild(row));}
+    list.replaceChildren(frag);
+  }
+  function upgrade(){
+    scheduled=false;
+    const toolbar=document.getElementById('v5ResourceToolbar'),select=document.getElementById('v5ResourceType');
+    if(toolbar&&select&&!select.dataset.fullCreativeTypes){select.dataset.fullCreativeTypes='1';select.innerHTML='<option value="all">All categories</option>'+cats.map(c=>'<option value="'+c+'">'+labels[c]+'</option>').join('');}
+    const typeInput=document.getElementById('resourceType');if(typeInput){typeInput.placeholder='Inspiration / Motion / Editing / Assets / Stock / 3D / Audio / Typography / Color / Learning / AI';}
+    groupRows();
+  }
+  function schedule(){if(scheduled)return;scheduled=true;setTimeout(upgrade,0);}
+  const page=document.getElementById('page-creative');if(page)new MutationObserver(schedule).observe(page,{childList:true,subtree:true});
+  document.addEventListener('click',e=>{if(e.target.closest&&e.target.closest('[data-page="creative"],[data-v5-page="creative"]'))setTimeout(upgrade,80)});
+  setTimeout(upgrade,350);
+})();
+</script>
 </body>`);
 
     document.open();
