@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="/english-v9.css?v=${V}"/>
 <link rel="stylesheet" href="/creative-workspace.css?v=${V}"/>
 <link rel="stylesheet" href="/creative-workspace-tools.css?v=${V}"/>
+<link rel="stylesheet" href="/creative-library-v2.css?v=2"/>
 <style>
 #appView.hidden~#v5BottomNav,#appView.hidden~#v5MobileMore{display:none!important}
 .resource-category-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:16px 0 4px;padding:9px 10px;border:1px solid var(--line);border-radius:10px;background:var(--soft,#f6f6f8)}
@@ -100,6 +101,7 @@
 <script src="/voice-commands-v1.js?v=1"></script>
 <script src="/creative-workspace.js?v=${V}"></script>
 <script src="/creative-workspace-tools.js?v=${V}"></script>
+<script src="/creative-library-v2.js?v=2"></script>
 <script>document.addEventListener("click",function(e){if(e.target.closest&&e.target.closest("[data-open-article]")){var p=document.getElementById("articleViewPane");if(p)p.dataset.v5Words=""}},true);</script>
 <script>
 (()=>{
