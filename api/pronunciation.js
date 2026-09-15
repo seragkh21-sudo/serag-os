@@ -4,7 +4,7 @@ export default async function handler(req,res){
   const word=String(raw||'').trim().slice(0,80);
   if(!word||!/[A-Za-z]/.test(word)||!/^[A-Za-z][A-Za-z '\-]*$/.test(word))return res.status(400).json({error:'Invalid word'});
   try{
-    const upstream=await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(word)}`,{headers:{accept:'application/json'}});
+    const upstream=await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(word)}`,{headers:{accept:'application/json'},signal:AbortSignal.timeout(8000)});
     if(!upstream.ok)return res.status(upstream.status===404?404:502).json({error:upstream.status===404?'Word not found':'Dictionary unavailable'});
     const entries=await upstream.json();
     const entry=Array.isArray(entries)?entries[0]:null;

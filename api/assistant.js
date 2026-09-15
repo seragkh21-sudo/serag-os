@@ -1,3 +1,4 @@
+import {allowUsage} from '../lib/usage-limit.js';
 import { generateText, tool, stepCountIs } from 'ai';
 import { z } from 'zod';
 
@@ -9,11 +10,21 @@ function bearer(req) {
   return h.startsWith('Bearer ') ? h.slice(7) : '';
 }
 
+function trustedTimezone(value) {
+  const candidate = String(value || 'Africa/Cairo').slice(0, 80);
+  try {
+    new Intl.DateTimeFormat('en-US', { timeZone: candidate }).format();
+    return candidate;
+  } catch {
+    return 'Africa/Cairo';
+  }
+}
+
 async function verifyUser(token) {
   const r = await fetch(`${SUPABASE_URL}/auth/v1/user`, {
-    headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${token}` },
-  });
-  if (!r.ok) return null;
+    headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${token}` },signal:AbortSignal.timeout(8000),
+  }).catch(()=>null);
+  if (!r?.ok) return null;
   return r.json();
 }
 
@@ -186,16 +197,17 @@ export default async function handler(req, res) {
       const rows = await db.get('assistant_messages', 'select=role,content,created_at&order=created_at.asc&limit=60');
       return res.status(200).json({ messages: rows || [] });
     } catch (e) {
-      return res.status(500).json({ error: e.message });
+      return res.status(500).json({ error: 'Unable to load assistant history.' });
     }
   }
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   try {
     const prompt = String(req.body?.message || '').trim().slice(0, 6000);
-    const timezone = String(req.body?.timezone || 'Africa/Cairo').slice(0, 80);
+    const timezone = trustedTimezone(req.body?.timezone);
     if (!prompt) return res.status(400).json({ error: 'Message is empty.' });
 
+    if(!await allowUsage(req,res,'assistant'))return;
     const context = await loadContext(db);
     const oldHistory = context.history.slice(-12).map(m => ({ role: m.role === 'assistant' ? 'assistant' : 'user', content: m.content }));
     await db.insert('assistant_messages', { user_id: user.id, role: 'user', content: prompt });
@@ -220,6 +232,6 @@ ${JSON.stringify({ profile: context.profile, tasks: context.tasks, meals: contex
     return res.status(200).json({ answer, actions });
   } catch (e) {
     console.error(e);
-    return res.status(500).json({ error: e?.message || 'Assistant error' });
+    return res.status(500).json({ error: 'Assistant temporarily unavailable.' });
   }
 }

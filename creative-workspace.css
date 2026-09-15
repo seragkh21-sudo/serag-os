@@ -53,3 +53,5 @@
 @media(prefers-reduced-motion:reduce){.cw-session{transition:none}}
 
 .cw-footer-status{border:0;background:transparent;color:inherit;padding:4px;font-size:12px!important;text-align:start}.cw-node textarea{text-align:start}
+
+@media(max-width:700px){.cw-board-head{flex-wrap:wrap;gap:8px}.cw-board-head>.cw-row{flex-wrap:wrap;justify-content:flex-start}.cw-board-head .cw-button{font-size:14px;padding:8px 10px}}

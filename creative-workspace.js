@@ -55,11 +55,11 @@
       <h3 id="cwCreateTitle">سيشن جديدة</h3><form id="cwCreateForm" class="cw-form">
       <label>اسم السيشن<input id="cwNewTitle" maxlength="160" required placeholder="مثلاً: حملة اليوم الوطني — Moodboard" autocomplete="off"></label>
       <label>المشروع<select id="cwNewProject"><option value="">سيشن مستقلة</option></select></label>
-      <label>ابدأ بـ<select id="cwTemplate"><option value="blank">بورد فاضية</option><option value="moodboard">Moodboard — بريف واتجاه بصري</option><option value="storyboard">Storyboard — مشاهد فيديو</option></select></label>
+      <label>ابدأ بـ<select id="cwTemplate"><option value="blank">بورد فاضية</option><option value="moodboard">Moodboard — بريف واتجاه بصري</option><option value="storyboard">Storyboard — مشاهد فيديو</option><option value="campaign">حملة سوشيال — بريف وتسليم</option><option value="motion">Motion — سكريبت وإنتاج</option></select></label>
       <p id="cwCreateError" class="cw-form-error" role="alert"></p><div class="cw-actions"><button type="button" class="cw-button" data-cw="cancel-create">إلغاء</button><button id="cwCreateSubmit" class="cw-button cw-primary" type="submit">إنشاء السيشن ${icon('plus')}</button></div></form></dialog>
       <dialog id="cwBoard" class="cw-dialog cw-board-dialog" dir="rtl" aria-label="مساحة العمل الإبداعية">
       <header class="cw-board-head"><div class="cw-board-brand">${button('close','حفظ والرجوع للسيشنز','back')}<div><div class="cw-kicker">CREATIVE / WORKSPACE</div><input id="cwTitle" aria-label="اسم السيشن" maxlength="160"><small id="cwProjectLabel"></small></div></div>
-      <div class="cw-row"><span id="cwSaveState" class="cw-save" role="status"></span><button class="cw-button cw-primary" data-cw="upload">${icon('upload')}<span class="cw-upload-label">رفع ملفات</span></button><span class="cw-sidebar-toggle">${button('sidebar','العناصر والملفات','layers')}</span></div></header>
+      <div class="cw-row"><button class="cw-button" data-cw="arrange" title="ترتيب كروت البورد في شبكة">ترتيب</button><button class="cw-button" data-cw="export-brief">تصدير البريف</button><span id="cwSaveState" class="cw-save" role="status"></span><button class="cw-button cw-primary" data-cw="upload">${icon('upload')}<span class="cw-upload-label">رفع ملفات</span></button><span class="cw-sidebar-toggle">${button('sidebar','العناصر والملفات','layers')}</span></div></header>
       <div class="cw-board-body"><div id="cwCanvas" class="cw-canvas" tabindex="0" aria-label="البورد. اسحب العناصر من عنوانها. استخدم الأسهم لتحريك العنصر المحدد.">
       <div id="cwWorld" class="cw-world"><svg id="cwEdges" class="cw-edges" aria-hidden="true"></svg><div id="cwNodes"></div></div>
       <div id="cwBoardEmpty" class="cw-board-empty">${icon('board')}<h3>مساحة للفكرة اللي جاية.</h3><p>اسحب الصور والفيديوهات هنا، أو ابدأ بملاحظة.<br>حرّك، رتّب، ووصل أفكارك ببعض.</p><button class="cw-button" data-cw="upload">${icon('upload')} اختار ملفات</button></div>
@@ -125,6 +125,15 @@
     const note = (kind,title,text,x,y,w=300,height=270) => ({id:uid(),kind,title,text,x,y,w,h:height});
     if(type==='moodboard') value.nodes = [note('note','البريف','الهدف من التصميم:\n\nالجمهور:\n\nالرسالة الأساسية:',40,40),note('prompt','الاتجاه البصري','Style:\n\nLighting:\n\nColors:\n\nComposition:',400,40,330,300)];
     if(type==='storyboard') value.nodes = [0,1,2].map(i=>note('note',`المشهد 0${i+1}`,'الصورة / الحركة:\n\nالتعليق الصوتي:\n\nالمدة:',40+i*350,50,300,310));
+    if(type==='campaign') value.nodes = [
+      note('note','01 / البريف','العميل:\nالهدف:\nالجمهور والسوق:\nالرسالة الأساسية:\nدعوة لاتخاذ إجراء:',40,40,320,330),
+      note('note','02 / الاتجاه البصري','الألوان:\nالخطوط:\nالملمس والإضاءة:\nزاوية التصوير:\nعناصر نستخدمها / نتجنبها:',410,40,320,330),
+      note('prompt','03 / Hero prompt','Subject:\nComposition:\nCamera angle:\nMaterials and lighting:\nBrand colors:\nBackground:\nAvoid:',780,40,340,330),
+      note('note','04 / قبل التسليم','□ مراجعة النص العربي\n□ مراجعة الشعار والألوان\n□ تأكيد المقاسات المطلوبة\n□ مراجعة الحواف والخلفية\n□ تصدير النسخة المعتمدة\n□ جمع ملفات المشروع والخطوط',40,430,320,300)];
+    if(type==='motion') value.nodes = [
+      note('note','01 / السكريبت','الفكرة:\nالافتتاحية:\nالمشكلة:\nالحل:\nالخاتمة / CTA:',40,40,320,330),
+      note('note','02 / إعداد المشروع','المدة:\nالمقاس:\nFrame rate:\nالموسيقى:\nالتعليق الصوتي:\nطريقة التسليم:',410,40,320,330),
+      ...[0,1,2].map(i=>note('note',`Shot 0${i+1}`,'Timecode:\nالصورة:\nالحركة:\nالصوت:\nTransition:',40+i*370,430,320,300))];
     return value;
   }
   async function createSession(e) {
@@ -366,6 +375,27 @@
     if(action==='disconnect')doc.edges=doc.edges.filter(e=>e.from!==n.id&&e.to!==n.id);
     changed();renderBoard();
   }
+  function arrangeNodes(){
+    if(!doc.nodes.length)return;
+    snapshot();
+    const columns=Math.min(3,doc.nodes.length),width=Math.max(...doc.nodes.map(n=>n.w))+50;
+    let y=40;
+    for(let i=0;i<doc.nodes.length;i+=columns){
+      const row=doc.nodes.slice(i,i+columns);
+      row.forEach((n,j)=>{n.x=40+j*width;n.y=y;});
+      y+=Math.max(...row.map(n=>n.h))+60;
+    }
+    changed();renderBoard();fit();announce('الكروت اترتبت. تقدر ترجع بـ Undo.');
+  }
+  function exportBrief(){
+    const text=['# '+$('cwTitle').value,'',...doc.nodes.flatMap(n=>[
+      '## '+(n.title||labels[n.kind]||'عنصر'),n.text||'',n.kind==='link'?safeUrl(n.url):'',
+      n.assetId?'ملف: '+(doc.assets.find(a=>a.id===n.assetId)?.name||''): '', ''
+    ])].filter(x=>x!==undefined).join('\n');
+    const url=URL.createObjectURL(new Blob([text],{type:'text/plain;charset=utf-8'}));
+    const a=document.createElement('a');a.href=url;a.download=($('cwTitle').value||'creative-brief').replace(/[^\p{L}\p{N} _-]/gu,'').slice(0,100)+'.txt';a.click();
+    setTimeout(()=>URL.revokeObjectURL(url),1000);announce('البريف اتصدّر كنص. الصور والرسومات بتفضل في السيشن.');
+  }
   function onClick(e) {
     const target=e.target.closest('button');if(!target)return;
     if(target.dataset.cwOpen)return openBoard(target.dataset.cwOpen);
@@ -381,6 +411,8 @@
     if(action==='reload')return loadSessions();
     if(action==='archive-filter'){archived=!archived;target.setAttribute('aria-pressed',String(archived));renderSessions();return;}
     if(!session)return;
+    if(action==='arrange')return arrangeNodes();
+    if(action==='export-brief')return exportBrief();
     if(action==='close')return closeBoard();
     if(action==='upload')return $('cwFileInput').click();
     if(['cursor','hand','connect'].includes(action))return setTool(action);

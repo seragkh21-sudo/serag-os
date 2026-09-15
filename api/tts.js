@@ -1,3 +1,4 @@
+import {allowUsage} from '../lib/usage-limit.js';
 const VOICE='en-US-JennyNeural';
 const MAX_WORD_CHARS=120;
 const MAX_ARTICLE_CHARS=5000;
@@ -23,11 +24,12 @@ function escapeXml(value){
 async function verify(req){
   const header=req.headers.authorization||'';
   if(!header.startsWith('Bearer '))return null;
-  const r=await fetch(`${SUPABASE_URL}/auth/v1/user`,{headers:{apikey:SUPABASE_KEY,Authorization:header}});
-  return r.ok?r.json():null;
+  const r=await fetch(`${SUPABASE_URL}/auth/v1/user`,{headers:{apikey:SUPABASE_KEY,Authorization:header},signal:AbortSignal.timeout(8000)}).catch(()=>null);
+  return r?.ok?r.json():null;
 }
 
 export default async function handler(req,res){
+  res.setHeader('Cache-Control','private, no-store');
   if(!['GET','POST'].includes(req.method))return res.status(405).json({error:'Method not allowed'});
 
   const key=process.env.AZURE_SPEECH_KEY||'';
@@ -50,6 +52,8 @@ export default async function handler(req,res){
   const text=cleanText(Array.isArray(rawText)?rawText[0]:rawText,mode==='word'?MAX_WORD_CHARS:MAX_ARTICLE_CHARS);
   if(!text)return res.status(400).json({error:'Text is required'});
   if(mode==='word'&&!/[A-Za-z]/.test(text))return res.status(400).json({error:'English text is required'});
+
+  if(!await allowUsage(req,res,'tts',text.length))return;
 
   const rate=mode==='word'?'-12%':'-3%';
   const ssml=`<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="en-US"><voice name="${VOICE}"><prosody rate="${rate}">${escapeXml(text)}</prosody></voice></speak>`;

@@ -14,7 +14,8 @@
     const last=s%3===0?pick('Creative',d):pick(professional[(s+4)%professional.length],d+'extra');
     return shuffle([...pro,...general,...natural,...last],s+93).slice(0,10);
   }
-  const dailyArticle=(d=today())=>data.articles[seed(d)%data.articles.length];
+  let articleIndex=null;
+  const dailyArticle=(d=today())=>data.articles[articleIndex??(seed(d)%data.articles.length)];
   const dailyGrammar=(d=today())=>data.grammar[seed(d)%data.grammar.length];
   const dailySpeaking=(d=today(),offset=0)=>data.speaking[(seed(d)+offset)%data.speaking.length];
   const blankExample=entry=>entry[3].replace(new RegExp(entry[0].replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'i'),'_____');
@@ -26,20 +27,26 @@
     return {...state,...x,date:today(),steps,revealed:Array.isArray(x.revealed)?x.revealed:[]};
   }
   function restoreProgress(){gameIndex=Math.max(0,Number(state.answers)||0)%10;score=Math.max(0,Number(state.correct)||0)}
-  function cache(){try{localStorage.setItem('seragEnglishV9',JSON.stringify(state))}catch{}}
-  function loadCache(){try{const x=JSON.parse(localStorage.getItem('seragEnglishV9')||'{}');if(x.date===today()){state=normalizeState(x);restoreProgress()}}catch{}}
+  const freshState=()=>({date:today(),steps:Array(6).fill(false),xp:0,answers:0,correct:0,revealed:[]});
+  let cacheOwner=null;
+  const cacheKey=()=>user?.id?'seragEnglishV9:'+user.id:null;
+  function cache(){if(!cacheKey())return;try{localStorage.setItem(cacheKey(),JSON.stringify(state))}catch{}}
+  function loadCache(){if(!cacheKey())return;try{const x=JSON.parse(localStorage.getItem(cacheKey())||'{}');if(x.date===today()){state=normalizeState(x);restoreProgress()}}catch{}}
   async function loadSync(){
+    if(cacheOwner!==user?.id){clearTimeout(syncTimer);state=freshState();syncId=null;archive=[];gameIndex=0;score=0;cacheOwner=user?.id;}
     loadCache();renderAll();if(typeof sb==='undefined'||!user?.id)return;
+    const loadingOwner=user.id;
     try{
       const r=await sb.from('quick_notes').select('*').eq('category','system_english').order('created_at',{ascending:false}).limit(90);
+      if(user?.id!==loadingOwner)return;
       archive=(r.data||[]).map(x=>{try{return {...JSON.parse(x.content),id:x.id}}catch{return null}}).filter(Boolean);
       const saved=archive.find(x=>x.date===today());if(saved){state=normalizeState(saved);syncId=saved.id;restoreProgress()}renderAll();
     }catch{}
   }
   let syncTimer;
   function sync(){
-    cache();clearTimeout(syncTimer);syncTimer=setTimeout(async()=>{
-      if(typeof sb==='undefined'||!user?.id)return;
+    const owner=user?.id;cache();clearTimeout(syncTimer);syncTimer=setTimeout(async()=>{
+      if(typeof sb==='undefined'||!owner||user?.id!==owner)return;
       const content=JSON.stringify({...state,version:9,updatedAt:new Date().toISOString()});
       if(syncId)await sb.from('quick_notes').update({content,updated_at:new Date().toISOString()}).eq('id',syncId);
       else{const r=await sb.from('quick_notes').insert({user_id:user.id,title:`English Daily ${state.date}`,content,category:'system_english'}).select('id').single();if(!r.error)syncId=r.data.id}
@@ -70,7 +77,16 @@
     return {title:'Choose the meaning',prompt:entry[0],correct:entry[1],options:shuffle(pool,s+4).map(x=>x[1])};
   }
   function renderQuiz(){const q=currentQuiz(),label=state.answers<10?`${state.answers+1}/10`:`Bonus ${state.answers-9}`;$('#el9Quiz').innerHTML=`<div class="el9-card-head"><div><div class="el6-muted">${q.title} · ${label}</div><h3>${esc(q.prompt)}</h3></div><span class="el9-pill">${score} صح</span></div><div class="el9-quiz-options">${q.options.map(x=>`<button data-quiz-answer="${esc(x)}" data-correct="${esc(q.correct)}">${esc(x)}</button>`).join('')}</div><div class="el6-muted">4 أنواع أسئلة، وتتغير الكلمات تلقائيًا كل يوم. بعد أول 10 تقدر تكمل Bonus.</div>`}
-  function renderArticle(){const a=dailyArticle();$('#el9Article').innerHTML=`<div class="el9-card-head"><div><div class="el6-eyebrow">DAILY READING</div><h3>${esc(a.title)}</h3></div><div class="el6-tags"><span class="el6-tag">${a.level}</span><span class="el6-tag">${a.topic}</span></div></div><div class="el6-article">${esc(a.text)}</div><div class="el9-actions"><button class="el6-btn secondary" data-read-article>🔊 Listen</button><button class="el6-btn secondary" data-article-done>✓ قرأت المقال</button></div><div class="el6-question"><strong>${esc(a.question)}</strong><div class="el8-short-answer"><input id="el9ArticleAnswer" placeholder="Answer in English"><button class="el6-btn" data-check-article>Check</button></div><div id="el9ArticleFeedback" class="el6-muted"></div></div>`}
+  function renderArticle(){
+    const a=dailyArticle();
+    const words=a.words||data.vocabulary.filter(x=>a.text.toLowerCase().includes(x[0].toLowerCase())).slice(0,4).map(x=>[x[0],x[1]]);
+    $('#el9Article').innerHTML=`<div class="el9-card-head"><div><div class="el6-eyebrow">READING LIBRARY · ${data.articles.length} ARTICLES</div><h3>${esc(a.title)}</h3></div><span class="el6-tag">${esc(a.level)}</span></div>
+    <label class="el18-select">اختار مقال<select id="el18ArticleSelect">${data.articles.map((x,i)=>`<option value="${i}" ${x===a?'selected':''}>${esc(x.title)}</option>`).join('')}</select></label>
+    ${words.length?`<details class="el18-reading-words" open><summary>قبل القراءة — كلمات تساعدك</summary><div>${words.map(([w,m])=>`<span><b dir="ltr">${esc(w)}</b> — ${esc(m)} <button class="el6-btn tiny secondary" data-save-word="${esc(w)}" data-meaning="${esc(m)}" data-example="">+ حفظ</button></span>`).join('')}</div></details>`:''}
+    <div class="el6-article" dir="ltr">${esc(a.text)}</div><div class="el9-actions"><button class="el6-btn secondary" data-read-article>🔊 Listen</button><button class="el6-btn secondary" data-stop-reading>إيقاف الصوت</button><button class="el6-btn secondary" data-article-done>✓ قرأت المقال</button></div>
+    ${(a.checks||[]).map(([q,options],i)=>`<fieldset class="el18-check"><legend dir="ltr">${esc(q)}</legend><div>${options.map((o,j)=>`<button class="el6-btn secondary" data-reading-check="${i}" data-choice="${j}" type="button" dir="ltr">${esc(o)}</button>`).join('')}</div><p role="status"></p></fieldset>`).join('')}
+    <div class="el6-question"><strong dir="ltr">${esc(a.question)}</strong><div class="el8-short-answer"><input id="el9ArticleAnswer" placeholder="Answer in English"><button class="el6-btn" data-check-article>قارن بالإجابة النموذجية</button></div><div id="el9ArticleFeedback" class="el6-muted" role="status"></div></div>`;
+  }
   function renderGrammar(){
     const g=dailyGrammar(),tracks=['All',...new Set(data.grammar.map(x=>x.track))],list=grammarFilter==='All'?data.grammar:data.grammar.filter(x=>x.track===grammarFilter);
     $('#el9GrammarBody').innerHTML=`<section class="el9-rule-today"><div class="el6-eyebrow">RULE OF THE DAY</div><h3>${esc(g.title)}</h3><p>${esc(g.rule)}</p><div class="el6-example">${esc(g.example)}</div><div class="el6-muted"><b>Practice:</b> ${esc(g.task)}</div><div class="el9-grammar-check"><span>${esc(g.quiz[0])}</span><div><button data-grammar-choice="${esc(g.quiz[1])}" data-correct="${esc(g.quiz[1])}">${esc(g.quiz[1])}</button><button data-grammar-choice="${esc(g.quiz[2])}" data-correct="${esc(g.quiz[1])}">${esc(g.quiz[2])}</button></div><div id="el9GrammarResult"></div></div><div class="el9-grammar-write"><label for="el9GrammarPractice">اكتب مثال من حياتك أو شغلك</label><textarea id="el9GrammarPractice" placeholder="Write one sentence using today’s rule…">${esc(state.grammarPractice)}</textarea></div><div class="el9-actions"><button class="el6-btn tiny secondary" data-speak="${esc(g.example)}">🔊 Listen</button><button class="el6-btn tiny secondary" data-grammar-ai>اشرح القاعدة ببساطة</button><button class="el6-btn tiny" data-grammar-check-writing>صحّح جملتي</button></div><div id="el9GrammarAi" class="el9-ai-feedback ${state.grammarFeedback?'':'hidden'}">${esc(state.grammarFeedback)}</div></section><div class="el9-scroll-tabs">${tracks.map(x=>`<button class="el7-tab ${x===grammarFilter?'active':''}" data-grammar-filter="${x}">${x}</button>`).join('')}</div><div class="el9-grammar-list">${list.map(x=>`<details class="el6-grammar-item"><summary><div><b>${esc(x.title)}</b><span>${esc(x.track)}</span></div><span>⌄</span></summary><div class="el6-grammar-body"><p>${esc(x.rule)}</p><div class="el6-example">${esc(x.example)}</div><p class="el6-muted"><b>Practice:</b> ${esc(x.task)}</p></div></details>`).join('')}</div>`;
@@ -136,6 +152,8 @@
       <details class="el7-accordion" id="el9ArchiveWrap"><summary><div class="el7-summary-left"><div class="el7-summary-icon">↺</div><div class="el7-summary-copy"><b>الأيام القديمة والمراجعة</b><span>آخر 21 يوم من الكلمات والمقالات</span></div></div><span class="el7-chevron">⌄</span></summary><div class="el7-panel" id="el9Archive"></div></details>`;
     anchor.insertAdjacentElement('afterend',hub);
     wrapPersonalLibrary(page,hub);renderAll();loadSync();
+    if(typeof sb!=='undefined')sb.auth.onAuthStateChange(()=>setTimeout(()=>loadSync(),0));
+    hub.addEventListener('change',e=>{if(e.target.id==='el18ArticleSelect'){articleIndex=Number(e.target.value);window.speechSynthesis?.cancel();renderArticle();}});
     hub.addEventListener('input',e=>{
       if(e.target.id==='el9Transcript'){state.speakingTranscript=e.target.value;sync()}
       if(e.target.id==='el9GrammarPractice'){state.grammarPractice=e.target.value;state.grammarFeedback='';$('#el9GrammarAi')?.classList.add('hidden');sync()}
@@ -144,6 +162,8 @@
       if(e.target.id==='el9VideoNotes'){state.videoNotes=e.target.value;sync()}
     });
     hub.addEventListener('click',e=>{
+      if(e.target.closest('[data-stop-reading]'))return window.speechSynthesis?.cancel();
+      const rc=e.target.closest('[data-reading-check]');if(rc){const check=dailyArticle().checks[Number(rc.dataset.readingCheck)];const box=rc.closest('fieldset');const ok=Number(rc.dataset.choice)===check[2];box.querySelector('p').textContent=(ok?'صح ✓ — ':'جرّب تاني — ')+check[3];rc.setAttribute('aria-pressed','true');if(ok)box.querySelectorAll('button').forEach(b=>b.disabled=true);return;}
       const jump=e.target.closest('[data-jump]');if(jump){const target=$('#'+jump.dataset.jump);if(target?.tagName==='DETAILS')target.open=true;target?.scrollIntoView({behavior:'smooth',block:'start'});return}
       const sound=e.target.closest('[data-speak]');if(sound)return speak(sound.dataset.speak);
       const save=e.target.closest('[data-save-word]');if(save)return saveWord(save.dataset.saveWord,save.dataset.meaning,save.dataset.example);
@@ -151,7 +171,7 @@
       const qa=e.target.closest('[data-quiz-answer]');if(qa&&!answered){answered=true;const ok=qa.dataset.quizAnswer===qa.dataset.correct;qa.classList.add(ok?'correct':'wrong');qa.closest('.el9-quiz-options')?.querySelectorAll('button').forEach(x=>{if(x.dataset.quizAnswer===qa.dataset.correct)x.classList.add('correct')});state.answers++;if(ok){score++;state.correct++}sync();if(state.answers>=10)complete(1);setTimeout(()=>{gameIndex=(gameIndex+1)%10;answered=false;renderQuiz()},850);return}
       if(e.target.closest('[data-read-article]'))return speak(dailyArticle().text);
       if(e.target.closest('[data-article-done]'))return complete(2);
-      if(e.target.closest('[data-check-article]')){const answer=$('#el9ArticleAnswer').value.trim();$('#el9ArticleFeedback').textContent=answer?'Model answer: '+dailyArticle().answer:'اكتب إجابة قصيرة الأول.';if(answer)complete(2);return}
+      if(e.target.closest('[data-check-article]')){const answer=$('#el9ArticleAnswer').value.trim();$('#el9ArticleFeedback').textContent=answer?'Model answer: '+dailyArticle().answer:'اكتب إجابة قصيرة الأول.';return}
       const gc=e.target.closest('[data-grammar-choice]');if(gc){const ok=gc.dataset.grammarChoice===gc.dataset.correct;gc.classList.add(ok?'correct':'wrong');$('#el9GrammarResult').textContent=ok?'Correct ✓':'الصحيح: '+gc.dataset.correct;if(ok)complete(3);return}
       if(e.target.closest('[data-grammar-ai]')){const g=dailyGrammar();return coach('grammar',`${g.title}: ${g.rule}`,'')}
       if(e.target.closest('[data-grammar-check-writing]')){const g=dailyGrammar(),answer=$('#el9GrammarPractice').value.trim();if(!answer)return toast?.('اكتب جملة الأول');state.grammarPractice=answer;return coach('grammar',`${g.title}: ${g.rule}`,answer)}

@@ -16,6 +16,7 @@ function fmtDate(v){if(!v)return 'بدون موعد';return new Date(v).toLocale
 function safeUrl(v){try{const u=new URL(v);return ['http:','https:'].includes(u.protocol)?u.href:''}catch{return ''}}
 function actionButtons(type,id,{openUrl='',done=false,edit=true,remove=true}={}){
   let x='<div class="row-actions">';
+  openUrl=safeUrl(openUrl);
   if(openUrl)x+=`<a class="mini link" target="_blank" rel="noopener" href="${esc(openUrl)}">فتح</a>`;
   if(done)x+=`<button class="mini" data-action="done" data-type="${type}" data-id="${id}" type="button">تم</button>`;
   if(edit)x+=`<button class="mini" data-action="edit" data-type="${type}" data-id="${id}" type="button">تعديل</button>`;
@@ -296,7 +297,7 @@ async function loadCaptures(){
 }
 async function openAttachment(id){
   const {data,error}=await sb.from('attachments').select('*').eq('id',id).single();if(error)return toast(error.message);
-  if(data.external_url){window.open(data.external_url,'_blank','noopener');return}
+  if(data.external_url){const url=safeUrl(data.external_url);if(!url)return toast('الرابط غير آمن أو غير صالح');window.open(url,'_blank','noopener');return}
   if(!data.storage_path)return;
   const {data:signed,error:err}=await sb.storage.from('serag-attachments').createSignedUrl(data.storage_path,3600);if(err)return toast(err.message);
   window.open(signed.signedUrl,'_blank','noopener');

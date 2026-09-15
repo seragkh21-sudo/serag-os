@@ -1,4 +1,4 @@
-const CACHE='serag-os-static-v15';
+const CACHE='serag-os-static-v18';
 const STATIC=['/icon.svg'];
 
 self.addEventListener('install',event=>{
@@ -19,19 +19,13 @@ self.addEventListener('fetch',event=>{
   const url=new URL(event.request.url);
   if(url.origin!==self.location.origin)return;
 
-  const isCode=event.request.mode==='navigate'||/\.(?:html|js|css|webmanifest)$/.test(url.pathname);
-  if(isCode){
-    event.respondWith(fetch(event.request,{cache:'no-store'}));
-    return;
-  }
-
-  event.respondWith(
-    fetch(event.request).then(response=>{
-      if(response&&response.ok){
-        const copy=response.clone();
-        caches.open(CACHE).then(cache=>cache.put(event.request,copy)).catch(()=>{});
-      }
-      return response;
-    }).catch(()=>caches.match(event.request))
-  );
+  // Never cache API responses, credentials, audio or user documents.
+  if(!STATIC.includes(url.pathname))return;
+  event.respondWith(fetch(event.request).then(async response=>{
+    if(response.ok){
+      const cache=await caches.open(CACHE);
+      await cache.put(event.request,response.clone());
+    }
+    return response;
+  }).catch(()=>caches.match(event.request)));
 });

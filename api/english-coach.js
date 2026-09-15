@@ -1,3 +1,4 @@
+import {allowUsage} from '../lib/usage-limit.js';
 import {generateText} from 'ai';
 
 const SUPABASE_URL='https://kdfbxcdxdhofqidczbot.supabase.co';
@@ -6,8 +7,8 @@ const SUPABASE_KEY='sb_publishable_51lY0ST_vE6v0nogH5RGkQ_z8lJ5EAM';
 async function verify(req){
   const header=req.headers.authorization||'';
   if(!header.startsWith('Bearer '))return null;
-  const r=await fetch(`${SUPABASE_URL}/auth/v1/user`,{headers:{apikey:SUPABASE_KEY,Authorization:header}});
-  return r.ok?r.json():null;
+  const r=await fetch(`${SUPABASE_URL}/auth/v1/user`,{headers:{apikey:SUPABASE_KEY,Authorization:header},signal:AbortSignal.timeout(8000)}).catch(()=>null);
+  return r?.ok?r.json():null;
 }
 
 export default async function handler(req,res){
@@ -19,6 +20,7 @@ export default async function handler(req,res){
   const prompt=String(req.body?.prompt||'').trim().slice(0,1200);
   const response=String(req.body?.response||'').trim().slice(0,3000);
   if(!prompt)return res.status(400).json({error:'Missing exercise'});
+  if(!await allowUsage(req,res,'english-coach'))return;
   try{
     const system=mode==='grammar'
       ?`You are a concise English grammar coach for an Arabic-speaking B1 learner. Explain the rule in simple Egyptian Arabic. If learner text is supplied, correct it and briefly say why. Keep English examples in English. Use exactly: الفكرة، مثال طبيعي، التصحيح (write "لا يوجد مثال للتصحيح" when none), غلطة شائعة. Include one everyday example and, when useful, one professional example. Maximum 150 words. No markdown tables.`
