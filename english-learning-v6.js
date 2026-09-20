@@ -3,6 +3,7 @@
   const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const data=window.SERAG_ENGLISH_V9;
   if(!data)return;
+  const grammarData=window.SERAG_GRAMMAR_V10?.length?window.SERAG_GRAMMAR_V10:data.grammar;
   const today=()=>new Date().toLocaleDateString('en-CA');
   const seed=d=>[...String(d)].reduce((a,c)=>((a*31)+c.charCodeAt(0))>>>0,17);
   const shuffle=(arr,s)=>{const a=[...arr];for(let i=a.length-1;i>0;i--){s=(s*1664525+1013904223)>>>0;const j=s%(i+1);[a[i],a[j]]=[a[j],a[i]]}return a};
@@ -16,22 +17,23 @@
   }
   let articleIndex=null;
   const dailyArticle=(d=today())=>data.articles[articleIndex??(seed(d)%data.articles.length)];
-  const dailyGrammar=(d=today())=>data.grammar[seed(d)%data.grammar.length];
+  const dailyGrammar=(d=today())=>grammarData.find(x=>x.id===state?.grammarActiveId)||grammarData[seed(d)%grammarData.length];
   const dailySpeaking=(d=today(),offset=0)=>data.speaking[(seed(d)+offset)%data.speaking.length];
   const blankExample=entry=>entry[3].replace(new RegExp(entry[0].replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'i'),'_____');
-  let state={date:today(),steps:Array(6).fill(false),xp:0,answers:0,correct:0,revealed:[],videoUrl:'',videoPhrase:'',videoMeaning:'',videoNotes:'',videoFeedback:'',speakingPromptOffset:0,speakingTranscript:'',speakingFeedback:'',grammarPractice:'',grammarFeedback:''};
-  let archive=[],syncId=null,gameIndex=0,score=0,answered=false,grammarFilter='All',recognition=null,isRecording=false;
+  let state={date:today(),steps:Array(6).fill(false),xp:0,answers:0,correct:0,revealed:[],videoUrl:'',videoPhrase:'',videoMeaning:'',videoNotes:'',videoFeedback:'',speakingPromptOffset:0,speakingTranscript:'',speakingFeedback:'',grammarPractice:'',grammarFeedback:'',grammarCompleted:[],grammarBookmarks:[],grammarActiveId:''};
+  let archive=[],syncId=null,gameIndex=0,score=0,answered=false,grammarFilter='All',grammarSearch='',recognition=null,isRecording=false;
 
   function normalizeState(x={}){
     const steps=Array.from({length:6},(_,i)=>Boolean(x.steps?.[i]));
-    return {...state,...x,date:today(),steps,revealed:Array.isArray(x.revealed)?x.revealed:[]};
+    return {...state,...x,date:today(),steps,revealed:Array.isArray(x.revealed)?x.revealed:[],grammarCompleted:Array.isArray(x.grammarCompleted)?x.grammarCompleted:state.grammarCompleted,grammarBookmarks:Array.isArray(x.grammarBookmarks)?x.grammarBookmarks:state.grammarBookmarks};
   }
   function restoreProgress(){gameIndex=Math.max(0,Number(state.answers)||0)%10;score=Math.max(0,Number(state.correct)||0)}
-  const freshState=()=>({date:today(),steps:Array(6).fill(false),xp:0,answers:0,correct:0,revealed:[]});
+  const freshState=()=>({date:today(),steps:Array(6).fill(false),xp:0,answers:0,correct:0,revealed:[],grammarCompleted:[],grammarBookmarks:[],grammarActiveId:''});
   let cacheOwner=null;
   const cacheKey=()=>user?.id?'seragEnglishV9:'+user.id:null;
-  function cache(){if(!cacheKey())return;try{localStorage.setItem(cacheKey(),JSON.stringify(state))}catch{}}
-  function loadCache(){if(!cacheKey())return;try{const x=JSON.parse(localStorage.getItem(cacheKey())||'{}');if(x.date===today()){state=normalizeState(x);restoreProgress()}}catch{}}
+  const curriculumKey=()=>user?.id?'seragGrammarCurriculum:'+user.id:null;
+  function cache(){if(!cacheKey())return;try{localStorage.setItem(cacheKey(),JSON.stringify(state));localStorage.setItem(curriculumKey(),JSON.stringify({completed:state.grammarCompleted,bookmarks:state.grammarBookmarks,activeId:state.grammarActiveId}))}catch{}}
+  function loadCache(){if(!cacheKey())return;try{const curriculum=JSON.parse(localStorage.getItem(curriculumKey())||'{}');if(Array.isArray(curriculum.completed))state.grammarCompleted=curriculum.completed;if(Array.isArray(curriculum.bookmarks))state.grammarBookmarks=curriculum.bookmarks;if(curriculum.activeId)state.grammarActiveId=curriculum.activeId;const x=JSON.parse(localStorage.getItem(cacheKey())||'{}');if(x.date===today()){state=normalizeState(x);restoreProgress()}}catch{}}
   async function loadSync(){
     if(cacheOwner!==user?.id){clearTimeout(syncTimer);state=freshState();syncId=null;archive=[];gameIndex=0;score=0;cacheOwner=user?.id;}
     loadCache();renderAll();if(typeof sb==='undefined'||!user?.id)return;
@@ -40,6 +42,8 @@
       const r=await sb.from('quick_notes').select('*').eq('category','system_english').order('created_at',{ascending:false}).limit(90);
       if(user?.id!==loadingOwner)return;
       archive=(r.data||[]).map(x=>{try{return {...JSON.parse(x.content),id:x.id}}catch{return null}}).filter(Boolean);
+      const curriculum=archive.find(x=>Array.isArray(x.grammarCompleted)||Array.isArray(x.grammarBookmarks));
+      if(curriculum){if(Array.isArray(curriculum.grammarCompleted))state.grammarCompleted=curriculum.grammarCompleted;if(Array.isArray(curriculum.grammarBookmarks))state.grammarBookmarks=curriculum.grammarBookmarks;if(curriculum.grammarActiveId)state.grammarActiveId=curriculum.grammarActiveId}
       const saved=archive.find(x=>x.date===today());if(saved){state=normalizeState(saved);syncId=saved.id;restoreProgress()}renderAll();
     }catch{}
   }
@@ -88,8 +92,11 @@
     <div class="el6-question"><strong dir="ltr">${esc(a.question)}</strong><div class="el8-short-answer"><input id="el9ArticleAnswer" placeholder="Answer in English"><button class="el6-btn" data-check-article>قارن بالإجابة النموذجية</button></div><div id="el9ArticleFeedback" class="el6-muted" role="status"></div></div>`;
   }
   function renderGrammar(){
-    const g=dailyGrammar(),tracks=['All',...new Set(data.grammar.map(x=>x.track))],list=grammarFilter==='All'?data.grammar:data.grammar.filter(x=>x.track===grammarFilter);
-    $('#el9GrammarBody').innerHTML=`<section class="el9-rule-today"><div class="el6-eyebrow">RULE OF THE DAY</div><h3>${esc(g.title)}</h3><p>${esc(g.rule)}</p><div class="el6-example">${esc(g.example)}</div><div class="el6-muted"><b>Practice:</b> ${esc(g.task)}</div><div class="el9-grammar-check"><span>${esc(g.quiz[0])}</span><div><button data-grammar-choice="${esc(g.quiz[1])}" data-correct="${esc(g.quiz[1])}">${esc(g.quiz[1])}</button><button data-grammar-choice="${esc(g.quiz[2])}" data-correct="${esc(g.quiz[1])}">${esc(g.quiz[2])}</button></div><div id="el9GrammarResult"></div></div><div class="el9-grammar-write"><label for="el9GrammarPractice">اكتب مثال من حياتك أو شغلك</label><textarea id="el9GrammarPractice" placeholder="Write one sentence using today’s rule…">${esc(state.grammarPractice)}</textarea></div><div class="el9-actions"><button class="el6-btn tiny secondary" data-speak="${esc(g.example)}">🔊 Listen</button><button class="el6-btn tiny secondary" data-grammar-ai>اشرح القاعدة ببساطة</button><button class="el6-btn tiny" data-grammar-check-writing>صحّح جملتي</button></div><div id="el9GrammarAi" class="el9-ai-feedback ${state.grammarFeedback?'':'hidden'}">${esc(state.grammarFeedback)}</div></section><div class="el9-scroll-tabs">${tracks.map(x=>`<button class="el7-tab ${x===grammarFilter?'active':''}" data-grammar-filter="${x}">${x}</button>`).join('')}</div><div class="el9-grammar-list">${list.map(x=>`<details class="el6-grammar-item"><summary><div><b>${esc(x.title)}</b><span>${esc(x.track)}</span></div><span>⌄</span></summary><div class="el6-grammar-body"><p>${esc(x.rule)}</p><div class="el6-example">${esc(x.example)}</div><p class="el6-muted"><b>Practice:</b> ${esc(x.task)}</p></div></details>`).join('')}</div>`;
+    const g=dailyGrammar(),tracks=['All',...new Set(grammarData.map(x=>x.track))],q=grammarSearch.trim().toLowerCase();
+    const list=grammarData.filter(x=>(grammarFilter==='All'||x.track===grammarFilter)&&(!q||[x.title,x.titleAr,x.summary,x.track,x.level].join(' ').toLowerCase().includes(q)));
+    const done=state.grammarCompleted.length,pct=Math.round(done/grammarData.length*100),example=g.examples?.[0]||g.example||'',rule=g.summary||g.rule||'';
+    const lesson=x=>{const complete=state.grammarCompleted.includes(x.id),saved=state.grammarBookmarks.includes(x.id),ex=x.examples||[x.example].filter(Boolean);return `<details class="el10-lesson ${complete?'complete':''}" data-lesson-id="${esc(x.id)}"><summary><div class="el10-lesson-number">${complete?'✓':esc(x.level||'•')}</div><div class="el10-lesson-title"><b>${esc(x.title)}</b><span>${esc(x.titleAr||'')} · ${esc(x.track)}</span></div><button type="button" class="el10-bookmark ${saved?'saved':''}" data-grammar-bookmark="${esc(x.id)}" aria-label="${saved?'إزالة من المحفوظات':'حفظ الدرس'}">${saved?'★':'☆'}</button><span class="el10-chevron">⌄</span></summary><div class="el10-lesson-body"><div class="el10-summary">${esc(x.summary||x.rule)}</div>${x.formula?`<div class="el10-formula"><span>FORMULA</span><code>${esc(x.formula)}</code></div>`:''}<div class="el10-detail-grid">${x.uses?.length?`<section><h5>تستخدمها إمتى؟</h5><ul>${x.uses.map(v=>`<li>${esc(v)}</li>`).join('')}</ul></section>`:''}<section><h5>أمثلة طبيعية</h5>${ex.map(v=>`<div class="el10-example"><span>${esc(v)}</span><button type="button" data-speak="${esc(v)}">🔊</button></div>`).join('')}</section>${x.mistake?`<section class="el10-mistake"><h5>خلي بالك</h5><p>${esc(x.mistake)}</p></section>`:''}${x.tip?`<section class="el10-tip"><h5>طريقة تفتكرها</h5><p>${esc(x.tip)}</p></section>`:''}</div><div class="el9-grammar-check"><span>${esc(x.quiz[0])}</span><div><button data-grammar-choice="${esc(x.quiz[1])}" data-correct="${esc(x.quiz[1])}">${esc(x.quiz[1])}</button><button data-grammar-choice="${esc(x.quiz[2])}" data-correct="${esc(x.quiz[1])}">${esc(x.quiz[2])}</button></div><div class="el10-inline-result"></div></div><div class="el10-lesson-actions"><button type="button" class="el6-btn tiny secondary" data-grammar-practice="${esc(x.id)}">استخدمه كتدريب اليوم</button><button type="button" class="el6-btn tiny ${complete?'secondary':''}" data-grammar-complete="${esc(x.id)}">${complete?'تم الدرس ✓':'علّم كمكتمل'}</button></div></div></details>`};
+    $('#el9GrammarBody').innerHTML=`<div class="el10-head"><div><div class="el6-eyebrow">GRAMMAR ACADEMY · ${grammarData.length} LESSONS</div><h3>افهم القاعدة، طبّقها، واتكلم بيها</h3><p>منهج مرتب ومبسّط من الكتاب، مع أمثلة للحياة والشغل وتمارين عملية.</p></div><div class="el10-progress-ring" style="--p:${pct}"><strong>${pct}%</strong><span>${done}/${grammarData.length}</span></div></div><section class="el9-rule-today el10-today"><div class="el10-today-copy"><div class="el6-eyebrow">RULE OF THE DAY · ${esc(g.level||'')}</div><h3>${esc(g.title)}</h3><span class="el10-ar-title">${esc(g.titleAr||'')}</span><p>${esc(rule)}</p>${g.formula?`<div class="el10-formula"><span>FORMULA</span><code>${esc(g.formula)}</code></div>`:''}<div class="el6-example">${esc(example)}</div><div class="el6-muted"><b>Practice:</b> ${esc(g.task)}</div></div><div class="el9-grammar-check"><span>${esc(g.quiz[0])}</span><div><button data-grammar-choice="${esc(g.quiz[1])}" data-correct="${esc(g.quiz[1])}">${esc(g.quiz[1])}</button><button data-grammar-choice="${esc(g.quiz[2])}" data-correct="${esc(g.quiz[1])}">${esc(g.quiz[2])}</button></div><div id="el9GrammarResult"></div></div><div class="el9-grammar-write"><label for="el9GrammarPractice">اكتب مثال من حياتك أو شغلك</label><textarea id="el9GrammarPractice" placeholder="Write one sentence using today’s rule…">${esc(state.grammarPractice)}</textarea></div><div class="el9-actions"><button class="el6-btn tiny secondary" data-speak="${esc(example)}">🔊 Listen</button><button class="el6-btn tiny secondary" data-grammar-ai>اشرحها أبسط</button><button class="el6-btn tiny" data-grammar-check-writing>صحّح جملتي</button></div><div id="el9GrammarAi" class="el9-ai-feedback ${state.grammarFeedback?'':'hidden'}">${esc(state.grammarFeedback)}</div></section><div class="el10-library-head"><div><h4>كل الدروس</h4><span>${list.length} نتيجة · ${state.grammarBookmarks.length} محفوظ</span></div><label class="el10-search"><span>⌕</span><input id="el10GrammarSearch" value="${esc(grammarSearch)}" placeholder="ابحث: articles, conditionals, الأزمنة…"></label></div><div class="el9-scroll-tabs">${tracks.map(x=>`<button class="el7-tab ${x===grammarFilter?'active':''}" data-grammar-filter="${esc(x)}">${esc(x)}</button>`).join('')}</div><div class="el10-grammar-list">${list.length?list.map(lesson).join(''):'<div class="el10-empty">مفيش درس بالبحث ده. جرّب كلمة أو تصنيف تاني.</div>'}</div>`;
   }
   function renderSpeaking(){
     const p=dailySpeaking(today(),state.speakingPromptOffset||0);
@@ -157,6 +164,7 @@
     hub.addEventListener('input',e=>{
       if(e.target.id==='el9Transcript'){state.speakingTranscript=e.target.value;sync()}
       if(e.target.id==='el9GrammarPractice'){state.grammarPractice=e.target.value;state.grammarFeedback='';$('#el9GrammarAi')?.classList.add('hidden');sync()}
+      if(e.target.id==='el10GrammarSearch'){grammarSearch=e.target.value;clearTimeout(e.target._t);e.target._t=setTimeout(()=>{renderGrammar();$('#el10GrammarSearch')?.focus()},180)}
       if(e.target.id==='el9VideoPhrase'){state.videoPhrase=e.target.value;state.videoFeedback='';$('#el9VideoAi')?.classList.add('hidden');sync()}
       if(e.target.id==='el9VideoMeaning'){state.videoMeaning=e.target.value;sync()}
       if(e.target.id==='el9VideoNotes'){state.videoNotes=e.target.value;sync()}
@@ -172,10 +180,13 @@
       if(e.target.closest('[data-read-article]'))return speak(dailyArticle().text);
       if(e.target.closest('[data-article-done]'))return complete(2);
       if(e.target.closest('[data-check-article]')){const answer=$('#el9ArticleAnswer').value.trim();$('#el9ArticleFeedback').textContent=answer?'Model answer: '+dailyArticle().answer:'اكتب إجابة قصيرة الأول.';return}
-      const gc=e.target.closest('[data-grammar-choice]');if(gc){const ok=gc.dataset.grammarChoice===gc.dataset.correct;gc.classList.add(ok?'correct':'wrong');$('#el9GrammarResult').textContent=ok?'Correct ✓':'الصحيح: '+gc.dataset.correct;if(ok)complete(3);return}
-      if(e.target.closest('[data-grammar-ai]')){const g=dailyGrammar();return coach('grammar',`${g.title}: ${g.rule}`,'')}
-      if(e.target.closest('[data-grammar-check-writing]')){const g=dailyGrammar(),answer=$('#el9GrammarPractice').value.trim();if(!answer)return toast?.('اكتب جملة الأول');state.grammarPractice=answer;return coach('grammar',`${g.title}: ${g.rule}`,answer)}
+      const gc=e.target.closest('[data-grammar-choice]');if(gc){const ok=gc.dataset.grammarChoice===gc.dataset.correct;gc.classList.add(ok?'correct':'wrong');const result=gc.closest('.el9-grammar-check')?.querySelector('#el9GrammarResult,.el10-inline-result');if(result)result.textContent=ok?'Correct ✓':'الصحيح: '+gc.dataset.correct;if(ok)complete(3);return}
+      if(e.target.closest('[data-grammar-ai]')){const g=dailyGrammar();return coach('grammar',`${g.title}: ${g.summary||g.rule}`,'')}
+      if(e.target.closest('[data-grammar-check-writing]')){const g=dailyGrammar(),answer=$('#el9GrammarPractice').value.trim();if(!answer)return toast?.('اكتب جملة الأول');state.grammarPractice=answer;return coach('grammar',`${g.title}: ${g.summary||g.rule}`,answer)}
       const gf=e.target.closest('[data-grammar-filter]');if(gf){grammarFilter=gf.dataset.grammarFilter;renderGrammar();return}
+      const gb=e.target.closest('[data-grammar-bookmark]');if(gb){e.preventDefault();e.stopPropagation();const id=gb.dataset.grammarBookmark;state.grammarBookmarks=state.grammarBookmarks.includes(id)?state.grammarBookmarks.filter(x=>x!==id):[...state.grammarBookmarks,id];sync();renderGrammar();return}
+      const gd=e.target.closest('[data-grammar-complete]');if(gd){const id=gd.dataset.grammarComplete;state.grammarCompleted=state.grammarCompleted.includes(id)?state.grammarCompleted.filter(x=>x!==id):[...state.grammarCompleted,id];sync();renderGrammar();return}
+      const gp=e.target.closest('[data-grammar-practice]');if(gp){const selected=grammarData.find(x=>x.id===gp.dataset.grammarPractice);if(!selected)return;state.grammarActiveId=selected.id;state.grammarPractice='';state.grammarFeedback='';sync();renderGrammar();const area=$('#el9GrammarPractice');area?.scrollIntoView({behavior:'smooth',block:'center'});area?.focus();return}
       if(e.target.closest('[data-speak-prompt]'))return speak(dailySpeaking(today(),state.speakingPromptOffset||0).prompt,.84);
       if(e.target.closest('[data-next-speaking]')){state.speakingPromptOffset=((state.speakingPromptOffset||0)+1)%data.speaking.length;state.speakingTranscript='';state.speakingFeedback='';sync();renderSpeaking();return}
       if(e.target.closest('[data-record]'))return startRecording();
