@@ -123,6 +123,7 @@
     const r=await sb.from('english_words').insert({user_id:user.id,word,meaning,example,status:'learning'});toast?.(r.error?r.error.message:'اتضافت لـ My Words');try{loadEnglish?.()}catch{}
   }
   async function coach(mode,prompt,response=''){
+    if(window.SERAG_ENGLISH_FREE_ONLY){const box=mode==='speaking'?$('#el9SpeakingFeedback'):mode==='video'?$('#el9VideoAi'):$('#el9GrammarAi');box.classList.remove('hidden');box.textContent='التصحيح المدفوع متوقف. استخدم خرائط القواعد والتدريب المحلي المجاني؛ النص الحر لا يتم تقييمه تلقائيًا.';return}
     const box=mode==='speaking'?$('#el9SpeakingFeedback'):mode==='video'?$('#el9VideoAi'):$('#el9GrammarAi');box.classList.remove('hidden');box.textContent='AI is reviewing…';
     try{
       const session=(await sb.auth.getSession()).data.session;if(!session)throw new Error('سجّل دخولك الأول');

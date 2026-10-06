@@ -1,0 +1,7 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import vm from 'node:vm';
+function data(){const c={window:{addEventListener(){}},setInterval(){return 0}};vm.createContext(c);for(const f of ['english-grammar-v10.js','english-review-v10-data.js','english-academy-v12.js'])vm.runInContext(fs.readFileSync(f,'utf8'),c);return c.window;}
+test('academy provides maps, scenarios and valid questions without paid API',()=>{const w=data(),a=w.SERAG_ACADEMY_V12;assert.equal(w.SERAG_ENGLISH_FREE_ONLY,true);assert.equal(Object.keys(a.maps).length,4);assert.equal(a.scenarios.length,20);const qs=a.questions();assert.ok(qs.length>70);assert.equal(new Set(qs.map(q=>q.id)).size,qs.length);for(const q of qs)assert.ok(q.options.includes(q.answer),q.id);const ids=new Set([...w.SERAG_GRAMMAR_V10.map(g=>g.id),'past-perfect-continuous']);const aliases={'zero-first':'zero-first-conditionals','if-alternatives':'condition-linkers'};for(const m of Object.values(a.maps))for(const [,nodes]of m.branches)for(const [id]of nodes)assert.ok(ids.has(aliases[id]||id),id);});
+test('academy never invokes a paid network service',()=>{const js=fs.readFileSync('english-academy-v12.js','utf8');assert.ok(!/fetch\s*\(/.test(js));assert.ok(js.includes('getUserMedia'));assert.ok(js.includes('localStorage'));});

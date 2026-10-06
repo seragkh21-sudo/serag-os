@@ -34,7 +34,7 @@
 
   function speakLocalMicrosoft(text,{word=false}={}){
     const value=String(text||'').trim();
-    const voice=microsoftVoice();
+    const voice=microsoftVoice()||(window.SERAG_ENGLISH_FREE_ONLY?allVoices().find(v=>/^en/i.test(v.lang||'')):null);
     if(!value||!voice||!('speechSynthesis' in window))return false;
     stopCurrent();
     const utter=new SpeechSynthesisUtterance(value);
@@ -56,6 +56,7 @@
   }
 
   async function detectAzure(){
+    if(window.SERAG_ENGLISH_FREE_ONLY){azureAvailable=false;return false}
     try{
       const r=await fetch('/api/tts?mode=status',{cache:'no-store'});
       if(!r.ok)return false;
@@ -66,6 +67,7 @@
   }
 
   async function fetchAzureAudio(text,{word=false}={}){
+    if(window.SERAG_ENGLISH_FREE_ONLY)throw new Error('Paid English speech is disabled');
     const value=String(text||'').replace(/\s+/g,' ').trim();
     if(!value)throw new Error('Empty text');
     if(word){

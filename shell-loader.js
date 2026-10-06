@@ -1,6 +1,6 @@
 (async()=>{
   try{
-    const V='20';
+    const V='21';
     const res=await fetch(`/legacy.html?v=${V}`,{cache:'no-store',headers:{'Cache-Control':'no-cache'}});
     if(!res.ok)throw new Error('Legacy app failed to load');
     let html=await res.text();
@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="/english-v8.css?v=${V}"/>
 <link rel="stylesheet" href="/english-v9.css?v=${V}"/>
 <link rel="stylesheet" href="/english-grammar-v10.css?v=${V}"/>
+<link rel="stylesheet" href="/english-academy-v12.css?v=${V}"/>
 <link rel="stylesheet" href="/creative-workspace.css?v=${V}"/>
 <link rel="stylesheet" href="/creative-workspace-tools.css?v=${V}"/>
 <link rel="stylesheet" href="/creative-library-v2.css?v=2"/>
@@ -90,6 +91,7 @@
     html=html.replace('</body>',`<script src="/dashboard-v2.js?v=${V}"></script>
 <script src="/english-v3.js?v=${V}"></script>
 <script src="/english-audio-v4.js?v=${V}"></script>
+<script>window.SERAG_ENGLISH_FREE_ONLY=true;</script>
 <script src="/microsoft-tts-v1.js?v=${V}"></script>
 <script src="/serag-v5.js?v=${V}"></script>
 <script src="/english-content-v9.js?v=${V}"></script>
@@ -99,6 +101,7 @@
 <script src="/english-review-v10.js?v=${V}"></script>
 <script src="/english-review-v10-fallback.js?v=${V}"></script>
 <script src="/english-attempt-sync-v11.js?v=${V}"></script>
+<script src="/english-academy-v12.js?v=${V}"></script>
 <script src="/english-focus-v7.js?v=${V}"></script>
 <script src="/voice-commands-v1.js?v=1"></script>
 <script src="/creative-workspace.js?v=${V}"></script>
