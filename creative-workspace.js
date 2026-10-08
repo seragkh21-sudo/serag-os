@@ -34,6 +34,7 @@
   let sessions = [], projects = [], archived = false, session = null, doc = blank();
   let selected = null, tool = 'cursor', connectFrom = null, drag = null, space = false;
   let history = [], future = [], dirty = false, generation = 0, saveTimer, saving = null, conflict = false;
+  let annotationState = 'saved';
   let uploading = false, sidebarTab = 'layers', lastFocus, oldOverflow = '', loading = false;
   let authOwner = null, viewEpoch = 0, createBusy = false, copyBusy = false;
   const mediaUrls = new Map();
@@ -63,11 +64,11 @@
       <div class="cw-board-body"><div id="cwCanvas" class="cw-canvas" tabindex="0" aria-label="البورد. اسحب العناصر من عنوانها. استخدم الأسهم لتحريك العنصر المحدد.">
       <div id="cwWorld" class="cw-world"><svg id="cwEdges" class="cw-edges" aria-hidden="true"></svg><div id="cwNodes"></div></div>
       <div id="cwBoardEmpty" class="cw-board-empty">${icon('board')}<h3>مساحة للفكرة اللي جاية.</h3><p>اسحب الصور والفيديوهات هنا، أو ابدأ بملاحظة.<br>حرّك، رتّب، ووصل أفكارك ببعض.</p><button class="cw-button" data-cw="upload">${icon('upload')} اختار ملفات</button></div>
-      <div id="cwTools" class="cw-tools" role="toolbar" aria-label="أدوات البورد">${button('cursor','تحديد · V','cursor','aria-pressed="true"')}${button('hand','تحريك البورد · H أو Space','hand','aria-pressed="false"')}<hr>${button('note','إضافة ملاحظة · N','note')}${button('prompt','إضافة برومبت · P','prompt')}${button('link','إضافة رابط · L','link')}${button('connect','وصل عنصرين · C','connect','aria-pressed="false"')}<hr>${button('undo','تراجع · Ctrl Z','undo')}${button('redo','إعادة · Ctrl Shift Z','redo')}</div>
+      <div id="cwTools" class="cw-tools" role="toolbar" aria-label="أدوات البورد">${button('cursor','تحديد · V','cursor','aria-pressed="true"')}${button('hand','تحريك البورد · H أو Space','hand','aria-pressed="false"')}<hr>${button('note','إضافة ملاحظة · N','note')}${button('prompt','إضافة برومبت · Shift P','prompt')}${button('link','إضافة رابط · L','link')}${button('connect','وصل عنصرين · C','connect','aria-pressed="false"')}<hr>${button('undo','تراجع · Ctrl Z','undo')}${button('redo','إعادة · Ctrl Shift Z','redo')}</div>
       <div id="cwConflict" class="cw-conflict" role="alert" hidden>السيشن اتعدلت في مكان تاني. احفظ شغلك كنسخة علشان تحتفظ بالاتنين.<button class="cw-button" data-cw="save-copy">حفظ كسيشن جديدة</button></div>
       <div id="cwUploadStatus" class="cw-upload-status" role="status"></div></div>
       <aside id="cwInspector" class="cw-inspector" aria-label="محتوى السيشن"><div class="cw-inspector-tabs"><button data-cw="layers" class="active">العناصر</button><button data-cw="assets">الملفات</button></div><div id="cwInspectorBody"></div></aside></div>
-      <footer class="cw-footer"><span class="cw-footer-help">Space + سحب للتحريك · Ctrl + عجلة الماوس للزوم · Delete للحذف</span><button type="button" id="cwFooterState" class="cw-footer-status" data-cw="retry-save" aria-label="حالة الحفظ. اضغط لحفظ التعديلات." aria-live="polite"></button><div class="cw-zoom">${button('zoom-out','تصغير','minus')}<button class="cw-button" data-cw="reset-zoom" id="cwZoom">100%</button>${button('zoom-in','تكبير','plus')}${button('fit','عرض كل العناصر','fit')}</div></footer>
+      <footer class="cw-footer"><span class="cw-footer-help">V تحديد · Shift تحديد متعدد · Space تحريك · T كتابة · P / B رسم</span><button type="button" id="cwFooterState" class="cw-footer-status" data-cw="retry-save" aria-label="حالة الحفظ. اضغط لحفظ التعديلات." aria-live="polite"></button><div class="cw-zoom">${button('zoom-out','تصغير','minus')}<button class="cw-button" data-cw="reset-zoom" id="cwZoom">100%</button>${button('zoom-in','تكبير','plus')}${button('fit','عرض كل العناصر','fit')}</div></footer>
       <input id="cwFileInput" type="file" accept="image/jpeg,image/png,image/webp,image/gif,image/avif,video/mp4,video/webm,video/quicktime" multiple hidden></dialog>`);
     $('cwSearch').addEventListener('input', renderSessions);
     $('cwCreateForm').addEventListener('submit', createSession);
@@ -150,7 +151,7 @@
 
   function normalize(value) {
     const v = value || blank();
-    return {nodes:(Array.isArray(v.nodes)?v.nodes:[]).filter(n=>Object.hasOwn(labels,n.kind)).slice(0,500).map(n=>({...n,x:clamp(Number(n.x)||0,-20000,20000),y:clamp(Number(n.y)||0,-20000,20000),w:clamp(Number(n.w)||300,180,1600),h:clamp(Number(n.h)||240,130,1600)})),edges:Array.isArray(v.edges)?v.edges:[],assets:Array.isArray(v.assets)?v.assets:[],viewport:{x:Number(v.viewport?.x)||110,y:Number(v.viewport?.y)||70,zoom:clamp(Number(v.viewport?.zoom)||1,.2,2)}};
+    return {nodes:(Array.isArray(v.nodes)?v.nodes:[]).filter(n=>Object.hasOwn(labels,n.kind)).slice(0,500).map(n=>({...n,x:clamp(Number(n.x)||0,-20000,20000),y:clamp(Number(n.y)||0,-20000,20000),w:clamp(Number(n.w)||300,180,1600),h:clamp(Number(n.h)||240,130,1600)})),edges:Array.isArray(v.edges)?v.edges:[],assets:Array.isArray(v.assets)?v.assets:[],viewport:{x:Number.isFinite(Number(v.viewport?.x))?Number(v.viewport.x):110,y:Number.isFinite(Number(v.viewport?.y))?Number(v.viewport.y):70,zoom:clamp(Number(v.viewport?.zoom)||1,.2,2)}};
   }
   async function openBoard(id) {
     if(session && !(await closeBoard())) return;
@@ -167,6 +168,8 @@
       } catch {}
       $('cwProjectLabel').textContent=projects.find(p=>p.id===data.project_id)?.title||'سيشن مستقلة';
       lastFocus=document.activeElement; oldOverflow=document.body.style.overflow; document.body.style.overflow='hidden';
+      await window.CreativeWorkspaceTools?.load(data.id);
+      if(epoch!==viewEpoch || session!==data)return;
       $('cwBoard').showModal(); $('cwConflict').hidden=!conflict;
       sidebarTab='layers';setTool('cursor');renderBoard(); status(conflict?'error':dirty?'pending':'saved');
       $('cwCanvas').focus();
@@ -183,6 +186,7 @@
     clearTimeout(saveTimer); if(!conflict) saveTimer=setTimeout(flushSave,650);
   }
   function status(state, message) {
+    if(state==='saved'&&annotationState!=='saved')state=annotationState;
     const texts={saved:'كل التعديلات محفوظة',saving:'جاري الحفظ…',pending:'تعديلات لم تُحفظ بعد',error:'تعذّر الحفظ — اضغط للمحاولة'};
     $('cwSaveState').dataset.state=state;
     $('cwSaveState').textContent=message||texts[state];
@@ -220,17 +224,19 @@
       const {data,error}=await sb.from('creative_sessions').insert({user_id:old.user_id,project_id:old.project_id,title:($('cwTitle').value.trim()||old.title).slice(0,145)+' — نسخة',document:clone(doc)}).select().single();
       if(error) throw error;
       if(session!==old)return;
+      if(window.CreativeWorkspaceTools && !(await window.CreativeWorkspaceTools.copyTo(data.id))){status('error','تعذّر نسخ النص والرسم. جرّب تاني.');return;}
       try{localStorage.removeItem(draftKey(old));}catch{}session=data;dirty=generation!==copyGen;conflict=false;$('cwConflict').hidden=true;$('cwTitle').value=data.title;status(dirty?'pending':'saved');if(dirty){persistDraft();flushSave();}loadSessions();
     } catch(e) { status('error','تعذّر حفظ النسخة. جرّب تاني.'); }
     finally {copyBusy=false;}
   }
   async function closeBoard() {
     if(uploading){announce('استنى لحد ما رفع الملفات يخلص.');return false;}
+    if(session && window.CreativeWorkspaceTools && !(await window.CreativeWorkspaceTools.flush())) return false;
     if(session && !(await flushSave())) return false;
     clearBoard();loadSessions();return true;
   }
   function clearBoard() {
-    viewEpoch++; clearTimeout(saveTimer);
+    viewEpoch++; clearTimeout(saveTimer); window.CreativeWorkspaceTools?.reset();
     $('cwBoard')?.querySelectorAll('video').forEach(v=>v.pause());
     if($('cwBoard')?.open){$('cwBoard').close();document.body.style.overflow=oldOverflow;lastFocus?.focus();}
     if($('cwCreate')?.open) $('cwCreate').close();
@@ -238,7 +244,7 @@
     mediaUrls.clear();pendingMedia.clear();
     if($('cwNodes')) $('cwNodes').replaceChildren();
   }
-  function snapshot() {history.push(JSON.stringify({nodes:doc.nodes,edges:doc.edges}));if(history.length>60)history.shift();future=[];syncHistory();}
+  function snapshot() {history.push(JSON.stringify({nodes:doc.nodes,edges:doc.edges,annotations:window.CreativeWorkspaceTools?.capture()}));if(history.length>60)history.shift();future=[];syncHistory();}
   function syncHistory(){
     $('cwTools').querySelector('[data-cw=undo]').disabled=!history.length;
     $('cwTools').querySelector('[data-cw=redo]').disabled=!future.length;
@@ -246,23 +252,24 @@
   function undo(redo=false) {
     const source=redo?future:history,target=redo?history:future;
     if(!source.length) return;
-    target.push(JSON.stringify({nodes:doc.nodes,edges:doc.edges}));Object.assign(doc,JSON.parse(source.pop()));selected=null;changed();renderBoard();
+    target.push(JSON.stringify({nodes:doc.nodes,edges:doc.edges,annotations:window.CreativeWorkspaceTools?.capture()}));const state=JSON.parse(source.pop());doc.nodes=state.nodes;doc.edges=state.edges;window.CreativeWorkspaceTools?.restore(state.annotations);selected=null;changed();renderBoard();
   }
   function position() { const r=$('cwCanvas').getBoundingClientRect(),v=doc.viewport; return {x:(r.width/2-v.x)/v.zoom-145,y:(r.height/2-v.y)/v.zoom-110}; }
   function addNode(kind,values={}) {
     if(doc.nodes.length>=500){announce('السيشن وصلت لـ500 عنصر. ابدأ سيشن جديدة.');return;}
     snapshot();const point=position();const n={id:uid(),kind,title:labels[kind],text:'',x:point.x,y:point.y,w:kind==='video'?380:300,h:kind==='link'?165:kind==='video'?265:260,...values};
-    doc.nodes.push(n);selected=n.id;setTool('cursor');changed();renderBoard();
-    if(['note','prompt','link'].includes(kind)) $('cwNodes').querySelector(`[data-node="${n.id}"] textarea, [data-node="${n.id}"] input`)?.focus();
+    doc.nodes.push(n);selected=n.id;window.CreativeWorkspaceTools?.selectNode(n.id);setTool('cursor');changed();renderBoard();
+    if(['note','prompt','link'].includes(kind)) window.CreativeWorkspaceTools?.editNode(n.id);
   }
   function selectNode(id,center=false) {
     selected=id;
+    window.CreativeWorkspaceTools?.selectNode(id);
     document.querySelectorAll('.cw-node').forEach(el=>el.classList.toggle('cw-selected',el.dataset.node===id));
     if(center){const n=doc.nodes.find(x=>x.id===id),r=$('cwCanvas').getBoundingClientRect();if(n){doc.viewport.x=r.width/2-(n.x+n.w/2)*doc.viewport.zoom;doc.viewport.y=r.height/2-(n.y+n.h/2)*doc.viewport.zoom;transform();changed();}}
     renderInspector();
   }
   function setTool(value) {
-    tool=value;connectFrom=null;$('cwCanvas').dataset.tool=value;
+    tool=value;connectFrom=null;$('cwCanvas').dataset.tool=value;window.CreativeWorkspaceTools?.baseTool(value);
     for(const b of $('cwTools').querySelectorAll('[aria-pressed]'))b.setAttribute('aria-pressed',String(b.dataset.cw===value));
     if(value==='connect') announce('اختار العنصر الأول، وبعده العنصر التاني.');
   }
@@ -270,15 +277,16 @@
     const v=doc.viewport;$('cwWorld').style.transform=`translate(${v.x}px,${v.y}px) scale(${v.zoom})`;
     const grid=Math.max(14,22*v.zoom);
     $('cwCanvas').style.backgroundSize=`${grid}px ${grid}px`;$('cwCanvas').style.backgroundPosition=`${v.x}px ${v.y}px`;
-    $('cwZoom').textContent=`${Math.round(v.zoom*100)}%`;
+    $('cwZoom').textContent=`${Math.round(v.zoom*100)}%`;window.CreativeWorkspaceTools?.refresh();
   }
   function zoomTo(zoom,cx,cy) {
     const v=doc.viewport,r=$('cwCanvas').getBoundingClientRect();cx??=r.width/2;cy??=r.height/2;
     const z=clamp(zoom,.2,2),ratio=z/v.zoom;v.x=cx-(cx-v.x)*ratio;v.y=cy-(cy-v.y)*ratio;v.zoom=z;transform();changed();
   }
   function fit() {
-    if(!doc.nodes.length){doc.viewport=blank().viewport;transform();changed();return;}
-    const r=$('cwCanvas').getBoundingClientRect(),xs=doc.nodes.map(n=>n.x),ys=doc.nodes.map(n=>n.y),left=Math.min(...xs),top=Math.min(...ys),right=Math.max(...doc.nodes.map(n=>n.x+n.w)),bottom=Math.max(...doc.nodes.map(n=>n.y+n.h));
+    const items=window.CreativeWorkspaceTools?.boundsForAll()||doc.nodes;
+    if(!items.length){doc.viewport=blank().viewport;transform();changed();return;}
+    const r=$('cwCanvas').getBoundingClientRect(),left=Math.min(...items.map(n=>n.x)),top=Math.min(...items.map(n=>n.y)),right=Math.max(...items.map(n=>n.x+n.w)),bottom=Math.max(...items.map(n=>n.y+n.h));
     const z=clamp(Math.min((r.width-140)/(right-left),(r.height-100)/(bottom-top)),.2,1.2);
     doc.viewport={zoom:z,x:(r.width-(right-left)*z)/2-left*z,y:(r.height-(bottom-top)*z)/2-top*z};transform();changed();
   }
@@ -289,17 +297,17 @@
     for(const el of root.querySelectorAll('.cw-node')) {
       const n=doc.nodes.find(x=>x.id===el.dataset.node);
       const edit=el.querySelector('textarea,input');
-      if(edit){edit.addEventListener('focus',()=>{selectNode(n.id);snapshot();},{once:true});edit.addEventListener('input',()=>{if(n.kind==='link'){n.url=edit.value;const a=el.querySelector('a');a.href=safeUrl(n.url)||'#';a.hidden=!safeUrl(n.url);}else n.text=edit.value;changed();});}
+      if(edit){edit.addEventListener('focus',()=>{selectNode(n.id);});edit.addEventListener('input',()=>{if(n.kind==='link'){n.url=edit.value;const a=el.querySelector('a');a.href=safeUrl(n.url)||'#';a.hidden=!safeUrl(n.url);}else n.text=edit.value;changed();});}
       const media=el.querySelector('[data-asset]');if(media)hydrateMedia(media,n.assetId);
     }
     $('cwBoardEmpty').hidden=!!doc.nodes.length;transform();renderEdges();renderInspector();
-    syncHistory();
+    syncHistory();window.CreativeWorkspaceTools?.refresh();
   }
   function nodeMarkup(n) {
     const color=colors.includes(n.color)?`background:${n.color};`:'';
     let content='';
-    if(n.kind==='note'||n.kind==='prompt') content=`<textarea aria-label="${h(n.title)}" placeholder="${n.kind==='prompt'?'اكتب البرومبت هنا…':'اكتب فكرتك…'}" maxlength="24000" spellcheck="${n.kind!=='prompt'}">${h(n.text)}</textarea>`;
-    if(n.kind==='link') content=`<div class="cw-node-link"><input type="url" value="${h(n.url||'')}" placeholder="https://…" aria-label="رابط الريفرنس"><a href="${h(safeUrl(n.url)||'#')}" target="_blank" rel="noopener noreferrer" ${safeUrl(n.url)?'':'hidden'}>فتح الريفرنس ↗</a></div>`;
+    if(n.kind==='note'||n.kind==='prompt') content=`<textarea readonly aria-label="${h(n.title)}" placeholder="${n.kind==='prompt'?'اكتب البرومبت هنا…':'اكتب فكرتك…'}" maxlength="24000" spellcheck="${n.kind!=='prompt'}">${h(n.text)}</textarea>`;
+    if(n.kind==='link') content=`<div class="cw-node-link"><input type="url" value="${h(n.url||'')}" placeholder="https://…" readonly aria-label="رابط الريفرنس"><a href="${h(safeUrl(n.url)||'#')}" target="_blank" rel="noopener noreferrer" ${safeUrl(n.url)?'':'hidden'}>فتح الريفرنس ↗</a></div>`;
     if(n.kind==='image'||n.kind==='video') content=`<div class="cw-node-media">${n.kind==='image'?`<img data-asset="${h(n.assetId)}" alt="${h(n.title)}" draggable="false">`:`<video data-asset="${h(n.assetId)}" aria-label="${h(n.title)}" controls playsinline preload="metadata"></video>`}<div class="cw-media-failed" hidden><span>المعاينة غير متاحة لهذا الملف.</span><button class="cw-button" data-cw-download="${h(n.assetId)}">فتح الملف الأصلي ↗</button></div></div>`;
     return `<article class="cw-node ${selected===n.id?'cw-selected':''}" data-node="${h(n.id)}" data-kind="${h(n.kind)}" style="left:${n.x}px;top:${n.y}px;width:${n.w}px;height:${n.h}px;${color}"><div class="cw-node-head" title="اسحب لتحريك العنصر">${icon(n.kind)}<span>${h(n.title)}</span>${n.kind==='prompt'?`<button data-cw-copy="${h(n.id)}" aria-label="نسخ البرومبت" title="نسخ البرومبت">${icon('copy')}</button>`:''}</div>${content}<div class="cw-resize" aria-label="تغيير حجم العنصر"></div></article>`;
   }
@@ -367,6 +375,7 @@
     await loadSessions();
   }
   function selectedAction(action) {
+    if(window.CreativeWorkspaceTools?.action(action))return;
     const n=doc.nodes.find(n=>n.id===selected);if(!n)return;
     snapshot();
     if(action==='remove'){doc.nodes=doc.nodes.filter(x=>x.id!==n.id);doc.edges=doc.edges.filter(e=>e.from!==n.id&&e.to!==n.id);selected=null;}
@@ -431,7 +440,7 @@
   function bindCanvas() {
     const canvas=$('cwCanvas');
     canvas.addEventListener('wheel',e=>{
-      if(e.target.closest('textarea,input,video,.cw-tools,.cw-node-link,.cw-conflict'))return;
+      if(e.target.closest('textarea:not([readonly]),input:not([readonly]),video,.cw-tools,.cw-pro-options,.cw-node-link,.cw-conflict,[contenteditable=true]'))return;
       e.preventDefault();
       if(e.ctrlKey||e.metaKey){const r=canvas.getBoundingClientRect();zoomTo(doc.viewport.zoom*Math.exp(-e.deltaY*.003),e.clientX-r.left,e.clientY-r.top);}
       else{doc.viewport.x-=e.shiftKey?e.deltaY:e.deltaX;doc.viewport.y-=e.shiftKey?0:e.deltaY;transform();changed();}
@@ -449,7 +458,7 @@
         else if(connectFrom!==n.id){snapshot();if(!doc.edges.some(x=>(x.from===connectFrom&&x.to===n.id)||(x.to===connectFrom&&x.from===n.id)))doc.edges.push({id:uid(),from:connectFrom,to:n.id});changed();renderEdges();setTool('cursor');announce('العنصرين اتوصلوا.');}
         return;
       }
-      const pan=space||tool==='hand'||e.button===1||!el;
+      const pan=space||tool==='hand'||e.button===1;
       if(n&&!pan)selectNode(n.id);
       if(pan){if(!space&&tool!=='hand')selectNode(null);drag={type:'pan',x:e.clientX,y:e.clientY,origin:{...doc.viewport}};}
       else if(n&&(e.target.closest('.cw-node-head')||e.target.closest('.cw-resize'))){snapshot();drag={type:e.target.closest('.cw-resize')?'resize':'move',id:n.id,x:e.clientX,y:e.clientY,origin:{...n}};}
@@ -473,7 +482,7 @@
     canvas.addEventListener('dragover',e=>{if(e.dataTransfer.types.includes('Files')){e.preventDefault();canvas.classList.add('cw-dragover');}});
     canvas.addEventListener('dragleave',e=>{if(!canvas.contains(e.relatedTarget))canvas.classList.remove('cw-dragover');});
     canvas.addEventListener('drop',e=>{e.preventDefault();canvas.classList.remove('cw-dragover');const r=canvas.getBoundingClientRect(),v=doc.viewport;uploadFiles([...e.dataTransfer.files],{x:(e.clientX-r.left-v.x)/v.zoom,y:(e.clientY-r.top-v.y)/v.zoom});});
-    $('cwBoard').addEventListener('paste',e=>{if(e.target.closest('textarea,input'))return;const files=[...e.clipboardData.files];if(files.length){e.preventDefault();uploadFiles(files);}});
+    $('cwBoard').addEventListener('paste',e=>{if(e.target.closest('textarea:not([readonly]),input:not([readonly]),[contenteditable=true]'))return;const files=[...e.clipboardData.files];if(files.length){e.preventDefault();uploadFiles(files);}});
     $('cwBoard').addEventListener('keydown',e=>{
       if(e.key==='Escape'){e.stopPropagation();}
       const editing=e.target.closest('input,textarea,select,[contenteditable=true]');
@@ -487,10 +496,11 @@
       const n=doc.nodes.find(n=>n.id===selected);
       if(n&&['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)){e.preventDefault();snapshot();const d=e.shiftKey?20:5;n.x+=e.key==='ArrowRight'?d:e.key==='ArrowLeft'?-d:0;n.y+=e.key==='ArrowDown'?d:e.key==='ArrowUp'?-d:0;changed();renderBoard();}
       const shortcuts={v:'cursor',h:'hand',c:'connect'};if(shortcuts[e.key.toLowerCase()])setTool(shortcuts[e.key.toLowerCase()]);
-      const additions={n:'note',p:'prompt',l:'link'};if(additions[e.key.toLowerCase()]){e.preventDefault();addNode(additions[e.key.toLowerCase()]);}
+      const additions={n:'note',l:'link'};if(additions[e.key.toLowerCase()]){e.preventDefault();addNode(additions[e.key.toLowerCase()]);}
     });
     window.addEventListener('keyup',e=>{if(e.code==='Space'){space=false;canvas.style.cursor='';}});
     window.addEventListener('blur',()=>{space=false;canvas.style.cursor='';pointers.clear();pinch=null;if(drag){drag=null;changed();}});
   }
+  window.CreativeWorkspace={get document(){return doc;},get session(){return session;},get tool(){return tool;},snapshot,undo,changed,zoomTo,transform,render:renderBoard,renderEdges,renderInspector,setTool,select:selectNode,announce,flush:flushSave,annotationStatus(state){annotationState=state;status(conflict?'error':saving?'saving':dirty?'pending':'saved');},annotationConflict(){conflict=true;$('cwConflict').hidden=false;status('error','في نسخة أحدث — احفظ شغلك كنسخة');},selectPrimary(id){selected=id;renderInspector();},syncHistory};
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mount,{once:true});else mount();
 })();
