@@ -8,7 +8,7 @@ function app(){
   const root={innerHTML:'',addEventListener(k,fn){events[k]=fn},querySelector(s){return s==='[data-ea-wordcount]'?wordCount:null},scrollIntoView(){}};
   const document={addEventListener(){},createElement(){return root},querySelector(s){if(s==='.el9-hub')return {prepend(){}};if(s==='#ea12Center')return root.innerHTML?root:null;return null},querySelectorAll(){return []}};
   const c={document,window:{addEventListener(){}},setInterval(fn){interval=fn;return 0},localStorage:{getItem:k=>store.get(k)||null,setItem:(k,v)=>store.set(k,v)}};
-  vm.createContext(c);for(const f of ['english-grammar-v10.js','english-supplement-v13.js','english-writing-v13.js','english-levels-v14.js','english-review-v10-data.js','english-academy-v12.js'])vm.runInContext(fs.readFileSync(f,'utf8'),c);
+  vm.createContext(c);for(const f of ['english-grammar-v10.js','english-supplement-v13.js','english-writing-v13.js','english-levels-v14.js','english-context-v15.js','english-review-v10-data.js','english-academy-v12.js'])vm.runInContext(fs.readFileSync(f,'utf8'),c);
   interval();
   function target(dataset,attrs=[]){return {dataset,value:'',hasAttribute:k=>attrs.includes(k),closest(){return this}}}
   const click=(dataset,attrs=[])=>events.click({target:target(dataset,attrs)});
@@ -50,7 +50,22 @@ test('question-first home and B1 to C2 paths offer questions for each level',()=
   assert.ok(a.root.innerHTML.includes('مسار '+level));
   a.click({eaStart:'level'});
   const q=a.w.SERAG_ACADEMY_V12.questions().find(q=>a.root.innerHTML.includes(q.prompt));assert.ok(q,level);
-  assert.equal(a.w.SERAG_GRAMMAR_V10.find(g=>g.id===q.topic)?.level,level);
+  assert.equal(q.level||a.w.SERAG_GRAMMAR_V10.find(g=>g.id===q.topic)?.level,level);
   a.click({},['data-ea-end']);
+ }
+});
+
+test('each level separates rules from contextual topics and runs a 12-question exam',()=>{
+ const a=app();const data=a.w.SERAG_CONTEXT_V15;assert.equal(data.questions.length,96);
+ assert.equal(new Set(data.questions.map(q=>q.id)).size,96);
+ for(const level of ['B1','B2','C1','C2']){
+  a.click({eaTab:'levels'});a.click({eaLevelPick:level});a.click({eaLevelPart:'exams'});
+  for(const theme of data.themes){assert.ok(a.root.innerHTML.includes(theme.titleAr));assert.equal(data.questions.filter(q=>q.level===level&&q.theme===theme.id).length,3)}
+  a.click({eaContext:'ai'});assert.ok(a.root.innerHTML.includes('1/3'));
+  const q=data.questions.find(q=>q.level===level&&q.theme==='ai'&&a.root.innerHTML.includes(q.prompt));assert.ok(q);
+  a.click({eaAnswer:q.answer},['data-ea-answer']);a.click({},['data-ea-end']);assert.ok(a.root.innerHTML.includes('امتحان من الحياة الحالية'));
+  a.click({eaStart:'exam'});assert.ok(a.root.innerHTML.includes('1/12'));
+  for(let i=0;i<12;i++){const q=data.questions.find(q=>q.level===level&&a.root.innerHTML.includes(q.prompt));assert.ok(q);a.click({eaAnswer:q.answer},['data-ea-answer']);a.click({},['data-ea-next'])}
+  assert.ok(a.root.innerHTML.includes('12/12'));a.click({},['data-ea-end']);
  }
 });
