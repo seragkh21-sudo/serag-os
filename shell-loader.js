@@ -1,11 +1,12 @@
 (async()=>{
   try{
-    const V='28';
+    const V='29';
     const res=await fetch(`/legacy.html?v=${V}`,{cache:'no-store',headers:{'Cache-Control':'no-cache'}});
     if(!res.ok)throw new Error('Legacy app failed to load');
     let html=await res.text();
 
     html=html.replace('</head>',`<link rel="stylesheet" href="/dashboard-v2.css?v=${V}"/>
+<link rel="stylesheet" href="/home-studio-v18.css?v=${V}"/>
 <link rel="stylesheet" href="/english-learning-v6.css?v=${V}"/>
 <link rel="stylesheet" href="/english-focus-v7.css?v=${V}"/>
 <link rel="stylesheet" href="/english-v8.css?v=${V}"/>
@@ -112,6 +113,7 @@
 <script src="/creative-workspace.js?v=${V}"></script>
 <script src="/creative-workspace-tools.js?v=${V}"></script>
 <script src="/creative-library-v2.js?v=2"></script>
+<script src="/home-studio-v18.js?v=${V}"></script>
 <script>document.addEventListener("click",function(e){if(e.target.closest&&e.target.closest("[data-open-article]")){var p=document.getElementById("articleViewPane");if(p)p.dataset.v5Words=""}},true);</script>
 <script>
 (()=>{

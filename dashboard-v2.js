@@ -79,7 +79,7 @@ async function v2LoadHomeCalendar(){
   const start=v2StartOfDay(new Date()),end=v2AddDays(start,7);end.setHours(23,59,59,999);
   const events=await v2LoadEventsRange(start,end);
   const days=Array.from({length:7},(_,i)=>v2AddDays(start,i));
-  $('homeWeekStrip').innerHTML=days.map(d=>{const key=v2DateKey(d),has=events.some(e=>v2DateKey(e.when)===key);return `<div class="week-day ${i===0?'today':''} ${has?'has-events':''}"><strong>${d.getDate().toLocaleString('ar-EG')}</strong><span>${d.toLocaleDateString('ar-EG',{weekday:'short'})}</span></div>`}).join('');
+  $('homeWeekStrip').innerHTML=days.map((d,i)=>{const key=v2DateKey(d),has=events.some(e=>v2DateKey(e.when)===key);return `<div class="week-day ${i===0?'today':''} ${has?'has-events':''}"><strong>${d.getDate().toLocaleString('ar-EG')}</strong><span>${d.toLocaleDateString('ar-EG',{weekday:'short'})}</span></div>`}).join('');
   const upcoming=events.filter(e=>new Date(e.when)>=new Date()).slice(0,3);
   $('homeUpcomingList').innerHTML=upcoming.length?upcoming.map(e=>`<div class="upcoming-mini"><div class="upcoming-main"><span class="source-dot"></span><strong>${v2Html(e.title)}</strong></div><span>${v2FmtShort(e.when)} ${e.allDay?'':v2FmtTime(e.when)}</span></div>`).join(''):'<div class="calendar-empty">مفيش مواعيد قريبة.</div>';
 }

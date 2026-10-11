@@ -4,28 +4,28 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="theme-color" content="#ffffff" />
-  <link rel="manifest" href="/manifest.webmanifest?v=28" />
+  <link rel="manifest" href="/manifest.webmanifest?v=29" />
   <title>Serag OS</title>
   <style>
     html,body{margin:0;min-height:100%;background:#f7f7f8;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;color:#18181b}
-    .boot{min-height:100vh;display:grid;place-items:center;padding:24px}.boot-card{width:min(360px,90vw);text-align:center}.boot-logo{font-size:28px;font-weight:900}.boot-sub{margin-top:7px;color:#7a7a84;font-size:13px}.boot-dot{width:28px;height:28px;border:3px solid #e5e5e8;border-top-color:#7058e8;border-radius:50%;margin:22px auto 0;animation:spin .8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+    .boot{min-height:100vh;display:grid;place-items:center;padding:24px}.boot-card{width:min(360px,90vw);text-align:center}.boot-logo{font-size:29px;font-weight:900}.boot-sub{margin-top:7px;color:#7a7a84;font-size:13px}.boot-dot{width:29px;height:29px;border:3px solid #e5e5e8;border-top-color:#7058e8;border-radius:50%;margin:22px auto 0;animation:spin .8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
   </style>
 </head>
 <body>
   <div class="boot"><div class="boot-card"><div class="boot-logo">Serag OS</div><div class="boot-sub">بنجهّز أحدث نسخة من الـworkspace…</div><div class="boot-dot"></div></div></div>
   <script>
-    window.SERAG_BUILD='28';
+    window.SERAG_BUILD='29';
     if('serviceWorker' in navigator){
       let reloaded=false;
       navigator.serviceWorker.addEventListener('controllerchange',()=>{
-        if(reloaded||sessionStorage.getItem('serag-build-28-reloaded'))return;
+        if(reloaded||sessionStorage.getItem('serag-build-29-reloaded'))return;
         reloaded=true;
-        sessionStorage.setItem('serag-build-28-reloaded','1');
+        sessionStorage.setItem('serag-build-29-reloaded','1');
         location.reload();
       });
-      navigator.serviceWorker.register('/sw.js?v=28',{scope:'/',updateViaCache:'none'}).then(r=>r.update()).catch(()=>{});
+      navigator.serviceWorker.register('/sw.js?v=29',{scope:'/',updateViaCache:'none'}).then(r=>r.update()).catch(()=>{});
     }
   </script>
-  <script src="/shell-loader.js?v=28"></script>
+  <script src="/shell-loader.js?v=29"></script>
 </body>
 </html>

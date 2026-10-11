@@ -117,5 +117,9 @@
   function disablePaid(){document.querySelectorAll('[data-speaking-feedback],[data-grammar-ai],[data-grammar-check-writing],[data-video-explain]').forEach(b=>{b.disabled=true;b.title='متوقف لتجنب استخدام API مدفوع';b.textContent='AI مدفوع — متوقف'})}
   document.addEventListener('click',e=>{const b=e.target.closest('[data-ea-external-topic]');if(b&&root){state.practiceTopic=b.dataset.eaExternalTopic;selected=null;save();start('topic');root.scrollIntoView({block:'start',behavior:'smooth'})}});
   const timer=setInterval(()=>{if(mount()){organizeLegacy();disablePaid();if(owner!==uid()){stop();load();render()} }},1200);window.addEventListener('pagehide',()=>{stop();if(audioUrl)URL.revokeObjectURL(audioUrl);clearInterval(timer)});
-  window.SERAG_ACADEMY_V12={maps,scenarios,questions,topicId};
+  function homeState(){if(!state||owner!==uid())load();return state}
+  function homeQuestion(){homeState();const pool=questions().filter(q=>q.options.length<=3&&(q.level||lesson(q.topic)?.level)===state.level);const available=pool.filter(q=>!state.cards[q.id]||state.cards[q.id].due<=Date.now());return (available.length?available:pool)[0]||questions()[0]}
+  function homeAnswer(id,answer){homeState();const q=questions().find(x=>x.id===id);if(!q||!q.options.includes(answer))return null;record(q,answer);return {correct:answer===q.answer,answer:q.answer,explanation:q.explanation}}
+  function openFromHome(section='today',kind=null){if(!mount())return false;homeState();stop();tab=section;selected=null;render();if(kind)start(kind);return true}
+  window.SERAG_ACADEMY_V12={maps,scenarios,questions,topicId,homeState,homeQuestion,homeAnswer,open:openFromHome};
 })();
