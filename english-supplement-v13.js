@@ -25,7 +25,7 @@
     'لو الخبر صفة أو اسم أو مكان، غالبًا تحتاج be.','اكتب تعريفًا بنفسك، نفيًا وسؤالًا باستخدام be.',[
       ['The two offices ___ open today.','are','is','am'],
       ['I ___ available after lunch.','am','is','are'],
-      ['Which question is correct?','Are you ready?','Do you are ready?','You are ready?'],
+      ['Which question is correct?','Are you ready?','Do you are ready?','Is you ready?'],
       ['Choose the correct negative.','She is not at home.','She does not is at home.','She not at home.']]);
   add('subject-object-pronouns','A1','Subject and object pronouns','ضمائر الفاعل والمفعول',
     'I/he/she/we/they في موقع الفاعل. me/him/her/us/them بعد الفعل أو حرف الجر.',
