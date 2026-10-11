@@ -8,7 +8,7 @@ function app(){
   const root={innerHTML:'',addEventListener(k,fn){events[k]=fn},querySelector(s){return s==='[data-ea-wordcount]'?wordCount:null},scrollIntoView(){}};
   const document={addEventListener(){},createElement(){return root},querySelector(s){if(s==='.el9-hub')return {prepend(){}};if(s==='#ea12Center')return root.innerHTML?root:null;return null},querySelectorAll(){return []}};
   const c={document,window:{addEventListener(){}},setInterval(fn){interval=fn;return 0},localStorage:{getItem:k=>store.get(k)||null,setItem:(k,v)=>store.set(k,v)}};
-  vm.createContext(c);for(const f of ['english-grammar-v10.js','english-supplement-v13.js','english-writing-v13.js','english-levels-v14.js','english-context-v15.js','english-review-v10-data.js','english-academy-v12.js'])vm.runInContext(fs.readFileSync(f,'utf8'),c);
+  vm.createContext(c);for(const f of ['english-grammar-v10.js','english-supplement-v13.js','english-writing-v13.js','english-levels-v14.js','english-context-v15.js','english-phrases-v16.js','english-review-v10-data.js','english-academy-v12.js'])vm.runInContext(fs.readFileSync(f,'utf8'),c);
   interval();
   function target(dataset,attrs=[]){return {dataset,value:'',hasAttribute:k=>attrs.includes(k),closest(){return this}}}
   const click=(dataset,attrs=[])=>events.click({target:target(dataset,attrs)});
