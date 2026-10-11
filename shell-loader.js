@@ -1,6 +1,6 @@
 (async()=>{
   try{
-    const V='22';
+    const V='23';
     const res=await fetch(`/legacy.html?v=${V}`,{cache:'no-store',headers:{'Cache-Control':'no-cache'}});
     if(!res.ok)throw new Error('Legacy app failed to load');
     let html=await res.text();
@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="/english-v9.css?v=${V}"/>
 <link rel="stylesheet" href="/english-grammar-v10.css?v=${V}"/>
 <link rel="stylesheet" href="/english-academy-v12.css?v=${V}"/>
+<link rel="stylesheet" href="/english-supplement-v13.css?v=${V}"/>
 <link rel="stylesheet" href="/creative-workspace.css?v=${V}"/>
 <link rel="stylesheet" href="/creative-workspace-tools.css?v=${V}"/>
 <link rel="stylesheet" href="/creative-library-v2.css?v=2"/>
@@ -96,6 +97,8 @@
 <script src="/serag-v5.js?v=${V}"></script>
 <script src="/english-content-v9.js?v=${V}"></script>
 <script src="/english-grammar-v10.js?v=${V}"></script>
+<script src="/english-supplement-v13.js?v=${V}"></script>
+<script src="/english-writing-v13.js?v=${V}"></script>
 <script src="/english-learning-v6.js?v=${V}"></script>
 <script src="/english-review-v10-data.js?v=${V}"></script>
 <script src="/english-review-v10.js?v=${V}"></script>
