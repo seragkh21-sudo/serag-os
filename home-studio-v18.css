@@ -6,3 +6,5 @@ body.so-v18{background:#f4f3ef;color:var(--so-ink)}.so-v18 .content{max-width:14
 @media(max-width:370px){.so-v18 .content{padding-inline:12px}.so-head h1{font-size:26px}.so-orbit-content{grid-template-columns:132px 1fr;gap:10px}.so-orbit-info h2{font-size:16px}.so-main-spaces{grid-template-columns:1fr}.so-space-body{display:flex}.so-space-body p br{display:none}.so-letter-art,.so-board-art{display:block;transform:scale(.7);width:100px}.so-mini-grid{gap:9px}.so-fitness-card,.so-mini-grid .so-card{padding:14px}.so-bars{gap:13px}}
 @media(prefers-reduced-motion:reduce){.so-home *,.so-studio *{scroll-behavior:auto!important;transition:none!important}}
 .so-demo-banner{background:#29272e;color:#f2edda;font-size:11px;text-align:center;padding:9px 15px;position:relative;z-index:1}
+.so-v18:has(#page-today:not(.hidden)) #quickFab{display:none!important}
+@media(max-width:650px){.so-home .so-orbit-info h2{font-size:16px;line-height:1.5}.so-home .so-orbit-info p{font-size:10px}.so-home .so-legend{margin-top:10px;gap:2px}}

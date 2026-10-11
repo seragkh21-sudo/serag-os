@@ -10,7 +10,7 @@ test('weekly activity compares distinct days and honors Cairo midnight',()=>{
  const x=m.model(d,local,now);assert.equal(x.sets.english.size,1);assert.equal(x.sets.studio.size,2);assert.equal(x.sets.fitness.size,1);assert.equal(x.active.size,4);assert.equal(x.finished,2);assert.equal(x.answers,3);assert.equal(x.accuracy,67);
 });
 test('both project sources share one list and studio tasks include both types',()=>{
- const m=module();const x=m.model({work:[{id:'client',status:'active'}],creative:[{id:'personal',status:'done'}],tasks:[{id:'creativeTask',category:'creative',priority:'high',status:'open'},{id:'workTask',category:'work',priority:'urgent',status:'open'},{id:'projectTask',category:'general',parent_type:'creative',status:'open'},{id:'unrelated',category:'fitness',status:'open'}]});
+ const m=module();const x=m.model({work:[{id:'client',status:'active'}],creative:[{id:'personal',status:'done'}],tasks:[{id:'creativeTask',category:'creative',priority:'high',status:'open'},{id:'workTask',category:'work',priority:'urgent',status:'open'},{id:'projectTask',category:'general',parent_type:'creative_project',status:'open'},{id:'unrelated',category:'fitness',status:'open'}]});
  assert.deepEqual(Array.from(x.projects,p=>p.kind),['work','creative']);assert.deepEqual(Array.from(x.important,t=>t.id),['workTask','creativeTask','projectTask']);assert.equal(m.model({}).accuracy,null);
 });
 test('new home answer updates the same academy history and rejects invalid options',()=>{
