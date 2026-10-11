@@ -1,6 +1,6 @@
 (async()=>{
   try{
-    const V='27';
+    const V='28';
     const res=await fetch(`/legacy.html?v=${V}`,{cache:'no-store',headers:{'Cache-Control':'no-cache'}});
     if(!res.ok)throw new Error('Legacy app failed to load');
     let html=await res.text();
@@ -24,7 +24,7 @@
 #resourcesList>.resource-category-head:first-child{margin-top:8px}
 @media(max-width:820px){.v5-resource-toolbar{position:sticky;top:6px;z-index:5;background:var(--bg,#fff);padding:6px;border-radius:12px}.resource-category-head{margin-top:12px}}
 </style>
-</head>`);
+<link rel="stylesheet" href="/english-video-v17.css?v=${V}"></head>`);
 
     const tasksNav='<button data-page="tasks" type="button">المهام</button>';
     html=html.replace(tasksNav,tasksNav+'\n      <button data-page="calendar" type="button">التقويم</button>');
@@ -100,7 +100,7 @@
 <script src="/english-grammar-v10.js?v=${V}"></script>
 <script src="/english-supplement-v13.js?v=${V}"></script>
 <script src="/english-writing-v13.js?v=${V}"></script>
-<script src="/english-levels-v14.js?v=${V}"></script><script src="/english-context-v15.js?v=${V}"></script><script src="/english-phrases-v16.js?v=${V}"></script>
+<script src="/english-levels-v14.js?v=${V}"></script><script src="/english-context-v15.js?v=${V}"></script><script src="/english-phrases-v16.js?v=${V}"></script><script src="/english-video-v17.js?v=${V}"></script>
 <script src="/english-learning-v6.js?v=${V}"></script>
 <script src="/english-review-v10-data.js?v=${V}"></script>
 <script src="/english-review-v10.js?v=${V}"></script>
