@@ -3,12 +3,12 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
 
-function app(){
+function app(game=false){
   let interval;const events={},store=new Map(),wordCount={textContent:''};
   const root={innerHTML:'',addEventListener(k,fn){events[k]=fn},querySelector(s){return s==='[data-ea-wordcount]'?wordCount:null},scrollIntoView(){}};
   const document={addEventListener(){},createElement(){return root},querySelector(s){if(s==='.el9-hub')return {prepend(){}};if(s==='#ea12Center')return root.innerHTML?root:null;return null},querySelectorAll(){return []}};
   const c={document,window:{addEventListener(){}},setInterval(fn){interval=fn;return 0},localStorage:{getItem:k=>store.get(k)||null,setItem:(k,v)=>store.set(k,v)}};
-  vm.createContext(c);for(const f of ['english-grammar-v10.js','english-supplement-v13.js','english-writing-v13.js','english-levels-v14.js','english-context-v15.js','english-phrases-v16.js','english-review-v10-data.js','english-academy-v12.js'])vm.runInContext(fs.readFileSync(f,'utf8'),c);
+  if(game)c.window.ENGOPLAY={renderLobby:()=>'<p>Engoplay lobby</p>',stats:()=>({current:0,answeredToday:new Set()}),track(x){this.last=x}};vm.createContext(c);for(const f of ['english-grammar-v10.js','english-supplement-v13.js','english-writing-v13.js','english-levels-v14.js','english-context-v15.js','english-phrases-v16.js','english-review-v10-data.js','english-academy-v12.js'])vm.runInContext(fs.readFileSync(f,'utf8'),c);
   interval();
   function target(dataset,attrs=[]){return {dataset,value:'',hasAttribute:k=>attrs.includes(k),closest(){return this}}}
   const click=(dataset,attrs=[])=>events.click({target:target(dataset,attrs)});
@@ -69,3 +69,5 @@ test('each level separates rules from contextual topics and runs a 12-question e
   assert.ok(a.root.innerHTML.includes('12/12'));a.click({},['data-ea-end']);
  }
 });
+
+ test('Engoplay uses one focused B2 question at a time and returns to the path',()=>{const a=app(true),api=a.w.SERAG_ACADEMY_V12,pool=api.questions().filter(q=>(q.level||api.lessons().find(g=>g.id===q.topic)?.level)==='B2');assert.ok(a.root.innerHTML.includes('Engoplay lobby'));assert.equal(api.playSet(pool.map(q=>q.id),5,'Daily','B2'),true);assert.ok(a.root.innerHTML.includes('1/5'));assert.ok(!a.root.innerHTML.includes('EXPLORE'));const q=pool.find(q=>a.root.innerHTML.includes(q.prompt));assert.ok(q);a.click({eaAnswer:q.answer},['data-ea-answer']);assert.equal(a.w.ENGOPLAY.last.id,q.id);assert.equal(a.w.ENGOPLAY.last.correct,true);a.click({},['data-ea-end']);assert.ok(a.root.innerHTML.includes('Engoplay lobby'));assert.equal(a.read().attempts.length,1)});
