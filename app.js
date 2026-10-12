@@ -40,7 +40,7 @@ $('authSubmit').onclick=async()=>{
   if(!email||password.length<6){$('authMsg').textContent='اكتب إيميل صحيح وباسورد 6 حروف على الأقل.';return}
   $('authMsg').textContent='جاري...';
   const result=authMode==='signup'
-    ? await sb.auth.signUp({email,password,options:{data:{display_name:'Serag'}}})
+    ? await sb.auth.signUp({email,password,options:{data:{display_name:''}}})
     : await sb.auth.signInWithPassword({email,password});
   $('authMsg').textContent=result.error?result.error.message:(authMode==='signup'?'اتعمل الحساب. لو وصلك تأكيد إيميل، أكده وبعدها ادخل.':'تم تسجيل الدخول.');
 };

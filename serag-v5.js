@@ -9,7 +9,7 @@
   const fmtDate=v=>v?new Date(v).toLocaleDateString('ar-EG',{day:'numeric',month:'short'}):'بدون موعد';
   const fmtDateTime=v=>v?new Date(v).toLocaleString('ar-EG',{day:'numeric',month:'short',hour:'numeric',minute:'2-digit'}):'بدون موعد';
   const escAttr=h;
-  let profile={calorie_target:2800,protein_target:150,water_target:8,display_name:'Serag'};
+  let profile={calorie_target:2800,protein_target:150,water_target:8,display_name:''};
   let todayMeals=[];
   let recentMeals=[];
   let v5Project=null;
