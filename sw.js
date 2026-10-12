@@ -1,4 +1,4 @@
-const CACHE='serag-os-static-v29';
+const CACHE='serag-os-static-v30';
 const STATIC=['/icon.svg'];
 
 self.addEventListener('install',event=>{
