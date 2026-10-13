@@ -10,7 +10,7 @@
   const rows=(window.SERAG_ENGLISH_V9?.vocabulary||[]).map(([phrase,meaning,group,example])=>({phrase,meaning,group,example}));
   rows.push(...(window.SERAG_PHRASES_V16?.items||[]),...custom.map(w=>({phrase:w.word,meaning:w.meaning,example:w.example,group:'My Words'})));
   const map=new Map();
-  for(const row of rows){const key=norm(row.phrase);if(!key)continue;const old=map.get(key);if(old){old.examples=[...new Set([...old.examples,row.example].filter(Boolean))];continue}map.set(key,{...row,id:row.id||'vocab:'+key,examples:[row.example].filter(Boolean)})}
+  for(const row of rows){const key=norm(row.phrase);if(!key)continue;const old=map.get(key);if(old){if(row.id)old.id=row.id;if(row.note)old.note=row.note;old.examples=[...new Set([...old.examples,row.example].filter(Boolean))];continue}map.set(key,{...row,id:row.id||'vocab:'+key,examples:[row.example].filter(Boolean)})}
   return [...map.values()];
  }
  function question(item,variant=0){
