@@ -147,7 +147,7 @@
     hub.insertAdjacentElement('afterend',details);details.querySelector('.el7-panel').append(grid);
   }
   function mount(){
-    const page=$('#page-english');if(!page)return false;if(page.dataset.el9)return true;page.dataset.el9='1';page.classList.remove('el6-hidden-old-writing');
+    const page=$('#page-english');if(!page||!page.dataset.ev3Mounted)return false;if(page.dataset.el9&&page.querySelector('.el9-hub'))return true;page.dataset.el9='1';page.classList.remove('el6-hidden-old-writing');
     const anchor=page.querySelector('.english-kpis')||page.querySelector('header'),hub=document.createElement('section');hub.className='el6-hub el9-hub';hub.innerHTML=`
       <div class="el6-hero"><div><div class="el6-eyebrow">SERAG ENGLISH · GENERAL + PROFESSIONAL</div><h3>اتكلم طبيعي في الحياة، وواثق في الشغل.</h3><p>General English، شغل وشركات، HR، مقابلات، Marketing، Slang وIdioms — والجرافيك جزء صغير فقط.</p></div><div class="el6-stats"><div class="el6-stat"><strong id="el9TodayPct">0%</strong><span>Today</span></div><div class="el6-stat"><strong id="el9Xp">0 XP</strong><span>Daily XP</span></div><div class="el6-stat"><strong>${data.vocabulary.length}</strong><span>Useful words</span></div></div></div>
       <nav class="card el9-today-nav" aria-label="English tools"><button data-jump="el9Mission">Today</button><button data-jump="el9Speaking">Speaking</button><button data-jump="el9Grammar">Grammar</button><button data-jump="el9VideoDetails">PlayLingo</button><button data-jump="el9WordBankWrap">Word Bank</button></nav>

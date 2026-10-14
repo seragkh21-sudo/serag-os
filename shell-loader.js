@@ -1,6 +1,6 @@
 (async()=>{
   try{
-    const V='32';
+    const V='33';
     const res=await fetch(`/legacy.html?v=${V}`,{cache:'no-store',headers:{'Cache-Control':'no-cache'}});
     if(!res.ok)throw new Error('Legacy app failed to load');
     let html=await res.text();
@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="/english-supplement-v13.css?v=${V}"/>
 <link rel="stylesheet" href="/english-layout-v14.css?v=${V}"/>
 <link rel="stylesheet" href="/engoplay-v19.css?v=${V}"/>
+<link rel="stylesheet" href="/workflow-v21.css?v=${V}"/>
 <link rel="stylesheet" href="/creative-workspace.css?v=${V}"/>
 <link rel="stylesheet" href="/creative-workspace-tools.css?v=${V}"/>
 <link rel="stylesheet" href="/creative-library-v2.css?v=2"/>
@@ -108,6 +109,7 @@
 <script src="/english-review-v10.js?v=${V}"></script>
 <script src="/english-review-v10-fallback.js?v=${V}"></script>
 <script src="/english-attempt-sync-v11.js?v=${V}"></script>
+<script src="/word-practice-v21.js?v=${V}"></script>
 <script src="/engoplay-v19.js?v=${V}"></script>
 <script src="/english-academy-v12.js?v=${V}"></script>
 <script src="/english-focus-v7.js?v=${V}"></script>
@@ -116,6 +118,7 @@
 <script src="/creative-workspace-tools.js?v=${V}"></script>
 <script src="/creative-library-v2.js?v=2"></script>
 <script src="/home-studio-v18.js?v=${V}"></script>
+<script src="/workflow-v21.js?v=${V}"></script>
 <script>document.addEventListener("click",function(e){if(e.target.closest&&e.target.closest("[data-open-article]")){var p=document.getElementById("articleViewPane");if(p)p.dataset.v5Words=""}},true);</script>
 <script>
 (()=>{
