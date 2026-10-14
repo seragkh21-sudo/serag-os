@@ -2,6 +2,10 @@
 
 Personal productivity web app for tasks, fitness, nutrition, English learning, creative projects, references, and synced data via Supabase.
 
+## AI development
+
+Read [AGENTS.md](AGENTS.md) before editing. GitHub Copilot repository instructions and a free test workflow are included. See [the AI handoff guide](docs/ai-handoff.md) for Copilot Free setup and sharing the project with another coding assistant.
+
 ## Creative Workspace Sessions
 
 The Creative section includes project-linked or standalone boards with image/video uploads, notes, prompts, links, connectors, pan/zoom, resizing, undo/redo, a reusable session file tray, and archive/restore. Moodboard and storyboard templates are available when creating a session.
