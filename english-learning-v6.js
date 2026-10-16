@@ -32,7 +32,7 @@
   }
   function completeArticle(title){
     const done=new Set(completedArticles());done.add(title);state.readingCompleted=[...done];
-    try{const k=readingProgressKey();if(k)localStorage.setItem(k,JSON.stringify([...done))}catch{}
+    try{const k=readingProgressKey();if(k)localStorage.setItem(k,JSON.stringify([...done]))}catch{}
     sync();complete(2);renderArticle();
   }
 
