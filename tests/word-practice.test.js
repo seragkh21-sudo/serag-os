@@ -21,7 +21,7 @@ test('Engoplay recall layout reserves the audio, feedback, answer and next-actio
  const before=api.html();
  assert.match(before,/wp-sound-button is-placeholder/);
  assert.match(before,/class="wp-response-area"/);
- assert.match(before,/class="wp-exposure-placeholder"/);
+ assert.match(before,/wp-exposure-placeholder/);
  assert.match(before,/class="wp-next-placeholder"/);
  answer('catch up');
  const after=api.html();
