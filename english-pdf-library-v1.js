@@ -26,11 +26,12 @@ const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const uid=()=>typeof user!=='undefined'&&user&&user.id?user.id:'';
 const norm=s=>String(s||'').toLowerCase().replace(/\.pdf$/i,'').replace(/[^a-z0-9]/g,'');
+function prettyTitle(title){const item=catalog.find(x=>norm(title)===norm(x.filename));return item?.title||title;}
 const sizeText=n=>n>=1048576?(n/1048576).toFixed(1)+' MB':Math.max(1,Math.round(n/1024))+' KB';
 let rows=[],search='',mounting=false;
 function meta(row){try{return JSON.parse(row.text_content||'{}')}catch{return {}}}
 function setStatus(text){const n=$('.ea16-pdf-status');if(n)n.textContent=text}
-function libraryHtml(){return '<section class="ea16-pdf-library"><div class="ea16-pdf-head"><div><small>STUDY LIBRARY</small><h3>مكتبة الكتب PDF</h3><p>كتبك الخاصة في مكان واحد — افتح أي كتاب وكمّل مذاكرتك من آخر نقطة تفتكرها.</p></div><button type="button" class="ea12-btn primary" data-ea-pdf-pick>＋ إضافة PDF</button><input type="file" accept=".pdf,application/pdf" multiple data-ea-pdf-files hidden></div><div class="ea16-pdf-note">الكتب اللي رفعتها في مكتبة ChatGPT مش بتنتقل للموقع تلقائيًا. نزّلها على جهازك، ثم اضغط + وحدد أكثر من PDF مرة واحدة. بعد الرفع هتتخزن بشكل خاص في حسابك.</div><div class="ea16-pdf-toolbar"><input type="search" data-ea-pdf-search placeholder="ابحث في كتبي المحفوظة…"><span class="ea16-pdf-count" id="ea16PdfCount">—</span></div><p class="ea16-pdf-status" role="status">جاري تحميل مكتبتك…</p><div class="ea16-pdf-list" id="ea16PdfList"></div><details class="ea16-pdf-catalog"><summary>قائمة الكتب الموجودة في مكتبة ChatGPT (20 ملفًا)</summary><p>القائمة للتذكير بالملفات التي وجدناها. الملف لا يظهر ككتاب قابل للقراءة داخل Serag OS إلا بعد استيراده بزر +.</p><div id="ea16PdfCatalogList"></div></details></section>'}
+function libraryHtml(){return '<section class="ea16-pdf-library"><div class="ea16-pdf-head"><div><small>STUDY LIBRARY</small><h3>مكتبة الكتب PDF</h3><p>كتبك الخاصة في مكان واحد — افتح أي كتاب وكمّل مذاكرتك من آخر نقطة تفتكرها.</p></div><button type="button" class="ea12-btn primary" data-ea-pdf-pick>＋ إضافة PDF</button><input type="file" accept=".pdf,application/pdf" multiple data-ea-pdf-files hidden></div><div class="ea16-pdf-note">الكتب اللي رفعتها في مكتبة ChatGPT مش بتنتقل للموقع تلقائيًا. نزّلها على جهازك، ثم اضغط + وحدد أكثر من PDF مرة واحدة. بعد الرفع هتتخزن بشكل خاص في حسابك.</div><div class="ea16-pdf-toolbar"><input type="search" data-ea-pdf-search placeholder="ابحث في كتبي المحفوظة…"><span class="ea16-pdf-count" id="ea16PdfCount">—</span></div><p class="ea16-pdf-status" role="status">جاري تحميل مكتبتك…</p><div class="ea16-pdf-list" id="ea16PdfList"></div></section>'}
 function ensureDialog(){if($('#ea16PdfDialog'))return;document.body.insertAdjacentHTML('beforeend','<dialog id="ea16PdfDialog" class="ea16-pdf-dialog"><header><div><small>PDF READER</small><h3 id="ea16PdfDialogTitle">—</h3><p id="ea16PdfDialogStatus">الكتاب خاص بحسابك.</p></div><button type="button" class="ea12-btn" data-ea-pdf-close>إغلاق ✕</button></header><iframe id="ea16PdfFrame" title="قارئ PDF" referrerpolicy="no-referrer"></iframe><footer><button type="button" class="ea12-btn primary" data-ea-pdf-dialog-done>علّم الكتاب كمكتمل</button></footer></dialog>')}
 function mount(){
  const target=$('#ea14Content'),heading=target?.querySelector('.ea14-section-head h3')?.textContent||'';
@@ -44,29 +45,40 @@ async function loadBooks(){
 }
 function renderRows(){
  const list=$('#ea16PdfList');if(!list)return;
- const visible=rows.filter(x=>(x.title||'').toLowerCase().includes(search.toLowerCase()));
+ const needle=search.toLowerCase();const visible=rows.filter(x=>(x.title||'').toLowerCase().includes(needle)||prettyTitle(x.title).toLowerCase().includes(needle));
  $('#ea16PdfCount').textContent=rows.length+' كتاب';
- list.innerHTML=visible.length?visible.map(row=>{const m=meta(row),done=!!m.completed;return '<article class="ea16-pdf-row"><div class="ea16-pdf-icon">PDF</div><div class="ea16-pdf-main"><b>'+esc(row.title)+'</b><small>'+sizeText(m.sizeBytes||0)+' · '+(done?'مكتمل ✓':'قيد المذاكرة')+'</small></div><div class="ea16-pdf-actions"><button class="ea12-btn primary" type="button" data-ea-pdf-open="'+esc(row.id)+'">افتح الكتاب</button><button class="ea12-btn" type="button" data-ea-pdf-toggle="'+esc(row.id)+'" data-ea-pdf-value="'+String(!done)+'">'+(done?'إلغاء الاكتمال':'علّم كمكتمل')+'</button><button class="ea12-btn danger" type="button" data-ea-pdf-delete="'+esc(row.id)+'">حذف</button></div></article>'}).join(''):'<div class="ea16-pdf-empty">'+(search?'مفيش كتاب بالبحث ده.':'لسه مفيش كتب مستوردة. استخدم زر + لاختيار ملفات PDF من جهازك.')+'</div>';
- const catalogEl=$('#ea16PdfCatalogList');if(catalogEl)catalogEl.innerHTML=catalog.map(item=>{const imported=rows.some(r=>norm(r.title)===norm(item.filename));return '<div class="ea16-pdf-catalog-row"><div><b>'+esc(item.title)+'</b><small>'+esc(item.filename)+'</small></div><span class="'+(imported?'imported':'not-imported')+'">'+(imported?'مستورد ✓':'لم يُستورد بعد')+'</span></div>'}).join('');
+ list.innerHTML=visible.length?visible.map(row=>{const m=meta(row),done=!!m.completed;return '<article class="ea16-pdf-row"><div class="ea16-pdf-icon">PDF</div><div class="ea16-pdf-main"><b>'+esc(prettyTitle(row.title))+'</b><small>'+sizeText(m.sizeBytes||0)+' · '+(done?'مكتمل ✓':'قيد المذاكرة')+'</small></div><div class="ea16-pdf-actions"><button class="ea12-btn primary" type="button" data-ea-pdf-open="'+esc(row.id)+'">افتح الكتاب</button><button class="ea12-btn" type="button" data-ea-pdf-toggle="'+esc(row.id)+'" data-ea-pdf-value="'+String(!done)+'">'+(done?'إلغاء الاكتمال':'علّم كمكتمل')+'</button><button class="ea12-btn danger" type="button" data-ea-pdf-delete="'+esc(row.id)+'">حذف</button></div></article>'}).join(''):'<div class="ea16-pdf-empty">'+(search?'مفيش كتاب بالبحث ده.':'لسه مفيش كتب مستوردة. استخدم زر + لاختيار ملفات PDF من جهازك.')+'</div>';
 }
 async function uploadBooks(files){
  const id=uid();if(!id||typeof sb==='undefined'){setStatus('سجّل دخولك الأول علشان تضيف كتبك.');return}
- const list=files.filter(f=>f.type==='application/pdf'||/\.pdf$/i.test(f.name));if(!list.length){setStatus('اختار ملفات PDF فقط.');return}
- let ok=0,skipped=0;
+ const list=Array.from(files||[]).filter(f=>f.type==='application/pdf'||/\.pdf$/i.test(f.name));
+ if(!list.length){setStatus('اختار ملفات PDF فقط.');return}
+ let ok=0;const skipped=[],failures=[];
  for(let i=0;i<list.length;i++){
   const file=list[i];
-  if(file.size>45*1024*1024){skipped++;setStatus('تم تخطي '+file.name+' لأن حجمه أكبر من 45 MB.');continue}
+  if(file.size>45*1024*1024){skipped.push(file.name);continue}
   const filename=file.name.replace(/[^a-zA-Z0-9._-]+/g,'_').slice(-100)||'book.pdf';
   const path=id+'/english-library/'+Date.now()+'-'+crypto.randomUUID()+'-'+filename;
   setStatus('رفع '+(i+1)+'/'+list.length+': '+file.name);
-  const up=await sb.storage.from('serag-attachments').upload(path,file,{contentType:'application/pdf',upsert:false});
-  if(up.error){setStatus('فشل رفع '+file.name+': '+up.error.message);continue}
-  const textContent=JSON.stringify({source:'english-library',sizeBytes:file.size,completed:false,lastOpenedAt:null});
-  const ins=await sb.from('attachments').insert({user_id:id,title:file.name,kind:'pdf',storage_path:path,mime_type:'application/pdf',parent_type:'english-library',text_content:textContent});
-  if(ins.error){await sb.storage.from('serag-attachments').remove([path]);setStatus('فشل حفظ سجل '+file.name+': '+ins.error.message);continue}
-  ok++;
+  try{
+   const up=await sb.storage.from('serag-attachments').upload(path,file,{contentType:'application/pdf',upsert:false});
+   if(up.error){failures.push(file.name+': '+up.error.message);continue}
+   const textContent=JSON.stringify({source:'english-library',sizeBytes:file.size,completed:false,lastOpenedAt:null});
+   const ins=await sb.from('attachments').insert({user_id:id,title:file.name,kind:'pdf',storage_path:path,mime_type:'application/pdf',parent_type:'english-library',text_content:textContent});
+   if(ins.error){
+    const cleanup=await sb.storage.from('serag-attachments').remove([path]);
+    failures.push(file.name+': '+ins.error.message+(cleanup.error?' (تعذر تنظيف الملف من التخزين: '+cleanup.error.message+')':''));
+    continue;
+   }
+   ok++;
+  }catch(error){failures.push(file.name+': '+(error?.message||'خطأ في الاتصال'))}
  }
- await loadBooks();setStatus('تم استيراد '+ok+' ملف PDF'+(skipped?' · تم تخطي '+skipped+' ملفًا كبيرًا':'')+'.');
+ await loadBooks();
+ const messages=['تم استيراد '+ok+' من '+list.length+' ملف PDF.'];
+ if(skipped.length)messages.push('تم تخطي الملفات الأكبر من 45 MB: '+skipped.join('، ')+'.');
+ if(failures.length)messages.push('تعذر استيراد: '+failures.join(' | '));
+ if(!ok&&!failures.length)messages.push('راجع حجم الملفات وحاول تاني.');
+ setStatus(messages.join(' '));
 }
 async function openBook(id){
  const owner=uid();if(!owner||typeof sb==='undefined')return;
