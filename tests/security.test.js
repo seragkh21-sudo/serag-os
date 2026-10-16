@@ -22,5 +22,5 @@ test('service worker only intercepts icon requests',()=>{
 });
 test('reading exercises have valid unique options and answers',()=>{
  const c={window:{}};c.window=c;vm.runInNewContext(readFileSync('english-content-v9.js','utf8'),c);
- assert.equal(c.SERAG_ENGLISH_V9.articles.length,14);for(const a of c.SERAG_ENGLISH_V9.articles.filter(a=>a.checks)){assert.equal(a.checks.length,2);for(const [q,options,answer,why] of a.checks){assert.ok(q&&why);assert.equal(new Set(options).size,options.length);assert.ok(options[answer])}}
+ assert.ok(c.SERAG_ENGLISH_V9.articles.length>=26);for(const a of c.SERAG_ENGLISH_V9.articles.filter(a=>a.checks)){assert.equal(a.checks.length,2);for(const [q,options,answer,why] of a.checks){assert.ok(q&&why);assert.equal(new Set(options).size,options.length);assert.ok(options[answer])}}
 });

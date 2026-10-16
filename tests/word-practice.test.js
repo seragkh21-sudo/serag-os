@@ -9,3 +9,59 @@ test('recognition precedes delayed writing; hints/retry/reveal remain distinct a
 test('every recall has at least three intervening questions and recognition has unique choices',()=>{const {api}=app(),round=api.buildRound(api.items().slice(0,4),[{id:'g',answer:'has',options:['has','have'],prompt:'She ___ a book.'}]);for(let i=0;i<round.length;i++){const q=round[i];if(q.kind==='recognition'){assert.equal(new Set(q.options.map(api.norm)).size,q.options.length);assert.ok(q.options.includes(q.answer))}if(q.kind==='recall'){const prior=round.findIndex(x=>x.kind==='recognition'&&x.item.phrase===q.item.phrase);assert.ok(prior>=0);assert.ok(i-prior-1>=3);assert.equal(round[prior].sentence,q.sentence)}}assert.equal(round.filter(x=>x.kind==='grammar').length,1)});
 
 test('application prompts adapt to context and accept natural use of the target expression',()=>{const {api}=app();const work=api.applicationQuestion({phrase:'figure out',group:'Work',meaning:'find a solution'},false);assert.equal(work.kind,'application');assert.match(work.prompt,/work or project situation/);assert.match(work.prompt,/figure out/);assert.equal(api.check(work,'I need to figure out a better way to organize this project.'),true);assert.equal(api.check(work,'I need a better solution for this project.'),false);const supported=api.applicationQuestion({phrase:'assumption',group:'Everyday'},true);assert.match(supported.prompt,/one clear sentence/);assert.equal(api.check(supported,'My assumption was wrong.'),true)});
+
+
+test('Engoplay recall layout reserves the audio, feedback, answer and next-action slots before answering',()=>{
+ const {api,events}=app();
+ function click(attr){const b={dataset:{},hasAttribute:k=>k===attr};events.click[0]({target:{closest:()=>b}})}
+ function answer(value){events.input[0]({target:{id:'wpAnswer',value}});events.submit[0]({target:{matches:()=>true},preventDefault(){}})}
+ api.start('catch up');
+ // Move from the initial meaning-cued exposure to the delayed written recall.
+ for(let i=0;i<4;i++){click('data-wp-reveal');click('data-wp-next')}
+ const before=api.html();
+ assert.match(before,/wp-sound-button is-placeholder/);
+ assert.match(before,/class="wp-response-area"/);
+ assert.match(before,/wp-exposure-placeholder/);
+ assert.match(before,/class="wp-next-placeholder"/);
+ answer('catch up');
+ const after=api.html();
+ assert.match(after,/class="wp-sound-button"/);
+ assert.doesNotMatch(after,/wp-sound-button is-placeholder/);
+ assert.match(after,/class="wp-response-area"/);
+ assert.match(after,/class="wp-result-slot"/);
+ assert.match(after,/class="wp-exposure"/);
+ assert.match(after,/data-wp-next/);
+ assert.doesNotMatch(after,/wp-next-placeholder/);
+});
+
+
+test('work English is merged into the shared deck with contextual follow-up prompts',()=>{
+ const {c,api}=app();
+ const all=api.items();
+ const byPhrase=phrase=>all.find(x=>api.norm(x.phrase)===api.norm(phrase));
+ for(const phrase of ['assumption','align','stuck','vanish','prejudice','judging','target audience','visual hierarchy','design direction','out of scope','turnaround time','source file']){
+  assert.ok(byPhrase(phrase),'missing shared work word: '+phrase);
+ }
+ const assumption=api.applicationQuestion(byPhrase('assumption'),false);
+ assert.match(assumption.prompt,/target audience|premium|brief/i);
+ assert.match(assumption.prompt,/assumption/i);
+ assert.match(assumption.sentence,/assumption/i);
+ assert.equal(assumption.workRelated,true);
+ assert.ok(c.window.SERAG_ENGLISH_V9.workPractice.scenarios.length>=15);
+ assert.equal(c.window.SERAG_ENGLISH_V9.workPractice.writingPrompts.length,5);
+ assert.equal(c.window.SERAG_ENGLISH_V9.speaking.filter(x=>x.prompt&&/design|client|brief|deadline|feedback/i.test(x.prompt)).length>0,true);
+});
+
+test('work vocabulary choices prefer meaningful same-category distractors',()=>{
+ const {api}=app();
+ const creative=api.items().filter(x=>x.group==='Creative Work');
+ assert.ok(creative.length>=4);
+ const round=api.buildRound(creative.slice(0,4),[],4);
+ const item=round.find(q=>q.kind==='recognition');
+ const options=item.options.filter(x=>api.norm(x)!==api.norm(item.answer));
+ assert.equal(options.length,3);
+ for(const option of options){
+  const distractor=api.items().find(x=>api.norm(x.phrase)===api.norm(option));
+  assert.equal(api.norm(distractor.group),api.norm(item.item.group));
+ }
+});

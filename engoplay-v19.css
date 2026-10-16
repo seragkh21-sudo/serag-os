@@ -16,3 +16,43 @@
 
 /* Compact, user-triggered pronunciation control for the shared Engoplay question engine. */
 .wp-sentence-row{display:flex;align-items:flex-start;gap:8px;direction:ltr;margin:12px 0 16px;min-width:0}.wp-sentence-row .wp-sentence{flex:1;min-width:0;margin:0}.wp-sound-button{flex:0 0 28px;width:28px;height:28px;min-width:28px;padding:0;display:inline-grid;place-items:center;border:1px solid #e8dfe6;border-radius:9px;background:#fffafc;color:#80677a;font-size:12px;line-height:1;cursor:pointer;opacity:.82;transition:background .15s,opacity .15s,border-color .15s}.wp-sound-button:hover,.wp-sound-button:focus-visible{opacity:1;background:#f8e8ef;border-color:#d9b8c7;outline:2px solid #d9b8c7;outline-offset:2px}.wp-sound-button:disabled{opacity:.5;cursor:wait}
+
+
+/* Pixel-aligned audio controls and stable answer-state geometry for Engoplay. */
+.wp-sentence-row{align-items:center;gap:10px}
+.wp-sound-button{align-self:center;box-sizing:border-box;display:grid;place-items:center;flex:0 0 32px;width:32px;height:32px;min-width:32px;min-height:32px;padding:0;line-height:0;vertical-align:middle}
+.wp-sound-button svg{display:block;width:17px;height:17px;flex:none;overflow:visible}
+.wp-sound-button.is-placeholder{visibility:hidden;pointer-events:none}
+.wp-response-area{display:grid;grid-template-rows:minmax(1.5em,auto) minmax(42px,auto) minmax(132px,auto) minmax(44px,auto);gap:7px;margin-top:8px;min-width:0}
+.wp-response-area .wp-hint{margin:0;min-height:1.5em}
+.wp-feedback-status{display:flex;align-items:center;min-height:42px;margin:0;line-height:1.6;overflow-wrap:anywhere}
+.wp-result-slot{min-height:132px;min-width:0}
+.wp-result-slot .wp-exposure{box-sizing:border-box;min-height:132px;margin:0;overflow-wrap:anywhere}
+.wp-result-slot .wp-exposure-placeholder{visibility:hidden;user-select:none}
+.wp-result-slot .wp-exposure-placeholder p{margin:0}
+.wp-next-row{display:flex;align-items:center;min-height:44px}
+.wp-next-row>button{min-height:44px}
+.wp-next-placeholder{visibility:hidden;pointer-events:none}
+.wp-options button{transition:border-color .16s ease,background .16s ease,transform .16s ease}
+.wp-options button:hover:not(:disabled){transform:translateY(-1px)}
+.wp-options button:focus-visible,.wp-actions button:focus-visible,.wp-next-row button:focus-visible{outline:3px solid #cfb6ca;outline-offset:3px}
+
+.ea12-record-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:44px}
+.ea12-record-icon{display:grid;place-items:center;box-sizing:border-box;flex:0 0 32px;width:32px;height:32px;min-width:32px;padding:0;border:1px solid currentColor;border-radius:10px;line-height:0}
+.ea12-record-icon svg{display:block;width:17px;height:17px;flex:none;overflow:visible}
+.ea12-record-btn.is-recording{background:#fff0ef;border-color:#d49490;color:#8e3029}
+.ea12-record-btn:disabled{opacity:.65;cursor:wait}
+.ep-session .ea12-feedback-slot{min-height:150px;min-width:0}
+.ep-session .ea12-feedback-placeholder{min-height:126px;visibility:hidden;pointer-events:none}
+.ep-session .ea12-feedback-slot .ea12-tip{box-sizing:border-box;min-height:126px;margin-top:12px;overflow-wrap:anywhere}
+.ep-session .ea12-next-slot{display:flex;align-items:center;min-height:48px}
+.ep-session .ea12-next-slot .ea12-actions{min-height:44px;margin-top:0}
+.ep-session .ea12-next-placeholder{visibility:hidden;pointer-events:none}
+@media(max-width:700px){
+  .wp-response-area{grid-template-rows:minmax(1.5em,auto) minmax(48px,auto) minmax(144px,auto) minmax(44px,auto);gap:8px}
+  .wp-result-slot,.wp-result-slot .wp-exposure{min-height:144px}
+  .wp-sentence-row{gap:8px}
+  .ep-session .ea14-questions{scroll-margin-top:14px}
+  .ep-session .ea12-feedback-slot{min-height:166px}
+}
+@media(prefers-reduced-motion:reduce){.wp-options button{transition:none}.wp-options button:hover:not(:disabled){transform:none}}
