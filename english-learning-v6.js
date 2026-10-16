@@ -23,6 +23,19 @@
   let state={date:today(),steps:Array(6).fill(false),xp:0,answers:0,correct:0,revealed:[],videoUrl:'',videoPhrase:'',videoMeaning:'',videoNotes:'',videoFeedback:'',speakingPromptOffset:0,speakingTranscript:'',speakingFeedback:'',grammarPractice:'',grammarFeedback:'',grammarCompleted:[],grammarBookmarks:[],grammarActiveId:''};
   let archive=[],syncId=null,gameIndex=0,score=0,answered=false,grammarFilter='All',grammarSearch='',recognition=null,isRecording=false;
 
+  const readingProgressKey=()=>user?.id?'seragReadingProgressV1:'+user.id:null;
+  function completedArticles(){
+    const done=new Set(state.readingCompleted||[]);
+    (archive||[]).forEach(x=>(Array.isArray(x.readingCompleted)?x.readingCompleted:[]).forEach(title=>done.add(title)));
+    try{const k=readingProgressKey(),saved=k?JSON.parse(localStorage.getItem(k)||'[]'):[];if(Array.isArray(saved))saved.forEach(title=>done.add(title))}catch{}
+    return [...done];
+  }
+  function completeArticle(title){
+    const done=new Set(completedArticles());done.add(title);state.readingCompleted=[...done];
+    try{const k=readingProgressKey();if(k)localStorage.setItem(k,JSON.stringify([...done))}catch{}
+    sync();complete(2);renderArticle();
+  }
+
   function normalizeState(x={}){
     const steps=Array.from({length:6},(_,i)=>Boolean(x.steps?.[i]));
     return {...state,...x,date:today(),steps,revealed:Array.isArray(x.revealed)?x.revealed:[],readingCompleted:Array.isArray(x.readingCompleted)?x.readingCompleted:[],grammarCompleted:Array.isArray(x.grammarCompleted)?x.grammarCompleted:state.grammarCompleted,grammarBookmarks:Array.isArray(x.grammarBookmarks)?x.grammarBookmarks:state.grammarBookmarks};
@@ -82,7 +95,7 @@
   }
   function renderQuiz(){const q=currentQuiz(),label=state.answers<10?`${state.answers+1}/10`:`Bonus ${state.answers-9}`;$('#el9Quiz').innerHTML=`<div class="el9-card-head"><div><div class="el6-muted">${q.title} · ${label}</div><h3>${esc(q.prompt)}</h3></div><span class="el9-pill">${score} صح</span></div><div class="el9-quiz-options">${q.options.map(x=>`<button data-quiz-answer="${esc(x)}" data-correct="${esc(q.correct)}">${esc(x)}</button>`).join('')}</div><div class="el6-muted">4 أنواع أسئلة، وتتغير الكلمات تلقائيًا كل يوم. بعد أول 10 تقدر تكمل Bonus.</div>`}
   function renderArticle(){
-    const a=dailyArticle(),finished=state.readingCompleted||[],readCount=finished.filter(title=>data.articles.some(x=>x.title===title)).length;
+    const a=dailyArticle(),finished=completedArticles(),readCount=finished.filter(title=>data.articles.some(x=>x.title===title)).length;
     const words=a.words||data.vocabulary.filter(x=>a.text.toLowerCase().includes(x[0].toLowerCase())).slice(0,4).map(x=>[x[0],x[1]]);
     $('#el9Article').innerHTML=`<div class="el9-card-head"><div><div class="el6-eyebrow">READING LIBRARY · ${data.articles.length} ARTICLES</div><h3>${esc(a.title)}</h3></div><span class="el6-tag">${esc(a.level)}</span></div>
     <div class="el18-reading-progress"><span>${readCount}/${data.articles.length} مقالات مكتملة</span><div><i style="width:${Math.round(readCount/Math.max(1,data.articles.length)*100)}%"></i></div></div>
@@ -180,7 +193,7 @@
       const r=e.target.closest('.el9-reveal');if(r){if(r.dataset.reveal!==undefined){const i=Number(r.dataset.reveal);state.revealed=state.revealed.includes(i)?state.revealed.filter(x=>x!==i):[...state.revealed,i];if(state.revealed.length>=10)complete(0);else sync();renderWords()}else r.classList.toggle('revealed');return}
       const qa=e.target.closest('[data-quiz-answer]');if(qa&&!answered){answered=true;const ok=qa.dataset.quizAnswer===qa.dataset.correct;qa.classList.add(ok?'correct':'wrong');qa.closest('.el9-quiz-options')?.querySelectorAll('button').forEach(x=>{if(x.dataset.quizAnswer===qa.dataset.correct)x.classList.add('correct')});state.answers++;if(ok){score++;state.correct++}sync();if(state.answers>=10)complete(1);setTimeout(()=>{gameIndex=(gameIndex+1)%10;answered=false;renderQuiz()},850);return}
       if(e.target.closest('[data-read-article]'))return speak(dailyArticle().text);
-      if(e.target.closest('[data-article-done]')){const title=dailyArticle().title;state.readingCompleted=[...new Set([...(state.readingCompleted||[]),title])];sync();complete(2);renderArticle();return;}
+      if(e.target.closest('[data-article-done]')){completeArticle(dailyArticle().title);return;}
       if(e.target.closest('[data-check-article]')){const answer=$('#el9ArticleAnswer').value.trim(),a=dailyArticle();if(!answer){$('#el9ArticleFeedback').textContent='اكتب إجابة قصيرة الأول.';return}const stop=new Set(['this','that','with','from','have','were','what','when','where','which','their','there','about','because','should','could','would','into','than','then','they','them','your','after','before','does','while','only','also','more','most','some','many','very','been','being','each','such','will','must','need','work']);const keyWords=[...new Set(String(a.answer||'').toLowerCase().replace(/[^a-z0-9\s-]/g,' ').split(/\s+/).filter(w=>w.length>3&&!stop.has(w)))].slice(0,7),written=answer.toLowerCase().replace(/[^a-z0-9\s-]/g,' '),matched=keyWords.filter(w=>written.includes(w)),pct=keyWords.length?Math.round(matched.length/keyWords.length*100):0;$('#el9ArticleFeedback').textContent='فحص محتوى بسيط: استخدمت '+matched.length+' من '+keyWords.length+' كلمات مفتاحية مرتبطة بالإجابة ('+pct+'%). قارن الفكرة والمعنى، مش الكلمات حرفيًا. النموذج: '+a.answer;return}
       const gc=e.target.closest('[data-grammar-choice]');if(gc){const ok=gc.dataset.grammarChoice===gc.dataset.correct;gc.classList.add(ok?'correct':'wrong');const result=gc.closest('.el9-grammar-check')?.querySelector('#el9GrammarResult,.el10-inline-result');if(result)result.textContent=ok?'Correct ✓':'الصحيح: '+gc.dataset.correct;if(ok)complete(3);return}
       if(e.target.closest('[data-grammar-ai]')){const g=dailyGrammar();return coach('grammar',`${g.title}: ${g.summary||g.rule}`,'')}
