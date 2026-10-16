@@ -9,3 +9,27 @@ test('recognition precedes delayed writing; hints/retry/reveal remain distinct a
 test('every recall has at least three intervening questions and recognition has unique choices',()=>{const {api}=app(),round=api.buildRound(api.items().slice(0,4),[{id:'g',answer:'has',options:['has','have'],prompt:'She ___ a book.'}]);for(let i=0;i<round.length;i++){const q=round[i];if(q.kind==='recognition'){assert.equal(new Set(q.options.map(api.norm)).size,q.options.length);assert.ok(q.options.includes(q.answer))}if(q.kind==='recall'){const prior=round.findIndex(x=>x.kind==='recognition'&&x.item.phrase===q.item.phrase);assert.ok(prior>=0);assert.ok(i-prior-1>=3);assert.equal(round[prior].sentence,q.sentence)}}assert.equal(round.filter(x=>x.kind==='grammar').length,1)});
 
 test('application prompts adapt to context and accept natural use of the target expression',()=>{const {api}=app();const work=api.applicationQuestion({phrase:'figure out',group:'Work',meaning:'find a solution'},false);assert.equal(work.kind,'application');assert.match(work.prompt,/work or project situation/);assert.match(work.prompt,/figure out/);assert.equal(api.check(work,'I need to figure out a better way to organize this project.'),true);assert.equal(api.check(work,'I need a better solution for this project.'),false);const supported=api.applicationQuestion({phrase:'assumption',group:'Everyday'},true);assert.match(supported.prompt,/one clear sentence/);assert.equal(api.check(supported,'My assumption was wrong.'),true)});
+
+
+test('Engoplay recall layout reserves the audio, feedback, answer and next-action slots before answering',()=>{
+ const {api,events}=app();
+ function click(attr){const b={dataset:{},hasAttribute:k=>k===attr};events.click[0]({target:{closest:()=>b}})}
+ function answer(value){events.input[0]({target:{id:'wpAnswer',value}});events.submit[0]({target:{matches:()=>true},preventDefault(){}})}
+ api.start('catch up');
+ // Move from the initial meaning-cued exposure to the delayed written recall.
+ for(let i=0;i<4;i++){click('data-wp-reveal');click('data-wp-next')}
+ const before=api.html();
+ assert.match(before,/wp-sound-button is-placeholder/);
+ assert.match(before,/class="wp-response-area"/);
+ assert.match(before,/class="wp-exposure-placeholder"/);
+ assert.match(before,/class="wp-next-placeholder"/);
+ answer('catch up');
+ const after=api.html();
+ assert.match(after,/class="wp-sound-button"/);
+ assert.doesNotMatch(after,/wp-sound-button is-placeholder/);
+ assert.match(after,/class="wp-response-area"/);
+ assert.match(after,/class="wp-result-slot"/);
+ assert.match(after,/class="wp-exposure"/);
+ assert.match(after,/data-wp-next/);
+ assert.doesNotMatch(after,/wp-next-placeholder/);
+});
