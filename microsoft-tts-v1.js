@@ -11,11 +11,12 @@
     const voices=allVoices().filter(v=>/^en(?:-|$)/i.test(v.lang||''));
     const score=v=>{
       const name=String(v.name||'').toLowerCase();
-      if(/online.*natural|natural.*online|neural|aria|ava|jenny|emma|andrew/.test(name))return 0;
+      if(/online.*natural|natural.*online|neural/.test(name))return 0;
       if(/google.*english|english.*google/.test(name))return 1;
-      if(/en-us|united states/.test(String(v.lang||'').toLowerCase()))return 2;
-      if(/microsoft/.test(name))return 3;
-      return 4;
+      if(/aria|ava|jenny|emma|andrew/.test(name))return 2;
+      if(/en-us|united states/.test(String(v.lang||'').toLowerCase()))return 3;
+      if(/microsoft/.test(name))return 4;
+      return 5;
     };
     return voices.sort((a,b)=>score(a)-score(b))[0]||null;
   }
