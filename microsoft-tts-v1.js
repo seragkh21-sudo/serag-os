@@ -8,19 +8,17 @@
 
   function allVoices(){return window.speechSynthesis?.getVoices?.()||[]}
   function microsoftVoice(){
-    const voices=allVoices();
-    const candidates=[
-      /microsoft.*(aria|jenny|ava|emma|andrew).*en/i,
-      /microsoft.*natural.*english/i,
-      /microsoft.*english.*united states/i,
-      /microsoft.*en-US/i,
-      /microsoft/i
-    ];
-    for(const rx of candidates){
-      const v=voices.find(x=>rx.test(`${x.name} ${x.lang}`)&&/^en/i.test(x.lang||''));
-      if(v)return v;
-    }
-    return null;
+    const voices=allVoices().filter(v=>/^en(?:-|$)/i.test(v.lang||''));
+    const score=v=>{
+      const name=String(v.name||'').toLowerCase();
+      if(/online.*natural|natural.*online|neural/.test(name))return 0;
+      if(/google.*english|english.*google/.test(name))return 1;
+      if(/aria|ava|jenny|emma|andrew/.test(name))return 2;
+      if(/en-us|united states/.test(String(v.lang||'').toLowerCase()))return 3;
+      if(/microsoft/.test(name))return 4;
+      return 5;
+    };
+    return voices.sort((a,b)=>score(a)-score(b))[0]||null;
   }
 
   function stopCurrent(){
@@ -40,8 +38,8 @@
     const utter=new SpeechSynthesisUtterance(value);
     utter.lang=voice.lang||'en-US';
     utter.voice=voice;
-    utter.rate=word?.74:.9;
-    utter.pitch=1;
+    utter.rate=word?.94:.98;
+    utter.pitch=1.02;
     window.speechSynthesis.speak(utter);
     return true;
   }
@@ -145,8 +143,8 @@
     const btn=document.getElementById('articleReadBtn');
     if(!btn||btn.dataset.microsoftTtsBound||!providerReady())return;
     btn.dataset.microsoftTtsBound='1';
-    btn.textContent='🔊 Microsoft voice';
-    btn.title=azureAvailable?'Microsoft Azure English neural voice':'Microsoft English voice';
+    btn.textContent='🔊 Read aloud';
+    btn.title=azureAvailable?'English neural voice':'English pronunciation';
     btn.onclick=()=>{
       const text=document.getElementById('articleViewPane')?.innerText?.trim();
       if(text)speakMicrosoft(text,{word:false,button:btn});
@@ -154,6 +152,18 @@
   }
 
   document.addEventListener('click',e=>{
+    const sentenceButton=e.target.closest?.('[data-speak-text]');
+    if(sentenceButton){
+      const page=document.getElementById('page-english');
+      if(!page?.contains(sentenceButton))return;
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      const text=sentenceButton.getAttribute('data-speak-text')||'';
+      if(!text)return;
+      if(!providerReady()){sentenceButton.title='لا يوجد صوت إنجليزي متاح في المتصفح';return}
+      speakMicrosoft(text,{word:false,button:sentenceButton});
+      return;
+    }
     const button=e.target.closest?.('[data-word-sound]');
     if(!button)return;
     const page=document.getElementById('page-english');
