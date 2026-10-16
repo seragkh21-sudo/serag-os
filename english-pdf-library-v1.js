@@ -35,7 +35,7 @@ function ensureDialog(){if($('#ea16PdfDialog'))return;document.body.insertAdjace
 function mount(){
  const target=$('#ea14Content'),heading=target?.querySelector('.ea14-section-head h3')?.textContent||'';
  if(!target||(!heading.includes('تقدمي ومكتبتي')&&!heading.toLowerCase().includes('progress')))return;
- if(target.querySelector('.ea16-pdf-library')){void loadBooks();return}
+ if(target.querySelector('.ea16-pdf-library'))return
  target.insertAdjacentHTML('beforeend',libraryHtml());ensureDialog();void loadBooks();
 }
 async function loadBooks(){
