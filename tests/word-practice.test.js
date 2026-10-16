@@ -33,3 +33,35 @@ test('Engoplay recall layout reserves the audio, feedback, answer and next-actio
  assert.match(after,/data-wp-next/);
  assert.doesNotMatch(after,/wp-next-placeholder/);
 });
+
+
+test('work English is merged into the shared deck with contextual follow-up prompts',()=>{
+ const {c,api}=app();
+ const all=api.items();
+ const byPhrase=phrase=>all.find(x=>api.norm(x.phrase)===api.norm(phrase));
+ for(const phrase of ['assumption','align','stuck','vanish','prejudice','judging','target audience','visual hierarchy','design direction','out of scope','turnaround time','source file']){
+  assert.ok(byPhrase(phrase),'missing shared work word: '+phrase);
+ }
+ const assumption=api.applicationQuestion(byPhrase('assumption'),false);
+ assert.match(assumption.prompt,/target audience|premium|brief/i);
+ assert.match(assumption.prompt,/assumption/i);
+ assert.match(assumption.sentence,/assumption/i);
+ assert.equal(assumption.workRelated,true);
+ assert.ok(c.window.SERAG_ENGLISH_V9.workPractice.scenarios.length>=15);
+ assert.equal(c.window.SERAG_ENGLISH_V9.workPractice.writingPrompts.length,5);
+ assert.equal(c.window.SERAG_ENGLISH_V9.speaking.filter(x=>x.prompt&&/design|client|brief|deadline|feedback/i.test(x.prompt)).length>0,true);
+});
+
+test('work vocabulary choices prefer meaningful same-category distractors',()=>{
+ const {api}=app();
+ const creative=api.items().filter(x=>x.group==='Creative Work');
+ assert.ok(creative.length>=4);
+ const round=api.buildRound(creative.slice(0,4),[],4);
+ const item=round.find(q=>q.kind==='recognition');
+ const options=item.options.filter(x=>api.norm(x)!==api.norm(item.answer));
+ assert.equal(options.length,3);
+ for(const option of options){
+  const distractor=api.items().find(x=>api.norm(x.phrase)===api.norm(option));
+  assert.equal(api.norm(distractor.group),api.norm(item.item.group));
+ }
+});
