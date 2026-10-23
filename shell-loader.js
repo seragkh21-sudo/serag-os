@@ -100,6 +100,7 @@
 <script src="/microsoft-tts-v1.js?v=${V}"></script>
 <script src="/serag-v5.js?v=${V}"></script>
 <script src="/english-content-v9.js?v=${V}"></script>
+<script src="/english-vocab-v24.js?v=24"></script>
 <script src="/english-grammar-v10.js?v=${V}"></script>
 <script src="/english-supplement-v13.js?v=${V}"></script>
 <script src="/english-writing-v13.js?v=${V}"></script>
