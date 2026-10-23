@@ -8,7 +8,7 @@
   const seed=d=>[...String(d)].reduce((a,c)=>((a*31)+c.charCodeAt(0))>>>0,17);
   const shuffle=(arr,s)=>{const a=[...arr];for(let i=a.length-1;i>0;i--){s=(s*1664525+1013904223)>>>0;const j=s%(i+1);[a[i],a[j]]=[a[j],a[i]]}return a};
   const pick=(category,d,n=1)=>shuffle(data.vocabulary.filter(x=>x[2]===category),seed(d+category)).slice(0,n);
-  const professional=['Work & Office','Jobs & Interviews','HR & People','Company & Business','Marketing & Sales','Meetings'];
+  const professional=['Work & Office','Jobs & Interviews','HR & People','Company & Business','Marketing & Sales','Meetings','Design & Motion'];
   function dailyWords(d=today()){
     const s=seed(d),pro=shuffle(professional,s).slice(0,4).flatMap((c,i)=>pick(c,d+i));
     const general=pick('Everyday',d,2),natural=[...pick('Slang & Natural',d),...pick('Idioms',d),...pick('Phrasal Verbs',d)];
