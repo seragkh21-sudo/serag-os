@@ -31,7 +31,7 @@ const patch = context.SERAG_ENGLISH_VOCAB_V24;
 const v24Rows = Array.isArray(patch?.additions) ? patch.additions.map(row => ({
   term: row[0], category: row[2], register: row[4]
 })) : [];
-const rawV24Match = patchSource.match(/const additions\\s*=\\s*(\\[[\\s\\S]*?\\]);/);
+const rawV24Match = patchSource.match(/const additions\s*=\s*(\[[\s\S]*?\]);/);
 if (!rawV24Match) throw new Error('Could not locate the literal additions array in english-vocab-v24.js');
 const rawV24Rows = runInNewContext('(' + rawV24Match[1] + ')', Object.create(null))
   .map(row => ({ term: row[0], category: row[2], register: row[4] }));
