@@ -7,11 +7,15 @@ const baseSource = readFileSync(new URL('../english-content-v9.js', import.meta.
 const patchSource = readFileSync(new URL('../english-vocab-v24.js', import.meta.url), 'utf8');
 
 function load() {
-  const window = {};
-  runInNewContext(baseSource, { window });
-  const before = window.SERAG_ENGLISH_V9.vocabulary.length;
-  runInNewContext(patchSource, { window });
-  return { window, before };
+  // In a browser, window is the global object. Mirror that relationship in vm:
+  // code that reads window.SERAG_ENGLISH_V9 and bare SERAG_ENGLISH_V9 must see
+  // the same binding, just as it does in production.
+  const context = {};
+  context.window = context;
+  runInNewContext(baseSource, context);
+  const before = context.SERAG_ENGLISH_V9.vocabulary.length;
+  runInNewContext(patchSource, context);
+  return { window: context, before };
 }
 const norm = value => String(value ?? '').toLowerCase().normalize('NFKC')
   .replace(/[’‘\x60]/g, "'").replace(/[^a-z0-9]+/g, ' ').trim().replace(/\s+/g, ' ');
