@@ -27,10 +27,14 @@ const v9Rows = context.SERAG_ENGLISH_V9.vocabulary.map(row => ({
 }));
 const beforePatch = v9Rows.length;
 runInNewContext(patchSource, context);
-const patch = context.SERAG_ENGLISH_VOCAB_VOCAB_V24 || context.SERAG_ENGLISH_VOCAB_V24;
+const patch = context.SERAG_ENGLISH_VOCAB_V24;
 const v24Rows = Array.isArray(patch?.additions) ? patch.additions.map(row => ({
   term: row[0], category: row[2], register: row[4]
 })) : [];
+const rawV24Match = patchSource.match(/const additions\\s*=\\s*(\\[[\\s\\S]*?\\]);/);
+if (!rawV24Match) throw new Error('Could not locate the literal additions array in english-vocab-v24.js');
+const rawV24Rows = runInNewContext('(' + rawV24Match[1] + ')', Object.create(null))
+  .map(row => ({ term: row[0], category: row[2], register: row[4] }));
 
 const v23Match = v23Source.match(/var vocabRows\s*=\s*(\[[\s\S]*?\]);\s*var grammarRows/);
 if (!v23Match) throw new Error('Could not locate the literal vocabRows array in english-vocab-v23.js');
@@ -45,7 +49,7 @@ const v23Overlaps = v23Rows.filter(row => known.has(norm(row.term)) || phrases.s
 const html = read('legacy.html');
 const loader = read('shell-loader.js');
 const refs = new Set([...html, ...loader].flatMap(source =>
-  [...source.matchAll(/(?:src\s*=\s*["']\/|["']\/)(english-[^"'?\s]+\.js)/g)].map(match => match[1])
+  [...source.matchAll(/["']\/?(english-[^/"'?\s]+\.js)/g)].map(match => match[1])
 ));
 const englishFiles = readdirSync(new URL('../', import.meta.url))
   .filter(name => /^english-.*\.js$/.test(name)).sort();
@@ -59,6 +63,10 @@ const report = {
   vocabulary: {
     v9Rows: beforePatch,
     v9UniqueNormalizedTerms: new Set(v9Rows.map(row => norm(row.term))).size,
+    v9DuplicateNormalizedRows: v9Rows.length - new Set(v9Rows.map(row => norm(row.term))).size,
+    v24RawRows: rawV24Rows.length,
+    v24RawDuplicateNormalizedRows: rawV24Rows.length - new Set(rawV24Rows.map(row => norm(row.term))).size,
+    v24OverlapWithV9: rawV24Rows.filter(row => new Set(v9Rows.map(item => norm(item.term))).has(norm(row.term))).map(row => row.term),
     v24AcceptedAdditions: v24Rows.length,
     v24CategoryCounts: countBy(v24Rows, 'category'),
     combinedV9V24Rows: context.SERAG_ENGLISH_V9.vocabulary.length,
