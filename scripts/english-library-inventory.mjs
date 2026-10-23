@@ -48,7 +48,7 @@ const v23Overlaps = v23Rows.filter(row => known.has(norm(row.term)) || phrases.s
 
 const html = read('legacy.html');
 const loader = read('shell-loader.js');
-const refs = new Set([...html, ...loader].flatMap(source =>
+const refs = new Set([html, loader].flatMap(source =>
   [...source.matchAll(/["']\/?(english-[^/"'?\s]+\.js)/g)].map(match => match[1])
 ));
 const englishFiles = readdirSync(new URL('../', import.meta.url))
