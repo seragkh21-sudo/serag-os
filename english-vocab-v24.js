@@ -1,0 +1,120 @@
+/* Additive vocabulary expansion shared by Serag OS English and EngoPlay.
+   Stable five-field tuples preserve the existing SERAG_ENGLISH_V9 schema.
+   Original examples; never replaces existing vocabulary or learner progress. */
+(()=> {
+  'use strict';
+  const additions = [
+    ['clarify','يوضّح','Work & Office','Could you clarify which version the client approved?','neutral'],
+    ['align on','نتفق على / نوحّد فهمنا بشأن','Work & Office','Let’s align on the deadline before we start.','natural'],
+    ['keep someone posted','يُبقي شخصًا على اطلاع','Work & Office','I’ll keep you posted when the files are ready.','natural'],
+    ['get back to someone','يرد على شخص لاحقًا','Work & Office','I’ll get back to you after I check the schedule.','natural'],
+    ['raise a concern','يطرح نقطة قلق','Work & Office','She raised a concern about the delivery date.','formal'],
+    ['address an issue','يعالج مشكلة','Work & Office','We need to address the missing files today.','formal'],
+    ['take into account','يأخذ في الاعتبار','Work & Office','Please take the client’s feedback into account.','formal'],
+    ['on track','يسير وفق الخطة','Work & Office','The campaign is on track for Monday’s launch.','natural'],
+    ['fall behind','يتأخر عن الخطة','Work & Office','We may fall behind if the brief changes again.','natural'],
+    ['move forward','يمضي قدمًا','Work & Office','We can move forward once the budget is approved.','neutral'],
+    ['run something by someone','يعرض شيئًا على شخص لأخذ رأيه','Work & Office','Can I run this headline by you before publishing?','natural'],
+    ['touch base','يتواصل باختصار','Work & Office','Let’s touch base tomorrow about the revisions.','natural'],
+    ['bring forward','يقدّم الموعد','Work & Office','Could we bring the review forward to Thursday?','neutral'],
+    ['push back','يؤجّل الموعد','Work & Office','We had to push back the launch by two days.','natural'],
+    ['scope of work','نطاق العمل','Work & Office','The scope of work includes six social media designs.','formal'],
+    ['deliverable','مخرج أو ملف مطلوب تسليمه','Work & Office','The final video is the main deliverable this week.','formal'],
+    ['turnaround time','المدة اللازمة لإنجاز الطلب','Work & Office','The turnaround time for urgent edits is one day.','formal'],
+    ['approval process','عملية الاعتماد','Work & Office','The approval process has three steps.','formal'],
+    ['action item','مهمة ناتجة عن اجتماع','Work & Office','I added each action item to the project board.','formal'],
+    ['trade-off','مفاضلة بين ميزتين أو خيارين','Work & Office','There is a trade-off between quality and speed.','formal'],
+    ['brand consistency','اتساق الهوية البصرية','Design & Motion','Brand consistency matters across every campaign format.','formal'],
+    ['visual hierarchy','التسلسل الهرمي البصري','Design & Motion','A clear visual hierarchy guides the viewer to the headline.','formal'],
+    ['negative space','المساحة السلبية أو الفارغة في التصميم','Design & Motion','Use negative space to keep the layout calm.','formal'],
+    ['safe area','المنطقة الآمنة داخل التصميم','Design & Motion','Keep the key text inside the safe area.','formal'],
+    ['aspect ratio','نسبة أبعاد الصورة أو الفيديو','Design & Motion','The story uses a vertical aspect ratio.','formal'],
+    ['frame rate','معدل الإطارات','Design & Motion','A higher frame rate can make motion look smoother.','formal'],
+    ['keyframe','إطار مفتاحي يحدد قيمة الحركة','Design & Motion','Add a keyframe to control the scale at the start.','technical'],
+    ['ease in','تسارع تدريجي في بداية الحركة','Design & Motion','Use ease in so the object starts moving gently.','technical'],
+    ['ease out','تباطؤ تدريجي في نهاية الحركة','Design & Motion','Ease out helps the card settle naturally.','technical'],
+    ['motion blur','تمويه الحركة','Design & Motion','A little motion blur can make the transition feel natural.','technical'],
+    ['mask out','يعزل جزءًا باستخدام ماسك','Design & Motion','Mask out the background before adding the new scene.','technical'],
+    ['track a shot','يتتبّع حركة اللقطة','Design & Motion','We need to track the shot before attaching the label.','technical'],
+    ['render queue','قائمة انتظار الرندر','Design & Motion','I sent the final composition to the render queue.','technical'],
+    ['pre-compose','يجمع طبقات داخل كومبوزيشن فرعي','Design & Motion','Pre-compose the layers before applying the effect.','technical'],
+    ['loop seamlessly','يُكرّر بسلاسة دون فاصل واضح','Design & Motion','The background animation should loop seamlessly.','technical'],
+    ['rough cut','نسخة مونتاج أولية','Design & Motion','I’ll share the rough cut before polishing the sound.','technical'],
+    ['fine-tune','يضبط بدقة','Design & Motion','We can fine-tune the timing after client feedback.','neutral'],
+    ['export settings','إعدادات التصدير','Design & Motion','Double-check the export settings before delivery.','technical'],
+    ['source file','ملف المشروع الأصلي','Design & Motion','Please include the source file with the final video.','technical'],
+    ['pixelated','مليء بالبكسلات / منخفض الوضوح','Design & Motion','The logo looks pixelated when scaled up.','neutral'],
+    ['legible','واضح وسهل القراءة','Design & Motion','Make sure the small caption remains legible on mobile.','formal'],
+    ['cluttered','مزدحم بصريًا','Design & Motion','The slide feels cluttered because it has too many icons.','neutral'],
+    ['subtle','هادئ وغير مبالغ فيه','Design & Motion','A subtle shadow will separate the card from the background.','neutral'],
+    ['consistent spacing','مسافات متسقة','Design & Motion','Consistent spacing makes the carousel feel more professional.','formal'],
+    ['visual reference','مرجع بصري','Design & Motion','Use the visual reference to match the camera angle.','formal'],
+    ['brand guidelines','إرشادات الهوية البصرية','Design & Motion','Check the brand guidelines before choosing a new colour.','formal'],
+    ['call to action','دعوة لاتخاذ إجراء','Marketing & Sales','The call to action should tell people what to do next.','formal'],
+    ['target audience','الجمهور المستهدف','Marketing & Sales','We need to understand the target audience before writing the ad.','formal'],
+    ['value proposition','عرض القيمة','Marketing & Sales','The value proposition explains why the service is useful.','formal'],
+    ['pain point','مشكلة أو احتياج يعاني منه العميل','Marketing & Sales','The campaign should address a real customer pain point.','formal'],
+    ['lead generation','توليد العملاء المحتملين','Marketing & Sales','The landing page supports lead generation.','formal'],
+    ['conversion rate','معدل التحويل','Marketing & Sales','The team is testing a new headline to improve the conversion rate.','formal'],
+    ['brand awareness','الوعي بالعلامة التجارية','Marketing & Sales','Short videos can help build brand awareness.','formal'],
+    ['campaign performance','أداء الحملة','Marketing & Sales','We review campaign performance at the end of each week.','formal'],
+    ['engagement rate','معدل التفاعل','Marketing & Sales','The post received a higher engagement rate than usual.','formal'],
+    ['organic reach','الوصول العضوي','Marketing & Sales','Useful content can improve organic reach over time.','formal'],
+    ['paid campaign','حملة إعلانية مدفوعة','Marketing & Sales','The paid campaign targets small business owners.','formal'],
+    ['content calendar','تقويم المحتوى','Marketing & Sales','I added the National Day posts to the content calendar.','formal'],
+    ['social proof','دليل اجتماعي مثل التقييمات وتجارب العملاء','Marketing & Sales','Customer reviews provide social proof.','formal'],
+    ['key message','الرسالة الأساسية','Marketing & Sales','The key message should remain clear in every format.','formal'],
+    ['messaging angle','زاوية صياغة الرسالة','Marketing & Sales','Let’s test a different messaging angle for this audience.','formal'],
+    ['competitor analysis','تحليل المنافسين','Marketing & Sales','The competitor analysis revealed a gap in the market.','formal'],
+    ['market positioning','التموضع في السوق','Marketing & Sales','Clear market positioning helps the brand stand out.','formal'],
+    ['proofread','يراجع النص لاكتشاف الأخطاء','Work & Office','Please proofread the Arabic caption before scheduling it.','neutral'],
+    ['typo','خطأ مطبعي','Everyday','There is a typo in the second slide.','natural'],
+    ['misleading','مضلّل','Everyday','The headline is misleading because it promises too much.','neutral'],
+    ['ambiguous','محتمل لأكثر من معنى / غير واضح','Work & Office','The brief is ambiguous, so I asked for clarification.','formal'],
+    ['overlook','يغفل عن شيء','Everyday','I overlooked one small detail in the export.','neutral'],
+    ['resolve','يحل مشكلة','Work & Office','We resolved the audio issue before delivery.','formal'],
+    ['workaround','حل بديل مؤقت','Work & Office','I found a workaround while the plugin was unavailable.','neutral'],
+    ['glitch','خلل تقني بسيط','Everyday','A small glitch caused the preview to freeze.','natural'],
+    ['crash','يتوقف فجأة / ينهار البرنامج','Everyday','The editor may crash when memory is low.','neutral'],
+    ['lag','تأخير أو بطء في الاستجابة','Everyday','The preview has a noticeable lag.','natural'],
+    ['back up','ينشئ نسخة احتياطية','Work & Office','Back up the project before updating the plugin.','neutral'],
+    ['restore','يستعيد نسخة أو حالة سابقة','Work & Office','I restored the previous version after the update failed.','formal'],
+    ['version history','سجل الإصدارات','Work & Office','Check the version history before replacing the file.','formal'],
+    ['reliable','يمكن الاعتماد عليه','Everyday','We need a reliable workflow for recurring projects.','neutral'],
+    ['feasible','قابل للتنفيذ','Work & Office','The deadline is tight, but the plan is feasible.','formal'],
+    ['manageable','يمكن التعامل معه','Everyday','The workload is manageable if we split the tasks.','neutral'],
+    ['overwhelmed','يشعر بضغط أكبر من قدرته','Everyday','I felt overwhelmed when all the revisions arrived together.','neutral'],
+    ['prioritise','يرتّب حسب الأهمية','Work & Office','Prioritise the client changes that affect the whole layout.','formal'],
+    ['estimate','يقدّر الوقت أو التكلفة','Work & Office','Can you estimate how long the animation will take?','formal'],
+    ['allocate','يخصّص وقتًا أو موارد','Work & Office','We should allocate more time for testing on mobile.','formal'],
+    ['dependency','اعتماد مهمة على مهمة أخرى','Work & Office','The export has a dependency on the missing font.','technical'],
+    ['bottleneck','عنق زجاجة يبطّئ العمل','Work & Office','Waiting for approval has become a bottleneck.','formal'],
+    ['iterate','يطوّر عبر تكرارات وتحسينات','Design & Motion','We can iterate on the concept after reviewing the first draft.','formal'],
+    ['feedback loop','دورة متكررة من الملاحظات والتحسين','Work & Office','A short feedback loop helps us fix issues early.','formal'],
+    ['edge case','حالة استثنائية نادرة','Work & Office','Test the edge case where the title wraps onto three lines.','technical'],
+    ['regression test','اختبار يتأكد أن التعديلات لم تكسر وظيفة قديمة','Work & Office','Add a regression test before changing the shared data.','technical'],
+    ['backward compatible','متوافق مع الإصدارات السابقة','Work & Office','The new data module must remain backward compatible.','technical'],
+    ['source of truth','المصدر الأساسي المعتمد للبيانات','Work & Office','Both interfaces should read from one source of truth.','technical'],
+    ['duplicate entry','عنصر مكرر','Work & Office','The validation script should flag every duplicate entry.','technical'],
+    ['retrieve','يسترجع أو يصل إلى معلومة','Everyday','I can retrieve the old project file from the archive.','formal'],
+    ['filter by','يصفّي النتائج حسب','Everyday','You can filter by topic to find relevant expressions.','neutral'],
+    ['look up','يبحث عن معلومة محددة','Everyday','I looked up the phrase before using it in the email.','natural'],
+    ['retain','يحتفظ بشيء','Work & Office','The migration must retain each learner’s saved progress.','formal']
+  ];
+  const norm = value => String(value ?? '').toLowerCase().normalize('NFKC').replace(/[’‘\x60]/g, "'").replace(/[^a-z0-9]+/g,' ').trim().replace(/\s+/g,' ');
+  const data = window.SERAG_ENGLISH_V9;
+  if (!data || !Array.isArray(data.vocabulary)) {
+    window.SERAG_ENGLISH_VOCAB_V24 = { version: 24, additions, applied: false };
+    return;
+  }
+  const known = new Set(data.vocabulary.map(row => norm(row?.[0])));
+  const accepted = additions.filter(row => {
+    if (row.length !== 5 || !row.every(value => typeof value === 'string' && value.trim())) return false;
+    const key = norm(row[0]);
+    if (!key || known.has(key)) return false;
+    known.add(key);
+    return true;
+  });
+  data.vocabulary.push(...accepted);
+  window.SERAG_ENGLISH_VOCAB_V24 = { version: 24, additions: accepted, skipped: additions.length - accepted.length, applied: true };
+})();
