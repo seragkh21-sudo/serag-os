@@ -1,6 +1,6 @@
 (async()=>{
   try{
-    const V='39';
+    const V='40';
     const res=await fetch(`/legacy.html?v=${V}`,{cache:'no-store',headers:{'Cache-Control':'no-cache'}});
     if(!res.ok)throw new Error('Legacy app failed to load');
     let html=await res.text();
@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="/english-academy-v12.css?v=${V}"/>
 <link rel="stylesheet" href="/english-supplement-v13.css?v=${V}"/>
 <link rel="stylesheet" href="/english-layout-v14.css?v=${V}"/>
+<link rel="stylesheet" href="/english-reading-library-v1.css?v=${V}"/>
 <link rel="stylesheet" href="/engoplay-v19.css?v=${V}"/>
 <link rel="stylesheet" href="/workflow-v21.css?v=${V}"/>
 <link rel="stylesheet" href="/creative-workspace.css?v=${V}"/>
@@ -114,6 +115,7 @@
 <script src="/word-practice-v21.js?v=${V}"></script>
 <script src="/engoplay-v19.js?v=${V}"></script>
 <script src="/english-academy-v12.js?v=${V}"></script>
+<script src="/english-reading-library-v1.js?v=${V}"></script>
 <script src="/english-writing-flow-v1.js?v=${V}"></script>
 <script src="/english-pdf-library-v1.js?v=${V}"></script>
 <script src="/english-focus-v7.js?v=${V}"></script>
