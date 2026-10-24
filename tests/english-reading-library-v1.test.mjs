@@ -11,9 +11,10 @@ test('reading library is wired into the English reading section and the active s
   const preview = read('workspace-preview-content.html');
   assert.match(academy, /SERAG_READING_LIBRARY_V1\?\.summaryHTML/);
   assert.match(loader, /english-reading-library-v1\.css/);
+  assert.match(loader, /const V=\x2742\x27/);
   assert.match(loader, /english-reading-library-v1\.js/);
-  assert.match(entry, /shell-loader\.js\?v=41/);
-  assert.match(preview, /english-reading-library-v1\.js/);
+  assert.match(entry, /shell-loader\\.js\\?v=42/);
+  assert.match(preview, /english-reading-library-v1\.js\?v=42/);
 });
 
 test('article library supports owner-scoped CRUD, search, reading status and notes', () => {
