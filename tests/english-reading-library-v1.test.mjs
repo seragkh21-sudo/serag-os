@@ -12,7 +12,7 @@ test('reading library is wired into the English reading section and the active s
   assert.match(academy, /SERAG_READING_LIBRARY_V1\?\.summaryHTML/);
   assert.match(loader, /english-reading-library-v1\.css/);
   assert.match(loader, /english-reading-library-v1\.js/);
-  assert.match(entry, /shell-loader\.js\?v=40/);
+  assert.match(entry, /shell-loader\.js\?v=41/);
   assert.match(preview, /english-reading-library-v1\.js/);
 });
 
