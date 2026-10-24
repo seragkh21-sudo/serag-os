@@ -18,6 +18,7 @@ test('reading library is wired into the English reading section and the active s
 
 test('article library supports owner-scoped CRUD, search, reading status and notes', () => {
   const source = read('english-reading-library-v1.js');
+  const styles = read('english-reading-library-v1.css');
   assert.match(source, /from\(TABLE\)\.select\('\*'\)\.eq\('user_id', id\)/);
   assert.match(source, /from\(TABLE\)\.insert/);
   assert.match(source, /from\(TABLE\)\.update/);
@@ -27,6 +28,8 @@ test('article library supports owner-scoped CRUD, search, reading status and not
   assert.match(source, /data-erl-complete/);
   assert.match(source, /safeUrl/);
   assert.match(source, /textContent/);
+  assert.match(source, /addEventListener\('submit',[\s\S]*erlEditorForm[\s\S]*saveArticle\(event\)/);
+  assert.match(styles, /\.erl-library-card\[hidden\]\{display:none!important;pointer-events:none!important\}/);
 });
 
 test('article table is private and validates content, ownership, status and progress', () => {
