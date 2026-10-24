@@ -8,3 +8,9 @@
 @media(prefers-reduced-motion:reduce){.erl-article-card,.erl-filter-tabs button,.erl-card-progress i{transition:none}}
 /* The global card styles must never override the native hidden state of this dynamically mounted library. */
 .erl-library-card[hidden]{display:none!important;pointer-events:none!important}
+
+/* Make the article card's primary action obvious and keyboard-accessible. */
+.erl-open-cta{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:15px;padding:10px 12px;border:1px solid #ded6ff;border-radius:10px;background:#f3f0ff;color:#5b4b9c;font-size:12px;font-weight:800;transition:background .15s,border-color .15s,transform .15s}
+.erl-open-cta-arrow{display:grid;place-items:center;width:25px;height:25px;flex-shrink:0;border-radius:7px;background:#e5ddff;font-size:17px;line-height:1}
+.erl-article-open:hover .erl-open-cta{border-color:#bdb0fa;background:#ebe5ff}
+.erl-article-open:focus-visible{outline:3px solid #9e8cf0;outline-offset:-3px;border-radius:12px}
