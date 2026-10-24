@@ -429,6 +429,11 @@
   function boot() {
     document.addEventListener('click', handleClick);
     document.addEventListener('input', handleInput);
+    // The editor dialog is mounted dynamically, so delegate submit handling at document level.
+    // Without this listener the browser performs a normal form submission and the article is not saved.
+    document.addEventListener('submit', function (event) {
+      if (event.target && event.target.id === 'erlEditorForm') saveArticle(event);
+    });
     const observer = new MutationObserver(function () { mount(); syncVisibility(); });
     if (document.body) observer.observe(document.body, { childList: true, subtree: true });
     document.addEventListener('click', function (event) {
