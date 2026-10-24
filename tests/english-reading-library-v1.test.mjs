@@ -52,3 +52,13 @@ test('article table is private and validates content, ownership, status and prog
   assert.match(sql, /check \(status in \('unread','reading','completed'\)\)/i);
   assert.match(sql, /references auth\.users\(id\) on delete cascade/i);
 });
+
+test('article cards show a clear action to open the reading view', () => {
+  const source = read('english-reading-library-v1.js');
+  const styles = read('english-reading-library-v1.css');
+  assert.match(source, /data-erl-open=/);
+  assert.match(source, /erl-open-cta/);
+  assert.match(source, /افتح المقال واقرأه/);
+  assert.match(source, /if \(open\) \{ openReader\(open\.dataset\.erlOpen\); return; \}/);
+  assert.match(styles, /\.erl-open-cta\{/);
+});

@@ -144,7 +144,8 @@
         '<div class="erl-card-kicker"><span class="erl-level">' + esc(row.level || 'B1') + '</span><span>' + esc(row.topic || 'General') + '</span><span>' + readMinutes(row) + ' د قراءة</span></div>' +
         '<h4>' + esc(row.title) + '</h4><p>' + esc(excerpt(row)) + '</p>' +
         '<div class="erl-card-progress"><div><i style="width:' + progress + '%"></i></div><small>' + (progress ? progress + '%' : statusLabel(row.status)) + '</small></div>' +
-        '<div class="erl-tags">' + tags + (source ? '<span class="erl-source-tag">↗ رابط مصدر</span>' : '') + '</div></button>' +
+        '<div class="erl-tags">' + tags + (source ? '<span class="erl-source-tag">↗ رابط مصدر</span>' : '') + '</div>' +
+        '<span class="erl-open-cta"><span>افتح المقال واقرأه</span><span class="erl-open-cta-arrow" aria-hidden="true">←</span></span></button>' +
         '<div class="erl-card-actions"><button type="button" data-erl-favorite="' + esc(row.id) + '" aria-label="المفضلة" title="المفضلة">' + (row.favorite ? '★' : '☆') + '</button>' +
         '<button type="button" data-erl-edit="' + esc(row.id) + '" aria-label="تعديل المقال" title="تعديل">✎</button>' +
         '<button type="button" data-erl-delete="' + esc(row.id) + '" aria-label="حذف المقال" title="حذف">⌫</button></div></article>';
