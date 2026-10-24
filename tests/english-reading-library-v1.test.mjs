@@ -32,6 +32,16 @@ test('article library supports owner-scoped CRUD, search, reading status and not
   assert.match(styles, /\.erl-library-card\[hidden\]\{display:none!important;pointer-events:none!important\}/);
 });
 
+test('active English Academy mounts the article list inside the selected Reading panel', () => {
+  const source = read('english-reading-library-v1.js');
+  const mount = source.slice(source.indexOf('  function mount() {'), source.indexOf('  function boot() {'));
+  assert.match(mount, /const academyRoot = \$\('#ea12Center'\)/);
+  assert.match(mount, /const intro = \$\('\.erl-reading-intro', academyRoot\)/);
+  assert.match(mount, /intro\.insertAdjacentHTML\('afterend', libraryHTML\(\)\)/);
+  assert.match(mount, /if \(card && !academyRoot\.contains\(card\)\) \{[\s\S]*?card\.remove\(\)/);
+  assert.match(mount, /return;[\s\S]*?const article = \$\('#el9Article'\)/);
+});
+
 test('article table is private and validates content, ownership, status and progress', () => {
   const sql = read('db/english-reading-articles-v1.sql');
   assert.match(sql, /enable row level security/i);

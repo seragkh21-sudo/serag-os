@@ -410,15 +410,52 @@
   }
   function mount() {
     const page = $('#page-english');
+    if (!page) return;
+
+    if (!$('#erlEditorDialog')) document.body.insertAdjacentHTML('beforeend', dialogsHTML());
+
+    // The active English Academy owns its tab content. Mount the article list inside
+    // the Reading panel instead of beside the legacy grid: organizeLegacy() hides
+    // legacy siblings that are not part of the selected section.
+    const academyRoot = $('#ea12Center');
+    if (academyRoot) {
+      const readingActive = !!$('#ea12Center [data-ea-tab="reading"][aria-pressed="true"]');
+      const intro = $('.erl-reading-intro', academyRoot);
+      let card = $('#erlLibraryCard');
+
+      if (readingActive && intro) {
+        if (!card || !intro.parentElement || !intro.parentElement.contains(card)) {
+          if (card) card.remove();
+          intro.insertAdjacentHTML('afterend', libraryHTML());
+          card = $('#erlLibraryCard');
+          // Rows may already have loaded before the Reading tab was opened.
+          renderRows();
+        }
+      } else if (card && !academyRoot.contains(card)) {
+        // Remove any legacy sibling card; it would be hidden by the Academy's
+        // legacy-layout organiser and leave learners with an empty Reading section.
+        card.remove();
+      }
+
+      syncVisibility();
+      const id = uid();
+      if (loadedFor !== id) {
+        loadedFor = id;
+        load(true);
+      }
+      return;
+    }
+
+    // Compatibility fallback for pages that still use the standalone legacy reading layout.
     const article = $('#el9Article');
-    if (!page || !article) return;
+    if (!article) return;
     let card = $('#erlLibraryCard');
     const grid = article.closest('.el6-grid');
     if (!card && grid) {
       grid.insertAdjacentHTML('afterend', libraryHTML());
       card = $('#erlLibraryCard');
+      renderRows();
     }
-    if (!$('#erlEditorDialog')) document.body.insertAdjacentHTML('beforeend', dialogsHTML());
     syncVisibility();
     const id = uid();
     if (loadedFor !== id) {
