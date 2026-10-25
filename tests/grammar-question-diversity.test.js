@@ -12,7 +12,7 @@ function academy(){
   for(const file of ['english-content-v9.js','english-grammar-v10.js','english-academy-v12.js']){
     vm.runInContext(fs.readFileSync(file,'utf8'),c,{filename:file});
   }
-  return {api:c.SERAG_ACADEMY_V12,store};
+  return {api:c.SERAG_ACADEMY_V12,store,context:c};
 }
 
 test('grammar bank expands lesson examples into answerable sentence variants',()=>{
@@ -55,4 +55,60 @@ test('review ordering prioritizes the oldest previously attempted questions when
   api.homeState();
   const pool=[{id:'new',topic:'a',prompt:'New',answer:'x',options:['x','y']},{id:'old',topic:'b',prompt:'Old',answer:'x',options:['x','y']}];
   assert.equal(api.selectQuestions(pool,'review',2)[0].id,'old');
+});
+test('word-practice grammar fillers skip locally and remotely answered questions until due',()=>{
+  const {api,store,context}=academy();
+  const now=Date.now(),day=86400000;
+  store.set('seragAcademyV12:test-user',JSON.stringify({
+    goal:'work',mode:8,
+    attempts:[{id:'local-solved',at:now-day/2,correct:true},{id:'due-question',at:now-3*day,correct:false}],
+    cards:{
+      'local-solved':{stage:1,due:now+day},
+      'due-question':{stage:0,due:now-1000}
+    },
+    notes:{},sessions:[],level:'B1',practiceTopic:'be-basics'
+  }));
+  api.homeState();
+  context.ENGOPLAY={stats:()=>({
+    answeredKeys:new Set(['remote-solved']),
+    correctKeys:new Set(['remote-solved']),
+    answeredToday:new Set(['remote-solved']),
+    lastAnsweredAt:new Map([['remote-solved',now-day/2]])
+  })};
+  vm.runInContext(fs.readFileSync('word-practice-v21.js','utf8'),context,{filename:'word-practice-v21.js'});
+  const wp=context.SERAG_WORD_PRACTICE;
+  const pool=[
+    {id:'local-solved',topic:'a',prompt:'Local solved',answer:'yes',options:['yes','no']},
+    {id:'remote-solved',topic:'b',prompt:'Remote solved',answer:'yes',options:['yes','no']},
+    {id:'due-question',topic:'c',prompt:'Due review',answer:'yes',options:['yes','no']},
+    {id:'fresh-1',topic:'d',prompt:'Fresh one',answer:'yes',options:['yes','no']},
+    {id:'fresh-2',topic:'e',prompt:'Fresh two',answer:'yes',options:['yes','no']},
+    {id:'fresh-3',topic:'f',prompt:'Fresh three',answer:'yes',options:['yes','no']}
+  ];
+  const selected=wp.selectGrammarQuestions(pool,3);
+  assert.deepEqual(Array.from(selected,q=>q.id).sort(),['fresh-1','fresh-2','fresh-3']);
+  assert.ok(!selected.some(q=>['local-solved','remote-solved'].includes(q.id)));
+});
+
+test('word-practice only repeats an answered grammar question when its review is due',()=>{
+  const {api,store,context}=academy();
+  const now=Date.now(),day=86400000;
+  store.set('seragAcademyV12:test-user',JSON.stringify({
+    goal:'work',mode:8,
+    attempts:[{id:'scheduled',at:now-day/2,correct:true},{id:'due',at:now-3*day,correct:false}],
+    cards:{scheduled:{stage:1,due:now+day},due:{stage:0,due:now-1}},
+    notes:{},sessions:[],level:'B1',practiceTopic:'be-basics'
+  }));
+  api.homeState();
+  context.ENGOPLAY={stats:()=>({answeredKeys:new Set(),correctKeys:new Set(),answeredToday:new Set(),lastAnsweredAt:new Map()})};
+  vm.runInContext(fs.readFileSync('word-practice-v21.js','utf8'),context,{filename:'word-practice-v21.js'});
+  const selected=context.SERAG_WORD_PRACTICE.selectGrammarQuestions([
+    {id:'scheduled',topic:'a',prompt:'Already solved',answer:'yes',options:['yes','no']},
+    {id:'due',topic:'b',prompt:'Needs review',answer:'yes',options:['yes','no']}
+  ],3);
+  assert.deepEqual(Array.from(selected,q=>q.id),['due']);
+  const allScheduled=context.SERAG_WORD_PRACTICE.selectGrammarQuestions([
+    {id:'scheduled',topic:'a',prompt:'Already solved',answer:'yes',options:['yes','no']}
+  ],3);
+  assert.equal(allScheduled.length,0,'do not repeat a not-yet-due question just to fill a grammar slot');
 });
