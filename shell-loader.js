@@ -117,7 +117,7 @@
 <script src="/engoplay-v19.js?v=44"></script>
 <script src="/english-academy-v12.js?v=44"></script>
 <script src="/english-reading-library-v1.js?v=${V}"></script>
-<script src="/english-reading-studio-v2.js?v=${V}"></script>
+<script src="/english-reading-studio-v2.js?v=44"></script>
 <script src="/english-writing-flow-v1.js?v=${V}"></script>
 <script src="/english-pdf-library-v1.js?v=${V}"></script>
 <script src="/english-focus-v7.js?v=${V}"></script>

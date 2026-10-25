@@ -11,3 +11,41 @@ test('PDF library catalog contains the books, uses private storage and scopes ev
 test('guided Writing Lab renders clear steps, a planning box and a reflection field',()=>{const c=context();for(const f of ['english-writing-flow-v1.js'])vm.runInContext(fs.readFileSync(f,'utf8'),c);const state={writingDrill:'opinion',notes:{},writingChecks:{}};const html=c.SERAG_WRITING_V13.html(state,s=>String(s??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch])));assert.match(html,/data-ea-writing-stage/);assert.match(html,/ea13-stepper/);assert.match(html,/writing-plan:opinion/);assert.match(html,/writing-reflection:opinion/);assert.match(html,/ea13-review-box/);});
 
 test('reading completion persists across dates and can be restored from saved daily entries',()=>{const source=fs.readFileSync('english-learning-v6.js','utf8');assert.match(source,/seragReadingProgressV1/);assert.match(source,/function completedArticles\(\)/);assert.match(source,/function completeArticle\(title\)/);assert.match(source,/archive\|\|\[\]/);});
+
+test('Reading Studio does not loop renders when its active tab changes the observed DOM',()=>{
+ const source=fs.readFileSync('english-reading-studio-v2.js','utf8');
+ const loader=fs.readFileSync('shell-loader.js','utf8');
+ assert.match(loader,/english-reading-studio-v2\.js\?v=44/,'the fixed reader must bypass the old cached script');
+ let activeReading=false,hasDialog=false,observerCallback=null,renderCount=0;
+ const grid={};
+ Object.defineProperty(grid,'innerHTML',{set(){renderCount++;if(observerCallback)observerCallback([])}});
+ const studioRoot={};
+ const dialog={addEventListener(){}};
+ const document={
+  readyState:'complete',
+  body:{classList:{toggle(){}},insertAdjacentHTML(){hasDialog=true}},
+  querySelector(selector){
+   if(selector==='#ersStudio')return studioRoot;
+   if(selector==='#ea12Center [data-ea-tab="reading"][aria-pressed="true"]')return activeReading?{}:null;
+   if(selector==='#ersEditorDialog')return hasDialog?dialog:null;
+   if(selector==='#ersGrid')return grid;
+   return null;
+  },
+  querySelectorAll(){return []},
+  addEventListener(){}
+ };
+ class FakeMutationObserver{
+  constructor(callback){observerCallback=callback}
+  observe(){}
+  disconnect(){}
+ }
+ const c={window:{},document,localStorage:{getItem(){return null},setItem(){}},MutationObserver:FakeMutationObserver,setInterval(){return 0},clearInterval(){},Date,Math,URL,console};
+ c.window=c;c.window.addEventListener=()=>{};
+ vm.createContext(c);
+ vm.runInContext(source,c,{filename:'english-reading-studio-v2.js'});
+ activeReading=true;
+ observerCallback([]);
+ assert.equal(renderCount,1,'entering Reading should render the library once');
+ observerCallback([]);
+ assert.equal(renderCount,1,'the observer must not trigger another render of its own DOM changes');
+});
