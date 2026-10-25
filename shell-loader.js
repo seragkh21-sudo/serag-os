@@ -1,6 +1,6 @@
 (async()=>{
   try{
-    const V='44';
+    const V='43';
     const res=await fetch(`/legacy.html?v=${V}`,{cache:'no-store',headers:{'Cache-Control':'no-cache'}});
     if(!res.ok)throw new Error('Legacy app failed to load');
     let html=await res.text();
@@ -112,9 +112,9 @@
 <script src="/english-review-v10.js?v=${V}"></script>
 <script src="/english-review-v10-fallback.js?v=${V}"></script>
 <script src="/english-attempt-sync-v11.js?v=${V}"></script>
-<script src="/word-practice-v21.js?v=${V}"></script>
-<script src="/engoplay-v19.js?v=${V}"></script>
-<script src="/english-academy-v12.js?v=${V}"></script>
+<script src="/word-practice-v21.js?v=44"></script>
+<script src="/engoplay-v19.js?v=44"></script>
+<script src="/english-academy-v12.js?v=44"></script>
 <script src="/english-reading-library-v1.js?v=${V}"></script>
 <script src="/english-writing-flow-v1.js?v=${V}"></script>
 <script src="/english-pdf-library-v1.js?v=${V}"></script>
