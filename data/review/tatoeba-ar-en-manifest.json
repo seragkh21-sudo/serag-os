@@ -1,0 +1,11 @@
+{
+  "dataset": "Tatoeba English-Arabic via ManyThings",
+  "source": "https://www.manythings.org/anki/",
+  "download": "https://www.manythings.org/anki/ara-eng.zip",
+  "source_updated": "2026-02-13",
+  "license": "CC BY 2.0 FR",
+  "attribution_policy": "Preserve the attribution field for each sentence pair; attribute ManyThings and Tatoeba.",
+  "rows": 12574,
+  "sha256": "2381d9e8130ab85f050e6d57564accad0855a736098c56c8fc5548700b66a9d6",
+  "review_status": "raw corpus; not approved for automatic publication as learning questions"
+}
