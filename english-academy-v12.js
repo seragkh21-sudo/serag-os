@@ -87,15 +87,35 @@
       ids.add(id);prompts.add(promptKey);return true;
     });
   }
-  function selectQuestions(list,kind='daily',limit=state?.mode||8){
+  function questionHistory(){
     const lastSeen=new Map();
     for(const attempt of state?.attempts||[]){if(attempt.id)lastSeen.set(attempt.id,Math.max(lastSeen.get(attempt.id)||0,Number(attempt.at)||0))}
-    const rank=q=>state?.cards?.[q.id]?.due<=Date.now()?0:!state?.cards?.[q.id]?1:2;
-    const salt=String((state?.attempts||[]).length)+(state?.sessions||[]).length;
-    const ordered=[...list].sort((a,b)=>rank(a)-rank(b)||(lastSeen.get(a.id)||0)-(lastSeen.get(b.id)||0)||hash(a.id+salt)-hash(b.id+salt));
+    let remote={};try{remote=window.ENGOPLAY?.stats?.()||{}}catch{}
+    const answered=remote.answeredKeys instanceof Set?remote.answeredKeys:new Set(remote.answeredKeys||[]);
+    const remoteLast=remote.lastAnsweredAt;
+    const lastAt=id=>Math.max(lastSeen.get(id)||0,remoteLast instanceof Map?Number(remoteLast.get(id))||0:Number(remoteLast?.[id])||0);
+    return {lastSeen,answered,lastAt,cards:state?.cards||{},salt:String((state?.attempts||[]).length)+(state?.sessions||[]).length};
+  }
+  function practicePool(list,now=Date.now()){
+    const history=questionHistory(),fresh=[],due=[];
+    for(const q of list){
+      if(!q?.id)continue;
+      const card=history.cards[q.id],last=history.lastAt(q.id),seen=!!card||history.lastSeen.has(q.id)||history.answered.has(q.id);
+      if(!seen){fresh.push(q);continue}
+      if(card&&Number(card.due)<=now){due.push(q);continue}
+      if(!card&&last&&now-last>=86400000)due.push(q);
+    }
+    const orderedDue=due.sort((a,b)=>history.lastAt(a.id)-history.lastAt(b.id)||hash(a.id+history.salt)-hash(b.id+history.salt));
+    return [...fresh,...orderedDue];
+  }
+  function selectQuestions(list,kind='daily',limit=state?.mode||8){
+    const history=questionHistory(),now=Date.now();
+    const candidates=kind==='review'?list:practicePool(list,now);
+    const priority=q=>(history.cards[q.id]&&Number(history.cards[q.id].due)<=now)||(!history.cards[q.id]&&history.lastAt(q.id)&&now-history.lastAt(q.id)>=86400000)?1:0;
+    const ordered=[...candidates].sort((a,b)=>priority(a)-priority(b)||(history.lastSeen.get(a.id)||0)-(history.lastSeen.get(b.id)||0)||hash(a.id+history.salt)-hash(b.id+history.salt));
     if(kind!=='daily')return ordered.slice(0,limit);
     const rankGroups=new Map();
-    for(const q of ordered){const r=rank(q);if(!rankGroups.has(r))rankGroups.set(r,new Map());const groups=rankGroups.get(r),topic=q.topic||'mixed';if(!groups.has(topic))groups.set(topic,[]);groups.get(topic).push(q)}
+    for(const q of ordered){const r=priority(q);if(!rankGroups.has(r))rankGroups.set(r,new Map());const groups=rankGroups.get(r),topic=q.topic||'mixed';if(!groups.has(topic))groups.set(topic,[]);groups.get(topic).push(q)}
     const diverse=[];
     for(const groups of rankGroups.values()){
       while([...groups.values()].some(rows=>rows.length)){
@@ -168,6 +188,6 @@
   function homeAnswer(id,answer){homeState();const q=questions().find(x=>x.id===id);if(!q||!q.options.includes(answer))return null;record(q,answer);return {correct:answer===q.answer,answer:q.answer,explanation:q.explanation}}
   function openFromHome(section='today',kind=null){if(!mount())return false;homeState();stop();if(section!=='play'&&session?.kind==='engoplay')session=null;tab=section;selected=null;render();if(kind)start(kind);return true}
   function setLevel(value){if(!['B1','B2','C1','C2'].includes(value))return;homeState();state.level=value;save()}
-  function playSet(ids,size,title,level){if(!mount())return false;homeState();stop();setLevel(level);selected=null;const allowed=new Set(ids),answered=window.ENGOPLAY?.stats().answeredToday||new Set(),pool=questions().filter(q=>allowed.has(q.id)),eligible=pool.filter(q=>!answered.has(q.id)),list=eligible.length?eligible:pool;const rank=q=>!state.cards[q.id]?0:state.cards[q.id].due<=Date.now()?1:2;list.sort((x,y)=>rank(x)-rank(y)||hash(x.id+day()+state.attempts.length)-hash(y.id+day()+state.attempts.length));session={kind:'engoplay',title,list:list.slice(0,[5,8,12].includes(size)?size:5),index:0,score:0,answered:false,answers:{},completed:false};tab='today';render();$('.ea14-questions',root)?.scrollIntoView({block:'nearest',behavior:'smooth'});return true}
-  window.SERAG_ACADEMY_V12={lessons,setLevel,playSet,refreshPlay(){if(root&&tab==='play')render()},maps,scenarios,questions,selectQuestions,topicId,homeState,homeQuestion,homeAnswer,open:openFromHome};
+  function playSet(ids,size,title,level){if(!mount())return false;homeState();stop();setLevel(level);selected=null;const allowed=new Set(ids),pool=questions().filter(q=>allowed.has(q.id)),limit=[5,8,12].includes(size)?size:5,list=selectQuestions(pool,'daily',limit);session={kind:'engoplay',title,list:list.slice(0,limit),index:0,score:0,answered:false,answers:{},completed:false};tab='today';render();$('.ea14-questions',root)?.scrollIntoView({block:'nearest',behavior:'smooth'});return true}
+  window.SERAG_ACADEMY_V12={lessons,setLevel,playSet,refreshPlay(){if(root&&tab==='play')render()},maps,scenarios,questions,selectQuestions,practicePool,topicId,homeState,homeQuestion,homeAnswer,open:openFromHome};
 })();
