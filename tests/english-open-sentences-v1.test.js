@@ -9,6 +9,7 @@ function load() {
     SERAG_GRAMMAR_V10: [{id:'existing-grammar'}],
     SERAG_SUPPLEMENT_V13: {questions:[{id:'existing-question'}]}
   };
+  window.window = window;
   runInNewContext(source, window);
   return window;
 }
