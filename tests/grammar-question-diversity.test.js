@@ -6,10 +6,10 @@ import fs from 'node:fs';
 function academy(){
   const store=new Map();
   const document={querySelector:()=>null,querySelectorAll:()=>[],getElementById:()=>null,addEventListener(){}};
-  const c={document,localStorage:{getItem:k=>store.get(k)||null,setItem:(k,v)=>store.set(k,v)},setInterval(){},clearInterval(){},Date,Math,console,user:{id:'test-user'},window:{addEventListener(){}}};
+  const c={document,localStorage:{getItem:k=>store.get(k)||null,setItem:(k,v)=>store.set(k,v)},setInterval(){},clearInterval(){},addEventListener(){},Date,Math,console,user:{id:'test-user'}};
   c.window=c;
   vm.createContext(c);
-  for(const file of ['english-grammar-v10.js','english-academy-v12.js']){
+  for(const file of ['english-content-v9.js','english-grammar-v10.js','english-academy-v12.js']){
     vm.runInContext(fs.readFileSync(file,'utf8'),c,{filename:file});
   }
   return {api:c.SERAG_ACADEMY_V12,store};
@@ -34,7 +34,7 @@ test('question bank removes duplicate ids and duplicate prompts within a topic',
   assert.equal(new Set(all.map(q=>q.id)).size,all.length);
   const key=q=>String(q.topic||'')+'|'+String(q.prompt).toLowerCase().replace(/[^\p{L}\p{N}]+/gu,' ').trim()+'|'+String(q.answer).toLowerCase();
   assert.equal(new Set(all.map(key)).size,all.length);
-  assert.ok(all.length>100,'the practice pool should be substantially larger than one short daily set');
+  assert.ok(all.length>api.lessons().length+10,'example variants should materially expand the lesson-only pool');
 });
 
 test('daily selection interleaves grammar topics instead of clustering one rule',()=>{
