@@ -19,7 +19,7 @@ SOURCE_PAGE = "https://www.manythings.org/anki/"
 LICENSE = "Tatoeba text: CC BY 2.0 FR; attribute ManyThings, Tatoeba, and sentence contributors."
 
 def clean(value: str) -> str:
-    return re.sub(r"\\s+", " ", value.replace("\\ufeff", "").strip())
+    return re.sub(r"\s+", " ", value.replace("\ufeff", "").strip())
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
@@ -52,7 +52,7 @@ def main() -> None:
         scored = []
         for name in candidates:
             sample = archive.read(name)[:256_000]
-            scored.append((sample.count(b"\\t"), archive.getinfo(name).file_size, name))
+            scored.append((sample.count(b"\t"), archive.getinfo(name).file_size, name))
         tab_count, _, data_name = max(scored)
         if tab_count == 0:
             raise SystemExit(
@@ -62,9 +62,9 @@ def main() -> None:
 
         raw = archive.read(data_name)
         decoded = raw.decode("utf-8-sig", errors="replace")
-        with output.open("w", encoding="utf-8", newline="\\n") as target:
+        with output.open("w", encoding="utf-8", newline="\n") as target:
             for line in decoded.splitlines():
-                parts = line.split("\\t")
+                parts = line.split("\t")
                 if len(parts) < 3:
                     continue
                 # ManyThings documents the order as English + TAB + other language + TAB + attribution.
@@ -85,7 +85,7 @@ def main() -> None:
                     "license_note": LICENSE,
                     "review_status": "needs-human-review",
                 }
-                target.write(json.dumps(record, ensure_ascii=False) + "\\n")
+                target.write(json.dumps(record, ensure_ascii=False) + "\n")
                 written += 1
                 if written >= args.limit:
                     break
