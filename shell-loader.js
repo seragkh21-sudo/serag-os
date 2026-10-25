@@ -107,7 +107,7 @@
 <script src="/english-supplement-v13.js?v=${V}"></script>
 <script src="/english-writing-v13.js?v=${V}"></script>
 <script src="/english-levels-v14.js?v=${V}"></script>
-<script src="/english-source-curriculum-v1.js?v=1"></script><script src="/english-context-v15.js?v=${V}"></script><script src="/english-phrases-v16.js?v=${V}"></script><script src="/english-video-v17.js?v=${V}"></script>
+<script src="/english-source-curriculum-v1.js?v=1"></script><script src="/english-open-sentences-v1.js?v=1"></script><script src="/english-context-v15.js?v=${V}"></script><script src="/english-phrases-v16.js?v=${V}"></script><script src="/english-video-v17.js?v=${V}"></script>
 <script src="/english-learning-v6.js?v=${V}"></script>
 <script src="/english-review-v10-data.js?v=${V}"></script>
 <script src="/english-review-v10.js?v=${V}"></script>
