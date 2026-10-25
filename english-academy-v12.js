@@ -59,7 +59,51 @@
     {id:'did-base',topic:'questions',prompt:'Which question is correct?',options:['Did you send the file?','Did you sent the file?','Did you sending the file?'],answer:'Did you send the file?',explanation:'بعد did نستخدم المصدر send.'},
     {id:'phrase-align',topic:'adjective-prepositions',prompt:'The design should align ___ the brand guidelines.',options:['with','at','of'],answer:'with',explanation:'التركيب الكامل align with = يتماشى مع.'}
   ];
-  function questions(){const extraIds=new Set([...(window.SERAG_SUPPLEMENT_V13?.lessons||[]),...(window.SERAG_LEVELS_V14?.lessons||[])].map(g=>g.id));const a=lessons().filter(g=>!extraIds.has(g.id)).map(g=>({id:'lesson:'+g.id,topic:g.id,prompt:g.quiz[0],answer:g.quiz[1],options:[g.quiz[1],g.quiz[2]],explanation:g.summary+' '+g.mistake}));const b=(window.SERAG_REVIEW_V10_DATA?.questions||[]).filter(q=>q.type==='choice').map(q=>({...q,id:'review:'+q.n,topic:topicId(q.section)}));return [...a,...b,...extra,...(window.SERAG_SUPPLEMENT_V13?.questions||[]),...(window.SERAG_LEVELS_V14?.questions||[]),...(window.SERAG_CONTEXT_V15?.questions||[]),...(window.SERAG_PHRASES_V16?.questions||[])]}
+  function exampleQuestions(g){
+    const answer=String(g.quiz?.[1]||'').trim(),wrong=String(g.quiz?.[2]||'').trim();
+    if(!answer||!wrong)return [];
+    return (g.examples||[]).flatMap((sentence,index)=>{
+      const at=sentence.toLowerCase().indexOf(answer.toLowerCase());
+      if(at<0)return [];
+      const before=sentence[at-1]||' ',after=sentence[at+answer.length]||' ';
+      if(/[A-Za-z]/.test(before)||/[A-Za-z]/.test(after))return [];
+      const matched=sentence.slice(at,at+answer.length);
+      const prompt=sentence.slice(0,at)+'___'+sentence.slice(at+answer.length);
+      if(!prompt.includes('___')||prompt===g.quiz[0])return [];
+      return [{id:'example:'+g.id+':'+index,topic:g.id,level:g.level,prompt,answer:matched,options:[matched,wrong],explanation:g.summary+' '+g.mistake,sourceExample:sentence}];
+    });
+  }
+  function questions(){
+    const extraIds=new Set([...(window.SERAG_SUPPLEMENT_V13?.lessons||[]),...(window.SERAG_LEVELS_V14?.lessons||[])].map(g=>g.id));
+    const baseLessons=lessons().filter(g=>!extraIds.has(g.id));
+    const a=baseLessons.flatMap(g=>[{id:'lesson:'+g.id,topic:g.id,level:g.level,prompt:g.quiz[0],answer:g.quiz[1],options:[g.quiz[1],g.quiz[2]],explanation:g.summary+' '+g.mistake},...exampleQuestions(g)]);
+    const b=(window.SERAG_REVIEW_V10_DATA?.questions||[]).filter(q=>q.type==='choice').map(q=>({...q,id:'review:'+q.n,topic:topicId(q.section)}));
+    const all=[...a,...b,...extra,...(window.SERAG_SUPPLEMENT_V13?.questions||[]),...(window.SERAG_LEVELS_V14?.questions||[]),...(window.SERAG_CONTEXT_V15?.questions||[]),...(window.SERAG_PHRASES_V16?.questions||[])];
+    const ids=new Set(),prompts=new Set();
+    return all.filter(q=>{
+      if(!q||!q.id||!String(q.prompt||'').trim()||!Array.isArray(q.options)||!q.options.includes(q.answer))return false;
+      const id=String(q.id),promptKey=String(q.topic||'')+'|'+String(q.prompt).toLowerCase().replace(/[^\p{L}\p{N}]+/gu,' ').trim()+'|'+String(q.answer).toLowerCase();
+      if(ids.has(id)||prompts.has(promptKey))return false;
+      ids.add(id);prompts.add(promptKey);return true;
+    });
+  }
+  function selectQuestions(list,kind='daily',limit=state?.mode||8){
+    const lastSeen=new Map();
+    for(const attempt of state?.attempts||[]){if(attempt.id)lastSeen.set(attempt.id,Math.max(lastSeen.get(attempt.id)||0,Number(attempt.at)||0))}
+    const rank=q=>state?.cards?.[q.id]?.due<=Date.now()?0:!state?.cards?.[q.id]?1:2;
+    const salt=String((state?.attempts||[]).length)+(state?.sessions||[]).length;
+    const ordered=[...list].sort((a,b)=>rank(a)-rank(b)||(lastSeen.get(a.id)||0)-(lastSeen.get(b.id)||0)||hash(a.id+salt)-hash(b.id+salt));
+    if(kind!=='daily')return ordered.slice(0,limit);
+    const rankGroups=new Map();
+    for(const q of ordered){const r=rank(q);if(!rankGroups.has(r))rankGroups.set(r,new Map());const groups=rankGroups.get(r),topic=q.topic||'mixed';if(!groups.has(topic))groups.set(topic,[]);groups.get(topic).push(q)}
+    const diverse=[];
+    for(const groups of rankGroups.values()){
+      while([...groups.values()].some(rows=>rows.length)){
+        for(const rows of groups.values())if(rows.length)diverse.push(rows.shift());
+      }
+    }
+    return diverse.slice(0,limit);
+  }
   function topicId(s){const t=String(s).toLowerCase();return lessons().find(g=>t.includes(g.title.toLowerCase()))?.id||({'a / an / the':'articles','in / on / at':'time-prepositions','much / many / a little / a few':'countable','mixed tenses':'past-simple'})[t]||'questions'}
   function record(q,answer){const correct=answer===q.answer;state.attempts.push({id:q.id,topic:q.topic,correct,answer,date:day(),at:Date.now()});state.attempts=state.attempts.slice(-1000);const old=state.cards[q.id]||{stage:0};const stage=correct?Math.min((old.stage||0)+1,5):0;state.cards[q.id]={stage,due:Date.now()+[0,1,3,7,14,30][stage]*86400000,wrong:correct?!!old.wrong:true};save();window.ENGOPLAY?.track(state.attempts.at(-1))}
   function due(){return questions().filter(q=>state.cards[q.id]&&state.cards[q.id].due<=Date.now())}
@@ -78,8 +122,9 @@
     if(kind==='daily'||kind==='topic'){
       const eligible=list.filter(q=>!state.cards[q.id]||state.cards[q.id].due<=Date.now());
       if(eligible.length)list=eligible;
-      const priorities=weak().map(([id])=>id),rank=q=>state.cards[q.id]?.due<=Date.now()?0:!state.cards[q.id]?1:2;
-      list.sort((a,b)=>rank(a)-rank(b)||(priorities.indexOf(a.topic)<0?999:priorities.indexOf(a.topic))-(priorities.indexOf(b.topic)<0?999:priorities.indexOf(b.topic))||hash(a.id+day())-hash(b.id+day()));
+      const priorities=weak().map(([id])=>id);
+      list.sort((a,b)=>{const pa=priorities.indexOf(a.topic),pb=priorities.indexOf(b.topic);return (pa<0?999:pa)-(pb<0?999:pb)});
+      list=selectQuestions(list,kind,kind==='topic'?list.length:state.mode);
     }
     session={kind,list:list.slice(0,kind==='placement'?18:kind==='topic'||kind==='context'?list.length:kind==='exam'?12:state.mode),index:0,score:0,answered:false,answers:{},completed:false};tab='today';render();$('.ea14-questions',root)?.scrollIntoView({block:'nearest',behavior:'smooth'});
   }
@@ -124,5 +169,5 @@
   function openFromHome(section='today',kind=null){if(!mount())return false;homeState();stop();if(section!=='play'&&session?.kind==='engoplay')session=null;tab=section;selected=null;render();if(kind)start(kind);return true}
   function setLevel(value){if(!['B1','B2','C1','C2'].includes(value))return;homeState();state.level=value;save()}
   function playSet(ids,size,title,level){if(!mount())return false;homeState();stop();setLevel(level);selected=null;const allowed=new Set(ids),answered=window.ENGOPLAY?.stats().answeredToday||new Set(),pool=questions().filter(q=>allowed.has(q.id)),eligible=pool.filter(q=>!answered.has(q.id)),list=eligible.length?eligible:pool;const rank=q=>!state.cards[q.id]?0:state.cards[q.id].due<=Date.now()?1:2;list.sort((x,y)=>rank(x)-rank(y)||hash(x.id+day()+state.attempts.length)-hash(y.id+day()+state.attempts.length));session={kind:'engoplay',title,list:list.slice(0,[5,8,12].includes(size)?size:5),index:0,score:0,answered:false,answers:{},completed:false};tab='today';render();$('.ea14-questions',root)?.scrollIntoView({block:'nearest',behavior:'smooth'});return true}
-  window.SERAG_ACADEMY_V12={lessons,setLevel,playSet,refreshPlay(){if(root&&tab==='play')render()},maps,scenarios,questions,topicId,homeState,homeQuestion,homeAnswer,open:openFromHome};
+  window.SERAG_ACADEMY_V12={lessons,setLevel,playSet,refreshPlay(){if(root&&tab==='play')render()},maps,scenarios,questions,selectQuestions,topicId,homeState,homeQuestion,homeAnswer,open:openFromHome};
 })();
