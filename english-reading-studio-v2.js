@@ -7,7 +7,7 @@
   const EMOJIS = ['📘','📗','📙','📕','📓','📖','📰','🧠','🌍','💼','✍️','🎨','💬','🔬','🌿','⭐','🧭','🪴'];
   const PALETTES = [['#7967d6','#49a88b'],['#d97757','#f0b66a'],['#3d7b8b','#79b6a3'],['#6556a8','#b4a5e9'],['#397d63','#9ac9a5'],['#b35d8c','#e8a6b7'],['#345a9b','#77a6dc'],['#6d727e','#bcc3cf'],['#9a6a2e','#e4bc70']];
   let rows = [], loadedFor = '__not_loaded__', activeId = null, editingId = null, query = '', filter = 'all', sort = 'recent';
-  let state, draft = null, cropImage = null, selectedText = '', selectedContext = '', lastUserId = null, progressTimer = null;
+  let state, draft = null, cropImage = null, selectedText = '', selectedContext = '', lastUserId = null, progressTimer = null, readingActive = false;
   function uid(){try{return typeof user!=='undefined'&&user?user.id:null}catch(_){return null}}
   function db(){try{return typeof sb!=='undefined'?sb:null}catch(_){return null}}
   function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
@@ -30,7 +30,7 @@
   function root(){return $('#ersStudio')}
   function ensureDialogs(){if(!$('#ersEditorDialog')&&document.body&&document.body.insertAdjacentHTML)document.body.insertAdjacentHTML('beforeend',dialogsHTML())}
   function setStatus(msg){const el=$('#ersStatus');if(el)el.textContent=msg}
-  function syncActive(){const isReading=!!root()&&!!$('#ea12Center [data-ea-tab="reading"][aria-pressed="true"]');if(document.body)document.body.classList.toggle('ers-active',isReading);if(isReading)renderLibrary()}
+  function syncActive(){const isReading=!!root()&&!!$('#ea12Center [data-ea-tab="reading"][aria-pressed="true"]');if(document.body)document.body.classList.toggle('ers-active',isReading);const enteredReading=isReading&&!readingActive;readingActive=isReading;if(enteredReading)renderLibrary()}
   function load(force){const id=uid();if(!id){rows=[];loadedFor=null;renderLibrary();setStatus('سجّل دخولك لعرض مقالاتك المحفوظة ومزامنتها.');return Promise.resolve()}if(!force&&loadedFor===id)return Promise.resolve();const client=db();if(!client){setStatus('قاعدة البيانات غير متاحة حاليًا.');return Promise.resolve()}setStatus('جاري تحميل مقالاتك…');return client.from(TABLE).select('*').eq('user_id',id).order('updated_at',{ascending:false}).limit(200).then(result=>{if(uid()!==id)return;if(result.error){setStatus('تعذر تحميل المقالات. حدّث الصفحة وحاول تاني.');return}rows=(result.data||[]).map(normalizeRow);loadedFor=id;renderLibrary();setStatus(rows.length?'مكتبتك متزامنة مع حسابك.':'مكتبتك جاهزة — أضف أول مقال من الزر بالأعلى.')}).catch(()=>setStatus('حصلت مشكلة أثناء الاتصال. جرّب تحديث المكتبة.'))}
   function sortRows(a,b){if(sort==='title')return String(a.title||'').localeCompare(String(b.title||''),undefined,{sensitivity:'base'});if(sort==='level')return String(a.level||'').localeCompare(String(b.level||''));if(sort==='progress')return (Number(b.reading_progress)||0)-(Number(a.reading_progress)||0);return String(b.updated_at||b.created_at||'').localeCompare(String(a.updated_at||a.created_at||''))}
   function visibleRows(){const q=norm(query);return rows.filter(r=>{const hay=norm([r.title,r.summary,String(r.content||'').slice(0,6000),r.topic,r.level,(r.tags||[]).join(' '),r.source_url].join(' '));return (!q||hay.includes(q))&&(filter==='all'||(filter==='favorites'?!!r.favorite:r.status===filter))}).sort(sortRows)}
