@@ -18,7 +18,7 @@ SOURCE_PAGE = "https://www.manythings.org/anki/"
 LICENSE = "Tatoeba text: CC BY 2.0 FR; attribute Tatoeba and contributors when supplied."
 
 def clean(value: str) -> str:
-    return re.sub(r"\\s+", " ", value.replace("\\ufeff", "").strip())
+    return re.sub(r"\s+", " ", value.replace("\ufeff", "").strip())
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
@@ -41,9 +41,9 @@ def main() -> None:
             raise SystemExit("The downloaded ZIP contains no data file.")
         with archive.open(candidates[0]) as raw:
             text = io.TextIOWrapper(raw, encoding="utf-8-sig", errors="replace")
-            with output.open("w", encoding="utf-8", newline="\\n") as target:
+            with output.open("w", encoding="utf-8", newline="\n") as target:
                 for line in text:
-                    parts = line.rstrip("\\r\\n").split("\\t")
+                    parts = line.rstrip("\r\n").split("\t")
                     if len(parts) < 2:
                         continue
                     # The published export is English, Arabic, and sometimes attribution.
@@ -65,7 +65,7 @@ def main() -> None:
                         "license_note": LICENSE,
                         "review_status": "needs-human-review",
                     }
-                    target.write(json.dumps(record, ensure_ascii=False) + "\\n")
+                    target.write(json.dumps(record, ensure_ascii=False) + "\n")
                     written += 1
                     if written >= args.limit:
                         break
