@@ -6,11 +6,18 @@ import { runInNewContext } from 'node:vm';
 const baseSource = readFileSync(new URL('../english-content-v9.js', import.meta.url), 'utf8');
 const patchSource = readFileSync(new URL('../english-vocab-v24.js', import.meta.url), 'utf8');
 
+function browserContext() {
+  // In a browser, window is the global object; emulate that in Node's VM.
+  const context = {};
+  context.window = context;
+  return context;
+}
+
 function load() {
-  const window = {};
-  runInNewContext(baseSource, { window });
+  const window = browserContext();
+  runInNewContext(baseSource, window);
   const before = window.SERAG_ENGLISH_V9.vocabulary.length;
-  runInNewContext(patchSource, { window });
+  runInNewContext(patchSource, window);
   return { window, before };
 }
 const norm = value => String(value ?? '').toLowerCase().normalize('NFKC')
@@ -44,8 +51,8 @@ test('every new vocabulary row has a complete existing-schema tuple and unique n
 });
 
 test('the patch safely reports not-applied when the base vocabulary has not loaded', () => {
-  const window = {};
-  runInNewContext(patchSource, { window });
+  const window = browserContext();
+  runInNewContext(patchSource, window);
   assert.equal(window.SERAG_ENGLISH_VOCAB_V24.applied, false);
   assert.ok(window.SERAG_ENGLISH_VOCAB_V24.additions.length >= 80);
 });
