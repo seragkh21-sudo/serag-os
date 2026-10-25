@@ -88,7 +88,7 @@ test('word-practice grammar fillers skip locally and remotely answered questions
   const selected=wp.selectGrammarQuestions(pool,3);
   assert.deepEqual(Array.from(selected,q=>q.id).sort(),['fresh-1','fresh-2','fresh-3']);
   assert.ok(!selected.some(q=>['local-solved','remote-solved'].includes(q.id)));
-  const actualRound=wp.buildRound(wp.items().slice(0,4),pool,4).filter(q=>q.kind==='grammar').map(q=>q.grammar.id);
+  const actualRound=Array.from(wp.buildRound(wp.items().slice(0,4),pool,4).filter(q=>q.kind==='grammar'),q=>q.grammar.id);
   assert.deepEqual(actualRound.sort(),['fresh-1','fresh-2','fresh-3'],'the actual round must render fresh questions, not just the selector');
 });
 
