@@ -38,7 +38,8 @@
   const selected=words.slice(0,Math.max(4,Math.min(6,size))),all=items();
   const choices=selected.map(w=>{const q=question(w,round++),eligible=all.filter(x=>norm(x.phrase)!==norm(w.phrase)),related=shuffle(eligible.filter(x=>norm(x.group||'')===norm(w.group||''))).slice(0,3),needed=3-related.length;if(needed>0)related.push(...shuffle(eligible.filter(x=>norm(x.group||'')!==norm(w.group||'')&&!related.some(y=>norm(y.phrase)===norm(x.phrase)))).slice(0,needed));const others=related.map(x=>x.phrase);return {...q,kind:'recognition',options:shuffle([q.answer,...others])}});
   // Block spacing: each recall follows its first exposure by at least three OTHER questions.
-  const grammarPool=window.SERAG_ACADEMY_V12?.selectQuestions?window.SERAG_ACADEMY_V12.selectQuestions(grammar,'daily',3):grammar.slice(0,3);\n  const fillers=grammarPool.map(q=>({kind:'grammar',grammar:q,answer:q.answer,options:q.options}));
+  const grammarPool=window.SERAG_ACADEMY_V12?.selectQuestions?window.SERAG_ACADEMY_V12.selectQuestions(grammar,'daily',3):grammar.slice(0,3);
+  const fillers=grammarPool.map(q=>({kind:'grammar',grammar:q,answer:q.answer,options:q.options}));
   return [...choices,...fillers,...choices.map(q=>({...q,kind:'recall',options:undefined}))];
  }
  function state(){try{return JSON.parse(localStorage.getItem('seragSentenceV21:'+uid())||'{}')}catch{return {}}}
