@@ -5,6 +5,7 @@ import { runInNewContext } from 'node:vm';
 
 const baseSource = readFileSync(new URL('../english-content-v9.js', import.meta.url), 'utf8');
 const patchSource = readFileSync(new URL('../english-vocab-v24.js', import.meta.url), 'utf8');
+const loaderSource = readFileSync(new URL('../shell-loader.js', import.meta.url), 'utf8');
 
 function browserContext() {
   // In a browser, window is the global object; emulate that in Node's VM.
@@ -55,4 +56,8 @@ test('the patch safely reports not-applied when the base vocabulary has not load
   runInNewContext(patchSource, window);
   assert.equal(window.SERAG_ENGLISH_VOCAB_V24.applied, false);
   assert.ok(window.SERAG_ENGLISH_VOCAB_V24.additions.length >= 80);
+});
+
+test('the corrected vocabulary patch has a bumped cache key in production loader', () => {
+  assert.match(loaderSource, /english-vocab-v24\.js\?v=25/);
 });
