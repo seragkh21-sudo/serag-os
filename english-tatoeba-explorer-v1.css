@@ -1,0 +1,25 @@
+.tatoeba-explorer{display:grid;gap:14px;max-width:920px;margin:0 auto;padding:4px 0 18px;color:var(--text,#24232b)}
+.te-intro{padding:18px;border:1px solid var(--line,#e7e5ee);border-radius:18px;background:var(--card,#fff)}
+.te-kicker{font-size:10px;letter-spacing:.13em;font-weight:800;color:var(--muted,#777)}
+.te-intro h3{font-size:clamp(20px,3vw,28px);margin:8px 0}
+.te-intro p,.te-caution{font-size:13px;line-height:1.8;color:var(--muted,#666)}
+.te-stats{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px}
+.te-stats strong{font-size:24px;font-variant-numeric:tabular-nums}
+.te-stats span{font-size:12px}
+.te-source-pill{border:1px solid var(--line,#e7e5ee);border-radius:999px;padding:5px 9px}
+.te-search-label{font-size:12px;font-weight:700}
+.te-search{width:100%;box-sizing:border-box;border:1px solid var(--line,#dedbe7);border-radius:12px;background:var(--card,#fff);color:inherit;padding:12px 14px;font:inherit;outline-offset:3px}
+.te-count{font-size:12px;color:var(--muted,#666);font-variant-numeric:tabular-nums}
+.te-sentence-card{border:1px solid var(--line,#e5e2ec);border-radius:18px;padding:clamp(16px,3vw,26px);background:var(--card,#fff);box-shadow:0 8px 26px #00000008}
+.te-label{font-size:10px;letter-spacing:.1em;font-weight:800;color:var(--muted,#777)}
+.te-english{font-size:clamp(20px,3vw,30px);line-height:1.6;font-weight:650;margin:10px 0 18px}
+.te-arabic{font-size:clamp(18px,2.6vw,25px);line-height:1.8;margin:8px 0 18px}
+.te-hidden-translation{border:1px dashed var(--line,#d9d5e4);border-radius:12px;padding:10px 12px;color:var(--muted,#777);font-size:13px}
+.te-attribution{display:grid;gap:4px;border-top:1px solid var(--line,#e7e5ee);padding-top:12px;margin-top:16px;font-size:10px;line-height:1.6;color:var(--muted,#777);overflow-wrap:anywhere}
+.te-actions{display:flex;gap:9px;flex-wrap:wrap}
+.te-actions button{min-height:42px}
+.te-caution{border-inline-start:3px solid var(--line,#c9c3d7);padding-inline-start:12px;margin:0}
+.te-links{font-size:12px;margin:0}
+.te-links a,.tatoeba-explorer>a{color:var(--accent,#6658a5);text-decoration:underline;text-underline-offset:3px}
+.te-loading,.te-empty{padding:22px;border:1px dashed var(--line,#dedbe7);border-radius:14px;color:var(--muted,#777);text-align:center}
+@media(max-width:560px){.te-stats{align-items:flex-start}.te-actions{display:grid;grid-template-columns:1fr 1fr}.te-actions button{width:100%;padding-inline:8px}.te-attribution{font-size:9px}}
