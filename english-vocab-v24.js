@@ -99,7 +99,22 @@
     ['retrieve','يسترجع أو يصل إلى معلومة','Everyday','I can retrieve the old project file from the archive.','formal'],
     ['filter by','يصفّي النتائج حسب','Everyday','You can filter by topic to find relevant expressions.','neutral'],
     ['look up','يبحث عن معلومة محددة','Everyday','I looked up the phrase before using it in the email.','natural'],
-    ['retain','يحتفظ بشيء','Work & Office','The migration must retain each learner’s saved progress.','formal']
+    ['retain','يحتفظ بشيء','Work & Office','The migration must retain each learner’s saved progress.','formal'],
+    ['scope creep','زيادة تدريجية في نطاق العمل','Work & Office','Unclear requirements can lead to scope creep late in the project.','formal'],
+    ['revision limit','الحد المتفق عليه لجولات التعديل','Work & Office','The proposal sets a revision limit to keep delivery predictable.','formal'],
+    ['handover notes','ملاحظات تسليم المشروع','Work & Office','I wrote handover notes so another designer can continue smoothly.','formal'],
+    ['asset handoff','تسليم ملفات التصميم والوسائط','Design & Motion','The asset handoff includes source files, fonts and final exports.','formal'],
+    ['file naming','تسمية الملفات','Design & Motion','Consistent file naming makes shared projects easier to maintain.','formal'],
+    ['design rationale','مبررات القرار التصميمي','Design & Motion','The case study explains the design rationale behind the layout.','formal'],
+    ['export preset','إعداد تصدير محفوظ','Design & Motion','I saved an export preset for the vertical video formats.','neutral'],
+    ['brand voice','نبرة العلامة التجارية','Marketing & Sales','The caption should match the brand voice across platforms.','formal'],
+    ['content brief','موجز المحتوى','Marketing & Sales','The content brief defines the audience, message and required formats.','formal'],
+    ['revision request','طلب تعديل','Work & Office','I grouped each revision request into clear action items.','formal'],
+    ['project milestone','مرحلة رئيسية في المشروع','Work & Office','The approved storyboard is an important project milestone.','formal'],
+    ['feedback summary','ملخص الملاحظات','Work & Office','I sent a feedback summary after the client meeting.','formal'],
+    ['production-ready','جاهز للإنتاج أو التسليم','Design & Motion','The layout is production-ready after the final quality check.','formal'],
+    ['deadline buffer','وقت احتياطي قبل الموعد النهائي','Work & Office','A small deadline buffer helps us handle unexpected changes.','formal'],
+    ['visual direction','الاتجاه البصري للتصميم','Design & Motion','The visual direction should support the message instead of competing with it.','formal']
   ];
   const norm = value => String(value ?? '').toLowerCase().normalize('NFKC').replace(/[’‘\x60]/g, "'").replace(/[^a-z0-9]+/g,' ').trim().replace(/\s+/g,' ');
   const data = window.SERAG_ENGLISH_V9;
