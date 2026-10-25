@@ -49,6 +49,7 @@ test('the patch is idempotent and does not duplicate shared question or lesson I
 
 test('the module safely no-ops when base English arrays are absent', () => {
   const w = {};
+  w.window = w;
   runInNewContext(source, w);
   assert.ok(w.SERAG_OPEN_SENTENCES_V1.questions.length >= 30);
 });
