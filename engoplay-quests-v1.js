@@ -276,8 +276,8 @@
     dialog.innerHTML = dialogMarkup(bundle);
     if (!dialog.open) dialog.showModal();
   }
-  function paintPanel() {
-    var bundle = getState();
+  function paintPanel(bundle) {
+    bundle = bundle || getState();
     var panel = document.querySelector('.eq-quest-panel');
     if (panel) panel.outerHTML = panelMarkup(bundle);
   }
@@ -298,10 +298,10 @@
     else if (grid && grid.parentNode) grid.parentNode.insertBefore(quest, grid);
     else lobby.appendChild(quest);
   }
-  function update() {
-    var bundle = getState();
+  function update(bundle) {
+    bundle = bundle || getState();
     save(bundle);
-    paintPanel();
+    paintPanel(bundle);
     var dialog = document.getElementById(DIALOG_ID);
     if (dialog && dialog.open) {
       dialog.innerHTML = dialogMarkup(bundle);
@@ -328,11 +328,11 @@
     if (button.hasAttribute('data-eq-take')) {
       var take = Number(button.getAttribute('data-eq-take'));
       if (!daily.correct && Number.isInteger(take) && take >= 0 && take < daily.bank.length && daily.selected.indexOf(take) < 0) daily.selected.push(take);
-      update();
+      update(bundle);
     } else if (button.hasAttribute('data-eq-return')) {
       var removeAt = Number(button.getAttribute('data-eq-return'));
       if (!daily.correct && Number.isInteger(removeAt) && removeAt >= 0 && removeAt < daily.selected.length) daily.selected.splice(removeAt, 1);
-      update();
+      update(bundle);
     } else if (button.hasAttribute('data-eq-clear')) {
       if (!daily.correct) {
         daily.selected = [];
