@@ -158,7 +158,13 @@
   function html() {
     bindRoot();
     const rows = getExamples();
-    const levels = new Set(rows.map(row=>row.level));
+    const initialList = filtered(rows);
+    const initialCards = initialList.length
+      ? initialList.slice(0,visibleLimit).map(cardHTML).join('')
+      : '<div class="ege-empty"><b>ملقيناش أمثلة مطابقة.</b><p>جرّب مستوى أو قاعدة مختلفة، أو امسح كلمة البحث.</p><button class="ege-btn" data-ege-action="reset">عرض كل الأمثلة</button></div>';
+    const initialCount = initialList.length
+      ? 'عرض ' + Math.min(visibleLimit,initialList.length).toLocaleString('en-US') + ' من ' + initialList.length.toLocaleString('en-US') + ' مثال'
+      : 'لا توجد أمثلة مطابقة للفلاتر الحالية';
     return '<section id="seragGrammarExamples" class="ege-root">' +
       '<header class="ege-intro"><div><span class="ege-kicker">SERAG ENGLISH · EXAMPLE LIBRARY</span>' +
       '<h3>بنك أمثلة القواعد</h3>' +
@@ -166,9 +172,9 @@
       '<a class="ege-source-link" href="' + SCORE_URL + '" target="_blank" rel="noopener noreferrer">استكشف SCoRE الرسمي ↗</a></header>' +
       statsHTML(rows) +
       filtersHTML(rows) +
-      '<div id="egeCount" class="ege-count"></div>' +
-      '<div id="egeCards" class="ege-grid"></div>' +
-      '<div class="ege-load-more"><button class="ege-btn primary" data-ege-action="more" hidden>حمّل أمثلة إضافية ↓</button></div>' +
+      '<div id="egeCount" class="ege-count">' + esc(initialCount) + '</div>' +
+      '<div id="egeCards" class="ege-grid">' + initialCards + '</div>' +
+      '<div class="ege-load-more"><button class="ege-btn primary" data-ege-action="more"' + (visibleLimit >= initialList.length ? ' hidden' : '') + '>حمّل أمثلة إضافية ↓</button></div>' +
       '<aside class="ege-corpus-note"><b>مصدر إضافي:</b> يوفّر SCoRE الرسمي أكثر من 10,000 جملة مصنّفة ضمن 22 موضوعًا نحويًا وثلاثة مستويات، لكنه يُعرض هنا كرابط خارجي ولا ننسخ بياناته إلى هذا البنك. محتوى SCoRE مرخّص CC BY-NC-SA 4.0.</aside>' +
       '<p class="ege-attribution">الأمثلة المحلية مجمّعة من دروس القواعد الموجودة في Serag OS. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">تفاصيل ترخيص SCoRE ↗</a></p>' +
       '</section>';
