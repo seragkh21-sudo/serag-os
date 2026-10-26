@@ -63,7 +63,7 @@
       return row && row.id != null && typeof row.sentence === 'string' &&
         tokensFromSentence(row.sentence).length >= 5 &&
         tokensFromSentence(row.sentence).length <= 24 &&
-        row.sentence.length <= 180;
+        row.sentence.length <= 180 && ! /_{2,}|\.{3,}/.test(row.sentence);
     });
     usable.sort(function (a, b) {
       var ka = hash(day + '|' + owner + '|' + a.id);
@@ -167,7 +167,7 @@
     var progress = complete ? 3 : Math.min(3, daily.index + (daily.correct ? 1 : 0));
     var available = daily.ids.length >= 3;
     var label = complete ? 'اعرض نتيجتك' : 'ابدأ تحدّي الجمل';
-    return '<section class="eq-quest-panel" data-eq-panel aria-labelledby="eqQuestPanelTitle">' +
+    return '<section class="eq-quest-panel" data-eq-panel data-eq-owner="' + esc(bundle.owner) + '" aria-labelledby="eqQuestPanelTitle">' +
       '<div class="eq-quest-copy"><div class="eq-eyebrow"><span class="eq-spark">✦</span> ENGOPLAY · DAILY QUEST</div>' +
       '<h3 id="eqQuestPanelTitle">خلّي الإنجليزي لعبة بتكسب منها</h3>' +
       '<p>رتّب كلمات من أمثلة القواعد الحقيقية، استخدم التلميح عند الحاجة، وخد نقاط على كل جملة تبنيها صح.</p>' +
@@ -261,7 +261,12 @@
   }
   function mountPanel() {
     var lobby = document.querySelector('.ep-lobby');
-    if (!lobby || lobby.querySelector('[data-eq-panel]')) return;
+    if (!lobby) return;
+    var existing = lobby.querySelector('[data-eq-panel]');
+    if (existing) {
+      if (existing.getAttribute('data-eq-owner') !== ownerKey()) existing.outerHTML = panelMarkup(getState());
+      return;
+    }
     var panel = document.createElement('section');
     panel.innerHTML = panelMarkup(getState());
     var quest = panel.firstElementChild;
@@ -292,6 +297,8 @@
       if (close && close.open) close.close();
       return;
     }
+    var actions = ['data-eq-take','data-eq-return','data-eq-clear','data-eq-hint','data-eq-check','data-eq-next','data-eq-audio'];
+    if (!actions.some(function (name) { return button.hasAttribute(name); })) return;
     var bundle = getState(), state = bundle.state, daily = state.daily, row = currentExample(state, bundle.rows);
     if (button.hasAttribute('data-eq-take')) {
       var take = Number(button.getAttribute('data-eq-take'));
@@ -376,6 +383,14 @@
       observer.observe(document.documentElement, { childList: true, subtree: true });
     }
     document.addEventListener('click', handleClick);
+    document.addEventListener('visibilitychange', function () {
+      if (!document.hidden) {
+        mountPanel();
+        paintPanel();
+        var dialog = document.getElementById(DIALOG_ID);
+        if (dialog && dialog.open) dialog.innerHTML = dialogMarkup(getState());
+      }
+    });
   }
 
   window.SERAG_ENGOPLAY_QUESTS_V1 = {
