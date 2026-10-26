@@ -43,8 +43,8 @@ test('filters support grammar topic, CEFR level, and free-text query', () => {
   assert.ok(articles.every(row=>row.lessonId==='articles'));
   const b1=api.filter({level:'B1'});
   assert.ok(b1.length>0 && b1.every(row=>row.level==='B1'));
-  const meeting=api.filter({query:'meeting'});
-  assert.ok(meeting.length>0 && meeting.every(row=>[row.sentence,row.title,row.titleAr,row.summary,row.formula,row.mistake,row.tip].join(' ').toLowerCase().includes('meeting')));
+  const meeting=api.filter({query:'interview'});
+  assert.ok(meeting.length>0 && meeting.every(row=>[row.sentence,row.title,row.titleAr,row.track,row.level,row.summary,row.formula,row.mistake,row.tip].join(' ').toLowerCase().includes('interview')));
   assert.equal(api.getExamples().length,all.length);
 });
 
@@ -55,7 +55,7 @@ test('the examples library links the official SCoRE resource without importing i
   assert.match(html,/CC BY-NC-SA 4\.0/);
   assert.match(html,/seragGrammarExamples/);
   assert.match(html,/class="ege-sentence"/, 'the first examples should render immediately');
-  assert.match(html,/id="egeCards">[^<]/);
+  assert.match(html,/id="egeCards"><article class="ege-card"/);
 });
 
 test('loader and navigation expose the examples bank in English and EngoPlay', () => {
