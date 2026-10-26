@@ -36,7 +36,8 @@ test('daily examples are deterministic, unique and limited to useful sentence le
     sentence: 'I have used this simple example for practice ' + i + '.'
   })).concat([
     { id: 'too-short', sentence: 'Hello world.' },
-    { id: 'too-long', sentence: Array(30).fill('word').join(' ') }
+    { id: 'too-long', sentence: Array(30).fill('word').join(' ') },
+    { id: 'placeholder', sentence: 'You should ______ in the form before submitting it.' }
   ]);
   const first = Array.from(game.pickDailyExamples(rows, 'user-a', '2026-10-26'));
   const second = Array.from(game.pickDailyExamples(rows, 'user-a', '2026-10-26'));
@@ -45,7 +46,8 @@ test('daily examples are deterministic, unique and limited to useful sentence le
   assert.equal(new Set(first).size, 3);
   assert.deepEqual(first, second);
   assert.notDeepEqual(first, otherUser);
-  assert.ok(first.every(id => id !== 'too-short' && id !== 'too-long'));
+  assert.ok(first.every(id => id !== 'too-short' && id !== 'too-long' && id !== 'placeholder'));
+  assert.equal(game.pickDailyExamples([{ id: 'placeholder', sentence: 'You should ______ in the form before submitting it.' }], 'user-a', '2026-10-26').length, 0);
 });
 
 test('challenge streak counts consecutive completed challenge dates without fabricating today', () => {
