@@ -13,7 +13,7 @@ test('reading library is wired into the English reading section and the active s
   assert.match(loader, /english-reading-library-v1\.css/);
   assert.match(loader, /const V=['"]43['"]/);
   assert.match(loader, /english-reading-library-v1\.js/);
-  assert.match(entry, /shell-loader\.js\?v=46/);
+  assert.match(entry, /shell-loader\.js\?v=47/);
   assert.match(preview, /english-reading-library-v1\.css\?v=43/);
   assert.match(preview, /english-reading-library-v1\.js\?v=43/);
 });
