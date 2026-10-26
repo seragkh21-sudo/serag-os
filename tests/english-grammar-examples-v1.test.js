@@ -55,7 +55,7 @@ test('the examples library links the official SCoRE resource without importing i
   assert.match(html,/CC BY-NC-SA 4\.0/);
   assert.match(html,/seragGrammarExamples/);
   assert.match(html,/class="ege-sentence"/, 'the first examples should render immediately');
-  assert.match(html,/id="egeCards"><article class="ege-card"/);
+  assert.match(html,/id="egeCards" class="ege-grid"><article class="ege-card"/);
 });
 
 test('loader and navigation expose the examples bank in English and EngoPlay', () => {
