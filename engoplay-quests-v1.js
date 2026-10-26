@@ -187,11 +187,11 @@
   function injectQuestMarkup(html) {
     if (typeof html !== 'string' || html.indexOf('data-eq-panel') >= 0) return html;
     var panel = panelMarkup(getState());
-    var navPattern = /(<nav class="ep-tabs"[^>]*>[\\s\\S]*?<\\/nav>)/;
+    var navPattern = /(<nav class="ep-tabs"[^>]*>[\s\S]*?<\/nav>)/;
     if (navPattern.test(html)) return html.replace(navPattern, function (match) { return match + panel; });
     var gridPattern = /(<div class="ep-play-grid"[^>]*>)/;
     if (gridPattern.test(html)) return html.replace(gridPattern, function (match) { return panel + match; });
-    var headerPattern = /(<header class="ep-top"[^>]*>[\\s\\S]*?<\\/header>)/;
+    var headerPattern = /(<header class="ep-top"[^>]*>[\s\S]*?<\/header>)/;
     if (headerPattern.test(html)) return html.replace(headerPattern, function (match) { return match + panel; });
     return html;
   }
