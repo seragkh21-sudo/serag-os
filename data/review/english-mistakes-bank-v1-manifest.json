@@ -1,0 +1,17 @@
+{
+  "dataset_id": "serag-english-mistakes-bank-v1",
+  "schema_version": 1,
+  "records": 40,
+  "default_level": "B1",
+  "source": {
+    "title": "Elispeak Common English Mistakes",
+    "repository": "https://github.com/elispeak/elispeak-common-english-mistakes",
+    "source_file": "data/common-english-mistakes.jsonl",
+    "license": "MIT",
+    "license_url": "https://opensource.org/license/mit/",
+    "copyright": "Copyright (c) 2026 Elispeak"
+  },
+  "imported_at": "2026-10-26",
+  "status": "source-curated examples; Arabic explanations and prompts are draft editorial translations and have not received independent human review",
+  "usage": "Practice library only; not added to the primary exam/question bank."
+}
