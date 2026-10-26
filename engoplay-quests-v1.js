@@ -409,7 +409,8 @@
       observer = new window.MutationObserver(function () { mountPanel(); });
       observer.observe(document.documentElement, { childList: true, subtree: true });
     }
-    document.addEventListener('click', handleClick, true);
+    // Listen at window capture so earlier document-level handlers cannot swallow tile clicks.
+    window.addEventListener('click', handleClick, true);
     document.addEventListener('visibilitychange', function () {
       if (!document.hidden) {
         mountPanel();
