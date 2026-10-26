@@ -108,6 +108,7 @@
         mistakes: 0,
         reward: 0,
         correct: false,
+        answerStatus: '',
         feedback: ''
       }
     };
@@ -134,6 +135,7 @@
     daily.mistakes = 0;
     daily.reward = 0;
     daily.correct = false;
+    daily.answerStatus = '';
     daily.feedback = '';
   }
   function getState() {
@@ -237,8 +239,11 @@
     }
     prepareQuestion(state, rows, bundle.owner);
     var selected = new Set(daily.selected);
+    var answerStatusClass = daily.answerStatus === 'correct' ? ' eq-tile-correct' :
+      (daily.answerStatus === 'incorrect' || daily.answerStatus === 'incomplete' ? ' eq-tile-incorrect' : '');
+    var answerStateClass = daily.answerStatus ? ' eq-answer-' + daily.answerStatus : '';
     var answer = daily.selected.map(function (index, pos) {
-      return '<button type="button" class="eq-tile eq-tile-selected" data-eq-return="' + pos + '" aria-label="إزالة الكلمة ' + esc(daily.bank[index]) + '">' + esc(daily.bank[index]) + '</button>';
+      return '<button type="button" class="eq-tile eq-tile-selected' + answerStatusClass + '" data-eq-return="' + pos + '" aria-label="إزالة الكلمة ' + esc(daily.bank[index]) + '">' + esc(daily.bank[index]) + '</button>';
     }).join('');
     if (!answer) answer = '<span class="eq-answer-placeholder">اضغط على الكلمات بالترتيب الصحيح هنا</span>';
     var bank = daily.bank.map(function (word, index) {
@@ -260,7 +265,7 @@
       '<div class="eq-step-count"><strong>' + (daily.index + 1) + '</strong><span>/ 3</span></div></div>' +
       '<div class="eq-progress-line"><progress max="3" value="' + progress + '"></progress><span>' + progress + ' من 3</span></div>' +
       '<div class="eq-rule-meta"><span>' + esc(row.level || 'B1') + '</span><span>' + esc(row.titleAr || row.title || 'قاعدة نحوية') + '</span></div>' +
-      '<div class="eq-build-area"><small>جملتك</small><div class="eq-answer" dir="ltr" lang="en">' + answer + '</div>' +
+      '<div class="eq-build-area"><small>جملتك</small><div class="eq-answer' + answerStateClass + '" dir="ltr" lang="en">' + answer + '</div>' +
       '<div class="eq-word-bank" dir="ltr" lang="en">' + bank + '</div></div>' + hint + feedback + controls +
       '<p class="eq-source-note">المثال مأخوذ من بنك القواعد الموجود في EngoPlay. النطق لا يعمل تلقائيًا؛ شغّله عند الحاجة.</p>';
   }
@@ -307,6 +312,31 @@
       dialog.innerHTML = dialogMarkup(bundle);
     }
   }
+  function evaluateAnswer(bundle) {
+    var state = bundle.state, daily = state.daily;
+    var row = currentExample(state, bundle.rows);
+    if (!row || daily.correct) return;
+    if (daily.selected.length !== daily.bank.length) {
+      daily.correct = false;
+      daily.answerStatus = 'incomplete';
+      daily.feedback = 'اختار كل الكلمات مرة واحدة عشان نراجع الجملة.';
+      return;
+    }
+    var built = daily.selected.map(function (index) { return daily.bank[index]; }).join(' ');
+    if (normalizeSentence(built) === normalizeSentence(row.sentence)) {
+      daily.correct = true;
+      daily.answerStatus = 'correct';
+      daily.reward = rewardPoints(daily.mistakes, daily.hintUsed);
+      state.points += daily.reward;
+      daily.feedback = 'مظبوط! + ' + daily.reward + ' نقطة. ' + (daily.hintUsed ? 'استخدمت التلميح بشكل ذكي.' : 'مبنيّة صح من أول مرة.');
+    } else {
+      daily.mistakes++;
+      daily.correct = false;
+      daily.answerStatus = 'incorrect';
+      daily.feedback = 'مش بالترتيب الصح لسه. الكلمات باللون الأحمر محتاجة ترتيب مختلف — جرّب تاني، من غير خصم.';
+    }
+  }
+
   function handleClick(event) {
     var button = event.target && event.target.closest ? event.target.closest('button') : null;
     if (!button) return;
@@ -327,18 +357,28 @@
     var bundle = getState(), state = bundle.state, daily = state.daily, row = currentExample(state, bundle.rows);
     if (button.hasAttribute('data-eq-take')) {
       var take = Number(button.getAttribute('data-eq-take'));
-      if (!daily.correct && Number.isInteger(take) && take >= 0 && take < daily.bank.length && daily.selected.indexOf(take) < 0) daily.selected.push(take);
+      if (!daily.correct && Number.isInteger(take) && take >= 0 && take < daily.bank.length && daily.selected.indexOf(take) < 0) {
+        daily.selected.push(take);
+        daily.answerStatus = '';
+        daily.feedback = '';
+        if (daily.selected.length === daily.bank.length) evaluateAnswer(bundle);
+      }
       update(bundle);
     } else if (button.hasAttribute('data-eq-return')) {
       var removeAt = Number(button.getAttribute('data-eq-return'));
-      if (!daily.correct && Number.isInteger(removeAt) && removeAt >= 0 && removeAt < daily.selected.length) daily.selected.splice(removeAt, 1);
+      if (!daily.correct && Number.isInteger(removeAt) && removeAt >= 0 && removeAt < daily.selected.length) {
+        daily.selected.splice(removeAt, 1);
+        daily.answerStatus = '';
+        daily.feedback = '';
+      }
       update(bundle);
     } else if (button.hasAttribute('data-eq-clear')) {
       if (!daily.correct) {
         daily.selected = [];
+        daily.answerStatus = '';
         daily.feedback = '';
         save(bundle);
-        update();
+        update(bundle);
       }
     } else if (button.hasAttribute('data-eq-hint')) {
       if (!daily.correct) {
@@ -348,25 +388,9 @@
         update();
       }
     } else if (button.hasAttribute('data-eq-check')) {
-      if (!row) return;
-      if (daily.selected.length !== daily.bank.length) {
-        daily.feedback = 'استخدم كل الكلمات مرة واحدة قبل ما تتحقّق.';
-        daily.correct = false;
-      } else {
-        var built = daily.selected.map(function (index) { return daily.bank[index]; }).join(' ');
-        if (normalizeSentence(built) === normalizeSentence(row.sentence)) {
-          daily.correct = true;
-          daily.reward = rewardPoints(daily.mistakes, daily.hintUsed);
-          state.points += daily.reward;
-          daily.feedback = 'مظبوط! + ' + daily.reward + ' نقطة. ' + (daily.hintUsed ? 'استخدمت التلميح بشكل ذكي.' : 'مبنيّة صح من أول مرة.');
-        } else {
-          daily.mistakes++;
-          daily.correct = false;
-          daily.feedback = 'قريب! راجع ترتيب الكلمات، وجرّب تاني. مفيش خصم على المحاولة.';
-        }
-      }
+      evaluateAnswer(bundle);
       save(bundle);
-      update();
+      update(bundle);
     } else if (button.hasAttribute('data-eq-next')) {
       if (!daily.correct) return;
       if (daily.index >= 2) {
@@ -383,6 +407,7 @@
         daily.mistakes = 0;
         daily.reward = 0;
         daily.correct = false;
+        daily.answerStatus = '';
         daily.feedback = '';
         prepareQuestion(state, bundle.rows, bundle.owner);
       }
