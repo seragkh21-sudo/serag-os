@@ -257,7 +257,7 @@
       '</div>' : '';
     var feedback = daily.feedback ? '<div class="eq-feedback ' + (daily.correct ? 'is-correct' : 'is-incorrect') + '" role="status" aria-live="polite">' + esc(daily.feedback) + '</div>' : '';
     var controls = daily.correct ?
-      '<button type="button" class="eq-primary-button" data-eq-next>' + (daily.index === 2 ? 'أنهِ التحدّي ✦' : 'الجملة التالية ←') + '</button>' :
+      '<button type="button" class="eq-primary-button" data-eq-next>' + (daily.index === 2 ? 'صح! أنهِ التحدّي ✦' : 'صح! تابع للسؤال التالي ←') + '</button>' :
       '<div class="eq-action-row"><button type="button" class="eq-secondary-button" data-eq-hint>تلميح</button><button type="button" class="eq-secondary-button" data-eq-audio>اسمع الجملة ◖))</button><button type="button" class="eq-primary-button" data-eq-check>تحقّق من الجملة</button><button type="button" class="eq-text-button" data-eq-clear>ابدأ من جديد</button></div>';
     return '<button class="eq-close" data-eq-close aria-label="إغلاق">×</button>' +
       '<div class="eq-dialog-top"><div><div class="eq-eyebrow">DAILY QUEST · SENTENCE BUILDER</div>' +
@@ -267,7 +267,7 @@
       '<div class="eq-rule-meta"><span>' + esc(row.level || 'B1') + '</span><span>' + esc(row.titleAr || row.title || 'قاعدة نحوية') + '</span></div>' +
       '<div class="eq-build-area"><small>جملتك</small><div class="eq-answer' + answerStateClass + '" dir="ltr" lang="en">' + answer + '</div>' +
       '<div class="eq-word-bank" dir="ltr" lang="en">' + bank + '</div></div>' + hint + feedback + controls +
-      '<p class="eq-source-note">المثال مأخوذ من بنك القواعد الموجود في EngoPlay. النطق لا يعمل تلقائيًا؛ شغّله عند الحاجة.</p>';
+      '<p class="eq-source-note">بمجرد اختيار آخر كلمة، هتظهر النتيجة بالأخضر أو الأحمر. لو الإجابة صح، اضغط «تابع للسؤال التالي». النطق عند الطلب فقط.</p>';
   }
   function paintDialog() {
     var bundle = getState(), dialog = dialogShell();
