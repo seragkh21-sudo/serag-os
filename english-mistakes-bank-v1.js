@@ -160,7 +160,7 @@
     return '<option value="' + esc(value) + '"' + (selected ? ' selected' : '') + '>' + esc(label) + '</option>';
   }
   function filtersHTML() {
-    const levels = ['all','A2','B1','B2','C1'];
+    const levels = ['all','A2','B1','B2'];
     const levelNames = {all:'كل المستويات',A2:'A2 · قبل المتوسط',B1:'B1 · متوسط',B2:'B2 · فوق المتوسط',C1:'C1 · متقدم'};
     const categories = ['all'].concat(Array.from(new Set(rows.map(row => row.category))));
     const statuses = [
