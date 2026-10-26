@@ -5,6 +5,7 @@
   var PREFIX = 'seragEngoplayQuestV1:';
   var DIALOG_ID = 'eqQuestDialog';
   var observer = null;
+  var initialized = false;
 
   function esc(value) {
     return String(value == null ? '' : value).replace(/[&<>"']/g, function (c) {
@@ -172,7 +173,8 @@
       '<h3 id="eqQuestPanelTitle">خلّي الإنجليزي لعبة بتكسب منها</h3>' +
       '<p>رتّب كلمات من أمثلة القواعد الحقيقية، استخدم التلميح عند الحاجة، وخد نقاط على كل جملة تبنيها صح.</p>' +
       '<div class="eq-quest-tags"><span>ترتيب جمل</span><span>تصحيح فوري</span><span>نطق عند الطلب</span></div>' +
-      '<button class="eq-quest-start" data-eq-open ' + (!available ? 'disabled' : '') + '>' + label + ' <span aria-hidden="true">←</span></button>' +
+      '<button class="eq-quest-start" data-eq-open>' + label + ' <span aria-hidden="true">←</span></button>' +
+      (!available ? '<p class="eq-unavailable" role="status">التحدّي هيبدأ لما يتوفر ٣ أمثلة جمل صالحة من بنك القواعد. اضغط للعرض أو افتح بنك أمثلة القواعد وتأكد إن الأمثلة محمّلة.</p>' : '') +
       '<small class="eq-local-note">نقاط التحدّي منفصلة عن XP الأساسي، ومحفوظة محليًا لكل حساب على هذا الجهاز.</small></div>' +
       '<div class="eq-quest-stats">' +
       '<div class="eq-stat-main"><span class="eq-stat-icon">✦</span><strong>' + state.points.toLocaleString('en-US') + '</strong><small>نقطة تحدّي</small></div>' +
@@ -377,12 +379,14 @@
     }
   }
   function init() {
+    if (initialized) return;
+    initialized = true;
     mountPanel();
     if (!observer && window.MutationObserver && document.documentElement) {
       observer = new window.MutationObserver(function () { mountPanel(); });
       observer.observe(document.documentElement, { childList: true, subtree: true });
     }
-    document.addEventListener('click', handleClick);
+    document.addEventListener('click', handleClick, true);
     document.addEventListener('visibilitychange', function () {
       if (!document.hidden) {
         mountPanel();
@@ -408,4 +412,7 @@
   } else {
     init();
   }
+  // The shell loader rebuilds the document with document.open/write after an async fetch.
+  // DOMContentLoaded may already have fired for the initial document, so keep an idempotent fallback.
+  if (typeof window.setTimeout === 'function') window.setTimeout(init, 0);
 })();
