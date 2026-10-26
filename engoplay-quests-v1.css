@@ -74,3 +74,5 @@
 .eq-complete-total span{font-size:11px;color:var(--muted,#777)}
 @media(max-width:720px){.eq-quest-panel{grid-template-columns:minmax(0,1fr);gap:16px;border-radius:18px}.eq-quest-stats{grid-template-columns:1fr;gap:12px}.eq-stat-main{grid-template-columns:32px 1fr}.eq-quest-copy h3{font-size:23px}.eq-quest-dialog{width:calc(100vw - 16px);max-height:92vh;border-radius:18px;padding:16px}.eq-dialog-top{gap:9px}.eq-dialog-top h2{font-size:24px}.eq-build-area{padding:12px}.eq-action-row>*{flex:1 1 auto}.eq-action-row .eq-primary-button{flex:1 1 100%}}
 @media(prefers-reduced-motion:reduce){.eq-quest-start,.eq-primary-button,.eq-tile,.eq-quest-panel progress::-webkit-progress-value{transition:none}.eq-quest-start:hover,.eq-primary-button:hover,.eq-tile:hover{transform:none}}
+
+.eq-unavailable{margin:10px 0 0;padding:9px 11px;border:1px solid #eacb98;border-radius:10px;background:#fff8e9;color:#805516;font-size:11px;line-height:1.7}
