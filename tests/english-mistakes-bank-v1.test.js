@@ -45,6 +45,8 @@ test('runtime validates rows and rejects missing translations or duplicate IDs',
   const api = load().SERAG_MISTAKES_BANK_V1;
   assert.equal(api.version, 1);
   assert.equal(api.dataUrl, '/data/review/english-mistakes-bank-v1.jsonl');
+  assert.match(source, /const levels = \['all','A2','B1','B2'\]/);
+  assert.doesNotMatch(source, /const levels = \['all','A2','B1','B2','C1'\]/);
   assert.deepEqual(Array.from(api.validateRows(rows)), []);
   const broken = rows.slice(0, 2).map(row => ({ ...row }));
   broken[1].id = broken[0].id;
