@@ -72,4 +72,7 @@ test('quest module is additive and does not overwrite the existing EngoPlay API'
   assert.match(source, /SERAG_GRAMMAR_EXAMPLES_V1/);
   assert.match(source, /SpeechSynthesisUtterance/);
   assert.doesNotMatch(source, /window\.ENGOPLAY\s*=/);
+  assert.match(source, /setTimeout\(init, 0\)/);
+  assert.match(source, /addEventListener\('click', handleClick, true\)/);
+  assert.doesNotMatch(source, /data-eq-open ['"]\s*\+\s*\(!available \? 'disabled'/);
 });
