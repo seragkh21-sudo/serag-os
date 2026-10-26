@@ -257,7 +257,12 @@
       '</div>' : '';
     var feedback = daily.feedback ? '<div class="eq-feedback ' + (daily.correct ? 'is-correct' : 'is-incorrect') + '" role="status" aria-live="polite">' + esc(daily.feedback) + '</div>' : '';
     var controls = daily.correct ?
-      '<button type="button" class="eq-primary-button" data-eq-next>' + (daily.index === 2 ? 'صح! أنهِ التحدّي ✦' : 'صح! تابع للسؤال التالي ←') + '</button>' :
+      '<div class="eq-success-actions"><button type="button" class="eq-primary-button eq-next-button" data-eq-next>' +
+      '<span class="eq-button-check" aria-hidden="true">✓</span><span>' + (daily.index === 2 ? 'صح! أنهِ التحدّي' : 'صح! تابع للسؤال التالي') + '</span><span class="eq-button-arrow" aria-hidden="true">←</span></button>' +
+      '<small>إجابتك صحيحة — جاهز للسؤال اللي بعده؟</small></div>' :
+      daily.answerStatus === 'incorrect' ?
+      '<div class="eq-action-row eq-retry-row"><button type="button" class="eq-primary-button eq-retry-button" data-eq-clear>عدّل الجملة وجرب تاني ↻</button>' +
+      '<button type="button" class="eq-secondary-button" data-eq-audio>اسمع الجملة ◖))</button></div>' :
       '<div class="eq-action-row"><button type="button" class="eq-secondary-button" data-eq-hint>تلميح</button><button type="button" class="eq-secondary-button" data-eq-audio>اسمع الجملة ◖))</button>' +
       (daily.selected.length < daily.bank.length ? '<button type="button" class="eq-primary-button" data-eq-check>تحقّق من الجملة</button>' : '') +
       '<button type="button" class="eq-text-button" data-eq-clear>ابدأ من جديد</button></div>';
