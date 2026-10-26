@@ -184,6 +184,26 @@
       '<div class="eq-storage-status" data-eq-storage-status role="status"></div>' +
       '</div></section>';
   }
+  function injectQuestMarkup(html) {
+    if (typeof html !== 'string' || html.indexOf('data-eq-panel') >= 0) return html;
+    var panel = panelMarkup(getState());
+    var navPattern = /(<nav class="ep-tabs"[^>]*>[\\s\\S]*?<\\/nav>)/;
+    if (navPattern.test(html)) return html.replace(navPattern, function (match) { return match + panel; });
+    var gridPattern = /(<div class="ep-play-grid"[^>]*>)/;
+    if (gridPattern.test(html)) return html.replace(gridPattern, function (match) { return panel + match; });
+    var headerPattern = /(<header class="ep-top"[^>]*>[\\s\\S]*?<\\/header>)/;
+    if (headerPattern.test(html)) return html.replace(headerPattern, function (match) { return match + panel; });
+    return html;
+  }
+  function attachRenderHook() {
+    var engine = window.ENGOPLAY;
+    if (!engine || typeof engine.renderLobby !== 'function' || engine.renderLobby.__eqQuestWrapped) return false;
+    var original = engine.renderLobby;
+    var wrapped = function () { return injectQuestMarkup(original.apply(this, arguments)); };
+    wrapped.__eqQuestWrapped = true;
+    engine.renderLobby = wrapped;
+    return true;
+  }
   function dialogShell() {
     var dialog = document.getElementById(DIALOG_ID);
     if (dialog) return dialog;
@@ -290,6 +310,11 @@
   function handleClick(event) {
     var button = event.target && event.target.closest ? event.target.closest('button') : null;
     if (!button) return;
+    var actions = ['data-eq-open','data-eq-close','data-eq-take','data-eq-return','data-eq-clear','data-eq-hint','data-eq-check','data-eq-next','data-eq-audio'];
+    if (!actions.some(function (name) { return button.hasAttribute(name); })) return;
+    event.preventDefault();
+    if (typeof event.stopImmediatePropagation === 'function') event.stopImmediatePropagation();
+    else if (typeof event.stopPropagation === 'function') event.stopPropagation();
     if (button.hasAttribute('data-eq-open')) {
       openDialog();
       return;
@@ -299,8 +324,6 @@
       if (close && close.open) close.close();
       return;
     }
-    var actions = ['data-eq-take','data-eq-return','data-eq-clear','data-eq-hint','data-eq-check','data-eq-next','data-eq-audio'];
-    if (!actions.some(function (name) { return button.hasAttribute(name); })) return;
     var bundle = getState(), state = bundle.state, daily = state.daily, row = currentExample(state, bundle.rows);
     if (button.hasAttribute('data-eq-take')) {
       var take = Number(button.getAttribute('data-eq-take'));
@@ -404,7 +427,9 @@
     normalizeSentence: normalizeSentence,
     pickDailyExamples: pickDailyExamples,
     streakForDates: streakForDates,
-    rewardPoints: rewardPoints
+    rewardPoints: rewardPoints,
+    injectQuestMarkup: injectQuestMarkup,
+    attachRenderHook: attachRenderHook
   };
 
   if (document.readyState === 'loading') {
