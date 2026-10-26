@@ -258,7 +258,9 @@
     var feedback = daily.feedback ? '<div class="eq-feedback ' + (daily.correct ? 'is-correct' : 'is-incorrect') + '" role="status" aria-live="polite">' + esc(daily.feedback) + '</div>' : '';
     var controls = daily.correct ?
       '<button type="button" class="eq-primary-button" data-eq-next>' + (daily.index === 2 ? 'صح! أنهِ التحدّي ✦' : 'صح! تابع للسؤال التالي ←') + '</button>' :
-      '<div class="eq-action-row"><button type="button" class="eq-secondary-button" data-eq-hint>تلميح</button><button type="button" class="eq-secondary-button" data-eq-audio>اسمع الجملة ◖))</button><button type="button" class="eq-primary-button" data-eq-check>تحقّق من الجملة</button><button type="button" class="eq-text-button" data-eq-clear>ابدأ من جديد</button></div>';
+      '<div class="eq-action-row"><button type="button" class="eq-secondary-button" data-eq-hint>تلميح</button><button type="button" class="eq-secondary-button" data-eq-audio>اسمع الجملة ◖))</button>' +
+      (daily.selected.length < daily.bank.length ? '<button type="button" class="eq-primary-button" data-eq-check>تحقّق من الجملة</button>' : '') +
+      '<button type="button" class="eq-text-button" data-eq-clear>ابدأ من جديد</button></div>';
     return '<button class="eq-close" data-eq-close aria-label="إغلاق">×</button>' +
       '<div class="eq-dialog-top"><div><div class="eq-eyebrow">DAILY QUEST · SENTENCE BUILDER</div>' +
       '<h2 id="eqDialogTitle">كوّن الجملة</h2><p>اختار كل كلمة بالترتيب. تقدر تغيّر ترتيب إجابتك بالضغط على الكلمة المختارة.</p></div>' +
