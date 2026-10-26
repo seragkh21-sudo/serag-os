@@ -123,7 +123,7 @@
 <script src="/english-mistakes-bank-v1.js?v=2"></script>
 <script src="/english-grammar-examples-v1.js?v=1"></script>
 <script src="/english-academy-v12.js?v=47"></script>
-<script src="/engoplay-quests-v1.js?v=3"></script>
+<script src="/engoplay-quests-v1.js?v=4"></script>
 <script src="/english-reading-library-v1.js?v=${V}"></script>
 <script src="/english-reading-studio-v2.js?v=44"></script>
 <script src="/english-writing-flow-v1.js?v=${V}"></script>
