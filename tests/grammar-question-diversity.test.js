@@ -159,10 +159,10 @@ test('adaptive selection uses synced cross-device error rates when ranking due q
   context.ENGOPLAY={stats:()=>({
     answeredKeys:new Set(['easy','hard']),
     lastAnsweredAt:{easy:old,hard:old},
-    questionStats:new Map([
-      ['easy',{total:6,wrong:0,correct:6,lastAt:old}],
-      ['hard',{total:6,wrong:5,correct:1,lastAt:old}]
-    ])
+    questionStats:{
+      easy:{total:6,wrong:0,correct:6,lastAt:old},
+      hard:{total:6,wrong:5,correct:1,lastAt:old}
+    }
   })};
   const pool=[
     {id:'easy',topic:'same-topic',prompt:'Easy',answer:'yes',options:['yes','no']},
