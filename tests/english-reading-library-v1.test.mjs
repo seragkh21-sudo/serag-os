@@ -6,7 +6,7 @@ const read = (path) => fs.readFileSync(path, 'utf8');
 
 test('reading library is wired into the English reading section and the active shell', () => {
   const academy = read('english-academy-v12.js');
-  const loader = read('shell-loader.js');
+  const loader = read('app-bootstrap.js');
   const entry = read('index.html');
   const preview = read('workspace-preview-content.html');
   assert.match(academy, /SERAG_READING_LIBRARY_V1\?\.summaryHTML/);
