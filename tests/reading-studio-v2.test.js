@@ -48,10 +48,11 @@ test('dictionary lookup is wired after Reading Studio and does not alter databas
   assert.ok(loader.indexOf('english-reading-studio-v2.js') < loader.indexOf('english-dictionary-v1.js'));
   assert.ok(studio.includes('data-ers-act="dictionary"'));
   assert.ok(studio.includes('SERAG_DICTIONARY_V1?.open(selectedText,selectedContext)'));
-  assert.ok(dictionary.includes('https://api.dictionaryapi.dev/api/v2/entries/en/'));
+  assert.ok(dictionary.includes('/api/dictionary?word='));
+  assert.match(fs.readFileSync('api/dictionary.js', 'utf8'), /const BASE/);
   assert.match(dictionary, /AbortController/);
   assert.match(dictionary, /sessionStorage/);
   assert.match(dictionary, /english_words/);
   assert.ok(css.includes('.ed-dialog'));
-  assert.match(fs.readFileSync('vercel.json', 'utf8'), /https:\/\/api\.dictionaryapi\.dev/);
+  assert.doesNotMatch(fs.readFileSync('vercel.json', 'utf8'), /dictionaryapi/);
 });
