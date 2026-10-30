@@ -116,3 +116,43 @@ test('render hook wraps the real EngoPlay lobby method without changing its publ
   assert.match(context.window.ENGOPLAY.renderLobby(), /data-eq-panel/);
   assert.equal(game.attachRenderHook(), false);
 });
+
+
+test('challenge attempts feed the shared EngoPlay XP and existing synced attempt queue', () => {
+  const xpCalls = [], syncCalls = [];
+  const context = {
+    window: {
+      ENGOPLAY: { track: row => xpCalls.push(row) },
+      SERAG_ENGLISH_ATTEMPT_SYNC_V11: { trackChallengeAttempt: row => syncCalls.push(row) }
+    },
+    document: { readyState: 'loading', addEventListener() {} },
+    localStorage: { getItem() { return null; }, setItem() {} },
+    Intl, Date, Set, Math, Number, String, Array, Object
+  };
+  vm.createContext(context);
+  vm.runInContext(fs.readFileSync('engoplay-quests-v1.js', 'utf8'), context);
+  const game = context.window.SERAG_ENGOPLAY_QUESTS_V1;
+  const row = { id: 'example-42', sentence: 'I have worked here for years.' };
+  const result = game.recordChallengeAttempt(row, 'I worked here for years.', false, {
+    owner: 'user:test-owner', state: { daily: { index: 1 } }
+  });
+  assert.equal(result.trackedXP, true);
+  assert.equal(result.syncedAttempt, true);
+  assert.equal(xpCalls.length, 1);
+  assert.equal(xpCalls[0].id, 'sentence-builder:example-42');
+  assert.equal(xpCalls[0].correct, false);
+  assert.equal(xpCalls[0].topic, 'sentence-builder');
+  assert.equal(syncCalls.length, 1);
+  assert.equal(syncCalls[0].source, 'engoplay_challenge');
+  assert.equal(syncCalls[0].is_correct, false);
+  assert.equal(syncCalls[0].selected_answer, 'I worked here for years.');
+  assert.equal(syncCalls[0].correct_answer, row.sentence);
+});
+
+test('challenge keeps an explicit Check action and does not auto-submit on the final tile', () => {
+  const source = fs.readFileSync('engoplay-quests-v1.js', 'utf8');
+  assert.match(source, /data-eq-check>تحقّق من الجملة/);
+  assert.doesNotMatch(source, /daily\.selected\.length === daily\.bank\.length\) evaluateAnswer/);
+  assert.match(source, /الإجابة الصحيحة: '\s*\+ row\.sentence/);
+  assert.match(source, /window\.ENGOPLAY\.track/);
+});
