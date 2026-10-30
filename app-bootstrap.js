@@ -1,6 +1,6 @@
 (async()=>{
   try{
-    const V='58';
+    const V='59';
     const res=await fetch(`/legacy.html?v=${V}`,{cache:'no-store',headers:{'Cache-Control':'no-cache'}});
     if(!res.ok)throw new Error('Legacy app failed to load');
     let html=await res.text();
@@ -170,7 +170,6 @@
 
     // Replace the initial boot document without parser-blocking document.write.
     const parsed = new DOMParser().parseFromString(html, 'text/html');
-    parsed.querySelector('script[src*="supabase-js"]')?.remove();
     const pendingScripts = Array.from(parsed.querySelectorAll('script'));
     pendingScripts.forEach(node => node.remove());
     const nextDocument = document.importNode(parsed.documentElement, true);
