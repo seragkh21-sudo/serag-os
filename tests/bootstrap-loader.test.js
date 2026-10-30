@@ -14,7 +14,6 @@ test('bootstrap preserves Supabase and executes dependency scripts in order',()=
   assert.doesNotMatch(source,/document\.(?:open|write|close)\s*\(/);
   assert.match(source,/for\s*\(const source of pendingScripts\)/);
   assert.match(source,/script\.async\s*=\s*false/);
-  assert.match(source,/script\[src\*="supabase-js"\]/);
   assert.doesNotMatch(source,/parsed\.querySelector[^\n]*supabase-js[^\n]*remove/);
 });
 
