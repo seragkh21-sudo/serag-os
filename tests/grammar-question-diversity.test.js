@@ -47,6 +47,24 @@ test('daily selection interleaves grammar topics instead of clustering one rule'
   assert.equal(new Set(picked.map(q=>q.topic)).size,8);
 });
 
+test('overdue grammar reviews come before fresh questions while scheduled questions stay out',()=>{
+  const {api,store}=academy();
+  const now=Date.now();
+  store.set('seragAcademyV12:test-user',JSON.stringify({
+    goal:'work',mode:8,attempts:[{id:'overdue',at:now-3*86400000},{id:'scheduled',at:now-1000}],
+    cards:{overdue:{stage:0,due:now-1},scheduled:{stage:2,due:now+86400000}},
+    notes:{},sessions:[],scenario:null,practiceTopic:'be-basics',writingDrill:'paragraph',writingChecks:{},level:'B1',levelPart:'grammar',examTheme:'digital'
+  }));
+  api.homeState();
+  const pool=[
+    {id:'fresh',topic:'fresh-topic',prompt:'Fresh question',answer:'yes',options:['yes','no']},
+    {id:'scheduled',topic:'scheduled-topic',prompt:'Scheduled question',answer:'yes',options:['yes','no']},
+    {id:'overdue',topic:'review-topic',prompt:'Overdue question',answer:'yes',options:['yes','no']}
+  ];
+  assert.deepEqual(Array.from(api.practicePool(pool,now),q=>q.id),['overdue','fresh']);
+  assert.deepEqual(Array.from(api.selectQuestions(pool,'daily',3),q=>q.id),['overdue','fresh']);
+});
+
 test('review ordering prioritizes the oldest previously attempted questions when none are due',()=>{
   const {api,store}=academy();
   store.set('seragAcademyV12:test-user',JSON.stringify({
