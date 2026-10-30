@@ -114,7 +114,7 @@
       const card=history.cards[q.id],last=history.lastAt(q.id),seen=!!card||history.lastSeen.has(q.id)||history.answered.has(q.id);
       const isDue=(card&&Number(card.due)<=now)||(!card&&last&&now-last>=86400000);
       // Keep recent due questions as a fallback, but never use a future-scheduled card early.
-      if(history.recentIds.has(String(q.id))){if(isDue)cooldown.push(q);continue}
+      if(history.recentIds.has(String(q.id))){if(!card||isDue)cooldown.push(q);continue}
       if(!seen){fresh.push(q);continue}
       if(isDue)due.push(q);
     }
