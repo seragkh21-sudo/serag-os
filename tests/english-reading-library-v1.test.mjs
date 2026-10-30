@@ -64,3 +64,12 @@ test('article cards show a clear action to open the reading view', () => {
   assert.match(source, /if \(open\) \{ openReader\(open\.dataset\.erlOpen\); return; \}/);
   assert.match(styles, /\.erl-open-cta\{/);
 });
+
+
+test('legacy article library yields the active Academy Reading panel to Reading Studio v2',()=>{
+  const source=read('english-reading-library-v1.js');
+  assert.match(source,/function studioOwnsAcademyReading\\(\\)[\\s\\S]*?window\\.SERAG_READING_STUDIO_V2 && \\$\\('#ea12Center'\\)/);
+  assert.match(source,/if \\(studioOwnsAcademyReading\\(\\)\\) return;/);
+  const mount=source.slice(source.indexOf('  function mount() {'),source.indexOf('  function boot() {'));
+  assert.match(mount,/if \\(window\\.SERAG_READING_STUDIO_V2\\) \\{[\\s\\S]*?legacyCard\\.remove\\(\\)[\\s\\S]*?return;/);
+});
