@@ -40,7 +40,7 @@ test('dictionary proxy validates input, handles not-found and caches successful 
     await dictionaryProxy({method:'GET',query:{word:'hello'}},res);
     assert.equal(res.statusCode,200);
     assert.equal(res.headers['Cache-Control'],'public, max-age=300, s-maxage=3600, stale-while-revalidate=86400');
-    assert.match(calls[0].url,/api\\.dictionaryapi\\.dev\\/api\\/v2\\/entries\\/en\\/hello/);
+    assert.ok(calls[0].url.includes('api.dictionaryapi.dev/api/v2/entries/en/hello'));
     assert.equal(calls[0].options.signal instanceof AbortSignal,true);
 
     const invalid = response();
