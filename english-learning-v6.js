@@ -117,7 +117,7 @@
   async function loadQuizHistory(){
     const owner=window.user?.id||'guest';
     if(quizHistoryOwner===owner&&quizHistoryReady)return;
-    quizHistoryOwner=owner;quizHistoryReady=false;quizQueue=[];sessionQuizKeys=new Set();answered=false;gameIndex=0;score=0;currentQuizItem=null;
+    quizHistoryOwner=owner;quizHistoryReady=false;quizQueue=[];sessionQuizKeys=new Set();answered=false;gameIndex=0;score=0;currentQuizItem=null;renderQuiz();
     let local=[];try{const saved=JSON.parse(localStorage.getItem('seragDailyQuizRecentV1:'+owner)||'[]');if(Array.isArray(saved))local=saved.filter(x=>typeof x==='string').slice(-10).reverse()}catch{}
     recentQuizKeys=new Set(local);
     if(owner!=='guest'&&window.sb){
@@ -135,7 +135,7 @@
     quizHistoryReady=true;renderQuiz();
   }
   function renderQuiz(){
-    if(window.user?.id&&!quizHistoryReady){$('#el9Quiz').innerHTML='<div class="el9-card-head"><h3>جارٍ تحميل سجل الأسئلة…</h3></div><p class="el6-muted">بنجهز تدريبًا جديدًا بعيدًا عن آخر إجاباتك.</p>';return}
+    if(!quizHistoryReady){$('#el9Quiz').innerHTML='<div class="el9-card-head"><h3>جارٍ تحميل سجل الأسئلة…</h3></div><p class="el6-muted">بنجهز تدريبًا جديدًا بعيدًا عن آخر إجاباتك.</p>';return}
     const q=currentQuiz(),label=state.answers<10?`${state.answers+1}/10`:`Bonus ${state.answers-9}`;
     $('#el9Quiz').innerHTML=`<div class="el9-card-head"><div><div class="el6-muted">${q.title} · ${label}</div><h3>${esc(q.prompt)}</h3></div><span class="el9-pill">${score} صح</span></div><div class="el9-quiz-options">${q.options.map(x=>`<button data-quiz-answer="${esc(x)}" data-correct="${esc(q.correct)}" data-question-key="${esc(q.key)}">${esc(x)}</button>`).join('')}</div><div class="el6-muted">بنك أسئلة متنوع من كل المفردات. آخر 10 أسئلة تمت الإجابة عليها يتم استبعادها، وبعد أول 10 تقدر تكمل Bonus.</div>`;
   }
