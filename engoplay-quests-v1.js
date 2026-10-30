@@ -35,7 +35,7 @@
   function ownerKey() {
     if (window.ENGOPLAY && window.ENGOPLAY.owner) return 'user:' + String(window.ENGOPLAY.owner);
     try {
-      if (typeof user !== 'undefined' && user && user.id) return 'user:' + String(user.id);
+      if (window.user && window.user.id) return 'user:' + String(window.user.id);
     } catch (_) {}
     return 'guest';
   }

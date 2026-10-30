@@ -132,3 +132,23 @@ test('word-practice only repeats an answered grammar question when its review is
   ],3);
   assert.equal(allScheduled.length,0,'do not repeat a not-yet-due question just to fill a grammar slot');
 });
+
+test('normal practice avoids the last ten answered questions until the eligible bank is exhausted',()=>{
+  const {api,store}=academy();
+  const now=Date.now();
+  const attempts=Array.from({length:10},(_,i)=>({id:'recent-'+i,topic:'recent',correct:true,at:now-i*1000}));
+  store.set('seragAcademyV12:test-user',JSON.stringify({
+    goal:'work',mode:8,attempts,cards:{},notes:{},sessions:[],scenario:null,
+    practiceTopic:'be-basics',writingDrill:'paragraph',writingChecks:{},level:'B1',levelPart:'grammar',examTheme:'digital'
+  }));
+  api.homeState();
+  const rows=[
+    ...attempts.map((a,i)=>({id:a.id,topic:'recent',prompt:'Recent '+i,answer:'yes',options:['yes','no']})),
+    {id:'fresh-a',topic:'fresh',prompt:'Fresh A',answer:'yes',options:['yes','no']},
+    {id:'fresh-b',topic:'fresh',prompt:'Fresh B',answer:'yes',options:['yes','no']}
+  ];
+  const picked=api.practicePool(rows,now);
+  assert.deepEqual(Array.from(picked,q=>q.id),['fresh-a','fresh-b']);
+  const exhausted=api.practicePool(rows.slice(0,10),now);
+  assert.equal(exhausted.length,10,'cooldown questions are a fallback only when the bank is exhausted');
+});
