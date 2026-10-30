@@ -14,9 +14,9 @@ test('Reading Studio v2 JavaScript parses before deployment', () => {
 
 test('Reading Studio v2 is wired into the actual English reading route', () => {
   assert.match(loader, /english-reading-studio-v2\.css\?v=\$\{V\}/);
-  assert.match(loader, /english-reading-studio-v2\.js\?v=44/);
+  assert.match(loader, /english-reading-studio-v2\\.js\\?v=\\$\\{V\\}/);
   assert.match(academy, /SERAG_READING_STUDIO_V2\?\.summaryHTML\(\)/);
-  assert.match(loader, /const V='55';/);
+  assert.match(loader, /const V='56';/);
 });
 
 test('Reading Studio keeps the existing private article table and user-scoped writes', () => {
