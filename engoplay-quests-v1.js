@@ -200,7 +200,7 @@
       '<div class="eq-quest-tags"><span>ترتيب جمل</span><span>تصحيح فوري</span><span>نطق عند الطلب</span></div>' +
       '<button class="eq-quest-start" data-eq-open>' + label + ' <span aria-hidden="true">←</span></button>' +
       (!available ? '<p class="eq-unavailable" role="status">التحدّي هيبدأ لما يتوفر ٣ أمثلة جمل صالحة من بنك القواعد. اضغط للعرض أو افتح بنك أمثلة القواعد وتأكد إن الأمثلة محمّلة.</p>' : '') +
-      '<small class="eq-local-note">نقاط التحدّي منفصلة عن XP الأساسي، ومحفوظة محليًا لكل حساب على هذا الجهاز.</small></div>' +
+      '<small class="eq-local-note">محاولاتك بتدخل في XP وسلسلة EngoPlay، وبتتزامن تلقائيًا عند الاتصال. لو الشبكة فصلت، المحاولات بتفضل في طابور المزامنة.</small></div>' +
       '<div class="eq-quest-stats">' +
       '<div class="eq-stat-main"><span class="eq-stat-icon">✦</span><strong>' + totalXP.toLocaleString('en-US') + '</strong><small>XP · EngoPlay</small></div>' +
       '<div class="eq-stat-pair"><div><strong>🔥 ' + streak + '</strong><small>أيام تحدّي متتالية</small></div><div><strong>' + state.sessions + '</strong><small>تحدّي مكتمل</small></div></div>' +
@@ -246,12 +246,13 @@
   function dialogMarkup(bundle) {
     var state = bundle.state, daily = state.daily, rows = bundle.rows;
     var progress = daily.completed ? 3 : daily.index + (daily.correct ? 1 : 0);
+    var shared = sharedProgress();
     if (daily.completed) {
       return '<button class="eq-close" data-eq-close aria-label="إغلاق">×</button>' +
         '<div class="eq-complete-icon">✦</div><div class="eq-eyebrow">QUEST COMPLETE</div>' +
         '<h2 id="eqDialogTitle">ممتاز! خلّصت تحدّي النهارده.</h2>' +
-        '<p class="eq-complete-copy">بنيت 3 جمل من بنك القواعد، والنقاط اللي جمعتها فضلت محفوظة لحسابك على الجهاز ده.</p>' +
-        '<div class="eq-complete-total"><strong>' + (sharedProgress() ? sharedProgress().xp : state.points).toLocaleString('en-US') + '</strong><span>إجمالي XP في EngoPlay</span></div>' +
+        '<p class="eq-complete-copy">أنهيت جولة التحدّي. إجاباتك اتسجلت ضمن تقدم EngoPlay، وتقدر تراجعها من سجل المحاولات.</p>' +
+        '<div class="eq-complete-total"><strong>' + (shared ? shared.xp : state.points).toLocaleString('en-US') + '</strong><span>إجمالي XP في EngoPlay</span></div>' +
         '<button class="eq-primary-button" data-eq-close>ارجع لرحلتك ←</button>';
     }
     var row = currentExample(state, rows);
@@ -386,7 +387,7 @@
     } catch (_) {}
     try {
       var sync = window.SERAG_ENGLISH_ATTEMPT_SYNC_V11;
-      if (sync && typeof sync.trackChallengeAttempt === 'function') {
+      if (owner.indexOf('user:') === 0 && sync && typeof sync.trackChallengeAttempt === 'function') {
         sync.trackChallengeAttempt({
           source: 'engoplay_challenge',
           attempt_session: 'sentence-builder:' + todayKey(at) + ':' + owner,

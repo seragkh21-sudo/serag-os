@@ -118,6 +118,8 @@
   }
 
   function trackChallengeAttempt(extra={}) {
+    // Do not leave an anonymous attempt in a shared queue that could later sync to another account.
+    if(!userId())return null;
     const row=baseRow({
       source:'engoplay_challenge',
       attempt_session:extra.attempt_session||`engoplay-challenge:${today()}`,

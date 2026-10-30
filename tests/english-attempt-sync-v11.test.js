@@ -3,9 +3,9 @@ import assert from 'node:assert/strict';
 import vm from 'node:vm';
 import fs from 'node:fs';
 
-function load() {
+function load(authenticated = true) {
   const store = new Map();
-  const window = { user: { id: 'test-owner' }, addEventListener() {} };
+  const window = { user: authenticated ? { id: 'test-owner' } : null, addEventListener() {} };
   const context = {
     window,
     document: { addEventListener() {} },
@@ -54,4 +54,11 @@ test('challenge events receive unique client IDs so retry attempts are not overw
   assert.notEqual(first.client_event_id, second.client_event_id);
   const pending = JSON.parse(store.get('seragEnglishPendingAttemptsV11'));
   assert.equal(pending.length, 2);
+});
+
+
+test('anonymous challenge answers are not queued for a later account', () => {
+  const { api, store } = load(false);
+  assert.equal(api.trackChallengeAttempt({ selected_answer: 'answer' }), null);
+  assert.equal(store.has('seragEnglishPendingAttemptsV11'), false);
 });
