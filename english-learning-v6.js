@@ -95,7 +95,7 @@
     else if(mode===2){const categories=[...new Set([entry[2],...shuffle([...new Set(data.vocabulary.map(x=>x[2]).filter(x=>x!==entry[2]))],s).slice(0,3)])];question={title:'Which topic does it belong to?',prompt:entry[0],correct:entry[2],options:categories};}
     else if(mode===3)question={title:'Choose the natural English',prompt:entry[1],correct:entry[0],options:pool.map(x=>x[0])};
     else question={title:'Choose the meaning',prompt:entry[0],correct:entry[1],options:pool.map(x=>x[1])};
-    question.options=[...new Set(question.options)].filter(Boolean);
+    question.options=shuffle([...new Set(question.options)].filter(Boolean),s+17);
     question.key=quizQuestionKey(question);return question;
   }
   function buildQuizBank(){
