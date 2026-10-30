@@ -73,12 +73,43 @@
       return [{id:'example:'+g.id+':'+index,topic:g.id,level:g.level,prompt,answer:matched,options:[matched,wrong],explanation:g.summary+' '+g.mistake,sourceExample:sentence}];
     });
   }
+  function curriculumExampleQuestions(){
+    const bank=window.SERAG_GRAMMAR_EXAMPLES_V1;
+    if(typeof bank?.getExamples!=='function'||typeof bank?.getLessons!=='function')return [];
+    const byId=new Map(bank.getLessons().map(lesson=>[String(lesson.id),lesson]));
+    return bank.getExamples().flatMap(row=>{
+      const lesson=byId.get(String(row.lessonId));
+      const answer=String(lesson?.quiz?.[1]||'').trim();
+      const wrong=String(lesson?.quiz?.[2]||'').trim();
+      const sentence=String(row.sentence||'');
+      if(!answer||!wrong||!sentence)return [];
+      const at=sentence.toLowerCase().indexOf(answer.toLowerCase());
+      if(at<0)return [];
+      const before=sentence[at-1]||' ',after=sentence[at+answer.length]||' ';
+      if(/[A-Za-z]/.test(before)||/[A-Za-z]/.test(after))return [];
+      const matched=sentence.slice(at,at+answer.length);
+      const prompt=sentence.slice(0,at)+'___'+sentence.slice(at+answer.length);
+      if(!prompt.includes('___'))return [];
+      return [{
+        id:'curriculum-example:'+row.id,
+        topic:String(row.lessonId),
+        level:String(row.level||lesson.level||'B1'),
+        prompt,
+        answer:matched,
+        options:[matched,wrong],
+        explanation:[row.summary,lesson.mistake].filter(Boolean).join(' '),
+        sourceExample:sentence,
+        source:'curriculum-example'
+      }];
+    });
+  }
   function questions(){
     const extraIds=new Set([...(window.SERAG_SUPPLEMENT_V13?.lessons||[]),...(window.SERAG_LEVELS_V14?.lessons||[])].map(g=>g.id));
     const baseLessons=lessons().filter(g=>!extraIds.has(g.id));
     const a=baseLessons.flatMap(g=>[{id:'lesson:'+g.id,topic:g.id,level:g.level,prompt:g.quiz[0],answer:g.quiz[1],options:[g.quiz[1],g.quiz[2]],explanation:g.summary+' '+g.mistake},...exampleQuestions(g)]);
     const b=(window.SERAG_REVIEW_V10_DATA?.questions||[]).filter(q=>q.type==='choice').map(q=>({...q,id:'review:'+q.n,topic:topicId(q.section)}));
-    const all=[...a,...b,...extra,...(window.SERAG_SUPPLEMENT_V13?.questions||[]),...(window.SERAG_LEVELS_V14?.questions||[]),...(window.SERAG_CONTEXT_V15?.questions||[]),...(window.SERAG_PHRASES_V16?.questions||[])];
+    const generatedExamples=curriculumExampleQuestions();
+    const all=[...a,...b,...extra,...generatedExamples,...(window.SERAG_SUPPLEMENT_V13?.questions||[]),...(window.SERAG_LEVELS_V14?.questions||[]),...(window.SERAG_CONTEXT_V15?.questions||[]),...(window.SERAG_PHRASES_V16?.questions||[])];
     const ids=new Set(),prompts=new Set();
     return all.filter(q=>{
       if(!q||!q.id||!String(q.prompt||'').trim()||!Array.isArray(q.options)||!q.options.includes(q.answer))return false;
