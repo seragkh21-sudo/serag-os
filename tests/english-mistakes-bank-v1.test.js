@@ -66,7 +66,7 @@ test('the new bank remains separate from active grammar question data', () => {
 });
 
 test('loader and English navigation provide a route to the correction bank', () => {
-  const loader = fs.readFileSync(new URL('../shell-loader.js', import.meta.url), 'utf8');
+  const loader = fs.readFileSync(new URL('../app-bootstrap.js', import.meta.url), 'utf8');
   const academy = fs.readFileSync(new URL('../english-academy-v12.js', import.meta.url), 'utf8');
   const engoplay = fs.readFileSync(new URL('../engoplay-v19.js', import.meta.url), 'utf8');
   assert.match(loader, /english-mistakes-bank-v1\.css/);
