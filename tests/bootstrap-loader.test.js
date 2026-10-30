@@ -24,6 +24,6 @@ test('app publishes Supabase client and authenticated user on window',()=>{
 
 test('bootstrap cache-busts every local asset from one version constant',()=>{
   const source=fs.readFileSync('app-bootstrap.js','utf8');
-  assert.match(source,/const V='56'/);
+  assert.match(source,/const V='57'/);
   assert.doesNotMatch(source,/\/(?:[\w-]+)\.(?:js|css)\?v=\d+/);
 });
