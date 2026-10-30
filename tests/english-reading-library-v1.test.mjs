@@ -14,8 +14,8 @@ test('reading library is wired into the English reading section and the active s
   assert.match(loader, /const V=['"]56['"]/);
   assert.match(loader, /english-reading-library-v1\.js/);
   assert.match(entry,/app-bootstrap\.js\?v=\d+/);
-  assert.match(preview, /english-reading-library-v1\.css\?v=55/);
-  assert.match(preview, /english-reading-library-v1\.js\?v=55/);
+  assert.match(preview, /english-reading-library-v1\.css\?v=56/);
+  assert.match(preview, /english-reading-library-v1\.js\?v=56/);
 });
 
 test('article library supports owner-scoped CRUD, search, reading status and notes', () => {
