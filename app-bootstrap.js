@@ -1,6 +1,6 @@
 (async()=>{
   try{
-    const V='55';
+    const V='56';
     const res=await fetch(`/legacy.html?v=${V}`,{cache:'no-store',headers:{'Cache-Control':'no-cache'}});
     if(!res.ok)throw new Error('Legacy app failed to load');
     let html=await res.text();
@@ -17,15 +17,15 @@
 <link rel="stylesheet" href="/english-layout-v14.css?v=${V}"/>
 <link rel="stylesheet" href="/english-reading-library-v1.css?v=${V}"/>
 <link rel="stylesheet" href="/english-reading-studio-v2.css?v=${V}"/>
-<link rel="stylesheet" href="/english-tatoeba-explorer-v1.css?v=1"/>
-<link rel="stylesheet" href="/english-mistakes-bank-v1.css?v=1"/>
-<link rel="stylesheet" href="/english-grammar-examples-v1.css?v=1"/>
+<link rel="stylesheet" href="/english-tatoeba-explorer-v1.css?v=${V}"/>
+<link rel="stylesheet" href="/english-mistakes-bank-v1.css?v=${V}"/>
+<link rel="stylesheet" href="/english-grammar-examples-v1.css?v=${V}"/>
 <link rel="stylesheet" href="/engoplay-v19.css?v=${V}"/>
-<link rel="stylesheet" href="/engoplay-quests-v1.css?v=4"/>
+<link rel="stylesheet" href="/engoplay-quests-v1.css?v=${V}"/>
 <link rel="stylesheet" href="/workflow-v21.css?v=${V}"/>
 <link rel="stylesheet" href="/creative-workspace.css?v=${V}"/>
 <link rel="stylesheet" href="/creative-workspace-tools.css?v=${V}"/>
-<link rel="stylesheet" href="/creative-library-v2.css?v=2"/>
+<link rel="stylesheet" href="/creative-library-v2.css?v=${V}"/>
 <style>
 #appView.hidden~#v5BottomNav,#appView.hidden~#v5MobileMore{display:none!important}
 .resource-category-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:16px 0 4px;padding:9px 10px;border:1px solid var(--line);border-radius:10px;background:var(--soft,#f6f6f8)}
@@ -106,33 +106,33 @@
 <script src="/microsoft-tts-v1.js?v=${V}"></script>
 <script src="/serag-v5.js?v=${V}"></script>
 <script src="/english-content-v9.js?v=${V}"></script>
-<script src="/english-vocab-v24.js?v=25"></script>
+<script src="/english-vocab-v24.js?v=${V}"></script>
 <script src="/english-grammar-v10.js?v=${V}"></script>
 <script src="/english-supplement-v13.js?v=${V}"></script>
 <script src="/english-writing-v13.js?v=${V}"></script>
 <script src="/english-levels-v14.js?v=${V}"></script>
-<script src="/english-source-curriculum-v1.js?v=1"></script><script src="/english-open-sentences-v1.js?v=1"></script><script src="/english-context-v15.js?v=${V}"></script><script src="/english-phrases-v16.js?v=${V}"></script><script src="/english-video-v17.js?v=${V}"></script>
+<script src="/english-source-curriculum-v1.js?v=${V}"></script><script src="/english-open-sentences-v1.js?v=${V}"></script><script src="/english-context-v15.js?v=${V}"></script><script src="/english-phrases-v16.js?v=${V}"></script><script src="/english-video-v17.js?v=${V}"></script>
 <script src="/english-learning-v6.js?v=${V}"></script>
 <script src="/english-review-v10-data.js?v=${V}"></script>
 <script src="/english-review-v10.js?v=${V}"></script>
 <script src="/english-review-v10-fallback.js?v=${V}"></script>
 <script src="/english-attempt-sync-v11.js?v=${V}"></script>
-<script src="/word-practice-v21.js?v=44"></script>
-<script src="/engoplay-v19.js?v=47"></script>
-<script src="/english-tatoeba-explorer-v1.js?v=1"></script>
-<script src="/english-mistakes-bank-v1.js?v=2"></script>
-<script src="/english-grammar-examples-v1.js?v=1"></script>
-<script src="/english-academy-v12.js?v=47"></script>
-<script src="/engoplay-quests-v1.js?v=8"></script>
+<script src="/word-practice-v21.js?v=${V}"></script>
+<script src="/engoplay-v19.js?v=${V}"></script>
+<script src="/english-tatoeba-explorer-v1.js?v=${V}"></script>
+<script src="/english-mistakes-bank-v1.js?v=${V}"></script>
+<script src="/english-grammar-examples-v1.js?v=${V}"></script>
+<script src="/english-academy-v12.js?v=${V}"></script>
+<script src="/engoplay-quests-v1.js?v=${V}"></script>
 <script src="/english-reading-library-v1.js?v=${V}"></script>
-<script src="/english-reading-studio-v2.js?v=44"></script>
+<script src="/english-reading-studio-v2.js?v=${V}"></script>
 <script src="/english-writing-flow-v1.js?v=${V}"></script>
 <script src="/english-pdf-library-v1.js?v=${V}"></script>
 <script src="/english-focus-v7.js?v=${V}"></script>
-<script src="/voice-commands-v1.js?v=1"></script>
+<script src="/voice-commands-v1.js?v=${V}"></script>
 <script src="/creative-workspace.js?v=${V}"></script>
 <script src="/creative-workspace-tools.js?v=${V}"></script>
-<script src="/creative-library-v2.js?v=2"></script>
+<script src="/creative-library-v2.js?v=${V}"></script>
 <script src="/home-studio-v18.js?v=${V}"></script>
 <script src="/workflow-v21.js?v=${V}"></script>
 <script>document.addEventListener("click",function(e){if(e.target.closest&&e.target.closest("[data-open-article]")){var p=document.getElementById("articleViewPane");if(p)p.dataset.v5Words=""}},true);</script>

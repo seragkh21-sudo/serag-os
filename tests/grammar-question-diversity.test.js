@@ -152,3 +152,22 @@ test('normal practice avoids the last ten answered questions until the eligible 
   const exhausted=api.practicePool(rows.slice(0,10),now);
   assert.equal(exhausted.length,10,'cooldown questions are a fallback only when the bank is exhausted');
 });
+
+test('adaptive selection uses synced cross-device error rates when ranking due questions',()=>{
+  const {api,context}=academy();
+  const now=Date.now(),old=now-3*86400000;
+  context.ENGOPLAY={stats:()=>({
+    answeredKeys:new Set(['easy','hard']),
+    lastAnsweredAt:{easy:old,hard:old},
+    questionStats:{
+      easy:{total:6,wrong:0,correct:6,lastAt:old},
+      hard:{total:6,wrong:5,correct:1,lastAt:old}
+    }
+  })};
+  const pool=[
+    {id:'easy',topic:'same-topic',prompt:'Easy',answer:'yes',options:['yes','no']},
+    {id:'hard',topic:'same-topic',prompt:'Hard',answer:'yes',options:['yes','no']}
+  ];
+  const picked=api.selectQuestions(pool,'daily',2);
+  assert.equal(picked[0].id,'hard','the question with the higher synced error rate should be prioritised');
+});

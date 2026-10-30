@@ -98,8 +98,13 @@
     const remoteRecent=remoteLast instanceof Map?[...remoteLast.entries()]:Object.entries(remoteLast||{});
     remoteRecent.sort((a,b)=>(Number(b[1])||0)-(Number(a[1])||0)).slice(0,10).forEach(([id])=>recentIds.add(String(id)));
     const stats=new Map();
+    const remoteQuestionStats=remote.questionStats instanceof Map?remote.questionStats:new Map(Object.entries(remote.questionStats||{}));
+    // Synced history is the cross-device source of truth; local attempts fill gaps while sync is pending.
+    for(const [id,value] of remoteQuestionStats){
+      stats.set(String(id),{total:Number(value?.total)||0,wrong:Number(value?.wrong)||0});
+    }
     for(const attempt of (state?.attempts||[]).slice(-100)){
-      if(!attempt.id)continue;
+      if(!attempt.id||stats.has(String(attempt.id)))continue;
       const row=stats.get(String(attempt.id))||{total:0,wrong:0};
       row.total++;if(!attempt.correct)row.wrong++;
       stats.set(String(attempt.id),row);

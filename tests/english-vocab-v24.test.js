@@ -59,5 +59,5 @@ test('the patch safely reports not-applied when the base vocabulary has not load
 });
 
 test('the corrected vocabulary patch has a bumped cache key in production loader', () => {
-  assert.match(loaderSource, /english-vocab-v24\.js\?v=25/);
+  assert.match(loaderSource, /english-vocab-v24\.js\?v=\$\{V\}/);
 });
