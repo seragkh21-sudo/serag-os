@@ -107,7 +107,7 @@ test('word-practice grammar fillers skip locally and remotely answered questions
   assert.deepEqual(Array.from(selected,q=>q.id).sort(),['fresh-1','fresh-2','fresh-3']);
   assert.ok(!selected.some(q=>['local-solved','remote-solved'].includes(q.id)));
   const actualRound=Array.from(wp.buildRound(wp.items().slice(0,4),pool,4).filter(q=>q.kind==='grammar'),q=>q.grammar.id);
-  assert.deepEqual(actualRound.sort(),['due-question','fresh-1','fresh-2'],'recently answered grammar questions stay out while fresh questions remain');
+  assert.deepEqual(actualRound.sort(),['fresh-1','fresh-2','fresh-3'],'recently answered grammar questions stay out while fresh questions remain');
 });
 
 test('word-practice only repeats an answered grammar question when its review is due',()=>{
