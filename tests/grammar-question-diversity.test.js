@@ -9,7 +9,7 @@ function academy(){
   const c={document,localStorage:{getItem:k=>store.get(k)||null,setItem:(k,v)=>store.set(k,v)},setInterval(){},clearInterval(){},addEventListener(){},Date,Math,console,user:{id:'test-user'}};
   c.window=c;
   vm.createContext(c);
-  for(const file of ['english-content-v9.js','english-grammar-v10.js','english-academy-v12.js']){
+  for(const file of ['english-content-v9.js','english-grammar-v10.js','english-supplement-v13.js','english-levels-v14.js','english-source-curriculum-v1.js','english-grammar-examples-v1.js','english-academy-v12.js']){
     vm.runInContext(fs.readFileSync(file,'utf8'),c,{filename:file});
   }
   return {api:c.SERAG_ACADEMY_V12,store,context:c};
@@ -170,4 +170,19 @@ test('adaptive selection uses synced cross-device error rates when ranking due q
   ];
   const picked=api.selectQuestions(pool,'daily',2);
   assert.equal(picked[0].id,'hard','the question with the higher synced error rate should be prioritised');
+});
+
+test('grammar question pool generates new cloze variants from the full curriculum example library',()=>{
+  const {api}=academy();
+  const all=api.questions();
+  const generated=all.filter(q=>q.source==='curriculum-example');
+  assert.ok(generated.length>=10,'expected multiple generated questions from supplementary and source-curriculum examples');
+  assert.equal(new Set(generated.map(q=>q.id)).size,generated.length);
+  for(const q of generated){
+    assert.ok(q.sourceExample);
+    assert.ok(q.prompt.includes('___'));
+    assert.ok(q.options.includes(q.answer));
+    assert.equal(q.prompt.replace('___',q.answer),q.sourceExample);
+    assert.ok(['A1','A2','B1','B2','C1','C2'].includes(q.level));
+  }
 });
