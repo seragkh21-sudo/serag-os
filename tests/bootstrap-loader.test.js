@@ -9,11 +9,13 @@ test('index loads Supabase in the head and uses the replacement bootstrap',()=>{
   assert.doesNotMatch(html,/shell-loader\.js/);
 });
 
-test('bootstrap has no document.write call and executes scripts in order',()=>{
+test('bootstrap preserves Supabase and executes dependency scripts in order',()=>{
   const source=fs.readFileSync('app-bootstrap.js','utf8');
   assert.doesNotMatch(source,/document\.(?:open|write|close)\s*\(/);
   assert.match(source,/for\s*\(const source of pendingScripts\)/);
-  assert.match(source,/script\.async\s*=\s*false/);\n  assert.match(source,/supabase-js/);\n  assert.doesNotMatch(source,/parsed\.querySelector\('script\\[src\\\\\*="supabase-js"\\]'\)\\?\.remove\(\)/);
+  assert.match(source,/script\.async\s*=\s*false/);
+  assert.match(source,/script\[src\*="supabase-js"\]/);
+  assert.doesNotMatch(source,/parsed\.querySelector[^\n]*supabase-js[^\n]*remove/);
 });
 
 test('app publishes Supabase client and authenticated user on window',()=>{
