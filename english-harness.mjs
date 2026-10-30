@@ -1,6 +1,6 @@
 // Read-only harness for the English library integration checks.
 // It never writes files, never touches the network, never talks to Supabase.
-// It reads shell-loader.js / legacy.html to learn the production script order,
+// It reads app-bootstrap.js / legacy.html to learn the production script order,
 // then loads only the CONTENT files (data) into an isolated vm sandbox.
 import fs from 'node:fs';
 import path from 'node:path';
@@ -9,7 +9,7 @@ import { fileURLToPath } from 'node:url';
 
 /** Content files that exist in the repo but are intentionally not wired yet. Every entry needs a reason. */
 export const KNOWN_UNWIRED = {
-  'english-vocab-v23.js': 'Deployed as a static file but never referenced by shell-loader.js. Decision pending (audit 2026-10-23).',
+  'english-vocab-v23.js': 'Deployed as a static file but never referenced by app-bootstrap.js. Decision pending (audit 2026-10-23).',
 };
 
 /** Files loaded into the sandbox (data only). Extend if a new data file family is added. */
@@ -31,13 +31,13 @@ export function findRoot() {
   for (const start of starts) {
     let dir = path.resolve(start);
     for (let i = 0; i < 6; i += 1) {
-      if (fs.existsSync(path.join(dir, 'shell-loader.js'))) return dir;
+      if (fs.existsSync(path.join(dir, 'app-bootstrap.js'))) return dir;
       const up = path.dirname(dir);
       if (up === dir) break;
       dir = up;
     }
   }
-  throw new Error('shell-loader.js not found. Run from the repository root or set SERAG_ROOT.');
+  throw new Error('app-bootstrap.js not found. Run from the repository root or set SERAG_ROOT.');
 }
 
 /** Approximation of the normalisation used by word-practice-v21.js (NFKC, lowercase, apostrophes, light punctuation). */
@@ -55,11 +55,11 @@ function scriptRefs(text) {
   return out;
 }
 
-/** Ordered, de-duplicated local script references. legacy.html scripts run first, then the ones injected by shell-loader.js. */
+/** Ordered, de-duplicated local script references. legacy.html scripts run first, then the ones injected by app-bootstrap.js. */
 export function readRefs(root) {
   const read = (f) => (fs.existsSync(path.join(root, f)) ? fs.readFileSync(path.join(root, f), 'utf8') : '');
   const legacy = scriptRefs(read('legacy.html'));
-  const loader = scriptRefs(read('shell-loader.js'));
+  const loader = scriptRefs(read('app-bootstrap.js'));
   const uniq = (arr) => [...new Set(arr)];
   return { legacy: uniq(legacy), loader: uniq(loader), all: new Set([...legacy, ...loader]), ordered: uniq([...legacy, ...loader]) };
 }
