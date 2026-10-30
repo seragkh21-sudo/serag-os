@@ -134,6 +134,8 @@
       explanation:extra.explanation==null?null:String(extra.explanation).slice(0,3000),
       metadata:Object.assign({version:11,ui:'engoplay'},extra.metadata&&typeof extra.metadata==='object'?extra.metadata:{})
     });
+    // Bind the row to the authenticated owner so it cannot be attributed to a later account.
+    row.user_id=userId();
     const session=String(extra.attempt_session||row.attempt_session).slice(0,160);
     queueRows('challenge:'+session+':'+row.client_event_id,[row]);
     return row;

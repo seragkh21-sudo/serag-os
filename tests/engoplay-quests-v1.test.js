@@ -154,5 +154,6 @@ test('challenge keeps an explicit Check action and does not auto-submit on the f
   assert.match(source, /data-eq-check>تحقّق من الجملة/);
   assert.doesNotMatch(source, /daily\.selected\.length === daily\.bank\.length\) evaluateAnswer/);
   assert.match(source, /الإجابة الصحيحة: '\s*\+ row\.sentence/);
+  assert.match(source, /رتّب الكلمات، وبعد ما تخلص اضغط/);
   assert.match(source, /window\.ENGOPLAY\.track/);
 });

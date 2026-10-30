@@ -196,14 +196,14 @@
     return '<section class="eq-quest-panel" data-eq-panel data-eq-owner="' + esc(bundle.owner) + '" aria-labelledby="eqQuestPanelTitle">' +
       '<div class="eq-quest-copy"><div class="eq-eyebrow"><span class="eq-spark">✦</span> ENGOPLAY · DAILY QUEST</div>' +
       '<h3 id="eqQuestPanelTitle">خلّي الإنجليزي لعبة بتكسب منها</h3>' +
-      '<p>رتّب كلمات من أمثلة القواعد الحقيقية، استخدم التلميح عند الحاجة، وخد نقاط على كل جملة تبنيها صح.</p>' +
+      '<p>رتّب كلمات من أمثلة القواعد الحقيقية، واستخدم التلميح عند الحاجة. كل محاولة بتدخل في تقدمك الموحد.</p>' +
       '<div class="eq-quest-tags"><span>ترتيب جمل</span><span>تصحيح فوري</span><span>نطق عند الطلب</span></div>' +
       '<button class="eq-quest-start" data-eq-open>' + label + ' <span aria-hidden="true">←</span></button>' +
       (!available ? '<p class="eq-unavailable" role="status">التحدّي هيبدأ لما يتوفر ٣ أمثلة جمل صالحة من بنك القواعد. اضغط للعرض أو افتح بنك أمثلة القواعد وتأكد إن الأمثلة محمّلة.</p>' : '') +
       '<small class="eq-local-note">محاولاتك بتدخل في XP وسلسلة EngoPlay، وبتتزامن تلقائيًا عند الاتصال. لو الشبكة فصلت، المحاولات بتفضل في طابور المزامنة.</small></div>' +
       '<div class="eq-quest-stats">' +
       '<div class="eq-stat-main"><span class="eq-stat-icon">✦</span><strong>' + totalXP.toLocaleString('en-US') + '</strong><small>XP · EngoPlay</small></div>' +
-      '<div class="eq-stat-pair"><div><strong>🔥 ' + streak + '</strong><small>أيام تحدّي متتالية</small></div><div><strong>' + state.sessions + '</strong><small>تحدّي مكتمل</small></div></div>' +
+      '<div class="eq-stat-pair"><div><strong>🔥 ' + streak + '</strong><small>سلسلة EngoPlay</small></div><div><strong>' + state.sessions + '</strong><small>تحدّي مكتمل</small></div></div>' +
       '<div class="eq-progress-head"><span>تقدّمك النهارده</span><b>' + progress + '/3</b></div><progress max="3" value="' + progress + '"></progress>' +
       '<div class="eq-mini-path" aria-label="تقدّم التحدّي">' + [0,1,2].map(function (i) { return '<span class="' + (i < progress ? 'is-done' : (i === daily.index && !complete ? 'is-current' : '')) + '">' + (i < progress ? '✓' : (i + 1)) + '</span>'; }).join('') + '</div>' +
       '<div class="eq-storage-status" data-eq-storage-status role="status"></div>' +
@@ -298,7 +298,7 @@
       '<div class="eq-rule-meta"><span>' + esc(row.level || 'B1') + '</span><span>' + esc(row.titleAr || row.title || 'قاعدة نحوية') + '</span></div>' +
       '<div class="eq-build-area"><small>جملتك</small><div class="eq-answer' + answerStateClass + '" dir="ltr" lang="en">' + answer + '</div>' +
       '<div class="eq-word-bank" dir="ltr" lang="en">' + bank + '</div></div>' + hint + feedback + controls +
-      '<p class="eq-source-note">بمجرد اختيار آخر كلمة، هتظهر النتيجة بالأخضر أو الأحمر. لو الإجابة صح، اضغط «تابع للسؤال التالي». النطق عند الطلب فقط.</p>';
+      '<p class="eq-source-note">رتّب الكلمات، وبعد ما تخلص اضغط «تحقّق من الجملة» عشان تشوف النتيجة. النطق عند الطلب فقط.</p>';
   }
   function paintDialog() {
     var bundle = getState(), dialog = dialogShell();
