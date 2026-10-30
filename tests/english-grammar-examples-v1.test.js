@@ -59,7 +59,7 @@ test('the examples library links the official SCoRE resource without importing i
 });
 
 test('loader and navigation expose the examples bank in English and EngoPlay', () => {
-  const loader=read('shell-loader.js');
+  const loader=read('app-bootstrap.js');
   const index=read('index.html');
   const academy=read('english-academy-v12.js');
   const engoplay=read('engoplay-v19.js');
