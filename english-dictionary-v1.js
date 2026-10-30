@@ -197,7 +197,7 @@
     if (!validPhrase(text)) { hideFloating(); return; }
     const range = selection.getRangeAt(0);
     const host = range.commonAncestorContainer.nodeType === 1 ? range.commonAncestorContainer : range.commonAncestorContainer.parentElement;
-    if (!host || !host.closest || !host.closest('#ersBody, #ea12Center [data-ea-tab="words"], #ea12Center .ea12-content, #ea12Center')) { hideFloating(); return; }
+    if (!host || !host.closest || host.closest('#ersBody') || !host.closest('#ea12Center')) { hideFloating(); return; }
     const rect = range.getBoundingClientRect();
     const context = host.closest('p, article, section')?.textContent || text;
     showFloating(text, context, rect);
