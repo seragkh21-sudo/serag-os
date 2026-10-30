@@ -68,5 +68,5 @@ test('loader and navigation expose the examples bank in English and EngoPlay', (
   assert.match(academy,/\['examples'/);
   assert.match(academy,/SERAG_GRAMMAR_EXAMPLES_V1\?\.html\(\)/);
   assert.match(engoplay,/data-ea-tab="examples"/);
-  assert.match(index,/shell-loader\.js\?v=\d+/);
+  assert.match(index,/app-bootstrap\.js\?v=\d+/);
 });
