@@ -21,7 +21,7 @@ const refs = readRefs(root);
 const contentFiles = contentFilesInOrder(refs);
 const { ctx, errors } = loadFiles(root, contentFiles);
 
-test('every script referenced by legacy.html and shell-loader.js exists on disk', () => {
+test('every script referenced by legacy.html and app-bootstrap.js exists on disk', () => {
   const missing = [...refs.all].filter((f) => !fs.existsSync(path.join(root, f)));
   assert.deepEqual(missing, [], `Referenced but missing: ${missing.join(', ')}`);
 });
@@ -29,7 +29,7 @@ test('every script referenced by legacy.html and shell-loader.js exists on disk'
 test('no english-*.js file is deployed without being wired (except documented ones)', () => {
   const onDisk = fs.readdirSync(root).filter((f) => ANY_ENGLISH_JS.test(f));
   const unwired = onDisk.filter((f) => !refs.all.has(f) && !(f in KNOWN_UNWIRED));
-  assert.deepEqual(unwired, [], `Add to shell-loader.js or document in KNOWN_UNWIRED: ${unwired.join(', ')}`);
+  assert.deepEqual(unwired, [], `Add to app-bootstrap.js or document in KNOWN_UNWIRED: ${unwired.join(', ')}`);
 });
 
 test('KNOWN_UNWIRED does not rot: listed files still exist and are still unwired', () => {
@@ -41,7 +41,7 @@ test('KNOWN_UNWIRED does not rot: listed files still exist and are still unwired
 });
 
 test('content files load in production order without throwing', () => {
-  assert.ok(contentFiles.length > 0, 'no content files found in shell-loader.js');
+  assert.ok(contentFiles.length > 0, 'no content files found in app-bootstrap.js');
   assert.deepEqual(errors, []);
 });
 
