@@ -51,7 +51,7 @@ test('overdue grammar reviews come before fresh questions while scheduled questi
   const {api,store}=academy();
   const now=Date.now();
   store.set('seragAcademyV12:test-user',JSON.stringify({
-    goal:'work',mode:8,attempts:[{id:'overdue',at:now-3*86400000},{id:'scheduled',at:now-1000}],
+    goal:'work',mode:8,attempts:[{id:'overdue',at:now-3*86400000},...Array.from({length:9},(_,i)=>({id:'noise-'+i,at:now-9000+i*500})),{id:'scheduled',at:now-1000}],
     cards:{overdue:{stage:0,due:now-1},scheduled:{stage:2,due:now+86400000}},
     notes:{},sessions:[],scenario:null,practiceTopic:'be-basics',writingDrill:'paragraph',writingChecks:{},level:'B1',levelPart:'grammar',examTheme:'digital'
   }));
@@ -104,10 +104,10 @@ test('word-practice grammar fillers skip locally and remotely answered questions
     {id:'fresh-3',topic:'f',prompt:'Fresh three',answer:'yes',options:['yes','no']}
   ];
   const selected=wp.selectGrammarQuestions(pool,3);
-  assert.deepEqual(Array.from(selected,q=>q.id).sort(),['due-question','fresh-1','fresh-2']);
+  assert.deepEqual(Array.from(selected,q=>q.id).sort(),['fresh-1','fresh-2','fresh-3']);
   assert.ok(!selected.some(q=>['local-solved','remote-solved'].includes(q.id)));
   const actualRound=Array.from(wp.buildRound(wp.items().slice(0,4),pool,4).filter(q=>q.kind==='grammar'),q=>q.grammar.id);
-  assert.deepEqual(actualRound.sort(),['due-question','fresh-1','fresh-2'],'the actual round must render overdue reviews before fresh questions');
+  assert.deepEqual(actualRound.sort(),['fresh-1','fresh-2','fresh-3'],'recently answered grammar questions stay out while fresh questions remain');
 });
 
 test('word-practice only repeats an answered grammar question when its review is due',()=>{
@@ -115,7 +115,7 @@ test('word-practice only repeats an answered grammar question when its review is
   const now=Date.now(),day=86400000;
   store.set('seragAcademyV12:test-user',JSON.stringify({
     goal:'work',mode:8,
-    attempts:[{id:'scheduled',at:now-day/2,correct:true},{id:'due',at:now-3*day,correct:false}],
+    attempts:[{id:'due',at:now-3*day,correct:false},...Array.from({length:9},(_,i)=>({id:'noise-'+i,at:now-9000+i*500,correct:true})),{id:'scheduled',at:now-day/2,correct:true}],
     cards:{scheduled:{stage:1,due:now+day},due:{stage:0,due:now-1}},
     notes:{},sessions:[],level:'B1',practiceTopic:'be-basics'
   }));
@@ -131,4 +131,24 @@ test('word-practice only repeats an answered grammar question when its review is
     {id:'scheduled',topic:'a',prompt:'Already solved',answer:'yes',options:['yes','no']}
   ],3);
   assert.equal(allScheduled.length,0,'do not repeat a not-yet-due question just to fill a grammar slot');
+});
+
+test('normal practice avoids the last ten answered questions until the eligible bank is exhausted',()=>{
+  const {api,store}=academy();
+  const now=Date.now();
+  const attempts=Array.from({length:10},(_,i)=>({id:'recent-'+i,topic:'recent',correct:true,at:now-i*1000}));
+  store.set('seragAcademyV12:test-user',JSON.stringify({
+    goal:'work',mode:8,attempts,cards:{},notes:{},sessions:[],scenario:null,
+    practiceTopic:'be-basics',writingDrill:'paragraph',writingChecks:{},level:'B1',levelPart:'grammar',examTheme:'digital'
+  }));
+  api.homeState();
+  const rows=[
+    ...attempts.map((a,i)=>({id:a.id,topic:'recent',prompt:'Recent '+i,answer:'yes',options:['yes','no']})),
+    {id:'fresh-a',topic:'fresh',prompt:'Fresh A',answer:'yes',options:['yes','no']},
+    {id:'fresh-b',topic:'fresh',prompt:'Fresh B',answer:'yes',options:['yes','no']}
+  ];
+  const picked=api.practicePool(rows,now);
+  assert.deepEqual(Array.from(picked,q=>q.id),['fresh-a','fresh-b']);
+  const exhausted=api.practicePool(rows.slice(0,10),now);
+  assert.equal(exhausted.length,10,'cooldown questions are a fallback only when the bank is exhausted');
 });

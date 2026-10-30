@@ -1,6 +1,6 @@
 (async()=>{
   try{
-    const V='43';
+    const V='55';
     const res=await fetch(`/legacy.html?v=${V}`,{cache:'no-store',headers:{'Cache-Control':'no-cache'}});
     if(!res.ok)throw new Error('Legacy app failed to load');
     let html=await res.text();
@@ -167,9 +167,30 @@
 </script>
 </body>`);
 
-    document.open();
-    document.write(html);
-    document.close();
+    // Replace the initial boot document without parser-blocking document.write.
+    const parsed = new DOMParser().parseFromString(html, 'text/html');
+    parsed.querySelector('script[src*="supabase-js"]')?.remove();
+    const pendingScripts = Array.from(parsed.querySelectorAll('script'));
+    pendingScripts.forEach(node => node.remove());
+    const nextDocument = document.importNode(parsed.documentElement, true);
+    document.replaceChild(nextDocument, document.documentElement);
+
+    // Load legacy dependencies sequentially so globals exist before dependants run.
+    for (const source of pendingScripts) {
+      const script = document.createElement('script');
+      for (const attr of Array.from(source.attributes)) script.setAttribute(attr.name, attr.value);
+      if (source.hasAttribute('src')) {
+        script.async = false;
+        await new Promise((resolve, reject) => {
+          script.onload = resolve;
+          script.onerror = () => reject(new Error('Failed to load ' + source.getAttribute('src')));
+          document.body.appendChild(script);
+        });
+      } else {
+        script.textContent = source.textContent || '';
+        document.body.appendChild(script);
+      }
+    }
   }catch(err){
     document.body.innerHTML='<div class="boot"><div class="boot-card"><div class="boot-logo">Serag OS</div><div class="boot-sub">حصلت مشكلة في تحميل الواجهة. جرّب Refresh.</div></div></div>';
     console.error(err);

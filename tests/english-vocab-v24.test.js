@@ -5,7 +5,7 @@ import { runInNewContext } from 'node:vm';
 
 const baseSource = readFileSync(new URL('../english-content-v9.js', import.meta.url), 'utf8');
 const patchSource = readFileSync(new URL('../english-vocab-v24.js', import.meta.url), 'utf8');
-const loaderSource = readFileSync(new URL('../shell-loader.js', import.meta.url), 'utf8');
+const loaderSource = readFileSync(new URL('../app-bootstrap.js', import.meta.url), 'utf8');
 
 function browserContext() {
   // In a browser, window is the global object; emulate that in Node's VM.

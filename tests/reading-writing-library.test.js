@@ -14,7 +14,7 @@ test('reading completion persists across dates and can be restored from saved da
 
 test('Reading Studio does not loop renders when its active tab changes the observed DOM',()=>{
  const source=fs.readFileSync('english-reading-studio-v2.js','utf8');
- const loader=fs.readFileSync('shell-loader.js','utf8');
+ const loader=fs.readFileSync('app-bootstrap.js','utf8');
  assert.match(loader,/english-reading-studio-v2\.js\?v=44/,'the fixed reader must bypass the old cached script');
  let activeReading=false,hasDialog=false,observerCallback=null,renderCount=0;
  const grid={};

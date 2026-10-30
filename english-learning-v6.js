@@ -23,7 +23,7 @@
   let state={date:today(),steps:Array(6).fill(false),xp:0,answers:0,correct:0,revealed:[],videoUrl:'',videoPhrase:'',videoMeaning:'',videoNotes:'',videoFeedback:'',speakingPromptOffset:0,speakingTranscript:'',speakingFeedback:'',grammarPractice:'',grammarFeedback:'',grammarCompleted:[],grammarBookmarks:[],grammarActiveId:''};
   let archive=[],syncId=null,gameIndex=0,score=0,answered=false,grammarFilter='All',grammarSearch='',recognition=null,isRecording=false;
 
-  const readingProgressKey=()=>user?.id?'seragReadingProgressV1:'+user.id:null;
+  const readingProgressKey=()=>window.user?.id?'seragReadingProgressV1:'+window.user.id:null;
   function completedArticles(){
     const done=new Set(state.readingCompleted||[]);
     (archive||[]).forEach(x=>(Array.isArray(x.readingCompleted)?x.readingCompleted:[]).forEach(title=>done.add(title)));
@@ -43,17 +43,17 @@
   function restoreProgress(){gameIndex=Math.max(0,Number(state.answers)||0)%10;score=Math.max(0,Number(state.correct)||0)}
   const freshState=()=>({date:today(),steps:Array(6).fill(false),xp:0,answers:0,correct:0,revealed:[],readingCompleted:[],grammarCompleted:[],grammarBookmarks:[],grammarActiveId:''});
   let cacheOwner=null;
-  const cacheKey=()=>user?.id?'seragEnglishV9:'+user.id:null;
-  const curriculumKey=()=>user?.id?'seragGrammarCurriculum:'+user.id:null;
+  const cacheKey=()=>window.user?.id?'seragEnglishV9:'+window.user.id:null;
+  const curriculumKey=()=>window.user?.id?'seragGrammarCurriculum:'+window.user.id:null;
   function cache(){if(!cacheKey())return;try{localStorage.setItem(cacheKey(),JSON.stringify(state));localStorage.setItem(curriculumKey(),JSON.stringify({completed:state.grammarCompleted,bookmarks:state.grammarBookmarks,activeId:state.grammarActiveId}))}catch{}}
   function loadCache(){if(!cacheKey())return;try{const curriculum=JSON.parse(localStorage.getItem(curriculumKey())||'{}');if(Array.isArray(curriculum.completed))state.grammarCompleted=curriculum.completed;if(Array.isArray(curriculum.bookmarks))state.grammarBookmarks=curriculum.bookmarks;if(curriculum.activeId)state.grammarActiveId=curriculum.activeId;const x=JSON.parse(localStorage.getItem(cacheKey())||'{}');if(x.date===today()){state=normalizeState(x);restoreProgress()}}catch{}}
   async function loadSync(){
-    if(cacheOwner!==user?.id){clearTimeout(syncTimer);state=freshState();syncId=null;archive=[];gameIndex=0;score=0;cacheOwner=user?.id;}
-    loadCache();renderAll();if(typeof sb==='undefined'||!user?.id)return;
-    const loadingOwner=user.id;
+    if(cacheOwner!==window.user?.id){clearTimeout(syncTimer);state=freshState();syncId=null;archive=[];gameIndex=0;score=0;cacheOwner=window.user?.id;}
+    loadCache();renderAll();if(typeof window.sb==='undefined'||!window.user?.id)return;
+    const loadingOwner=window.user.id;
     try{
-      const r=await sb.from('quick_notes').select('*').eq('category','system_english').order('created_at',{ascending:false}).limit(90);
-      if(user?.id!==loadingOwner)return;
+      const r=await window.sb.from('quick_notes').select('*').eq('category','system_english').order('created_at',{ascending:false}).limit(90);
+      if(window.user?.id!==loadingOwner)return;
       archive=(r.data||[]).map(x=>{try{return {...JSON.parse(x.content),id:x.id}}catch{return null}}).filter(Boolean);
       const curriculum=archive.find(x=>Array.isArray(x.grammarCompleted)||Array.isArray(x.grammarBookmarks));
       if(curriculum){if(Array.isArray(curriculum.grammarCompleted))state.grammarCompleted=curriculum.grammarCompleted;if(Array.isArray(curriculum.grammarBookmarks))state.grammarBookmarks=curriculum.grammarBookmarks;if(curriculum.grammarActiveId)state.grammarActiveId=curriculum.grammarActiveId}
@@ -62,11 +62,11 @@
   }
   let syncTimer;
   function sync(){
-    const owner=user?.id;cache();clearTimeout(syncTimer);syncTimer=setTimeout(async()=>{
-      if(typeof sb==='undefined'||!owner||user?.id!==owner)return;
+    const owner=window.user?.id;cache();clearTimeout(syncTimer);syncTimer=setTimeout(async()=>{
+      if(typeof window.sb==='undefined'||!owner||window.user?.id!==owner)return;
       const content=JSON.stringify({...state,version:9,updatedAt:new Date().toISOString()});
-      if(syncId)await sb.from('quick_notes').update({content,updated_at:new Date().toISOString()}).eq('id',syncId);
-      else{const r=await sb.from('quick_notes').insert({user_id:user.id,title:`English Daily ${state.date}`,content,category:'system_english'}).select('id').single();if(!r.error)syncId=r.data.id}
+      if(syncId)await window.sb.from('quick_notes').update({content,updated_at:new Date().toISOString()}).eq('id',syncId);
+      else{const r=await window.sb.from('quick_notes').insert({user_id:window.user.id,title:`English Daily ${state.date}`,content,category:'system_english'}).select('id').single();if(!r.error)syncId=r.data.id}
     },450);
   }
   function complete(i){state.steps[i]=true;state.xp=state.steps.filter(Boolean).length*20;sync();renderMission()}
@@ -132,15 +132,15 @@
   function renderAll(){renderMission();renderWords();renderQuiz();renderArticle();renderGrammar();renderSpeaking();renderVideo();renderBank();renderArchive()}
 
   async function saveWord(word,meaning,example=''){
-    if(!user?.id)return toast?.('سجّل دخولك الأول');
-    const old=await sb.from('english_words').select('id').ilike('word',word).limit(1);if(old.data?.length)return toast?.('موجودة بالفعل في My Words');
-    const r=await sb.from('english_words').insert({user_id:user.id,word,meaning,example,status:'learning'});toast?.(r.error?r.error.message:'اتضافت لـ My Words');try{loadEnglish?.()}catch{}
+    if(!window.user?.id)return toast?.('سجّل دخولك الأول');
+    const old=await window.sb.from('english_words').select('id').ilike('word',word).limit(1);if(old.data?.length)return toast?.('موجودة بالفعل في My Words');
+    const r=await window.sb.from('english_words').insert({user_id:window.user.id,word,meaning,example,status:'learning'});toast?.(r.error?r.error.message:'اتضافت لـ My Words');try{loadEnglish?.()}catch{}
   }
   async function coach(mode,prompt,response=''){
     if(window.SERAG_ENGLISH_FREE_ONLY){const box=mode==='speaking'?$('#el9SpeakingFeedback'):mode==='video'?$('#el9VideoAi'):$('#el9GrammarAi');box.classList.remove('hidden');box.textContent='التصحيح المدفوع متوقف. استخدم خرائط القواعد والتدريب المحلي المجاني؛ النص الحر لا يتم تقييمه تلقائيًا.';return}
     const box=mode==='speaking'?$('#el9SpeakingFeedback'):mode==='video'?$('#el9VideoAi'):$('#el9GrammarAi');box.classList.remove('hidden');box.textContent='AI is reviewing…';
     try{
-      const session=(await sb.auth.getSession()).data.session;if(!session)throw new Error('سجّل دخولك الأول');
+      const session=(await window.sb.auth.getSession()).data.session;if(!session)throw new Error('سجّل دخولك الأول');
       const r=await fetch('/api/english-coach',{method:'POST',headers:{'Content-Type':'application/json',Authorization:`Bearer ${session.access_token}`},body:JSON.stringify({mode,prompt,response})});
       const out=await r.json();if(!r.ok)throw new Error(out.error||'تعذر التصحيح');box.textContent=out.feedback;
       if(mode==='speaking'){state.speakingFeedback=out.feedback;complete(4)}
@@ -174,7 +174,7 @@
       <details class="el7-accordion" id="el9ArchiveWrap"><summary><div class="el7-summary-left"><div class="el7-summary-icon">↺</div><div class="el7-summary-copy"><b>الأيام القديمة والمراجعة</b><span>آخر 21 يوم من الكلمات والمقالات</span></div></div><span class="el7-chevron">⌄</span></summary><div class="el7-panel" id="el9Archive"></div></details>`;
     anchor.insertAdjacentElement('afterend',hub);
     wrapPersonalLibrary(page,hub);renderAll();loadSync();
-    if(typeof sb!=='undefined')sb.auth.onAuthStateChange(()=>setTimeout(()=>loadSync(),0));
+    if(typeof window.sb!=='undefined')window.sb.auth.onAuthStateChange(()=>setTimeout(()=>loadSync(),0));
     hub.addEventListener('change',e=>{if(e.target.id==='el18ArticleSelect'){articleIndex=Number(e.target.value);window.speechSynthesis?.cancel();renderArticle();}});
     hub.addEventListener('input',e=>{
       if(e.target.id==='el9Transcript'){state.speakingTranscript=e.target.value;sync()}

@@ -59,7 +59,7 @@ test('the examples library links the official SCoRE resource without importing i
 });
 
 test('loader and navigation expose the examples bank in English and EngoPlay', () => {
-  const loader=read('shell-loader.js');
+  const loader=read('app-bootstrap.js');
   const index=read('index.html');
   const academy=read('english-academy-v12.js');
   const engoplay=read('engoplay-v19.js');
@@ -68,5 +68,5 @@ test('loader and navigation expose the examples bank in English and EngoPlay', (
   assert.match(academy,/\['examples'/);
   assert.match(academy,/SERAG_GRAMMAR_EXAMPLES_V1\?\.html\(\)/);
   assert.match(engoplay,/data-ea-tab="examples"/);
-  assert.match(index,/shell-loader\.js\?v=\d+/);
+  assert.match(index,/app-bootstrap\.js\?v=\d+/);
 });

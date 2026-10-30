@@ -5,7 +5,7 @@ import vm from 'node:vm';
 
 const js = fs.readFileSync('english-reading-studio-v2.js', 'utf8');
 const css = fs.readFileSync('english-reading-studio-v2.css', 'utf8');
-const loader = fs.readFileSync('shell-loader.js', 'utf8');
+const loader = fs.readFileSync('app-bootstrap.js', 'utf8');
 const academy = fs.readFileSync('english-academy-v12.js', 'utf8');
 
 test('Reading Studio v2 JavaScript parses before deployment', () => {
@@ -16,7 +16,7 @@ test('Reading Studio v2 is wired into the actual English reading route', () => {
   assert.match(loader, /english-reading-studio-v2\.css\?v=\$\{V\}/);
   assert.match(loader, /english-reading-studio-v2\.js\?v=44/);
   assert.match(academy, /SERAG_READING_STUDIO_V2\?\.summaryHTML\(\)/);
-  assert.match(loader, /const V='43';/);
+  assert.match(loader, /const V='55';/);
 });
 
 test('Reading Studio keeps the existing private article table and user-scoped writes', () => {

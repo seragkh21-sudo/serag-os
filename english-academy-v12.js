@@ -2,7 +2,7 @@
   'use strict';
   window.SERAG_ENGLISH_FREE_ONLY=true;
   const $=(s,r=document)=>r.querySelector(s),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const day=()=>new Date().toLocaleDateString('en-CA'),uid=()=>typeof user!=='undefined'&&user?.id?user.id:'guest';
+  const day=()=>new Date().toLocaleDateString('en-CA'),uid=()=>window.user?.id?window.user.id:'guest';
   const key=()=>`seragAcademyV12:${uid()}`;
   let owner='',state,tab='today',map='tenses',session=null,selected=null,root;
   const fresh=()=>({goal:'work',mode:8,attempts:[],cards:{},notes:{},sessions:[],scenario:null,practiceTopic:'be-basics',writingDrill:'paragraph',writingChecks:{},level:'B1',levelPart:'grammar',examTheme:'digital'});
@@ -94,26 +94,39 @@
     const answered=remote.answeredKeys instanceof Set?remote.answeredKeys:new Set(remote.answeredKeys||[]);
     const remoteLast=remote.lastAnsweredAt;
     const lastAt=id=>Math.max(lastSeen.get(id)||0,remoteLast instanceof Map?Number(remoteLast.get(id))||0:Number(remoteLast?.[id])||0);
-    return {lastSeen,answered,lastAt,cards:state?.cards||{},salt:String((state?.attempts||[]).length)+(state?.sessions||[]).length};
+    const recentIds=new Set((state?.attempts||[]).slice(-10).map(attempt=>String(attempt.id||'')).filter(Boolean));
+    const remoteRecent=remoteLast instanceof Map?[...remoteLast.entries()]:Object.entries(remoteLast||{});
+    remoteRecent.sort((a,b)=>(Number(b[1])||0)-(Number(a[1])||0)).slice(0,10).forEach(([id])=>recentIds.add(String(id)));
+    const stats=new Map();
+    for(const attempt of (state?.attempts||[]).slice(-100)){
+      if(!attempt.id)continue;
+      const row=stats.get(String(attempt.id))||{total:0,wrong:0};
+      row.total++;if(!attempt.correct)row.wrong++;
+      stats.set(String(attempt.id),row);
+    }
+    const errorRate=id=>{const row=stats.get(String(id));return row?.total?row.wrong/row.total:0};
+    return {lastSeen,answered,lastAt,recentIds,errorRate,cards:state?.cards||{},salt:String((state?.attempts||[]).length)+(state?.sessions||[]).length};
   }
   function practicePool(list,now=Date.now()){
-    const history=questionHistory(),fresh=[],due=[];
+    const history=questionHistory(),fresh=[],due=[],cooldown=[];
     for(const q of list){
       if(!q?.id)continue;
       const card=history.cards[q.id],last=history.lastAt(q.id),seen=!!card||history.lastSeen.has(q.id)||history.answered.has(q.id);
+      const isDue=(card&&Number(card.due)<=now)||(!card&&last&&now-last>=86400000);
+      // Keep recent due questions as a fallback, but never use a future-scheduled card early.
+      if(history.recentIds.has(String(q.id))){if(!card||isDue)cooldown.push(q);continue}
       if(!seen){fresh.push(q);continue}
-      if(card&&Number(card.due)<=now){due.push(q);continue}
-      if(!card&&last&&now-last>=86400000)due.push(q);
+      if(isDue)due.push(q);
     }
     const orderedDue=due.sort((a,b)=>history.lastAt(a.id)-history.lastAt(b.id)||hash(a.id+history.salt)-hash(b.id+history.salt));
-    // Review overdue questions before introducing fresh material; never pull a scheduled card early.
-    return [...orderedDue,...fresh];
+    // Due reviews first, then unseen material. Cooldown questions are a last-resort fallback.
+    return [...orderedDue,...fresh,...(orderedDue.length||fresh.length?[]:cooldown)];
   }
   function selectQuestions(list,kind='daily',limit=state?.mode||8){
     const history=questionHistory(),now=Date.now();
     const candidates=kind==='review'?list:practicePool(list,now);
     const priority=q=>(history.cards[q.id]&&Number(history.cards[q.id].due)<=now)||(!history.cards[q.id]&&history.lastAt(q.id)&&now-history.lastAt(q.id)>=86400000)?0:1;
-    const ordered=[...candidates].sort((a,b)=>priority(a)-priority(b)||(history.lastSeen.get(a.id)||0)-(history.lastSeen.get(b.id)||0)||hash(a.id+history.salt)-hash(b.id+history.salt));
+    const ordered=[...candidates].sort((a,b)=>priority(a)-priority(b)||history.errorRate(b.id)-history.errorRate(a.id)||(history.lastSeen.get(a.id)||0)-(history.lastSeen.get(b.id)||0)||hash(a.id+history.salt)-hash(b.id+history.salt));
     if(kind!=='daily')return ordered.slice(0,limit);
     const rankGroups=new Map();
     for(const q of ordered){const r=priority(q);if(!rankGroups.has(r))rankGroups.set(r,new Map());const groups=rankGroups.get(r),topic=q.topic||'mixed';if(!groups.has(topic))groups.set(topic,[]);groups.get(topic).push(q)}
