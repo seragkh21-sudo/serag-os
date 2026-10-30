@@ -18,12 +18,13 @@ test('bootstrap has no document.write call and executes scripts in order',()=>{
 
 test('app publishes Supabase client and authenticated user on window',()=>{
   const source=fs.readFileSync('app.js','utf8');
-  assert.match(source,/window\.sb\s*=\s*window\.supabase\.createClient/);
-  assert.match(source,/window\.user\s*=\s*null/);
+  assert.match(source,/sb=window\.sb=window\.supabase\.createClient/);
+  assert.match(source,/var sb = null;[\s\S]*var user = null;/);
+  assert.match(source,/user=window\.user=session\?\.user\|\|null/);
 });
 
 test('bootstrap cache-busts every local asset from one version constant',()=>{
   const source=fs.readFileSync('app-bootstrap.js','utf8');
-  assert.match(source,/const V='57'/);
+  assert.match(source,/const V='58'/);
   assert.doesNotMatch(source,/\/(?:[\w-]+)\.(?:js|css)\?v=\d+/);
 });
