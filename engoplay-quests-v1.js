@@ -160,7 +160,7 @@
     }
     if (!Array.isArray(state.daily.bank)) state.daily.bank = [];
     if (!Array.isArray(state.daily.selected)) state.daily.selected = [];
-    if (!Array.isArray(state.daily.ids) || !state.daily.ids.length) state.daily.ids = pickDailyExamples(rows, owner, day);
+    if (!Array.isArray(state.daily.ids) || !state.daily.ids.length) state.daily.ids = pickDailyExamples(rows, owner, day, state.recentExampleIds);
     if (!Number.isInteger(state.daily.index) || state.daily.index < 0) state.daily.index = 0;
     if (state.daily.index > 2) state.daily.index = 2;
     if (state.daily.completed) state.daily.index = 2;
