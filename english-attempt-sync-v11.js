@@ -121,7 +121,7 @@
     // Do not leave an anonymous attempt in a shared queue that could later sync to another account.
     if(!userId())return null;
     const row=baseRow({
-      source:'engoplay_challenge',
+      source:'daily_quiz',
       attempt_session:extra.attempt_session||`engoplay-challenge:${today()}`,
       attempt_order:extra.attempt_order??null,
       question_number:extra.question_number??null,
@@ -132,7 +132,7 @@
       correct_answer:String(extra.correct_answer||'').slice(0,3000),
       is_correct:Boolean(extra.is_correct),
       explanation:extra.explanation==null?null:String(extra.explanation).slice(0,3000),
-      metadata:Object.assign({version:11,ui:'engoplay'},extra.metadata&&typeof extra.metadata==='object'?extra.metadata:{})
+      metadata:Object.assign({version:11,ui:'engoplay',origin:'engoplay_challenge'},extra.metadata&&typeof extra.metadata==='object'?extra.metadata:{})
     });
     // Bind the row to the authenticated owner so it cannot be attributed to a later account.
     row.user_id=userId();

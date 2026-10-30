@@ -36,7 +36,8 @@ test('EngoPlay challenge attempts use the existing offline-safe attempt queue', 
     explanation: 'Present perfect describes a situation continuing to now.',
     metadata: { question_key: 'sentence-builder:example-42' }
   });
-  assert.equal(row.source, 'engoplay_challenge');
+  assert.equal(row.source, 'daily_quiz');
+  assert.equal(row.metadata.origin, 'engoplay_challenge');
   assert.equal(row.user_id, 'test-owner');
   assert.equal(row.is_correct, false);
   assert.equal(row.metadata.question_key, 'sentence-builder:example-42');

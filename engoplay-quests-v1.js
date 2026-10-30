@@ -251,7 +251,7 @@
       return '<button class="eq-close" data-eq-close aria-label="إغلاق">×</button>' +
         '<div class="eq-complete-icon">✦</div><div class="eq-eyebrow">QUEST COMPLETE</div>' +
         '<h2 id="eqDialogTitle">ممتاز! خلّصت تحدّي النهارده.</h2>' +
-        '<p class="eq-complete-copy">أنهيت جولة التحدّي. إجاباتك اتسجلت ضمن تقدم EngoPlay، وتقدر تراجعها من سجل المحاولات.</p>' +
+        '<p class="eq-complete-copy">أنهيت جولة التحدّي. إجاباتك اتسجلت ضمن تقدم EngoPlay الموحد.</p>' +
         '<div class="eq-complete-total"><strong>' + (shared ? shared.xp : state.points).toLocaleString('en-US') + '</strong><span>إجمالي XP في EngoPlay</span></div>' +
         '<button class="eq-primary-button" data-eq-close>ارجع لرحلتك ←</button>';
     }
@@ -389,7 +389,6 @@
       var sync = window.SERAG_ENGLISH_ATTEMPT_SYNC_V11;
       if (owner.indexOf('user:') === 0 && sync && typeof sync.trackChallengeAttempt === 'function') {
         sync.trackChallengeAttempt({
-          source: 'engoplay_challenge',
           attempt_session: 'sentence-builder:' + todayKey(at) + ':' + owner,
           attempt_order: bundle && bundle.state && bundle.state.daily ? bundle.state.daily.index + 1 : null,
           question_number: bundle && bundle.state && bundle.state.daily ? bundle.state.daily.index + 1 : null,

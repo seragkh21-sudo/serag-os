@@ -143,7 +143,7 @@ test('challenge attempts feed the shared EngoPlay XP and existing synced attempt
   assert.equal(xpCalls[0].correct, false);
   assert.equal(xpCalls[0].topic, 'sentence-builder');
   assert.equal(syncCalls.length, 1);
-  assert.equal(syncCalls[0].source, 'engoplay_challenge');
+  assert.equal(syncCalls[0].section, 'EngoPlay · Sentence Builder');
   assert.equal(syncCalls[0].is_correct, false);
   assert.equal(syncCalls[0].selected_answer, 'I worked here for years.');
   assert.equal(syncCalls[0].correct_answer, row.sentence);
