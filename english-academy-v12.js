@@ -111,12 +111,12 @@
     const history=questionHistory(),fresh=[],due=[],cooldown=[];
     for(const q of list){
       if(!q?.id)continue;
-      // Avoid the last ten answered IDs in normal practice unless the eligible bank is exhausted.
-      if(history.recentIds.has(String(q.id))){cooldown.push(q);continue}
       const card=history.cards[q.id],last=history.lastAt(q.id),seen=!!card||history.lastSeen.has(q.id)||history.answered.has(q.id);
+      const isDue=(card&&Number(card.due)<=now)||(!card&&last&&now-last>=86400000);
+      // Keep recent due questions as a fallback, but never use a future-scheduled card early.
+      if(history.recentIds.has(String(q.id))){if(isDue)cooldown.push(q);continue}
       if(!seen){fresh.push(q);continue}
-      if(card&&Number(card.due)<=now){due.push(q);continue}
-      if(!card&&last&&now-last>=86400000)due.push(q);
+      if(isDue)due.push(q);
     }
     const orderedDue=due.sort((a,b)=>history.lastAt(a.id)-history.lastAt(b.id)||hash(a.id+history.salt)-hash(b.id+history.salt));
     // Due reviews first, then unseen material. Cooldown questions are a last-resort fallback.
