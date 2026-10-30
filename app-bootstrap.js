@@ -4,6 +4,7 @@
     const res=await fetch(`/legacy.html?v=${V}`,{cache:'no-store',headers:{'Cache-Control':'no-cache'}});
     if(!res.ok)throw new Error('Legacy app failed to load');
     let html=await res.text();
+    html=html.replace('<script src="/app.js"></script>',`<script src="/app.js?v=${V}"></script>`);
 
     html=html.replace('</head>',`<link rel="stylesheet" href="/dashboard-v2.css?v=${V}"/>
 <link rel="stylesheet" href="/home-studio-v18.css?v=${V}"/>
