@@ -92,6 +92,18 @@
     if (Number(mistakes) <= 1) return 7;
     return 5;
   }
+  function sharedProgress() {
+    try {
+      var engine = window.ENGOPLAY;
+      if (!engine || typeof engine.stats !== 'function') return null;
+      var result = engine.stats();
+      if (!result || typeof result !== 'object') return null;
+      return {
+        xp: Math.max(0, Number(result.totalXP) || 0),
+        streak: Math.max(0, Number(result.current) || 0)
+      };
+    } catch (_) { return null; }
+  }
   function examples() {
     var bank = window.SERAG_GRAMMAR_EXAMPLES_V1;
     if (!bank || typeof bank.getExamples !== 'function') return [];
@@ -175,21 +187,23 @@
   }
   function panelMarkup(bundle) {
     var state = bundle.state, daily = state.daily, complete = !!daily.completed;
-    var streak = streakForDates(state.completedDates, daily.date);
+    var shared = sharedProgress();
+    var streak = shared ? shared.streak : streakForDates(state.completedDates, daily.date);
+    var totalXP = shared ? shared.xp : state.points;
     var progress = complete ? 3 : Math.min(3, daily.index + (daily.correct ? 1 : 0));
     var available = daily.ids.length >= 3;
     var label = complete ? 'اعرض نتيجتك' : 'ابدأ تحدّي الجمل';
     return '<section class="eq-quest-panel" data-eq-panel data-eq-owner="' + esc(bundle.owner) + '" aria-labelledby="eqQuestPanelTitle">' +
       '<div class="eq-quest-copy"><div class="eq-eyebrow"><span class="eq-spark">✦</span> ENGOPLAY · DAILY QUEST</div>' +
       '<h3 id="eqQuestPanelTitle">خلّي الإنجليزي لعبة بتكسب منها</h3>' +
-      '<p>رتّب كلمات من أمثلة القواعد الحقيقية، استخدم التلميح عند الحاجة، وخد نقاط على كل جملة تبنيها صح.</p>' +
+      '<p>رتّب كلمات من أمثلة القواعد الحقيقية، واستخدم التلميح عند الحاجة. كل محاولة بتدخل في تقدمك الموحد.</p>' +
       '<div class="eq-quest-tags"><span>ترتيب جمل</span><span>تصحيح فوري</span><span>نطق عند الطلب</span></div>' +
       '<button class="eq-quest-start" data-eq-open>' + label + ' <span aria-hidden="true">←</span></button>' +
       (!available ? '<p class="eq-unavailable" role="status">التحدّي هيبدأ لما يتوفر ٣ أمثلة جمل صالحة من بنك القواعد. اضغط للعرض أو افتح بنك أمثلة القواعد وتأكد إن الأمثلة محمّلة.</p>' : '') +
-      '<small class="eq-local-note">نقاط التحدّي منفصلة عن XP الأساسي، ومحفوظة محليًا لكل حساب على هذا الجهاز.</small></div>' +
+      '<small class="eq-local-note">محاولاتك بتدخل في XP وسلسلة EngoPlay، وبتتزامن تلقائيًا عند الاتصال. لو الشبكة فصلت، المحاولات بتفضل في طابور المزامنة.</small></div>' +
       '<div class="eq-quest-stats">' +
-      '<div class="eq-stat-main"><span class="eq-stat-icon">✦</span><strong>' + state.points.toLocaleString('en-US') + '</strong><small>نقطة تحدّي</small></div>' +
-      '<div class="eq-stat-pair"><div><strong>🔥 ' + streak + '</strong><small>أيام تحدّي متتالية</small></div><div><strong>' + state.sessions + '</strong><small>تحدّي مكتمل</small></div></div>' +
+      '<div class="eq-stat-main"><span class="eq-stat-icon">✦</span><strong>' + totalXP.toLocaleString('en-US') + '</strong><small>XP · EngoPlay</small></div>' +
+      '<div class="eq-stat-pair"><div><strong>🔥 ' + streak + '</strong><small>سلسلة EngoPlay</small></div><div><strong>' + state.sessions + '</strong><small>تحدّي مكتمل</small></div></div>' +
       '<div class="eq-progress-head"><span>تقدّمك النهارده</span><b>' + progress + '/3</b></div><progress max="3" value="' + progress + '"></progress>' +
       '<div class="eq-mini-path" aria-label="تقدّم التحدّي">' + [0,1,2].map(function (i) { return '<span class="' + (i < progress ? 'is-done' : (i === daily.index && !complete ? 'is-current' : '')) + '">' + (i < progress ? '✓' : (i + 1)) + '</span>'; }).join('') + '</div>' +
       '<div class="eq-storage-status" data-eq-storage-status role="status"></div>' +
@@ -232,12 +246,13 @@
   function dialogMarkup(bundle) {
     var state = bundle.state, daily = state.daily, rows = bundle.rows;
     var progress = daily.completed ? 3 : daily.index + (daily.correct ? 1 : 0);
+    var shared = sharedProgress();
     if (daily.completed) {
       return '<button class="eq-close" data-eq-close aria-label="إغلاق">×</button>' +
         '<div class="eq-complete-icon">✦</div><div class="eq-eyebrow">QUEST COMPLETE</div>' +
         '<h2 id="eqDialogTitle">ممتاز! خلّصت تحدّي النهارده.</h2>' +
-        '<p class="eq-complete-copy">بنيت 3 جمل من بنك القواعد، والنقاط اللي جمعتها فضلت محفوظة لحسابك على الجهاز ده.</p>' +
-        '<div class="eq-complete-total"><strong>' + state.points.toLocaleString('en-US') + '</strong><span>إجمالي نقاط التحدّي</span></div>' +
+        '<p class="eq-complete-copy">أنهيت جولة التحدّي. إجاباتك اتسجلت ضمن تقدم EngoPlay الموحد.</p>' +
+        '<div class="eq-complete-total"><strong>' + (shared ? shared.xp : state.points).toLocaleString('en-US') + '</strong><span>إجمالي XP في EngoPlay</span></div>' +
         '<button class="eq-primary-button" data-eq-close>ارجع لرحلتك ←</button>';
     }
     var row = currentExample(state, rows);
@@ -273,7 +288,7 @@
       '<div class="eq-action-row eq-retry-row"><button type="button" class="eq-primary-button eq-retry-button" data-eq-clear>عدّل الجملة وجرب تاني ↻</button>' +
       '<button type="button" class="eq-secondary-button" data-eq-audio>اسمع الجملة ◖))</button></div>' :
       '<div class="eq-action-row"><button type="button" class="eq-secondary-button" data-eq-hint>تلميح</button><button type="button" class="eq-secondary-button" data-eq-audio>اسمع الجملة ◖))</button>' +
-      (daily.selected.length < daily.bank.length ? '<button type="button" class="eq-primary-button" data-eq-check>تحقّق من الجملة</button>' : '') +
+      '<button type="button" class="eq-primary-button" data-eq-check>تحقّق من الجملة</button>' +
       '<button type="button" class="eq-text-button" data-eq-clear>ابدأ من جديد</button></div>';
     return '<button class="eq-close" data-eq-close aria-label="إغلاق">×</button>' +
       '<div class="eq-dialog-top"><div><div class="eq-eyebrow">DAILY QUEST · SENTENCE BUILDER</div>' +
@@ -283,7 +298,7 @@
       '<div class="eq-rule-meta"><span>' + esc(row.level || 'B1') + '</span><span>' + esc(row.titleAr || row.title || 'قاعدة نحوية') + '</span></div>' +
       '<div class="eq-build-area"><small>جملتك</small><div class="eq-answer' + answerStateClass + '" dir="ltr" lang="en">' + answer + '</div>' +
       '<div class="eq-word-bank" dir="ltr" lang="en">' + bank + '</div></div>' + hint + feedback + controls +
-      '<p class="eq-source-note">بمجرد اختيار آخر كلمة، هتظهر النتيجة بالأخضر أو الأحمر. لو الإجابة صح، اضغط «تابع للسؤال التالي». النطق عند الطلب فقط.</p>';
+      '<p class="eq-source-note">رتّب الكلمات، وبعد ما تخلص اضغط «تحقّق من الجملة» عشان تشوف النتيجة. النطق عند الطلب فقط.</p>';
   }
   function paintDialog() {
     var bundle = getState(), dialog = dialogShell();
@@ -343,14 +358,53 @@
       daily.correct = true;
       daily.answerStatus = 'correct';
       daily.reward = rewardPoints(daily.mistakes, daily.hintUsed);
-      state.points += daily.reward;
-      daily.feedback = 'مظبوط! + ' + daily.reward + ' نقطة. ' + (daily.hintUsed ? 'استخدمت التلميح بشكل ذكي.' : 'مبنيّة صح من أول مرة.');
+      daily.feedback = 'مظبوط! اتسجلت إجابتك في تقدم EngoPlay.';
     } else {
       daily.mistakes++;
       daily.correct = false;
       daily.answerStatus = 'incorrect';
-      daily.feedback = 'مش بالترتيب الصح لسه. الكلمات باللون الأحمر محتاجة ترتيب مختلف — جرّب تاني، من غير خصم.';
+      daily.feedback = 'مش بالترتيب الصح. الإجابة الصحيحة: ' + row.sentence + ' — جرّب تاني أو راجعها قبل السؤال التالي.';
     }
+    recordChallengeAttempt(row, built, daily.correct, bundle);
+  }
+
+  function recordChallengeAttempt(row, built, correct, bundle) {
+    var at = new Date().toISOString();
+    var questionKey = 'sentence-builder:' + String(row && row.id != null ? row.id : 'unknown');
+    var owner = bundle && bundle.owner ? String(bundle.owner) : ownerKey();
+    var trackedXP = false, syncedAttempt = false;
+    try {
+      if (window.ENGOPLAY && typeof window.ENGOPLAY.track === 'function') {
+        window.ENGOPLAY.track({
+          id: questionKey,
+          topic: 'sentence-builder',
+          correct: !!correct,
+          answer: String(built || ''),
+          at: at
+        });
+        trackedXP = true;
+      }
+    } catch (_) {}
+    try {
+      var sync = window.SERAG_ENGLISH_ATTEMPT_SYNC_V11;
+      if (owner.indexOf('user:') === 0 && sync && typeof sync.trackChallengeAttempt === 'function') {
+        sync.trackChallengeAttempt({
+          attempt_session: 'sentence-builder:' + todayKey(at) + ':' + owner,
+          attempt_order: bundle && bundle.state && bundle.state.daily ? bundle.state.daily.index + 1 : null,
+          question_number: bundle && bundle.state && bundle.state.daily ? bundle.state.daily.index + 1 : null,
+          section: 'EngoPlay · Sentence Builder',
+          question_type: 'sentence_arrange',
+          prompt: String(row && row.sentence || ''),
+          selected_answer: String(built || ''),
+          correct_answer: String(row && row.sentence || ''),
+          is_correct: !!correct,
+          explanation: String(row && (row.summary || row.tip) || ''),
+          metadata: { question_key: questionKey, topic: 'sentence-builder' }
+        });
+        syncedAttempt = true;
+      }
+    } catch (_) {}
+    return { trackedXP: trackedXP, syncedAttempt: syncedAttempt, questionKey: questionKey };
   }
 
   function handleClick(event) {
@@ -377,7 +431,6 @@
         daily.selected.push(take);
         daily.answerStatus = '';
         daily.feedback = '';
-        if (daily.selected.length === daily.bank.length) evaluateAnswer(bundle);
       }
       update(bundle);
     } else if (button.hasAttribute('data-eq-return')) {
@@ -414,7 +467,6 @@
         if (state.completedDates.indexOf(daily.date) < 0) state.completedDates.push(daily.date);
         state.completedDates = state.completedDates.slice(-180);
         state.sessions += 1;
-        state.points += 10;
       } else {
         daily.index += 1;
         daily.bank = [];
@@ -470,6 +522,8 @@
     pickDailyExamples: pickDailyExamples,
     streakForDates: streakForDates,
     rewardPoints: rewardPoints,
+    sharedProgress: sharedProgress,
+    recordChallengeAttempt: recordChallengeAttempt,
     injectQuestMarkup: injectQuestMarkup,
     attachRenderHook: attachRenderHook
   };

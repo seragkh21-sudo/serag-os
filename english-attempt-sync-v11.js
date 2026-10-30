@@ -117,6 +117,30 @@
     queueRows(`grammar:${row.client_event_id}`,[row]);
   }
 
+  function trackChallengeAttempt(extra={}) {
+    // Do not leave an anonymous attempt in a shared queue that could later sync to another account.
+    if(!userId())return null;
+    const row=baseRow({
+      source:'daily_quiz',
+      attempt_session:extra.attempt_session||`engoplay-challenge:${today()}`,
+      attempt_order:extra.attempt_order??null,
+      question_number:extra.question_number??null,
+      section:extra.section||'EngoPlay Challenge',
+      question_type:extra.question_type||'sentence_arrange',
+      prompt:String(extra.prompt||'').slice(0,3000),
+      selected_answer:extra.selected_answer==null?null:String(extra.selected_answer).slice(0,3000),
+      correct_answer:String(extra.correct_answer||'').slice(0,3000),
+      is_correct:Boolean(extra.is_correct),
+      explanation:extra.explanation==null?null:String(extra.explanation).slice(0,3000),
+      metadata:Object.assign({version:11,ui:'engoplay',origin:'engoplay_challenge'},extra.metadata&&typeof extra.metadata==='object'?extra.metadata:{})
+    });
+    // Bind the row to the authenticated owner so it cannot be attributed to a later account.
+    row.user_id=userId();
+    const session=String(extra.attempt_session||row.attempt_session).slice(0,160);
+    queueRows('challenge:'+session+':'+row.client_event_id,[row]);
+    return row;
+  }
+
   function getReviewSession(){
     try{
       let id=localStorage.getItem(REVIEW_SESSION_KEY);
@@ -177,4 +201,8 @@
 
   window.addEventListener('online',()=>void flushPending());
   [400,1400,4000].forEach(ms=>setTimeout(()=>void flushPending(),ms));
+  window.SERAG_ENGLISH_ATTEMPT_SYNC_V11 = {
+    trackChallengeAttempt,
+    flushPending
+  };
 })();

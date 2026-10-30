@@ -61,10 +61,12 @@
 .eq-feedback{margin-top:12px;padding:11px 13px;border:1px solid var(--line,#e4e0eb);border-radius:11px;font-size:12px;line-height:1.75}
 .eq-feedback.is-correct{border-color:#9bd8bc;background:#ecfbf3;color:#176744}
 .eq-feedback.is-incorrect{border-color:#f0d2a5;background:#fff8e9;color:#87561b}
-.eq-action-row{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-top:14px}
+.eq-action-row{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-top:14px;position:sticky;bottom:0;z-index:4;padding:10px 0 max(10px,env(safe-area-inset-bottom));background:linear-gradient(180deg,transparent,var(--card,#fff) 18%);}
 .eq-secondary-button,.eq-text-button{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:39px;padding:9px 12px;border:1px solid var(--line,#e4e0eb);border-radius:10px;background:var(--card,#fff);color:var(--text,#333);font:inherit;font-size:11px;font-weight:750;cursor:pointer}
 .eq-primary-button{min-height:42px;margin-top:14px}
 .eq-action-row .eq-primary-button{margin:0}
+.eq-quest-dialog .eq-action-row [data-eq-check]{min-width:150px}
+.eq-quest-dialog .eq-action-row button:disabled{opacity:.55;cursor:not-allowed}
 .eq-text-button{border-color:transparent;background:transparent;color:var(--muted,#777)}
 .eq-source-note{margin:14px 0 0;font-size:10px;line-height:1.7;color:var(--muted,#888)}
 .eq-complete-icon{display:grid;place-items:center;width:58px;height:58px;margin:26px auto 10px;border-radius:18px;background:#e8f9f0;color:#21855e;font-size:31px}
