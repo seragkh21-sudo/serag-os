@@ -24,3 +24,36 @@ test('reading exercises have valid unique options and answers',()=>{
  const c={window:{}};c.window=c;vm.runInNewContext(readFileSync('english-content-v9.js','utf8'),c);
  assert.ok(c.SERAG_ENGLISH_V9.articles.length>=26);for(const a of c.SERAG_ENGLISH_V9.articles.filter(a=>a.checks)){assert.equal(a.checks.length,2);for(const [q,options,answer,why] of a.checks){assert.ok(q&&why);assert.equal(new Set(options).size,options.length);assert.ok(options[answer])}}
 });
+
+
+import dictionaryProxy from '../api/dictionary.js';
+
+test('dictionary proxy validates input, handles not-found and caches successful public lookups', async () => {
+  const original = global.fetch;
+  const calls = [];
+  try {
+    global.fetch = async (url, options) => {
+      calls.push({url, options});
+      return {status:200,ok:true,json:async()=>[{word:'hello',meanings:[]}]};
+    };
+    const res = response();
+    await dictionaryProxy({method:'GET',query:{word:'hello'}},res);
+    assert.equal(res.statusCode,200);
+    assert.equal(res.headers['Cache-Control'],'public, max-age=300, s-maxage=3600, stale-while-revalidate=86400');
+    assert.match(calls[0].url,/api\\.dictionaryapi\\.dev\\/api\\/v2\\/entries\\/en\\/hello/);
+    assert.equal(calls[0].options.signal instanceof AbortSignal,true);
+
+    const invalid = response();
+    await dictionaryProxy({method:'GET',query:{word:'<script>'}},invalid);
+    assert.equal(invalid.statusCode,400);
+
+    global.fetch = async () => ({status:404,ok:false});
+    const missing = response();
+    await dictionaryProxy({method:'GET',query:{word:'notaword'}},missing);
+    assert.equal(missing.statusCode,404);
+
+    const method = response();
+    await dictionaryProxy({method:'POST',query:{word:'hello'}},method);
+    assert.equal(method.statusCode,405);
+  } finally { global.fetch = original; }
+});
