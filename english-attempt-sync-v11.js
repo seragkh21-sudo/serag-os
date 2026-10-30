@@ -5,8 +5,8 @@
   const today=()=>new Date().toLocaleDateString('en-CA');
   const makeId=()=>globalThis.crypto?.randomUUID?.()||`${Date.now()}-${Math.random().toString(36).slice(2)}-${Math.random().toString(36).slice(2)}`;
   const norm=s=>String(s??'').toLowerCase().trim().replace(/[’']/g,"'").replace(/\s+/g,' ').replace(/[.!?]+$/g,'');
-  const client=()=>typeof sb!=='undefined'?sb:null;
-  const userId=()=>typeof user!=='undefined'&&user?.id?user.id:null;
+  const client=()=>window.sb||null;
+  const userId=()=>window.user?.id||null;
 
   function readPending(){
     try{const x=JSON.parse(localStorage.getItem(PENDING_KEY)||'[]');return Array.isArray(x)?x:[]}catch{return []}
@@ -95,7 +95,7 @@
     const row=baseRow({
       source:'daily_quiz',attempt_session:`daily:${today()}`,attempt_order:order,question_number:order,
       section:'Daily Quiz',question_type,prompt,selected_answer:selected,correct_answer:correct,
-      is_correct:selected===correct,options,metadata:{version:11,ui:'english_v9'}
+      is_correct:selected===correct,options,metadata:{version:11,ui:'english_v9',...(button.dataset.questionKey?{question_key:button.dataset.questionKey}:{})}
     });
     queueRows(`daily:${row.client_event_id}`,[row]);
   }
