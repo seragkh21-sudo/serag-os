@@ -99,7 +99,7 @@
     question.key=quizQuestionKey(question);return question;
   }
   function buildQuizBank(){
-    if(!quizBank){const seen=new Set();quizBank=data.vocabulary.flatMap((entry,index)=>[0,1,2,3].map(mode=>buildQuizQuestion(entry,mode,index))).filter(q=>{if(!q.prompt||!q.correct||q.options.length<2||!q.options.includes(q.correct)||seen.has(q.key))return false;seen.add(q.key);return true})}
+    if(!quizBank){const seen=new Set();quizBank=data.vocabulary.flatMap((entry,index)=>[0,1,2,3].map(mode=>buildQuizQuestion(entry,mode,index))).filter(q=>{if(!q.prompt||!q.correct||q.options.length<2||!q.options.includes(q.correct)||(q.title==='Complete the sentence'&&!q.prompt.includes('_____'))||seen.has(q.key))return false;seen.add(q.key);return true})}
     return quizBank;
   }
   function selectQuizQuestion(recent=recentQuizKeys,seen=sessionQuizKeys){
