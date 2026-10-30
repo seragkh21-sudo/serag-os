@@ -50,6 +50,21 @@ test('daily examples are deterministic, unique and limited to useful sentence le
   assert.equal(game.pickDailyExamples([{ id: 'placeholder', sentence: 'You should ______ in the form before submitting it.' }], 'user-a', '2026-10-26').length, 0);
 });
 
+test('daily Sentence Builder avoids recently used examples before reusing the bank', () => {
+  const game = loadModule();
+  const rows = Array.from({ length: 9 }, (_, i) => ({
+    id: 'example-' + i,
+    sentence: 'I have used this simple example for practice ' + i + '.'
+  }));
+  const first = Array.from(game.pickDailyExamples(rows, 'user-a', '2026-10-26'));
+  const next = Array.from(game.pickDailyExamples(rows, 'user-a', '2026-10-27', first));
+  assert.equal(next.length, 3);
+  assert.equal(next.some(id => first.includes(id)), false);
+  const smallBank = rows.slice(0, 3);
+  assert.equal(game.pickDailyExamples(smallBank, 'user-a', '2026-10-27', first).length, 3,
+    'reuse is allowed only when the remaining bank cannot fill a complete challenge');
+});
+
 test('challenge streak counts consecutive completed challenge dates without fabricating today', () => {
   const game = loadModule();
   assert.equal(game.streakForDates(['2026-10-23', '2026-10-24', '2026-10-25'], '2026-10-26'), 3);

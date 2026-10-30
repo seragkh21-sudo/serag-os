@@ -47,6 +47,24 @@ test('daily selection interleaves grammar topics instead of clustering one rule'
   assert.equal(new Set(picked.map(q=>q.topic)).size,8);
 });
 
+test('overdue grammar reviews come before fresh questions while scheduled questions stay out',()=>{
+  const {api,store}=academy();
+  const now=Date.now();
+  store.set('seragAcademyV12:test-user',JSON.stringify({
+    goal:'work',mode:8,attempts:[{id:'overdue',at:now-3*86400000},{id:'scheduled',at:now-1000}],
+    cards:{overdue:{stage:0,due:now-1},scheduled:{stage:2,due:now+86400000}},
+    notes:{},sessions:[],scenario:null,practiceTopic:'be-basics',writingDrill:'paragraph',writingChecks:{},level:'B1',levelPart:'grammar',examTheme:'digital'
+  }));
+  api.homeState();
+  const pool=[
+    {id:'fresh',topic:'fresh-topic',prompt:'Fresh question',answer:'yes',options:['yes','no']},
+    {id:'scheduled',topic:'scheduled-topic',prompt:'Scheduled question',answer:'yes',options:['yes','no']},
+    {id:'overdue',topic:'review-topic',prompt:'Overdue question',answer:'yes',options:['yes','no']}
+  ];
+  assert.deepEqual(Array.from(api.practicePool(pool,now),q=>q.id),['overdue','fresh']);
+  assert.deepEqual(Array.from(api.selectQuestions(pool,'daily',3),q=>q.id),['overdue','fresh']);
+});
+
 test('review ordering prioritizes the oldest previously attempted questions when none are due',()=>{
   const {api,store}=academy();
   store.set('seragAcademyV12:test-user',JSON.stringify({
@@ -86,10 +104,10 @@ test('word-practice grammar fillers skip locally and remotely answered questions
     {id:'fresh-3',topic:'f',prompt:'Fresh three',answer:'yes',options:['yes','no']}
   ];
   const selected=wp.selectGrammarQuestions(pool,3);
-  assert.deepEqual(Array.from(selected,q=>q.id).sort(),['fresh-1','fresh-2','fresh-3']);
+  assert.deepEqual(Array.from(selected,q=>q.id).sort(),['due-question','fresh-1','fresh-2']);
   assert.ok(!selected.some(q=>['local-solved','remote-solved'].includes(q.id)));
   const actualRound=Array.from(wp.buildRound(wp.items().slice(0,4),pool,4).filter(q=>q.kind==='grammar'),q=>q.grammar.id);
-  assert.deepEqual(actualRound.sort(),['fresh-1','fresh-2','fresh-3'],'the actual round must render fresh questions, not just the selector');
+  assert.deepEqual(actualRound.sort(),['due-question','fresh-1','fresh-2'],'the actual round must render overdue reviews before fresh questions');
 });
 
 test('word-practice only repeats an answered grammar question when its review is due',()=>{

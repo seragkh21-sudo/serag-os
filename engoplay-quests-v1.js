@@ -59,7 +59,7 @@
       .replace(/[.!?…]+$/g, '')
       .toLocaleLowerCase();
   }
-  function pickDailyExamples(examples, owner, day) {
+  function pickDailyExamples(examples, owner, day, excludeIds) {
     var usable = (Array.isArray(examples) ? examples : []).filter(function (row) {
       return row && row.id != null && typeof row.sentence === 'string' &&
         tokensFromSentence(row.sentence).length >= 5 &&
@@ -71,7 +71,11 @@
       var kb = hash(day + '|' + owner + '|' + b.id);
       return ka - kb || String(a.id).localeCompare(String(b.id));
     });
-    return usable.slice(0, 3).map(function (row) { return String(row.id); });
+    var excluded = new Set((Array.isArray(excludeIds) ? excludeIds : []).map(String));
+    var fresh = usable.filter(function (row) { return !excluded.has(String(row.id)); });
+    var fallback = usable.filter(function (row) { return excluded.has(String(row.id)); });
+    // Prefer examples not used recently; only reuse older examples when the bank is too small.
+    return fresh.concat(fallback).slice(0, 3).map(function (row) { return String(row.id); });
   }
   function streakForDates(completedDates, today) {
     var set = new Set((Array.isArray(completedDates) ? completedDates : []).map(String));
@@ -93,14 +97,15 @@
     if (!bank || typeof bank.getExamples !== 'function') return [];
     try { return bank.getExamples() || []; } catch (_) { return []; }
   }
-  function emptyState(owner, day, rows) {
+  function emptyState(owner, day, rows, recentIds) {
     return {
       points: 0,
       sessions: 0,
       completedDates: [],
+      recentExampleIds: Array.isArray(recentIds) ? recentIds.slice(-90) : [],
       daily: {
         date: day,
-        ids: pickDailyExamples(rows, owner, day),
+        ids: pickDailyExamples(rows, owner, day, recentIds),
         index: 0,
         bank: [],
         selected: [],
@@ -144,14 +149,18 @@
     if (!state || typeof state !== 'object') state = emptyState(owner, day, rows);
     if (!Array.isArray(state.completedDates)) state.completedDates = [];
     state.completedDates = state.completedDates.filter(function (x) { return /^\d{4}-\d{2}-\d{2}$/.test(String(x)); }).slice(-180);
+    if (!Array.isArray(state.recentExampleIds)) state.recentExampleIds = [];
+    state.recentExampleIds = state.recentExampleIds.map(String).slice(-90);
     state.points = Math.max(0, Number(state.points) || 0);
     state.sessions = Math.max(0, Number(state.sessions) || 0);
     if (!state.daily || state.daily.date !== day || !Array.isArray(state.daily.ids)) {
-      state.daily = emptyState(owner, day, rows).daily;
+      var previousIds = Array.isArray(state.daily && state.daily.ids) ? state.daily.ids.map(String) : [];
+      state.recentExampleIds = state.recentExampleIds.concat(previousIds).filter(function (id, index, all) { return all.lastIndexOf(id) === index; }).slice(-90);
+      state.daily = emptyState(owner, day, rows, state.recentExampleIds).daily;
     }
     if (!Array.isArray(state.daily.bank)) state.daily.bank = [];
     if (!Array.isArray(state.daily.selected)) state.daily.selected = [];
-    if (!Array.isArray(state.daily.ids) || !state.daily.ids.length) state.daily.ids = pickDailyExamples(rows, owner, day);
+    if (!Array.isArray(state.daily.ids) || !state.daily.ids.length) state.daily.ids = pickDailyExamples(rows, owner, day, state.recentExampleIds);
     if (!Number.isInteger(state.daily.index) || state.daily.index < 0) state.daily.index = 0;
     if (state.daily.index > 2) state.daily.index = 2;
     if (state.daily.completed) state.daily.index = 2;
