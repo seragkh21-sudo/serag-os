@@ -1,8 +1,10 @@
+var sb = null;
+var user = null;
 const SUPABASE_URL='https://kdfbxcdxdhofqidczbot.supabase.co';
 const SUPABASE_KEY='sb_publishable_51lY0ST_vE6v0nogH5RGkQ_z8lJ5EAM';
 if(!window.supabase?.createClient)throw new Error('Supabase JS client did not load');
-window.sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
-window.user=null;
+sb=window.sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+user=window.user=null;
 let authMode='login', lastWaterLog=null;
 let selectedFood=null, mealDraft=[];
 let mediaRecorder=null, recordedChunks=[], recordedBlob=null, micStream=null;
@@ -48,7 +50,7 @@ $('authSubmit').onclick=async()=>{
 $('logoutBtn').onclick=()=>sb.auth.signOut();
 $('refreshBtn').onclick=()=>refreshAll();
 sb.auth.onAuthStateChange((_event,session)=>{
-  user=session?.user||null;
+  user=window.user=session?.user||null;
   $('authView').classList.toggle('hidden',!!user);
   $('appView').classList.toggle('hidden',!user);
   $('quickFab').classList.toggle('hidden',!user);
