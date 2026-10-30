@@ -106,12 +106,13 @@
       if(!card&&last&&now-last>=86400000)due.push(q);
     }
     const orderedDue=due.sort((a,b)=>history.lastAt(a.id)-history.lastAt(b.id)||hash(a.id+history.salt)-hash(b.id+history.salt));
-    return [...fresh,...orderedDue];
+    // Review overdue questions before introducing fresh material; never pull a scheduled card early.
+    return [...orderedDue,...fresh];
   }
   function selectQuestions(list,kind='daily',limit=state?.mode||8){
     const history=questionHistory(),now=Date.now();
     const candidates=kind==='review'?list:practicePool(list,now);
-    const priority=q=>(history.cards[q.id]&&Number(history.cards[q.id].due)<=now)||(!history.cards[q.id]&&history.lastAt(q.id)&&now-history.lastAt(q.id)>=86400000)?1:0;
+    const priority=q=>(history.cards[q.id]&&Number(history.cards[q.id].due)<=now)||(!history.cards[q.id]&&history.lastAt(q.id)&&now-history.lastAt(q.id)>=86400000)?0:1;
     const ordered=[...candidates].sort((a,b)=>priority(a)-priority(b)||(history.lastSeen.get(a.id)||0)-(history.lastSeen.get(b.id)||0)||hash(a.id+history.salt)-hash(b.id+history.salt));
     if(kind!=='daily')return ordered.slice(0,limit);
     const rankGroups=new Map();
@@ -139,12 +140,13 @@
     if(kind==='context'||kind==='exam'){const eligible=list.filter(q=>!state.cards[q.id]||state.cards[q.id].due<=Date.now());if(eligible.length&&kind==='context')list=eligible;list.sort((a,b)=>hash(a.id+String(state.attempts.length))-hash(b.id+String(state.attempts.length)));}
     if(kind==='placement')list=questions().filter(q=>q.id.startsWith('lesson:')).slice(0,18);
     if(kind==='daily')list=list.filter(q=>!['zero-first-conditionals','second-conditional','third-conditional','mixed-conditionals','condition-linkers'].includes(q.topic));
-    if(kind==='daily'||kind==='topic'){
+    if(kind==='daily'||kind==='topic'||kind==='level'){
       const eligible=list.filter(q=>!state.cards[q.id]||state.cards[q.id].due<=Date.now());
       if(eligible.length)list=eligible;
       const priorities=weak().map(([id])=>id);
       list.sort((a,b)=>{const pa=priorities.indexOf(a.topic),pb=priorities.indexOf(b.topic);return (pa<0?999:pa)-(pb<0?999:pb)});
-      list=selectQuestions(list,kind,kind==='topic'?list.length:state.mode);
+      // Level practice uses the same fresh/due filtering and topic interleaving as daily practice.
+      list=selectQuestions(list,kind==='topic'?'topic':'daily',kind==='topic'?list.length:state.mode);
     }
     session={kind,list:list.slice(0,kind==='placement'?18:kind==='topic'||kind==='context'?list.length:kind==='exam'?12:state.mode),index:0,score:0,answered:false,answers:{},completed:false};tab='today';render();$('.ea14-questions',root)?.scrollIntoView({block:'nearest',behavior:'smooth'});
   }
@@ -184,7 +186,7 @@
   document.addEventListener('click',e=>{const b=e.target.closest('[data-ea-external-topic]');if(b&&root){state.practiceTopic=b.dataset.eaExternalTopic;selected=null;save();start('topic');root.scrollIntoView({block:'start',behavior:'smooth'})}});
   const timer=setInterval(()=>{if(mount()){organizeLegacy();disablePaid();if(owner!==uid()){stop();load();render()} }},1200);window.addEventListener('pagehide',()=>{stop();if(audioUrl)URL.revokeObjectURL(audioUrl);clearInterval(timer)});
   function homeState(){if(!state||owner!==uid())load();return state}
-  function homeQuestion(){homeState();const pool=questions().filter(q=>q.options.length<=3&&(q.level||lesson(q.topic)?.level)===state.level);const available=pool.filter(q=>!state.cards[q.id]||state.cards[q.id].due<=Date.now());return (available.length?available:pool)[0]||questions()[0]}
+  function homeQuestion(){homeState();const pool=questions().filter(q=>q.options.length<=3&&(q.level||lesson(q.topic)?.level)===state.level);return selectQuestions(pool,'daily',1)[0]||pool[0]||questions()[0]}
   function homeAnswer(id,answer){homeState();const q=questions().find(x=>x.id===id);if(!q||!q.options.includes(answer))return null;record(q,answer);return {correct:answer===q.answer,answer:q.answer,explanation:q.explanation}}
   function openFromHome(section='today',kind=null){if(!mount())return false;homeState();stop();if(section!=='play'&&session?.kind==='engoplay')session=null;tab=section;selected=null;render();if(kind)start(kind);return true}
   function setLevel(value){if(!['B1','B2','C1','C2'].includes(value))return;homeState();state.level=value;save()}
