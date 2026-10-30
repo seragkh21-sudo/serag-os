@@ -22,6 +22,8 @@
   const blankExample=entry=>entry[3].replace(new RegExp(entry[0].replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'i'),'_____');
   let state={date:today(),steps:Array(6).fill(false),xp:0,answers:0,correct:0,revealed:[],videoUrl:'',videoPhrase:'',videoMeaning:'',videoNotes:'',videoFeedback:'',speakingPromptOffset:0,speakingTranscript:'',speakingFeedback:'',grammarPractice:'',grammarFeedback:'',grammarCompleted:[],grammarBookmarks:[],grammarActiveId:''};
   let archive=[],syncId=null,gameIndex=0,score=0,answered=false,grammarFilter='All',grammarSearch='',recognition=null,isRecording=false;
+  let quizBank=null,quizQueue=[],quizHistoryOwner=null,quizHistoryReady=false,currentQuizItem=null;
+  let recentQuizKeys=new Set(),sessionQuizKeys=new Set();
 
   const readingProgressKey=()=>window.user?.id?'seragReadingProgressV1:'+window.user.id:null;
   function completedArticles(){
@@ -83,17 +85,60 @@
     $('#el9WordsList').innerHTML=words.map(([word,meaning,category,example,register],i)=>`<article class="el9-word-card"><div class="el9-word-head"><div><strong>${esc(word)}</strong><div><span>${esc(category)}</span><em>${esc(register)}</em></div></div><button data-speak="${esc(word)}" aria-label="اسمع ${esc(word)}">🔊</button></div>${reveal(meaning,i)}<details><summary>Example</summary><p>${esc(example)}</p><button data-speak="${esc(example)}">🔊 Listen</button></details><button class="el6-btn tiny secondary" data-save-word="${esc(word)}" data-meaning="${esc(meaning)}" data-example="${esc(example)}">+ My Words</button></article>`).join('');
     $('#el9WordsCount').textContent=`${words.length} كلمات · General + Work`;
   }
-  function currentQuiz(){
-    const words=dailyWords(),entry=words[gameIndex%words.length],mode=gameIndex%4,s=seed(today())+gameIndex*17;
-    const alternatives=shuffle(data.vocabulary.filter(x=>x[0]!==entry[0]&&(x[2]===entry[2]||x[4]===entry[4])),s).slice(0,3);
-    const fallback=alternatives.length<3?shuffle(data.vocabulary.filter(x=>x[0]!==entry[0]&&!alternatives.includes(x)),s+9).slice(0,3-alternatives.length):[];
-    const pool=[entry,...alternatives,...fallback];
-    if(mode===1)return {title:'Complete the sentence',prompt:blankExample(entry),correct:entry[0],options:shuffle(pool,s+1).map(x=>x[0])};
-    if(mode===2){const categories=[entry[2],...shuffle([...new Set(data.vocabulary.map(x=>x[2]).filter(x=>x!==entry[2]))],s).slice(0,3)];return {title:'Which topic does it belong to?',prompt:entry[0],correct:entry[2],options:shuffle(categories,s+2)}}
-    if(mode===3)return {title:'Choose the natural English',prompt:entry[1],correct:entry[0],options:shuffle(pool,s+3).map(x=>x[0])};
-    return {title:'Choose the meaning',prompt:entry[0],correct:entry[1],options:shuffle(pool,s+4).map(x=>x[1])};
+  const normalizeQuizText=value=>String(value??'').toLowerCase().trim().replace(/[’']/g,"'").replace(/\s+/g,' ').replace(/[.!?]+$/g,'');
+  const quizQuestionKey=q=>[q.title,q.prompt,q.correct].map(normalizeQuizText).join('|');
+  function buildQuizQuestion(entry,mode,index){
+    const s=seed(today()+entry[0]+mode+index),similar=data.vocabulary.filter(x=>x[0]!==entry[0]&&(x[2]===entry[2]||x[4]===entry[4]));
+    const alternatives=shuffle(similar,s).slice(0,3),fallback=alternatives.length<3?shuffle(data.vocabulary.filter(x=>x[0]!==entry[0]&&!alternatives.some(y=>y[0]===x[0])),s+9).slice(0,3-alternatives.length):[];
+    const pool=[entry,...alternatives,...fallback];let question;
+    if(mode===1)question={title:'Complete the sentence',prompt:blankExample(entry),correct:entry[0],options:pool.map(x=>x[0])};
+    else if(mode===2){const categories=[...new Set([entry[2],...shuffle([...new Set(data.vocabulary.map(x=>x[2]).filter(x=>x!==entry[2]))],s).slice(0,3)])];question={title:'Which topic does it belong to?',prompt:entry[0],correct:entry[2],options:categories};}
+    else if(mode===3)question={title:'Choose the natural English',prompt:entry[1],correct:entry[0],options:pool.map(x=>x[0])};
+    else question={title:'Choose the meaning',prompt:entry[0],correct:entry[1],options:pool.map(x=>x[1])};
+    question.options=[...new Set(question.options)].filter(Boolean);
+    question.key=quizQuestionKey(question);return question;
   }
-  function renderQuiz(){const q=currentQuiz(),label=state.answers<10?`${state.answers+1}/10`:`Bonus ${state.answers-9}`;$('#el9Quiz').innerHTML=`<div class="el9-card-head"><div><div class="el6-muted">${q.title} · ${label}</div><h3>${esc(q.prompt)}</h3></div><span class="el9-pill">${score} صح</span></div><div class="el9-quiz-options">${q.options.map(x=>`<button data-quiz-answer="${esc(x)}" data-correct="${esc(q.correct)}">${esc(x)}</button>`).join('')}</div><div class="el6-muted">4 أنواع أسئلة، وتتغير الكلمات تلقائيًا كل يوم. بعد أول 10 تقدر تكمل Bonus.</div>`}
+  function buildQuizBank(){
+    if(!quizBank){const seen=new Set();quizBank=data.vocabulary.flatMap((entry,index)=>[0,1,2,3].map(mode=>buildQuizQuestion(entry,mode,index))).filter(q=>{if(!q.prompt||!q.correct||q.options.length<2||!q.options.includes(q.correct)||seen.has(q.key))return false;seen.add(q.key);return true})}
+    return quizBank;
+  }
+  function selectQuizQuestion(recent=recentQuizKeys,seen=sessionQuizKeys){
+    if(!quizQueue.length)quizQueue=shuffle(buildQuizBank(),seed(today()+String(window.user?.id||'guest')));
+    const fresh=quizQueue.filter(q=>!recent.has(q.key)&&!seen.has(q.key));
+    const fallback=quizQueue.filter(q=>!seen.has(q.key));
+    return fresh[0]||fallback[0]||quizQueue[0];
+  }
+  function currentQuiz(){currentQuizItem=selectQuizQuestion();return currentQuizItem;}
+  function saveRecentQuizKey(key){
+    if(!key)return;recentQuizKeys.delete(key);recentQuizKeys.add(key);
+    while(recentQuizKeys.size>10)recentQuizKeys.delete(recentQuizKeys.values().next().value);
+    try{localStorage.setItem('seragDailyQuizRecentV1:'+(window.user?.id||'guest'),JSON.stringify([...recentQuizKeys]))}catch{}
+  }
+  async function loadQuizHistory(){
+    const owner=window.user?.id||'guest';
+    if(quizHistoryOwner===owner&&quizHistoryReady)return;
+    quizHistoryOwner=owner;quizHistoryReady=false;quizQueue=[];sessionQuizKeys=new Set();answered=false;gameIndex=0;score=0;currentQuizItem=null;
+    let local=[];try{const saved=JSON.parse(localStorage.getItem('seragDailyQuizRecentV1:'+owner)||'[]');if(Array.isArray(saved))local=saved.filter(x=>typeof x==='string').slice(-10).reverse()}catch{}
+    recentQuizKeys=new Set(local);
+    if(owner!=='guest'&&window.sb){
+      try{
+        const result=await window.sb.from('english_quiz_attempts').select('prompt,question_type,correct_answer,metadata,created_at').eq('user_id',owner).eq('source','daily_quiz').order('created_at',{ascending:false}).limit(10);
+        if(window.user?.id!==owner)return;
+        if(!result.error){
+          const remote=(result.data||[]).map(row=>row.metadata?.question_key||quizQuestionKey({title:row.question_type||'',prompt:row.prompt||'',correct:row.correct_answer||''})).filter(Boolean);
+          recentQuizKeys=new Set([...new Set([...local,...remote])].slice(0,10));
+          try{localStorage.setItem('seragDailyQuizRecentV1:'+owner,JSON.stringify([...recentQuizKeys]))}catch{}
+        }else console.warn('Daily quiz history could not be loaded',result.error);
+      }catch(error){console.warn('Daily quiz history could not be loaded',error)}
+    }
+    if((window.user?.id||'guest')!==owner)return;
+    quizHistoryReady=true;renderQuiz();
+  }
+  function renderQuiz(){
+    if(window.user?.id&&!quizHistoryReady){$('#el9Quiz').innerHTML='<div class="el9-card-head"><h3>جارٍ تحميل سجل الأسئلة…</h3></div><p class="el6-muted">بنجهز تدريبًا جديدًا بعيدًا عن آخر إجاباتك.</p>';return}
+    const q=currentQuiz(),label=state.answers<10?`${state.answers+1}/10`:`Bonus ${state.answers-9}`;
+    $('#el9Quiz').innerHTML=`<div class="el9-card-head"><div><div class="el6-muted">${q.title} · ${label}</div><h3>${esc(q.prompt)}</h3></div><span class="el9-pill">${score} صح</span></div><div class="el9-quiz-options">${q.options.map(x=>`<button data-quiz-answer="${esc(x)}" data-correct="${esc(q.correct)}" data-question-key="${esc(q.key)}">${esc(x)}</button>`).join('')}</div><div class="el6-muted">بنك أسئلة متنوع من كل المفردات. آخر 10 أسئلة تمت الإجابة عليها يتم استبعادها، وبعد أول 10 تقدر تكمل Bonus.</div>`;
+  }
   function renderArticle(){
     const a=dailyArticle(),finished=completedArticles(),readCount=finished.filter(title=>data.articles.some(x=>x.title===title)).length;
     const words=a.words||data.vocabulary.filter(x=>a.text.toLowerCase().includes(x[0].toLowerCase())).slice(0,4).map(x=>[x[0],x[1]]);
@@ -173,8 +218,8 @@
       <details class="el7-accordion" id="el9WordBankWrap"><summary><div class="el7-summary-left"><div class="el7-summary-icon">W</div><div class="el7-summary-copy"><b>Word Bank by Topic</b><span>Work · HR · Jobs · Marketing · Everyday · Slang · Idioms · More</span></div></div><span class="el7-chevron">⌄</span></summary><div class="el7-panel" id="el9WordBank"></div></details>
       <details class="el7-accordion" id="el9ArchiveWrap"><summary><div class="el7-summary-left"><div class="el7-summary-icon">↺</div><div class="el7-summary-copy"><b>الأيام القديمة والمراجعة</b><span>آخر 21 يوم من الكلمات والمقالات</span></div></div><span class="el7-chevron">⌄</span></summary><div class="el7-panel" id="el9Archive"></div></details>`;
     anchor.insertAdjacentElement('afterend',hub);
-    wrapPersonalLibrary(page,hub);renderAll();loadSync();
-    if(typeof window.sb!=='undefined')window.sb.auth.onAuthStateChange(()=>setTimeout(()=>loadSync(),0));
+    wrapPersonalLibrary(page,hub);renderAll();loadSync();void loadQuizHistory();
+    if(window.sb?.auth)window.sb.auth.onAuthStateChange(()=>setTimeout(()=>{loadSync();void loadQuizHistory()},0));
     hub.addEventListener('change',e=>{if(e.target.id==='el18ArticleSelect'){articleIndex=Number(e.target.value);window.speechSynthesis?.cancel();renderArticle();}});
     hub.addEventListener('input',e=>{
       if(e.target.id==='el9Transcript'){state.speakingTranscript=e.target.value;sync()}
@@ -191,7 +236,7 @@
       const sound=e.target.closest('[data-speak]');if(sound)return speak(sound.dataset.speak);
       const save=e.target.closest('[data-save-word]');if(save)return saveWord(save.dataset.saveWord,save.dataset.meaning,save.dataset.example);
       const r=e.target.closest('.el9-reveal');if(r){if(r.dataset.reveal!==undefined){const i=Number(r.dataset.reveal);state.revealed=state.revealed.includes(i)?state.revealed.filter(x=>x!==i):[...state.revealed,i];if(state.revealed.length>=10)complete(0);else sync();renderWords()}else r.classList.toggle('revealed');return}
-      const qa=e.target.closest('[data-quiz-answer]');if(qa&&!answered){answered=true;const ok=qa.dataset.quizAnswer===qa.dataset.correct;qa.classList.add(ok?'correct':'wrong');qa.closest('.el9-quiz-options')?.querySelectorAll('button').forEach(x=>{if(x.dataset.quizAnswer===qa.dataset.correct)x.classList.add('correct')});state.answers++;if(ok){score++;state.correct++}sync();if(state.answers>=10)complete(1);setTimeout(()=>{gameIndex=(gameIndex+1)%10;answered=false;renderQuiz()},850);return}
+      const qa=e.target.closest('[data-quiz-answer]');if(qa&&!answered){answered=true;const ok=qa.dataset.quizAnswer===qa.dataset.correct;qa.classList.add(ok?'correct':'wrong');qa.closest('.el9-quiz-options')?.querySelectorAll('button').forEach(x=>{if(x.dataset.quizAnswer===qa.dataset.correct)x.classList.add('correct')});const questionKey=qa.dataset.questionKey||currentQuizItem?.key;if(questionKey){sessionQuizKeys.add(questionKey);saveRecentQuizKey(questionKey)}state.answers++;if(ok){score++;state.correct++}sync();if(state.answers>=10)complete(1);setTimeout(()=>{gameIndex++;answered=false;renderQuiz()},850);return}
       if(e.target.closest('[data-read-article]'))return speak(dailyArticle().text);
       if(e.target.closest('[data-article-done]')){completeArticle(dailyArticle().title);return;}
       if(e.target.closest('[data-check-article]')){const answer=$('#el9ArticleAnswer').value.trim(),a=dailyArticle();if(!answer){$('#el9ArticleFeedback').textContent='اكتب إجابة قصيرة الأول.';return}const stop=new Set(['this','that','with','from','have','were','what','when','where','which','their','there','about','because','should','could','would','into','than','then','they','them','your','after','before','does','while','only','also','more','most','some','many','very','been','being','each','such','will','must','need','work']);const keyWords=[...new Set(String(a.answer||'').toLowerCase().replace(/[^a-z0-9\s-]/g,' ').split(/\s+/).filter(w=>w.length>3&&!stop.has(w)))].slice(0,7),written=answer.toLowerCase().replace(/[^a-z0-9\s-]/g,' '),matched=keyWords.filter(w=>written.includes(w)),pct=keyWords.length?Math.round(matched.length/keyWords.length*100):0;$('#el9ArticleFeedback').textContent='فحص محتوى بسيط: استخدمت '+matched.length+' من '+keyWords.length+' كلمات مفتاحية مرتبطة بالإجابة ('+pct+'%). قارن الفكرة والمعنى، مش الكلمات حرفيًا. النموذج: '+a.answer;return}
@@ -216,5 +261,6 @@
     });
     return true;
   }
+  window.SERAG_DAILY_QUIZ_V6={buildQuizBank,questionKey:quizQuestionKey,selectQuestion(recent=[],seen=[]){return selectQuizQuestion(new Set(recent),new Set(seen))}};
   let attempts=0,timer=setInterval(()=>{attempts++;if(mount()||attempts>35)clearInterval(timer)},350);
 })();
