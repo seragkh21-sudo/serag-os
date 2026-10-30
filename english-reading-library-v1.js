@@ -151,7 +151,12 @@
         '<button type="button" data-erl-delete="' + esc(row.id) + '" aria-label="حذف المقال" title="حذف">⌫</button></div></article>';
     }).join('');
   }
+  function studioOwnsAcademyReading() {
+    return !!(window.SERAG_READING_STUDIO_V2 && $('#ea12Center'));
+  }
   async function load(force) {
+    // Reading Studio v2 owns the active Academy panel; don't run a second invisible query.
+    if (studioOwnsAcademyReading()) return;
     const id = uid();
     if (!id) {
       rows = [];
@@ -420,6 +425,11 @@
     // legacy siblings that are not part of the selected section.
     const academyRoot = $('#ea12Center');
     if (academyRoot) {
+      if (window.SERAG_READING_STUDIO_V2) {
+        const legacyCard = $('#erlLibraryCard');
+        if (legacyCard) legacyCard.remove();
+        return;
+      }
       const readingActive = !!$('#ea12Center [data-ea-tab="reading"][aria-pressed="true"]');
       const intro = $('.erl-reading-intro', academyRoot);
       let card = $('#erlLibraryCard');

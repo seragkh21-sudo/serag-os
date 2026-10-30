@@ -11,11 +11,11 @@ test('reading library is wired into the English reading section and the active s
   const preview = read('workspace-preview-content.html');
   assert.match(academy, /SERAG_READING_LIBRARY_V1\?\.summaryHTML/);
   assert.match(loader, /english-reading-library-v1\.css/);
-  assert.match(loader, /const V=['"]56['"]/);
+  assert.match(loader, /const V=['"]57['"]/);
   assert.match(loader, /english-reading-library-v1\.js/);
   assert.match(entry,/app-bootstrap\.js\?v=\d+/);
-  assert.match(preview, /english-reading-library-v1\.css\?v=56/);
-  assert.match(preview, /english-reading-library-v1\.js\?v=56/);
+  assert.match(preview, /english-reading-library-v1\.css\?v=57/);
+  assert.match(preview, /english-reading-library-v1\.js\?v=57/);
 });
 
 test('article library supports owner-scoped CRUD, search, reading status and notes', () => {
@@ -63,4 +63,13 @@ test('article cards show a clear action to open the reading view', () => {
   assert.match(source, /افتح المقال واقرأه/);
   assert.match(source, /if \(open\) \{ openReader\(open\.dataset\.erlOpen\); return; \}/);
   assert.match(styles, /\.erl-open-cta\{/);
+});
+
+
+test('legacy article library yields the active Academy Reading panel to Reading Studio v2',()=>{
+  const source=read('english-reading-library-v1.js');
+  assert.match(source,/function studioOwnsAcademyReading\(\)[\s\S]*?window\.SERAG_READING_STUDIO_V2 && \$\('#ea12Center'\)/);
+  assert.match(source,/if \(studioOwnsAcademyReading\(\)\) return;/);
+  const mount=source.slice(source.indexOf('  function mount() {'),source.indexOf('  function boot() {'));
+  assert.match(mount,/if \(window\.SERAG_READING_STUDIO_V2\) \{[\s\S]*?legacyCard\.remove\(\)[\s\S]*?return;/);
 });
