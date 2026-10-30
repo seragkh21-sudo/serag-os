@@ -1,7 +1,7 @@
 /* EngoPlay Dictionary v1 — resilient, opt-in dictionary lookup for Reading and Vocabulary. */
 (function () {
   'use strict';
-  const API = 'https://api.dictionaryapi.dev/api/v2/entries/en/';
+  const API = '/api/dictionary?word=';
   const CACHE_KEY = 'seragDictionaryCacheV1';
   const TTL = 7 * 24 * 60 * 60 * 1000;
   const MAX_CACHE = 100;
