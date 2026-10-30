@@ -16,7 +16,7 @@ test('daily quiz draws multiple question forms from the full vocabulary bank',()
   const api=dailyQuiz(),bank=api.buildQuizBank();
   assert.ok(bank.length>100,'the quiz bank should be substantially larger than the old ten-word loop');
   assert.equal(new Set(bank.map(q=>q.key)).size,bank.length,'question keys must be unique');
-  for(const q of bank){assert.ok(q.options.includes(q.correct),q.key);assert.ok(q.options.length>1,q.key)}
+  for(const q of bank){assert.ok(q.options.includes(q.correct),q.key);assert.ok(q.options.length>1,q.key);if(q.title==='Complete the sentence')assert.ok(q.prompt.includes('_____'),q.key)}
   assert.ok(bank.some(q=>q.options.indexOf(q.correct)>0),'correct answers must not always appear first');
 });
 
