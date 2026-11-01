@@ -153,7 +153,7 @@ test('challenge keeps an explicit Check action and does not auto-submit on the f
   const source = fs.readFileSync('engoplay-quests-v1.js', 'utf8');
   assert.match(source, /data-eq-check>Check answer/);
   assert.doesNotMatch(source, /daily\.selected\.length === daily\.bank\.length\) evaluateAnswer/);
-  assert.match(source, /الإجابة الصحيحة: '\s*\+ row\.sentence/);
+  assert.match(source, /Not quite\. Correct answer: '\s*\+ row\.sentence/);
   assert.match(source, /Arrange the words, then select Check answer/);
   assert.match(source, /window\.ENGOPLAY\.track/);
 });
