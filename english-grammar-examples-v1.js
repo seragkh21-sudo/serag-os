@@ -113,11 +113,11 @@
   function filtersHTML(rows) {
     const levels = ['all',...Array.from(new Set(rows.map(row=>row.level))).sort((a,b)=>a.localeCompare(b,undefined,{numeric:true}))];
     const topics = getLessons().filter(lesson => rows.some(row => row.lessonId === String(lesson.id)))
-      .sort((a,b)=>String(a.titleAr||a.title).localeCompare(String(b.titleAr||b.title),'ar'));
+      .sort((a,b)=>String(a.title).localeCompare(String(b.title),'en'));
     return '<div class="ege-filters">' +
       '<label>Level<select data-ege-level>' + levels.map(value=>option(value,value==='all'?'All levels':(LEVEL_LABELS[value]||value),level===value)).join('') + '</select></label>' +
       '<label>Topic<select data-ege-topic>' + option('all','All topics',topic==='all') +
-      topics.map(lesson=>option(String(lesson.id),String(lesson.titleAr||lesson.title||lesson.id) + ' · ' + String(lesson.level||'B1'),topic===String(lesson.id))).join('') +
+      topics.map(lesson=>option(String(lesson.id),String(lesson.title||lesson.id) + ' · ' + String(lesson.level||'B1'),topic===String(lesson.id))).join('') +
       '</select></label>' +
       '<label class="ege-search-label">Search examples and grammar<input type="search" data-ege-search value="' + esc(query) + '" placeholder="e.g. present perfect or conditionals" autocomplete="off"></label>' +
       '</div>';
@@ -134,7 +134,7 @@
       : '';
     return '<article class="ege-card">' +
       '<div class="ege-card-meta"><span class="ege-level">' + esc(row.level) + '</span><span>' + esc(row.track) + '</span></div>' +
-      '<h4>' + esc(row.titleAr) + '</h4><p class="ege-rule-name" lang="en" dir="ltr">' + esc(row.title) + '</p>' +
+      '<h4>' + esc(row.title) + '</h4>' +
       '<blockquote class="ege-sentence" dir="ltr" lang="en">' + esc(row.sentence) + '</blockquote>' +
       details +
       '<div class="ege-card-actions"><button class="ege-btn" data-ea-lesson="' + esc(row.lessonId) + '">Open grammar lesson ↗</button></div>' +
