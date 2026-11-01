@@ -49,7 +49,7 @@
   function excerpt(row) {
     const source = String(row.summary || row.content || '').trim();
     if (source) return source.length > 155 ? source.slice(0, 152) + '…' : source;
-    return row.source_url ? 'مقال محفوظ من الويب — افتح المصدر أو أضف النص لقراءته هنا.' : 'أضف Article text لبدء القراءة.';
+    return row.source_url ? 'Saved web link. Open the source or add the text to read it here.' : 'Add article text to start reading.';
   }
   function summaryHTML() {
     return '<section class="erl-reading-intro">' +
@@ -57,7 +57,7 @@
       '<h3>Reading library</h3>' +
       '<p>Save articles, read at your own pace and return whenever you need. Your library syncs with your account.</p></div>' +
       '<div class="erl-reading-intro-actions"><div class="erl-reading-mini-stats">' +
-      '<span><b data-erl-count>0</b><small>مقال محفوظ</small></span>' +
+      '<span><b data-erl-count>0</b><small>Saved articles</small></span>' +
       '<span><b data-erl-completed-count>0</b><small>Completed</small></span></div>' +
       '<button type="button" class="ea12-btn primary" data-erl-add>＋ Add article</button></div></section>';
   }
@@ -65,15 +65,15 @@
     return '<section id="erlLibraryCard" class="card erl-library-card" hidden>' +
       '<div class="erl-library-head"><div><span class="erl-eyebrow">MY ARTICLES</span><h3>Saved articles</h3>' +
       '<p class="erl-muted">Write or paste an article, or save a link for later.</p></div>' +
-      '<button type="button" class="ea12-btn primary" data-erl-add>＋ إضافة مقال</button></div>' +
+      '<button type="button" class="ea12-btn primary" data-erl-add>＋ Add article</button></div>' +
       '<div class="erl-library-toolbar"><label class="erl-search"><span>⌕</span><input type="search" id="erlSearch" placeholder="Search by title, topic or keywords…" autocomplete="off"></label>' +
       '<div class="erl-filter-tabs" role="group" aria-label="Filter articles">' +
-      '<button type="button" data-erl-filter="all" aria-pressed="true">الكل</button>' +
-      '<button type="button" data-erl-filter="unread" aria-pressed="false">للقراءة</button>' +
+      '<button type="button" data-erl-filter="all" aria-pressed="true">All</button>' +
+      '<button type="button" data-erl-filter="unread" aria-pressed="false">Unread</button>' +
       '<button type="button" data-erl-filter="reading" aria-pressed="false">In progress</button>' +
       '<button type="button" data-erl-filter="completed" aria-pressed="false">Completed</button>' +
-      '<button type="button" data-erl-filter="favorites" aria-pressed="false">★ المفضلة</button></div></div>' +
-      '<div class="erl-library-status" id="erlLibraryStatus" role="status">جاري تجهيز مكتبتك…</div>' +
+      '<button type="button" data-erl-filter="favorites" aria-pressed="false">★ Favorites</button></div></div>' +
+      '<div class="erl-library-status" id="erlLibraryStatus" role="status">Preparing your library…</div>' +
       '<div id="erlArticleRows" class="erl-article-grid"></div>' +
       '</section>';
   }
@@ -82,26 +82,26 @@
       '<form id="erlEditorForm" class="erl-editor-form">' +
       '<header class="erl-dialog-head"><div><span class="erl-eyebrow">ADD TO YOUR LIBRARY</span><h3 id="erlEditorHeading">Add a new article</h3>' +
       '<p class="erl-muted">Save text to read in the app or a link to revisit later.</p></div>' +
-      '<button type="button" class="erl-close" data-erl-close aria-label="إغلاق">×</button></header>' +
+      '<button type="button" class="erl-close" data-erl-close aria-label="Close">×</button></header>' +
       '<div class="erl-form-grid">' +
-      '<label class="erl-field erl-wide">Article title<input id="erlTitle" name="title" maxlength="200" required placeholder="مثال: How to communicate clearly at work"></label>' +
-      '<label class="erl-field erl-wide">Source URL <span class="erl-optional">اختياري</span><input id="erlUrl" name="source_url" type="url" maxlength="2048" placeholder="https://…"></label>' +
+      '<label class="erl-field erl-wide">Article title<input id="erlTitle" name="title" maxlength="200" required placeholder="e.g. How to communicate clearly at work"></label>' +
+      '<label class="erl-field erl-wide">Source URL <span class="erl-optional">Optional</span><input id="erlUrl" name="source_url" type="url" maxlength="2048" placeholder="https://…"></label>' +
       '<label class="erl-field">Topic<input id="erlTopic" name="topic" maxlength="100" placeholder="Work, Daily life, Design…" value="General"></label>' +
       '<label class="erl-field">Level<select id="erlLevel" name="level"><option>A1</option><option>A2</option><option selected>B1</option><option>B2</option><option>C1</option><option>C2</option></select></label>' +
-      '<label class="erl-field erl-wide">Tags <span class="erl-optional">افصل بينها بفاصلة</span><input id="erlTags" name="tags" placeholder="communication, work, vocabulary"></label>' +
-      '<label class="erl-field erl-wide">Short summary <span class="erl-optional">اختياري</span><textarea id="erlSummary" name="summary" rows="2" maxlength="600" placeholder="What is the article about?"></textarea></label>' +
+      '<label class="erl-field erl-wide">Tags <span class="erl-optional">Separate with commas</span><input id="erlTags" name="tags" placeholder="communication, work, vocabulary"></label>' +
+      '<label class="erl-field erl-wide">Short summary <span class="erl-optional">Optional</span><textarea id="erlSummary" name="summary" rows="2" maxlength="600" placeholder="What is the article about?"></textarea></label>' +
       '<label class="erl-field erl-wide">Article text <span class="erl-optional">Paste the text here to read it in the app</span><textarea id="erlContent" name="content" rows="8" maxlength="200000" placeholder="Paste the article text here…"></textarea></label>' +
-      '</div><p class="erl-form-hint">ملاحظة: حفظ الرابط لا يستورد نص الموقع تلقائيًا؛ بعض المواقع تمنع الاستيراد. الصق النص إذا أردت قارئًا مريحًا داخل Serag OS.</p>' +
-      '<footer class="erl-dialog-actions"><button type="button" class="ea12-btn" data-erl-close>إلغاء</button><button type="submit" class="ea12-btn primary" id="erlSaveArticle">Save article</button></footer>' +
+      '</div><p class="erl-form-hint">Note: Saving a link does not import the webpage text automatically. Some sites block importing. Paste the text to read it comfortably in Serag OS.</p>' +
+      '<footer class="erl-dialog-actions"><button type="button" class="ea12-btn" data-erl-close>Cancel</button><button type="submit" class="ea12-btn primary" id="erlSaveArticle">Save article</button></footer>' +
       '</form></dialog>' +
       '<dialog id="erlReaderDialog" class="erl-dialog erl-reader-dialog">' +
       '<header class="erl-reader-header"><div class="erl-reader-title-wrap"><span class="erl-eyebrow">FOCUS READING</span><h2 id="erlReaderTitle">—</h2><p id="erlReaderMeta" class="erl-muted"></p></div>' +
-      '<div class="erl-reader-tools"><button type="button" class="erl-reader-tool" data-erl-font="down" aria-label="Decrease font size">A−</button><button type="button" class="erl-reader-tool" data-erl-font="up" aria-label="Increase font size">A+</button><button type="button" class="erl-close" data-erl-reader-close aria-label="إغلاق">×</button></div></header>' +
-      '<div class="erl-reader-progress"><span id="erlReaderProgressLabel">0% مقروء</span><div><i id="erlReaderProgressBar" style="width:0%"></i></div></div>' +
+      '<div class="erl-reader-tools"><button type="button" class="erl-reader-tool" data-erl-font="down" aria-label="Decrease font size">A−</button><button type="button" class="erl-reader-tool" data-erl-font="up" aria-label="Increase font size">A+</button><button type="button" class="erl-close" data-erl-reader-close aria-label="Close">×</button></div></header>' +
+      '<div class="erl-reader-progress"><span id="erlReaderProgressLabel">0% read</span><div><i id="erlReaderProgressBar" style="width:0%"></i></div></div>' +
       '<div id="erlReaderScroll" class="erl-reader-scroll"><article id="erlReaderBody" class="erl-reader-body"></article></div>' +
       '<section class="erl-reader-notes"><label for="erlReaderNotes">My notes</label><textarea id="erlReaderNotes" rows="2" maxlength="10000" placeholder="Save an idea or word to revisit…"></textarea><button type="button" class="ea12-btn" data-erl-save-notes>Save note</button></section>' +
       '<footer class="erl-reader-footer"><a id="erlSourceLink" href="#" target="_blank" rel="noopener noreferrer" hidden>Open original source ↗</a>' +
-      '<div class="erl-reader-footer-actions"><button type="button" class="ea12-btn" data-erl-reader-favorite>☆ Save to favorites</button><button type="button" class="ea12-btn primary" data-erl-complete>علّم كCompleted ✓</button></div></footer>' +
+      '<div class="erl-reader-footer-actions"><button type="button" class="ea12-btn" data-erl-reader-favorite>☆ Save to favorites</button><button type="button" class="ea12-btn primary" data-erl-complete>Mark as completed ✓</button></div></footer>' +
       '</dialog>';
   }
   function setStatus(message) {
@@ -146,7 +146,7 @@
         '<div class="erl-card-progress"><div><i style="width:' + progress + '%"></i></div><small>' + (progress ? progress + '%' : statusLabel(row.status)) + '</small></div>' +
         '<div class="erl-tags">' + tags + (source ? '<span class="erl-source-tag">↗ رابط مصدر</span>' : '') + '</div>' +
         '<span class="erl-open-cta"><span>Open and read</span><span class="erl-open-cta-arrow" aria-hidden="true">←</span></span></button>' +
-        '<div class="erl-card-actions"><button type="button" data-erl-favorite="' + esc(row.id) + '" aria-label="المفضلة" title="المفضلة">' + (row.favorite ? '★' : '☆') + '</button>' +
+        '<div class="erl-card-actions"><button type="button" data-erl-favorite="' + esc(row.id) + '" aria-label="Favorites" title="Favorites">' + (row.favorite ? '★' : '☆') + '</button>' +
         '<button type="button" data-erl-edit="' + esc(row.id) + '" aria-label="Edit article" title="تعديل">✎</button>' +
         '<button type="button" data-erl-delete="' + esc(row.id) + '" aria-label="Delete article" title="حذف">⌫</button></div></article>';
     }).join('');
