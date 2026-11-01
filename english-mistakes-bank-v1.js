@@ -203,7 +203,7 @@
       '<div class="emb-attempt"><label for="embAnswer">Try correcting the sentence yourself</label><input id="embAnswer" data-emb-answer-input type="text" dir="ltr" lang="en" value="' + esc(answer) + '" placeholder="Type the corrected sentence..." autocomplete="off" spellcheck="false"></div>' +
       '<div class="emb-actions"><button class="emb-btn primary" data-emb-action="check">Check my answer</button><button class="emb-btn" data-emb-action="reveal">' + (showCorrection ? 'Correction revealed' : 'Reveal correction and explanation') + '</button></div>' +
       feedbackHTML + correctionHTML +
-      '<footer class="emb-card-foot"><span>المصدر: Elispeak Common English Mistakes · MIT</span><span>Attempts: ' + Number(item.attempts || 0).toLocaleString('en-US') + '</span></footer>' +
+      '<footer class="emb-card-foot"><span>Source: Elispeak Common English Mistakes · MIT</span><span>Attempts: ' + Number(item.attempts || 0).toLocaleString('en-US') + '</span></footer>' +
       '</article>';
   }
   function countText(list) {
@@ -216,7 +216,7 @@
       return '<div class="emb-intro"><span class="emb-kicker">SERAG ENGLISH · CORRECTION LAB</span><h3>Mistake bank</h3><p>' + esc(loadError) + '</p><button class="emb-btn primary" data-emb-action="retry">Try again</button></div>';
     }
     if (!rows.length) {
-      return '<div class="emb-intro"><span class="emb-kicker">SERAG ENGLISH · CORRECTION LAB</span><h3>Mistake bank</h3><p>بنحمّل الأمثلة…</p></div>';
+      return '<div class="emb-intro"><span class="emb-kicker">SERAG ENGLISH · CORRECTION LAB</span><h3>Mistake bank</h3><p>Loading examples…</p></div>';
     }
     const list = filteredRows();
     const row = currentRow(list);
