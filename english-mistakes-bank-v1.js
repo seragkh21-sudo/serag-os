@@ -161,19 +161,19 @@
   }
   function filtersHTML() {
     const levels = ['all','A2','B1','B2'];
-    const levelNames = {all:'All levels',A2:'A2 · قبل المتوسط',B1:'B1 · متوسط',B2:'B2 · فوق المتوسط',C1:'C1 · متقدم'};
+    const levelNames = {all:'All levels',A2:'A2 · Elementary',B1:'B1 · Intermediate',B2:'B2 · Upper intermediate',C1:'C1 · Advanced'};
     const categories = ['all'].concat(Array.from(new Set(rows.map(row => row.category))));
     const statuses = [
       ['all','All statuses'],
       ['new','New'],
       ['review','Needs review'],
-      ['learned','Rules understoodا']
+      ['learned','Learned']
     ];
     return '<div class="emb-filters">' +
-      '<label>المستوى<select data-emb-level>' + levels.map(v => option(v, levelNames[v], level === v)).join('') + '</select></label>' +
-      '<label>نوع الخطأ<select data-emb-category>' + categories.map(v => option(v, v === 'all' ? 'All mistake types' : (categoryLabels[v] || v), category === v)).join('') + '</select></label>' +
-      '<label>حالة المراجعة<select data-emb-status>' + statuses.map(v => option(v[0],v[1],statusFilter === v[0])).join('') + '</select></label>' +
-      '<label class="emb-search-label">Search sentences and grammar<input type="search" data-emb-search value="' + esc(query) + '" placeholder="مثال: present perfect أو Prepositions" autocomplete="off"></label>' +
+      '<label>Level<select data-emb-level>' + levels.map(v => option(v, levelNames[v], level === v)).join('') + '</select></label>' +
+      '<label>Mistake type<select data-emb-category>' + categories.map(v => option(v, v === 'all' ? 'All mistake types' : (categoryLabels[v] || v), category === v)).join('') + '</select></label>' +
+      '<label>Review status<select data-emb-status>' + statuses.map(v => option(v[0],v[1],statusFilter === v[0])).join('') + '</select></label>' +
+      '<label class="emb-search-label">Search sentences and grammar<input type="search" data-emb-search value="' + esc(query) + '" placeholder="e.g. present perfect or prepositions" autocomplete="off"></label>' +
       '</div>';
   }
   function currentCardHTML(row, list) {
@@ -207,16 +207,16 @@
       '</article>';
   }
   function countText(list) {
-    if (!list.length) return 'لا توجد نتائج مطابقة';
-    return 'المثال ' + (index + 1).toLocaleString('en-US') + ' من ' + list.length.toLocaleString('en-US') + ' في الفلتر الحالي';
+    if (!list.length) return 'No matching results';
+    return 'Example ' + (index + 1).toLocaleString('en-US') + ' of ' + list.length.toLocaleString('en-US') + ' in the current filter';
   }
   function contentHTML() {
     syncProgressOwner();
     if (loadError) {
-      return '<div class="emb-intro"><span class="emb-kicker">SERAG ENGLISH · CORRECTION LAB</span><h3>بنك الأخطاء والتصحيح</h3><p>' + esc(loadError) + '</p><button class="emb-btn primary" data-emb-action="retry">حاول مرة أخرى</button></div>';
+      return '<div class="emb-intro"><span class="emb-kicker">SERAG ENGLISH · CORRECTION LAB</span><h3>Mistake bank</h3><p>' + esc(loadError) + '</p><button class="emb-btn primary" data-emb-action="retry">Try again</button></div>';
     }
     if (!rows.length) {
-      return '<div class="emb-intro"><span class="emb-kicker">SERAG ENGLISH · CORRECTION LAB</span><h3>بنك الأخطاء والتصحيح</h3><p>بنحمّل الأمثلة…</p></div>';
+      return '<div class="emb-intro"><span class="emb-kicker">SERAG ENGLISH · CORRECTION LAB</span><h3>Mistake bank</h3><p>بنحمّل الأمثلة…</p></div>';
     }
     const list = filteredRows();
     const row = currentRow(list);
