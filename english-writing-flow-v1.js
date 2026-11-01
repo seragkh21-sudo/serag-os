@@ -17,9 +17,9 @@ api.html=function(state,escapeFn){
  html=html.replace('class="ea12-grid ea13-writing-grid"','class="ea12-grid ea13-writing-grid" data-writing-stage="'+stage+'" data-writing-drill="'+esc(d.id)+'"');
  const planKey='writing-plan:'+d.id,reflectionKey='writing-reflection:'+d.id;
  const plan='<section class="ea13-plan-box"><label for="ea13Plan">Three-point plan</label><p>Before drafting, note your main idea, one reason or example, and how you will close your answer.</p><textarea id="ea13Plan" class="ea12-input" dir="ltr" lang="en" data-ea-note="'+planKey+'" placeholder="Main idea… / Reason or example… / Closing point…">'+esc(state.notes?.[planKey]||'')+'</textarea></section>';
- html=html.replace('<label for="ea13Draft">Your draft</label>',plan+'<label for="ea13Draft">مسودتك</label>');
- html=html.replace('<details><summary>Self-review checklist</summary>','<details class="ea13-review-box"><summary>قائمة المراجعة الذاتية</summary>');
- html=html.replace('<details><summary>View the sample or plan after your attempt</summary>','<details class="ea13-model-box"><summary>شاهد المثال أو الخطة بعد محاولتك</summary>');
+ html=html.replace('<label for="ea13Draft">Your draft</label>',plan+'<label for="ea13Draft">Your draft</label>');
+ html=html.replace('<details><summary>Self-review checklist</summary>','<details class="ea13-review-box"><summary>Self-review checklist</summary>');
+ html=html.replace('<details><summary>View the sample or plan after your attempt</summary>','<details class="ea13-model-box"><summary>View the sample or plan after your attempt</summary>');
  html=html.replace('<details class="ea13-model-box">','<details class="ea13-model-box"'+(stage===4?' open':'')+'>');
  const reflection='<section class="ea13-reflection-box"><label for="ea13Reflection">After comparing: what is the most important change you will make?</label><textarea id="ea13Reflection" class="ea12-input" data-ea-note="'+reflectionKey+'" placeholder="I will improve… because…">'+esc(state.notes?.[reflectionKey]||'')+'</textarea></section>';
  html=html.replace('</details></article></div><div class="ea12-tip">','</details>'+reflection+'</article></div><div class="ea12-tip">');
