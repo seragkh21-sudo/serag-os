@@ -230,7 +230,7 @@
       '<div class="emb-navigation"><button class="emb-btn" data-emb-action="prev"' + (index <= 0 || !list.length ? ' disabled' : '') + '>← Previous</button>' +
       '<button class="emb-btn primary" data-emb-action="next"' + (index >= list.length - 1 || !list.length ? ' disabled' : '') + ' >Next example →</button>' +
       '<button class="emb-btn" data-emb-action="restart"' + (!list.length || index === 0 ? ' hidden' : '') + ' >Restart this set</button></div>' +
-      '<p class="emb-caution">ملاحظة: الجمل الإنجليزية of مصدر مرخص MIT. الشرح العربي والتطبيق العربي إضافات تحريرية أولية لم تخضع لمراجعة بشرية مستقلة؛ تعامل معها كوسيلة تدريب وراجع السياق عند الحاجة.</p>' +
+      '<p class="emb-caution">Note: The English sentences come from an MIT-licensed source. Arabic explanations and exercises are preliminary editorial additions that have not been independently reviewed. Use them for practice and check the context.</p>' +
       '<p class="emb-attribution">Source: <a href="https://github.com/elispeak/elispeak-common-english-mistakes" target="_blank" rel="noopener noreferrer">Elispeak Common English Mistakes</a> · <a href="https://opensource.org/license/mit/" target="_blank" rel="noopener noreferrer">MIT License</a>.</p>';
   }
   function html() {
@@ -315,7 +315,7 @@
       recordAttempt(row, correct);
       revealed = true;
       feedback = correct
-        ? {type:'good',text:'ممتاز! تصحيحك مطابق. اقرأ القاعدة مرة، وبعدها طبّقها في جملة of عندك.'}
+        ? {type:'good',text:'Correct. Read the rule once, then apply it in a sentence of your own.'}
         : {type:'bad',text:'There is still a difference. Compare your answer with the correction and identify what changed.'};
       paint();
       return;
