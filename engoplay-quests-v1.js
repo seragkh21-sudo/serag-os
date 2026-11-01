@@ -248,7 +248,7 @@
     var progress = daily.completed ? 3 : daily.index + (daily.correct ? 1 : 0);
     var shared = sharedProgress();
     if (daily.completed) {
-      return '<button class="eq-close" data-eq-close aria-label="إغلاق">×</button>' +
+      return '<button class="eq-close" data-eq-close aria-label="Close">×</button>' +
         '<div class="eq-complete-icon">✦</div><div class="eq-eyebrow">QUEST COMPLETE</div>' +
         '<h2 id="eqDialogTitle">Practice complete</h2>' +
         '<p class="eq-complete-copy">You completed this session. Your answers have been added to your EngoPlay progress.</p>' +
@@ -257,7 +257,7 @@
     }
     var row = currentExample(state, rows);
     if (!row) {
-      return '<button class="eq-close" data-eq-close aria-label="إغلاق">×</button>' +
+      return '<button class="eq-close" data-eq-close aria-label="Close">×</button>' +
         '<div class="eq-eyebrow">DAILY QUEST</div><h2 id="eqDialogTitle">Loading grammar examples</h2>' +
         '<p>Close this window and try again once Grammar Examples has loaded.</p><button class="eq-primary-button" data-eq-close>OK</button>';
     }
@@ -290,7 +290,7 @@
       '<div class="eq-action-row"><button type="button" class="eq-secondary-button" data-eq-hint>Hint</button><button type="button" class="eq-secondary-button" data-eq-audio>Listen to the sentence</button>' +
       '<button type="button" class="eq-primary-button" data-eq-check>Check answer</button>' +
       '<button type="button" class="eq-text-button" data-eq-clear>Start over</button></div>';
-    return '<button class="eq-close" data-eq-close aria-label="إغلاق">×</button>' +
+    return '<button class="eq-close" data-eq-close aria-label="Close">×</button>' +
       '<div class="eq-dialog-top"><div><div class="eq-eyebrow">DAILY QUEST · SENTENCE BUILDER</div>' +
       '<h2 id="eqDialogTitle">Build the sentence</h2><p>Select each word in order. You can change the order by selecting a chosen word.</p></div>' +
       '<div class="eq-step-count"><strong>' + (daily.index + 1) + '</strong><span>/ 3</span></div></div>' +
@@ -298,7 +298,7 @@
       '<div class="eq-rule-meta"><span>' + esc(row.level || 'B1') + '</span><span>' + esc(row.titleAr || row.title || 'Grammar') + '</span></div>' +
       '<div class="eq-build-area"><small>Your sentence</small><div class="eq-answer' + answerStateClass + '" dir="ltr" lang="en">' + answer + '</div>' +
       '<div class="eq-word-bank" dir="ltr" lang="en">' + bank + '</div></div>' + hint + feedback + controls +
-      '<p class="eq-source-note">رتّب الكلمات، وبعد ما تخلص اضغط «Check answer» عشان تشوف النتيجة. الAudio on demand فقط.</p>';
+      '<p class="eq-source-note">Arrange the words, then select Check answer to see your result. Audio is optional.</p>';
   }
   function paintDialog() {
     var bundle = getState(), dialog = dialogShell();
@@ -452,7 +452,7 @@
     } else if (button.hasAttribute('data-eq-hint')) {
       if (!daily.correct) {
         daily.hintUsed = true;
-        daily.feedback = 'الHint ظاهر تحت منطقة الإجابة. جرّب ترتّب الكلمات بنفسك.';
+        daily.feedback = 'The hint is shown below your answer. Try building the sentence yourself.';
         save(bundle);
         update();
       }
