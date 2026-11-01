@@ -167,13 +167,13 @@
       ['all','All statuses'],
       ['new','New'],
       ['review','Needs review'],
-      ['learned','Rules understoodا']
+      ['learned','Learned']
     ];
     return '<div class="emb-filters">' +
-      '<label>المستوى<select data-emb-level>' + levels.map(v => option(v, levelNames[v], level === v)).join('') + '</select></label>' +
-      '<label>نوع الخطأ<select data-emb-category>' + categories.map(v => option(v, v === 'all' ? 'All mistake types' : (categoryLabels[v] || v), category === v)).join('') + '</select></label>' +
-      '<label>حالة المراجعة<select data-emb-status>' + statuses.map(v => option(v[0],v[1],statusFilter === v[0])).join('') + '</select></label>' +
-      '<label class="emb-search-label">Search sentences and grammar<input type="search" data-emb-search value="' + esc(query) + '" placeholder="مثال: present perfect أو Prepositions" autocomplete="off"></label>' +
+      '<label>Level<select data-emb-level>' + levels.map(v => option(v, levelNames[v], level === v)).join('') + '</select></label>' +
+      '<label>Mistake type<select data-emb-category>' + categories.map(v => option(v, v === 'all' ? 'All mistake types' : (categoryLabels[v] || v), category === v)).join('') + '</select></label>' +
+      '<label>Review status<select data-emb-status>' + statuses.map(v => option(v[0],v[1],statusFilter === v[0])).join('') + '</select></label>' +
+      '<label class="emb-search-label">Search sentences and grammar<input type="search" data-emb-search value="' + esc(query) + '" placeholder="e.g. present perfect or prepositions" autocomplete="off"></label>' +
       '</div>';
   }
   function currentCardHTML(row, list) {
@@ -220,7 +220,7 @@
     }
     const list = filteredRows();
     const row = currentRow(list);
-    return '<div class="emb-intro"><div><span class="emb-kicker">SERAG ENGLISH · CORRECTION LAB</span><h3>اتعلّم of الخطأ، مش of حفظ الإجابة</h3>' +
+    return '<div class="emb-intro"><div><span class="emb-kicker">SERAG ENGLISH · CORRECTION LAB</span><h3>Learn from the mistake, not by memorising the answer</h3>' +
       '<p>Read the sentence, write your correction, then compare it with the answer and explanation. Examples are graded, and progress is saved locally on this device.</p></div>' +
       '<span class="emb-source-pill">Open content · attribution included</span></div>' +
       statsHTML() +
@@ -228,8 +228,8 @@
       '<div class="emb-count" id="embCount">' + esc(countText(list)) + '</div>' +
       '<div class="emb-current" id="embCurrent">' + currentCardHTML(row,list) + '</div>' +
       '<div class="emb-navigation"><button class="emb-btn" data-emb-action="prev"' + (index <= 0 || !list.length ? ' disabled' : '') + '>← Previous</button>' +
-      '<button class="emb-btn primary" data-emb-action="next"' + (index >= list.length - 1 || !list.length ? ' disabled' : '') + '>Example التالي →</button>' +
-      '<button class="emb-btn" data-emb-action="restart"' + (!list.length || index === 0 ? ' hidden' : '') + '>ابدأ المجموعة of الأول</button></div>' +
+      '<button class="emb-btn primary" data-emb-action="next"' + (index >= list.length - 1 || !list.length ? ' disabled' : '') + ' >Next example →</button>' +
+      '<button class="emb-btn" data-emb-action="restart"' + (!list.length || index === 0 ? ' hidden' : '') + ' >Restart this set</button></div>' +
       '<p class="emb-caution">ملاحظة: الجمل الإنجليزية of مصدر مرخص MIT. الشرح العربي والتطبيق العربي إضافات تحريرية أولية لم تخضع لمراجعة بشرية مستقلة؛ تعامل معها كوسيلة تدريب وراجع السياق عند الحاجة.</p>' +
       '<p class="emb-attribution">Source: <a href="https://github.com/elispeak/elispeak-common-english-mistakes" target="_blank" rel="noopener noreferrer">Elispeak Common English Mistakes</a> · <a href="https://opensource.org/license/mit/" target="_blank" rel="noopener noreferrer">MIT License</a>.</p>';
   }
