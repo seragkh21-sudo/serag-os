@@ -60,7 +60,7 @@ test('article cards show a clear action to open the reading view', () => {
   const styles = read('english-reading-library-v1.css');
   assert.match(source, /data-erl-open=/);
   assert.match(source, /erl-open-cta/);
-  assert.match(source, /افتح المقال واقرأه/);
+  assert.match(source, /Open and read/);
   assert.match(source, /if \(open\) \{ openReader\(open\.dataset\.erlOpen\); return; \}/);
   assert.match(styles, /\.erl-open-cta\{/);
 });
