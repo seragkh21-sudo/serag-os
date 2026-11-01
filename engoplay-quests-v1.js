@@ -192,19 +192,19 @@
     var totalXP = shared ? shared.xp : state.points;
     var progress = complete ? 3 : Math.min(3, daily.index + (daily.correct ? 1 : 0));
     var available = daily.ids.length >= 3;
-    var label = complete ? 'اعرض نتيجتك' : 'ابدأ تحدّي الجمل';
+    var label = complete ? 'View results' : 'Start sentence practice';
     return '<section class="eq-quest-panel" data-eq-panel data-eq-owner="' + esc(bundle.owner) + '" aria-labelledby="eqQuestPanelTitle">' +
       '<div class="eq-quest-copy"><div class="eq-eyebrow"><span class="eq-spark">✦</span> ENGOPLAY · DAILY QUEST</div>' +
-      '<h3 id="eqQuestPanelTitle">خلّي الإنجليزي لعبة بتكسب منها</h3>' +
-      '<p>رتّب كلمات من أمثلة القواعد الحقيقية، واستخدم التلميح عند الحاجة. كل محاولة بتدخل في تقدمك الموحد.</p>' +
-      '<div class="eq-quest-tags"><span>ترتيب جمل</span><span>تصحيح فوري</span><span>نطق عند الطلب</span></div>' +
+      '<h3 id="eqQuestPanelTitle">Sentence Builder</h3>' +
+      '<p>Build sentences from grammar examples. Use a hint when needed. Your attempts count toward your overall progress.</p>' +
+      '<div class="eq-quest-tags"><span>Sentence building</span><span>Instant feedback</span><span>Audio on demand</span></div>' +
       '<button class="eq-quest-start" data-eq-open>' + label + ' <span aria-hidden="true">←</span></button>' +
-      (!available ? '<p class="eq-unavailable" role="status">التحدّي هيبدأ لما يتوفر ٣ أمثلة جمل صالحة من بنك القواعد. اضغط للعرض أو افتح بنك أمثلة القواعد وتأكد إن الأمثلة محمّلة.</p>' : '') +
-      '<small class="eq-local-note">محاولاتك بتدخل في XP وسلسلة EngoPlay، وبتتزامن تلقائيًا عند الاتصال. لو الشبكة فصلت، المحاولات بتفضل في طابور المزامنة.</small></div>' +
+      (!available ? '<p class="eq-unavailable" role="status">Sentence practice will be available when at least 3 valid examples are loaded. Open Grammar Examples to check the question bank.</p>' : '') +
+      '<small class="eq-local-note">Attempts count toward your XP and streak. They sync automatically when you're online.</small></div>' +
       '<div class="eq-quest-stats">' +
       '<div class="eq-stat-main"><span class="eq-stat-icon">✦</span><strong>' + totalXP.toLocaleString('en-US') + '</strong><small>XP · EngoPlay</small></div>' +
-      '<div class="eq-stat-pair"><div><strong>🔥 ' + streak + '</strong><small>سلسلة EngoPlay</small></div><div><strong>' + state.sessions + '</strong><small>تحدّي مكتمل</small></div></div>' +
-      '<div class="eq-progress-head"><span>تقدّمك النهارده</span><b>' + progress + '/3</b></div><progress max="3" value="' + progress + '"></progress>' +
+      '<div class="eq-stat-pair"><div><strong>🔥 ' + streak + '</strong><small>EngoPlay streak</small></div><div><strong>' + state.sessions + '</strong><small>Sessions completed</small></div></div>' +
+      '<div class="eq-progress-head"><span>Today's progress</span><b>' + progress + '/3</b></div><progress max="3" value="' + progress + '"></progress>' +
       '<div class="eq-mini-path" aria-label="تقدّم التحدّي">' + [0,1,2].map(function (i) { return '<span class="' + (i < progress ? 'is-done' : (i === daily.index && !complete ? 'is-current' : '')) + '">' + (i < progress ? '✓' : (i + 1)) + '</span>'; }).join('') + '</div>' +
       '<div class="eq-storage-status" data-eq-storage-status role="status"></div>' +
       '</div></section>';
@@ -248,18 +248,18 @@
     var progress = daily.completed ? 3 : daily.index + (daily.correct ? 1 : 0);
     var shared = sharedProgress();
     if (daily.completed) {
-      return '<button class="eq-close" data-eq-close aria-label="إغلاق">×</button>' +
+      return '<button class="eq-close" data-eq-close aria-label="Close">×</button>' +
         '<div class="eq-complete-icon">✦</div><div class="eq-eyebrow">QUEST COMPLETE</div>' +
-        '<h2 id="eqDialogTitle">ممتاز! خلّصت تحدّي النهارده.</h2>' +
-        '<p class="eq-complete-copy">أنهيت جولة التحدّي. إجاباتك اتسجلت ضمن تقدم EngoPlay الموحد.</p>' +
-        '<div class="eq-complete-total"><strong>' + (shared ? shared.xp : state.points).toLocaleString('en-US') + '</strong><span>إجمالي XP في EngoPlay</span></div>' +
-        '<button class="eq-primary-button" data-eq-close>ارجع لرحلتك ←</button>';
+        '<h2 id="eqDialogTitle">Practice complete</h2>' +
+        '<p class="eq-complete-copy">You completed this session. Your answers have been added to your EngoPlay progress.</p>' +
+        '<div class="eq-complete-total"><strong>' + (shared ? shared.xp : state.points).toLocaleString('en-US') + '</strong><span>Total EngoPlay XP</span></div>' +
+        '<button class="eq-primary-button" data-eq-close>Back to EngoPlay →</button>';
     }
     var row = currentExample(state, rows);
     if (!row) {
-      return '<button class="eq-close" data-eq-close aria-label="إغلاق">×</button>' +
-        '<div class="eq-eyebrow">DAILY QUEST</div><h2 id="eqDialogTitle">بنك الأمثلة لسه بيحمّل</h2>' +
-        '<p>اقفل النافذة وافتح التحدّي مرة تانية بعد تحميل بنك أمثلة القواعد.</p><button class="eq-primary-button" data-eq-close>تمام</button>';
+      return '<button class="eq-close" data-eq-close aria-label="Close">×</button>' +
+        '<div class="eq-eyebrow">DAILY QUEST</div><h2 id="eqDialogTitle">Loading grammar examples</h2>' +
+        '<p>Close this window and try again once Grammar Examples has loaded.</p><button class="eq-primary-button" data-eq-close>OK</button>';
     }
     prepareQuestion(state, rows, bundle.owner);
     var selected = new Set(daily.selected);
@@ -269,36 +269,36 @@
     var answer = daily.selected.map(function (index, pos) {
       return '<button type="button" class="eq-tile eq-tile-selected' + answerStatusClass + '" data-eq-return="' + pos + '" aria-label="إزالة الكلمة ' + esc(daily.bank[index]) + '">' + esc(daily.bank[index]) + '</button>';
     }).join('');
-    if (!answer) answer = '<span class="eq-answer-placeholder">اضغط على الكلمات بالترتيب الصحيح هنا</span>';
+    if (!answer) answer = '<span class="eq-answer-placeholder">Select the words in the correct order</span>';
     var bank = daily.bank.map(function (word, index) {
       if (selected.has(index)) return '';
       return '<button type="button" class="eq-tile" data-eq-take="' + index + '">' + esc(word) + '</button>';
     }).join('');
-    var hint = daily.hintUsed ? '<div class="eq-hint"><b>تلميح القاعدة</b>' +
+    var hint = daily.hintUsed ? '<div class="eq-hint"><b>Grammar hint</b>' +
       (row.summary ? '<p>' + esc(row.summary) + '</p>' : '') +
       (row.formula ? '<p class="eq-formula" lang="en" dir="ltr">' + esc(row.formula) + '</p>' : '') +
-      (row.tip ? '<p>' + esc(row.tip) + '</p>' : '<p>رتّب الكلمات لتكوين جملة إنجليزية طبيعية، وانتبه لمكان الفعل والفاعل.</p>') +
+      (row.tip ? '<p>' + esc(row.tip) + '</p>' : '<p>Arrange the words to form a natural English sentence. Pay attention to word order.</p>') +
       '</div>' : '';
     var feedback = daily.feedback ? '<div class="eq-feedback ' + (daily.correct ? 'is-correct' : 'is-incorrect') + '" role="status" aria-live="polite">' + esc(daily.feedback) + '</div>' : '';
     var controls = daily.correct ?
       '<div class="eq-success-actions"><button type="button" class="eq-primary-button eq-next-button" data-eq-next>' +
-      '<span class="eq-button-check" aria-hidden="true">✓</span><span>' + (daily.index === 2 ? 'صح! أنهِ التحدّي' : 'صح! تابع للسؤال التالي') + '</span><span class="eq-button-arrow" aria-hidden="true">←</span></button>' +
-      '<small>إجابتك صحيحة — جاهز للسؤال اللي بعده؟</small></div>' :
+      '<span class="eq-button-check" aria-hidden="true">✓</span><span>' + (daily.index === 2 ? 'Correct! Finish' : 'Correct! Next question') + '</span><span class="eq-button-arrow" aria-hidden="true">←</span></button>' +
+      '<small>Correct answer. Ready for the next question?</small></div>' :
       daily.answerStatus === 'incorrect' ?
-      '<div class="eq-action-row eq-retry-row"><button type="button" class="eq-primary-button eq-retry-button" data-eq-clear>عدّل الجملة وجرب تاني ↻</button>' +
-      '<button type="button" class="eq-secondary-button" data-eq-audio>اسمع الجملة ◖))</button></div>' :
-      '<div class="eq-action-row"><button type="button" class="eq-secondary-button" data-eq-hint>تلميح</button><button type="button" class="eq-secondary-button" data-eq-audio>اسمع الجملة ◖))</button>' +
-      '<button type="button" class="eq-primary-button" data-eq-check>تحقّق من الجملة</button>' +
-      '<button type="button" class="eq-text-button" data-eq-clear>ابدأ من جديد</button></div>';
-    return '<button class="eq-close" data-eq-close aria-label="إغلاق">×</button>' +
+      '<div class="eq-action-row eq-retry-row"><button type="button" class="eq-primary-button eq-retry-button" data-eq-clear>Edit your sentence and try again ↻</button>' +
+      '<button type="button" class="eq-secondary-button" data-eq-audio>Listen to the sentence</button></div>' :
+      '<div class="eq-action-row"><button type="button" class="eq-secondary-button" data-eq-hint>Hint</button><button type="button" class="eq-secondary-button" data-eq-audio>Listen to the sentence</button>' +
+      '<button type="button" class="eq-primary-button" data-eq-check>Check answer</button>' +
+      '<button type="button" class="eq-text-button" data-eq-clear>Start over</button></div>';
+    return '<button class="eq-close" data-eq-close aria-label="Close">×</button>' +
       '<div class="eq-dialog-top"><div><div class="eq-eyebrow">DAILY QUEST · SENTENCE BUILDER</div>' +
-      '<h2 id="eqDialogTitle">كوّن الجملة</h2><p>اختار كل كلمة بالترتيب. تقدر تغيّر ترتيب إجابتك بالضغط على الكلمة المختارة.</p></div>' +
+      '<h2 id="eqDialogTitle">Build the sentence</h2><p>Select each word in order. You can change the order by selecting a chosen word.</p></div>' +
       '<div class="eq-step-count"><strong>' + (daily.index + 1) + '</strong><span>/ 3</span></div></div>' +
       '<div class="eq-progress-line"><progress max="3" value="' + progress + '"></progress><span>' + progress + ' من 3</span></div>' +
-      '<div class="eq-rule-meta"><span>' + esc(row.level || 'B1') + '</span><span>' + esc(row.titleAr || row.title || 'قاعدة نحوية') + '</span></div>' +
-      '<div class="eq-build-area"><small>جملتك</small><div class="eq-answer' + answerStateClass + '" dir="ltr" lang="en">' + answer + '</div>' +
+      '<div class="eq-rule-meta"><span>' + esc(row.level || 'B1') + '</span><span>' + esc(row.titleAr || row.title || 'Grammar') + '</span></div>' +
+      '<div class="eq-build-area"><small>Your sentence</small><div class="eq-answer' + answerStateClass + '" dir="ltr" lang="en">' + answer + '</div>' +
       '<div class="eq-word-bank" dir="ltr" lang="en">' + bank + '</div></div>' + hint + feedback + controls +
-      '<p class="eq-source-note">رتّب الكلمات، وبعد ما تخلص اضغط «تحقّق من الجملة» عشان تشوف النتيجة. النطق عند الطلب فقط.</p>';
+      '<p class="eq-source-note">رتّب الكلمات، وبعد ما تخلص اضغط «Check answer» عشان تشوف النتيجة. الAudio on demand فقط.</p>';
   }
   function paintDialog() {
     var bundle = getState(), dialog = dialogShell();
@@ -350,7 +350,7 @@
     if (daily.selected.length !== daily.bank.length) {
       daily.correct = false;
       daily.answerStatus = 'incomplete';
-      daily.feedback = 'اختار كل الكلمات مرة واحدة عشان نراجع الجملة.';
+      daily.feedback = 'Use each word exactly once to complete the sentence.';
       return;
     }
     var built = daily.selected.map(function (index) { return daily.bank[index]; }).join(' ');
@@ -358,12 +358,12 @@
       daily.correct = true;
       daily.answerStatus = 'correct';
       daily.reward = rewardPoints(daily.mistakes, daily.hintUsed);
-      daily.feedback = 'مظبوط! اتسجلت إجابتك في تقدم EngoPlay.';
+      daily.feedback = 'Correct. Your answer has been saved to EngoPlay.';
     } else {
       daily.mistakes++;
       daily.correct = false;
       daily.answerStatus = 'incorrect';
-      daily.feedback = 'مش بالترتيب الصح. الإجابة الصحيحة: ' + row.sentence + ' — جرّب تاني أو راجعها قبل السؤال التالي.';
+      daily.feedback = 'Not quite. Correct answer: ' + row.sentence + ' — Try again or review it before moving on.';
     }
     recordChallengeAttempt(row, built, daily.correct, bundle);
   }
@@ -452,7 +452,7 @@
     } else if (button.hasAttribute('data-eq-hint')) {
       if (!daily.correct) {
         daily.hintUsed = true;
-        daily.feedback = 'التلميح ظاهر تحت منطقة الإجابة. جرّب ترتّب الكلمات بنفسك.';
+        daily.feedback = 'الHint ظاهر تحت منطقة الإجابة. جرّب ترتّب الكلمات بنفسك.';
         save(bundle);
         update();
       }
@@ -484,7 +484,7 @@
     } else if (button.hasAttribute('data-eq-audio')) {
       if (!row || !window.speechSynthesis || typeof window.SpeechSynthesisUtterance !== 'function') {
         var note = document.querySelector('.eq-source-note');
-        if (note) note.textContent = 'النطق غير متاح في هذا المتصفح.';
+        if (note) note.textContent = 'Audio is not available in this browser.';
         return;
       }
       window.speechSynthesis.cancel();
