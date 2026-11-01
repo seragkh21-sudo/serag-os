@@ -144,11 +144,11 @@
         '<div class="erl-card-kicker"><span class="erl-level">' + esc(row.level || 'B1') + '</span><span>' + esc(row.topic || 'General') + '</span><span>' + readMinutes(row) + ' د قراءة</span></div>' +
         '<h4>' + esc(row.title) + '</h4><p>' + esc(excerpt(row)) + '</p>' +
         '<div class="erl-card-progress"><div><i style="width:' + progress + '%"></i></div><small>' + (progress ? progress + '%' : statusLabel(row.status)) + '</small></div>' +
-        '<div class="erl-tags">' + tags + (source ? '<span class="erl-source-tag">↗ رابط مصدر</span>' : '') + '</div>' +
+        '<div class="erl-tags">' + tags + (source ? '<span class="erl-source-tag">↗ Source link</span>' : '') + '</div>' +
         '<span class="erl-open-cta"><span>Open and read</span><span class="erl-open-cta-arrow" aria-hidden="true">←</span></span></button>' +
         '<div class="erl-card-actions"><button type="button" data-erl-favorite="' + esc(row.id) + '" aria-label="Favorites" title="Favorites">' + (row.favorite ? '★' : '☆') + '</button>' +
-        '<button type="button" data-erl-edit="' + esc(row.id) + '" aria-label="Edit article" title="تعديل">✎</button>' +
-        '<button type="button" data-erl-delete="' + esc(row.id) + '" aria-label="Delete article" title="حذف">⌫</button></div></article>';
+        '<button type="button" data-erl-edit="' + esc(row.id) + '" aria-label="Edit article" title="Edit">✎</button>' +
+        '<button type="button" data-erl-delete="' + esc(row.id) + '" aria-label="Delete article" title="Delete">⌫</button></div></article>';
     }).join('');
   }
   function studioOwnsAcademyReading() {
@@ -229,7 +229,7 @@
       } else {
         const source = safeUrl(row.source_url);
         body.innerHTML = '<div class="erl-no-body"><span>↗</span><h3>Article saved as a link</h3><p>The source website does not provide text for automatic import. Open the source or edit this item and paste the text here.</p>' +
-          (source ? '<a href="' + esc(source) + '" target="_blank" rel="noopener noreferrer">فتح المقال الأصلي ↗</a>' : '') + '</div>';
+          (source ? '<a href="' + esc(source) + '" target="_blank" rel="noopener noreferrer">Open original article ↗</a>' : '') + '</div>';
       }
     }
     const sourceLink = $('#erlSourceLink');
@@ -263,7 +263,7 @@
     const value = Math.max(0, Math.min(100, Math.round(progress || 0)));
     const label = $('#erlReaderProgressLabel');
     const bar = $('#erlReaderProgressBar');
-    if (label) label.textContent = value + '% مقروء';
+    if (label) label.textContent = value + '% read';
     if (bar) bar.style.width = value + '%';
   }
   async function savePatch(id, patch) {
@@ -293,9 +293,9 @@
     const rawUrl = $('#erlUrl').value.trim();
     const sourceUrl = rawUrl ? safeUrl(rawUrl) : '';
     const content = $('#erlContent').value.trim();
-    if (!title) return notify('اكتب Article title الأول.');
-    if (rawUrl && !sourceUrl) return notify('Source URL لازم يبدأ بـ http:// أو https://.');
-    if (!content && !sourceUrl) return notify('اكتب Article text أو أضف Source URL.');
+    if (!title) return notify('Enter an article title first.');
+    if (rawUrl && !sourceUrl) return notify('The source URL must start with http:// or https://.');
+    if (!content && !sourceUrl) return notify('Paste article text or add a source URL.');
     const current = editingId ? rows.find(function (row) { return row.id === editingId; }) : null;
     const tags = $('#erlTags').value.split(',').map(function (tag) { return tag.trim(); }).filter(Boolean).slice(0, 12);
     const payload = {
@@ -320,7 +320,7 @@
       result = await client.from(TABLE).insert(Object.assign({ user_id: ownerId }, payload)).select('*').single();
     }
     if (button) { button.disabled = false; button.textContent = 'Save article'; }
-    if (result.error) return notify('تعذر Save article: ' + result.error.message);
+    if (result.error) return notify('Could not save article: ' + result.error.message);
     if (current) rows = rows.map(function (row) { return row.id === current.id ? result.data : row; });
     else rows.unshift(result.data);
     closeEditor();
@@ -336,7 +336,7 @@
   async function markComplete() {
     if (!activeId) return;
     const saved = await savePatch(activeId, { status: 'completed', reading_progress: 100 });
-    if (saved) notify('اتعلّم كCompleted ✓');
+    if (saved) notify('اتMark as completed ✓');
   }
   async function saveNotes() {
     if (!activeId) return;
