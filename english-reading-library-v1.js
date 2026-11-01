@@ -141,7 +141,7 @@
       const tags = (row.tags || []).slice(0, 3).map(function (tag) { return '<span class="erl-tag">' + esc(tag) + '</span>'; }).join('');
       const source = safeUrl(row.source_url);
       return '<article class="erl-article-card"><button type="button" class="erl-article-open" data-erl-open="' + esc(row.id) + '">' +
-        '<div class="erl-card-kicker"><span class="erl-level">' + esc(row.level || 'B1') + '</span><span>' + esc(row.topic || 'General') + '</span><span>' + readMinutes(row) + ' د قراءة</span></div>' +
+        '<div class="erl-card-kicker"><span class="erl-level">' + esc(row.level || 'B1') + '</span><span>' + esc(row.topic || 'General') + '</span><span>' + readMinutes(row) + ' min read</span></div>' +
         '<h4>' + esc(row.title) + '</h4><p>' + esc(excerpt(row)) + '</p>' +
         '<div class="erl-card-progress"><div><i style="width:' + progress + '%"></i></div><small>' + (progress ? progress + '%' : statusLabel(row.status)) + '</small></div>' +
         '<div class="erl-tags">' + tags + (source ? '<span class="erl-source-tag">↗ Source link</span>' : '') + '</div>' +
