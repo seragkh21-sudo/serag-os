@@ -7,18 +7,18 @@
     '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
   }[c]));
   const categoryLabels = {
-    article: 'أدوات a / an / the',
-    collocation: 'التراكيب الشائعة',
-    conditional: 'الجمل الشرطية',
-    countability: 'الأسماء المعدودة وغير المعدودة',
-    modal: 'الأفعال الناقصة',
-    preposition: 'حروف الجر',
-    pronoun: 'الضمائر',
-    question: 'تكوين الأسئلة',
-    tense: 'الأزمنة',
-    verb_pattern: 'تركيب الأفعال',
-    word_choice: 'اختيار الكلمة',
-    word_order: 'ترتيب الكلمات'
+    article: 'Articles: a / an / the',
+    collocation: 'Common collocations',
+    conditional: 'Conditionals',
+    countability: 'Countable & uncountable nouns',
+    modal: 'Modal verbs',
+    preposition: 'Prepositions',
+    pronoun: 'Pronouns',
+    question: 'Question formation',
+    tense: 'Tenses',
+    verb_pattern: 'Verb patterns',
+    word_choice: 'Word choice',
+    word_order: 'Word order'
   };
   let rows = [];
   let loadPromise = null;
@@ -74,7 +74,7 @@
     if (rows.length || loadPromise) return;
     loadError = '';
     if (!window.fetch) {
-      loadError = 'متصفحك لا يدعم تحميل مكتبة الأخطاء.';
+      loadError = 'Your browser does not support loading the mistake bank.';
       paint();
       return;
     }
@@ -94,7 +94,7 @@
         paint();
       })
       .catch(error => {
-        loadError = 'تعذّر تحميل بنك الأخطاء. تأكد من اتصالك ثم جرّب مرة أخرى.';
+        loadError = 'Could not load the mistake bank. Check your connection and try again.';
         loadPromise = null;
         paint();
       });
@@ -150,10 +150,10 @@
     const learned = Object.keys(progress).filter(id => progress[id] && progress[id].status === 'learned').length;
     const needs = Object.keys(progress).filter(id => progress[id] && progress[id].status === 'review').length;
     return '<div class="emb-stats">' +
-      '<div><strong>' + rows.length.toLocaleString('en-US') + '</strong><span>مثال تصحيح</span></div>' +
-      '<div><strong>' + reviewed.toLocaleString('en-US') + '</strong><span>بدأت مراجعته</span></div>' +
-      '<div><strong>' + learned.toLocaleString('en-US') + '</strong><span>فهمت قاعدته</span></div>' +
-      '<div><strong>' + needs.toLocaleString('en-US') + '</strong><span>يحتاج مراجعة</span></div>' +
+      '<div><strong>' + rows.length.toLocaleString('en-US') + '</strong><span>Correction examples</span></div>' +
+      '<div><strong>' + reviewed.toLocaleString('en-US') + '</strong><span>Reviewed</span></div>' +
+      '<div><strong>' + learned.toLocaleString('en-US') + '</strong><span>Rules understood</span></div>' +
+      '<div><strong>' + needs.toLocaleString('en-US') + '</strong><span>Needs review</span></div>' +
       '</div>';
   }
   function option(value, label, selected) {
@@ -161,49 +161,49 @@
   }
   function filtersHTML() {
     const levels = ['all','A2','B1','B2'];
-    const levelNames = {all:'كل المستويات',A2:'A2 · قبل المتوسط',B1:'B1 · متوسط',B2:'B2 · فوق المتوسط',C1:'C1 · متقدم'};
+    const levelNames = {all:'All levels',A2:'A2 · قبل المتوسط',B1:'B1 · متوسط',B2:'B2 · فوق المتوسط',C1:'C1 · متقدم'};
     const categories = ['all'].concat(Array.from(new Set(rows.map(row => row.category))));
     const statuses = [
-      ['all','كل الحالات'],
-      ['new','لم أراجعها'],
-      ['review','تحتاج مراجعة'],
-      ['learned','فهمت قاعدتها']
+      ['all','All statuses'],
+      ['new','New'],
+      ['review','Needs review'],
+      ['learned','Rules understoodا']
     ];
     return '<div class="emb-filters">' +
       '<label>المستوى<select data-emb-level>' + levels.map(v => option(v, levelNames[v], level === v)).join('') + '</select></label>' +
-      '<label>نوع الخطأ<select data-emb-category>' + categories.map(v => option(v, v === 'all' ? 'كل أنواع الأخطاء' : (categoryLabels[v] || v), category === v)).join('') + '</select></label>' +
+      '<label>نوع الخطأ<select data-emb-category>' + categories.map(v => option(v, v === 'all' ? 'All mistake types' : (categoryLabels[v] || v), category === v)).join('') + '</select></label>' +
       '<label>حالة المراجعة<select data-emb-status>' + statuses.map(v => option(v[0],v[1],statusFilter === v[0])).join('') + '</select></label>' +
-      '<label class="emb-search-label">ابحث في الجمل والقواعد<input type="search" data-emb-search value="' + esc(query) + '" placeholder="مثال: present perfect أو حروف الجر" autocomplete="off"></label>' +
+      '<label class="emb-search-label">Search sentences and grammar<input type="search" data-emb-search value="' + esc(query) + '" placeholder="مثال: present perfect أو Prepositions" autocomplete="off"></label>' +
       '</div>';
   }
   function currentCardHTML(row, list) {
     if (!row) {
-      return '<article class="emb-empty"><h4>مفيش نتائج مطابقة</h4><p>جرّب مستوى أو نوع خطأ مختلف، أو امسح البحث.</p><button class="emb-btn" data-emb-action="resetfilters">عرض كل الأمثلة</button></article>';
+      return '<article class="emb-empty"><h4>No matching results</h4><p>Try another level or mistake type, or clear the search.</p><button class="emb-btn" data-emb-action="resetfilters">Show all examples</button></article>';
     }
     const state = rowStatus(row);
-    const stateLabel = state === 'learned' ? 'فهمت القاعدة' : state === 'review' ? 'تحتاج مراجعة' : 'جديدة';
+    const stateLabel = state === 'learned' ? 'Rule understood' : state === 'review' ? 'Needs review' : 'New';
     const item = progressFor(row);
     const showCorrection = revealed;
     const feedbackHTML = feedback
       ? '<p class="emb-feedback ' + esc(feedback.type) + '" role="status">' + esc(feedback.text) + '</p>'
       : '';
     const correctionHTML = showCorrection
-      ? '<section class="emb-correction"><div class="emb-label">التصحيح الصحيح</div>' +
+      ? '<section class="emb-correction"><div class="emb-label">Corrected sentence</div>' +
         '<p class="emb-corrected" lang="en" dir="ltr">' + esc(row.corrected_sentence) + '</p>' +
-        '<div class="emb-explanations"><div><b>القاعدة بالإنجليزية</b><p lang="en" dir="ltr">' + esc(row.explanation) + '</p></div>' +
-        '<div><b>شرح بالعربي</b><p dir="rtl" lang="ar">' + esc(row.explanation_ar) + '</p></div></div>' +
-        '<div class="emb-prompt"><b>طبّق بنفسك</b><p lang="en" dir="ltr">' + esc(row.practice_prompt) + '</p>' +
+        '<div class="emb-explanations"><div><b>Grammar explanation</b><p lang="en" dir="ltr">' + esc(row.explanation) + '</p></div>' +
+        '<div><b>Arabic meaning</b><p dir="rtl" lang="ar">' + esc(row.explanation_ar) + '</p></div></div>' +
+        '<div class="emb-prompt"><b>Try it yourself</b><p lang="en" dir="ltr">' + esc(row.practice_prompt) + '</p>' +
         '<p dir="rtl" lang="ar">' + esc(row.practice_prompt_ar) + '</p></div>' +
-        '<div class="emb-actions"><button class="emb-btn primary" data-emb-action="learned">فهمت القاعدة</button><button class="emb-btn" data-emb-action="review">محتاج أراجعها</button></div>' +
+        '<div class="emb-actions"><button class="emb-btn primary" data-emb-action="learned">Rule understood</button><button class="emb-btn" data-emb-action="review">Needs review</button></div>' +
         '</section>'
       : '';
     return '<article class="emb-card">' +
-      '<header class="emb-card-head"><div><span class="emb-label">الجملة قبل التصحيح</span><h4 lang="en" dir="ltr">' + esc(row.learner_sentence) + '</h4></div>' +
+      '<header class="emb-card-head"><div><span class="emb-label">Original sentence</span><h4 lang="en" dir="ltr">' + esc(row.learner_sentence) + '</h4></div>' +
       '<div class="emb-meta"><span>' + esc(row.cefr) + '</span><span>' + esc(categoryLabels[row.category] || row.category) + '</span><span>' + esc(stateLabel) + '</span></div></header>' +
-      '<div class="emb-attempt"><label for="embAnswer">جرّب تصلّح الجملة بنفسك</label><input id="embAnswer" data-emb-answer-input type="text" dir="ltr" lang="en" value="' + esc(answer) + '" placeholder="Type the corrected sentence..." autocomplete="off" spellcheck="false"></div>' +
-      '<div class="emb-actions"><button class="emb-btn primary" data-emb-action="check">تحقق من إجابتي</button><button class="emb-btn" data-emb-action="reveal">' + (showCorrection ? 'التصحيح ظاهر' : 'اكشف التصحيح والشرح') + '</button></div>' +
+      '<div class="emb-attempt"><label for="embAnswer">Try correcting the sentence yourself</label><input id="embAnswer" data-emb-answer-input type="text" dir="ltr" lang="en" value="' + esc(answer) + '" placeholder="Type the corrected sentence..." autocomplete="off" spellcheck="false"></div>' +
+      '<div class="emb-actions"><button class="emb-btn primary" data-emb-action="check">Check my answer</button><button class="emb-btn" data-emb-action="reveal">' + (showCorrection ? 'Correction revealed' : 'Reveal correction and explanation') + '</button></div>' +
       feedbackHTML + correctionHTML +
-      '<footer class="emb-card-foot"><span>المصدر: Elispeak Common English Mistakes · MIT</span><span>المحاولات: ' + Number(item.attempts || 0).toLocaleString('en-US') + '</span></footer>' +
+      '<footer class="emb-card-foot"><span>المصدر: Elispeak Common English Mistakes · MIT</span><span>Attempts: ' + Number(item.attempts || 0).toLocaleString('en-US') + '</span></footer>' +
       '</article>';
   }
   function countText(list) {
@@ -220,16 +220,16 @@
     }
     const list = filteredRows();
     const row = currentRow(list);
-    return '<div class="emb-intro"><div><span class="emb-kicker">SERAG ENGLISH · CORRECTION LAB</span><h3>اتعلّم من الخطأ، مش من حفظ الإجابة</h3>' +
-      '<p>اقرأ الجملة، اكتب تصحيحك، وبعدها قارن بالحل والشرح. الأمثلة متدرجة، والتقدم محفوظ محليًا على جهازك.</p></div>' +
-      '<span class="emb-source-pill">محتوى مفتوح · مع نسب المصدر</span></div>' +
+    return '<div class="emb-intro"><div><span class="emb-kicker">SERAG ENGLISH · CORRECTION LAB</span><h3>Learn from the mistake, not by memorising the answer</h3>' +
+      '<p>Read the sentence, write your correction, then compare it with the answer and explanation. Examples are graded, and progress is saved locally on this device.</p></div>' +
+      '<span class="emb-source-pill">Open content · attribution included</span></div>' +
       statsHTML() +
       filtersHTML() +
       '<div class="emb-count" id="embCount">' + esc(countText(list)) + '</div>' +
       '<div class="emb-current" id="embCurrent">' + currentCardHTML(row,list) + '</div>' +
-      '<div class="emb-navigation"><button class="emb-btn" data-emb-action="prev"' + (index <= 0 || !list.length ? ' disabled' : '') + '>← السابق</button>' +
-      '<button class="emb-btn primary" data-emb-action="next"' + (index >= list.length - 1 || !list.length ? ' disabled' : '') + '>المثال التالي →</button>' +
-      '<button class="emb-btn" data-emb-action="restart"' + (!list.length || index === 0 ? ' hidden' : '') + '>ابدأ المجموعة من الأول</button></div>' +
+      '<div class="emb-navigation"><button class="emb-btn" data-emb-action="prev"' + (index <= 0 || !list.length ? ' disabled' : '') + '>← Previous</button>' +
+      '<button class="emb-btn primary" data-emb-action="next"' + (index >= list.length - 1 || !list.length ? ' disabled' : '') + '>Next example →</button>' +
+      '<button class="emb-btn" data-emb-action="restart"' + (!list.length || index === 0 ? ' hidden' : '') + '>Restart this set</button></div>' +
       '<p class="emb-caution">ملاحظة: الجمل الإنجليزية من مصدر مرخص MIT. الشرح العربي والتطبيق العربي إضافات تحريرية أولية لم تخضع لمراجعة بشرية مستقلة؛ تعامل معها كوسيلة تدريب وراجع السياق عند الحاجة.</p>' +
       '<p class="emb-attribution">المصدر: <a href="https://github.com/elispeak/elispeak-common-english-mistakes" target="_blank" rel="noopener noreferrer">Elispeak Common English Mistakes</a> · <a href="https://opensource.org/license/mit/" target="_blank" rel="noopener noreferrer">MIT License</a>.</p>';
   }
@@ -307,7 +307,7 @@
       const input = document.getElementById('embAnswer');
       answer = input ? input.value : answer;
       if (!answer.trim()) {
-        feedback = {type:'hint',text:'اكتب الجملة المصححة الأول، أو اكشف التصحيح لو محتاج مساعدة.'};
+        feedback = {type:'hint',text:'Write your corrected sentence first, or reveal the correction if you need help.'};
         paint();
         return;
       }
@@ -315,8 +315,8 @@
       recordAttempt(row, correct);
       revealed = true;
       feedback = correct
-        ? {type:'good',text:'ممتاز! تصحيحك مطابق. اقرأ القاعدة مرة، وبعدها طبّقها في جملة من عندك.'}
-        : {type:'bad',text:'لسه فيه اختلاف. قارن إجابتك بالتصحيح، وحدد الجزء اللي اتغيّر.'};
+        ? {type:'good',text:'Correct. Read the rule once, then apply it in a sentence of your own.'}
+        : {type:'bad',text:'There is still a difference. Compare your answer with the correction and identify what changed.'};
       paint();
       return;
     }
@@ -330,7 +330,7 @@
         lastReviewedAt: new Date().toISOString()
       };
       saveProgress();
-      feedback = {type:'hint',text:action === 'learned' ? 'اتسجلت كقاعدة فهمتها. ارجع لها لاحقًا للتثبيت.' : 'اتسجلت للمراجعة. جرّب تعود لها بعد ما تحل أمثلة أخرى.'};
+      feedback = {type:'hint',text:action === 'learned' ? 'Saved as a learned rule. Review it later to reinforce it.' : 'Added to your review list. Return to it after completing more examples.'};
       paint();
     }
   }
