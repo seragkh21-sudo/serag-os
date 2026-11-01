@@ -205,7 +205,7 @@
       '<div class="eq-stat-main"><span class="eq-stat-icon">✦</span><strong>' + totalXP.toLocaleString('en-US') + '</strong><small>XP · EngoPlay</small></div>' +
       '<div class="eq-stat-pair"><div><strong>🔥 ' + streak + '</strong><small>EngoPlay streak</small></div><div><strong>' + state.sessions + '</strong><small>Sessions completed</small></div></div>' +
       '<div class="eq-progress-head"><span>Today's progress</span><b>' + progress + '/3</b></div><progress max="3" value="' + progress + '"></progress>' +
-      '<div class="eq-mini-path" aria-label="تقدّم التحدّي">' + [0,1,2].map(function (i) { return '<span class="' + (i < progress ? 'is-done' : (i === daily.index && !complete ? 'is-current' : '')) + '">' + (i < progress ? '✓' : (i + 1)) + '</span>'; }).join('') + '</div>' +
+      '<div class="eq-mini-path" aria-label="Challenge progress">' + [0,1,2].map(function (i) { return '<span class="' + (i < progress ? 'is-done' : (i === daily.index && !complete ? 'is-current' : '')) + '">' + (i < progress ? '✓' : (i + 1)) + '</span>'; }).join('') + '</div>' +
       '<div class="eq-storage-status" data-eq-storage-status role="status"></div>' +
       '</div></section>';
   }
@@ -267,7 +267,7 @@
       (daily.answerStatus === 'incorrect' || daily.answerStatus === 'incomplete' ? ' eq-tile-incorrect' : '');
     var answerStateClass = daily.answerStatus ? ' eq-answer-' + daily.answerStatus : '';
     var answer = daily.selected.map(function (index, pos) {
-      return '<button type="button" class="eq-tile eq-tile-selected' + answerStatusClass + '" data-eq-return="' + pos + '" aria-label="إزالة الكلمة ' + esc(daily.bank[index]) + '">' + esc(daily.bank[index]) + '</button>';
+      return '<button type="button" class="eq-tile eq-tile-selected' + answerStatusClass + '" data-eq-return="' + pos + '" aria-label="Remove word ' + esc(daily.bank[index]) + '">' + esc(daily.bank[index]) + '</button>';
     }).join('');
     if (!answer) answer = '<span class="eq-answer-placeholder">Select the words in the correct order</span>';
     var bank = daily.bank.map(function (word, index) {
@@ -452,7 +452,7 @@
     } else if (button.hasAttribute('data-eq-hint')) {
       if (!daily.correct) {
         daily.hintUsed = true;
-        daily.feedback = 'الHint ظاهر تحت منطقة الإجابة. جرّب ترتّب الكلمات بنفسك.';
+        daily.feedback = 'The hint is shown below your answer. Try building the sentence yourself.';
         save(bundle);
         update();
       }
