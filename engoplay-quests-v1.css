@@ -32,7 +32,7 @@
 .eq-mini-path span.is-current{border:2px solid var(--eq-accent);color:var(--eq-accent);box-shadow:0 0 0 4px rgba(102,83,204,.10)}
 .eq-mini-path span.is-done{border-color:#379c7a;background:#dcf8eb;color:#187552}
 .eq-storage-status{min-height:0;color:var(--muted,#777);font-size:10px}
-.eq-quest-dialog{box-sizing:border-box;width:min(680px,calc(100vw - 24px));max-width:680px;max-height:min(90vh,900px);overflow:auto;padding:clamp(18px,3vw,28px);border:1px solid var(--line,#e7e5ee);border-radius:22px;background:var(--card,#fff);color:var(--text,#292633);box-shadow:0 28px 90px rgba(22,15,39,.25)}
+.eq-quest-dialog{--eq-accent:var(--ea-accent,#6653cc);box-sizing:border-box;width:min(680px,calc(100vw - 24px));max-width:680px;max-height:min(90vh,900px);overflow:auto;padding:clamp(18px,3vw,28px);border:1px solid var(--line,#e7e5ee);border-radius:22px;background:var(--card,#fff);color:var(--text,#292633);box-shadow:0 28px 90px rgba(22,15,39,.25)}
 .eq-quest-dialog::backdrop{background:rgba(27,21,44,.55);backdrop-filter:blur(4px)}
 .eq-close{position:sticky;top:0;float:left;display:grid;place-items:center;width:34px;height:34px;border:1px solid var(--line,#e7e5ee);border-radius:10px;background:var(--card,#fff);color:var(--muted,#777);font-size:22px;cursor:pointer;z-index:2}
 .eq-dialog-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding-top:14px}

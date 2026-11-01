@@ -178,19 +178,42 @@
     document.replaceChild(nextDocument, document.documentElement);
 
     // Load legacy dependencies sequentially so globals exist before dependants run.
+    // Only explicitly optional enhancements may fail without blocking the whole workspace.
+    const optionalScriptPatterns = [
+      /^\/dashboard-v2\.js(?:\?|$)/,
+      /^\/english-audio-v4\.js(?:\?|$)/,
+      /^\/microsoft-tts-v1\.js(?:\?|$)/,
+      /^\/english-source-curriculum-v1\.js(?:\?|$)/,
+      /^\/english-open-sentences-v1\.js(?:\?|$)/,
+      /^\/english-context-v15\.js(?:\?|$)/,
+      /^\/english-phrases-v16\.js(?:\?|$)/,
+      /^\/english-video-v17\.js(?:\?|$)/,
+      /^\/english-review-v10-fallback\.js(?:\?|$)/,
+      /^\/english-tatoeba-explorer-v1\.js(?:\?|$)/,
+      /^\/english-grammar-examples-v1\.js(?:\?|$)/,
+      /^\/english-dictionary-v1\.js(?:\?|$)/,
+      /^\/voice-commands-v1\.js(?:\?|$)/
+    ];
     for (const source of pendingScripts) {
       const script = document.createElement('script');
+      const scriptSrc = source.getAttribute('src') || '';
+      const isOptional = optionalScriptPatterns.some(pattern => pattern.test(scriptSrc));
       for (const attr of Array.from(source.attributes)) script.setAttribute(attr.name, attr.value);
-      if (source.hasAttribute('src')) {
-        script.async = false;
-        await new Promise((resolve, reject) => {
-          script.onload = resolve;
-          script.onerror = () => reject(new Error('Failed to load ' + source.getAttribute('src')));
+      try {
+        if (source.hasAttribute('src')) {
+          script.async = false;
+          await new Promise((resolve, reject) => {
+            script.onload = resolve;
+            script.onerror = () => reject(new Error('Failed to load ' + scriptSrc));
+            document.body.appendChild(script);
+          });
+        } else {
+          script.textContent = source.textContent || '';
           document.body.appendChild(script);
-        });
-      } else {
-        script.textContent = source.textContent || '';
-        document.body.appendChild(script);
+        }
+      } catch (scriptError) {
+        if (!isOptional) throw scriptError;
+        console.warn('Optional Serag OS enhancement failed to load:', scriptSrc, scriptError);
       }
     }
   }catch(err){

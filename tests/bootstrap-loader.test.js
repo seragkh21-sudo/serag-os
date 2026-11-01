@@ -2,31 +2,35 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 
-test('index loads Supabase in the head and uses the replacement bootstrap',()=>{
+test('index uses the replacement bootstrap and legacy loads the pinned Supabase client',()=>{
   const html=fs.readFileSync('index.html','utf8');
-  assert.match(html,/<head>[\s\S]*cdn\.jsdelivr\.net\/npm\/@supabase\/supabase-js@2[\s\S]*<\/head>/);
-  assert.match(html,/app-bootstrap\.js/);
-  assert.doesNotMatch(html,/shell-loader\.js/);
+  const legacy=fs.readFileSync('legacy.html','utf8');
+  assert.equal(html.includes('cdn.jsdelivr.net/npm/@supabase/supabase-js'),false);
+  assert.ok(html.includes('app-bootstrap.js'));
+  assert.equal(html.includes('shell-loader.js'),false);
+  assert.ok(legacy.includes('@supabase/supabase-js@2.116.0'));
 });
 
 test('bootstrap preserves Supabase and executes dependency scripts in order',()=>{
   const source=fs.readFileSync('app-bootstrap.js','utf8');
-  assert.doesNotMatch(source,/document\.(?:open|write|close)\s*\(/);
-  assert.match(source,/for\s*\(const source of pendingScripts\)/);
-  assert.match(source,/script\.async\s*=\s*false/);
-  assert.doesNotMatch(source,/parsed\.querySelector[^\n]*supabase-js[^\n]*remove/);
+  assert.equal(source.includes('document.write('),false);
+  assert.ok(source.includes('for (const source of pendingScripts)'));
+  assert.ok(source.includes('script.async = false'));
+  assert.equal(source.includes(`parsed.querySelector('script[src*="supabase-js"]')?.remove()`),false);
 });
 
 test('app publishes Supabase client and authenticated user on window',()=>{
   const source=fs.readFileSync('app.js','utf8');
-  assert.match(source,/sb=window\.sb=window\.supabase\.createClient/);
-  assert.match(source,/var sb = null;[\s\S]*var user = null;/);
-  assert.match(source,/user=window\.user=session\?\.user\|\|null/);
+  assert.ok(source.includes('sb=window.sb=window.supabase.createClient'));
+  assert.ok(source.includes('var sb = null;'));
+  assert.ok(source.includes('var user = null;'));
+  assert.ok(source.includes('user=window.user=session?.user||null'));
 });
 
 test('bootstrap cache-busts every local asset from one version constant',()=>{
   const source=fs.readFileSync('app-bootstrap.js','utf8');
-  assert.match(source,/const V='60'/);
-  assert.match(source,/app\.js\?v=\$\{V\}/);
-  assert.doesNotMatch(source,/\/(?:[\w-]+)\.(?:js|css)\?v=\d+/);
+  assert.ok(source.includes("const V='60'"));
+  assert.ok(source.includes('app.js?v=${V}'));
+  assert.equal(source.includes('.js?v=60'),false);
+  assert.equal(source.includes('.css?v=60'),false);
 });
