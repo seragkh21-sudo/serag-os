@@ -28,12 +28,12 @@
     const count = document.getElementById('tatoebaCount');
     const reveal = document.querySelector('[data-tatoeba-reveal]');
     if (count) count.textContent = list.length
-      ? 'الجملة ' + Math.min(index + 1, list.length) + ' من ' + list.length.toLocaleString('en-US')
-      : 'لا توجد نتائج مطابقة';
+      ? 'Sentence ' + Math.min(index + 1, list.length) + ' of ' + list.length.toLocaleString('en-US')
+      : 'No matching results';
     if (reveal) reveal.hidden = !list.length || revealed;
     if (!card) return;
     if (!list.length) {
-      card.innerHTML = '<div class="te-empty">ملقيناش جمل مطابقة. جرّب كلمة إنجليزية أو عربية مختلفة.</div>';
+      card.innerHTML = '<div class="te-empty">No matching sentences. Try a different English or Arabic search term.</div>';
       return;
     }
     const row = list[index % list.length];
@@ -41,9 +41,9 @@
       '<div class="te-label">ENGLISH</div>' +
       '<p class="te-english" lang="en" dir="ltr">' + esc(row.english) + '</p>' +
       (revealed
-        ? '<div class="te-label">المعنى العربي</div><p class="te-arabic" lang="ar" dir="rtl">' + esc(row.arabic) + '</p>'
-        : '<p class="te-hidden-translation" dir="rtl">حاول تفهم الجملة الأول، وبعدها اكشف الترجمة.</p>') +
-      '<div class="te-attribution"><span>المصدر: Tatoeba عبر ManyThings</span><span>' + esc(row.attribution) + '</span></div>' +
+        ? '<div class="te-label">Arabic meaning</div><p class="te-arabic" lang="ar" dir="rtl">' + esc(row.arabic) + '</p>'
+        : '<p class="te-hidden-translation" dir="rtl">Try to understand the sentence first, then reveal the translation.</p>') +
+      '<div class="te-attribution"><span>Source: Tatoeba via ManyThings</span><span>' + esc(row.attribution) + '</span></div>' +
       '</article>';
   }
 
@@ -51,20 +51,20 @@
     return '<div class="tatoeba-explorer">' +
       '<div class="te-intro">' +
         '<span class="te-kicker">OPEN SENTENCE CORPUS</span>' +
-        '<h3>مكتبة الجمل الإنجليزية والعربية</h3>' +
-        '<p>استكشف الجمل حسب ترتيب المصدر، وابحث بالإنجليزية أو العربية. حاول تفهم المعنى قبل كشف الترجمة.</p>' +
-        '<div class="te-stats"><strong>12,574</strong><span>زوج جمل متاح</span><span class="te-source-pill">مصدر مفتوح · مع النَسب</span></div>' +
+        '<h3>English sentence library</h3>' +
+        '<p>Browse sentences in source order and search in English or Arabic. Try to understand the meaning before revealing the translation.</p>' +
+        '<div class="te-stats"><strong>12,574</strong><span>sentence pairs available</span><span class="te-source-pill">Open source · attribution included</span></div>' +
       '</div>' +
-      '<label class="te-search-label" for="tatoebaSearch">ابحث في الجمل</label>' +
-      '<input id="tatoebaSearch" class="te-search" data-tatoeba-search type="search" value="' + esc(query) + '" placeholder="مثال: meeting أو العمل" autocomplete="off" />' +
-      '<div class="te-count" id="tatoebaCount">تحميل الجمل…</div>' +
-      '<div id="tatoebaCurrent"><div class="te-loading">بنحمّل مكتبة الجمل…</div></div>' +
+      '<label class="te-search-label" for="tatoebaSearch">Search sentences</label>' +
+      '<input id="tatoebaSearch" class="te-search" data-tatoeba-search type="search" value="' + esc(query) + '" placeholder="e.g. meeting or work" autocomplete="off" />' +
+      '<div class="te-count" id="tatoebaCount">Loading sentences…</div>' +
+      '<div id="tatoebaCurrent"><div class="te-loading">Loading the sentence library…</div></div>' +
       '<div class="te-actions">' +
-        '<button type="button" class="ea12-btn primary" data-tatoeba-reveal>اكشف الترجمة</button>' +
-        '<button type="button" class="ea12-btn" data-tatoeba-next>الجملة التالية ←</button>' +
+        '<button type="button" class="ea12-btn primary" data-tatoeba-reveal>Reveal translation</button>' +
+        '<button type="button" class="ea12-btn" data-tatoeba-next>Next sentence →</button>' +
       '</div>' +
-      '<p class="te-caution">تنبيه: دي جمل من مصدر مجتمعي وليست كلها مراجَعة تعليميًا. راجع المعنى والسياق قبل اعتماد أي جملة للحفظ أو الامتحانات. بيانات النص من Tatoeba بترخيص CC BY 2.0 FR؛ احتفظ بنسبة المصدر والمساهمين.</p>' +
-      '<p class="te-links"><a href="https://www.manythings.org/anki/" target="_blank" rel="noopener noreferrer">تفاصيل المصدر والترخيص ↗</a></p>' +
+      '<p class="te-caution">Note: These sentences come from a community source and have not all been reviewed for teaching. Check meaning and context before using them for study or exams. Tatoeba text is licensed under CC BY 2.0 FR; retain source and contributor attribution.</p>' +
+      '<p class="te-links"><a href="https://www.manythings.org/anki/" target="_blank" rel="noopener noreferrer">Source and licence details ↗</a></p>' +
     '</div>';
   }
 
@@ -86,8 +86,8 @@
       } catch (error) {
         loadError = String(error?.message || error);
         const host = document.querySelector('#ea14Content .tatoeba-explorer');
-        if (host) host.outerHTML = '<div class="tatoeba-explorer"><h3>تعذر تحميل مكتبة الجمل</h3><p>ما قدرناش نقرأ ملف الداتا من الموقع (' +
-          esc(loadError) + '). باقي أقسام الإنجليزي تفضل شغالة.</p><a href="https://github.com/seragkh21-sudo/serag-os/tree/main/data/review" target="_blank" rel="noopener noreferrer">فتح ملفات المصدر على GitHub ↗</a></div>';
+        if (host) host.outerHTML = '<div class="tatoeba-explorer"><h3>Could not load the sentence library</h3><p>Could not read the data file from the site (' +
+          esc(loadError) + '). The other English sections remain available.</p><a href="https://github.com/seragkh21-sudo/serag-os/tree/main/data/review" target="_blank" rel="noopener noreferrer">View source files on GitHub ↗</a></div>';
       }
     })();
     return loadPromise;
@@ -95,8 +95,8 @@
 
   function html() {
     if (!rows.length && !loadError) void load();
-    if (loadError) return '<div class="tatoeba-explorer"><h3>تعذر تحميل مكتبة الجمل</h3><p>ما قدرناش نقرأ ملف الداتا من الموقع (' +
-      esc(loadError) + '). باقي أقسام الإنجليزي تفضل شغالة.</p><a href="https://github.com/seragkh21-sudo/serag-os/tree/main/data/review" target="_blank" rel="noopener noreferrer">فتح ملفات المصدر على GitHub ↗</a></div>';
+    if (loadError) return '<div class="tatoeba-explorer"><h3>Could not load the sentence library</h3><p>Could not read the data file from the site (' +
+      esc(loadError) + '). The other English sections remain available.</p><a href="https://github.com/seragkh21-sudo/serag-os/tree/main/data/review" target="_blank" rel="noopener noreferrer">View source files on GitHub ↗</a></div>';
     return panelHTML();
   }
 
