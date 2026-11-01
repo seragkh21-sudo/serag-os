@@ -40,7 +40,7 @@
     if (status) status.textContent = message;
   }
   function statusLabel(status) {
-    return ({ unread: 'للقراءة لاحقًا', reading: 'قيد القراءة', completed: 'مكتمل' })[status] || 'للقراءة لاحقًا';
+    return ({ unread: 'Unread', reading: 'In progress', completed: 'Completed' })[status] || 'Unread';
   }
   function readMinutes(row) {
     const count = String(row.content || row.summary || '').trim().split(/\s+/).filter(Boolean).length;
@@ -49,29 +49,29 @@
   function excerpt(row) {
     const source = String(row.summary || row.content || '').trim();
     if (source) return source.length > 155 ? source.slice(0, 152) + '…' : source;
-    return row.source_url ? 'مقال محفوظ من الويب — افتح المصدر أو أضف النص لقراءته هنا.' : 'أضف نص المقال لبدء القراءة.';
+    return row.source_url ? 'مقال محفوظ من الويب — افتح المصدر أو أضف النص لقراءته هنا.' : 'أضف Article text لبدء القراءة.';
   }
   function summaryHTML() {
     return '<section class="erl-reading-intro">' +
       '<div class="erl-reading-intro-copy"><span class="erl-eyebrow">YOUR READING SPACE</span>' +
-      '<h3>مكتبة القراءة</h3>' +
-      '<p>اجمع مقالاتك، اقرأ بهدوء، وارجع لها وقت ما تحتاج. مقالاتك الخاصة بتتزامن مع حسابك.</p></div>' +
+      '<h3>Reading library</h3>' +
+      '<p>Save articles, read at your own pace and return whenever you need. Your library syncs with your account.</p></div>' +
       '<div class="erl-reading-intro-actions"><div class="erl-reading-mini-stats">' +
       '<span><b data-erl-count>0</b><small>مقال محفوظ</small></span>' +
-      '<span><b data-erl-completed-count>0</b><small>مكتمل</small></span></div>' +
-      '<button type="button" class="ea12-btn primary" data-erl-add>＋ أضف مقال</button></div></section>';
+      '<span><b data-erl-completed-count>0</b><small>Completed</small></span></div>' +
+      '<button type="button" class="ea12-btn primary" data-erl-add>＋ Add article</button></div></section>';
   }
   function libraryHTML() {
     return '<section id="erlLibraryCard" class="card erl-library-card" hidden>' +
-      '<div class="erl-library-head"><div><span class="erl-eyebrow">MY ARTICLES</span><h3>مقالاتي المحفوظة</h3>' +
-      '<p class="erl-muted">اكتب المقال أو الصق نصه، أو احفظ رابطًا للرجوع إليه لاحقًا.</p></div>' +
+      '<div class="erl-library-head"><div><span class="erl-eyebrow">MY ARTICLES</span><h3>Saved articles</h3>' +
+      '<p class="erl-muted">Write or paste an article, or save a link for later.</p></div>' +
       '<button type="button" class="ea12-btn primary" data-erl-add>＋ إضافة مقال</button></div>' +
-      '<div class="erl-library-toolbar"><label class="erl-search"><span>⌕</span><input type="search" id="erlSearch" placeholder="ابحث بالعنوان أو الموضوع أو الكلمات…" autocomplete="off"></label>' +
-      '<div class="erl-filter-tabs" role="group" aria-label="تصفية المقالات">' +
+      '<div class="erl-library-toolbar"><label class="erl-search"><span>⌕</span><input type="search" id="erlSearch" placeholder="Search by title, topic or keywords…" autocomplete="off"></label>' +
+      '<div class="erl-filter-tabs" role="group" aria-label="Filter articles">' +
       '<button type="button" data-erl-filter="all" aria-pressed="true">الكل</button>' +
       '<button type="button" data-erl-filter="unread" aria-pressed="false">للقراءة</button>' +
-      '<button type="button" data-erl-filter="reading" aria-pressed="false">قيد القراءة</button>' +
-      '<button type="button" data-erl-filter="completed" aria-pressed="false">مكتمل</button>' +
+      '<button type="button" data-erl-filter="reading" aria-pressed="false">In progress</button>' +
+      '<button type="button" data-erl-filter="completed" aria-pressed="false">Completed</button>' +
       '<button type="button" data-erl-filter="favorites" aria-pressed="false">★ المفضلة</button></div></div>' +
       '<div class="erl-library-status" id="erlLibraryStatus" role="status">جاري تجهيز مكتبتك…</div>' +
       '<div id="erlArticleRows" class="erl-article-grid"></div>' +
@@ -80,28 +80,28 @@
   function dialogsHTML() {
     return '<dialog id="erlEditorDialog" class="erl-dialog erl-editor-dialog">' +
       '<form id="erlEditorForm" class="erl-editor-form">' +
-      '<header class="erl-dialog-head"><div><span class="erl-eyebrow">ADD TO YOUR LIBRARY</span><h3 id="erlEditorHeading">إضافة مقال جديد</h3>' +
-      '<p class="erl-muted">احفظ نصًا تقرأه داخل سراج أو رابطًا ترجع له بعدين.</p></div>' +
+      '<header class="erl-dialog-head"><div><span class="erl-eyebrow">ADD TO YOUR LIBRARY</span><h3 id="erlEditorHeading">Add a new article</h3>' +
+      '<p class="erl-muted">Save text to read in the app or a link to revisit later.</p></div>' +
       '<button type="button" class="erl-close" data-erl-close aria-label="إغلاق">×</button></header>' +
       '<div class="erl-form-grid">' +
-      '<label class="erl-field erl-wide">عنوان المقال<input id="erlTitle" name="title" maxlength="200" required placeholder="مثال: How to communicate clearly at work"></label>' +
-      '<label class="erl-field erl-wide">رابط المصدر <span class="erl-optional">اختياري</span><input id="erlUrl" name="source_url" type="url" maxlength="2048" placeholder="https://…"></label>' +
-      '<label class="erl-field">الموضوع<input id="erlTopic" name="topic" maxlength="100" placeholder="Work, Daily life, Design…" value="General"></label>' +
-      '<label class="erl-field">المستوى<select id="erlLevel" name="level"><option>A1</option><option>A2</option><option selected>B1</option><option>B2</option><option>C1</option><option>C2</option></select></label>' +
-      '<label class="erl-field erl-wide">وسوم <span class="erl-optional">افصل بينها بفاصلة</span><input id="erlTags" name="tags" placeholder="communication, work, vocabulary"></label>' +
-      '<label class="erl-field erl-wide">ملخص قصير <span class="erl-optional">اختياري</span><textarea id="erlSummary" name="summary" rows="2" maxlength="600" placeholder="عن إيه المقال؟"></textarea></label>' +
-      '<label class="erl-field erl-wide">نص المقال <span class="erl-optional">الصق النص هنا للقراءة داخل الموقع</span><textarea id="erlContent" name="content" rows="8" maxlength="200000" placeholder="Paste the article text here…"></textarea></label>' +
+      '<label class="erl-field erl-wide">Article title<input id="erlTitle" name="title" maxlength="200" required placeholder="مثال: How to communicate clearly at work"></label>' +
+      '<label class="erl-field erl-wide">Source URL <span class="erl-optional">اختياري</span><input id="erlUrl" name="source_url" type="url" maxlength="2048" placeholder="https://…"></label>' +
+      '<label class="erl-field">Topic<input id="erlTopic" name="topic" maxlength="100" placeholder="Work, Daily life, Design…" value="General"></label>' +
+      '<label class="erl-field">Level<select id="erlLevel" name="level"><option>A1</option><option>A2</option><option selected>B1</option><option>B2</option><option>C1</option><option>C2</option></select></label>' +
+      '<label class="erl-field erl-wide">Tags <span class="erl-optional">افصل بينها بفاصلة</span><input id="erlTags" name="tags" placeholder="communication, work, vocabulary"></label>' +
+      '<label class="erl-field erl-wide">Short summary <span class="erl-optional">اختياري</span><textarea id="erlSummary" name="summary" rows="2" maxlength="600" placeholder="What is the article about?"></textarea></label>' +
+      '<label class="erl-field erl-wide">Article text <span class="erl-optional">Paste the text here to read it in the app</span><textarea id="erlContent" name="content" rows="8" maxlength="200000" placeholder="Paste the article text here…"></textarea></label>' +
       '</div><p class="erl-form-hint">ملاحظة: حفظ الرابط لا يستورد نص الموقع تلقائيًا؛ بعض المواقع تمنع الاستيراد. الصق النص إذا أردت قارئًا مريحًا داخل Serag OS.</p>' +
-      '<footer class="erl-dialog-actions"><button type="button" class="ea12-btn" data-erl-close>إلغاء</button><button type="submit" class="ea12-btn primary" id="erlSaveArticle">حفظ المقال</button></footer>' +
+      '<footer class="erl-dialog-actions"><button type="button" class="ea12-btn" data-erl-close>إلغاء</button><button type="submit" class="ea12-btn primary" id="erlSaveArticle">Save article</button></footer>' +
       '</form></dialog>' +
       '<dialog id="erlReaderDialog" class="erl-dialog erl-reader-dialog">' +
       '<header class="erl-reader-header"><div class="erl-reader-title-wrap"><span class="erl-eyebrow">FOCUS READING</span><h2 id="erlReaderTitle">—</h2><p id="erlReaderMeta" class="erl-muted"></p></div>' +
-      '<div class="erl-reader-tools"><button type="button" class="erl-reader-tool" data-erl-font="down" aria-label="تصغير الخط">A−</button><button type="button" class="erl-reader-tool" data-erl-font="up" aria-label="تكبير الخط">A+</button><button type="button" class="erl-close" data-erl-reader-close aria-label="إغلاق">×</button></div></header>' +
+      '<div class="erl-reader-tools"><button type="button" class="erl-reader-tool" data-erl-font="down" aria-label="Decrease font size">A−</button><button type="button" class="erl-reader-tool" data-erl-font="up" aria-label="Increase font size">A+</button><button type="button" class="erl-close" data-erl-reader-close aria-label="إغلاق">×</button></div></header>' +
       '<div class="erl-reader-progress"><span id="erlReaderProgressLabel">0% مقروء</span><div><i id="erlReaderProgressBar" style="width:0%"></i></div></div>' +
       '<div id="erlReaderScroll" class="erl-reader-scroll"><article id="erlReaderBody" class="erl-reader-body"></article></div>' +
-      '<section class="erl-reader-notes"><label for="erlReaderNotes">ملاحظاتي على المقال</label><textarea id="erlReaderNotes" rows="2" maxlength="10000" placeholder="اكتب فكرة أو كلمة عايز ترجع لها…"></textarea><button type="button" class="ea12-btn" data-erl-save-notes>حفظ الملاحظة</button></section>' +
-      '<footer class="erl-reader-footer"><a id="erlSourceLink" href="#" target="_blank" rel="noopener noreferrer" hidden>فتح المصدر الأصلي ↗</a>' +
-      '<div class="erl-reader-footer-actions"><button type="button" class="ea12-btn" data-erl-reader-favorite>☆ حفظ في المفضلة</button><button type="button" class="ea12-btn primary" data-erl-complete>علّم كمكتمل ✓</button></div></footer>' +
+      '<section class="erl-reader-notes"><label for="erlReaderNotes">My notes</label><textarea id="erlReaderNotes" rows="2" maxlength="10000" placeholder="Save an idea or word to revisit…"></textarea><button type="button" class="ea12-btn" data-erl-save-notes>Save note</button></section>' +
+      '<footer class="erl-reader-footer"><a id="erlSourceLink" href="#" target="_blank" rel="noopener noreferrer" hidden>Open original source ↗</a>' +
+      '<div class="erl-reader-footer-actions"><button type="button" class="ea12-btn" data-erl-reader-favorite>☆ Save to favorites</button><button type="button" class="ea12-btn primary" data-erl-complete>علّم كCompleted ✓</button></div></footer>' +
       '</dialog>';
   }
   function setStatus(message) {
@@ -131,9 +131,9 @@
     });
     if (!visible.length) {
       list.innerHTML = '<div class="erl-empty"><span class="erl-empty-icon">✳</span><h4>' +
-        (rows.length ? 'مفيش نتائج مطابقة' : 'ابدأ أول مجموعة مقالات') + '</h4><p>' +
-        (rows.length ? 'جرّب كلمة بحث أو فلتر مختلف.' : 'أضف مقالًا من نص عندك أو احفظ رابطًا من الويب. هتلاقي كل حاجة هنا بعدين.') +
-        '</p>' + (rows.length ? '' : '<button type="button" class="ea12-btn primary" data-erl-add>＋ أضف أول مقال</button>') + '</div>';
+        (rows.length ? 'No matching results' : 'Start your article library') + '</h4><p>' +
+        (rows.length ? 'Try another search term or filter.' : 'Add an article from your own text or save a web link. Your saved items will appear here.') +
+        '</p>' + (rows.length ? '' : '<button type="button" class="ea12-btn primary" data-erl-add>＋ Add your first article</button>') + '</div>';
       return;
     }
     list.innerHTML = visible.map(function (row) {
@@ -145,10 +145,10 @@
         '<h4>' + esc(row.title) + '</h4><p>' + esc(excerpt(row)) + '</p>' +
         '<div class="erl-card-progress"><div><i style="width:' + progress + '%"></i></div><small>' + (progress ? progress + '%' : statusLabel(row.status)) + '</small></div>' +
         '<div class="erl-tags">' + tags + (source ? '<span class="erl-source-tag">↗ رابط مصدر</span>' : '') + '</div>' +
-        '<span class="erl-open-cta"><span>افتح المقال واقرأه</span><span class="erl-open-cta-arrow" aria-hidden="true">←</span></span></button>' +
+        '<span class="erl-open-cta"><span>Open and read</span><span class="erl-open-cta-arrow" aria-hidden="true">←</span></span></button>' +
         '<div class="erl-card-actions"><button type="button" data-erl-favorite="' + esc(row.id) + '" aria-label="المفضلة" title="المفضلة">' + (row.favorite ? '★' : '☆') + '</button>' +
-        '<button type="button" data-erl-edit="' + esc(row.id) + '" aria-label="تعديل المقال" title="تعديل">✎</button>' +
-        '<button type="button" data-erl-delete="' + esc(row.id) + '" aria-label="حذف المقال" title="حذف">⌫</button></div></article>';
+        '<button type="button" data-erl-edit="' + esc(row.id) + '" aria-label="Edit article" title="تعديل">✎</button>' +
+        '<button type="button" data-erl-delete="' + esc(row.id) + '" aria-label="Delete article" title="حذف">⌫</button></div></article>';
     }).join('');
   }
   function studioOwnsAcademyReading() {
@@ -161,25 +161,25 @@
     if (!id) {
       rows = [];
       renderRows();
-      setStatus('سجّل دخولك لعرض مقالاتك المحفوظة.');
+      setStatus('Sign in to view your saved articles.');
       return;
     }
     if (!force && loadedFor === id) return;
     const client = db();
     if (!client) {
-      setStatus('قاعدة البيانات غير متاحة حاليًا.');
+      setStatus('The database is currently unavailable.');
       return;
     }
-    setStatus('جاري تحميل مقالاتك…');
+    setStatus('Loading your articles…');
     const result = await client.from(TABLE).select('*').eq('user_id', id).order('updated_at', { ascending: false }).limit(200);
     if (result.error) {
-      setStatus('تعذر تحميل المقالات. تأكد من الاتصال ثم حدّث الصفحة. (' + result.error.message + ')');
+      setStatus('Could not load articles. Check your connection and refresh the page. (' + result.error.message + ')');
       return;
     }
     rows = result.data || [];
     loadedFor = id;
     renderRows();
-    setStatus(rows.length ? 'مكتبتك متزامنة مع حسابك.' : 'مكتبتك جاهزة — أضف أول مقال من الزر بالأعلى.');
+    setStatus(rows.length ? 'Your library is synced with your account.' : 'Your library is ready. Add your first article above.');
   }
   function editorDialog() { return $('#erlEditorDialog'); }
   function readerDialog() { return $('#erlReaderDialog'); }
@@ -200,7 +200,7 @@
       if (el) el.value = fields[idKey];
     });
     const heading = $('#erlEditorHeading');
-    if (heading) heading.textContent = row ? 'تعديل المقال' : 'إضافة مقال جديد';
+    if (heading) heading.textContent = row ? 'Edit article' : 'Add a new article';
     const dialog = editorDialog();
     if (dialog && !dialog.open) dialog.showModal();
     setTimeout(function () { $('#erlTitle') && $('#erlTitle').focus(); }, 50);
@@ -219,7 +219,7 @@
     const body = $('#erlReaderBody');
     const scroll = $('#erlReaderScroll');
     if (title) title.textContent = row.title;
-    if (meta) meta.textContent = (row.topic || 'General') + ' · ' + (row.level || 'B1') + ' · ' + readMinutes(row) + ' دقيقة قراءة';
+    if (meta) meta.textContent = (row.topic || 'General') + ' · ' + (row.level || 'B1') + ' · ' + readMinutes(row) + ' min read';
     if (body) {
       const content = String(row.content || '').trim();
       if (content) {
@@ -228,7 +228,7 @@
         }).join('');
       } else {
         const source = safeUrl(row.source_url);
-        body.innerHTML = '<div class="erl-no-body"><span>↗</span><h3>المقال محفوظ كرابط</h3><p>الموقع الأصلي لا يتيح نصًا محفوظًا داخل سراج تلقائيًا. افتح المصدر أو ارجع للتعديل والصق النص هنا.</p>' +
+        body.innerHTML = '<div class="erl-no-body"><span>↗</span><h3>Article saved as a link</h3><p>The source website does not provide text for automatic import. Open the source or edit this item and paste the text here.</p>' +
           (source ? '<a href="' + esc(source) + '" target="_blank" rel="noopener noreferrer">فتح المقال الأصلي ↗</a>' : '') + '</div>';
       }
     }
@@ -241,7 +241,7 @@
     const notes = $('#erlReaderNotes');
     if (notes) notes.value = row.notes || '';
     const fav = $('[data-erl-reader-favorite]');
-    if (fav) fav.textContent = row.favorite ? '★ محفوظ في المفضلة' : '☆ حفظ في المفضلة';
+    if (fav) fav.textContent = row.favorite ? '★ Saved to favorites' : '☆ Save to favorites';
     readerFont = 18;
     try {
       const savedFont = Number(localStorage.getItem('serag-reading-font:' + uid()));
@@ -272,14 +272,14 @@
     if (!client || !ownerId || !id) return false;
     const result = await client.from(TABLE).update(patch).eq('id', id).eq('user_id', ownerId).select('*').single();
     if (result.error) {
-      notify('تعذر حفظ التعديل: ' + result.error.message);
+      notify('Could not save changes: ' + result.error.message);
       return false;
     }
     rows = rows.map(function (row) { return row.id === id ? result.data : row; });
     renderRows();
     if (activeId === id) {
       const fav = $('[data-erl-reader-favorite]');
-      if (fav) fav.textContent = result.data.favorite ? '★ محفوظ في المفضلة' : '☆ حفظ في المفضلة';
+      if (fav) fav.textContent = result.data.favorite ? '★ Saved to favorites' : '☆ Save to favorites';
       updateReaderProgress(Number(result.data.reading_progress) || 0);
     }
     return true;
@@ -288,14 +288,14 @@
     event.preventDefault();
     const ownerId = uid();
     const client = db();
-    if (!ownerId || !client) return notify('سجّل دخولك الأول علشان تحفظ مقالاتك.');
+    if (!ownerId || !client) return notify('Sign in to save your articles.');
     const title = $('#erlTitle').value.trim();
     const rawUrl = $('#erlUrl').value.trim();
     const sourceUrl = rawUrl ? safeUrl(rawUrl) : '';
     const content = $('#erlContent').value.trim();
-    if (!title) return notify('اكتب عنوان المقال الأول.');
-    if (rawUrl && !sourceUrl) return notify('رابط المصدر لازم يبدأ بـ http:// أو https://.');
-    if (!content && !sourceUrl) return notify('اكتب نص المقال أو أضف رابط المصدر.');
+    if (!title) return notify('اكتب Article title الأول.');
+    if (rawUrl && !sourceUrl) return notify('Source URL لازم يبدأ بـ http:// أو https://.');
+    if (!content && !sourceUrl) return notify('اكتب Article text أو أضف Source URL.');
     const current = editingId ? rows.find(function (row) { return row.id === editingId; }) : null;
     const tags = $('#erlTags').value.split(',').map(function (tag) { return tag.trim(); }).filter(Boolean).slice(0, 12);
     const payload = {
@@ -312,21 +312,21 @@
       notes: current ? (current.notes || '') : ''
     };
     const button = $('#erlSaveArticle');
-    if (button) { button.disabled = true; button.textContent = 'جاري الحفظ…'; }
+    if (button) { button.disabled = true; button.textContent = 'Saving…'; }
     let result;
     if (current) {
       result = await client.from(TABLE).update(payload).eq('id', current.id).eq('user_id', ownerId).select('*').single();
     } else {
       result = await client.from(TABLE).insert(Object.assign({ user_id: ownerId }, payload)).select('*').single();
     }
-    if (button) { button.disabled = false; button.textContent = 'حفظ المقال'; }
-    if (result.error) return notify('تعذر حفظ المقال: ' + result.error.message);
+    if (button) { button.disabled = false; button.textContent = 'Save article'; }
+    if (result.error) return notify('تعذر Save article: ' + result.error.message);
     if (current) rows = rows.map(function (row) { return row.id === current.id ? result.data : row; });
     else rows.unshift(result.data);
     closeEditor();
     renderRows();
-    setStatus('اتحفظ المقال بنجاح.');
-    notify('اتحفظ المقال في مكتبتك ✓');
+    setStatus('اتSave article بنجاح.');
+    notify('اتSave article في مكتبتك ✓');
   }
   async function toggleFavorite(id) {
     const row = rows.find(function (item) { return item.id === id; });
@@ -336,25 +336,25 @@
   async function markComplete() {
     if (!activeId) return;
     const saved = await savePatch(activeId, { status: 'completed', reading_progress: 100 });
-    if (saved) notify('اتعلّم كمكتمل ✓');
+    if (saved) notify('اتعلّم كCompleted ✓');
   }
   async function saveNotes() {
     if (!activeId) return;
     const notes = $('#erlReaderNotes');
     if (!notes) return;
-    if (await savePatch(activeId, { notes: notes.value })) notify('ملاحظتك اتحفظت.');
+    if (await savePatch(activeId, { notes: notes.value })) notify('Your note has been saved.');
   }
   async function deleteArticle(id) {
     const row = rows.find(function (item) { return item.id === id; });
-    if (!row || !window.confirm('تحذف المقال «' + row.title + '» من مكتبتك؟')) return;
+    if (!row || !window.confirm('تDelete article «' + row.title + '” from your library?')) return;
     const client = db();
     const ownerId = uid();
     const result = await client.from(TABLE).delete().eq('id', id).eq('user_id', ownerId);
-    if (result.error) return notify('تعذر حذف المقال: ' + result.error.message);
+    if (result.error) return notify('تعذر Delete article: ' + result.error.message);
     rows = rows.filter(function (item) { return item.id !== id; });
     renderRows();
-    setStatus('اتحذف المقال.');
-    notify('اتحذف المقال.');
+    setStatus('اتDelete article.');
+    notify('اتDelete article.');
   }
   function handleClick(event) {
     const target = event.target;
