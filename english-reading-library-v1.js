@@ -325,8 +325,8 @@
     else rows.unshift(result.data);
     closeEditor();
     renderRows();
-    setStatus('اتSave article بنجاح.');
-    notify('اتSave article في مكتبتك ✓');
+    setStatus('Article saved successfully.');
+    notify('Article saved to your library ✓');
   }
   async function toggleFavorite(id) {
     const row = rows.find(function (item) { return item.id === id; });
@@ -336,7 +336,7 @@
   async function markComplete() {
     if (!activeId) return;
     const saved = await savePatch(activeId, { status: 'completed', reading_progress: 100 });
-    if (saved) notify('اتMark as completed ✓');
+    if (saved) notify('Marked as completed ✓');
   }
   async function saveNotes() {
     if (!activeId) return;
@@ -346,15 +346,15 @@
   }
   async function deleteArticle(id) {
     const row = rows.find(function (item) { return item.id === id; });
-    if (!row || !window.confirm('تDelete article «' + row.title + '” from your library?')) return;
+    if (!row || !window.confirm('Delete the article “' + row.title + '” from your library?')) return;
     const client = db();
     const ownerId = uid();
     const result = await client.from(TABLE).delete().eq('id', id).eq('user_id', ownerId);
-    if (result.error) return notify('تعذر Delete article: ' + result.error.message);
+    if (result.error) return notify('Could not delete article: ' + result.error.message);
     rows = rows.filter(function (item) { return item.id !== id; });
     renderRows();
-    setStatus('اتDelete article.');
-    notify('اتDelete article.');
+    setStatus('Article deleted.');
+    notify('Article deleted.');
   }
   function handleClick(event) {
     const target = event.target;
