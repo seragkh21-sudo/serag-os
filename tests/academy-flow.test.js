@@ -22,7 +22,7 @@ test('question history restores original answers and never counts replay twice',
   const q=a.w.SERAG_ACADEMY_V12.questions().find(q=>q.topic==='be-basics'&&a.root.innerHTML.includes(q.prompt));assert.ok(q);
   a.click({eaAnswer:q.answer},['data-ea-answer']);assert.equal(a.read().attempts.length,1);
   a.click({},['data-ea-next']);a.click({},['data-ea-prev']);
-  assert.ok(a.root.innerHTML.includes(q.prompt));assert.ok(a.root.innerHTML.includes('صحيح ✓'));
+  assert.ok(a.root.innerHTML.includes(q.prompt));assert.ok(a.root.innerHTML.includes('Correct ✓'));
   a.click({eaAnswer:q.answer},['data-ea-answer']);assert.equal(a.read().attempts.length,1);
   a.click({},['data-ea-end']);a.click({eaStart:'topic'});
   assert.ok(!a.root.innerHTML.includes(q.prompt),'a solved, not-yet-due question should leave the current queue');
@@ -43,11 +43,11 @@ test('original lessons and writing models have coherent coverage and references'
 });
 
 test('question-first home and B1 to C2 paths offer questions for each level',()=>{
- const a=app();assert.ok(a.root.innerHTML.indexOf('مركز الأسئلة')<a.root.innerHTML.indexOf('أقسام English'));
+ const a=app();assert.ok(a.root.innerHTML.indexOf('Question hub')<a.root.innerHTML.indexOf('English sections'));
  a.click({eaTab:'levels'});
  for(const level of ['B1','B2','C1','C2']){
   a.click({eaTab:'levels'});a.click({eaLevelPick:level});assert.equal(a.read().level,level);
-  assert.ok(a.root.innerHTML.includes('مسار '+level));
+  assert.ok(a.root.innerHTML.includes(level+' learning path'));
   a.click({eaStart:'level'});
   const q=a.w.SERAG_ACADEMY_V12.questions().find(q=>a.root.innerHTML.includes(q.prompt));assert.ok(q,level);
   assert.equal(q.level||a.w.SERAG_GRAMMAR_V10.find(g=>g.id===q.topic)?.level,level);
@@ -60,10 +60,10 @@ test('each level separates rules from contextual topics and runs a 12-question e
  assert.equal(new Set(data.questions.map(q=>q.id)).size,96);
  for(const level of ['B1','B2','C1','C2']){
   a.click({eaTab:'levels'});a.click({eaLevelPick:level});a.click({eaLevelPart:'exams'});
-  for(const theme of data.themes){assert.ok(a.root.innerHTML.includes(theme.titleAr));assert.equal(data.questions.filter(q=>q.level===level&&q.theme===theme.id).length,3)}
+  for(const theme of data.themes){assert.ok(a.root.innerHTML.includes(theme.title));assert.equal(data.questions.filter(q=>q.level===level&&q.theme===theme.id).length,3)}
   a.click({eaContext:'ai'});assert.ok(a.root.innerHTML.includes('1/3'));
   const q=data.questions.find(q=>q.level===level&&q.theme==='ai'&&a.root.innerHTML.includes(q.prompt));assert.ok(q);
-  a.click({eaAnswer:q.answer},['data-ea-answer']);a.click({},['data-ea-end']);assert.ok(a.root.innerHTML.includes('امتحان من الحياة الحالية'));
+  a.click({eaAnswer:q.answer},['data-ea-answer']);a.click({},['data-ea-end']);assert.ok(a.root.innerHTML.includes('Real-life exam'));
   a.click({eaStart:'exam'});assert.ok(a.root.innerHTML.includes('1/12'));
   for(let i=0;i<12;i++){const q=data.questions.find(q=>q.level===level&&a.root.innerHTML.includes(q.prompt));assert.ok(q);a.click({eaAnswer:q.answer},['data-ea-answer']);a.click({},['data-ea-next'])}
   assert.ok(a.root.innerHTML.includes('12/12'));a.click({},['data-ea-end']);
