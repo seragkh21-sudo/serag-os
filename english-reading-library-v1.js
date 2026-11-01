@@ -90,7 +90,7 @@
       '<label class="erl-field">Level<select id="erlLevel" name="level"><option>A1</option><option>A2</option><option selected>B1</option><option>B2</option><option>C1</option><option>C2</option></select></label>' +
       '<label class="erl-field erl-wide">Tags <span class="erl-optional">Separate with commas</span><input id="erlTags" name="tags" placeholder="communication, work, vocabulary"></label>' +
       '<label class="erl-field erl-wide">Short summary <span class="erl-optional">Optional</span><textarea id="erlSummary" name="summary" rows="2" maxlength="600" placeholder="What is the article about?"></textarea></label>' +
-      '<label class="erl-field erl-wide">Article text <span class="erl-optional">الصق النص هنا Unread داخل الموقع</span><textarea id="erlContent" name="content" rows="8" maxlength="200000" placeholder="Paste the article text here…"></textarea></label>' +
+      '<label class="erl-field erl-wide">Article text <span class="erl-optional">Paste the text here to read it in the app</span><textarea id="erlContent" name="content" rows="8" maxlength="200000" placeholder="Paste the article text here…"></textarea></label>' +
       '</div><p class="erl-form-hint">Note: Saving a link does not import the webpage text automatically. Some sites block importing. Paste the text to read it comfortably in Serag OS.</p>' +
       '<footer class="erl-dialog-actions"><button type="button" class="ea12-btn" data-erl-close>Cancel</button><button type="submit" class="ea12-btn primary" id="erlSaveArticle">Save article</button></footer>' +
       '</form></dialog>' +
@@ -101,7 +101,7 @@
       '<div id="erlReaderScroll" class="erl-reader-scroll"><article id="erlReaderBody" class="erl-reader-body"></article></div>' +
       '<section class="erl-reader-notes"><label for="erlReaderNotes">My notes</label><textarea id="erlReaderNotes" rows="2" maxlength="10000" placeholder="Save an idea or word to revisit…"></textarea><button type="button" class="ea12-btn" data-erl-save-notes>Save note</button></section>' +
       '<footer class="erl-reader-footer"><a id="erlSourceLink" href="#" target="_blank" rel="noopener noreferrer" hidden>Open original source ↗</a>' +
-      '<div class="erl-reader-footer-actions"><button type="button" class="ea12-btn" data-erl-reader-favorite>☆ Save to favorites</button><button type="button" class="ea12-btn primary" data-erl-complete>علّم كCompleted ✓</button></div></footer>' +
+      '<div class="erl-reader-footer-actions"><button type="button" class="ea12-btn" data-erl-reader-favorite>☆ Save to favorites</button><button type="button" class="ea12-btn primary" data-erl-complete>Mark as completed ✓</button></div></footer>' +
       '</dialog>';
   }
   function setStatus(message) {
@@ -148,7 +148,7 @@
         '<span class="erl-open-cta"><span>Open and read</span><span class="erl-open-cta-arrow" aria-hidden="true">←</span></span></button>' +
         '<div class="erl-card-actions"><button type="button" data-erl-favorite="' + esc(row.id) + '" aria-label="Favorites" title="Favorites">' + (row.favorite ? '★' : '☆') + '</button>' +
         '<button type="button" data-erl-edit="' + esc(row.id) + '" aria-label="Edit article" title="Edit">✎</button>' +
-        '<button type="button" data-erl-delete="' + esc(row.id) + '" aria-label="Delete article" title="حذف">⌫</button></div></article>';
+        '<button type="button" data-erl-delete="' + esc(row.id) + '" aria-label="Delete article" title="Delete">⌫</button></div></article>';
     }).join('');
   }
   function studioOwnsAcademyReading() {
@@ -228,7 +228,7 @@
         }).join('');
       } else {
         const source = safeUrl(row.source_url);
-        body.innerHTML = '<div class="erl-no-body"><span>↗</span><h3>الSaved articles كرابط</h3><p>الموقع الأصلي لا يتيح نصًا محفوظًا داخل سراج تلقائيًا. افتح المصدر أو ارجع للEdit والصق النص هنا.</p>' +
+        body.innerHTML = '<div class="erl-no-body"><span>↗</span><h3>Article saved as a link</h3><p>The source website does not provide text for automatic import. Open the source or edit this item and paste the text here.</p>' +
           (source ? '<a href="' + esc(source) + '" target="_blank" rel="noopener noreferrer">Open original article ↗</a>' : '') + '</div>';
       }
     }
@@ -241,7 +241,7 @@
     const notes = $('#erlReaderNotes');
     if (notes) notes.value = row.notes || '';
     const fav = $('[data-erl-reader-favorite]');
-    if (fav) fav.textContent = row.favorite ? '★ محفوظ في Favorites' : '☆ Save to favorites';
+    if (fav) fav.textContent = row.favorite ? '★ Saved to favorites' : '☆ Save to favorites';
     readerFont = 18;
     try {
       const savedFont = Number(localStorage.getItem('serag-reading-font:' + uid()));
@@ -272,14 +272,14 @@
     if (!client || !ownerId || !id) return false;
     const result = await client.from(TABLE).update(patch).eq('id', id).eq('user_id', ownerId).select('*').single();
     if (result.error) {
-      notify('تعذر حفظ الEdit: ' + result.error.message);
+      notify('Could not save changes: ' + result.error.message);
       return false;
     }
     rows = rows.map(function (row) { return row.id === id ? result.data : row; });
     renderRows();
     if (activeId === id) {
       const fav = $('[data-erl-reader-favorite]');
-      if (fav) fav.textContent = result.data.favorite ? '★ محفوظ في Favorites' : '☆ Save to favorites';
+      if (fav) fav.textContent = result.data.favorite ? '★ Saved to favorites' : '☆ Save to favorites';
       updateReaderProgress(Number(result.data.reading_progress) || 0);
     }
     return true;
@@ -293,7 +293,7 @@
     const rawUrl = $('#erlUrl').value.trim();
     const sourceUrl = rawUrl ? safeUrl(rawUrl) : '';
     const content = $('#erlContent').value.trim();
-    if (!title) return notify('اكتب Article title الأول.');
+    if (!title) return notify('Enter an article title first.');
     if (rawUrl && !sourceUrl) return notify('Source URL لازم يبدأ بـ http:// أو https://.');
     if (!content && !sourceUrl) return notify('اكتب Article text أو أضف Source URL.');
     const current = editingId ? rows.find(function (row) { return row.id === editingId; }) : null;
