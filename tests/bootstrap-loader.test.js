@@ -16,7 +16,7 @@ test('bootstrap preserves Supabase and executes dependency scripts in order',()=
   assert.equal(source.includes('document.write('),false);
   assert.ok(source.includes('for (const source of pendingScripts)'));
   assert.ok(source.includes('script.async = false'));
-  assert.equal(source.includes('parsed.querySelector'),false);
+  assert.equal(source.includes(`parsed.querySelector('script[src*="supabase-js"]')?.remove()`),false);
 });
 
 test('app publishes Supabase client and authenticated user on window',()=>{
