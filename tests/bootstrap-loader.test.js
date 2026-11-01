@@ -2,13 +2,14 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 
-test('index loads Supabase in the head and uses the replacement bootstrap',()=>{
+test('index uses the replacement bootstrap and legacy loads the pinned Supabase client',()=>{
   const html=fs.readFileSync('index.html','utf8');
-  assert.match(html,/<head>[\s\S]*cdn\.jsdelivr\.net\/npm\/@supabase\/supabase-js@2[\s\S]*<\/head>/);
-  assert.match(html,/app-bootstrap\.js/);
-  assert.doesNotMatch(html,/shell-loader\.js/);
+  const legacy=fs.readFileSync('legacy.html','utf8');
+  assert.doesNotMatch(html,/cdn\\.jsdelivr\\.net\\/npm\\/@supabase\\/supabase-js/);
+  assert.match(html,/app-bootstrap\\.js/);
+  assert.doesNotMatch(html,/shell-loader\\.js/);
+  assert.match(legacy,/@supabase\\/supabase-js@2\\.116\\.0/);
 });
-
 test('bootstrap preserves Supabase and executes dependency scripts in order',()=>{
   const source=fs.readFileSync('app-bootstrap.js','utf8');
   assert.doesNotMatch(source,/document\.(?:open|write|close)\s*\(/);
