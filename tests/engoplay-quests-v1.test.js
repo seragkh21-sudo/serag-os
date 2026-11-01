@@ -151,9 +151,9 @@ test('challenge attempts feed the shared EngoPlay XP and existing synced attempt
 
 test('challenge keeps an explicit Check action and does not auto-submit on the final tile', () => {
   const source = fs.readFileSync('engoplay-quests-v1.js', 'utf8');
-  assert.match(source, /data-eq-check>تحقّق من الجملة/);
+  assert.match(source, /data-eq-check>Check answer/);
   assert.doesNotMatch(source, /daily\.selected\.length === daily\.bank\.length\) evaluateAnswer/);
   assert.match(source, /الإجابة الصحيحة: '\s*\+ row\.sentence/);
-  assert.match(source, /رتّب الكلمات، وبعد ما تخلص اضغط/);
+  assert.match(source, /Arrange the words, then select Check answer/);
   assert.match(source, /window\.ENGOPLAY\.track/);
 });
