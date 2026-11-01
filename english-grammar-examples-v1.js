@@ -3,7 +3,7 @@
 (() => {
   'use strict';
   const SCORE_URL = 'https://score.ddl-study.org/en/';
-  const LEVEL_LABELS = {A1:'A1 · تأسيسي',A2:'A2 · أساسي',B1:'B1 · متوسط',B2:'B2 · فوق المتوسط',C1:'C1 · متقدم',C2:'C2 · متقدم جدًا'};
+  const LEVEL_LABELS = {A1:'A1 · Beginner',A2:'A2 · Elementary',B1:'B1 · Intermediate',B2:'B2 · Upper intermediate',C1:'C1 · Advanced',C2:'C2 · Proficient'};
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({
     '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
   }[c]));
@@ -100,9 +100,9 @@
     const lessons = new Set(rows.map(row => row.lessonId));
     const levels = new Set(rows.map(row => row.level));
     return '<div class="ege-stats">' +
-      '<div><strong>' + rows.length.toLocaleString('en-US') + '</strong><span>مثال متاح</span></div>' +
-      '<div><strong>' + lessons.size.toLocaleString('en-US') + '</strong><span>قاعدة مرتبطة بأمثلة</span></div>' +
-      '<div><strong>' + levels.size.toLocaleString('en-US') + '</strong><span>مستوى تدريبي</span></div>' +
+      '<div><strong>' + rows.length.toLocaleString('en-US') + '</strong><span>Examples available</span></div>' +
+      '<div><strong>' + lessons.size.toLocaleString('en-US') + '</strong><span>Grammar topics with examples</span></div>' +
+      '<div><strong>' + levels.size.toLocaleString('en-US') + '</strong><span>Practice levels</span></div>' +
       '</div>';
   }
 
@@ -115,21 +115,21 @@
     const topics = getLessons().filter(lesson => rows.some(row => row.lessonId === String(lesson.id)))
       .sort((a,b)=>String(a.titleAr||a.title).localeCompare(String(b.titleAr||b.title),'ar'));
     return '<div class="ege-filters">' +
-      '<label>المستوى<select data-ege-level>' + levels.map(value=>option(value,value==='all'?'كل المستويات':(LEVEL_LABELS[value]||value),level===value)).join('') + '</select></label>' +
-      '<label>القاعدة<select data-ege-topic>' + option('all','كل القواعد',topic==='all') +
+      '<label>Level<select data-ege-level>' + levels.map(value=>option(value,value==='all'?'All levels':(LEVEL_LABELS[value]||value),level===value)).join('') + '</select></label>' +
+      '<label>Topic<select data-ege-topic>' + option('all','All topics',topic==='all') +
       topics.map(lesson=>option(String(lesson.id),String(lesson.titleAr||lesson.title||lesson.id) + ' · ' + String(lesson.level||'B1'),topic===String(lesson.id))).join('') +
       '</select></label>' +
-      '<label class="ege-search-label">ابحث في الأمثلة والقواعد<input type="search" data-ege-search value="' + esc(query) + '" placeholder="مثال: present perfect أو الشرط" autocomplete="off"></label>' +
+      '<label class="ege-search-label">Search examples and grammar<input type="search" data-ege-search value="' + esc(query) + '" placeholder="e.g. present perfect or conditionals" autocomplete="off"></label>' +
       '</div>';
   }
 
   function cardHTML(row) {
     const details = (row.summary || row.formula || row.mistake || row.tip)
-      ? '<details class="ege-rule-details"><summary>افهم القاعدة وراء المثال</summary>' +
+      ? '<details class="ege-rule-details"><summary>افهم Topic وراء المثال</summary>' +
         (row.summary ? '<p>' + esc(row.summary) + '</p>' : '') +
-        (row.formula ? '<div class="ege-formula"><b>الصيغة</b><span dir="ltr" lang="en">' + esc(row.formula) + '</span></div>' : '') +
-        (row.mistake ? '<p><b>خطأ شائع:</b> ' + esc(row.mistake) + '</p>' : '') +
-        (row.tip ? '<p><b>تلميح:</b> ' + esc(row.tip) + '</p>' : '') +
+        (row.formula ? '<div class="ege-formula"><b>Form</b><span dir="ltr" lang="en">' + esc(row.formula) + '</span></div>' : '') +
+        (row.mistake ? '<p><b>Common mistake:</b> ' + esc(row.mistake) + '</p>' : '') +
+        (row.tip ? '<p><b>Tip:</b> ' + esc(row.tip) + '</p>' : '') +
       '</details>'
       : '';
     return '<article class="ege-card">' +
@@ -137,7 +137,7 @@
       '<h4>' + esc(row.titleAr) + '</h4><p class="ege-rule-name" lang="en" dir="ltr">' + esc(row.title) + '</p>' +
       '<blockquote class="ege-sentence" dir="ltr" lang="en">' + esc(row.sentence) + '</blockquote>' +
       details +
-      '<div class="ege-card-actions"><button class="ege-btn" data-ea-lesson="' + esc(row.lessonId) + '">افتح شرح القاعدة ↗</button></div>' +
+      '<div class="ege-card-actions"><button class="ege-btn" data-ea-lesson="' + esc(row.lessonId) + '">افتح شرح Topic ↗</button></div>' +
       '</article>';
   }
 
@@ -147,11 +147,11 @@
     const cards = document.getElementById('egeCards');
     const more = document.querySelector('#seragGrammarExamples [data-ege-action="more"]');
     if (count) count.textContent = list.length
-      ? 'عرض ' + Math.min(visibleLimit,list.length).toLocaleString('en-US') + ' من ' + list.length.toLocaleString('en-US') + ' مثال'
-      : 'لا توجد أمثلة مطابقة للفلاتر الحالية';
+      ? 'Showing ' + Math.min(visibleLimit,list.length).toLocaleString('en-US') + ' of ' + list.length.toLocaleString('en-US') + ' examples'
+      : 'No examples match the current filters';
     if (cards) cards.innerHTML = list.length
       ? list.slice(0,visibleLimit).map(cardHTML).join('')
-      : '<div class="ege-empty"><b>ملقيناش أمثلة مطابقة.</b><p>جرّب مستوى أو قاعدة مختلفة، أو امسح كلمة البحث.</p><button class="ege-btn" data-ege-action="reset">عرض كل الأمثلة</button></div>';
+      : '<div class="ege-empty"><b>No matching examples found.</b><p>Try another level or topic, or clear the search.</p><button class="ege-btn" data-ege-action="reset">Showing كل الأمثلة</button></div>';
     if (more) more.hidden = visibleLimit >= list.length;
   }
 
@@ -161,22 +161,22 @@
     const initialList = filtered(rows);
     const initialCards = initialList.length
       ? initialList.slice(0,visibleLimit).map(cardHTML).join('')
-      : '<div class="ege-empty"><b>ملقيناش أمثلة مطابقة.</b><p>جرّب مستوى أو قاعدة مختلفة، أو امسح كلمة البحث.</p><button class="ege-btn" data-ege-action="reset">عرض كل الأمثلة</button></div>';
+      : '<div class="ege-empty"><b>No matching examples found.</b><p>Try another level or topic, or clear the search.</p><button class="ege-btn" data-ege-action="reset">Showing كل الأمثلة</button></div>';
     const initialCount = initialList.length
-      ? 'عرض ' + Math.min(visibleLimit,initialList.length).toLocaleString('en-US') + ' من ' + initialList.length.toLocaleString('en-US') + ' مثال'
-      : 'لا توجد أمثلة مطابقة للفلاتر الحالية';
+      ? 'Showing ' + Math.min(visibleLimit,initialList.length).toLocaleString('en-US') + ' of ' + initialList.length.toLocaleString('en-US') + ' examples'
+      : 'No examples match the current filters';
     return '<section id="seragGrammarExamples" class="ege-root">' +
       '<header class="ege-intro"><div><span class="ege-kicker">SERAG ENGLISH · EXAMPLE LIBRARY</span>' +
-      '<h3>بنك أمثلة القواعد</h3>' +
-      '<p>شوف القاعدة في جمل فعلية من دروس المنهج، وابحث باسم القاعدة أو الصيغة أو الجملة. كل مثال مرتبط بدرس تقدر تفتحه مباشرة.</p></div>' +
-      '<a class="ege-source-link" href="' + SCORE_URL + '" target="_blank" rel="noopener noreferrer">استكشف SCoRE الرسمي ↗</a></header>' +
+      '<h3>Grammar examples</h3>' +
+      '<p>شوف Topic في جمل فعلية of دروس المنهج، وابحث باسم Topic أو Form أو الجملة. كل examples مرتبط بدرس تقدر تفتحه مباشرة.</p></div>' +
+      '<a class="ege-source-link" href="' + SCORE_URL + '" target="_blank" rel="noopener noreferrer">Explore official SCoRE ↗</a></header>' +
       statsHTML(rows) +
       filtersHTML(rows) +
       '<div id="egeCount" class="ege-count">' + esc(initialCount) + '</div>' +
       '<div id="egeCards" class="ege-grid">' + initialCards + '</div>' +
-      '<div class="ege-load-more"><button class="ege-btn primary" data-ege-action="more"' + (visibleLimit >= initialList.length ? ' hidden' : '') + '>حمّل أمثلة إضافية ↓</button></div>' +
-      '<aside class="ege-corpus-note"><b>مصدر إضافي:</b> يوفّر SCoRE الرسمي أكثر من 10,000 جملة مصنّفة ضمن 22 موضوعًا نحويًا وثلاثة مستويات، لكنه يُعرض هنا كرابط خارجي ولا ننسخ بياناته إلى هذا البنك. محتوى SCoRE مرخّص CC BY-NC-SA 4.0.</aside>' +
-      '<p class="ege-attribution">الأمثلة المحلية مجمّعة من دروس القواعد الموجودة في Serag OS. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">تفاصيل ترخيص SCoRE ↗</a></p>' +
+      '<div class="ege-load-more"><button class="ege-btn primary" data-ege-action="more"' + (visibleLimit >= initialList.length ? ' hidden' : '') + '>Load more examples ↓</button></div>' +
+      '<aside class="ege-corpus-note"><b>Additional source:</b> يوفّر SCoRE الرسمي أكثر of 10,000 جملة مصنّفة ضمن 22 موضوعًا نحويًا وثلاثة مستويات، لكنه يُShowing هنا كرابط خارجي ولا ننسخ بياناته إلى هذا البنك. محتوى SCoRE مرخّص CC BY-NC-SA 4.0.</aside>' +
+      '<p class="ege-attribution">الأمثلة المحلية مجمّعة of دروس القواعد الموجودة في Serag OS. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">SCoRE licence details ↗</a></p>' +
       '</section>';
   }
 
