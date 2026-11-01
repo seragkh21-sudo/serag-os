@@ -43,7 +43,7 @@
       (revealed
         ? '<div class="te-label">Arabic meaning</div><p class="te-arabic" lang="ar" dir="rtl">' + esc(row.arabic) + '</p>'
         : '<p class="te-hidden-translation" dir="rtl">Try to understand the sentence first, then reveal the translation.</p>') +
-      '<div class="te-attribution"><span>المصدر: Tatoeba عبر ManyThings</span><span>' + esc(row.attribution) + '</span></div>' +
+      '<div class="te-attribution"><span>Source: Tatoeba via ManyThings</span><span>' + esc(row.attribution) + '</span></div>' +
       '</article>';
   }
 
