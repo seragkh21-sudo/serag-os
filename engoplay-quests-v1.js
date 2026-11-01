@@ -294,7 +294,7 @@
       '<div class="eq-dialog-top"><div><div class="eq-eyebrow">DAILY QUEST · SENTENCE BUILDER</div>' +
       '<h2 id="eqDialogTitle">Build the sentence</h2><p>Select each word in order. You can change the order by selecting a chosen word.</p></div>' +
       '<div class="eq-step-count"><strong>' + (daily.index + 1) + '</strong><span>/ 3</span></div></div>' +
-      '<div class="eq-progress-line"><progress max="3" value="' + progress + '"></progress><span>' + progress + ' من 3</span></div>' +
+      '<div class="eq-progress-line"><progress max="3" value="' + progress + '"></progress><span>' + progress + ' of 3</span></div>' +
       '<div class="eq-rule-meta"><span>' + esc(row.level || 'B1') + '</span><span>' + esc(row.title || 'Grammar') + '</span></div>' +
       '<div class="eq-build-area"><small>Your sentence</small><div class="eq-answer' + answerStateClass + '" dir="ltr" lang="en">' + answer + '</div>' +
       '<div class="eq-word-bank" dir="ltr" lang="en">' + bank + '</div></div>' + hint + feedback + controls +
