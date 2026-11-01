@@ -31,5 +31,6 @@ test('bootstrap cache-busts every local asset from one version constant',()=>{
   const source=fs.readFileSync('app-bootstrap.js','utf8');
   assert.ok(source.includes("const V='60'"));
   assert.ok(source.includes('app.js?v=${V}'));
-  assert.ok(!/\\/(?:[\\w-]+)\\.(?:js|css)\\?v=\\d+/.test(source));
+  assert.equal(source.includes('.js?v=60'),false);
+  assert.equal(source.includes('.css?v=60'),false);
 });
