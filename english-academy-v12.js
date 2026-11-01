@@ -8,26 +8,26 @@
   const fresh=()=>({goal:'work',mode:8,attempts:[],cards:{},notes:{},sessions:[],scenario:null,practiceTopic:'be-basics',writingDrill:'paragraph',writingChecks:{},level:'B1',levelPart:'grammar',examTheme:'digital'});
   function load(){owner=uid();try{state={...fresh(),...JSON.parse(localStorage.getItem(key())||'{}')}}catch{state=fresh()}session=null}
   function save(){try{localStorage.setItem(key(),JSON.stringify(state))}catch{}}
-  const extraLesson={id:'past-perfect-continuous',level:'B1',title:'Past Perfect Continuous',titleAr:'الماضي التام المستمر',summary:'نشاط بدأ قبل نقطة ماضية، مع التركيز على مدته أو أثره عند تلك النقطة.',formula:'had been + verb-ing',examples:['I had been editing for two hours when the client called.','She was tired because she had been working all night.','By nine, we had been waiting for an hour.'],mistake:'مع أفعال الحالة مثل know استخدم had known، وليس had been knowing.',tip:'حدّد النقطة الماضية ثم اسأل: النشاط استمر قد إيه قبلها؟',quiz:['By noon, I ___ for three hours.','had been working','have been working'],task:'صف نشاطًا استمر لفترة قبل حدث ماضٍ آخر.'};
+  const extraLesson={id:'past-perfect-continuous',level:'B1',title:'Past Perfect Continuous',titleAr:'الماضي التام المستمر',summary:'An activity that started before a past point, with emphasis on its duration or its effect at that point.',formula:'had been + verb-ing',examples:['I had been editing for two hours when the client called.','She was tired because she had been working all night.','By nine, we had been waiting for an hour.'],mistake:'With stative verbs such as know, use had known, not had been knowing.',tip:'Identify the past reference point, then ask how long the activity had continued before it.',quiz:['By noon, I ___ for three hours.','had been working','have been working'],task:'Describe an activity that continued for a period before another past event.'};
   const lessons=()=>[...(window.SERAG_GRAMMAR_V10||[]),extraLesson];
   const lesson=id=>lessons().find(x=>x.id===({'zero-first':'zero-first-conditionals','if-alternatives':'condition-linkers'}[id]||id));
   const maps={
     tenses:{name:'Tense map',root:'Choose the tense based on the meaning, not just a time expression.',branches:[
-      ['Present · الحاضر',[['present-simple','عادة أو حقيقة','I work in marketing.'],['present-continuous','الآن / وضع مؤقت / ترتيب مؤكد','I am editing a video now.'],['present-perfect','خبرة أو نتيجة مرتبطة بالحاضر','I have sent the file.'],['present-perfect-continuous','نشاط ومدة حتى الآن','I have been working for two hours.']]],
-      ['Past · الماضي',[['past-simple','حدث انتهى في وقت ماضٍ','I sent it yesterday.'],['past-continuous','حدث كان مستمرًا','I was editing when he called.'],['past-perfect','حدث قبل حدث ماضٍ آخر','I had finished before he arrived.'],['past-perfect-continuous','مدة نشاط قبل نقطة ماضية','I had been working for hours.']]],
-      ['Future · المستقبل',[['future-forms','will: قرار الآن / وعد','I will help you.'],['future-forms','going to: نية أو دليل','I am going to update my CV.'],['future-forms','Present Continuous: ترتيب مؤكد','I am meeting the client tomorrow.']]]],tip:'الأزمنة تعبّر عن زاوية رؤيتك للحدث. أحيانًا أكثر من زمن ممكن، لكن Meaning والتركيز بيتغير.'},
+      ['Present',[['present-simple','Habit or fact','I work in marketing.'],['present-continuous','Now, temporary situation or fixed arrangement','I am editing a video now.'],['present-perfect','Experience or result connected to the present','I have sent the file.'],['present-perfect-continuous','Activity continuing up to now','I have been working for two hours.']]],
+      ['Past',[['past-simple','A completed past event','I sent it yesterday.'],['past-continuous','An action in progress in the past','I was editing when he called.'],['past-perfect','An event before another past event','I had finished before he arrived.'],['past-perfect-continuous','Duration of an activity before a past point','I had been working for hours.']]],
+      ['Future',[['future-forms','will: a decision made now or a promise','I will help you.'],['future-forms','going to: an intention or prediction based on evidence','I am going to update my CV.'],['future-forms','Present Continuous: a fixed arrangement','I am meeting the client tomorrow.']]]],tip:'Tenses show how you view an event. More than one tense may be possible, but the meaning and emphasis change.'},
     basics:{name:'Grammar foundations',root:'Start with the noun, then identify description, quantity and place.',branches:[
-      ['Nouns · الأسماء',[['articles','مفرد غير محدد: a/an؛ محدد: the','an hour / a university / the report'],['countable','معدود أم غير معدود؟','many tasks / much time'],['singular-plural-nouns','اختر فعل المفرد أو الجمع','The news is good.']]],
-      ['Description · الوصف',[['adjective-adverb','صفة للاسم؛ ظرف للفعل','a clear idea / explain clearly'],['ed-ing-adjectives','الشعور أم سبب الشعور؟','I am bored. / The meeting is boring.'],['comparatives','مقارنة أم أفضل شيء؟','better than / the best']]],
-      ['Prepositions · حروف الجر',[['time-prepositions','وقت: at نقطة / on يوم / in فترة','at 3 / on Monday / in May'],['place-prepositions','مكان: نقطة / سطح / داخل','at work / on the desk / in a room'],['adjective-prepositions','احفظ التركيب كاملًا','interested in / responsible for']]]],tip:'a/an حسب الصوت، مش الحرف. information/advice غير معدودتين في الاستخدام المعتاد.'},
+      ['Nouns',[['articles','Indefinite singular: a/an; specific: the','an hour / a university / the report'],['countable','Countable or uncountable?','many tasks / much time'],['singular-plural-nouns','Choose a singular or plural verb','The news is good.']]],
+      ['Description',[['adjective-adverb','An adjective describes a noun; an adverb modifies a verb.','a clear idea / explain clearly'],['ed-ing-adjectives','The feeling or the cause of the feeling?','I am bored. / The meeting is boring.'],['comparatives','A comparison or the superlative?','better than / the best']]],
+      ['Prepositions',[['time-prepositions','Time: at a point, on a day, in a period','at 3 / on Monday / in May'],['place-prepositions','Place: at a point, on a surface, in an enclosed space','at work / on the desk / in a room'],['adjective-prepositions','Learn the full collocation','interested in / responsible for']]]],tip:'Choose a/an by sound, not spelling. Information and advice are usually uncountable.'},
     sentence:{name:'Sentence structure map',root:'Identify the tense and subject, choose the auxiliary, then build the sentence.',branches:[
-      ['Questions · السؤال',[['questions','be: قدّمه على الفاعل','Are you ready?'],['questions','do/does/did + المصدر','Where did you work?'],['questions','have/has/had + V3','Have you sent the file?']]],
-      ['Meaning · Meaning',[['modals','قدرة / نصيحة / ضرورة / احتمال','can / should / must / might + base'],['passive','التركيز على من استقبل الفعل','The file was sent.'],['relative-clauses','وصف شخص أو شيء','The designer who created it…']]],
-      ['Verb patterns · شكل الفعل',[['gerund-infinitive','فعل + ing أو to + المصدر','enjoy working / want to work'],['do-make','نشاط أم نتيجة؟ تعلم التركيب','do homework / make a decision'],['reported-speech','نقل كلام شخص','He said he was busy.']]]],tip:'بعد does/did/modal يرجع الفعل للمصدر. لكن be + ing وhave + V3 لهم بناء مختلف.'},
+      ['Questions',[['questions','With be, move the verb before the subject.','Are you ready?'],['questions','do/does/did + base verb','Where did you work?'],['questions','have/has/had + past participle','Have you sent the file?']]],
+      ['Meaning',[['modals','Ability, advice, necessity or possibility','can / should / must / might + base'],['passive','Focus on the receiver of the action','The file was sent.'],['relative-clauses','Describe a person or thing','The designer who created it…']]],
+      ['Verb patterns',[['gerund-infinitive','Verb + -ing or to + base verb','enjoy working / want to work'],['do-make','Activity or result? Learn the collocation.','do homework / make a decision'],['reported-speech','Report what someone said','He said he was busy.']]]],tip:'After does, did or a modal, use the base verb. Be + -ing and have + past participle follow different patterns.'},
     conditionals:{name:'Conditionals map',root:'Is it a fact, a real possibility, an imaginary situation, or a past regret?',branches:[
-      ['Facts & possibility',[['zero-first','Zero: حقيقة متكررة','If + present, present'],['zero-first','First: مستقبل ممكن','If + present, will + base']]],
-      ['Imaginary & regret',[['second-conditional','Second: افتراض حاضر/مستقبل','If + past, would + base'],['third-conditional','Third: ماضٍ لم يحدث','If + had V3, would have V3']]],
-      ['Mixed & alternatives',[['mixed-conditionals','سبب ماضٍ → نتيجة الآن','If I had studied, I would be ready.'],['if-alternatives','unless = if not؛ as long as = بشرط','Unless you hurry, you will be late.']]]],tip:'ابدأ بالخريطة الأساسية لو لسه ما درستش IF؛ الجزء ده مستقل ومش داخل جلستك الافتراضية إلا لو اخترته.'}
+      ['Facts & possibility',[['zero-first','Zero: a general truth','If + present, present'],['zero-first','First: a real future possibility','If + present, will + base']]],
+      ['Imaginary & regret',[['second-conditional','Second: an imaginary present or future','If + past, would + base'],['third-conditional','Third: an unreal past situation','If + had V3, would have V3']]],
+      ['Mixed & alternatives',[['mixed-conditionals','A past cause with a present result','If I had studied, I would be ready.'],['if-alternatives','unless = if not; as long as = provided that','Unless you hurry, you will be late.']]]],tip:'Start with the foundations map if you have not studied conditionals yet. This section is separate and is not included in the default practice session unless you choose it.'}
   };
   Object.assign(maps,window.SERAG_SUPPLEMENT_V13?.maps||{});
   const scenarios=[
@@ -42,20 +42,20 @@
     ['Meeting small talk','Start a conversation and ask a follow-up question.','How has your week been? / What are you working on?','questions'],
     ['Airport conversation','Explain the purpose and length of your trip and where you are staying.','I am visiting… / I will stay for…','future-forms'],
     ['Renting a room','Ask about rent, bills and transport.','Does the rent include…? / How far is…?','questions'],
-    ['Australia interview','اشرح لماذا تريد الوظيفة وما الذي ستضيفه.','I am interested in this role because…','adjective-prepositions'],
-    ['Campaign results','قارن النتائج بين حملتين.','This campaign performed better than…','comparatives'],
-    ['Ask for assets','اطلب الملفات اللازمة وحدد ما ينقصك.','Could you send…? / I still need…','modals'],
-    ['Give feedback','قدم اقتراحًا دون أن تبدو هجوميًا.','It might be clearer if… / Could we try…?','modals'],
-    ['Customer support','اشرح المشكلة ووقت بدايتها وما جربته.','It stopped working… / I have tried…','present-perfect'],
-    ['Daily routine','صف يوم العمل المعتاد واختلاف اليوم.','I usually… / Today I am…','present-continuous'],
-    ['Future plans','تكلم عن خطة تعلمك وترتيب مؤكد للأسبوع.','I am going to… / I am meeting…','future-forms'],
-    ['Explain a process','اشرح مراحل إنتاج الفيديو حتى التسليم.','First… / Then… / Finally…','present-simple'],
-    ['Handle misunderstanding','صحح سوء فهم بأدب وكرر الفكرة ببساطة.','What I meant was… / Let me clarify…','questions']
+    ['Australia interview','Explain why you want the role and what you can contribute.','I am interested in this role because…','adjective-prepositions'],
+    ['Campaign results','Compare the results of two campaigns.','This campaign performed better than…','comparatives'],
+    ['Ask for assets','Request the required assets and explain what is missing.','Could you send…? / I still need…','modals'],
+    ['Give feedback','Make a suggestion without sounding confrontational.','It might be clearer if… / Could we try…?','modals'],
+    ['Customer support','Explain the issue, when it started and what you have tried.','It stopped working… / I have tried…','present-perfect'],
+    ['Daily routine','Describe your usual workday and how today is different.','I usually… / Today I am…','present-continuous'],
+    ['Future plans','Talk about your learning plan and a confirmed arrangement for the week.','I am going to… / I am meeting…','future-forms'],
+    ['Explain a process','Explain the stages of video production through delivery.','First… / Then… / Finally…','present-simple'],
+    ['Handle misunderstanding','Politely correct a misunderstanding and restate your point simply.','What I meant was… / Let me clarify…','questions']
   ];
   scenarios.push(...(window.SERAG_ENGLISH_V9?.workPractice?.scenarios||[]).map(s=>[s.title,s.hint,s.starter,s.topic||'questions',s.prompt]));
   const extra=[
     {id:'past-duration',topic:'past-perfect-continuous',prompt:'He was tired because he ___ for three hours before the meeting.',options:['had been working','has been working','is working'],answer:'had been working',explanation:'مدة نشاط انتهت أو استمرت حتى نقطة ماضية: had been + ing.'},
-    {id:'perfect-past',topic:'present-perfect',prompt:'I ___ the final design yesterday.',options:['sent','have sent','had been sending'],answer:'sent',explanation:'yesterday وقت ماضٍ منتهٍ؛ نستخدم Past Simple.'},
+    {id:'perfect-past',topic:'present-perfect',prompt:'I ___ the final design yesterday.',options:['sent','have sent','had been sending'],answer:'sent',explanation:'Yesterday refers to a finished past time, so use the Past Simple.'},
     {id:'did-base',topic:'questions',prompt:'Which question is correct?',options:['Did you send the file?','Did you sent the file?','Did you sending the file?'],answer:'Did you send the file?',explanation:'بعد did نستخدم المصدر send.'},
     {id:'phrase-align',topic:'adjective-prepositions',prompt:'The design should align ___ the brand guidelines.',options:['with','at','of'],answer:'with',explanation:'التركيب الكامل align with = يتماشى مع.'}
   ];
