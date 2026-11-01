@@ -125,7 +125,7 @@
 
   function cardHTML(row) {
     const details = (row.summary || row.formula || row.mistake || row.tip)
-      ? '<details class="ege-rule-details"><summary>افهم Topic وراء المثال</summary>' +
+      ? '<details class="ege-rule-details"><summary>Understand the rule behind the example</summary>' +
         (row.summary ? '<p>' + esc(row.summary) + '</p>' : '') +
         (row.formula ? '<div class="ege-formula"><b>Form</b><span dir="ltr" lang="en">' + esc(row.formula) + '</span></div>' : '') +
         (row.mistake ? '<p><b>Common mistake:</b> ' + esc(row.mistake) + '</p>' : '') +
@@ -137,7 +137,7 @@
       '<h4>' + esc(row.titleAr) + '</h4><p class="ege-rule-name" lang="en" dir="ltr">' + esc(row.title) + '</p>' +
       '<blockquote class="ege-sentence" dir="ltr" lang="en">' + esc(row.sentence) + '</blockquote>' +
       details +
-      '<div class="ege-card-actions"><button class="ege-btn" data-ea-lesson="' + esc(row.lessonId) + '">افتح شرح Topic ↗</button></div>' +
+      '<div class="ege-card-actions"><button class="ege-btn" data-ea-lesson="' + esc(row.lessonId) + '" >Open grammar lesson ↗</button></div>' +
       '</article>';
   }
 
@@ -151,7 +151,7 @@
       : 'No examples match the current filters';
     if (cards) cards.innerHTML = list.length
       ? list.slice(0,visibleLimit).map(cardHTML).join('')
-      : '<div class="ege-empty"><b>No matching examples found.</b><p>Try another level or topic, or clear the search.</p><button class="ege-btn" data-ege-action="reset">Showing كل الأمثلة</button></div>';
+      : '<div class="ege-empty"><b>No matching examples found.</b><p>Try another level or topic, or clear the search.</p><button class="ege-btn" data-ege-action="reset" >Show all examples</button></div>';
     if (more) more.hidden = visibleLimit >= list.length;
   }
 
@@ -161,22 +161,22 @@
     const initialList = filtered(rows);
     const initialCards = initialList.length
       ? initialList.slice(0,visibleLimit).map(cardHTML).join('')
-      : '<div class="ege-empty"><b>No matching examples found.</b><p>Try another level or topic, or clear the search.</p><button class="ege-btn" data-ege-action="reset">Showing كل الأمثلة</button></div>';
+      : '<div class="ege-empty"><b>No matching examples found.</b><p>Try another level or topic, or clear the search.</p><button class="ege-btn" data-ege-action="reset" >Show all examples</button></div>';
     const initialCount = initialList.length
       ? 'Showing ' + Math.min(visibleLimit,initialList.length).toLocaleString('en-US') + ' of ' + initialList.length.toLocaleString('en-US') + ' examples'
       : 'No examples match the current filters';
     return '<section id="seragGrammarExamples" class="ege-root">' +
       '<header class="ege-intro"><div><span class="ege-kicker">SERAG ENGLISH · EXAMPLE LIBRARY</span>' +
       '<h3>Grammar examples</h3>' +
-      '<p>شوف Topic في جمل فعلية of دروس المنهج، وابحث باسم Topic أو Form أو الجملة. كل examples مرتبط بدرس تقدر تفتحه مباشرة.</p></div>' +
+      '<p>Study grammar in real sentences from the curriculum. Search by topic, form or sentence. Each example links to its lesson.</p></div>' +
       '<a class="ege-source-link" href="' + SCORE_URL + '" target="_blank" rel="noopener noreferrer">Explore official SCoRE ↗</a></header>' +
       statsHTML(rows) +
       filtersHTML(rows) +
       '<div id="egeCount" class="ege-count">' + esc(initialCount) + '</div>' +
       '<div id="egeCards" class="ege-grid">' + initialCards + '</div>' +
       '<div class="ege-load-more"><button class="ege-btn primary" data-ege-action="more"' + (visibleLimit >= initialList.length ? ' hidden' : '') + '>Load more examples ↓</button></div>' +
-      '<aside class="ege-corpus-note"><b>Additional source:</b> يوفّر SCoRE الرسمي أكثر of 10,000 جملة مصنّفة ضمن 22 موضوعًا نحويًا وثلاثة مستويات، لكنه يُShowing هنا كرابط خارجي ولا ننسخ بياناته إلى هذا البنك. محتوى SCoRE مرخّص CC BY-NC-SA 4.0.</aside>' +
-      '<p class="ege-attribution">الأمثلة المحلية مجمّعة of دروس القواعد الموجودة في Serag OS. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">SCoRE licence details ↗</a></p>' +
+      '<aside class="ege-corpus-note"><b>Additional source:</b> The official SCoRE resource provides more than 10,000 sentences across 22 grammar topics and three levels. It is linked here as an external resource; its data is not copied into this bank. محتوى SCoRE مرخّص CC BY-NC-SA 4.0.</aside>' +
+      '<p class="ege-attribution">Local examples are collected from grammar lessons in Serag OS. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">SCoRE licence details ↗</a></p>' +
       '</section>';
   }
 
