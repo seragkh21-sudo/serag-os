@@ -137,7 +137,7 @@
   function renderQuiz(){
     if(!quizHistoryReady){$('#el9Quiz').innerHTML='<div class="el9-card-head"><h3>Loading question history…</h3></div><p class="el6-muted">Preparing a new practice set based on your recent answers.</p>';return}
     const q=currentQuiz(),label=state.answers<10?`${state.answers+1}/10`:`Bonus ${state.answers-9}`;
-    $('#el9Quiz').innerHTML=`<div class="el9-card-head"><div><div class="el6-muted">${q.title} · ${label}</div><h3>${esc(q.prompt)}</h3></div><span class="el9-pill">${score} صح</span></div><div class="el9-quiz-options">${q.options.map(x=>`<button data-quiz-answer="${esc(x)}" data-correct="${esc(q.correct)}" data-question-key="${esc(q.key)}">${esc(x)}</button>`).join('')}</div><div class="el6-muted">بنك أسئلة متنوع من كل المفردات. آخر 10 أسئلة تمت الإجابة عليها يتم استبعادها، وبعد أول 10 تقدر تكمل Bonus.</div>`;
+    $('#el9Quiz').innerHTML=`<div class="el9-card-head"><div><div class="el6-muted">${q.title} · ${label}</div><h3>${esc(q.prompt)}</h3></div><span class="el9-pill">${score} correct</span></div><div class="el9-quiz-options">${q.options.map(x=>`<button data-quiz-answer="${esc(x)}" data-correct="${esc(q.correct)}" data-question-key="${esc(q.key)}">${esc(x)}</button>`).join('')}</div><div class="el6-muted">بنك أسئلة متنوع من كل المفردات. آخر 10 أسئلة تمت الإجابة عليها يتم استبعادها، وبعد أول 10 تقدر تكمل Bonus.</div>`;
   }
   function renderArticle(){
     const a=dailyArticle(),finished=completedArticles(),readCount=finished.filter(title=>data.articles.some(x=>x.title===title)).length;
@@ -145,7 +145,7 @@
     $('#el9Article').innerHTML=`<div class="el9-card-head"><div><div class="el6-eyebrow">READING LIBRARY · ${data.articles.length} ARTICLES</div><h3>${esc(a.title)}</h3></div><span class="el6-tag">${esc(a.level)}</span></div>
     <div class="el18-reading-progress"><span>${readCount}/${data.articles.length} articles completed</span><div><i style="width:${Math.round(readCount/Math.max(1,data.articles.length)*100)}%"></i></div></div>
     <label class="el18-select">Choose an article<select id="el18ArticleSelect">${data.articles.map((x,i)=>`<option value="${i}" ${x===a?'selected':''}>${esc(x.title)}</option>`).join('')}</select></label>
-    ${words.length?`<details class="el18-reading-words" open><summary>قبل القراءة — words تساعدك</summary><div>${words.map(([w,m])=>`<span><b dir="ltr">${esc(w)}</b> — ${esc(m)} <button class="el6-btn tiny secondary" data-save-word="${esc(w)}" data-meaning="${esc(m)}" data-example="">+ حفظ</button></span>`).join('')}</div></details>`:''}
+    ${words.length?`<details class="el18-reading-words" open><summary>Before reading — useful words</summary><div>${words.map(([w,m])=>`<span><b dir="ltr">${esc(w)}</b> — ${esc(m)} <button class="el6-btn tiny secondary" data-save-word="${esc(w)}" data-meaning="${esc(m)}" data-example="">+ حفظ</button></span>`).join('')}</div></details>`:''}
     <div class="el6-article" dir="ltr">${esc(a.text)}</div><div class="el9-actions"><button class="el6-btn secondary" data-read-article>🔊 Listen</button><button class="el6-btn secondary" data-stop-reading>Stop audio</button><button class="el6-btn secondary" data-article-done>${finished.includes(a.title)?"✓ Completed — read again":"✓ Mark as read"}</button></div>
     ${(a.checks||[]).map(([q,options],i)=>`<fieldset class="el18-check"><legend dir="ltr">${esc(q)}</legend><div>${options.map((o,j)=>`<button class="el6-btn secondary" data-reading-check="${i}" data-choice="${j}" type="button" dir="ltr">${esc(o)}</button>`).join('')}</div><p role="status"></p></fieldset>`).join('')}
     <div class="el6-question"><strong dir="ltr">${esc(a.question)}</strong><div class="el8-short-answer"><input id="el9ArticleAnswer" placeholder="Answer in English"><button class="el6-btn" data-check-article>Compare with the sample answer</button></div><div id="el9ArticleFeedback" class="el6-muted" role="status"></div></div>`;
@@ -178,8 +178,8 @@
 
   async function saveWord(word,meaning,example=''){
     if(!window.user?.id)return toast?.('Please sign in first');
-    const old=await window.sb.from('english_words').select('id').ilike('word',word).limit(1);if(old.data?.length)return toast?.('موجودة بالفعل في My Words');
-    const r=await window.sb.from('english_words').insert({user_id:window.user.id,word,meaning,example,status:'learning'});toast?.(r.error?r.error.message:'اتضافت لـ My Words');try{loadEnglish?.()}catch{}
+    const old=await window.sb.from('english_words').select('id').ilike('word',word).limit(1);if(old.data?.length)return toast?.('Already saved in My Words');
+    const r=await window.sb.from('english_words').insert({user_id:window.user.id,word,meaning,example,status:'learning'});toast?.(r.error?r.error.message:'Added to My Words');try{loadEnglish?.()}catch{}
   }
   async function coach(mode,prompt,response=''){
     if(window.SERAG_ENGLISH_FREE_ONLY){const box=mode==='speaking'?$('#el9SpeakingFeedback'):mode==='video'?$('#el9VideoAi'):$('#el9GrammarAi');box.classList.remove('hidden');box.textContent='Paid feedback is disabled. Use Grammar Maps and free local practice instead. النص الحر لا يتم تقييمه تلقائيًا.';return}
@@ -208,15 +208,15 @@
   function mount(){
     const page=$('#page-english');if(!page||!page.dataset.ev3Mounted)return false;if(page.dataset.el9&&page.querySelector('.el9-hub'))return true;page.dataset.el9='1';page.classList.remove('el6-hidden-old-writing');
     const anchor=page.querySelector('.english-kpis')||page.querySelector('header'),hub=document.createElement('section');hub.className='el6-hub el9-hub';hub.innerHTML=`
-      <div class="el6-hero"><div><div class="el6-eyebrow">SERAG ENGLISH · GENERAL + PROFESSIONAL</div><h3>Speak naturally in everyday situations and confidently at work.</h3><p>General English، شغل وشركات، HR، مقابلات، Marketing، Slang وIdioms — والجرافيك جزء صغير فقط.</p></div><div class="el6-stats"><div class="el6-stat"><strong id="el9TodayPct">0%</strong><span>Today</span></div><div class="el6-stat"><strong id="el9Xp">0 XP</strong><span>Daily XP</span></div><div class="el6-stat"><strong>${data.vocabulary.length}</strong><span>Useful words</span></div></div></div>
+      <div class="el6-hero"><div><div class="el6-eyebrow">SERAG ENGLISH · GENERAL + PROFESSIONAL</div><h3>Speak naturally in everyday situations and confidently at work.</h3><p>General English, business, HR, interviews, marketing, slang and idioms — with a small focus on design.</p></div><div class="el6-stats"><div class="el6-stat"><strong id="el9TodayPct">0%</strong><span>Today</span></div><div class="el6-stat"><strong id="el9Xp">0 XP</strong><span>Daily XP</span></div><div class="el6-stat"><strong>${data.vocabulary.length}</strong><span>Useful words</span></div></div></div>
       <nav class="card el9-today-nav" aria-label="English tools"><button data-jump="el9Mission">Today</button><button data-jump="el9Speaking">Speaking</button><button data-jump="el9Grammar">Grammar</button><button data-jump="el9VideoDetails">PlayLingo</button><button data-jump="el9WordBankWrap">Word Bank</button></nav>
       <div class="el6-grid"><section class="card el6-span4" id="el9Mission"></section><section class="card el6-span8" id="el9Words"><div class="el9-card-head"><div><div class="el6-eyebrow">WORDS OF THE DAY</div><h3>Today's words</h3></div><span id="el9WordsCount" class="el9-pill"></span></div><p class="el6-muted">خليط مقصود من الحياة والشغل واللغة الطبيعية، مع مثال وسياق لكل كلمة.</p><div id="el9WordsList" class="el9-daily-words"></div></section></div>
       <div class="el6-grid"><section class="card el6-span5" id="el9Quiz"></section><section class="card el6-span7" id="el9Article"></section></div>
       <section class="card" id="el9Speaking"></section>
       <details class="el7-accordion" id="el9Grammar"><summary><div class="el7-summary-left"><div class="el7-summary-icon">Aa</div><div class="el7-summary-copy"><b>Grammar Lab</b><span>Daily grammar, practice and feedback, then the full curriculum</span></div></div><span class="el7-chevron">⌄</span></summary><div class="el7-panel" id="el9GrammarBody"></div></details>
-      <details class="el7-accordion" id="el9VideoDetails"><summary><div class="el7-summary-left"><div class="el7-summary-icon">▶</div><div class="el7-summary-copy"><b>Learn from Video</b><span>تدريب Immersion مستوحى من PlayLingo على أي فيديو YouTube</span></div></div><span class="el7-chevron">⌄</span></summary><div class="el7-panel" id="el9VideoContent"></div></details>
+      <details class="el7-accordion" id="el9VideoDetails"><summary><div class="el7-summary-left"><div class="el7-summary-icon">▶</div><div class="el7-summary-copy"><b>Learn from Video</b><span>Immersion practice with any YouTube video</span></div></div><span class="el7-chevron">⌄</span></summary><div class="el7-panel" id="el9VideoContent"></div></details>
       <details class="el7-accordion" id="el9WordBankWrap"><summary><div class="el7-summary-left"><div class="el7-summary-icon">W</div><div class="el7-summary-copy"><b>Word Bank by Topic</b><span>Work · HR · Jobs · Marketing · Everyday · Slang · Idioms · More</span></div></div><span class="el7-chevron">⌄</span></summary><div class="el7-panel" id="el9WordBank"></div></details>
-      <details class="el7-accordion" id="el9ArchiveWrap"><summary><div class="el7-summary-left"><div class="el7-summary-icon">↺</div><div class="el7-summary-copy"><b>History & review</b><span>آخر 21 يوم من الwords والمقالات</span></div></div><span class="el7-chevron">⌄</span></summary><div class="el7-panel" id="el9Archive"></div></details>`;
+      <details class="el7-accordion" id="el9ArchiveWrap"><summary><div class="el7-summary-left"><div class="el7-summary-icon">↺</div><div class="el7-summary-copy"><b>History & review</b><span>Your last 21 days of words and articles</span></div></div><span class="el7-chevron">⌄</span></summary><div class="el7-panel" id="el9Archive"></div></details>`;
     anchor.insertAdjacentElement('afterend',hub);
     wrapPersonalLibrary(page,hub);renderAll();loadSync();void loadQuizHistory();
     if(window.sb?.auth)window.sb.auth.onAuthStateChange(()=>setTimeout(()=>{loadSync();void loadQuizHistory()},0));
@@ -256,7 +256,7 @@
       if(e.target.closest('[data-load-video]')){state.videoUrl=$('#el9VideoUrl').value.trim();sync();renderVideo();return}
       if(e.target.closest('[data-video-explain]'))return state.videoPhrase?coach('video','Explain this real English line in context, including any slang, idiom, grammar or connected speech.',state.videoPhrase):toast?.('Enter the sentence you heard first');
       if(e.target.closest('[data-video-listen]'))return state.videoPhrase?speak(state.videoPhrase,.78):toast?.('Enter the sentence you heard first');
-      if(e.target.closest('[data-video-save]'))return state.videoPhrase?saveWord(state.videoPhrase,state.videoMeaning,'Saved from video practice'):toast?.('اكتب الجملة الأول');
+      if(e.target.closest('[data-video-save]'))return state.videoPhrase?saveWord(state.videoPhrase,state.videoMeaning,'Saved from video practice'):toast?.('Enter the sentence first');
       if(e.target.closest('[data-video-done]')){complete(5);toast?.('Video practice completed ✓');return}
     });
     return true;
