@@ -115,8 +115,8 @@
     const topics = getLessons().filter(lesson => rows.some(row => row.lessonId === String(lesson.id)))
       .sort((a,b)=>String(a.titleAr||a.title).localeCompare(String(b.titleAr||b.title),'ar'));
     return '<div class="ege-filters">' +
-      '<label>المستوى<select data-ege-level>' + levels.map(value=>option(value,value==='all'?'كل المستويات':(LEVEL_LABELS[value]||value),level===value)).join('') + '</select></label>' +
-      '<label>القاعدة<select data-ege-topic>' + option('all','كل القواعد',topic==='all') +
+      '<label>Level<select data-ege-level>' + levels.map(value=>option(value,value==='all'?'All levels':(LEVEL_LABELS[value]||value),level===value)).join('') + '</select></label>' +
+      '<label>Topic<select data-ege-topic>' + option('all','All topics',topic==='all') +
       topics.map(lesson=>option(String(lesson.id),String(lesson.titleAr||lesson.title||lesson.id) + ' · ' + String(lesson.level||'B1'),topic===String(lesson.id))).join('') +
       '</select></label>' +
       '<label class="ege-search-label">Search examples and grammar<input type="search" data-ege-search value="' + esc(query) + '" placeholder="e.g. present perfect or conditionals" autocomplete="off"></label>' +
@@ -127,7 +127,7 @@
     const details = (row.summary || row.formula || row.mistake || row.tip)
       ? '<details class="ege-rule-details"><summary>Understand the rule behind the example</summary>' +
         (row.summary ? '<p>' + esc(row.summary) + '</p>' : '') +
-        (row.formula ? '<div class="ege-formula"><b>الصيغة</b><span dir="ltr" lang="en">' + esc(row.formula) + '</span></div>' : '') +
+        (row.formula ? '<div class="ege-formula"><b>Form</b><span dir="ltr" lang="en">' + esc(row.formula) + '</span></div>' : '') +
         (row.mistake ? '<p><b>Common mistake:</b> ' + esc(row.mistake) + '</p>' : '') +
         (row.tip ? '<p><b>Tip:</b> ' + esc(row.tip) + '</p>' : '') +
       '</details>'
@@ -147,7 +147,7 @@
     const cards = document.getElementById('egeCards');
     const more = document.querySelector('#seragGrammarExamples [data-ege-action="more"]');
     if (count) count.textContent = list.length
-      ? 'عرض ' + Math.min(visibleLimit,list.length).toLocaleString('en-US') + ' من ' + list.length.toLocaleString('en-US') + ' مثال'
+      ? 'Showing ' + Math.min(visibleLimit,list.length).toLocaleString('en-US') + ' of ' + list.length.toLocaleString('en-US') + ' examples'
       : 'No examples match the current filters';
     if (cards) cards.innerHTML = list.length
       ? list.slice(0,visibleLimit).map(cardHTML).join('')
@@ -163,7 +163,7 @@
       ? initialList.slice(0,visibleLimit).map(cardHTML).join('')
       : '<div class="ege-empty"><b>No matching examples found.</b><p>Try another level or topic, or clear the search.</p><button class="ege-btn" data-ege-action="reset">Show all examples</button></div>';
     const initialCount = initialList.length
-      ? 'عرض ' + Math.min(visibleLimit,initialList.length).toLocaleString('en-US') + ' من ' + initialList.length.toLocaleString('en-US') + ' مثال'
+      ? 'Showing ' + Math.min(visibleLimit,initialList.length).toLocaleString('en-US') + ' of ' + initialList.length.toLocaleString('en-US') + ' examples'
       : 'No examples match the current filters';
     return '<section id="seragGrammarExamples" class="ege-root">' +
       '<header class="ege-intro"><div><span class="ege-kicker">SERAG ENGLISH · EXAMPLE LIBRARY</span>' +
@@ -175,7 +175,7 @@
       '<div id="egeCount" class="ege-count">' + esc(initialCount) + '</div>' +
       '<div id="egeCards" class="ege-grid">' + initialCards + '</div>' +
       '<div class="ege-load-more"><button class="ege-btn primary" data-ege-action="more"' + (visibleLimit >= initialList.length ? ' hidden' : '') + '>Load more examples ↓</button></div>' +
-      '<aside class="ege-corpus-note"><b>Additional source:</b> يوفّر SCoRE الرسمي أكثر من 10,000 جملة مصنّفة ضمن 22 موضوعًا نحويًا وثلاثة مستويات، لكنه يُعرض هنا كرابط خارجي ولا ننسخ بياناته إلى هذا البنك. محتوى SCoRE مرخّص CC BY-NC-SA 4.0.</aside>' +
+      '<aside class="ege-corpus-note"><b>Additional source:</b> The official SCoRE resource provides more than 10,000 sentences across 22 grammar topics and three levels. It is linked here as an external resource; its data is not copied into this bank. SCoRE content is licensed under CC BY-NC-SA 4.0.</aside>' +
       '<p class="ege-attribution">Local examples are collected from grammar lessons in Serag OS. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">SCoRE licence details ↗</a></p>' +
       '</section>';
   }
