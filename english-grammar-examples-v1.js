@@ -175,7 +175,7 @@
       '<div id="egeCount" class="ege-count">' + esc(initialCount) + '</div>' +
       '<div id="egeCards" class="ege-grid">' + initialCards + '</div>' +
       '<div class="ege-load-more"><button class="ege-btn primary" data-ege-action="more"' + (visibleLimit >= initialList.length ? ' hidden' : '') + '>Load more examples ↓</button></div>' +
-      '<aside class="ege-corpus-note"><b>Additional source:</b> The official SCoRE resource provides more than 10,000 sentences across 22 grammar topics and three levels. It is linked here as an external resource; its data is not copied into this bank. محتوى SCoRE مرخّص CC BY-NC-SA 4.0.</aside>' +
+      '<aside class="ege-corpus-note"><b>Additional source:</b> The official SCoRE resource provides more than 10,000 sentences across 22 grammar topics and three levels. It is linked here as an external resource; its data is not copied into this bank. SCoRE content is licensed under CC BY-NC-SA 4.0.</aside>' +
       '<p class="ege-attribution">Local examples are collected from grammar lessons in Serag OS. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">SCoRE licence details ↗</a></p>' +
       '</section>';
   }
