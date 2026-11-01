@@ -182,7 +182,7 @@
     const r=await window.sb.from('english_words').insert({user_id:window.user.id,word,meaning,example,status:'learning'});toast?.(r.error?r.error.message:'Added to My Words');try{loadEnglish?.()}catch{}
   }
   async function coach(mode,prompt,response=''){
-    if(window.SERAG_ENGLISH_FREE_ONLY){const box=mode==='speaking'?$('#el9SpeakingFeedback'):mode==='video'?$('#el9VideoAi'):$('#el9GrammarAi');box.classList.remove('hidden');box.textContent='Paid feedback is disabled. Use Grammar Maps and free local practice instead. النص الحر لا يتم تقييمه تلقائيًا.';return}
+    if(window.SERAG_ENGLISH_FREE_ONLY){const box=mode==='speaking'?$('#el9SpeakingFeedback'):mode==='video'?$('#el9VideoAi'):$('#el9GrammarAi');box.classList.remove('hidden');box.textContent='Paid feedback is disabled. Use Grammar Maps and free local practice instead. الFree-form writing is not automatically evaluated.';return}
     const box=mode==='speaking'?$('#el9SpeakingFeedback'):mode==='video'?$('#el9VideoAi'):$('#el9GrammarAi');box.classList.remove('hidden');box.textContent='AI is reviewing…';
     try{
       const session=(await window.sb.auth.getSession()).data.session;if(!session)throw new Error('Please sign in first');
