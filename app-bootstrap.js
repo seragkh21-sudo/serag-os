@@ -66,35 +66,35 @@
     const calendarPage=`
     <section id="page-calendar" class="page hidden">
       <header class="top">
-        <div><h2>التقويم</h2><p class="muted">المهام، الجيم، الـdeadlines والتذكيرات في View واحدة.</p></div>
+        <div><h2>Calendar</h2><p class="muted">Tasks, deadlines and reminders in one view.</p></div>
         <button id="openGoogleCalendar" class="btn desktop-only" type="button">فتح Google Calendar ↗</button>
       </header>
       <div class="calendar-layout">
         <section class="card calendar-main">
           <div class="calendar-toolbar">
-            <button id="calendarPrev" class="icon-btn calendar-arrow" type="button" aria-label="الشهر السابق">›</button>
-            <div><h3 id="calendarMonthTitle">—</h3><button id="calendarToday" class="text-btn" type="button">اليوم</button></div>
-            <button id="calendarNext" class="icon-btn calendar-arrow" type="button" aria-label="الشهر التالي">‹</button>
+            <button id="calendarPrev" class="icon-btn calendar-arrow" type="button" aria-label="Previous month">›</button>
+            <div><h3 id="calendarMonthTitle">—</h3><button id="calendarToday" class="text-btn" type="button">Today</button></div>
+            <button id="calendarNext" class="icon-btn calendar-arrow" type="button" aria-label="Next month">‹</button>
           </div>
-          <div class="calendar-weekdays"><span>السبت</span><span>الأحد</span><span>الاثنين</span><span>الثلاثاء</span><span>الأربعاء</span><span>الخميس</span><span>الجمعة</span></div>
+          <div class="calendar-weekdays"><span>Sat</span><span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span></div>
           <div id="calendarGrid" class="calendar-grid"></div>
         </section>
         <aside class="calendar-side">
           <section class="card">
-            <div class="section-head"><div><h3>إضافة موعد</h3><p class="muted">هيتحفظ ويتزامن مع حسابك على كل الأجهزة.</p></div></div>
+            <div class="section-head"><div><h3>Add event</h3><p class="muted">Synced to your account across devices.</p></div></div>
             <form id="calendarEventForm" class="form">
-              <input id="calendarEventTitle" required placeholder="اسم الموعد"/>
+              <input id="calendarEventTitle" required placeholder="Event title"/>
               <input id="calendarEventAt" type="datetime-local" required/>
-              <select id="calendarEventCategory"><option value="general">عام</option><option value="work">شغل</option><option value="english">English</option><option value="fitness">Gym</option><option value="creative">Creative</option></select>
-              <button class="btn primary" type="submit">إضافة للتقويم</button>
+              <select id="calendarEventCategory"><option value="general">General</option><option value="work">Work</option><option value="english">English</option><option value="creative">Creative</option></select>
+              <button class="btn primary" type="submit">Add event</button>
             </form>
           </section>
           <section class="card">
-            <div class="section-head"><div><h3 id="selectedDayTitle">مواعيد اليوم</h3><p class="muted">اضغط على أي يوم في الشهر.</p></div></div>
+            <div class="section-head"><div><h3 id="selectedDayTitle">Selected day</h3><p class="muted">Select a date on the calendar.</p></div></div>
             <div id="selectedDayEvents" class="calendar-events-list"></div>
           </section>
           <section class="card google-lite-card">
-            <div class="google-lite-head"><span class="google-mark">G</span><div><strong>Google Calendar</strong><div class="muted">تقدر تضيف أي موعد إلى Google بنقرة واحدة. المزامنة التلقائية الكاملة محتاجة Google OAuth.</div></div></div>
+            <div class="google-lite-head"><span class="google-mark">G</span><div><strong>Google Calendar</strong><div class="muted">Export an event to Google Calendar. Automatic two-way sync is not enabled.</div></div></div>
           </section>
         </aside>
       </div>
