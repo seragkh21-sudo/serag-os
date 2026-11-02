@@ -6,7 +6,7 @@ test('index uses the replacement bootstrap and legacy loads the pinned Supabase 
   const html=fs.readFileSync('index.html','utf8');
   const legacy=fs.readFileSync('legacy.html','utf8');
   assert.equal(html.includes('cdn.jsdelivr.net/npm/@supabase/supabase-js'),false);
-  assert.ok(html.includes('app-bootstrap.js'));
+  assert.ok(html.includes('app-bootstrap.js?v=62'));
   assert.equal(html.includes('shell-loader.js'),false);
   assert.ok(legacy.includes('@supabase/supabase-js@2.116.0'));
 });
