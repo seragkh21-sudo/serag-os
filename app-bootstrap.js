@@ -1,10 +1,12 @@
 (async()=>{
   try{
-    const V='62';
+    const V='63';
     const res=await fetch(`/legacy.html?v=${V}`,{cache:'no-store',headers:{'Cache-Control':'no-cache'}});
     if(!res.ok)throw new Error('Legacy app failed to load');
     let html=await res.text();
     html=html.replace('<script src="/app.js"></script>',`<script src="/app.js?v=${V}"></script>`);
+    html=html.replace('href="/styles.css"',`href="/styles.css?v=${V}"`);
+    html=html.replace('<body>',`<body><div id="seragBootScreen" role="status" aria-live="polite">Serag OS · جاري تجهيز مساحة العمل…</div>`);
 
     html=html.replace('</head>',`<link rel="stylesheet" href="/dashboard-v2.css?v=${V}"/>
 <link rel="stylesheet" href="/home-studio-v18.css?v=${V}"/>
@@ -35,7 +37,13 @@
 #resourcesList>.resource-category-head:first-child{margin-top:8px}
 @media(max-width:820px){.v5-resource-toolbar{position:sticky;top:6px;z-index:5;background:var(--bg,#fff);padding:6px;border-radius:12px}.resource-category-head{margin-top:12px}}
 </style>
-<link rel="stylesheet" href="/english-video-v17.css?v=${V}"></head>`);
+<link rel="stylesheet" href="/english-video-v17.css?v=${V}"/>
+<style id="serag-boot-guard">
+#seragBootScreen{display:none;position:fixed;inset:0;z-index:2147483647;align-items:center;justify-content:center;background:#fff;color:#273044;font:600 14px system-ui,sans-serif}
+html.serag-booting #seragBootScreen{display:flex}
+html.serag-booting #authView,html.serag-booting #appView{visibility:hidden!important}
+html.serag-ready #seragBootScreen{display:none!important}
+</style></head>`);
 
     const tasksNav='<button data-page="tasks" type="button">المهام</button>';
     html=html.replace(tasksNav,tasksNav+'\n      <button data-page="calendar" type="button">التقويم</button>');
@@ -119,6 +127,7 @@
 <script src="/english-review-v10.js?v=${V}"></script>
 <script src="/english-review-v10-fallback.js?v=${V}"></script>
 <script src="/english-attempt-sync-v11.js?v=${V}"></script>
+<script src="/sentence-building-v1.js?v=${V}"></script>
 <script src="/word-practice-v21.js?v=${V}"></script>
 <script src="/engoplay-v19.js?v=${V}"></script>
 <script src="/english-tatoeba-explorer-v1.js?v=${V}"></script>
@@ -173,6 +182,17 @@
     // Replace the initial boot document without parser-blocking document.write.
     const parsed = new DOMParser().parseFromString(html, 'text/html');
     const pendingScripts = Array.from(parsed.querySelectorAll('script'));
+    // Start fetching same-origin scripts together, then execute them in their original dependency order.
+    for (const source of pendingScripts) {
+      const src = source.getAttribute('src') || '';
+      if (!src.startsWith('/') || src.startsWith('//')) continue;
+      const preload = parsed.createElement('link');
+      preload.rel = 'preload';
+      preload.as = 'script';
+      preload.href = src;
+      parsed.head.appendChild(preload);
+    }
+    parsed.documentElement.classList.add('serag-booting');
     pendingScripts.forEach(node => node.remove());
     const nextDocument = document.importNode(parsed.documentElement, true);
     document.replaceChild(nextDocument, document.documentElement);
@@ -216,6 +236,9 @@
         console.warn('Optional Serag OS enhancement failed to load:', scriptSrc, scriptError);
       }
     }
+    document.documentElement.classList.remove('serag-booting');
+    document.documentElement.classList.add('serag-ready');
+    document.getElementById('seragBootScreen')?.remove();
   }catch(err){
     document.body.innerHTML='<div class="boot"><div class="boot-card"><div class="boot-logo">Serag OS</div><div class="boot-sub">حصلت مشكلة في تحميل الواجهة. جرّب Refresh.</div></div></div>';
     console.error(err);
