@@ -2,7 +2,7 @@
   'use strict';
   const by=id=>document.getElementById(id);
   const make=(tag,attrs={},html='')=>{const n=document.createElement(tag);Object.entries(attrs).forEach(([k,v])=>n.setAttribute(k,v));n.innerHTML=html;return n};
-  let planView='calendar',projectView='all',baseShowPage=null;
+  let planView='calendar',projectView='work',baseShowPage=null;
   function setPanel(kind,value){
     const panels=kind==='plan'?['page-calendar','page-tasks']:['page-work','page-creative'];
     panels.forEach(id=>{const node=by(id);if(node)node.classList.toggle('hidden',id===(kind==='plan'?(value==='tasks'?'page-calendar':'page-tasks'):(value==='creative'?'page-work':'page-creative')))});
@@ -28,11 +28,11 @@
     const work=by('page-work'),creative=by('page-creative');if(!work||!creative)return;
     const page=make('section',{id:'page-projects',class:'page hidden'});
     page.append(make('header',{class:'top product-page-head'},'<div><h2>Projects</h2><p class="muted">Work and creative projects, together.</p></div><button class="btn" type="button" data-product-project-add>+ New project</button>'));
-    page.append(make('div',{class:'product-subnav','aria-label':'Project filters'},'<button type="button" data-product-project-view="all" class="active">All</button><button type="button" data-product-project-view="work">Work</button><button type="button" data-product-project-view="creative">Creative</button>'));
+    page.append(make('div',{class:'product-subnav','aria-label':'Project filters'},'<button type="button" data-product-project-view="work" class="active">Work</button><button type="button" data-product-project-view="creative">Creative</button>'));
     [work,creative].forEach((node,i)=>{node.classList.remove('page','hidden');node.classList.add('product-project-panel');node.querySelector('.top')?.remove();page.append(node)});
     main.append(page);
     page.querySelectorAll('[data-product-project-view]').forEach(b=>b.addEventListener('click',()=>setPanel('projects',b.dataset.productProjectView)));
-    page.querySelector('[data-product-project-add]').addEventListener('click',()=>{setPanel('projects',projectView);const form=by(projectView==='work'?'workProjectForm':'projectForm');form?.scrollIntoView({behavior:'smooth',block:'center'});form?.querySelector('input')?.focus()});
+    page.querySelector('[data-product-project-add]').addEventListener('click',()=>{setPanel('projects',projectView);const form=by(projectView==='creative'?'projectForm':'workProjectForm');form?.scrollIntoView({behavior:'smooth',block:'center'});form?.querySelector('input')?.focus()});
   }
   function simplifyToday(){
     const page=by('page-today');if(!page)return;
@@ -87,7 +87,7 @@
     if(window.__productSimplificationV1)return;
     const main=document.querySelector('main.content');if(!main||!by('page-calendar')||!by('page-tasks'))return;
     window.__productSimplificationV1=true;
-    buildPlan(main);buildProjects(main);simplifyToday();buildNavigation();simplifyQuickAdd();removeHealthChoices();setPanel('plan','calendar');setPanel('projects','all');
+    buildPlan(main);buildProjects(main);simplifyToday();buildNavigation();simplifyQuickAdd();removeHealthChoices();setPanel('plan','calendar');setPanel('projects','work');
     document.querySelector('.sidebar-foot .btn:not(#productDesktopSettings)')?.replaceChildren(document.createTextNode('Sign out'));
     baseShowPage=window.showPage;
     if(typeof baseShowPage==='function')window.showPage=function(page){
