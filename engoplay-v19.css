@@ -56,3 +56,7 @@
   .ep-session .ea12-feedback-slot{min-height:166px}
 }
 @media(prefers-reduced-motion:reduce){.wp-options button{transition:none}.wp-options button:hover:not(:disabled){transform:none}}
+
+/* Sentence-building prompt inside the mixed daily practice session. */
+.wp-build-words{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:14px 0;padding:12px;border:1px solid var(--line,#e5e7eb);border-radius:14px;background:var(--soft,#f7f7fa)}
+.wp-build-words span{display:inline-flex;align-items:center;padding:7px 10px;border:1px solid var(--line,#e5e7eb);border-radius:9px;background:var(--card,#fff);font-size:14px;font-weight:600;line-height:1.4}

@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import vm from 'node:vm';
 import fs from 'node:fs';
-function app(){const store=new Map(),events={},c={user:{id:'a'},window:{addEventListener(){}},document:{addEventListener:(name,fn)=>(events[name]??=[]).push(fn),querySelectorAll:()=>[],getElementById:()=>null},localStorage:{getItem:k=>store.get(k)||null,setItem:(k,v)=>store.set(k,v)},setInterval(){},Date,Math};c.addEventListener=()=>{};c.window=c;vm.createContext(c);for(const f of ['english-content-v9.js','english-phrases-v16.js','word-practice-v21.js'])vm.runInContext(fs.readFileSync(f,'utf8'),c);return {c,api:c.window.SERAG_WORD_PRACTICE,events,store}}
+function app(){const store=new Map(),events={},c={user:{id:'a'},window:{addEventListener(){}},document:{addEventListener:(name,fn)=>(events[name]??=[]).push(fn),querySelectorAll:()=>[],getElementById:()=>null},localStorage:{getItem:k=>store.get(k)||null,setItem:(k,v)=>store.set(k,v)},setInterval(){},Date,Math};c.addEventListener=()=>{};c.window=c;vm.createContext(c);for(const f of ['english-content-v9.js','english-phrases-v16.js','sentence-building-v1.js','word-practice-v21.js'])vm.runInContext(fs.readFileSync(f,'utf8'),c);return {c,api:c.window.SERAG_WORD_PRACTICE,events,store}}
 test('every published vocabulary item has one valid blank, a correct full sentence and unique key',()=>{const {c,api}=app(),items=api.items();assert.ok(items.length>150);assert.equal(new Set(items.map(x=>api.norm(x.phrase))).size,items.length);for(const entry of c.window.SERAG_ENGLISH_V9.vocabulary)assert.ok(items.some(x=>api.norm(x.phrase)===api.norm(entry[0])),entry[0]);const fallback=[];for(const item of items){const q=api.question(item);assert.equal(q.before+q.answer+q.after,q.sentence,item.phrase);assert.ok(q.answer);assert.equal(api.check(q,q.answer.toUpperCase()+'!'),true);assert.equal(api.check(q,'unrelated answer'),false);if(q.fallback)fallback.push(item.phrase)}console.log('Coverage:',items.length,'items; explicit notebook fallbacks:',fallback.join(', '));assert.ok(fallback.length<items.length*.1)});
 test('hints reveal exactly one additional letter and preserve spaces/punctuation',()=>{const {api}=app();assert.equal(api.hint('catch up',0),'_____ __');assert.equal(api.hint('catch up',1),'c____ __');assert.equal(api.hint('catch up',2),'ca___ __');assert.equal(api.hint("can't",3),"can'_");assert.equal(api.hint('catch up',99),'catch up');assert.equal(api.check({answer:'catch up'},' CATCH   UP. '),true);assert.equal(api.question({phrase:'run late',examples:["I'm running late because of traffic."]}).answer,'running late')});
 test('recognition precedes delayed writing; hints/retry/reveal remain distinct and isolated',()=>{const {c,api,events}=app();function click(attr){const b={dataset:{},hasAttribute:k=>k===attr};events.click[0]({target:{closest:()=>b}})}function answer(value){events.input[0]({target:{id:'wpAnswer',value}});events.submit[0]({target:{matches:()=>true},preventDefault(){}})}function recall(){api.start('catch up');answer('catch up');assert.equal(api.progress()['catch up'].last_stage,'recognition');click('data-wp-next');for(let i=0;i<3;i++){click('data-wp-reveal');click('data-wp-next')}assert.ok(api.html().includes('Recall the expression you just learned'))}recall();click('data-wp-hint');answer('catch up');assert.equal(api.progress()['catch up'].independent,0);recall();answer('bad');answer('catch up');assert.equal(api.progress()['catch up'].last_assisted,true);recall();answer('catch up');assert.equal(api.progress()['catch up'].independent,1);recall();click('data-wp-reveal');assert.equal(api.progress()['catch up'].last_correct,false);c.user={id:'b'};assert.equal(Object.keys(api.progress()).length,0)});
@@ -63,5 +63,26 @@ test('work vocabulary choices prefer meaningful same-category distractors',()=>{
  for(const option of options){
   const distractor=api.items().find(x=>api.norm(x.phrase)===api.norm(option));
   assert.equal(api.norm(distractor.group),api.norm(item.item.group));
+ }
+});
+
+
+test('B1 and B2 sentence-building bank is varied, complete and integrated into a mixed round',()=>{
+ const {c,api}=app(),bank=c.window.SERAG_SENTENCE_BUILDING_V1;
+ assert.equal(bank.byLevel('B1').length,12);
+ assert.equal(bank.byLevel('B2').length,12);
+ assert.equal(new Set(bank.questions.map(q=>q.id)).size,bank.questions.length);
+ assert.equal(new Set(bank.questions.map(q=>q.answer.toLowerCase())).size,bank.questions.length);
+ for(const q of bank.questions){
+  assert.ok(q.prompt&&q.explanation&&q.tokens.length>=7,q.id);
+  assert.equal([...q.tokens].sort().join('|'),[...q.answer.split(' ')].sort().join('|'),q.id);
+ }
+ const round=api.buildRound(api.items().slice(0,4),[],4,bank.byLevel('B1'));
+ const builds=round.filter(q=>q.kind==='build');
+ assert.equal(builds.length,3);
+ for(const q of builds){
+  assert.equal([...q.words].sort().join('|'),[...q.tokens].sort().join('|'));
+  assert.equal(api.check(q,q.answer.toUpperCase()),true);
+  assert.equal(api.check(q,'unrelated words'),false);
  }
 });
