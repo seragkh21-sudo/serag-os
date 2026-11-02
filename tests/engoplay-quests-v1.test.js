@@ -92,29 +92,19 @@ test('quest module is additive and does not overwrite the existing EngoPlay API'
   assert.doesNotMatch(source, /data-eq-open ['"]\s*\+\s*\(!available \? 'disabled'/);
 });
 
-test('quest markup integrates into the actual EngoPlay lobby render and is idempotent', () => {
+test('sentence building is exposed for the mixed daily session without a separate lobby panel', () => {
   const game = loadModule();
   const original = '<div class="ep-lobby"><header class="ep-top">top</header><nav class="ep-tabs"><button>tabs</button></nav><div class="ep-play-grid"></div></div>';
-  const inserted = game.injectQuestMarkup(original);
-  assert.match(inserted, /data-eq-panel/);
-  assert.ok(inserted.indexOf('</nav>') < inserted.indexOf('data-eq-panel'));
-  assert.ok(inserted.indexOf('data-eq-panel') < inserted.indexOf('<div class="ep-play-grid">'));
-  assert.equal(game.injectQuestMarkup(inserted), inserted);
+  assert.equal(game.injectQuestMarkup(original), original);
+  assert.equal(typeof game.getDailyPracticeQuestions, 'function');
+  assert.equal(typeof game.recordPracticeAttempt, 'function');
 });
 
-test('render hook wraps the real EngoPlay lobby method without changing its public API', () => {
-  const context = {
-    window: { ENGOPLAY: { owner: 'owner-1', renderLobby() { return '<div class="ep-lobby"><nav class="ep-tabs">tabs</nav><div class="ep-play-grid"></div></div>'; } } },
-    document: { readyState: 'loading', addEventListener() {} },
-    localStorage: { getItem() { return null; }, setItem() {} },
-    Intl, Date, Set, Math, Number, String, Array, Object
-  };
-  vm.createContext(context);
-  vm.runInContext(fs.readFileSync('engoplay-quests-v1.js', 'utf8'), context);
-  const game = context.window.SERAG_ENGOPLAY_QUESTS_V1;
-  assert.equal(game.attachRenderHook(), true);
-  assert.match(context.window.ENGOPLAY.renderLobby(), /data-eq-panel/);
-  assert.equal(game.attachRenderHook(), false);
+test('the quest module no longer mounts a separate Sentence Builder lobby card', () => {
+  const source = fs.readFileSync('engoplay-quests-v1.js', 'utf8');
+  const init = source.slice(source.indexOf('function init()'), source.indexOf('window.SERAG_ENGOPLAY_QUESTS_V1'));
+  assert.doesNotMatch(init, /mountPanel\(\)/);
+  assert.doesNotMatch(source, /attachRenderHook:/);
 });
 
 

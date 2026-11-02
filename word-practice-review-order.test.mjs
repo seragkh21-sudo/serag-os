@@ -72,7 +72,7 @@ test('end-to-end: start() opens the journey with the most overdue practised word
     'old due phrase': { attempts: 1, independent: 1 },
     'new due phrase': { attempts: 1, independent: 1 },
   }));
-  ctx.ENGOPLAY = {
+  ctx.window.ENGOPLAY = ctx.ENGOPLAY = {
     reviewStatus: (id) => {
       if (id === 'vocab:old due phrase') return { due_at: new Date(Date.now() - 5 * DAY).toISOString() };
       if (id === 'vocab:new due phrase') return { due_at: new Date(Date.now() - 1 * DAY).toISOString() };
@@ -90,7 +90,7 @@ test('regression: choosing a specific word still puts it first, even when review
   const rows = Array.from({ length: 20 }, (_, i) => [`plain phrase ${i}`, `PLAIN-MEANING-${i}`, 'Everyday', `We say plain phrase ${i} often.`, 'neutral']);
   rows.push(['due phrase', 'DUE-MEANING', 'Everyday', 'We say due phrase often.', 'neutral']);
   ctx.SERAG_ENGLISH_V9 = { vocabulary: rows };
-  ctx.ENGOPLAY = { reviewStatus: (id) => (id === 'vocab:due phrase' ? { due_at: new Date(Date.now() - 2 * DAY).toISOString() } : null) };
+  ctx.window.ENGOPLAY = ctx.ENGOPLAY = { reviewStatus: (id) => (id === 'vocab:due phrase' ? { due_at: new Date(Date.now() - 2 * DAY).toISOString() } : null) };
   ctx.SERAG_WORD_PRACTICE.start('plain phrase 7');
   assert.match(ctx.SERAG_WORD_PRACTICE.html(), /PLAIN-MEANING-7/);
 });

@@ -1,6 +1,6 @@
 (async()=>{
   try{
-    const V='63';
+    const V='64';
     const res=await fetch(`/legacy.html?v=${V}`,{cache:'no-store',headers:{'Cache-Control':'no-cache'}});
     if(!res.ok)throw new Error('Legacy app failed to load');
     let html=await res.text();
@@ -127,7 +127,6 @@ html.serag-ready #seragBootScreen{display:none!important}
 <script src="/english-review-v10.js?v=${V}"></script>
 <script src="/english-review-v10-fallback.js?v=${V}"></script>
 <script src="/english-attempt-sync-v11.js?v=${V}"></script>
-<script src="/sentence-building-v1.js?v=${V}"></script>
 <script src="/word-practice-v21.js?v=${V}"></script>
 <script src="/engoplay-v19.js?v=${V}"></script>
 <script src="/english-tatoeba-explorer-v1.js?v=${V}"></script>

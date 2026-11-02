@@ -109,6 +109,58 @@
     if (!bank || typeof bank.getExamples !== 'function') return [];
     try { return bank.getExamples() || []; } catch (_) { return []; }
   }
+  function getDailyPracticeQuestions(level, limit) {
+    var bundle = getState(), rows = bundle.rows;
+    var wanted = String(level || 'B1');
+    var eligible = rows.filter(function (row) { return row.level === wanted; });
+    if (!eligible.length && wanted === 'C1') eligible = rows.filter(function (row) { return row.level === 'B2'; });
+    if (!eligible.length && wanted === 'C2') eligible = rows.filter(function (row) { return row.level === 'B2'; });
+    if (!eligible.length) eligible = rows.filter(function (row) { return row.level === 'B1'; });
+    var stats = sharedProgress() && window.ENGOPLAY && typeof window.ENGOPLAY.stats === 'function' ? window.ENGOPLAY.stats() : {};
+    var answered = stats && stats.answeredToday instanceof Set ? Array.from(stats.answeredToday) : (stats && Array.isArray(stats.answeredToday) ? stats.answeredToday : []);
+    var lastAt = stats && stats.lastAnsweredAt instanceof Map ? stats.lastAnsweredAt : new Map();
+    var questionStats = stats && stats.questionStats instanceof Map ? stats.questionStats : new Map();
+    var now = Date.now();
+    eligible = eligible.filter(function (row) {
+      var key = 'sentence-builder:' + String(row.id), last = Number(lastAt.get(key)) || 0;
+      if (!last) return true;
+      var result = questionStats.get(key), cooldown = Number(result && result.correct) > 0 ? 3 * 86400000 : 86400000;
+      return now - last >= cooldown;
+    });
+    var excluded = bundle.state.recentExampleIds.concat(answered.map(function (id) {
+      var prefix = 'sentence-builder:';
+      return String(id).indexOf(prefix) === 0 ? String(id).slice(prefix.length) : String(id);
+    }));
+    var ids = pickDailyExamples(eligible, bundle.owner, bundle.state.daily.date, excluded);
+    var count = Math.max(1, Math.min(3, Number(limit) || 2));
+    return ids.slice(0, count).map(function (id) {
+      var row = eligible.find(function (item) { return String(item.id) === String(id); });
+      if (!row) return null;
+      var words = tokensFromSentence(row.sentence);
+      for (var i = words.length - 1; i > 0; i--) {
+        var j = hash(bundle.owner + '|' + bundle.state.daily.date + '|' + row.id + '|' + i) % (i + 1);
+        var temp = words[i]; words[i] = words[j]; words[j] = temp;
+      }
+      if (words.join(' ') === tokensFromSentence(row.sentence).join(' ') && words.length > 2) words.push(words.shift());
+      return {
+        id: 'sentence-builder:' + String(row.id),
+        sourceRow: row,
+        level: row.level,
+        topic: 'sentence-builder',
+        prompt: 'Arrange the words to form a natural English sentence.',
+        tokens: words,
+        answer: row.sentence,
+        explanation: row.summary || row.formula || row.tip || 'Pay attention to the subject, verb and the relationship between the ideas.'
+      };
+    }).filter(Boolean);
+  }
+  function recordPracticeAttempt(question, built, correct, order) {
+    if (!question || !question.sourceRow) return null;
+    return recordChallengeAttempt(question.sourceRow, built, correct, {
+      owner: ownerKey(),
+      state: { daily: { index: Math.max(0, Number(order) || 0) } }
+    });
+  }
   function emptyState(owner, day, rows, recentIds) {
     return {
       points: 0,
@@ -497,17 +549,10 @@
   function init() {
     if (initialized) return;
     initialized = true;
-    mountPanel();
-    if (!observer && window.MutationObserver && document.documentElement) {
-      observer = new window.MutationObserver(function () { mountPanel(); });
-      observer.observe(document.documentElement, { childList: true, subtree: true });
-    }
     // Listen at window capture so earlier document-level handlers cannot swallow tile clicks.
     window.addEventListener('click', handleClick, true);
     document.addEventListener('visibilitychange', function () {
       if (!document.hidden) {
-        mountPanel();
-        paintPanel();
         var dialog = document.getElementById(DIALOG_ID);
         if (dialog && dialog.open) dialog.innerHTML = dialogMarkup(getState());
       }
@@ -524,8 +569,9 @@
     rewardPoints: rewardPoints,
     sharedProgress: sharedProgress,
     recordChallengeAttempt: recordChallengeAttempt,
-    injectQuestMarkup: injectQuestMarkup,
-    attachRenderHook: attachRenderHook
+    injectQuestMarkup: function (html) { return html; },
+    getDailyPracticeQuestions: getDailyPracticeQuestions,
+    recordPracticeAttempt: recordPracticeAttempt
   };
 
   if (document.readyState === 'loading') {
