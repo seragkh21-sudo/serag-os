@@ -70,7 +70,7 @@
   if(q.kind==='recall'&&(!old.last_recall_day||old.last_recall_day!==new Date().toDateString())){s[key].last_recall_day=new Date().toDateString();try{localStorage.setItem('seragSentenceV21:'+id,JSON.stringify(s))}catch{}window.ENGOPLAY?.scheduleWord?.(q.item.id,correct&&!assisted)}
   const prefix=q.kind==='recognition'?'recognition:':q.kind==='application'?'application:':'sentence:';if(!assisted)window.ENGOPLAY?.track({id:prefix+key,topic:q.kind==='recognition'?'vocabulary-recognition':q.kind==='application'?(isWorkItem(q.item)?'work-application':'vocabulary-application'):'vocabulary-sentence',correct,answer:correct?(q.kind==='application'?(session?.input||''):q.answer):(session?.input||''),at:Date.now()});
  }
- function saveBuildAttempt(q,correct,assisted){if(assisted)return;window.SERAG_ENGOPLAY_QUESTS_V1?.recordPracticeAttempt?.(q,session?.input||'',correct);}
+ function saveBuildAttempt(q,correct,assisted){if(assisted)return;window.SERAG_ENGOPLAY_QUESTS_V1?.recordPracticeAttempt?.(q,session?.input||'',correct,session?.index||0);}
  // Review order: due reviews (most overdue first) -> fresh words -> practised but unscheduled -> scheduled for later.
  // Pure and exported so it can be tested. status(id) returns {due_at} or null; seen is the local per-user state map.
  function orderPool(list,status=()=>null,seen={},now=Date.now()){const key=w=>{const r=status(w.id),t=r?Date.parse(r.due_at):NaN;if(Number.isFinite(t))return t<=now?[0,t]:[3,0];return [seen[norm(w.phrase)]?2:1,0]};return shuffle(list).sort((a,b)=>{const x=key(a),y=key(b);return x[0]-y[0]||x[1]-y[1]})}
