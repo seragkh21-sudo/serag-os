@@ -118,6 +118,15 @@
     if (!eligible.length) eligible = rows.filter(function (row) { return row.level === 'B1'; });
     var stats = sharedProgress() && window.ENGOPLAY && typeof window.ENGOPLAY.stats === 'function' ? window.ENGOPLAY.stats() : {};
     var answered = stats && stats.answeredToday instanceof Set ? Array.from(stats.answeredToday) : (stats && Array.isArray(stats.answeredToday) ? stats.answeredToday : []);
+    var lastAt = stats && stats.lastAnsweredAt instanceof Map ? stats.lastAnsweredAt : new Map();
+    var questionStats = stats && stats.questionStats instanceof Map ? stats.questionStats : new Map();
+    var now = Date.now();
+    eligible = eligible.filter(function (row) {
+      var key = 'sentence-builder:' + String(row.id), last = Number(lastAt.get(key)) || 0;
+      if (!last) return true;
+      var result = questionStats.get(key), cooldown = Number(result && result.correct) > 0 ? 3 * 86400000 : 86400000;
+      return now - last >= cooldown;
+    });
     var excluded = bundle.state.recentExampleIds.concat(answered.map(function (id) {
       var prefix = 'sentence-builder:';
       return String(id).indexOf(prefix) === 0 ? String(id).slice(prefix.length) : String(id);
@@ -145,11 +154,11 @@
       };
     }).filter(Boolean);
   }
-  function recordPracticeAttempt(question, built, correct) {
+  function recordPracticeAttempt(question, built, correct, order) {
     if (!question || !question.sourceRow) return null;
     return recordChallengeAttempt(question.sourceRow, built, correct, {
       owner: ownerKey(),
-      state: { daily: { index: 0 } }
+      state: { daily: { index: Math.max(0, Number(order) || 0) } }
     });
   }
   function emptyState(owner, day, rows, recentIds) {
