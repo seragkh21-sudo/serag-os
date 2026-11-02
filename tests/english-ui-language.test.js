@@ -28,7 +28,7 @@ test('English learning interface copy stays English across active UI modules', (
     const withoutArabicMeaning = source.replace(/Arabic meaning: [\u0600-\u06FF ]+/g, 'Arabic meaning:');
     assert.doesNotMatch(withoutArabicMeaning, /[\u0600-\u06FF]/, file + ' contains Arabic copy outside an explicitly labelled meaning');
     if (file.endsWith('.css')) {
-      assert.doesNotMatch(source, /direction\\s*:\\s*rtl|text-align\\s*:\\s*right/i, file + ' contains RTL layout rules');
+      assert.doesNotMatch(source, /direction\s*:\s*rtl|text-align\s*:\s*right/i, file + ' contains RTL layout rules');
     }
   }
 });
