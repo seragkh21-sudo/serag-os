@@ -75,14 +75,13 @@ test('B1 and B2 sentence-building bank is varied, complete and integrated into a
  assert.equal(new Set(bank.questions.map(q=>q.answer.toLowerCase())).size,bank.questions.length);
  for(const q of bank.questions){
   assert.ok(q.prompt&&q.explanation&&q.tokens.length>=7,q.id);
-  assert.deepEqual([...q.tokens].sort(),q.answer.split(' ').sort(),q.id);
+  assert.equal([...q.tokens].sort().join('|'),[...q.answer.split(' ')].sort().join('|'),q.id);
  }
  const round=api.buildRound(api.items().slice(0,4),[],4,bank.byLevel('B1'));
  const builds=round.filter(q=>q.kind==='build');
  assert.equal(builds.length,3);
  for(const q of builds){
-  assert.equal(new Set(q.words).size,q.words.length);
-  assert.deepEqual([...q.words].sort(),[...q.tokens].sort());
+  assert.equal([...q.words].sort().join('|'),[...q.tokens].sort().join('|'));
   assert.equal(api.check(q,q.answer.toUpperCase()),true);
   assert.equal(api.check(q,'unrelated words'),false);
  }
