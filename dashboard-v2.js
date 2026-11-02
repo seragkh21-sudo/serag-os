@@ -7,9 +7,9 @@ let v2CalendarEvents=[];
 function v2DateKey(value){const d=value instanceof Date?value:new Date(value);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
 function v2StartOfDay(value=new Date()){const d=new Date(value);d.setHours(0,0,0,0);return d}
 function v2AddDays(value,n){const d=new Date(value);d.setDate(d.getDate()+n);return d}
-function v2FmtTime(value){if(!value)return '';return new Date(value).toLocaleTimeString('ar-EG',{hour:'numeric',minute:'2-digit'})}
-function v2FmtShort(value){if(!value)return '';return new Date(value).toLocaleDateString('ar-EG',{day:'numeric',month:'short'})}
-function v2SourceLabel(source){return ({task:'مهمة',reminder:'موعد',work:'شغل',creative:'Creative',workout:'Gym'})[source]||source}
+function v2FmtTime(value){if(!value)return '';return new Date(value).toLocaleTimeString('en-GB',{hour:'numeric',minute:'2-digit'})}
+function v2FmtShort(value){if(!value)return '';return new Date(value).toLocaleDateString('en-GB',{day:'numeric',month:'short'})}
+function v2SourceLabel(source){return ({task:'Task',reminder:'Event',work:'Work deadline',creative:'Creative deadline'})[source]||source}
 function v2Html(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 
 async function v2LoadWeekly(){return}
@@ -39,7 +39,7 @@ async function v2LoadHomeCalendar(){
   const start=v2StartOfDay(new Date()),end=v2AddDays(start,7);end.setHours(23,59,59,999);
   const events=await v2LoadEventsRange(start,end);
   const days=Array.from({length:7},(_,i)=>v2AddDays(start,i));
-  $('homeWeekStrip').innerHTML=days.map((d,i)=>{const key=v2DateKey(d),has=events.some(e=>v2DateKey(e.when)===key);return `<div class="week-day ${i===0?'today':''} ${has?'has-events':''}"><strong>${d.getDate().toLocaleString('ar-EG')}</strong><span>${d.toLocaleDateString('ar-EG',{weekday:'short'})}</span></div>`}).join('');
+  $('homeWeekStrip').innerHTML=days.map((d,i)=>{const key=v2DateKey(d),has=events.some(e=>v2DateKey(e.when)===key);return `<div class="week-day ${i===0?'today':''} ${has?'has-events':''}"><strong>${d.getDate().toLocaleString('en-GB')}</strong><span>${d.toLocaleDateString('en-GB',{weekday:'short'})}</span></div>`}).join('');
   const upcoming=events.filter(e=>new Date(e.when)>=new Date()).slice(0,3);
   $('homeUpcomingList').innerHTML=upcoming.length?upcoming.map(e=>`<div class="upcoming-mini"><div class="upcoming-main"><span class="source-dot"></span><strong>${v2Html(e.title)}</strong></div><span>${v2FmtShort(e.when)} ${e.allDay?'':v2FmtTime(e.when)}</span></div>`).join(''):'<div class="calendar-empty">مفيش مواعيد قريبة.</div>';
 }
@@ -62,13 +62,13 @@ async function v2LoadCalendar(){
 }
 
 function v2RenderCalendar(gridStart){
-  $('calendarMonthTitle').textContent=v2CalendarCursor.toLocaleDateString('ar-EG',{month:'long',year:'numeric'});
+  $('calendarMonthTitle').textContent=v2CalendarCursor.toLocaleDateString('en-GB',{month:'long',year:'numeric'});
   const todayKey=v2DateKey(new Date()),month=v2CalendarCursor.getMonth();
   const cells=Array.from({length:42},(_,i)=>v2AddDays(gridStart,i));
   $('calendarGrid').innerHTML=cells.map(d=>{
     const key=v2DateKey(d),events=v2CalendarEvents.filter(e=>v2DateKey(e.when)===key),outside=d.getMonth()!==month;
     const chips=events.slice(0,2).map(e=>`<div class="calendar-chip">${v2Html(e.title)}</div>`).join('');
-    return `<button class="calendar-day ${outside?'outside':''} ${key===todayKey?'today':''} ${key===v2SelectedDay?'selected':''} ${events.length?'has-events':''}" data-day="${key}" type="button"><span class="calendar-day-num">${d.getDate().toLocaleString('ar-EG')}</span><div class="calendar-day-events">${chips}</div>${events.length>2?`<div class="calendar-more">+${events.length-2}</div>`:''}</button>`;
+    return `<button class="calendar-day ${outside?'outside':''} ${key===todayKey?'today':''} ${key===v2SelectedDay?'selected':''} ${events.length?'has-events':''}" data-day="${key}" type="button"><span class="calendar-day-num">${d.getDate().toLocaleString('en-GB')}</span><div class="calendar-day-events">${chips}</div>${events.length>2?`<div class="calendar-more">+${events.length-2}</div>`:''}</button>`;
   }).join('');
   document.querySelectorAll('.calendar-day').forEach(b=>b.onclick=()=>{v2SelectedDay=b.dataset.day;v2RenderCalendar(gridStart);v2RenderSelectedDay()});
 }
@@ -81,7 +81,7 @@ function v2GoogleUrl(event){
 
 function v2RenderSelectedDay(){
   const day=new Date(`${v2SelectedDay}T12:00:00`);
-  $('selectedDayTitle').textContent=day.toLocaleDateString('ar-EG',{weekday:'long',day:'numeric',month:'long'});
+  $('selectedDayTitle').textContent=day.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'});
   const events=v2CalendarEvents.filter(e=>v2DateKey(e.when)===v2SelectedDay);
   $('selectedDayEvents').innerHTML=events.length?events.map(e=>`<div class="calendar-event"><div class="calendar-event-top"><div><div class="calendar-event-title">${v2Html(e.title)}</div><div class="calendar-event-meta">${v2SourceLabel(e.source)}${e.allDay?'':` · ${v2FmtTime(e.when)}`}${e.detail?' · '+v2Html(e.detail):''}</div></div><span class="pill">${v2Html(e.category)}</span></div><div class="calendar-event-actions"><a class="mini link" target="_blank" rel="noopener" href="${v2GoogleUrl(e)}">Google</a>${e.source==='reminder'?`<button class="mini danger" data-delete-reminder="${e.id}" type="button">حذف</button>`:''}</div></div>`).join(''):'<div class="calendar-empty">مفيش حاجة في اليوم ده.</div>';
   document.querySelectorAll('[data-delete-reminder]').forEach(b=>b.onclick=async()=>{const {error}=await sb.from('reminders').delete().eq('id',b.dataset.deleteReminder);if(error)return toast(error.message);toast('الموعد اتحذف');await v2LoadCalendar();await v2LoadHomeCalendar()});
