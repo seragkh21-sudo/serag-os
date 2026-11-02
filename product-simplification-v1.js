@@ -7,7 +7,7 @@
     const panels=kind==='plan'?['page-calendar','page-tasks']:['page-work','page-creative'];
     panels.forEach(id=>{const node=by(id);if(node)node.classList.toggle('hidden',id===(kind==='plan'?(value==='tasks'?'page-calendar':'page-tasks'):(value==='creative'?'page-work':'page-creative')))});
     if(kind==='plan'){planView=value;document.querySelectorAll('[data-product-plan-view]').forEach(b=>b.classList.toggle('active',b.dataset.productPlanView===value));if(value==='calendar'){try{const agenda=document.querySelector('[data-v5-calendar-view="agenda"]');if(agenda)agenda.click();else window.v2LoadCalendar?.()}catch{}}else{try{window.loadTasks?.()}catch{}}}
-    else{projectView=value;document.querySelectorAll('[data-product-project-view]').forEach(b=>b.classList.toggle('active',b.dataset.productProjectView===value));const work=by('page-work'),creative=by('page-creative');if(work)work.classList.toggle('hidden',value==='creative');if(creative)creative.classList.toggle('hidden',value==='work');if(value!=='creative')window.renderWorkProjects?.();if(value!=='work')window.renderCreativeProjects?.()}
+    else{projectView=value;document.querySelectorAll('[data-product-project-view]').forEach(b=>b.classList.toggle('active',b.dataset.productProjectView===value));const work=by('page-work'),creative=by('page-creative');if(work)work.classList.toggle('hidden',value==='creative');if(creative)creative.classList.toggle('hidden',value==='work');if(value!=='creative')window.loadWork?.();if(value!=='work')window.loadCreative?.()}
   }
   function buildPlan(main){
     const calendar=by('page-calendar'),tasks=by('page-tasks');if(!calendar||!tasks)return;
@@ -37,17 +37,19 @@
   function simplifyToday(){
     const page=by('page-today');if(!page)return;
     const taskCard=by('homeTaskList')?.closest('.card');
-    const calendarCard=by('homeWeekStrip')?.closest('.card');
+    const captureCard=by('homeCaptureList')?.closest('.card');
+    const commandCard=by('v5CommandCenter');
     const header=page.querySelector('.top');
     const date=header?.querySelector('.date')?.outerHTML||'';
+    const openQuick=by('openQuickFromHome');
     page.replaceChildren();
     const cleanHeader=make('header',{class:'top product-page-head'},'<div>'+date+'<h2>Today</h2><p class="muted">Your priorities and what is coming up.</p></div><button class="btn" type="button" data-product-goto="plan">Open plan</button>');
     page.append(cleanHeader);
     const grid=make('div',{class:'product-today-grid'});
+    if(commandCard)grid.append(commandCard);
     if(taskCard){taskCard.querySelector('h3')?.replaceChildren(document.createTextNode('Open tasks'));grid.append(taskCard)}
-    if(calendarCard){calendarCard.querySelector('h3')?.replaceChildren(document.createTextNode('Coming up'));const p=calendarCard.querySelector('.muted');if(p)p.textContent='Your next events and deadlines.';const viewAll=by('openCalendarFromHome');if(viewAll)viewAll.textContent='View all';grid.append(calendarCard)}
+    if(captureCard){captureCard.querySelector('h3')?.replaceChildren(document.createTextNode('Recent notes & files'));const p=captureCard.querySelector('.muted');if(p)p.textContent='Your latest captures.';if(openQuick){openQuick.textContent='+ Add';openQuick.onclick=()=>window.openQuickDrawer?.()}grid.append(captureCard)}
     page.append(grid);
-    by('v5CommandCenter')?.remove();
     cleanHeader.querySelector('[data-product-goto]').addEventListener('click',()=>window.showPage('plan'));
   }
   function buildNavigation(){
