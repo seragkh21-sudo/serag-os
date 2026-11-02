@@ -44,8 +44,8 @@
     const cleanHeader=make('header',{class:'top product-page-head'},'<div>'+date+'<h2>Today</h2><p class="muted">Your priorities and what is coming up.</p></div><button class="btn" type="button" data-product-goto="plan">Open plan</button>');
     page.append(cleanHeader);
     const grid=make('div',{class:'product-today-grid'});
-    if(taskCard){taskCard.querySelector('h3')?.replaceChildren(document.createTextNode("Today's tasks"));grid.append(taskCard)}
-    if(calendarCard){calendarCard.querySelector('h3')?.replaceChildren(document.createTextNode('Coming up'));const p=calendarCard.querySelector('.muted');if(p)p.textContent='Your next events and deadlines.';grid.append(calendarCard)}
+    if(taskCard){taskCard.querySelector('h3')?.replaceChildren(document.createTextNode('Open tasks'));grid.append(taskCard)}
+    if(calendarCard){calendarCard.querySelector('h3')?.replaceChildren(document.createTextNode('Coming up'));const p=calendarCard.querySelector('.muted');if(p)p.textContent='Your next events and deadlines.';const viewAll=by('openCalendarFromHome');if(viewAll)viewAll.textContent='View all';grid.append(calendarCard)}
     page.append(grid);
     by('v5CommandCenter')?.remove();
     cleanHeader.querySelector('[data-product-goto]').addEventListener('click',()=>window.showPage('plan'));
@@ -91,10 +91,12 @@
     document.querySelector('.sidebar-foot .btn:not(#productDesktopSettings)')?.replaceChildren(document.createTextNode('Sign out'));
     baseShowPage=window.showPage;
     if(typeof baseShowPage==='function')window.showPage=function(page){
+      let subview=null;
       if(page==='fitness')page='today';
-      if(page==='calendar'||page==='tasks'){const view=page;page='plan';setPanel('plan',view)}
-      if(page==='work'||page==='creative'){const view=page;page='projects';setPanel('projects',view)}
+      if(page==='calendar'||page==='tasks'){subview=page;page='plan'}
+      if(page==='work'||page==='creative'){subview=page;page='projects'}
       baseShowPage(page);
+      if(subview)setPanel(page==='plan'?'plan':'projects',subview);
       document.querySelectorAll('.sidebar .nav [data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===page));
       document.querySelectorAll('#v5BottomNav [data-v5-page]').forEach(b=>b.classList.toggle('active',b.dataset.v5Page===page));
       if(page==='plan'&&planView==='calendar')setPanel('plan','calendar');
