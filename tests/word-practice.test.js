@@ -67,7 +67,7 @@ test('work vocabulary choices prefer meaningful same-category distractors',()=>{
 });
 
 
-test('Today's Practice is a single mixed round with sentence building and no repeated vocabulary recall',()=>{
+test("Today's Practice is a single mixed round with sentence building and no repeated vocabulary recall",()=>{
  const {api}=app();
  const grammar=[
   {id:'g1',answer:'has',options:['has','have'],prompt:'She ___ a book.'},
