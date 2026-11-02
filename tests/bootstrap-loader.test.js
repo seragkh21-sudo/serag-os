@@ -6,7 +6,7 @@ test('index uses the replacement bootstrap and legacy loads the pinned Supabase 
   const html=fs.readFileSync('index.html','utf8');
   const legacy=fs.readFileSync('legacy.html','utf8');
   assert.equal(html.includes('cdn.jsdelivr.net/npm/@supabase/supabase-js'),false);
-  assert.ok(html.includes('app-bootstrap.js?v=63'));
+  assert.ok(html.includes('app-bootstrap.js?v=64'));
   assert.equal(html.includes('shell-loader.js'),false);
   assert.ok(legacy.includes('@supabase/supabase-js@2.116.0'));
 });
@@ -29,8 +29,8 @@ test('app publishes Supabase client and authenticated user on window',()=>{
 
 test('bootstrap cache-busts every local asset from one version constant',()=>{
   const source=fs.readFileSync('app-bootstrap.js','utf8');
-  assert.ok(source.includes("const V='63'"));
+  assert.ok(source.includes("const V='64'"));
   assert.ok(source.includes('app.js?v=${V}'));
-  assert.equal(source.includes('.js?v=63'),false);
-  assert.equal(source.includes('.css?v=63'),false);
+  assert.equal(source.includes('.js?v=64'),false);
+  assert.equal(source.includes('.css?v=64'),false);
 });
