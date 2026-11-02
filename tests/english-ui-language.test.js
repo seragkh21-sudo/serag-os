@@ -16,7 +16,10 @@ const uiFiles = [
   'english-writing-v13.js',
   'english-writing-flow-v1.js',
   'english-grammar-v10.js',
-  'english-supplement-v13.js'
+  'english-supplement-v13.js',
+  'english-academy-v12.css',
+  'engoplay-v19.css',
+  'engoplay-quests-v1.css'
 ];
 
 test('English learning interface copy stays English across active UI modules', () => {
@@ -24,5 +27,8 @@ test('English learning interface copy stays English across active UI modules', (
     const source = fs.readFileSync(file, 'utf8');
     const withoutArabicMeaning = source.replace(/Arabic meaning: [\u0600-\u06FF ]+/g, 'Arabic meaning:');
     assert.doesNotMatch(withoutArabicMeaning, /[\u0600-\u06FF]/, file + ' contains Arabic copy outside an explicitly labelled meaning');
+    if (file.endsWith('.css')) {
+      assert.doesNotMatch(source, /direction\\s*:\\s*rtl|text-align\\s*:\\s*right/i, file + ' contains RTL layout rules');
+    }
   }
 });
