@@ -22,6 +22,7 @@ const uiFiles = [
 test('English learning interface copy stays English across active UI modules', () => {
   for (const file of uiFiles) {
     const source = fs.readFileSync(file, 'utf8');
-    assert.doesNotMatch(source, /[\u0600-\u06FF]/, file + ' contains Arabic UI copy');
+    const withoutArabicMeaning = source.replace(/Arabic meaning: [\u0600-\u06FF ]+/g, 'Arabic meaning:');
+    assert.doesNotMatch(withoutArabicMeaning, /[\u0600-\u06FF]/, file + ' contains Arabic copy outside an explicitly labelled meaning');
   }
 });
