@@ -2,12 +2,12 @@
   'use strict';
   const by=id=>document.getElementById(id);
   const make=(tag,attrs={},html='')=>{const n=document.createElement(tag);Object.entries(attrs).forEach(([k,v])=>n.setAttribute(k,v));n.innerHTML=html;return n};
-  let planView='calendar',projectView='work',baseShowPage=null;
+  let planView='calendar',projectView='all',baseShowPage=null;
   function setPanel(kind,value){
     const panels=kind==='plan'?['page-calendar','page-tasks']:['page-work','page-creative'];
     panels.forEach(id=>{const node=by(id);if(node)node.classList.toggle('hidden',id===(kind==='plan'?(value==='tasks'?'page-calendar':'page-tasks'):(value==='creative'?'page-work':'page-creative')))});
-    if(kind==='plan'){planView=value;document.querySelectorAll('[data-product-plan-view]').forEach(b=>b.classList.toggle('active',b.dataset.productPlanView===value));if(value==='calendar'){try{window.v2LoadCalendar?.();if(!by('v5CalendarAgenda')?.classList.contains('hidden'))window.renderAgenda?.()}catch{}}else{try{window.loadTasks?.()}catch{}}}
-    else{projectView=value;document.querySelectorAll('[data-product-project-view]').forEach(b=>b.classList.toggle('active',b.dataset.productProjectView===value));if(value==='work')window.renderWorkProjects?.();else window.renderCreativeProjects?.()}
+    if(kind==='plan'){planView=value;document.querySelectorAll('[data-product-plan-view]').forEach(b=>b.classList.toggle('active',b.dataset.productPlanView===value));if(value==='calendar'){try{const agenda=document.querySelector('[data-v5-calendar-view="agenda"]');if(agenda)agenda.click();else window.v2LoadCalendar?.()}catch{}}else{try{window.loadTasks?.()}catch{}}}
+    else{projectView=value;document.querySelectorAll('[data-product-project-view]').forEach(b=>b.classList.toggle('active',b.dataset.productProjectView===value));const work=by('page-work'),creative=by('page-creative');if(work)work.classList.toggle('hidden',value==='creative');if(creative)creative.classList.toggle('hidden',value==='work');if(value!=='creative')window.renderWorkProjects?.();if(value!=='work')window.renderCreativeProjects?.()}
   }
   function buildPlan(main){
     const calendar=by('page-calendar'),tasks=by('page-tasks');if(!calendar||!tasks)return;
@@ -16,8 +16,8 @@
     page.append(make('div',{class:'product-subnav','aria-label':'Plan views'},'<button type="button" data-product-plan-view="calendar" class="active">Calendar</button><button type="button" data-product-plan-view="tasks">Tasks</button>'));
     calendar.classList.remove('page','hidden');calendar.classList.add('product-plan-panel');calendar.querySelector('.top')?.remove();
     tasks.classList.remove('page','hidden');tasks.classList.add('product-plan-panel','hidden');tasks.querySelector('.top')?.remove();
-    const workTask=by('workTaskForm')?.closest('details');workTask?.remove();
-    const workDeadlines=by('deadlinesList')?.closest('details');workDeadlines?.remove();
+    const workTask=by('workTaskForm')?.closest('details');workTask?.classList.add('product-legacy-hidden');
+    const workDeadlines=by('deadlinesList')?.closest('details');workDeadlines?.classList.add('product-legacy-hidden');
     page.append(calendar,tasks);main.append(page);
     page.querySelector('[data-product-plan-add]').addEventListener('click',()=>setPanel('plan','tasks'));
     page.querySelectorAll('[data-product-plan-view]').forEach(b=>b.addEventListener('click',()=>setPanel('plan',b.dataset.productPlanView)));
@@ -28,7 +28,7 @@
     const work=by('page-work'),creative=by('page-creative');if(!work||!creative)return;
     const page=make('section',{id:'page-projects',class:'page hidden'});
     page.append(make('header',{class:'top product-page-head'},'<div><h2>Projects</h2><p class="muted">Work and creative projects, together.</p></div><button class="btn" type="button" data-product-project-add>+ New project</button>'));
-    page.append(make('div',{class:'product-subnav','aria-label':'Project filters'},'<button type="button" data-product-project-view="work" class="active">Work</button><button type="button" data-product-project-view="creative">Creative</button>'));
+    page.append(make('div',{class:'product-subnav','aria-label':'Project filters'},'<button type="button" data-product-project-view="all" class="active">All</button><button type="button" data-product-project-view="work">Work</button><button type="button" data-product-project-view="creative">Creative</button>'));
     [work,creative].forEach((node,i)=>{node.classList.remove('page','hidden');node.classList.add('product-project-panel');node.querySelector('.top')?.remove();page.append(node)});
     main.append(page);
     page.querySelectorAll('[data-product-project-view]').forEach(b=>b.addEventListener('click',()=>setPanel('projects',b.dataset.productProjectView)));
@@ -67,7 +67,7 @@
   function simplifyQuickAdd(){
     by('v5QuickActions')?.remove();
     const drawer=by('quickDrawer');if(!drawer||by('productQuickActions'))return;
-    drawer.insertAdjacentHTML('afterbegin','<section id="productQuickActions" class="product-quick-actions"><button data-product-action="task" type="button">Task</button><button data-product-action="event" type="button">Event</button><button data-product-action="note" type="button">Note</button><button data-product-action="file" type="button">File</button></section>');
+    drawer.querySelector('.drawer-head')?.insertAdjacentHTML('afterend','<section id="productQuickActions" class="product-quick-actions"><button data-product-action="task" type="button">Task</button><button data-product-action="event" type="button">Event</button><button data-product-action="note" type="button">Note</button><button data-product-action="file" type="button">File</button></section>');
     drawer.addEventListener('click',e=>{
       const b=e.target.closest('[data-product-action]');if(!b)return;
       const action=b.dataset.productAction;
@@ -87,7 +87,7 @@
     if(window.__productSimplificationV1)return;
     const main=document.querySelector('main.content');if(!main||!by('page-calendar')||!by('page-tasks'))return;
     window.__productSimplificationV1=true;
-    buildPlan(main);buildProjects(main);simplifyToday();buildNavigation();simplifyQuickAdd();removeHealthChoices();
+    buildPlan(main);buildProjects(main);simplifyToday();buildNavigation();simplifyQuickAdd();removeHealthChoices();setPanel('plan','calendar');setPanel('projects','all');
     document.querySelector('.sidebar-foot .btn:not(#productDesktopSettings)')?.replaceChildren(document.createTextNode('Sign out'));
     baseShowPage=window.showPage;
     if(typeof baseShowPage==='function')window.showPage=function(page){
