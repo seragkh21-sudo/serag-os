@@ -9,7 +9,7 @@
   const fmtDate=v=>v?new Date(v).toLocaleDateString('ar-EG',{day:'numeric',month:'short'}):'بدون موعد';
   const fmtDateTime=v=>v?new Date(v).toLocaleString('ar-EG',{day:'numeric',month:'short',hour:'numeric',minute:'2-digit'}):'بدون موعد';
   const escAttr=h;
-  let profile={calorie_target:2800,protein_target:150,water_target:8,display_name:''};
+  let profile={display_name:''};
   let todayMeals=[];
   let recentMeals=[];
   let v5Project=null;
@@ -25,7 +25,7 @@
   function mount(){
     if(window.__seragV5Mounted)return;window.__seragV5Mounted=true;css();
     createSettingsPage();createBottomNav();enhanceQuickDrawer();createProjectModal();createWordPopup();
-    enhanceHomeSkeleton();enhanceFitnessSkeleton();enhanceCalendarSkeleton();
+    enhanceHomeSkeleton();enhanceCalendarSkeleton();
     bindGlobal();wrapCoreFunctions();
     refreshV5();
   }
@@ -52,12 +52,6 @@
       }
     }catch{}
     try{
-      if(typeof loadMeals==='function'){
-        v5OriginalLoadMeals=loadMeals;
-        loadMeals=async function(){const r=await v5OriginalLoadMeals();await loadNutrition();return r};
-      }
-    }catch{}
-    try{
       if(typeof loadWork==='function'){
         v5OriginalLoadWork=loadWork;
         loadWork=async function(){const r=await v5OriginalLoadWork();await renderWorkProjects();return r};
@@ -73,7 +67,6 @@
 
   function onPageShown(page){
     if(page==='today')loadCommandCenter();
-    if(page==='fitness')loadNutrition();
     if(page==='work')renderWorkProjects();
     if(page==='creative')renderCreativeProjects();
     if(page==='calendar'&&q('v5CalendarAgenda')&&!q('v5CalendarAgenda').classList.contains('hidden'))renderAgenda();
@@ -83,13 +76,13 @@
   async function refreshV5(){
     if(!window.user)return;
     await loadProfile();
-    await Promise.allSettled([loadCommandCenter(),loadNutrition(),renderWorkProjects(),renderCreativeProjects()]);
+    await Promise.allSettled([loadCommandCenter(),renderWorkProjects(),renderCreativeProjects()]);
     if(!q('page-settings')?.classList.contains('hidden'))loadSettings();
   }
 
   async function loadProfile(){
     if(!window.user)return profile;
-    const {data}=await window.sb.from('profiles').select('display_name,calorie_target,protein_target,water_target').eq('id',window.user.id).maybeSingle();
+    const {data}=await window.sb.from('profiles').select('display_name').eq('id',window.user.id).maybeSingle();
     if(data)profile={...profile,...data};
     return profile;
   }
@@ -103,30 +96,23 @@
 
   async function loadCommandCenter(){
     if(!user||!q('v5CommandStats'))return;
-    await loadProfile();
-    const start=dayStart(),end=dayEnd(),now=new Date();
-    const [m,w,t,rem,wp,cp,wo]=await Promise.all([
-      window.sb.from('meals').select('calories,protein_g').gte('eaten_at',start.toISOString()).lte('eaten_at',end.toISOString()),
-      window.sb.from('water_logs').select('amount_ml').gte('logged_at',start.toISOString()).lte('logged_at',end.toISOString()),
+    const now=new Date();
+    const [t,rem,wp,cp]=await Promise.all([
       window.sb.from('tasks').select('id,title,due_at,category,priority,status').neq('status','done').order('due_at',{ascending:true,nullsFirst:false}).limit(50),
       window.sb.from('reminders').select('id,title,remind_at,category,is_done').eq('is_done',false).gte('remind_at',now.toISOString()).order('remind_at',{ascending:true}).limit(20),
       window.sb.from('work_projects').select('id,title,deadline,client,status').gte('deadline',now.toISOString()).order('deadline',{ascending:true}).limit(20),
-      window.sb.from('creative_projects').select('id,title,deadline,project_type,status').gte('deadline',now.toISOString()).order('deadline',{ascending:true}).limit(20),
-      window.sb.from('workouts').select('id,title,workout_date').gte('workout_date',start.toISOString().slice(0,10)).limit(20)
+      window.sb.from('creative_projects').select('id,title,deadline,project_type,status').gte('deadline',now.toISOString()).order('deadline',{ascending:true}).limit(20)
     ]);
-    const meals=m.data||[],water=w.data||[],tasks=t.data||[];
-    const kcal=meals.reduce((a,x)=>a+num(x.calories),0),protein=meals.reduce((a,x)=>a+num(x.protein_g),0),cups=Math.round(water.reduce((a,x)=>a+num(x.amount_ml),0)/250);
-    const remainK=Math.max(0,num(profile.calorie_target||2800)-kcal),remainP=Math.max(0,num(profile.protein_target||150)-protein),remainW=Math.max(0,num(profile.water_target||8)-cups);
-    q('v5CommandStats').innerHTML=`${commandStat('السعرات',`${round(kcal)} / ${profile.calorie_target||2800}`,remainK?`فاضلك ${round(remainK)} kcal`:'الهدف اكتمل ✓',kcal/num(profile.calorie_target||2800))}${commandStat('البروتين',`${round(protein,1)} / ${profile.protein_target||150}g`,remainP?`فاضلك ${round(remainP,1)}g`:'الهدف اكتمل ✓',protein/num(profile.protein_target||150))}${commandStat('المياه',`${cups} / ${profile.water_target||8}`,remainW?`فاضلك ${remainW} كوب`:'الهدف اكتمل ✓',cups/num(profile.water_target||8))}${commandStat('المهام',`${tasks.length} مفتوحة`,tasks.length?'رتّب الأقرب أولًا':'اليوم هادي ✓',tasks.length?Math.min(1,tasks.length/5):1)}`;
+    const tasks=t.data||[];
+    q('v5CommandStats').innerHTML=commandStat('Open tasks',String(tasks.length),tasks.length?'Across all projects':'No open tasks',Math.min(1,tasks.length/5));
     const events=[];
     tasks.filter(x=>x.due_at&&new Date(x.due_at)>=now).forEach(x=>events.push({title:x.title,when:x.due_at,type:'Task'}));
-    (rem.data||[]).forEach(x=>events.push({title:x.title,when:x.remind_at,type:'Calendar'}));
+    (rem.data||[]).forEach(x=>events.push({title:x.title,when:x.remind_at,type:'Event'}));
     (wp.data||[]).forEach(x=>events.push({title:x.title,when:x.deadline,type:'Work'}));
     (cp.data||[]).forEach(x=>events.push({title:x.title,when:x.deadline,type:'Creative'}));
-    (wo.data||[]).forEach(x=>events.push({title:x.title,when:`${x.workout_date}T12:00:00`,type:'Gym'}));
     events.sort((a,b)=>new Date(a.when)-new Date(b.when));
     const next=events[0];
-    q('v5NextUp').innerHTML=next?`<div class="v5-next-label">NEXT UP</div><div class="v5-next-main"><div><strong>${h(next.title)}</strong><span>${h(next.type)} · ${fmtDateTime(next.when)}</span></div><button class="mini" type="button" data-v5-page="${next.type==='Gym'?'fitness':next.type==='Work'?'work':next.type==='Creative'?'creative':'calendar'}">فتح</button></div>`:`<div class="v5-next-empty">مفيش حاجة مستعجلة بعد كده. ركّز في اللي قدامك.</div>`;
+    q('v5NextUp').innerHTML=next?'<div class="v5-next-label">NEXT UP</div><div class="v5-next-main"><div><strong>'+h(next.title)+'</strong><span>'+h(next.type)+' · '+fmtDateTime(next.when)+'</span></div><button class="mini" type="button" data-v5-page="'+(next.type==='Work'||next.type==='Creative'?'projects':'plan')+'">Open</button></div>':'<div class="v5-next-empty">Nothing urgent coming up.</div>';
   }
   function commandStat(label,value,sub,ratio){return `<div class="v5-command-stat"><span>${h(label)}</span><strong>${h(value)}</strong><small>${h(sub)}</small><div class="progress"><div class="bar" style="width:${Math.min(100,Math.max(0,ratio*100))}%"></div></div></div>`}
 
@@ -188,9 +174,10 @@
   function playLookupAudio(word,url){if(safeUrl(url)){v5WordPopupAudio=new Audio(url);v5WordPopupAudio.play().catch(()=>speakWord(word))}else speakWord(word)}function speakWord(word){if(!('speechSynthesis' in window))return;window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(word);u.lang='en-US';u.rate=.82;window.speechSynthesis.speak(u)}
   async function addPopupWord(word,d){const meaning=q('v5WordArabicMeaning')?.value.trim()||'';const {error}=await window.sb.from('english_words').insert({user_id:window.user.id,word,meaning,status:'learning',phonetic:d.phonetic||null,audio_url:safeUrl(d.audio)||null,part_of_speech:d.partOfSpeech||null});if(error)return toast(error.message);toast('اتضافت للـVocabulary');closeWordPopup();try{loadEnglish?.()}catch{}}
 
-  function createSettingsPage(){if(q('page-settings'))return;const main=document.querySelector('main.content');if(!main)return;main.insertAdjacentHTML('beforeend',`<section id="page-settings" class="page hidden"><header class="top"><div><h2>Settings</h2><p class="muted">أهدافك الأساسية بتنعكس تلقائيًا على الرئيسية والجيم والأكل.</p></div></header><div class="grid"><section class="card span6"><div class="v5-section-head"><div><h3>Profile & Goals</h3><p class="muted">غير الأهداف من هنا بدل أرقام ثابتة.</p></div></div><form id="v5SettingsForm" class="form"><label>الاسم<input id="v5DisplayName"></label><label>Calories target<input id="v5CalorieTarget" type="number" min="500" max="10000"></label><label>Protein target (g)<input id="v5ProteinTarget" type="number" min="20" max="500"></label><label>Water target (cups)<input id="v5WaterTarget" type="number" min="1" max="30"></label><button class="btn primary">Save settings</button></form></section><section class="card span6"><h3>How goals work</h3><div class="v5-settings-note">الرئيسية بتعرض المتبقي من السعرات والبروتين والمياه تلقائيًا. الأكل الجديد يحدث الأرقام فورًا، وكل البيانات مرتبطة بحسابك.</div></section></div></section>`);const desktopNav=document.querySelector('.nav');if(desktopNav&&!desktopNav.querySelector('[data-page="settings"]'))desktopNav.insertAdjacentHTML('beforeend','<button data-page="settings" type="button">الإعدادات</button>');document.querySelector('[data-page="settings"]')?.addEventListener('click',()=>showPage('settings'));q('v5SettingsForm').onsubmit=saveSettings}
-  async function loadSettings(){await loadProfile();q('v5DisplayName').value=profile.display_name||'';q('v5CalorieTarget').value=profile.calorie_target||2800;q('v5ProteinTarget').value=profile.protein_target||150;q('v5WaterTarget').value=profile.water_target||8}
-  async function saveSettings(e){e.preventDefault();const patch={display_name:q('v5DisplayName').value.trim(),calorie_target:Math.max(500,num(q('v5CalorieTarget').value)),protein_target:Math.max(20,num(q('v5ProteinTarget').value)),water_target:Math.max(1,num(q('v5WaterTarget').value)),updated_at:new Date().toISOString()};const {error}=await window.sb.from('profiles').update(patch).eq('id',window.user.id);if(error)return toast(error.message);profile={...profile,...patch};toast('الإعدادات اتحفظت');refreshV5()}
+  function createSettingsPage(){if(q('page-settings'))return;const main=document.querySelector('main.content');if(!main)return;main.insertAdjacentHTML('beforeend',`<section id="page-settings" class="page hidden"><header class="top"><div><h2>Settings</h2><p class="muted">Account preferences.</p></div></header><div class="grid"><section class="card span6"><div class="v5-section-head"><div><h3>Profile</h3><p class="muted">Update your display name.</p></div></div><form id="v5SettingsForm" class="form"><label>Display name<input id="v5DisplayName"></label><button class="btn primary">Save changes</button></form></section></div></section>`);q('v5SettingsForm').onsubmit=saveSettings}
+  async function loadSettings(){await loadProfile();q('v5DisplayName').value=profile.display_name||''}
+  async function saveSettings(e){e.preventDefault();const patch={display_name:q('v5DisplayName').value.trim(),updated_at:new Date().toISOString()};const {error}=await window.sb.from('profiles').update(patch).eq('id',window.user.id);if(error)return toast(error.message);profile={...profile,...patch};toast('Settings saved')}
+
 
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(mount,40),{once:true});else setTimeout(mount,40);
 })();
