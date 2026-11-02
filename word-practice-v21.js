@@ -59,9 +59,13 @@
   const builds=shuffle(buildPool).slice(0,dailyMode?2:3).map(q=>({...q,kind:'build',words:shuffle([...q.tokens])}));
   // Today's Practice is one short mixed session: one exposure per vocabulary item,
   // grammar in context, and sentence-building tasks from the existing grammar examples.
-  if(dailyMode)return shuffle([...choices,...fillers,...builds]);
-  // In focused vocabulary practice, keep delayed recall as a separate learning stage.
-  const firstExposure=shuffle([...choices,...fillers,...builds]);
+  if(dailyMode){
+   const extras=shuffle([...fillers,...builds]),mixed=[];
+   for(let i=0;i<choices.length;i++){mixed.push(choices[i]);if(extras.length)mixed.push(extras.shift())}
+   return mixed.concat(extras);
+  }
+  // Preserve the due-review order of vocabulary; place grammar/building between exposure and recall.
+  const firstExposure=[...choices,...shuffle([...fillers,...builds])];
   return [...firstExposure,...shuffle(choices.map(q=>({...q,kind:'recall',options:undefined})))];
  }
  function state(){try{return JSON.parse(localStorage.getItem('seragSentenceV21:'+uid())||'{}')}catch{return {}}}
