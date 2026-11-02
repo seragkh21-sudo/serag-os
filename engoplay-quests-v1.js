@@ -544,8 +544,6 @@
     window.addEventListener('click', handleClick, true);
     document.addEventListener('visibilitychange', function () {
       if (!document.hidden) {
-        mountPanel();
-        paintPanel();
         var dialog = document.getElementById(DIALOG_ID);
         if (dialog && dialog.open) dialog.innerHTML = dialogMarkup(getState());
       }
