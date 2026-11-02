@@ -367,8 +367,7 @@ async function loadHomeTip(){
 }
 async function refreshAll(){
   if(!user)return;
-  await Promise.all([loadWater(),loadMeals(),loadWorkouts(),loadTasks(),loadEnglish(),loadWork(),loadCreative(),loadCaptures()]);
-  loadHomeTip();
+  await Promise.all([loadTasks(),loadEnglish(),loadWork(),loadCreative(),loadCaptures()]);
 }
 
 (async()=>{
