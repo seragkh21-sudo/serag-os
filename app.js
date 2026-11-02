@@ -295,7 +295,7 @@ async function loadCaptures(){
     return `<div class="row"><div class="row-main"><div class="row-title">${icon} ${esc(x.title)}</div><div class="row-meta">${esc(x.kind)} · ${esc(x.parent_type||'general')}</div></div><div class="row-actions"><button class="mini open-attachment" data-id="${x.id}" type="button">فتح</button><button class="mini danger" data-action="delete" data-type="attachment" data-id="${x.id}" type="button">حذف</button></div></div>`;
   };
   $('quickCaptureList').innerHTML=combined.length?combined.slice(0,16).map(renderQuick).join(''):empty('لسه مفيش ملاحظات أو مرفقات.');
-  $('homeCaptureList').innerHTML=combined.length?combined.slice(0,6).map(x=>`<div class="compact-item"><strong>${x._type==='note'?'📝':'📎'} ${esc(x.title||'ملاحظة')}</strong><div>${esc(x._type==='note'?(x.content||''):(x.kind||''))}</div></div>`).join(''):empty('استخدم زر + لإضافة أول حاجة.');
+  if($('homeCaptureList'))$('homeCaptureList').innerHTML=combined.length?combined.slice(0,6).map(x=>`<div class="compact-item"><strong>${x._type==='note'?'📝':'📎'} ${esc(x.title||'ملاحظة')}</strong><div>${esc(x._type==='note'?(x.content||''):(x.kind||''))}</div></div>`).join(''):empty('Use Quick Add to save your first item.');
   document.querySelectorAll('.open-attachment').forEach(b=>b.onclick=()=>openAttachment(b.dataset.id));
 }
 async function openAttachment(id){
