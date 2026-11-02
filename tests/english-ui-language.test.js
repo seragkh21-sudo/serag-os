@@ -14,7 +14,9 @@ const uiFiles = [
   'english-mistakes-bank-v1.js',
   'english-tatoeba-explorer-v1.js',
   'english-writing-v13.js',
-  'english-writing-flow-v1.js'
+  'english-writing-flow-v1.js',
+  'english-grammar-v10.js',
+  'english-supplement-v13.js'
 ];
 
 test('English learning interface copy stays English across active UI modules', () => {
