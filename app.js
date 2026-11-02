@@ -161,11 +161,11 @@ async function loadTasks(){
     sb.from('tasks').select('*').eq('status','done').order('updated_at',{ascending:false}).limit(30)
   ]);
   const render=x=>`<div class="row"><div class="row-main"><div class="row-title">${esc(x.title)}</div><div class="row-meta">${esc(x.category)} · ${fmtDate(x.due_at)} · ${esc(x.priority)}</div></div>${actionButtons('task',x.id,{done:true})}</div>`;
-  $('tasksCount').textContent=open.length;$('doneTasksCount').textContent=done.length;$('homeTasks').textContent=open.length;
+  $('tasksCount').textContent=open.length;$('doneTasksCount').textContent=done.length;if($('homeTasks'))$('homeTasks').textContent=open.length;
   $('tasksList').innerHTML=open.length?open.map(render).join(''):empty('مفيش مهام مفتوحة.');
   $('homeTaskList').innerHTML=open.length?open.slice(0,5).map(render).join(''):empty('الدنيا فاضية ✨');
   $('doneTasksList').innerHTML=done.length?done.map(x=>`<div class="row"><div class="row-main"><div class="row-title">${esc(x.title)}</div><div class="row-meta">${esc(x.category)} · مكتملة</div></div>${actionButtons('task',x.id,{done:false,edit:false})}</div>`).join(''):empty('لسه مفيش مهام مكتملة.');
-  const work=open.filter(x=>x.category==='work');$('workTasksCount').textContent=work.length;$('workTaskList').innerHTML=work.length?work.map(render).join(''):empty('مفيش مهام شغل.');
+  const work=open.filter(x=>x.category==='work');if($('workTasksCount'))$('workTasksCount').textContent=work.length;if($('workTaskList'))$('workTaskList').innerHTML=work.length?work.map(render).join(''):empty('مفيش مهام شغل.');
   return {open,done};
 }
 
