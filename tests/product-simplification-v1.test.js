@@ -7,8 +7,8 @@ const read = file => fs.readFileSync(file, 'utf8');
 test('simplified product shell is loaded from the versioned bootstrap', () => {
   const index = read('index.html');
   const bootstrap = read('app-bootstrap.js');
-  assert.ok(index.includes('app-bootstrap.js?v=63'));
-  assert.ok(bootstrap.includes("const V='63'"));
+  assert.ok(index.includes('app-bootstrap.js?v=64'));
+  assert.ok(bootstrap.includes("const V='64'"));
   assert.ok(bootstrap.includes('product-simplification-v1.js?v=${V}'));
   assert.ok(bootstrap.includes('product-simplification-v1.css?v=${V}'));
 });
