@@ -161,11 +161,11 @@ async function loadTasks(){
     sb.from('tasks').select('*').eq('status','done').order('updated_at',{ascending:false}).limit(30)
   ]);
   const render=x=>`<div class="row"><div class="row-main"><div class="row-title">${esc(x.title)}</div><div class="row-meta">${esc(x.category)} · ${fmtDate(x.due_at)} · ${esc(x.priority)}</div></div>${actionButtons('task',x.id,{done:true})}</div>`;
-  $('tasksCount').textContent=open.length;$('doneTasksCount').textContent=done.length;$('homeTasks').textContent=open.length;
+  $('tasksCount').textContent=open.length;$('doneTasksCount').textContent=done.length;if($('homeTasks'))$('homeTasks').textContent=open.length;
   $('tasksList').innerHTML=open.length?open.map(render).join(''):empty('مفيش مهام مفتوحة.');
   $('homeTaskList').innerHTML=open.length?open.slice(0,5).map(render).join(''):empty('الدنيا فاضية ✨');
   $('doneTasksList').innerHTML=done.length?done.map(x=>`<div class="row"><div class="row-main"><div class="row-title">${esc(x.title)}</div><div class="row-meta">${esc(x.category)} · مكتملة</div></div>${actionButtons('task',x.id,{done:false,edit:false})}</div>`).join(''):empty('لسه مفيش مهام مكتملة.');
-  const work=open.filter(x=>x.category==='work');$('workTasksCount').textContent=work.length;$('workTaskList').innerHTML=work.length?work.map(render).join(''):empty('مفيش مهام شغل.');
+  const work=open.filter(x=>x.category==='work');if($('workTasksCount'))$('workTasksCount').textContent=work.length;if($('workTaskList'))$('workTaskList').innerHTML=work.length?work.map(render).join(''):empty('مفيش مهام شغل.');
   return {open,done};
 }
 
@@ -295,7 +295,7 @@ async function loadCaptures(){
     return `<div class="row"><div class="row-main"><div class="row-title">${icon} ${esc(x.title)}</div><div class="row-meta">${esc(x.kind)} · ${esc(x.parent_type||'general')}</div></div><div class="row-actions"><button class="mini open-attachment" data-id="${x.id}" type="button">فتح</button><button class="mini danger" data-action="delete" data-type="attachment" data-id="${x.id}" type="button">حذف</button></div></div>`;
   };
   $('quickCaptureList').innerHTML=combined.length?combined.slice(0,16).map(renderQuick).join(''):empty('لسه مفيش ملاحظات أو مرفقات.');
-  $('homeCaptureList').innerHTML=combined.length?combined.slice(0,6).map(x=>`<div class="compact-item"><strong>${x._type==='note'?'📝':'📎'} ${esc(x.title||'ملاحظة')}</strong><div>${esc(x._type==='note'?(x.content||''):(x.kind||''))}</div></div>`).join(''):empty('استخدم زر + لإضافة أول حاجة.');
+  if($('homeCaptureList'))$('homeCaptureList').innerHTML=combined.length?combined.slice(0,6).map(x=>`<div class="compact-item"><strong>${x._type==='note'?'📝':'📎'} ${esc(x.title||'ملاحظة')}</strong><div>${esc(x._type==='note'?(x.content||''):(x.kind||''))}</div></div>`).join(''):empty('Use Quick Add to save your first item.');
   document.querySelectorAll('.open-attachment').forEach(b=>b.onclick=()=>openAttachment(b.dataset.id));
 }
 async function openAttachment(id){
@@ -367,8 +367,7 @@ async function loadHomeTip(){
 }
 async function refreshAll(){
   if(!user)return;
-  await Promise.all([loadWater(),loadMeals(),loadWorkouts(),loadTasks(),loadEnglish(),loadWork(),loadCreative(),loadCaptures()]);
-  loadHomeTip();
+  await Promise.all([loadTasks(),loadEnglish(),loadWork(),loadCreative(),loadCaptures()]);
 }
 
 (async()=>{
