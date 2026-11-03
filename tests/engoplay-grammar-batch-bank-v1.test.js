@@ -215,6 +215,8 @@ test('EngoPlay mixed practice displays an imported grammar question and records 
   assert.ok(current.options.includes(current.answer));
 
   const wrong = current.options.find(option => option !== current.answer);
+  assert.equal(practice.check(current, wrong), false, 'punctuation and capitalization differences must remain meaningful in grammar MCQs');
+  assert.equal(practice.check(current, current.answer), true);
   practice.respond(wrong);
   let attempts = window.SERAG_ACADEMY_V12.homeState().attempts.filter(row => row.id === grammarQuestion.id);
   assert.equal(attempts.length, 1, 'the first wrong response should be recorded');
