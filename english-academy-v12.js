@@ -195,7 +195,8 @@
     if(kind==='daily')list=list.filter(q=>!['zero-first-conditionals','second-conditional','third-conditional','mixed-conditionals','condition-linkers'].includes(q.topic));
     if(kind==='daily'||kind==='topic'||kind==='level'){
       const eligible=list.filter(q=>!state.cards[q.id]||state.cards[q.id].due<=Date.now());
-      if(eligible.length)list=eligible;
+      const rotationTopic=kind==='topic'&&window.EngoRotation&&String(topic).startsWith('grammar-batch-topic-');
+      if(!rotationTopic&&eligible.length)list=eligible;
       const priorities=weak().map(([id])=>id);
       list.sort((a,b)=>{const pa=priorities.indexOf(a.topic),pb=priorities.indexOf(b.topic);return (pa<0?999:pa)-(pb<0?999:pb)});
       // Level practice uses the same fresh/due filtering and topic interleaving as daily practice.
