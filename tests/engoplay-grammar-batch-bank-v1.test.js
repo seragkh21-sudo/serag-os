@@ -226,7 +226,8 @@ test('EngoPlay mixed practice displays an imported grammar question and records 
   practice.respond(current.answer);
   attempts = window.SERAG_ACADEMY_V12.homeState().attempts.filter(row => row.id === grammarQuestion.id);
   assert.equal(attempts.length, 2, 'the corrected retry should remain visible as a separate attempt');
-  assert.deepEqual(attempts.map(row => row.correct), [false, true]);
+  assert.equal(attempts[0].correct, false);
+  assert.equal(attempts[1].correct, true);
   const card = window.SERAG_ACADEMY_V12.homeState().cards[grammarQuestion.id];
   assert.equal(card.stage, 1, 'the correct retry should enter the existing spaced-review schedule');
   assert.equal(card.wrong, true, 'the earlier mistake should remain flagged for review');
