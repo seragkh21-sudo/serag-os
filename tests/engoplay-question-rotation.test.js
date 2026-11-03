@@ -58,6 +58,7 @@ test('picker prioritizes unseen questions, then overdue, before future-due quest
   assert.equal(chosen.length, 11);
   assert.ok(!ids.has('q1'), 'future-due item must be last');
   assert.ok(ids.has('q0'), 'overdue item should be selected');
+  assert.equal(ids.size, 11, 'selection contains no duplicate questions');
 });
 
 test('correct and incorrect answers schedule the specified retry intervals', () => {
