@@ -34,15 +34,26 @@ test('interactive practice highlights a wrong choice and the correct answer with
   engine.respond(question.answer);
   markup = engine.html();
   assert.match(markup, /data-wp-next/);
+  assert.match(markup, /class="wp-next-label">Continue<\/span>/);
+  assert.match(markup, /class="wp-next-arrow" aria-hidden="true">→<\/span>/);
   assert.match(markup, /class="wp-option[^"]*is-correct/);
   assert.match(markup, /Correct after a hint or retry/i);
+  assert.equal(engine.currentQuestion().item.phrase, question.item.phrase, 'answer feedback must not skip to the next question');
+  assert.equal(engine.next(), true, 'Continue advances the session');
+  assert.notEqual(engine.currentQuestion().item.phrase, question.item.phrase, 'Continue moves to a different question');
 });
 
 test('interactive learning styles include mobile, focus-visible and reduced-motion support', () => {
   const css = fs.readFileSync(path.join(root, 'engoplay-quests-v1.css'), 'utf8');
   assert.match(css, /\.wp-option\.is-wrong/);
   assert.match(css, /\.wp-option\.is-correct/);
+  assert.match(css, /\.wp-next-row button\[data-wp-next\] \.wp-next-label/);
+  assert.match(css, /Comfort pass: quieter greens/);
+  assert.match(css, /box-shadow:0 2px 9px rgba\(111,99,157,.14\)!important/);
   assert.match(css, /@media\s*\(max-width:\s*600px\)/);
   assert.match(css, /:focus-visible/);
   assert.match(css, /prefers-reduced-motion:\s*reduce/);
+  const source = fs.readFileSync(path.join(root, 'word-practice-v21.js'), 'utf8');
+  assert.match(source, /function patchPracticeNode\(/);
+  assert.match(source, /patchPracticeDOM\(host,html\(\)\)/);
 });
