@@ -159,3 +159,77 @@ test('bootstrap loads the bank before the academy and waits for its read-only im
   assert.match(bootstrap, /SERAG_GRAMMAR_BATCH_BANK_V1_READY/);
   assert.match(bootstrap, /engoplay-grammar-batch-bank-v1[.]js/);
 });
+
+
+test('EngoPlay mixed practice displays an imported grammar question and records wrong-then-correct review progress', async () => {
+  const { sandbox, window } = createContext();
+  let syncedAttempts = [];
+  window.ENGOPLAY = {
+    stats() {
+      return {
+        answeredToday: new Set(),
+        answeredKeys: new Set(),
+        lastAnsweredAt: new Map(),
+        questionStats: new Map(),
+        correctKeys: new Set(),
+        current: 0,
+        totalXP: 0
+      };
+    },
+    track(attempt) { syncedAttempts.push({ ...attempt }); },
+    scheduleWord() {}
+  };
+  window.SERAG_ENGLISH_V9 = {
+    vocabulary: [
+      ['project', 'a planned piece of work', 'Work', 'I planned a project today.'],
+      ['report', 'a written account', 'Work', 'I finished the report today.'],
+      ['client', 'a customer', 'Work', 'I called the client today.'],
+      ['meeting', 'a planned discussion', 'Work', 'I joined the meeting today.']
+    ]
+  };
+
+  vm.runInContext(fs.readFileSync(loaderPath, 'utf8'), sandbox, { filename: loaderPath });
+  const imported = await window.SERAG_GRAMMAR_BATCH_BANK_V1_READY;
+  assert.equal(imported.status, 'ready');
+
+  vm.runInContext(fs.readFileSync(path.join(root, 'english-academy-v12.js'), 'utf8'), sandbox, { filename: 'english-academy-v12.js' });
+  const grammarQuestion = window.SERAG_ACADEMY_V12.questions().find(q =>
+    q.id === 'engoplay-grammar-batch-q151'
+  );
+  assert.ok(grammarQuestion, 'Q151 should be available through the academy question engine');
+
+  vm.runInContext(fs.readFileSync(path.join(root, 'word-practice-v21.js'), 'utf8'), sandbox, { filename: 'word-practice-v21.js' });
+  const practice = window.SERAG_WORD_PRACTICE;
+  assert.ok(practice, 'the existing Word Practice engine should be available');
+
+  practice.startJourney([grammarQuestion.id], 'Grammar integration test', [], true);
+  let current = practice.currentQuestion();
+  assert.equal(current.kind, 'recognition', 'the mixed session begins with vocabulary exposure');
+  practice.respond(current.answer);
+  assert.equal(practice.next(), true);
+
+  current = practice.currentQuestion();
+  assert.equal(current.kind, 'grammar', 'the imported grammar question should be inserted into mixed practice');
+  assert.equal(current.grammar.id, grammarQuestion.id);
+  assert.equal(current.options.length, 4);
+  assert.ok(current.options.includes(current.answer));
+
+  const wrong = current.options.find(option => option !== current.answer);
+  assert.equal(practice.check(current, wrong), false, 'punctuation and capitalization differences must remain meaningful in grammar MCQs');
+  assert.equal(practice.check(current, current.answer), true);
+  practice.respond(wrong);
+  let attempts = window.SERAG_ACADEMY_V12.homeState().attempts.filter(row => row.id === grammarQuestion.id);
+  assert.equal(attempts.length, 1, 'the first wrong response should be recorded');
+  assert.equal(attempts[0].correct, false);
+  assert.equal(syncedAttempts.at(-1).correct, false);
+
+  practice.respond(current.answer);
+  attempts = window.SERAG_ACADEMY_V12.homeState().attempts.filter(row => row.id === grammarQuestion.id);
+  assert.equal(attempts.length, 2, 'the corrected retry should remain visible as a separate attempt');
+  assert.equal(attempts[0].correct, false);
+  assert.equal(attempts[1].correct, true);
+  const card = window.SERAG_ACADEMY_V12.homeState().cards[grammarQuestion.id];
+  assert.equal(card.stage, 1, 'the correct retry should enter the existing spaced-review schedule');
+  assert.equal(card.wrong, true, 'the earlier mistake should remain flagged for review');
+  assert.equal(syncedAttempts.at(-1).correct, true, 'the corrected answer should update EngoPlay activity tracking');
+});
