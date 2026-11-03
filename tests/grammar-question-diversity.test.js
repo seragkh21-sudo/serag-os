@@ -9,7 +9,7 @@ function academy(){
   const c={document,localStorage:{getItem:k=>store.get(k)||null,setItem:(k,v)=>store.set(k,v)},setInterval(){},clearInterval(){},addEventListener(){},Date,Math,console,user:{id:'test-user'}};
   c.window=c;
   vm.createContext(c);
-  for(const file of ['english-content-v9.js','english-grammar-v10.js','english-supplement-v13.js','english-levels-v14.js','english-source-curriculum-v1.js','english-grammar-examples-v1.js','english-academy-v12.js']){
+  for(const file of ['english-content-v9.js','english-grammar-v10.js','english-c1-advanced-v1.js','english-supplement-v13.js','english-levels-v14.js','english-source-curriculum-v1.js','english-grammar-examples-v1.js','english-academy-v12.js']){
     vm.runInContext(fs.readFileSync(file,'utf8'),c,{filename:file});
   }
   return {api:c.SERAG_ACADEMY_V12,store,context:c};
