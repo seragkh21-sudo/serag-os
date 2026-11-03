@@ -8,10 +8,12 @@ import { fileURLToPath } from 'node:url';
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, '..');
 const dataPath = path.join(root, 'engoplay-grammar-batches-2-5.json');
+const rebuiltDataPath = path.join(root, 'engoplay-grammar-rebuilt-batch-1.json');
 const loaderPath = path.join(root, 'engoplay-grammar-batch-bank-v1.js');
 
 function createContext({ failFetch = false } = {}) {
   const data = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
+  const rebuiltData = JSON.parse(fs.readFileSync(rebuiltDataPath, 'utf8'));
   const window = {
     addEventListener() {},
     SERAG_GRAMMAR_V10: [],
@@ -34,9 +36,10 @@ function createContext({ failFetch = false } = {}) {
     clearInterval() {},
     setTimeout() { return 0; },
     addEventListener() {},
-    fetch: async () => {
+    fetch: async (url) => {
       if (failFetch) throw new Error('fixture network failure');
-      return { ok: true, status: 200, json: async () => data };
+      const payload = String(url || '').includes('engoplay-grammar-rebuilt-batch-1.json') ? rebuiltData : data;
+      return { ok: true, status: 200, json: async () => payload };
     }
   };
   vm.createContext(sandbox);
@@ -53,7 +56,18 @@ test('source export contains only available batches 2–5 and IDs 51–250', () 
   assert.ok(!questions.some(q => q.question_id <= 50));
 });
 
-test('loader adds 20 lessons and 200 unique compatible questions without replacing existing content', async () => {
+test('rebuilt Batch 1 is separate from the unchanged original Batches 2–5 export', () => {
+  const rebuilt = JSON.parse(fs.readFileSync(rebuiltDataPath, 'utf8'));
+  assert.equal(rebuilt.length, 5);
+  assert.deepEqual(rebuilt.map(t => t.topic_id), [1, 2, 3, 4, 5]);
+  assert.ok(rebuilt.every(t => /Rebuilt replacement content; not the missing original NotebookLM Batch 1/.test(t.reconstruction_status)));
+  const questions = rebuilt.flatMap(t => t.practice_questions);
+  assert.equal(questions.length, 50);
+  assert.deepEqual(questions.map(q => q.question_id).sort((a, b) => a - b), Array.from({ length: 50 }, (_, i) => i + 1));
+  assert.ok(rebuilt.every(t => t.source_book_and_page?.[0]?.includes('printed pages')));
+});
+
+test('loader adds 25 lessons and 250 unique compatible questions without replacing existing content', async () => {
   const { sandbox, window } = createContext();
   window.SERAG_GRAMMAR_V10.push({ id: 'existing-lesson', level: 'A1', title: 'Existing lesson' });
   window.SERAG_SUPPLEMENT_V13.lessons.push({ id: 'existing-supplement', level: 'A1', title: 'Existing supplement' });
@@ -64,17 +78,27 @@ test('loader adds 20 lessons and 200 unique compatible questions without replaci
   vm.runInContext(fs.readFileSync(loaderPath, 'utf8'), sandbox, { filename: loaderPath });
   const status = await window.SERAG_GRAMMAR_BATCH_BANK_V1_READY;
   assert.equal(status.status, 'ready');
-  assert.equal(status.topicCount, 20);
-  assert.equal(status.questionCount, 200);
-  assert.equal(status.questionsAdded, 200);
-  assert.deepEqual(Array.from(status.missingBatches), [1]);
-  assert.equal(window.SERAG_GRAMMAR_V10.length, 21);
-  assert.equal(window.SERAG_SUPPLEMENT_V13.lessons.length, 21);
-  assert.equal(window.SERAG_SUPPLEMENT_V13.questions.length, 201);
-  const imported = window.SERAG_SUPPLEMENT_V13.questions.filter(q => q.id.startsWith('engoplay-grammar-batch-q'));
-  assert.equal(imported.length, 200);
-  assert.equal(new Set(imported.map(q => q.id)).size, 200);
-  for (const q of imported) {
+  assert.equal(status.topicCount, 25);
+  assert.equal(status.questionCount, 250);
+  assert.equal(status.questionsAdded, 250);
+  assert.equal(status.originalNotebookLMQuestionCount, 200);
+  assert.equal(status.rebuiltQuestionCount, 50);
+  assert.equal(status.originalNotebookLMBatch1Available, false);
+  assert.deepEqual(Array.from(status.availableBatches), [1, 2, 3, 4, 5]);
+  assert.deepEqual(Array.from(status.missingBatches), []);
+  assert.equal(window.SERAG_GRAMMAR_V10.length, 26);
+  assert.equal(window.SERAG_SUPPLEMENT_V13.lessons.length, 26);
+  assert.equal(window.SERAG_SUPPLEMENT_V13.questions.length, 251);
+
+  const originalQuestions = window.SERAG_SUPPLEMENT_V13.questions.filter(q => q.id.startsWith('engoplay-grammar-batch-q'));
+  const rebuiltQuestions = window.SERAG_SUPPLEMENT_V13.questions.filter(q => q.id.startsWith('engoplay-grammar-rebuilt-batch1-q'));
+  assert.equal(originalQuestions.length, 200);
+  assert.equal(rebuiltQuestions.length, 50);
+  assert.equal(new Set([...originalQuestions, ...rebuiltQuestions].map(q => q.id)).size, 250);
+  assert.equal(rebuiltQuestions.find(q => q.sourceQuestionId === 1).sourceReconstruction, true);
+  assert.match(rebuiltQuestions.find(q => q.sourceQuestionId === 1).sourceOrigin, /not the missing original NotebookLM Batch 1/i);
+
+  for (const q of [...originalQuestions, ...rebuiltQuestions]) {
     assert.ok(q.id);
     assert.ok(q.topic.startsWith('grammar-batch-topic-'));
     assert.ok(['A1', 'A2', 'B1', 'B2'].includes(q.level));
@@ -118,8 +142,9 @@ test('loading the bank twice is idempotent', async () => {
   const status = await window.SERAG_GRAMMAR_BATCH_BANK_V1_READY;
   assert.equal(status.status, 'ready');
   assert.equal(status.questionsAdded, 0);
-  assert.equal(window.SERAG_GRAMMAR_V10.filter(g => g.id.startsWith('grammar-batch-topic-')).length, 20);
+  assert.equal(window.SERAG_GRAMMAR_V10.filter(g => g.id.startsWith('grammar-batch-topic-')).length, 25);
   assert.equal(window.SERAG_SUPPLEMENT_V13.questions.filter(q => q.id.startsWith('engoplay-grammar-batch-q')).length, 200);
+  assert.equal(window.SERAG_SUPPLEMENT_V13.questions.filter(q => q.id.startsWith('engoplay-grammar-rebuilt-batch1-q')).length, 50);
 });
 
 test('bank loading fails closed and leaves existing academy data intact when the asset is unavailable', async () => {
@@ -143,10 +168,12 @@ test('the existing academy exposes the imported bank through its normal question
   vm.runInContext(fs.readFileSync(academyPath, 'utf8'), sandbox, { filename: 'english-academy-v12.js' });
   const all = window.SERAG_ACADEMY_V12.questions();
   const imported = all.filter(q => q.id.startsWith('engoplay-grammar-batch-q'));
+  const rebuilt = all.filter(q => q.id.startsWith('engoplay-grammar-rebuilt-batch1-q'));
   assert.equal(imported.length, 200);
-  assert.equal(new Set(imported.map(q => q.id)).size, 200);
-  assert.ok(imported.every(q => q.options.includes(q.answer)));
-  assert.equal(window.SERAG_ACADEMY_V12.lessons().filter(g => g.id.startsWith('grammar-batch-topic-')).length, 20);
+  assert.equal(rebuilt.length, 50);
+  assert.equal(new Set([...imported, ...rebuilt].map(q => q.id)).size, 250);
+  assert.ok([...imported, ...rebuilt].every(q => q.options.includes(q.answer)));
+  assert.equal(window.SERAG_ACADEMY_V12.lessons().filter(g => g.id.startsWith('grammar-batch-topic-')).length, 25);
 });
 
 test('bootstrap loads the bank before the academy and waits for its read-only import', (t) => {

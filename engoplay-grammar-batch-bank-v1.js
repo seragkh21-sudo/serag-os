@@ -1,12 +1,14 @@
 /* EngoPlay Grammar Bank v1
-   Read-only import of the available Grammar Batches 2–5.
-   Batch 1 (Topics 1–5 / Q1–50) is missing from the source export and is not fabricated.
+   Read-only import of original Batches 2–5 plus a clearly labeled, source-based rebuilt Batch 1.
+   The rebuilt first batch is not the missing original NotebookLM export.
 */
 (() => {
   'use strict';
   const DATA_URL = '/engoplay-grammar-batches-2-5.json';
+  const REBUILT_DATA_URL = '/engoplay-grammar-rebuilt-batch-1.json';
   const TOPIC_PREFIX = 'grammar-batch-topic-';
   const QUESTION_PREFIX = 'engoplay-grammar-batch-q';
+  const REBUILT_QUESTION_PREFIX = 'engoplay-grammar-rebuilt-batch1-q';
 
   const levelFor = (estimate) => {
     const value = String(estimate || '').toUpperCase();
@@ -78,15 +80,17 @@
       task: 'Review the explanation and examples, then complete the ten topic questions and write two original sentences.',
       quiz: [String(first && first.question || ''), answerIndex >= 0 ? cleanOption(firstOptions[answerIndex]) : '', distractor ? cleanOption(distractor) : ''],
       sourceTopicId: topic.topic_id,
-      sourceReferences: sources
+      sourceReferences: sources,
+      sourceOrigin: topic.reconstruction_status ? 'Rebuilt Batch 1 from Scholastic Success With Grammar Grade 5' : 'EngoPlay Grammar Batches 2–5',
+      sourceReconstruction: Boolean(topic.reconstruction_status)
     };
   };
 
-  const prepareQuestion = (question, topicId, cefr) => {
-    const correction = corrections[question.question_id] || {};
+  const prepareQuestion = (question, topicId, cefr, reconstructed) => {
+    const correction = reconstructed ? {} : (corrections[question.question_id] || {});
     const options = (correction.options || question.options || []).map(cleanOption);
     return {
-      id: QUESTION_PREFIX + question.question_id,
+      id: (reconstructed ? REBUILT_QUESTION_PREFIX : QUESTION_PREFIX) + question.question_id,
       topic: TOPIC_PREFIX + topicId,
       level: levelFor(cefr),
       prompt: correction.question || String(question.question || ''),
@@ -96,20 +100,26 @@
       sourceQuestionId: question.question_id,
       sourceTopicId: topicId,
       sourceCEFR: cefr,
-      sourceBatchId: Math.floor((Number(question.question_id) - 1) / 50) + 1,
-      sourceOrigin: 'EngoPlay Grammar Batches 2–5'
+      sourceBatchId: reconstructed ? 1 : Math.floor((Number(question.question_id) - 1) / 50) + 1,
+      sourceOrigin: reconstructed
+        ? 'Rebuilt Batch 1 — original NotebookLM export unavailable; source-based questions from Scholastic Success With Grammar Grade 5'
+        : 'EngoPlay Grammar Batches 2–5',
+      sourceReconstruction: Boolean(reconstructed)
     };
   };
 
   const load = async () => {
     const status = {
       status: 'loading',
-      availableBatches: [2, 3, 4, 5],
-      missingBatches: [1],
-      missingQuestionIds: { from: 1, to: 50 },
+      availableBatches: [1, 2, 3, 4, 5],
+      missingBatches: [],
+      missingQuestionIds: null,
       topicCount: 0,
       questionCount: 0,
       questionsAdded: 0,
+      originalNotebookLMQuestionCount: 200,
+      rebuiltQuestionCount: 50,
+      originalNotebookLMBatch1Available: false,
       correctionsApplied: Object.keys(corrections).map(Number).sort((a, b) => a - b)
     };
     window.SERAG_GRAMMAR_BATCH_BANK_V1 = status;
@@ -118,10 +128,25 @@
           !Array.isArray(window.SERAG_SUPPLEMENT_V13.lessons) || !Array.isArray(window.SERAG_SUPPLEMENT_V13.questions)) {
         throw new Error('Existing grammar lesson/question collections are unavailable.');
       }
-      const response = await fetch(DATA_URL + '?v=65', { credentials: 'same-origin', cache: 'no-store' });
-      if (!response.ok) throw new Error('Grammar bank request failed (' + response.status + ').');
-      const topics = await response.json();
-      if (!Array.isArray(topics) || topics.length !== 20) throw new Error('Grammar bank must contain exactly 20 available topics.');
+      const responses = await Promise.all([
+        fetch(DATA_URL + '?v=66', { credentials: 'same-origin', cache: 'no-store' }),
+        fetch(REBUILT_DATA_URL + '?v=66', { credentials: 'same-origin', cache: 'no-store' })
+      ]);
+      if (responses.some((response) => !response.ok)) {
+        throw new Error('Grammar bank source request failed (' + responses.map((response) => response.status).join(', ') + ').');
+      }
+      const sourceBatchTopics = await responses[0].json();
+      const rebuiltBatchTopics = await responses[1].json();
+      if (!Array.isArray(sourceBatchTopics) || sourceBatchTopics.length !== 20) {
+        throw new Error('Original grammar export must contain exactly 20 topics from Batches 2–5.');
+      }
+      if (!Array.isArray(rebuiltBatchTopics) || rebuiltBatchTopics.length !== 5) {
+        throw new Error('Rebuilt Batch 1 must contain exactly five source-based topics.');
+      }
+      if (!rebuiltBatchTopics.every((topic) => topic && topic.reconstruction_status && Array.isArray(topic.practice_questions))) {
+        throw new Error('Rebuilt Batch 1 must remain explicitly labeled as reconstructed source content.');
+      }
+      const topics = rebuiltBatchTopics.concat(sourceBatchTopics);
 
       const seenTopicIds = new Set();
       const seenQuestionIds = new Set();
@@ -132,17 +157,21 @@
 
       for (const topic of topics) {
         const topicId = Number(topic && topic.topic_id);
-        if (!Number.isInteger(topicId) || topicId < 6 || topicId > 25) throw new Error('Unexpected grammar topic ID in imported bank.');
+        if (!Number.isInteger(topicId) || topicId < 1 || topicId > 25) throw new Error('Unexpected grammar topic ID in imported bank.');
+        if ((topicId <= 5) !== Boolean(topic.reconstruction_status)) throw new Error('Rebuilt/source topic provenance does not match topic ID ' + topicId + '.');
         if (seenTopicIds.has(topicId)) throw new Error('Duplicate grammar topic ID ' + topicId + '.');
         seenTopicIds.add(topicId);
         topicRows.push(buildLesson(topic));
         for (const rawQuestion of topic.practice_questions || []) {
           const id = Number(rawQuestion && rawQuestion.question_id);
-          if (!Number.isInteger(id) || id < 51 || id > 250) throw new Error('Unexpected grammar question ID in imported bank.');
+          const reconstructed = topicId <= 5;
+          if (!Number.isInteger(id) || (reconstructed ? id < 1 || id > 50 : id < 51 || id > 250)) {
+            throw new Error('Unexpected grammar question ID in imported bank.');
+          }
           if (seenQuestionIds.has(id)) throw new Error('Duplicate grammar question ID ' + id + '.');
           seenQuestionIds.add(id);
           totalQuestions += 1;
-          const prepared = prepareQuestion(rawQuestion, topicId, topic.cefr_level);
+          const prepared = prepareQuestion(rawQuestion, topicId, topic.cefr_level, reconstructed);
           if (!prepared.prompt.trim() || prepared.options.length !== 4 || new Set(prepared.options).size !== 4 ||
               !prepared.options.includes(prepared.answer) || !prepared.explanation.trim()) {
             throw new Error('Invalid imported grammar question Q' + id + '.');
@@ -151,9 +180,9 @@
         }
       }
 
-      if (totalQuestions !== 200 || seenQuestionIds.size !== 200) throw new Error('Imported grammar bank must contain 200 unique questions.');
-      for (let id = 51; id <= 250; id += 1) {
-        if (!seenQuestionIds.has(id)) throw new Error('Missing question Q' + id + ' in imported grammar bank.');
+      if (totalQuestions !== 250 || seenQuestionIds.size !== 250) throw new Error('Combined grammar bank must contain 250 unique questions.');
+      for (let id = 1; id <= 250; id += 1) {
+        if (!seenQuestionIds.has(id)) throw new Error('Missing question Q' + id + ' in combined grammar bank.');
       }
 
       const existingLessonIds = new Set(window.SERAG_GRAMMAR_V10.map((lesson) => lesson && lesson.id));
@@ -167,10 +196,14 @@
       status.status = 'ready';
       status.topicCount = topicRows.length;
       status.questionsAdded = questionRows.length;
-      status.questionCount = 200;
-      status.availableQuestionIds = { from: 51, to: 250 };
-      status.missingQuestionIds = { from: 1, to: 50 };
-      status.levelMapping = 'Estimated CEFR ranges are mapped to the lower level for the app filter; the original estimate is retained on each lesson and question.';
+      status.questionCount = 250;
+      status.availableQuestionIds = { from: 1, to: 250 };
+      status.missingQuestionIds = null;
+      status.originalNotebookLMQuestionCount = 200;
+      status.rebuiltQuestionCount = 50;
+      status.originalNotebookLMBatch1Available = false;
+      status.batch1Note = 'Q1–Q50 are a labeled reconstruction based on Scholastic Success With Grammar Grade 5 printed pages 5–19; they are not the missing original NotebookLM Batch 1.';
+      status.levelMapping = 'CEFR labels are editorial estimates; the original source estimate is retained on each question and topic.';
       return status;
     } catch (error) {
       status.status = 'unavailable';
