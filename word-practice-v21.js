@@ -94,10 +94,53 @@
   <p class="wp-hint" lang="en" dir="ltr">${session.hints?hint(q.answer,session.hints):''}</p>
   <p class="wp-feedback-status" role="status" aria-live="polite">${session.done?session.revealed?'Review the expression and example. Revealing the answer does not count as an independent attempt.':application?(session.wrong||session.hints||q.assisted?'You used the expression after an attempt or hint.':'Good. You used the target expression in context.'):session.wrong||session.hints?'Correct after a hint or retry.':'Correct ✓':session.wrong?grammar?'Not quite — the correct option is highlighted. Try again.':build?'The word order is not correct yet. Check the subject, verb and time expression.':application?'The target expression is missing from your answer. Try using it in a natural sentence.':'Not quite — the correct option is highlighted. Try again. Other expressions may also be valid in different contexts.':''}</p>
   <div class="wp-result-slot">${session.done ? `<div class="wp-exposure"><b lang="en" dir="ltr">${h(q.answer)}</b><p>${h(grammar?q.grammar.explanation:build?q.explanation:q.item.meaning||'')}</p>${grammar?'':`<p lang="en" dir="ltr">${h(build?q.answer:q.sentence)}</p>`}<p>${q.kind==='recognition'?'Review the sentence. You will recall the expression in writing after other questions.':application?'This check confirms that you used the target expression. Review the other grammar points yourself.':''}</p></div>` : `<div class="wp-exposure wp-exposure-placeholder" aria-hidden="true"><p>The answer and meaning will appear here after you respond.</p></div>`}</div>
-  <div class="wp-next-row">${session.done ? `<button type="button" data-wp-next >Continue →</button>` : `<button type="button" class="wp-next-placeholder" disabled aria-hidden="true" tabindex="-1" >Continue →</button>`}</div>
+  <div class="wp-next-row">${session.done ? `<button type="button" data-wp-next aria-label="Continue to the next question"><span class="wp-next-label">Continue</span><span class="wp-next-arrow" aria-hidden="true">→</span></button>` : `<button type="button" class="wp-next-placeholder" disabled aria-hidden="true" tabindex="-1" >Continue →</button>`}</div>
 </div></section>`;
  }
- function paint(){mount();document.querySelectorAll('[data-word-practice]').forEach(x=>x.innerHTML=html())}
+ function patchPracticeNode(current,next){
+  if(!current||!next||current.nodeType!==next.nodeType||
+     (current.nodeType===1&&current.tagName!==next.tagName)){
+    return next.cloneNode(true);
+  }
+  if(current.nodeType===3||current.nodeType===8){
+    if(current.nodeValue!==next.nodeValue)current.nodeValue=next.nodeValue;
+    return current;
+  }
+  if(current.nodeType!==1)return current;
+  const attrs=Array.from(next.attributes||[]);
+  for(const attr of Array.from(current.attributes||[])){
+    if(!next.hasAttribute(attr.name))current.removeAttribute(attr.name);
+  }
+  for(const attr of attrs){
+    if(current.getAttribute(attr.name)!==attr.value)current.setAttribute(attr.name,attr.value);
+  }
+  const freshChildren=Array.from(next.childNodes||[]);
+  for(let i=0;i<freshChildren.length;i++){
+    const oldChild=current.childNodes[i],freshChild=freshChildren[i];
+    if(!oldChild){current.appendChild(freshChild.cloneNode(true));continue}
+    const patched=patchPracticeNode(oldChild,freshChild);
+    if(patched!==oldChild)current.replaceChild(patched,oldChild);
+  }
+  while(current.childNodes.length>freshChildren.length)current.removeChild(current.lastChild);
+  if(current.tagName==='INPUT'&&current.value!==next.value)current.value=next.value;
+  if(current.tagName==='TEXTAREA'&&current.value!==next.value)current.value=next.value;
+  if(current.tagName==='SELECT'&&current.value!==next.value)current.value=next.value;
+  return current;
+ }
+ function patchPracticeDOM(host,markup){
+  const template=document.createElement('template');
+  template.innerHTML=markup;
+  const fresh=template.content&&template.content.firstElementChild;
+  const current=host.firstElementChild;
+  if(!fresh){host.innerHTML=markup;return}
+  if(!current){host.appendChild(fresh);return}
+  const patched=patchPracticeNode(current,fresh);
+  if(patched!==current)host.replaceChild(patched,current);
+ }
+ function paint(){
+  mount();
+  document.querySelectorAll('[data-word-practice]').forEach(host=>patchPracticeDOM(host,html()));
+ }
  function mount(){const center=document.getElementById('ea12Center');if(!center)return;const words=!!center.querySelector('[data-ea-tab="words"][aria-pressed="true"]'),path=center.querySelector('.ep-path');if(!words&&!path)return;center.classList.toggle('wp-journey-active',!!(path&&session&&session.owner===uid()));if(center.querySelector('[data-word-practice]'))return;const node=document.createElement('div');node.dataset.wordPractice='';(center.querySelector('#ea14Content')||path||center).prepend(node);node.innerHTML=html()}
  document.addEventListener('input',e=>{if(e.target.id==='wpAnswer'&&session)session.input=e.target.value});
  document.addEventListener('submit',e=>{if(!e.target.matches('[data-wp-form]'))return;e.preventDefault();respond(session?.input||'')});
