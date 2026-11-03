@@ -1,0 +1,815 @@
+[
+  {
+    "topic_id": 1,
+    "topic_name": "Types of Sentences (Declarative, Interrogative, Imperative & Exclamatory)",
+    "cefr_level": "Model-estimated CEFR: A2 (not stated by the source)",
+    "cefr_level_status": "Rebuilt from Scholastic Success With Grammar Grade 5; CEFR level is an editorial estimate, not a publisher classification.",
+    "english_explanation": "A sentence expresses a complete thought. A declarative sentence makes a statement, an interrogative sentence asks a question, an imperative sentence gives a command or request, and an exclamatory sentence expresses strong feeling. A complete sentence has a subject and a predicate and expresses a complete thought. Begin sentences with a capital letter and use punctuation that matches the sentence type.",
+    "arabic_explanation": "الجملة الكاملة تعبّر عن معنى تام، وتتكوّن من فاعل ومسند. الجملة الخبرية (Declarative) تقدّم معلومة، والاستفهامية (Interrogative) تسأل سؤالًا، والأمرية (Imperative) تقدّم أمرًا أو طلبًا، والتعجبية (Exclamatory) تعبّر عن شعور قوي. ابدأ الجملة بحرف كبير، واستخدم علامة الترقيم المناسبة لنوعها.",
+    "grammar_structure_and_formulas": {
+      "declarative": "Statement: Subject + Predicate + period (.)",
+      "interrogative": "Question: Auxiliary / Question Word + Subject + Verb + question mark (?)",
+      "imperative": "Command or request: Base Verb + (Object / Complement) + period or exclamation mark",
+      "exclamatory": "Strong feeling: Exclamatory sentence + exclamation mark (!)",
+      "complete_sentence": "Complete subject + complete predicate = complete thought"
+    },
+    "forms": {
+      "declarative": "The train leaves at six.",
+      "interrogative": "Does the train leave at six?",
+      "imperative": "Please close the window.",
+      "exclamatory": "What a beautiful view!"
+    },
+    "when_and_how_to_use": [
+      "Use a declarative sentence to state a fact or give information.",
+      "Use an interrogative sentence when asking for information.",
+      "Use an imperative sentence to give a direction, instruction or polite request.",
+      "Use an exclamatory sentence to express strong surprise, excitement or another strong feeling.",
+      "Check that a group of words has a subject and predicate and expresses a complete thought."
+    ],
+    "common_mistakes": [
+      "Using a period after a direct question instead of a question mark.",
+      "Forgetting the capital letter at the beginning of a sentence or in a proper name.",
+      "Treating a dependent phrase such as 'Before the meeting' as a complete sentence.",
+      "Confusing an imperative sentence with a declarative sentence because the subject 'you' is understood."
+    ],
+    "examples": [
+      "The design is ready.",
+      "Where is the final version?",
+      "Please save the document.",
+      "What an excellent idea!",
+      "Before the meeting. (incomplete thought)"
+    ],
+    "practice_questions": [
+      {
+        "question_id": 1,
+        "question": "Which sentence is interrogative?",
+        "options": [
+          "A) Please close the gate.",
+          "B) The gate is open.",
+          "C) Is the gate open?",
+          "D) What a tall gate!"
+        ],
+        "correct_answer": "C) Is the gate open?",
+        "explanation": "An interrogative sentence asks a question and normally ends with a question mark."
+      },
+      {
+        "question_id": 2,
+        "question": "Which sentence is imperative?",
+        "options": [
+          "A) The lights are bright.",
+          "B) Turn off the lights.",
+          "C) Are the lights on?",
+          "D) What bright lights!"
+        ],
+        "correct_answer": "B) Turn off the lights.",
+        "explanation": "An imperative sentence gives a command or instruction. The subject 'you' is understood."
+      },
+      {
+        "question_id": 3,
+        "question": "What punctuation mark normally ends a declarative sentence?",
+        "options": [
+          "A) A period (.)",
+          "B) A comma (,)",
+          "C) A question mark (?)",
+          "D) An exclamation mark (!)"
+        ],
+        "correct_answer": "A) A period (.)",
+        "explanation": "A declarative sentence makes a statement and normally ends with a period."
+      },
+      {
+        "question_id": 4,
+        "question": "Which option correctly capitalizes and punctuates the question 'where is the library'?",
+        "options": [
+          "A) where is the library.",
+          "B) Where is the library.",
+          "C) Where is the library?",
+          "D) where is the library?"
+        ],
+        "correct_answer": "C) Where is the library?",
+        "explanation": "Begin the sentence with a capital letter and end a direct question with a question mark."
+      },
+      {
+        "question_id": 5,
+        "question": "Which group of words is an incomplete thought?",
+        "options": [
+          "A) The coach praised the team.",
+          "B) Before the final match.",
+          "C) The team won the match.",
+          "D) Our coach arrived early."
+        ],
+        "correct_answer": "B) Before the final match.",
+        "explanation": "'Before the final match' is a dependent introductory phrase without a main clause, so it does not express a complete thought by itself."
+      },
+      {
+        "question_id": 6,
+        "question": "Which group of words is a complete sentence?",
+        "options": [
+          "A) Because the bus was late.",
+          "B) Across the quiet street.",
+          "C) The bus arrived at noon.",
+          "D) After the long journey."
+        ],
+        "correct_answer": "C) The bus arrived at noon.",
+        "explanation": "'The bus arrived at noon' has a subject, a predicate and a complete thought."
+      },
+      {
+        "question_id": 7,
+        "question": "Which sentence is exclamatory?",
+        "options": [
+          "A) Where did you put the keys?",
+          "B) Please put the keys here.",
+          "C) The keys are on the table.",
+          "D) What a useful set of keys!"
+        ],
+        "correct_answer": "D) What a useful set of keys!",
+        "explanation": "The sentence expresses strong feeling and ends with an exclamation mark."
+      },
+      {
+        "question_id": 8,
+        "question": "For a neutral command, which punctuation mark is normally used at the end of 'Please wait here'?",
+        "options": [
+          "A) A period (.)",
+          "B) A question mark (?)",
+          "C) A comma (,)",
+          "D) A colon (:)"
+        ],
+        "correct_answer": "A) A period (.)",
+        "explanation": "A neutral instruction or request can end with a period. An exclamation mark is possible when strong feeling is intended."
+      },
+      {
+        "question_id": 9,
+        "question": "Which change turns the statement 'You are ready.' into a yes/no question?",
+        "options": [
+          "A) You are ready!",
+          "B) Are you ready?",
+          "C) You, are ready.",
+          "D) Are ready you?"
+        ],
+        "correct_answer": "B) Are you ready?",
+        "explanation": "Move the verb 'are' before the subject 'you' to form the direct question."
+      },
+      {
+        "question_id": 10,
+        "question": "Which group is incomplete because it lacks a complete subject or predicate?",
+        "options": [
+          "A) The new student smiled.",
+          "B) Our class starts at nine.",
+          "C) Walked to the station.",
+          "D) Mina opened the window."
+        ],
+        "correct_answer": "C) Walked to the station.",
+        "explanation": "'Walked to the station' has no stated subject, so it is not a complete sentence in this context."
+      }
+    ],
+    "source_book_and_page": [
+      "Scholastic Success With Grammar Grade 5, printed pages 5–7 (Types of Sentences)."
+    ],
+    "reconstruction_status": "Rebuilt replacement content; not the missing original NotebookLM Batch 1."
+  },
+  {
+    "topic_id": 2,
+    "topic_name": "Complete and Simple Subjects",
+    "cefr_level": "Model-estimated CEFR: A2 (not stated by the source)",
+    "cefr_level_status": "Rebuilt from Scholastic Success With Grammar Grade 5; CEFR level is an editorial estimate, not a publisher classification.",
+    "english_explanation": "The complete subject includes all the words that tell who or what the sentence is about. The simple subject is the main noun or pronoun in that subject. Modifiers and prepositional phrases may belong to the complete subject without being part of the simple subject.",
+    "arabic_explanation": "الفاعل الكامل (Complete Subject) يشمل كل الكلمات التي توضّح مَن أو ما الذي تتحدث عنه الجملة. أما الفاعل البسيط (Simple Subject) فهو الاسم أو الضمير الأساسي داخل الفاعل الكامل. وقد تضاف صفات أو عبارات جار ومجرور إلى الفاعل الكامل، لكنها لا تصبح بالضرورة جزءًا من الفاعل البسيط.",
+    "grammar_structure_and_formulas": {
+      "complete_subject": "Complete Subject = Simple Subject + its modifiers",
+      "simple_subject": "Simple Subject = main noun or pronoun in the subject",
+      "identification": "Ask 'Who or what is the sentence about?'"
+    },
+    "forms": {
+      "complete_subject": "The small brown dog barked loudly.",
+      "simple_subject": "The small brown dog barked loudly. → dog",
+      "prepositional_phrase": "The box of old photographs is heavy. → simple subject: box"
+    },
+    "when_and_how_to_use": [
+      "Identify the complete subject when you need all the words naming who or what the sentence is about.",
+      "Identify the simple subject when you need only the main noun or pronoun.",
+      "Do not mistake a noun inside a prepositional phrase for the simple subject.",
+      "A compound subject may contain two or more simple subjects."
+    ],
+    "common_mistakes": [
+      "Including the predicate in the complete subject.",
+      "Choosing a noun inside an 'of' phrase instead of the main subject noun.",
+      "Confusing a modifier such as 'small' with the simple subject."
+    ],
+    "examples": [
+      "The small brown dog barked loudly. (complete subject: The small brown dog; simple subject: dog)",
+      "Several students from our class joined the fair. (complete subject: Several students from our class; simple subject: students)",
+      "The box of colored pencils is on the desk. (simple subject: box)",
+      "My sister and her friend planned the trip. (simple subjects: sister and friend)"
+    ],
+    "practice_questions": [
+      {
+        "question_id": 11,
+        "question": "What is the complete subject in 'The small brown dog barked loudly'?",
+        "options": [
+          "A) barked loudly",
+          "B) The small brown dog",
+          "C) dog barked",
+          "D) loudly"
+        ],
+        "correct_answer": "B) The small brown dog",
+        "explanation": "The complete subject includes the article and modifiers together with the main noun: 'The small brown dog'."
+      },
+      {
+        "question_id": 12,
+        "question": "What is the simple subject in 'The small brown dog barked loudly'?",
+        "options": [
+          "A) small",
+          "B) dog",
+          "C) barked",
+          "D) loudly"
+        ],
+        "correct_answer": "B) dog",
+        "explanation": "'Dog' is the main noun that tells what the sentence is about."
+      },
+      {
+        "question_id": 13,
+        "question": "What is the simple subject in 'The box of colored pencils is on the desk'?",
+        "options": [
+          "A) colored pencils",
+          "B) desk",
+          "C) box",
+          "D) is"
+        ],
+        "correct_answer": "C) box",
+        "explanation": "The sentence is about the box. 'Of colored pencils' is a prepositional phrase modifying 'box'."
+      },
+      {
+        "question_id": 14,
+        "question": "What is the complete subject in 'Several students from our class joined the science fair'?",
+        "options": [
+          "A) joined the science fair",
+          "B) the science fair",
+          "C) Several students from our class",
+          "D) students from our"
+        ],
+        "correct_answer": "C) Several students from our class",
+        "explanation": "The complete subject includes 'Several students' and the phrase 'from our class'."
+      },
+      {
+        "question_id": 15,
+        "question": "What are the simple subjects in 'My sister and her friend planned the trip'?",
+        "options": [
+          "A) My sister and her friend",
+          "B) sister and friend",
+          "C) planned and trip",
+          "D) My and her"
+        ],
+        "correct_answer": "B) sister and friend",
+        "explanation": "The two main subject nouns are 'sister' and 'friend'. Together they form a compound subject."
+      },
+      {
+        "question_id": 16,
+        "question": "What is the complete subject in 'The old bridge near the river needs repairs'?",
+        "options": [
+          "A) needs repairs",
+          "B) the river",
+          "C) The old bridge near the river",
+          "D) repairs"
+        ],
+        "correct_answer": "C) The old bridge near the river",
+        "explanation": "The complete subject includes the noun phrase 'The old bridge' and the phrase 'near the river' that describes it."
+      },
+      {
+        "question_id": 17,
+        "question": "What is the simple subject in 'The bright lights in the hall flickered'?",
+        "options": [
+          "A) bright",
+          "B) hall",
+          "C) lights",
+          "D) flickered"
+        ],
+        "correct_answer": "C) lights",
+        "explanation": "'Lights' is the main noun in the subject. 'Bright' and 'in the hall' provide additional information."
+      },
+      {
+        "question_id": 18,
+        "question": "What is the simple subject in 'A group of volunteers cleaned the beach'?",
+        "options": [
+          "A) volunteers",
+          "B) beach",
+          "C) cleaned",
+          "D) group"
+        ],
+        "correct_answer": "D) group",
+        "explanation": "The main noun is 'group'. The phrase 'of volunteers' completes the larger subject but does not change its simple subject."
+      },
+      {
+        "question_id": 19,
+        "question": "Which sentence has the complete subject 'The manager and assistant'?",
+        "options": [
+          "A) The manager and assistant reviewed the schedule.",
+          "B) The manager reviewed the schedule and assistant.",
+          "C) The schedule was reviewed by the manager.",
+          "D) The assistant reviewed the manager's schedule."
+        ],
+        "correct_answer": "A) The manager and assistant reviewed the schedule.",
+        "explanation": "In option A, 'The manager and assistant' together name who performed the action."
+      },
+      {
+        "question_id": 20,
+        "question": "What is the simple subject in 'The keys to the storage room are missing'?",
+        "options": [
+          "A) storage",
+          "B) room",
+          "C) keys",
+          "D) missing"
+        ],
+        "correct_answer": "C) keys",
+        "explanation": "The sentence is about the keys. 'To the storage room' modifies 'keys'; it is not the simple subject."
+      }
+    ],
+    "source_book_and_page": [
+      "Scholastic Success With Grammar Grade 5, printed pages 8–10 (Complete and Simple Subjects)."
+    ],
+    "reconstruction_status": "Rebuilt replacement content; not the missing original NotebookLM Batch 1."
+  },
+  {
+    "topic_id": 3,
+    "topic_name": "Complete and Simple Predicates",
+    "cefr_level": "Model-estimated CEFR: A2 (not stated by the source)",
+    "cefr_level_status": "Rebuilt from Scholastic Success With Grammar Grade 5; CEFR level is an editorial estimate, not a publisher classification.",
+    "english_explanation": "The complete predicate contains all the words that tell what the subject does or is. The simple predicate is the main verb or verbs in the complete predicate. A simple predicate can show an action or a state of being.",
+    "arabic_explanation": "المسند الكامل (Complete Predicate) يشمل كل الكلمات التي توضّح ما الذي يفعله الفاعل أو ما حالته. أما المسند البسيط (Simple Predicate) فهو الفعل الأساسي أو الأفعال الأساسية في المسند الكامل. وقد يعبّر الفعل عن حركة أو فعل، أو عن حالة ووجود.",
+    "grammar_structure_and_formulas": {
+      "complete_predicate": "Complete Predicate = Simple Predicate + objects / complements / modifiers",
+      "simple_predicate": "Simple Predicate = main verb or verbs",
+      "identification": "Ask 'What does the subject do or what is the subject?'"
+    },
+    "forms": {
+      "action": "The children played soccer after school. → simple predicate: played; complete predicate: played soccer after school",
+      "state_of_being": "The soup is hot. → simple predicate: is; complete predicate: is hot",
+      "compound": "The players ran and cheered. → simple predicates: ran and cheered"
+    },
+    "when_and_how_to_use": [
+      "Identify the complete predicate to find everything that tells what the subject does or is.",
+      "Identify the simple predicate to find the main verb or verbs.",
+      "The simple predicate may be an action verb or a state-of-being verb.",
+      "Include objects and modifiers in the complete predicate, not in the simple predicate."
+    ],
+    "common_mistakes": [
+      "Choosing the subject noun instead of the main verb as the simple predicate.",
+      "Leaving out an object or a modifier when identifying the complete predicate.",
+      "Assuming that every simple predicate must show a physical action; forms of 'be' can show a state."
+    ],
+    "examples": [
+      "The children played soccer after school. (simple predicate: played; complete predicate: played soccer after school)",
+      "The soup tastes salty. (simple predicate: tastes; complete predicate: tastes salty)",
+      "Our teacher explained the rule carefully. (complete predicate: explained the rule carefully)",
+      "The players ran and cheered. (compound simple predicate: ran and cheered)"
+    ],
+    "practice_questions": [
+      {
+        "question_id": 21,
+        "question": "What is the simple predicate in 'The baby laughed loudly'?",
+        "options": [
+          "A) baby",
+          "B) laughed",
+          "C) loudly",
+          "D) The baby"
+        ],
+        "correct_answer": "B) laughed",
+        "explanation": "'Laughed' is the main verb and therefore the simple predicate."
+      },
+      {
+        "question_id": 22,
+        "question": "What is the complete predicate in 'The children played soccer after school'?",
+        "options": [
+          "A) The children",
+          "B) played",
+          "C) played soccer after school",
+          "D) soccer after school"
+        ],
+        "correct_answer": "C) played soccer after school",
+        "explanation": "The complete predicate includes the verb and all the words that complete the thought about what the children did."
+      },
+      {
+        "question_id": 23,
+        "question": "What is the simple predicate in 'The soup tastes salty'?",
+        "options": [
+          "A) soup",
+          "B) salty",
+          "C) tastes",
+          "D) The soup"
+        ],
+        "correct_answer": "C) tastes",
+        "explanation": "'Tastes' is the verb that links the subject to a description."
+      },
+      {
+        "question_id": 24,
+        "question": "What is the simple predicate in 'Maya and Karim are excited about the trip'?",
+        "options": [
+          "A) Maya and Karim",
+          "B) trip",
+          "C) excited",
+          "D) are"
+        ],
+        "correct_answer": "D) are",
+        "explanation": "'Are' is the state-of-being verb and the simple predicate."
+      },
+      {
+        "question_id": 25,
+        "question": "Which sentence has an action verb as its simple predicate?",
+        "options": [
+          "A) The sky is blue.",
+          "B) The engine roared loudly.",
+          "C) The room seems quiet.",
+          "D) The soup was warm."
+        ],
+        "correct_answer": "B) The engine roared loudly.",
+        "explanation": "'Roared' describes an action or event, while the other sentences use state or linking verbs."
+      },
+      {
+        "question_id": 26,
+        "question": "What is the complete predicate in 'Our teacher explained the rule carefully'?",
+        "options": [
+          "A) Our teacher",
+          "B) explained",
+          "C) the rule",
+          "D) explained the rule carefully"
+        ],
+        "correct_answer": "D) explained the rule carefully",
+        "explanation": "The complete predicate contains the verb 'explained', its object 'the rule', and the adverb 'carefully'."
+      },
+      {
+        "question_id": 27,
+        "question": "What is the simple predicate in 'The old house on the hill was empty'?",
+        "options": [
+          "A) house",
+          "B) hill",
+          "C) was",
+          "D) empty"
+        ],
+        "correct_answer": "C) was",
+        "explanation": "'Was' is the main verb. 'Empty' describes the subject but is not the simple predicate."
+      },
+      {
+        "question_id": 28,
+        "question": "What is the complete predicate in 'Birds with bright feathers flew across the garden'?",
+        "options": [
+          "A) Birds with bright feathers",
+          "B) flew across the garden",
+          "C) bright feathers",
+          "D) the garden"
+        ],
+        "correct_answer": "B) flew across the garden",
+        "explanation": "The complete predicate tells what the birds did: 'flew across the garden'."
+      },
+      {
+        "question_id": 29,
+        "question": "Which words form the simple predicate in 'The performers sang, danced, and bowed'?",
+        "options": [
+          "A) The performers",
+          "B) sang, danced, and bowed",
+          "C) the performers sang",
+          "D) and bowed"
+        ],
+        "correct_answer": "B) sang, danced, and bowed",
+        "explanation": "The three main verbs form a compound simple predicate."
+      },
+      {
+        "question_id": 30,
+        "question": "Which option correctly identifies the complete predicate in 'My cousin reads every night'?",
+        "options": [
+          "A) My cousin",
+          "B) cousin reads",
+          "C) reads every night",
+          "D) every night"
+        ],
+        "correct_answer": "C) reads every night",
+        "explanation": "The complete predicate includes the simple predicate 'reads' and the time expression 'every night'."
+      }
+    ],
+    "source_book_and_page": [
+      "Scholastic Success With Grammar Grade 5, printed pages 11–13 (Complete and Simple Predicates)."
+    ],
+    "reconstruction_status": "Rebuilt replacement content; not the missing original NotebookLM Batch 1."
+  },
+  {
+    "topic_id": 4,
+    "topic_name": "Compound Subjects and Predicates",
+    "cefr_level": "Model-estimated CEFR: A2 (not stated by the source)",
+    "cefr_level_status": "Rebuilt from Scholastic Success With Grammar Grade 5; CEFR level is an editorial estimate, not a publisher classification.",
+    "english_explanation": "A compound subject contains two or more simple subjects joined by a conjunction such as 'and' or 'or'. A compound predicate contains two or more simple predicates joined by a conjunction. The subjects share a predicate, or one subject performs more than one action.",
+    "arabic_explanation": "الفاعل المركب (Compound Subject) يتكوّن من فاعلين بسيطين أو أكثر يرتبطان بأداة عطف مثل and أو or. أما المسند المركب (Compound Predicate) فيتكوّن من فعلين أساسيين أو أكثر يرتبطان بأداة عطف. قد يشترك أكثر من فاعل في مسند واحد، أو يقوم فاعل واحد بأكثر من فعل.",
+    "grammar_structure_and_formulas": {
+      "compound_subject": "Simple Subject + and/or + Simple Subject + Predicate",
+      "compound_predicate": "Subject + Simple Predicate + and/or + Simple Predicate",
+      "three_or_more": "Subject + Verb 1, Verb 2, and Verb 3"
+    },
+    "forms": {
+      "compound_subject": "Lina and Omar prepared dinner.",
+      "compound_predicate": "The boys ran and jumped across the field.",
+      "both": "Mona and Ali packed the boxes and loaded the van."
+    },
+    "when_and_how_to_use": [
+      "Use a compound subject when two or more people or things share the same predicate.",
+      "Use a compound predicate when one subject performs two or more actions or has two related states.",
+      "Use 'and' to join items or actions that are both included; use 'or' to show an alternative.",
+      "When a list has three or more verbs, use commas to separate the items and a conjunction before the final item."
+    ],
+    "common_mistakes": [
+      "Confusing a compound subject with a compound predicate.",
+      "Using a comma between two simple subjects that are joined by 'and' without another reason.",
+      "Leaving out the conjunction between the final two items in a list of three verbs."
+    ],
+    "examples": [
+      "Annemarie and Ellen are good friends. (compound subject)",
+      "The girls talk or giggle. (compound predicate)",
+      "The performers sang, danced, and bowed. (three simple predicates)",
+      "The manager and assistant reviewed the schedule. (compound subject)"
+    ],
+    "practice_questions": [
+      {
+        "question_id": 31,
+        "question": "What is the compound subject in 'Lina and Omar prepared dinner'?",
+        "options": [
+          "A) prepared dinner",
+          "B) Lina and Omar",
+          "C) dinner",
+          "D) Omar prepared"
+        ],
+        "correct_answer": "B) Lina and Omar",
+        "explanation": "'Lina' and 'Omar' are two simple subjects joined by 'and'."
+      },
+      {
+        "question_id": 32,
+        "question": "Which conjunction joins the compound subject in 'The cat ___ the dog need food'?",
+        "options": [
+          "A) but",
+          "B) because",
+          "C) or",
+          "D) although"
+        ],
+        "correct_answer": "C) or",
+        "explanation": "'Or' joins the two possible subjects: the cat or the dog."
+      },
+      {
+        "question_id": 33,
+        "question": "What are the two simple predicates in 'The teacher explained the lesson and answered questions'?",
+        "options": [
+          "A) teacher and lesson",
+          "B) explained and answered",
+          "C) lesson and questions",
+          "D) the teacher and questions"
+        ],
+        "correct_answer": "B) explained and answered",
+        "explanation": "The subject 'teacher' performs two actions: explained and answered."
+      },
+      {
+        "question_id": 34,
+        "question": "Which sentence has a compound subject?",
+        "options": [
+          "A) The baby slept and smiled.",
+          "B) Sara and Hany are presenting.",
+          "C) The driver opened the door.",
+          "D) The children laughed loudly."
+        ],
+        "correct_answer": "B) Sara and Hany are presenting.",
+        "explanation": "'Sara' and 'Hany' share the predicate 'are presenting'."
+      },
+      {
+        "question_id": 35,
+        "question": "Which sentence has a compound predicate?",
+        "options": [
+          "A) The boys ran and jumped across the field.",
+          "B) The boys and girls watched the game.",
+          "C) The tall boys were ready.",
+          "D) The coach praised the team."
+        ],
+        "correct_answer": "A) The boys ran and jumped across the field.",
+        "explanation": "The single subject 'The boys' has two predicates: 'ran' and 'jumped'."
+      },
+      {
+        "question_id": 36,
+        "question": "What are the simple subjects in 'The coach and the captain spoke to the team'?",
+        "options": [
+          "A) coach and captain",
+          "B) spoke and team",
+          "C) The coach and the captain spoke",
+          "D) the team"
+        ],
+        "correct_answer": "A) coach and captain",
+        "explanation": "The two main subject nouns are 'coach' and 'captain'."
+      },
+      {
+        "question_id": 37,
+        "question": "Choose the conjunction that completes the compound subject: 'Nadia ___ Hany are presenting the report.'",
+        "options": [
+          "A) because",
+          "B) and",
+          "C) although",
+          "D) while"
+        ],
+        "correct_answer": "B) and",
+        "explanation": "'And' joins the two people who share the predicate."
+      },
+      {
+        "question_id": 38,
+        "question": "Which sentence has a compound predicate?",
+        "options": [
+          "A) The manager and assistant reviewed the budget.",
+          "B) The assistant reviewed the budget.",
+          "C) The manager checked the budget and emailed the team.",
+          "D) The budget was detailed."
+        ],
+        "correct_answer": "C) The manager checked the budget and emailed the team.",
+        "explanation": "The subject 'The manager' performs two actions: checked and emailed."
+      },
+      {
+        "question_id": 39,
+        "question": "Which words form the compound predicate in 'The performers sang, danced, and bowed'?",
+        "options": [
+          "A) The performers",
+          "B) sang, danced, and bowed",
+          "C) performers sang",
+          "D) and bowed"
+        ],
+        "correct_answer": "B) sang, danced, and bowed",
+        "explanation": "The three verbs are joined in one compound predicate."
+      },
+      {
+        "question_id": 40,
+        "question": "A compound subject contains two or more simple subjects joined by:",
+        "options": [
+          "A) an adjective",
+          "B) a preposition",
+          "C) a conjunction",
+          "D) an adverb"
+        ],
+        "correct_answer": "C) a conjunction",
+        "explanation": "A conjunction such as 'and' or 'or' joins the simple subjects."
+      }
+    ],
+    "source_book_and_page": [
+      "Scholastic Success With Grammar Grade 5, printed pages 14–16 (Compound Subjects and Predicates)."
+    ],
+    "reconstruction_status": "Rebuilt replacement content; not the missing original NotebookLM Batch 1."
+  },
+  {
+    "topic_id": 5,
+    "topic_name": "Compound Sentences",
+    "cefr_level": "Model-estimated CEFR: A2 (not stated by the source)",
+    "cefr_level_status": "Rebuilt from Scholastic Success With Grammar Grade 5; CEFR level is an editorial estimate, not a publisher classification.",
+    "english_explanation": "A compound sentence joins two simple sentences (independent clauses) into one sentence. In the pattern taught in the source book, place a comma before a coordinating conjunction such as 'and', 'but' or 'or'. Choose the conjunction according to the relationship between the two complete thoughts.",
+    "arabic_explanation": "الجملة المركبة (Compound Sentence) تربط جملتين بسيطتين مستقلتين، بحيث تستطيع كل واحدة منهما أن تقف وحدها بمعنى كامل. في النمط المعروض في الكتاب، توضع فاصلة قبل أداة العطف مثل and أو but أو or. اختر أداة العطف بحسب العلاقة بين الفكرتين: إضافة، تعارض، أو اختيار.",
+    "grammar_structure_and_formulas": {
+      "compound_sentence": "Independent Clause 1 + comma + and/but/or + Independent Clause 2",
+      "and": "Use 'and' to add a related idea or show sequence.",
+      "but": "Use 'but' to show contrast.",
+      "or": "Use 'or' to show a choice or alternative."
+    },
+    "forms": {
+      "and": "The rain stopped, and the sun came out.",
+      "but": "I wanted to join the game, but I had to finish my work.",
+      "or": "We can take the train, or we can drive."
+    },
+    "when_and_how_to_use": [
+      "Check that each side of the conjunction is an independent clause with its own subject and predicate.",
+      "Use 'and' to add information or connect related events.",
+      "Use 'but' to connect contrasting ideas.",
+      "Use 'or' to present alternatives.",
+      "In the source pattern, use a comma before the coordinating conjunction."
+    ],
+    "common_mistakes": [
+      "Joining two independent clauses with only a comma (comma splice).",
+      "Putting the comma after the conjunction instead of before it.",
+      "Using a compound sentence label for a sentence that contains a dependent clause rather than two independent clauses."
+    ],
+    "examples": [
+      "The meeting ended, and everyone went home.",
+      "The road was crowded, but we arrived on time.",
+      "You can call me, or you can send a message.",
+      "After the meeting ended, we went home. (complex sentence, not compound)"
+    ],
+    "practice_questions": [
+      {
+        "question_id": 41,
+        "question": "Which sentence is a compound sentence?",
+        "options": [
+          "A) Because it rained, we stayed inside.",
+          "B) I called Sara, but she was busy.",
+          "C) After the lesson, we went home.",
+          "D) The tired students left."
+        ],
+        "correct_answer": "B) I called Sara, but she was busy.",
+        "explanation": "The sentence joins two independent clauses with a comma and 'but'."
+      },
+      {
+        "question_id": 42,
+        "question": "Which option correctly punctuates two independent clauses joined by 'and'?",
+        "options": [
+          "A) I finished my work and, I went home.",
+          "B) I finished my work, and I went home.",
+          "C) I finished my work, I went home.",
+          "D) I finished, my work and I went home."
+        ],
+        "correct_answer": "B) I finished my work, and I went home.",
+        "explanation": "The source pattern places a comma before the coordinating conjunction joining the two independent clauses."
+      },
+      {
+        "question_id": 43,
+        "question": "Which conjunction best completes the sentence to show contrast: 'The road was crowded, ___ we arrived on time'?",
+        "options": [
+          "A) and",
+          "B) but",
+          "C) or",
+          "D) because"
+        ],
+        "correct_answer": "B) but",
+        "explanation": "'But' connects the contrast between the crowded road and arriving on time."
+      },
+      {
+        "question_id": 44,
+        "question": "Which conjunction best shows a choice: 'We can take the train, ___ we can drive'?",
+        "options": [
+          "A) or",
+          "B) but",
+          "C) because",
+          "D) although"
+        ],
+        "correct_answer": "A) or",
+        "explanation": "'Or' introduces an alternative between taking the train and driving."
+      },
+      {
+        "question_id": 45,
+        "question": "Which sentence correctly uses 'and' to add a related idea?",
+        "options": [
+          "A) The rain stopped, and the sun came out.",
+          "B) The rain stopped, but the sun came out.",
+          "C) The rain stopped, or the sun came out.",
+          "D) The rain stopped because, the sun came out."
+        ],
+        "correct_answer": "A) The rain stopped, and the sun came out.",
+        "explanation": "'And' adds a second related event to the first independent clause."
+      },
+      {
+        "question_id": 46,
+        "question": "Which pair of clauses forms a compound sentence?",
+        "options": [
+          "A) Because the bell rang, the students left.",
+          "B) When the bell rang, the students left.",
+          "C) The bell rang, and the students left.",
+          "D) Ringing loudly, the bell woke the students."
+        ],
+        "correct_answer": "C) The bell rang, and the students left.",
+        "explanation": "Both 'The bell rang' and 'the students left' are independent clauses joined by a comma and 'and'."
+      },
+      {
+        "question_id": 47,
+        "question": "Which sentence has the comma in the correct place?",
+        "options": [
+          "A) Mona packed the books and, Ali carried the boxes.",
+          "B) Mona packed the books, and Ali carried the boxes.",
+          "C) Mona packed, the books and Ali carried the boxes.",
+          "D) Mona packed the books, and, Ali carried the boxes."
+        ],
+        "correct_answer": "B) Mona packed the books, and Ali carried the boxes.",
+        "explanation": "The comma goes before 'and' when it joins the two independent clauses in this pattern."
+      },
+      {
+        "question_id": 48,
+        "question": "Which sentence is not a compound sentence?",
+        "options": [
+          "A) I wanted to call, but my phone was dead.",
+          "B) The shop closed, and we went home.",
+          "C) After the lesson ended, we went home.",
+          "D) You can study now, or you can study later."
+        ],
+        "correct_answer": "C) After the lesson ended, we went home.",
+        "explanation": "'After the lesson ended' is a dependent clause, so the sentence is complex rather than compound."
+      },
+      {
+        "question_id": 49,
+        "question": "Choose the conjunction that shows contrast: 'I wanted to join the game, ___ I had to finish my homework.'",
+        "options": [
+          "A) and",
+          "B) or",
+          "C) but",
+          "D) because"
+        ],
+        "correct_answer": "C) but",
+        "explanation": "'But' shows that the wish to join the game contrasts with the need to finish homework."
+      },
+      {
+        "question_id": 50,
+        "question": "Combine the two simple sentences using 'or': 'You can call me. You can send a message.'",
+        "options": [
+          "A) You can call me, and you can send a message.",
+          "B) You can call me, but you can send a message.",
+          "C) You can call me, or you can send a message.",
+          "D) You can call me because you can send a message."
+        ],
+        "correct_answer": "C) You can call me, or you can send a message.",
+        "explanation": "'Or' presents the two actions as alternatives and the comma joins the independent clauses."
+      }
+    ],
+    "source_book_and_page": [
+      "Scholastic Success With Grammar Grade 5, printed pages 17–19 (Compound Sentences)."
+    ],
+    "reconstruction_status": "Rebuilt replacement content; not the missing original NotebookLM Batch 1."
+  }
+]
