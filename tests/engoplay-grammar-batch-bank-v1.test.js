@@ -96,7 +96,7 @@ test('loader adds 25 lessons and 250 unique compatible questions without replaci
   assert.equal(rebuiltQuestions.length, 50);
   assert.equal(new Set([...originalQuestions, ...rebuiltQuestions].map(q => q.id)).size, 250);
   assert.equal(rebuiltQuestions.find(q => q.sourceQuestionId === 1).sourceReconstruction, true);
-  assert.match(rebuiltQuestions.find(q => q.sourceQuestionId === 1).sourceOrigin, /not the missing original NotebookLM Batch 1/i);
+  assert.match(rebuiltQuestions.find(q => q.sourceQuestionId === 1).sourceOrigin, /original NotebookLM export unavailable/i);
 
   for (const q of [...originalQuestions, ...rebuiltQuestions]) {
     assert.ok(q.id);
