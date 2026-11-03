@@ -474,3 +474,21 @@
 @media(prefers-reduced-motion:reduce){
   .wp-card .wp-feedback-status{transition:none!important}
 }
+
+
+/* Interactive sentence builder — tap tiles to assemble the answer. */
+.wp-build-workspace{display:grid;gap:14px;margin:18px 0 4px}
+.wp-build-label{display:block;margin-bottom:8px;color:#6d6680;font-size:12px;font-weight:800}
+.wp-build-answer{display:flex;flex-wrap:wrap;align-items:center;gap:8px;min-height:72px;padding:13px;border:1px dashed #cfc9dc;border-radius:15px;background:#fbfaff}
+.wp-build-placeholder{color:#918ba0;font-size:13px;line-height:1.7}
+.wp-build-selected{display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:8px 12px;border:1px solid #d9d4e6;border-radius:11px;background:#f0edf7;color:#49435b;font:inherit;font-size:14px;font-weight:750;cursor:pointer}
+.wp-build-selected small{color:#8b849b;font-size:15px;line-height:1}
+.wp-build-bank{display:flex;flex-wrap:wrap;justify-content:center;gap:9px;padding:4px 0}
+.wp-build-tile{min-height:44px;padding:10px 14px;border:1px solid #e2deea;border-radius:12px;background:#fff;color:#3f3a4e;font:inherit;font-size:14px;font-weight:750;cursor:pointer;box-shadow:0 2px 0 #eeebf3;transition:transform .14s ease,border-color .14s ease,background .14s ease}
+.wp-build-tile:hover:not(:disabled){transform:translateY(-1px);border-color:#bdb4d2;background:#faf9fd}
+.wp-build-tile.is-used{opacity:.24;border-style:dashed;box-shadow:none;cursor:default}
+.wp-build-workspace .wp-actions{align-items:center;margin-top:2px}
+.wp-build-workspace .wp-actions button{min-height:44px}
+.wp-build-workspace .wp-actions button[data-wp-build-reset]{padding:10px 14px;border:1px solid #e4dfeb;border-radius:12px;background:#faf9fc;color:#736c82;font:inherit;font-size:12px;font-weight:750;cursor:pointer}
+.wp-build-workspace button:disabled{opacity:.45;cursor:not-allowed}
+@media(max-width:600px){.wp-build-answer{min-height:66px;padding:10px}.wp-build-bank{justify-content:flex-start;gap:8px}.wp-build-tile{min-height:42px;padding:9px 12px}.wp-build-workspace .wp-actions>*{flex:1 1 100%}}

@@ -109,51 +109,67 @@
     if (!bank || typeof bank.getExamples !== 'function') return [];
     try { return bank.getExamples() || []; } catch (_) { return []; }
   }
+  function sessionOrder(rows, owner, day, sequence) {
+    return rows.map(function (row) {
+      return { row: row, rank: hash(owner + '|' + day + '|practice|' + sequence + '|' + row.id) };
+    }).sort(function (a, b) { return a.rank - b.rank || String(a.row.id).localeCompare(String(b.row.id)); })
+      .map(function (entry) { return entry.row; });
+  }
+
   function getDailyPracticeQuestions(level, limit) {
-    var bundle = getState(), rows = bundle.rows;
+    var bundle = getState(), state = bundle.state, rows = bundle.rows;
     var wanted = String(level || 'B1');
     var eligible = rows.filter(function (row) { return row.level === wanted; });
-    if (!eligible.length && wanted === 'C1') eligible = rows.filter(function (row) { return row.level === 'B2'; });
-    if (!eligible.length && wanted === 'C2') eligible = rows.filter(function (row) { return row.level === 'B2'; });
+    if (!eligible.length && (wanted === 'C1' || wanted === 'C2')) eligible = rows.filter(function (row) { return row.level === 'B2'; });
     if (!eligible.length) eligible = rows.filter(function (row) { return row.level === 'B1'; });
-    var stats = sharedProgress() && window.ENGOPLAY && typeof window.ENGOPLAY.stats === 'function' ? window.ENGOPLAY.stats() : {};
-    var answered = stats && stats.answeredToday instanceof Set ? Array.from(stats.answeredToday) : (stats && Array.isArray(stats.answeredToday) ? stats.answeredToday : []);
-    var lastAt = stats && stats.lastAnsweredAt instanceof Map ? stats.lastAnsweredAt : new Map();
-    var questionStats = stats && stats.questionStats instanceof Map ? stats.questionStats : new Map();
+    var activity = sharedProgress() && window.ENGOPLAY && typeof window.ENGOPLAY.stats === 'function' ? window.ENGOPLAY.stats() : {};
+    var answered = activity && activity.answeredToday instanceof Set ? Array.from(activity.answeredToday) : (activity && Array.isArray(activity.answeredToday) ? activity.answeredToday : []);
+    var answeredIds = new Set(answered.map(function (id) {
+      var value = String(id), prefix = 'sentence-builder:';
+      return value.indexOf(prefix) === 0 ? value.slice(prefix.length) : value;
+    }));
+    var lastAt = activity && activity.lastAnsweredAt instanceof Map ? activity.lastAnsweredAt : new Map();
+    var questionStats = activity && activity.questionStats instanceof Map ? activity.questionStats : new Map();
     var now = Date.now();
     eligible = eligible.filter(function (row) {
+      if (answeredIds.has(String(row.id))) return false;
       var key = 'sentence-builder:' + String(row.id), last = Number(lastAt.get(key)) || 0;
       if (!last) return true;
       var result = questionStats.get(key), cooldown = Number(result && result.correct) > 0 ? 3 * 86400000 : 86400000;
       return now - last >= cooldown;
     });
-    var excluded = bundle.state.recentExampleIds.concat(answered.map(function (id) {
-      var prefix = 'sentence-builder:';
-      return String(id).indexOf(prefix) === 0 ? String(id).slice(prefix.length) : String(id);
-    }));
-    var ids = pickDailyExamples(eligible, bundle.owner, bundle.state.daily.date, excluded);
     var count = Math.max(1, Math.min(3, Number(limit) || 2));
-    return ids.slice(0, count).map(function (id) {
-      var row = eligible.find(function (item) { return String(item.id) === String(id); });
-      if (!row) return null;
+    var sequence = Math.max(0, Number(state.practiceSessionSequence) || 0) + 1;
+    var recent = new Set(state.recentExampleIds.map(String));
+    var previousSession = new Set((state.lastPracticeExampleIds || []).map(String));
+    var available = eligible;
+    var fresh = available.filter(function (row) { return !recent.has(String(row.id)); });
+    var withoutPreviousSession = available.filter(function (row) { return !previousSession.has(String(row.id)); });
+    var pool = fresh.length >= count ? fresh : (withoutPreviousSession.length >= count ? withoutPreviousSession : available);
+    var selected = sessionOrder(pool, bundle.owner, state.daily.date, sequence).slice(0, count);
+    if (selected.length < count) {
+      var picked = new Set(selected.map(function (row) { return String(row.id); }));
+      var refill = available.filter(function (row) { return !picked.has(String(row.id)); });
+      selected = selected.concat(sessionOrder(refill, bundle.owner, state.daily.date, sequence + 1).slice(0, count - selected.length));
+    }
+    var selectedIds = selected.map(function (row) { return String(row.id); });
+    state.practiceSessionSequence = sequence;
+    state.lastPracticeExampleIds = selectedIds;
+    state.recentExampleIds = state.recentExampleIds.concat(selectedIds).filter(function (id, index, all) { return all.lastIndexOf(id) === index; }).slice(-90);
+    save(bundle);
+    return selected.map(function (row) {
       var words = tokensFromSentence(row.sentence);
       for (var i = words.length - 1; i > 0; i--) {
-        var j = hash(bundle.owner + '|' + bundle.state.daily.date + '|' + row.id + '|' + i) % (i + 1);
+        var j = hash(bundle.owner + '|' + state.daily.date + '|practice|' + sequence + '|' + row.id + '|' + i) % (i + 1);
         var temp = words[i]; words[i] = words[j]; words[j] = temp;
       }
       if (words.join(' ') === tokensFromSentence(row.sentence).join(' ') && words.length > 2) words.push(words.shift());
-      return {
-        id: 'sentence-builder:' + String(row.id),
-        sourceRow: row,
-        level: row.level,
-        topic: 'sentence-builder',
-        prompt: 'Arrange the words to form a natural English sentence.',
-        tokens: words,
-        answer: row.sentence,
-        explanation: row.summary || row.formula || row.tip || 'Pay attention to the subject, verb and the relationship between the ideas.'
-      };
-    }).filter(Boolean);
+      return { id:'sentence-builder:'+String(row.id), sourceRow:row, level:row.level, topic:'sentence-builder',
+        prompt:'Arrange the words to form a natural English sentence.', tokens:words, answer:row.sentence,
+        explanation:row.summary || row.formula || row.tip || 'Pay attention to the subject, verb and the relationship between the ideas.' };
+    });
   }
+
   function recordPracticeAttempt(question, built, correct, order) {
     if (!question || !question.sourceRow) return null;
     return recordChallengeAttempt(question.sourceRow, built, correct, {
@@ -167,6 +183,8 @@
       sessions: 0,
       completedDates: [],
       recentExampleIds: Array.isArray(recentIds) ? recentIds.slice(-90) : [],
+      practiceSessionSequence: 0,
+      lastPracticeExampleIds: [],
       daily: {
         date: day,
         ids: pickDailyExamples(rows, owner, day, recentIds),
@@ -215,6 +233,9 @@
     state.completedDates = state.completedDates.filter(function (x) { return /^\d{4}-\d{2}-\d{2}$/.test(String(x)); }).slice(-180);
     if (!Array.isArray(state.recentExampleIds)) state.recentExampleIds = [];
     state.recentExampleIds = state.recentExampleIds.map(String).slice(-90);
+    if (!Array.isArray(state.lastPracticeExampleIds)) state.lastPracticeExampleIds = [];
+    state.lastPracticeExampleIds = state.lastPracticeExampleIds.map(String).slice(-3);
+    state.practiceSessionSequence = Math.max(0, Math.floor(Number(state.practiceSessionSequence) || 0));
     state.points = Math.max(0, Number(state.points) || 0);
     state.sessions = Math.max(0, Number(state.sessions) || 0);
     if (!state.daily || state.daily.date !== day || !Array.isArray(state.daily.ids)) {

@@ -5,8 +5,11 @@ import fs from 'node:fs';
 test('index uses the replacement bootstrap and legacy loads the pinned Supabase client',()=>{
   const html=fs.readFileSync('index.html','utf8');
   const legacy=fs.readFileSync('legacy.html','utf8');
+  const bootstrap=fs.readFileSync('app-bootstrap.js','utf8');
+  const version=bootstrap.match(/const V=['\"](\d+)['\"]/)?.[1];
+  assert.ok(version, 'bootstrap exposes one cache version');
   assert.equal(html.includes('cdn.jsdelivr.net/npm/@supabase/supabase-js'),false);
-  assert.ok(html.includes('app-bootstrap.js?v=66'));
+  assert.ok(html.includes('app-bootstrap.js?v=' + version));
   assert.equal(html.includes('shell-loader.js'),false);
   assert.ok(legacy.includes('@supabase/supabase-js@2.116.0'));
 });
@@ -29,7 +32,7 @@ test('app publishes Supabase client and authenticated user on window',()=>{
 
 test('bootstrap cache-busts every local asset from one version constant',()=>{
   const source=fs.readFileSync('app-bootstrap.js','utf8');
-  assert.ok(source.includes("const V='66'"));
+  assert.match(source, /const V=['"]\d+['"]/);
   assert.ok(source.includes('app.js?v=${V}'));
   assert.equal(source.includes('.js?v=64'),false);
   assert.equal(source.includes('.css?v=64'),false);
