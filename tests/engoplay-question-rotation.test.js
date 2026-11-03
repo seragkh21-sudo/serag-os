@@ -53,9 +53,9 @@ test('picker prioritizes unseen questions, then overdue, before future-due quest
   statsObj.q0 = { seen: 1, correct: 1, wrong: 0, streak: 1, lastSeen: new Date().toISOString(), nextDue: new Date(Date.now() - 1000).toISOString() };
   statsObj.q1 = { seen: 1, correct: 1, wrong: 0, streak: 1, lastSeen: new Date().toISOString(), nextDue: new Date(Date.now() + 86400000).toISOString() };
   stats.set('engoplay_qstats_v1', JSON.stringify(statsObj));
-  const chosen = api.pickQuestions(pool, { count: 10, markSeen: false });
+  const chosen = api.pickQuestions(pool, { count: 11, markSeen: false });
   const ids = new Set(chosen.map(q => q.question_id));
-  assert.equal(chosen.length, 10);
+  assert.equal(chosen.length, 11);
   assert.ok(!ids.has('q1'), 'future-due item must be last');
   assert.ok(ids.has('q0'), 'overdue item should be selected');
 });
