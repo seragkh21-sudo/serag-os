@@ -1,6 +1,6 @@
 (async()=>{
   try{
-    const V='67';
+    const V='68';
     const res=await fetch(`/legacy.html?v=${V}`,{cache:'no-store',headers:{'Cache-Control':'no-cache'}});
     if(!res.ok)throw new Error('Legacy app failed to load');
     let html=await res.text();
@@ -134,6 +134,7 @@ html.serag-ready #seragBootScreen{display:none!important}
 <script src="/english-mistakes-bank-v1.js?v=${V}"></script>
 <script src="/english-grammar-examples-v1.js?v=${V}"></script>
 <script src="/engoplay-grammar-batch-bank-v1.js?v=${V}"></script>
+<script src="/engoplay-question-rotation.js?v=${V}"></script>
 <script src="/english-academy-v12.js?v=${V}"></script>
 <script src="/engoplay-quests-v1.js?v=${V}"></script>
 <script src="/english-reading-library-v1.js?v=${V}"></script>
@@ -213,6 +214,7 @@ html.serag-ready #seragBootScreen{display:none!important}
       /^\/english-tatoeba-explorer-v1\.js(?:\?|$)/,
       /^\/english-grammar-examples-v1\.js(?:\?|$)/,
       /^\/engoplay-grammar-batch-bank-v1\.js(?:\?|$)/,
+      /^\/engoplay-question-rotation\.js(?:\?|$)/,
       /^\/english-dictionary-v1\.js(?:\?|$)/,
       /^\/voice-commands-v1\.js(?:\?|$)/
     ];
