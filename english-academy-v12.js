@@ -182,6 +182,7 @@
     stop();
     let list=questions();
     if(kind==='review')list=due();
+    if(kind==='smart')list=questions();
     if(kind==='topic')list=list.filter(q=>q.topic===topic);
     if(kind==='quick')list=window.EngoRotation?window.EngoRotation.pickQuestions(list,{count:5}):selectQuestions(list,'daily',5);
     if(kind==='smart')list=window.EngoRotation?window.EngoRotation.pickQuestions(list,{count:10,mode:'review'}):due();
