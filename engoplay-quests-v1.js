@@ -142,8 +142,7 @@
     var sequence = Math.max(0, Number(state.practiceSessionSequence) || 0) + 1;
     var recent = new Set(state.recentExampleIds.map(String));
     var previousSession = new Set((state.lastPracticeExampleIds || []).map(String));
-    var todayQuest = new Set((state.daily.ids || []).map(String));
-    var available = eligible.filter(function (row) { return !todayQuest.has(String(row.id)); });
+    var available = eligible;
     var fresh = available.filter(function (row) { return !recent.has(String(row.id)); });
     var withoutPreviousSession = available.filter(function (row) { return !previousSession.has(String(row.id)); });
     var pool = fresh.length >= count ? fresh : (withoutPreviousSession.length >= count ? withoutPreviousSession : available);
