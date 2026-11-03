@@ -88,7 +88,7 @@
       return memory.seed;
     }
     if (!memory.seed) memory.seed = createSeed();
-    writeJson(store, SEED_KEY, memory.seed);
+    try { if (store) store.setItem(SEED_KEY, memory.seed); } catch (_) {}
     return memory.seed;
   }
   function getSessionSeed() {
