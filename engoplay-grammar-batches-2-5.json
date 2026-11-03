@@ -1,0 +1,3274 @@
+[
+  {
+    "topic_id": 6,
+    "topic_name": "Pronoun Types (Subject, Object, Possessive Pronouns & Possessive Adjectives)",
+    "cefr_level": "Estimated CEFR: A1-A2",
+    "cefr_level_status": "Estimated mapping based on Grade 4–5 & Everybody Up 6 primary sources",
+    "english_explanation": "Pronouns replace nouns to avoid awkward repetition. Subject pronouns (I, you, he, she, it, we, they) act as sentence subjects performing the verb. Object pronouns (me, you, him, her, it, us, them) receive the action of verbs or follow prepositions. Possessive pronouns (mine, yours, his, hers, ours, theirs) replace a noun phrase entirely to express ownership. Possessive adjectives (my, your, his, her, its, our, their) precede a noun to modify it and indicate possession.",
+    "arabic_explanation": "تُستخدم الضمائر (Pronouns) لتحل محل الأسماء وتمنع التكرار. تُستخدم ضمائر الفاعل (Subject Pronouns: I, you, he, she, it, we, they) كفاعل للجملة يقوم بالجمع بين الفعل والفاعل. وتأتي ضمائر المفعول به (Object Pronouns: me, you, him, her, it, us, them) بعد الأفعال المتعدية وحروف الجر. أما ضمائر الملكية (Possessive Pronouns: mine, yours, his, hers, ours, theirs) فتعبر عن الملكية وتستبدل التركيب الاسمي بالكامل دون الحاجة لذكر الاسم بعدها، بينما تأتي صفات الملكية (Possessive Adjectives: my, your, his, her, its, our, their) مباشرة قبل الاسم لتحديده وإثبات ملكيته.",
+    "grammar_structure_and_formulas": {
+      "subject_pronoun_formula": "[Subject Pronoun (I/He/She/We/They...)] + [Verb] + [Object]",
+      "object_pronoun_formula": "[Subject] + [Verb / Preposition] + [Object Pronoun (me/him/her/us/them...)]",
+      "possessive_pronoun_formula": "[Possessive Pronoun (mine/yours/his/hers/ours/theirs)] + [Verb/Complement]",
+      "possessive_adjective_formula": "[Possessive Adjective (my/your/his/her/its/our/their)] + [Noun]"
+    },
+    "forms": {
+      "positive_form": "Subject: 'She called him.' | Possessive Pronoun: 'The book is mine.' | Possessive Adjective: 'This is my book.'",
+      "negative_form": "Subject: 'She did not call him.' | Possessive Pronoun: 'The book is not mine.'",
+      "question_form": "Subject/Object: 'Did she call him?' | Possessive Pronoun: 'Is this book yours?'"
+    },
+    "when_and_how_to_use": [
+      "Use subject pronouns before main verbs to perform actions.",
+      "Use object pronouns immediately following action verbs or prepositions (e.g., 'to me', 'with us', 'for them').",
+      "Use possessive pronouns when replacing the entire noun phrase (e.g., 'Whose bag is this? It is hers.').",
+      "Use possessive adjectives directly before a head noun (e.g., 'Her bag is on the desk.')."
+    ],
+    "common_mistakes": [
+      "Using subject pronouns after prepositions (e.g., writing 'between you and I' instead of 'between you and me').",
+      "Confusing possessive adjectives with possessive pronouns (e.g., writing 'This is mine book' instead of 'This is my book' or 'This book is mine').",
+      "Confusing the contraction 'it's' (it is) with the possessive adjective 'its' (belonging to it)."
+    ],
+    "examples": [
+      "Subject Pronoun: She gave a presentation on solar energy.",
+      "Object Pronoun: The teacher handed the returned assignments to us.",
+      "Possessive Adjective: My sister completed her project yesterday.",
+      "Possessive Pronoun: That red backpack belongs to David; the blue one is mine.",
+      "Compound Object: Please send the email to Sarah and me."
+    ],
+    "practice_questions": [
+      {
+        "question_id": 51,
+        "question": "Which pronoun correctly completes the sentence: '___ went to the store after school.'?",
+        "options": [
+          "A) Him",
+          "B) Her",
+          "C) They",
+          "D) Them"
+        ],
+        "correct_answer": "C) They",
+        "explanation": "'They' is a subject pronoun required to perform the action verb 'went'."
+      },
+      {
+        "question_id": 52,
+        "question": "Choose the correct object pronoun: 'Mr. Davis called Alex and ___ to his office.'",
+        "options": [
+          "A) I",
+          "B) me",
+          "C) he",
+          "D) we"
+        ],
+        "correct_answer": "B) me",
+        "explanation": "'me' is an object pronoun receiving the action of the transitive verb 'called'."
+      },
+      {
+        "question_id": 53,
+        "question": "Identify the POSSESSIVE PRONOUN in: 'This laptop is yours, but the printer is hers.'",
+        "options": [
+          "A) This",
+          "B) laptop",
+          "C) printer",
+          "D) hers"
+        ],
+        "correct_answer": "D) hers",
+        "explanation": "'hers' replaces the noun phrase 'her printer' and shows ownership without a following noun."
+      },
+      {
+        "question_id": 54,
+        "question": "Which sentence correctly uses a POSSESSIVE ADJECTIVE?",
+        "options": [
+          "A) That pencil is my.",
+          "B) That pencil is mine.",
+          "C) That is my pencil.",
+          "D) That is mine pencil."
+        ],
+        "correct_answer": "C) That is my pencil.",
+        "explanation": "'my' is a possessive adjective directly modifying the noun 'pencil'."
+      },
+      {
+        "question_id": 55,
+        "question": "Which option fixes the punctuation error in: 'The dog wagged it's tail happily.'?",
+        "options": [
+          "A) The dog wagged its tail happily.",
+          "B) The dog wagged its' tail happily.",
+          "C) The dog wagged it tail happily.",
+          "D) The dog wagged hers tail happily."
+        ],
+        "correct_answer": "A) The dog wagged its tail happily.",
+        "explanation": "'its' (without an apostrophe) is the correct possessive adjective for animals or objects."
+      },
+      {
+        "question_id": 56,
+        "question": "Which pronoun completes the compound prepositional phrase: 'The gift was given to John and ___.'?",
+        "options": [
+          "A) I",
+          "B) me",
+          "C) he",
+          "D) we"
+        ],
+        "correct_answer": "B) me",
+        "explanation": "Prepositions must be followed by object pronouns ('to John and me')."
+      },
+      {
+        "question_id": 57,
+        "question": "In 'We completed our homework early,' the word 'our' functions as a:",
+        "options": [
+          "A) Subject pronoun",
+          "B) Object pronoun",
+          "C) Possessive adjective",
+          "D) Possessive pronoun"
+        ],
+        "correct_answer": "C) Possessive adjective",
+        "explanation": "'our' modifies the noun 'homework' to show ownership."
+      },
+      {
+        "question_id": 58,
+        "question": "Identify the subject pronoun in: 'Although it was raining, we went for a walk.'",
+        "options": [
+          "A) walk",
+          "B) we",
+          "C) raining",
+          "D) although"
+        ],
+        "correct_answer": "B) we",
+        "explanation": "'we' is the subject pronoun performing the action 'went'."
+      },
+      {
+        "question_id": 59,
+        "question": "Which sentence contains a PRONOUN CASE error?",
+        "options": [
+          "A) She and I prepared lunch.",
+          "B) Him and me went to the game.",
+          "C) They invited us to the party.",
+          "D) He gave her the book."
+        ],
+        "correct_answer": "B) Him and me went to the game.",
+        "explanation": "Object pronouns ('Him and me') cannot serve as clause subjects; it must read 'He and I went'."
+      },
+      {
+        "question_id": 60,
+        "question": "What is the possessive pronoun corresponding to 'they'?",
+        "options": [
+          "A) Their",
+          "B) Theirs",
+          "C) Them",
+          "D) They're"
+        ],
+        "correct_answer": "B) Theirs",
+        "explanation": "'Theirs' is the possessive pronoun standing alone (e.g., 'The decision was theirs')."
+      }
+    ],
+    "source_book_and_page": [
+      "Scholastic Success with Grammar Grade 4, Pages 23–28",
+      "Scholastic Success with Grammar Grade 5, Pages 29–34, 44–52",
+      "Everybody Up 6 Workbook, Page 7"
+    ]
+  },
+  {
+    "topic_id": 7,
+    "topic_name": "Action Verbs, Direct Objects & Transitive/Intransitive Verbs",
+    "cefr_level": "Estimated CEFR: A2",
+    "cefr_level_status": "Estimated mapping based on Grade 4–5 primary sources",
+    "english_explanation": "Action verbs express physical or mental activities. Transitive verbs pass action directly to a noun phrase or pronoun called a direct object, which answers 'What?' or 'Whom?' after the verb. Intransitive verbs express actions that do not pass to a direct object; they are usually followed by adverbs or prepositional phrases answering 'How?', 'Where?', or 'When?'.",
+    "arabic_explanation": "تُعبر الأفعال الحركية (Action Verbs) عن أنشطة بدنية أو ذهنية. الأفعال المتعدية (Transitive Verbs) تتعدى بحركتها مباشرة إلى تركيب اسمي أو ضمير يُسمى المفعول به المباشر (Direct Object)، والذي يجيب عن السؤال (ماذا؟ أو مَن؟) بعد الفعل. أما الأفعال اللازمة (Intransitive Verbs) فلا تأخذ مفعولاً به مباشرًا، وغالبًا ما يتبعها ظرف أو شبه جملة يجيب عن (كيف؟ أو أين؟ أو متى؟).",
+    "grammar_structure_and_formulas": {
+      "transitive_formula": "[Subject] + [Transitive Action Verb] + [Direct Object Noun Phrase]",
+      "intransitive_formula": "[Subject] + [Intransitive Action Verb] (+ Adverb / Prepositional Phrase)",
+      "direct_object_test": "Subject + Verb + WHAT/WHOM? = Direct Object Noun Phrase"
+    },
+    "forms": {
+      "positive_form": "Transitive: 'The child threw the ball.' | Intransitive: 'The child slept peacefully.'",
+      "negative_form": "Transitive: 'The child did not throw the ball.' | Intransitive: 'The child did not sleep.'",
+      "question_form": "Transitive: 'Did the child throw the ball?' | Intransitive: 'Did the child sleep peacefully?'"
+    },
+    "when_and_how_to_use": [
+      "Use Transitive verbs when an action directly impacts a receiving noun phrase.",
+      "Use Intransitive verbs when describing actions, movement, or states without a direct recipient.",
+      "To find a direct object, ask 'What?' or 'Whom?' after the action verb."
+    ],
+    "common_mistakes": [
+      "Confusing direct objects with prepositional objects (e.g., in 'He walked to school', 'school' is the object of the preposition 'to', not a direct object).",
+      "Assuming all action verbs are strictly transitive or intransitive (many verbs, like 'read' or 'sing', function as either depending on context)."
+    ],
+    "examples": [
+      "Transitive Verb + Direct Object: The chef cooked a delicious meal (a delicious meal = direct object noun phrase).",
+      "Intransitive Verb + Prepositional Phrase: The chef cooked in the kitchen (no direct object).",
+      "Mental Action Verb: She remembered the complete answer immediately (the complete answer = direct object noun phrase).",
+      "Physical Action Verb: The mechanic repaired the car's engine (the car's engine = direct object noun phrase).",
+      "Intransitive Movement: The plane landed smoothly on the runway."
+    ],
+    "practice_questions": [
+      {
+        "question_id": 61,
+        "question": "In 'The player kicked the soccer ball,' what is the complete DIRECT OBJECT noun phrase?",
+        "options": [
+          "A) player",
+          "B) kicked",
+          "C) soccer",
+          "D) the soccer ball"
+        ],
+        "correct_answer": "D) the soccer ball",
+        "explanation": "'the soccer ball' is the full direct object noun phrase receiving the physical action 'kicked'."
+      },
+      {
+        "question_id": 62,
+        "question": "Is the verb in 'The birds sang sweetly in the morning' TRANSITIVE or INTRANSITIVE?",
+        "options": [
+          "A) Transitive",
+          "B) Intransitive",
+          "C) Linking",
+          "D) Auxiliary"
+        ],
+        "correct_answer": "B) Intransitive",
+        "explanation": "'sang' is followed by adverbs and prepositional phrases rather than a direct object."
+      },
+      {
+        "question_id": 63,
+        "question": "Which sentence contains a TRANSITIVE verb with the direct object noun phrase 'a mystery novel'?",
+        "options": [
+          "A) The author wrote quietly in her room.",
+          "B) The author wrote every morning.",
+          "C) The author wrote a mystery novel.",
+          "D) The author wrote with passion."
+        ],
+        "correct_answer": "C) The author wrote a mystery novel.",
+        "explanation": "'a mystery novel' is the direct object noun phrase receiving the action 'wrote'."
+      },
+      {
+        "question_id": 64,
+        "question": "What question does a DIRECT OBJECT answer after an action verb?",
+        "options": [
+          "A) Where or When?",
+          "B) How or Why?",
+          "C) What or Whom?",
+          "D) How much or How far?"
+        ],
+        "correct_answer": "C) What or Whom?",
+        "explanation": "Direct objects respond directly to 'Verb + What?' or 'Verb + Whom?'."
+      },
+      {
+        "question_id": 65,
+        "question": "In 'My brother built a wooden desk,' the action verb 'built' is:",
+        "options": [
+          "A) Transitive",
+          "B) Intransitive",
+          "C) Linking",
+          "D) Passive"
+        ],
+        "correct_answer": "A) Transitive",
+        "explanation": "'built' transfers action directly to the direct object noun phrase 'a wooden desk'."
+      },
+      {
+        "question_id": 66,
+        "question": "Identify the complete direct object noun phrase in: 'The teacher answered all our questions.'",
+        "options": [
+          "A) teacher",
+          "B) answered",
+          "C) all our questions",
+          "D) our"
+        ],
+        "correct_answer": "C) all our questions",
+        "explanation": "'all our questions' is the complete noun phrase directly receiving the action 'answered'."
+      },
+      {
+        "question_id": 67,
+        "question": "Why is 'school' NOT a direct object in 'She walked to school'?",
+        "options": [
+          "A) Because it is a proper noun.",
+          "B) Because it is the object of the preposition 'to'.",
+          "C) Because 'walked' is a transitive verb.",
+          "D) Because 'school' is an adjective."
+        ],
+        "correct_answer": "B) Because it is the object of the preposition 'to'.",
+        "explanation": "Nouns inside prepositional phrases function as objects of prepositions, not direct objects."
+      },
+      {
+        "question_id": 68,
+        "question": "Which sentence shows an INTRANSITIVE use of the verb 'read'?",
+        "options": [
+          "A) She reads comic books.",
+          "B) She reads before going to bed.",
+          "C) She reads the daily newspaper.",
+          "D) She reads her brother a story."
+        ],
+        "correct_answer": "B) She reads before going to bed.",
+        "explanation": "In option B, 'reads' is followed by a prepositional phrase without a direct object."
+      },
+      {
+        "question_id": 69,
+        "question": "Identify the action verb in: 'The audience clapped enthusiastically after the show.'",
+        "options": [
+          "A) audience",
+          "B) clapped",
+          "C) enthusiastically",
+          "D) show"
+        ],
+        "correct_answer": "B) clapped",
+        "explanation": "'clapped' expresses the physical action executed by the audience."
+      },
+      {
+        "question_id": 70,
+        "question": "Which sentence contains a direct object pronoun?",
+        "options": [
+          "A) He saw me at the library.",
+          "B) I gave him my textbook.",
+          "C) She went with them.",
+          "D) We spoke to her."
+        ],
+        "correct_answer": "A) He saw me at the library.",
+        "explanation": "'me' directly receives the action of the verb 'saw' (Saw whom? -> me)."
+      }
+    ],
+    "source_book_and_page": [
+      "Scholastic Success with Grammar Grade 4, Pages 29–31",
+      "Scholastic Success with Grammar Grade 5, Pages 35–37"
+    ]
+  },
+  {
+    "topic_id": 8,
+    "topic_name": "Verb Tenses (Simple Present, Simple Past, Simple Future & Progressive Tenses)",
+    "cefr_level": "Estimated CEFR: A1-A2",
+    "cefr_level_status": "Estimated mapping based on Grade 4–5 & Everybody Up 6 primary sources",
+    "english_explanation": "Verb tenses specify the time of an action. Simple Present expresses habits, general truths, and routines. Simple Past describes completed past actions. Simple Future expresses future time using 'will' or 'be going to'. Use 'will' for spontaneous decisions, promises, offers, or predictions without present evidence. Use 'be going to' for prior intentions/plans and predictions based on immediate physical evidence. Progressive tenses express ongoing duration in present, past, or future time using auxiliary 'be' + main verb '-ing'.",
+    "arabic_explanation": "تحدد الأزمنة الفعلية وقت حدوث الفعل. يُعبر المضارع البسيط (Simple Present) عن العادات والحقائق والتكرار. ويُعبر الماضي البسيط (Simple Past) عن أفعال اكتملت في الماضي. أما المستقبل البسيط فيتكون باستخدام (will) أو (be going to)؛ حيث يُستخدم (will) للقرارات اللحظية، والوعود، والعروض، والتنبؤات العامة دون دليل، بينما يُستخدم (be going to) للخطط والنوايا المسبقة والتنبؤات القائمة على أدلة حسية حاضرة. وتُعبر الأزمنة المستمرة (Progressive) عن استمرارية الحدث باستخدام فعل الكينونة (be) متبوعًا بـ -ing.",
+    "grammar_structure_and_formulas": {
+      "simple_present": "[Subject + Base Verb / Verb + -s/-es (3rd person singular)]",
+      "simple_past": "[Subject + Regular Verb + -ed / Irregular Past Form]",
+      "simple_future_will": "[Subject + will + Base Verb] (Spontaneous decisions / Promises / General predictions)",
+      "simple_future_going_to": "[Subject + am/is/are + going to + Base Verb] (Prior plans / Evidence-based predictions)",
+      "present_progressive": "[Subject + am/is/are + Verb-ing]",
+      "past_progressive": "[Subject + was/were + Verb-ing]",
+      "future_progressive": "[Subject + will be + Verb-ing]"
+    },
+    "forms": {
+      "positive_form": "Simple Present: 'He walks.' | Simple Past: 'He walked.' | Future (Will): 'I will help you.' | Future (Going to): 'He is going to study medicine.'",
+      "negative_form": "Simple Present: 'He does not walk.' | Simple Past: 'He did not walk.' | Future: 'I will not walk.'",
+      "question_form": "Simple Present: 'Does he walk?' | Simple Past: 'Did he walk?' | Future: 'Will you help me?'"
+    },
+    "when_and_how_to_use": [
+      "Use Simple Present for daily routines, permanent facts, or scientific universal statements.",
+      "Use Simple Past for actions completed at a definite time in the past.",
+      "Use 'will' when making immediate decisions, promises, offers, or predictions.",
+      "Use 'be going to' when referring to pre-planned decisions or future outcomes supported by present evidence.",
+      "Use Progressive tenses to highlight action duration at a specific moment."
+    ],
+    "common_mistakes": [
+      "Forgetting 3rd person singular '-s' in Simple Present (e.g., writing 'He walk to school' instead of 'He walks').",
+      "Using double past markers in questions or negatives (e.g., writing 'Did you went?' instead of 'Did you go?').",
+      "Confusing 'will' and 'be going to' when expressing fixed prior plans."
+    ],
+    "examples": [
+      "Simple Present (Fact): Earth rotates on its axis every twenty-four hours.",
+      "Simple Past (Completed): Amelia Earhart flew across the Atlantic Ocean in 1932.",
+      "Simple Future (Will - Promise): I will call you as soon as I arrive at the airport.",
+      "Simple Future (Going to - Plan): Look at those dark clouds; it is going to rain.",
+      "Present Progressive (Ongoing): The students are studying for their grammar exam right now."
+    ],
+    "practice_questions": [
+      {
+        "question_id": 71,
+        "question": "Which verb tense is used in: 'The sun rises in the east every morning'?",
+        "options": [
+          "A) Simple Past",
+          "B) Simple Present",
+          "C) Present Progressive",
+          "D) Simple Future"
+        ],
+        "correct_answer": "B) Simple Present",
+        "explanation": "It states a universal scientific fact using the present form 'rises'."
+      },
+      {
+        "question_id": 72,
+        "question": "What is the correct Simple Past form of the irregular verb 'catch'?",
+        "options": [
+          "A) catched",
+          "B) caught",
+          "C) caughted",
+          "D) catching"
+        ],
+        "correct_answer": "B) caught",
+        "explanation": "'catch' forms its simple past irregularly as 'caught'."
+      },
+      {
+        "question_id": 73,
+        "question": "Which future form best expresses a prior plan or intention: 'She ___ medicine next fall'?",
+        "options": [
+          "A) study",
+          "B) studied",
+          "C) is going to study",
+          "D) was studying"
+        ],
+        "correct_answer": "C) is going to study",
+        "explanation": "'is going to study' expresses a pre-planned future decision/intention."
+      },
+      {
+        "question_id": 74,
+        "question": "Which sentence contains a PAST PROGRESSIVE verb tense?",
+        "options": [
+          "A) We played soccer yesterday.",
+          "B) We were playing soccer when it started to rain.",
+          "C) We will play soccer tomorrow.",
+          "D) We are playing soccer now."
+        ],
+        "correct_answer": "B) We were playing soccer when it started to rain.",
+        "explanation": "'were playing' consists of the past auxiliary 'were' + main verb '-ing'."
+      },
+      {
+        "question_id": 75,
+        "question": "Identify the grammatical mistake in: 'Did she wrote the letter yesterday?'",
+        "options": [
+          "A) 'Did' should be 'Does'",
+          "B) 'wrote' should be base form 'write'",
+          "C) 'yesterday' should be 'tomorrow'",
+          "D) 'letter' should be plural"
+        ],
+        "correct_answer": "B) 'wrote' should be base form 'write'",
+        "explanation": "Auxiliary 'Did' requires the base verb form ('Did she write...')."
+      },
+      {
+        "question_id": 76,
+        "question": "Which sentence expresses a spontaneous offer made at the moment of speech?",
+        "options": [
+          "A) I am going to carry your bags tomorrow.",
+          "B) I will help you carry those heavy bags right now.",
+          "C) I carried your heavy bags.",
+          "D) I was carrying your bags."
+        ],
+        "correct_answer": "B) I will help you carry those heavy bags right now.",
+        "explanation": "'will' is used for spontaneous offers and instant decisions made at the moment of speaking."
+      },
+      {
+        "question_id": 77,
+        "question": "What is the correct 3rd person singular present tense of 'study'?",
+        "options": [
+          "A) studys",
+          "B) studies",
+          "C) studying",
+          "D) studied"
+        ],
+        "correct_answer": "B) studies",
+        "explanation": "Verbs ending in consonant + y change y to -ies in 3rd person singular present."
+      },
+      {
+        "question_id": 78,
+        "question": "Identify the tense: 'By this time tomorrow, I will be flying to London.'",
+        "options": [
+          "A) Simple Future",
+          "B) Future Progressive",
+          "C) Present Progressive",
+          "D) Past Progressive"
+        ],
+        "correct_answer": "B) Future Progressive",
+        "explanation": "'will be flying' indicates an action that will be in progress at a specific future moment."
+      },
+      {
+        "question_id": 79,
+        "question": "Which sentence correctly uses the Simple Past of an irregular verb?",
+        "options": [
+          "A) He runned three miles this morning.",
+          "B) He ran three miles this morning.",
+          "C) He run three miles this morning.",
+          "D) He running three miles this morning."
+        ],
+        "correct_answer": "B) He ran three miles this morning.",
+        "explanation": "'ran' is the correct simple past of the irregular verb 'run'."
+      },
+      {
+        "question_id": 80,
+        "question": "Complete the negative Simple Present: 'Mark ___ like mushrooms on his pizza.'",
+        "options": [
+          "A) do not",
+          "B) does not",
+          "C) is not",
+          "D) did not"
+        ],
+        "correct_answer": "B) does not",
+        "explanation": "3rd person singular subject 'Mark' takes 'does not' + base verb in simple present."
+      }
+    ],
+    "source_book_and_page": [
+      "Scholastic Success with Grammar Grade 4, Pages 32–34",
+      "Scholastic Success with Grammar Grade 5, Pages 41–43",
+      "Everybody Up 6 Workbook, Pages 11, 23, 35, 47, 59, 71, 84"
+    ]
+  },
+  {
+    "topic_id": 9,
+    "topic_name": "Helping/Auxiliary Verbs vs. Main Verbs",
+    "cefr_level": "Estimated CEFR: A2",
+    "cefr_level_status": "Estimated mapping based on Grade 4–5 primary sources",
+    "english_explanation": "A main verb expresses the central action or state of being in a clause and can stand alone without a helping verb (e.g., 'She works'). A verb phrase is formed when one or more helping (auxiliary) verbs are added before the main verb. Primary auxiliaries (forms of be, have, do) establish tenses, construct negatives, and form questions. Modal auxiliaries (can, could, may, might, must, should, will, would) express ability, permission, necessity, or possibility.",
+    "arabic_explanation": "يعبر الفعل الرئيسي (Main Verb) عن الحدث الأساسي أو حالة الكينونة ويمكنه القدوم بمفرده دون فعل مساعد (مثل: \"She works\"). وتتكون الجملة الفعلية المركبة (Verb Phrase) عند إضافة فعل مساعدة واحد أو أكثر قبل الفعل الرئيسي. تُستخدم الأفعال المساعدة الأساسية (be, have, do) لتكوين الأزمنة والنفي والأسئلة، بينما تُستخدم الأفعال الناقصة (Modals: can, must, should...) للتعبير عن القدرة أو الإمكانية أو الواجب.",
+    "grammar_structure_and_formulas": {
+      "standalone_main_verb_formula": "[Subject] + [Main Verb (Present/Past)]",
+      "complex_verb_phrase_formula": "[Subject] + [Helping Verb(s)] + [Main Verb]",
+      "primary_auxiliaries": "be (am/is/are/was/were), have (has/have/had), do (does/do/did)",
+      "modal_auxiliaries": "can, could, may, might, must, should, will, would + [Bare Base Verb]"
+    },
+    "forms": {
+      "positive_form": "Standalone: 'She works.' | Verb Phrase: 'She has finished her assignment.' | Modal: 'You must stop.'",
+      "negative_form": "Standalone: 'She does not work.' | Verb Phrase: 'She has not finished.'",
+      "question_form": "Standalone: 'Does she work?' | Verb Phrase: 'Has she finished?'"
+    },
+    "when_and_how_to_use": [
+      "Use standalone main verbs for simple present and past assertions.",
+      "Add primary auxiliary verbs (be, have, do) when forming continuous/perfect tenses, negatives, and direct questions.",
+      "Add modal auxiliary verbs to modify the main verb with meanings of ability, permission, obligation, or possibility.",
+      "Always use the bare base form of the main verb directly after modal auxiliaries."
+    ],
+    "common_mistakes": [
+      "Adding '-s' or '-ed' to main verbs following modal auxiliaries (e.g., writing 'She can swims' instead of 'She can swim').",
+      "Confusing standalone main verb uses of 'be', 'have', or 'do' with their helping verb roles (e.g., in 'I have a car', 'have' is the main verb, not a helping verb)."
+    ],
+    "examples": [
+      "Standalone Main Verb: She works at the research hospital.",
+      "Primary Auxiliary (be): The children are playing in the schoolyard.",
+      "Primary Auxiliary (have): We have completed all our assigned lessons.",
+      "Primary Auxiliary (do): Do you understand the instructions?",
+      "Modal Auxiliary (obligation): Students must hand in their essays by Friday."
+    ],
+    "practice_questions": [
+      {
+        "question_id": 81,
+        "question": "In the sentence 'The storm has destroyed several old trees,' what is the HELPING verb?",
+        "options": [
+          "A) storm",
+          "B) has",
+          "C) destroyed",
+          "D) trees"
+        ],
+        "correct_answer": "B) has",
+        "explanation": "'has' is the auxiliary helping verb assisting the main verb 'destroyed'."
+      },
+      {
+        "question_id": 82,
+        "question": "In the sentence 'The storm has destroyed several old trees,' what is the MAIN verb?",
+        "options": [
+          "A) storm",
+          "B) has",
+          "C) destroyed",
+          "D) several"
+        ],
+        "correct_answer": "C) destroyed",
+        "explanation": "'destroyed' expresses the principal action in the verb phrase."
+      },
+      {
+        "question_id": 83,
+        "question": "Which sentence uses 'has' as a STANDALONE MAIN verb rather than a helping verb?",
+        "options": [
+          "A) I have finished my dinner.",
+          "B) They have visited London twice.",
+          "C) She has two younger brothers.",
+          "D) We have been waiting for hours."
+        ],
+        "correct_answer": "C) She has two younger brothers.",
+        "explanation": "In option C, 'has' stands alone as the sole main verb showing possession."
+      },
+      {
+        "question_id": 84,
+        "question": "Which modal auxiliary verb best expresses strong obligation?",
+        "options": [
+          "A) may",
+          "B) might",
+          "C) must",
+          "D) could"
+        ],
+        "correct_answer": "C) must",
+        "explanation": "'must' expresses necessity or compulsory obligation."
+      },
+      {
+        "question_id": 85,
+        "question": "Choose the correctly structured sentence following a modal auxiliary:",
+        "options": [
+          "A) He should studies for the exam.",
+          "B) He should study for the exam.",
+          "C) He should to study for the exam.",
+          "D) He should studied for the exam."
+        ],
+        "correct_answer": "B) He should study for the exam.",
+        "explanation": "Modal verbs must be followed directly by the bare base verb form ('study')."
+      },
+      {
+        "question_id": 86,
+        "question": "Identify the complete VERB PHRASE in: 'My parents will be arriving at six o'clock.'",
+        "options": [
+          "A) will",
+          "B) arriving",
+          "C) will be arriving",
+          "D) be arriving"
+        ],
+        "correct_answer": "C) will be arriving",
+        "explanation": "The entire verb phrase includes two helping verbs ('will be') plus the main verb ('arriving')."
+      },
+      {
+        "question_id": 87,
+        "question": "Which modal verb expresses polite formal permission?",
+        "options": [
+          "A) May",
+          "B) Must",
+          "C) Will",
+          "D) Would"
+        ],
+        "correct_answer": "A) May",
+        "explanation": "'May' is conventionally used to request or grant formal permission (e.g., 'May I leave?')."
+      },
+      {
+        "question_id": 88,
+        "question": "In 'Did you see the match yesterday?', the verb 'Did' serves as a:",
+        "options": [
+          "A) Standalone main verb",
+          "B) Helping verb",
+          "C) Linking verb",
+          "D) Predicate adjective"
+        ],
+        "correct_answer": "B) Helping verb",
+        "explanation": "'Did' is an auxiliary helping verb used to form a simple past question."
+      },
+      {
+        "question_id": 89,
+        "question": "Which sentence contains TWO helping verbs in a single verb phrase?",
+        "options": [
+          "A) She is reading a book.",
+          "B) They have been working hard.",
+          "C) We will go home.",
+          "D) You should try again."
+        ],
+        "correct_answer": "B) They have been working hard.",
+        "explanation": "'have' and 'been' are two auxiliary verbs assisting main verb 'working'."
+      },
+      {
+        "question_id": 90,
+        "question": "Choose the sentence where 'is' acts as a HELPING verb:",
+        "options": [
+          "A) Mr. Harrison is a doctor.",
+          "B) The weather is cold today.",
+          "C) Julia is writing an essay.",
+          "D) My bag is on the chair."
+        ],
+        "correct_answer": "C) Julia is writing an essay.",
+        "explanation": "'is' acts as a helping verb assisting the main action verb 'writing'."
+      }
+    ],
+    "source_book_and_page": [
+      "Scholastic Success with Grammar Grade 4, Pages 35–37",
+      "Scholastic Success with Grammar Grade 5, Pages 38–40",
+      "Everybody Up 6 Workbook, Page 86"
+    ]
+  },
+  {
+    "topic_id": 10,
+    "topic_name": "Linking Verbs & Predicate Adjectives/Nouns",
+    "cefr_level": "Estimated CEFR: A2-B1",
+    "cefr_level_status": "Estimated mapping based on Grade 4–5 primary sources",
+    "english_explanation": "Linking verbs do not express physical action; instead, they connect the subject of a clause to a word in the predicate that describes or renames it. The word following a linking verb is either a predicate adjective (which describes the subject) or a predicate noun / subject complement (which renames the subject). Common linking verbs include forms of be (am, is, are, was, were), as well as sensory and state verbs (seem, appear, become, look, smell, taste, sound, feel).",
+    "arabic_explanation": "أفعال الربط (Linking Verbs) لا تُعبر عن حدث حركي، بل تربط فاعل الجملة بكلمة في الخبر تصف الفاعل أو تُعيد تسميته. الكلمة التي تلي فعل الربط إما أن تكون صفة خبرية (Predicate Adjective) تصف الفاعل، أو اسمًا خبيرًا (Predicate Noun) يُعيد تسمية الفاعل وتحديده. تشمل أفعال الربط صور الفعل be وأفعال الحواس والحالة (seem, appear, become, look, smell, taste, sound, feel).",
+    "grammar_structure_and_formulas": {
+      "predicate_adjective_formula": "[Subject] + [Linking Verb] + [Predicate Adjective (describes subject)]",
+      "predicate_noun_formula": "[Subject] + [Linking Verb] + [Predicate Noun (renames subject)]",
+      "linking_verb_list": "be (am/is/are/was/were), become, seem, appear, look, smell, taste, sound, feel"
+    },
+    "forms": {
+      "positive_form": "Predicate Adjective: 'The soup tastes delicious.' | Predicate Noun: 'My father became a pilot.'",
+      "negative_form": "Predicate Adjective: 'The soup does not taste delicious.' | Predicate Noun: 'My father did not become a pilot.'",
+      "question_form": "Predicate Adjective: 'Does the soup taste delicious?' | Predicate Noun: 'Did my father become a pilot?'"
+    },
+    "when_and_how_to_use": [
+      "Use Linking verbs to describe states of being, sensory qualities, or identities.",
+      "Follow linking verbs with predicate adjectives (not adverbs) when describing the subject.",
+      "Follow linking verbs with predicate nouns when identifying who or what the subject is."
+    ],
+    "common_mistakes": [
+      "Using adverbs instead of predicate adjectives after linking verbs (e.g., writing 'I feel badly' instead of 'I feel bad', or 'The soup smells deliciously' instead of 'The soup smells delicious').",
+      "Confusing action uses of sensory verbs with linking uses (e.g., 'The chef tasted the soup' [Action] vs 'The soup tasted delicious' [Linking])."
+    ],
+    "examples": [
+      "Predicate Adjective: The hot vegetable soup tasted delicious on a cold day.",
+      "Predicate Noun: Dr. Elizabeth Blackwell became the first female physician in the United States.",
+      "Linking Verb (Sensory): The music sounded peaceful to the tired audience.",
+      "Action vs Linking (Action): The dog smelled the bone (smelled = action verb).",
+      "Action vs Linking (Linking): The fresh bread smelled wonderful (smelled = linking verb)."
+    ],
+    "practice_questions": [
+      {
+        "question_id": 91,
+        "question": "In 'The fresh flowers smelled sweet,' what is the word 'sweet'?",
+        "options": [
+          "A) Direct object",
+          "B) Predicate adjective",
+          "C) Predicate noun",
+          "D) Adverb"
+        ],
+        "correct_answer": "B) Predicate adjective",
+        "explanation": "'sweet' is a predicate adjective following linking verb 'smelled' describing the subject 'flowers'."
+      },
+      {
+        "question_id": 92,
+        "question": "In 'Mr. Henderson is our new school principal,' what is the word 'principal'?",
+        "options": [
+          "A) Direct object",
+          "B) Predicate adjective",
+          "C) Predicate noun",
+          "D) Action verb"
+        ],
+        "correct_answer": "C) Predicate noun",
+        "explanation": "'principal' is a predicate noun following linking verb 'is' that renames subject 'Mr. Henderson'."
+      },
+      {
+        "question_id": 93,
+        "question": "Which sentence contains a LINKING verb rather than an action verb?",
+        "options": [
+          "A) The boy felt the soft velvet ribbon.",
+          "B) The candidate looked at the audience.",
+          "C) The apple pie tasted delicious.",
+          "D) The chef tasted the sauce carefully."
+        ],
+        "correct_answer": "C) The apple pie tasted delicious.",
+        "explanation": "In option C, 'tasted' links subject 'pie' to descriptive adjective 'delicious'."
+      },
+      {
+        "question_id": 94,
+        "question": "Identify the LINKING verb in: 'After working all day, the laborers seemed exhausted.'",
+        "options": [
+          "A) working",
+          "B) seemed",
+          "C) exhausted",
+          "D) day"
+        ],
+        "correct_answer": "B) seemed",
+        "explanation": "'seemed' connects subject 'laborers' to predicate adjective 'exhausted'."
+      },
+      {
+        "question_id": 95,
+        "question": "Choose the grammatically correct sentence:",
+        "options": [
+          "A) The dinner smells deliciously.",
+          "B) The dinner smells delicious.",
+          "C) The dinner smells in a delicious way.",
+          "D) The dinner is smelling deliciously."
+        ],
+        "correct_answer": "B) The dinner smells delicious.",
+        "explanation": "Linking verbs require predicate adjectives ('delicious') rather than adverbs ('deliciously')."
+      },
+      {
+        "question_id": 96,
+        "question": "Which word is the PREDICATE ADJECTIVE in: 'The sound of thunder was very loud'?",
+        "options": [
+          "A) thunder",
+          "B) sound",
+          "C) very",
+          "D) loud"
+        ],
+        "correct_answer": "D) loud",
+        "explanation": "'loud' is the predicate adjective describing the subject 'sound' after linking verb 'was'."
+      },
+      {
+        "question_id": 97,
+        "question": "In which sentence is 'looked' used as an ACTION verb?",
+        "options": [
+          "A) The detective looked closely at the fingerprints.",
+          "B) The skies looked cloudy before the storm.",
+          "C) The newborn baby looked healthy.",
+          "D) The old building looked deserted."
+        ],
+        "correct_answer": "A) The detective looked closely at the fingerprints.",
+        "explanation": "In option A, 'looked' describes a physical action performed by the detective."
+      },
+      {
+        "question_id": 98,
+        "question": "Identify the PREDICATE NOUN in: 'My oldest sister became an architect after university.'",
+        "options": [
+          "A) sister",
+          "B) became",
+          "C) architect",
+          "D) university"
+        ],
+        "correct_answer": "C) architect",
+        "explanation": "'architect' is the predicate noun following linking verb 'became' renaming subject 'sister'."
+      },
+      {
+        "question_id": 99,
+        "question": "What grammatical function does the verb 'became' serve?",
+        "options": [
+          "A) Action verb",
+          "B) Linking verb",
+          "C) Helping verb",
+          "D) Transitive action verb"
+        ],
+        "correct_answer": "B) Linking verb",
+        "explanation": "'became' links a subject to a predicate noun or adjective expressing state change."
+      },
+      {
+        "question_id": 100,
+        "question": "Which option correctly identifies the predicate element in 'The ocean water felt extremely cold'?",
+        "options": [
+          "A) Direct object: water",
+          "B) Predicate adjective: cold",
+          "C) Predicate noun: ocean",
+          "D) Action verb: felt"
+        ],
+        "correct_answer": "B) Predicate adjective: cold",
+        "explanation": "'cold' is the predicate adjective describing the subject 'water'."
+      }
+    ],
+    "source_book_and_page": [
+      "Scholastic Success with Grammar Grade 4, Pages 38–40",
+      "Scholastic Success with Grammar Grade 5, Pages 35–37"
+    ]
+  },
+  {
+    "topic_id": 11,
+    "topic_name": "Prepositions & Prepositional Phrases",
+    "cefr_level": "Estimated CEFR: A2",
+    "cefr_level_status": "Estimated mapping based on Grade 4–5 & Everybody Up 6 primary sources",
+    "english_explanation": "Prepositions (e.g., in, on, at, under, over, through, between, with, for, from) show relationships of location, direction, time, or cause between a noun/pronoun and other sentence elements. A prepositional phrase consists of a preposition, its modifiers, and its noun or pronoun object (e.g., 'under the old bridge'). Prepositional phrases function either as adjectives (modifying nouns) or adverbs (modifying verbs, adjectives, or adverbs).",
+    "arabic_explanation": "تُبين حروف الجر (Prepositions) العلاقات المكانية والزمانية والاتجاهية بين الأسماء والكلمات الأخرى في الجملة. وتتكون شبه الجملة من جار ومجرور (Prepositional Phrase) من حرف الجر ومضمون مجروره من الأسماء أو الضمائر مع صفاتها المحددة (مثل: \"under the old bridge\"). تعمل شبه الجملة إما كصفة تصف اسمًا أو كظرف يصف فعلاً أو صفة أخرى.",
+    "grammar_structure_and_formulas": {
+      "prepositional_phrase_formula": "[Preposition] + (Modifiers/Articles) + [Object of Preposition (Noun/Pronoun)]",
+      "adjectival_prepositional_phrase": "[Noun] + [Prepositional Phrase (answers 'Which one?')]",
+      "adverbial_prepositional_phrase": "[Verb] + [Prepositional Phrase (answers 'Where?', 'When?', 'How?')]"
+    },
+    "forms": {
+      "positive_form": "Adjectival: 'The book on the table is mine.' | Adverbial: 'We walked through the park.'",
+      "negative_form": "Adverbial: 'We did not walk through the park.'",
+      "question_form": "Adverbial: 'Did you walk through the park?'"
+    },
+    "when_and_how_to_use": [
+      "Use prepositional phrases to specify physical locations, travel paths, or precise time frames.",
+      "Always follow a preposition with an object pronoun (me, him, her, us, them), never a subject pronoun.",
+      "Use adjectival prepositional phrases directly after the nouns they describe."
+    ],
+    "common_mistakes": [
+      "Using subject pronouns as objects of prepositions (e.g., writing 'between you and I' instead of 'between you and me').",
+      "Mistaking prepositional objects for direct objects of action verbs.",
+      "Confusing prepositional phrases with infinitive verb phrases (e.g., 'to school' [prepositional phrase] vs 'to run' [infinitive])."
+    ],
+    "examples": [
+      "Prepositional Phrase (Location): The children played under the tall oak tree.",
+      "Prepositional Phrase (Time): Our school assembly begins at eight o'clock.",
+      "Adjectival Function: The girl in the blue jacket won the chess match.",
+      "Adverbial Function: The train arrived safely at the station.",
+      "Compound Object of Preposition: She handed the invitations to Marcus and me."
+    ],
+    "practice_questions": [
+      {
+        "question_id": 101,
+        "question": "Identify the PREPOSITION in the sentence: 'The puppy slept under the warm blanket.'",
+        "options": [
+          "A) puppy",
+          "B) slept",
+          "C) under",
+          "D) blanket"
+        ],
+        "correct_answer": "C) under",
+        "explanation": "'under' is the preposition introducing spatial relationship to 'blanket'."
+      },
+      {
+        "question_id": 102,
+        "question": "What is the complete PREPOSITIONAL PHRASE in: 'The cat slept on the comfortable sofa'?",
+        "options": [
+          "A) slept on",
+          "B) on the comfortable sofa",
+          "C) comfortable sofa",
+          "D) slept on the sofa"
+        ],
+        "correct_answer": "B) on the comfortable sofa",
+        "explanation": "The prepositional phrase starts with preposition 'on' and ends with noun object 'sofa'."
+      },
+      {
+        "question_id": 103,
+        "question": "Identify the OBJECT OF THE PREPOSITION in: 'They rowed their boat across the wide river.'",
+        "options": [
+          "A) boat",
+          "B) across",
+          "C) wide",
+          "D) river"
+        ],
+        "correct_answer": "D) river",
+        "explanation": "'river' is the noun receiving the preposition 'across'."
+      },
+      {
+        "question_id": 104,
+        "question": "Which preposition expresses movement or direction into an enclosure?",
+        "options": [
+          "A) into",
+          "B) on",
+          "C) under",
+          "D) beside"
+        ],
+        "correct_answer": "A) into",
+        "explanation": "'into' indicates directional movement towards the inside of a space."
+      },
+      {
+        "question_id": 105,
+        "question": "In which sentence does a prepositional phrase function as an ADJECTIVE modifying a noun?",
+        "options": [
+          "A) The students ran quickly into the classroom.",
+          "B) The book on the top shelf belongs to me.",
+          "C) She arrived early in the morning.",
+          "D) They walked along the riverbank."
+        ],
+        "correct_answer": "B) The book on the top shelf belongs to me.",
+        "explanation": "'on the top shelf' acts as an adjective answering 'Which book?'."
+      },
+      {
+        "question_id": 106,
+        "question": "In which sentence does a prepositional phrase function as an ADVERB modifying a verb?",
+        "options": [
+          "A) The girl with red hair spoke.",
+          "B) The house on the hill is old.",
+          "C) She ran into the classroom.",
+          "D) The teacher in our class smiled."
+        ],
+        "correct_answer": "C) She ran into the classroom.",
+        "explanation": "'into the classroom' acts as an adverb answering 'Where did she run?'."
+      },
+      {
+        "question_id": 107,
+        "question": "Choose the sentence that correctly uses an OBJECT PRONOUN after a preposition:",
+        "options": [
+          "A) Divide the apples between John and I.",
+          "B) Divide the apples between John and me.",
+          "C) Divide the apples between John and he.",
+          "D) Divide the apples between John and we."
+        ],
+        "correct_answer": "B) Divide the apples between John and me.",
+        "explanation": "Prepositions must take object pronouns ('between John and me')."
+      },
+      {
+        "question_id": 108,
+        "question": "Which of the following is a COMPOUND PREPOSITION consisting of multiple words?",
+        "options": [
+          "A) in front of",
+          "B) inside",
+          "C) through",
+          "D) beneath"
+        ],
+        "correct_answer": "A) in front of",
+        "explanation": "'in front of' is a multi-word compound preposition."
+      },
+      {
+        "question_id": 109,
+        "question": "Identify the preposition in: 'The bakery sits beside the convenience store.'",
+        "options": [
+          "A) bakery",
+          "B) sits",
+          "C) beside",
+          "D) convenience"
+        ],
+        "correct_answer": "C) beside",
+        "explanation": "'beside' shows the spatial relation between bakery and store."
+      },
+      {
+        "question_id": 110,
+        "question": "How many prepositional phrases are in: 'In the morning, we drove to the lake with our friends'?",
+        "options": [
+          "A) One",
+          "B) Two",
+          "C) Three",
+          "D) Four"
+        ],
+        "correct_answer": "C) Three",
+        "explanation": "Three phrases: 'In the morning', 'to the lake', and 'with our friends'."
+      }
+    ],
+    "source_book_and_page": [
+      "Scholastic Success with Grammar Grade 4, Pages 50–52",
+      "Scholastic Success with Grammar Grade 5, Page 58",
+      "Everybody Up 6 Workbook, Pages 4–5, 85"
+    ]
+  },
+  {
+    "topic_id": 12,
+    "topic_name": "Adjectives, Comparison & Articles (A, An, The)",
+    "cefr_level": "Estimated CEFR: A1-A2",
+    "cefr_level_status": "Estimated mapping based on Grade 4–5 & Understanding Semantics primary sources",
+    "english_explanation": "Adjectives modify nouns or pronouns by telling 'What kind?', 'How many?', or 'Which one?'. Articles are special adjectives: indefinite articles 'a' (before consonant sounds) and 'an' (before vowel sounds) refer to non-specific singular countable nouns; the definite article 'the' refers to specific singular or plural nouns. Adjectives form comparative degrees (-er / more) when comparing two entities, and superlative degrees (-est / most) when comparing three or more entities.",
+    "arabic_explanation": "تصف الصفات (Adjectives) الأسماء أو الضمائر عبر الإجابة عن الأسئلة (أي نوع؟، كم العدد؟، أي واحد؟). وتُعتبر أدوات التعريف والتنكير (Articles) أنواعًا خاصة من الصفات: تُستخدم أدوات التنكير (a قبل أصوات الحروف الساكنة) و (an قبل أصوات الحروف المتحركة) مع الأسماء المفردة المعدودة غير المحددة، بينما تُستخدم أداة التعريف (the) مع الأسماء المحددة مفردة كانت أم جمعًا. وتُكون الصفات صيغ المقارنة (Comparative: -er / more) بين عنصرين، وصيغ التفضيل (Superlative: -est / most) بين ثلاثة عناصر أو أكثر.",
+    "grammar_structure_and_formulas": {
+      "indefinite_article_a": "a + Consonant Sound + Singular Countable Noun (e.g., a book, a university)",
+      "indefinite_article_an": "an + Vowel Sound + Singular Countable Noun (e.g., an apple, an hour)",
+      "definite_article_the": "the + Specific Noun (Singular/Plural/Uncountable)",
+      "comparative_formula": "[Adjective + -er] + than OR [more + Adjective] + than (comparing 2)",
+      "superlative_formula": "the + [Adjective + -est] OR the + [most + Adjective] (comparing 3+)"
+    },
+    "forms": {
+      "positive_form": "Positive: 'tall / exciting' | Comparative: 'taller / more exciting' | Superlative: 'tallest / most exciting'",
+      "negative_form": "'This book is not more exciting than that one.'",
+      "question_form": "'Is this book the most exciting story in the library?'"
+    },
+    "when_and_how_to_use": [
+      "Use 'a/an' when introducing a singular countable noun for the first time without specifying which one.",
+      "Use 'the' when referring to a specific noun already mentioned or uniquely defined in context.",      "Use comparative forms (-er / more) for strictly two items; use superlative forms (-est / most) for three or more items.",
+      "Do not combine '-er' with 'more' or '-est' with 'most' (avoid double comparatives)."
+    ],
+    "common_mistakes": [
+      "Writing 'a hour' instead of 'an hour' (basing article choice on letter spelling rather than vowel sound).",
+      "Creating double comparatives (e.g., writing 'more faster' instead of 'faster').",
+      "Using superlative forms when comparing only two entities (e.g., 'He is the tallest of the two brothers')."
+    ],
+    "examples": [
+      "Article Choice: She bought a book and an umbrella at the store.",
+      "Comparative (-er): Anna is taller than her brother Caleb.",
+      "Comparative (more): This puzzle is more challenging than the previous one.",
+      "Superlative (-est): Jupiter is the largest planet in our solar system.",
+      "Superlative (most): That was the most delicious meal I have ever eaten."
+    ],
+    "practice_questions": [
+      {
+        "question_id": 111,
+        "question": "Which article correctly completes the phrase describing a non-specific honest answer: '___ honest answer'?",
+        "options": [
+          "A) a",
+          "B) an",
+          "C) the",
+          "D) No article needed"
+        ],
+        "correct_answer": "B) an",
+        "explanation": "'honest' begins with a silent 'h' vowel sound (/ɒ/), requiring 'an'."
+      },
+      {
+        "question_id": 112,
+        "question": "Which sentence correctly uses articles for uncountable general nouns?",
+        "options": [
+          "A) The water is essential for all human life.",
+          "B) A water is essential for all human life.",
+          "C) Water is essential for all human life.",
+          "D) An water is essential for all human life."
+        ],
+        "correct_answer": "C) Water is essential for all human life.",
+        "explanation": "General uncountable nouns used in generic statements take no article."
+      },
+      {
+        "question_id": 113,
+        "question": "Choose the correct comparative form for a long adjective: 'This exam is ___ than the last one.'",
+        "options": [
+          "A) challengingest",
+          "B) more challenging",
+          "C) most challenging",
+          "D) more challenginger"
+        ],
+        "correct_answer": "B) more challenging",
+        "explanation": "Multi-syllable adjectives form comparatives using 'more + adjective'."
+      },
+      {
+        "question_id": 114,
+        "question": "What is the correct superlative form of the irregular adjective 'good'?",
+        "options": [
+          "A) goodest",
+          "B) better",
+          "C) most good",
+          "D) best"
+        ],
+        "correct_answer": "D) best",
+        "explanation": "'good' forms its irregular superlative as 'best' (good -> better -> best)."
+      },
+      {
+        "question_id": 115,
+        "question": "Choose the correct sentence comparing TWO brothers:",
+        "options": [
+          "A) Liam is the tallest of the two brothers.",
+          "B) Liam is taller than his brother.",
+          "C) Liam is most tall than his brother.",
+          "D) Liam is more taller than his brother."
+        ],
+        "correct_answer": "B) Liam is taller than his brother.",
+        "explanation": "Comparing strictly two items requires the comparative degree 'taller'."
+      },
+      {
+        "question_id": 116,
+        "question": "Identify the DEMONSTRATIVE adjective in: 'These shiny new bicycles belong to the school.'",
+        "options": [
+          "A) These",
+          "B) shiny",
+          "C) new",
+          "D) school"
+        ],
+        "correct_answer": "A) These",
+        "explanation": "'These' is a demonstrative adjective modifying 'bicycles'."
+      },
+      {
+        "question_id": 117,
+        "question": "Which word is a PROPER adjective that must be capitalized?",
+        "options": [
+          "A) delicious",
+          "B) Italian",
+          "C) spicy",
+          "D) fresh"
+        ],
+        "correct_answer": "B) Italian",
+        "explanation": "'Italian' is a proper adjective derived from proper noun 'Italy'."
+      },
+      {
+        "question_id": 118,
+        "question": "Select the correct adjective order describing a table:",
+        "options": [
+          "A) a wooden round small table",
+          "B) a small round wooden table",
+          "C) a round wooden small table",
+          "D) a wooden small round table"
+        ],
+        "correct_answer": "B) a small round wooden table",
+        "explanation": "Standard adjective order is Size (small) -> Shape (round) -> Material (wooden)."
+      },
+      {
+        "question_id": 119,
+        "question": "Which article precedes superlative adjectives in specific descriptions?",
+        "options": [
+          "A) a",
+          "B) an",
+          "C) the",
+          "D) some"
+        ],
+        "correct_answer": "C) the",
+        "explanation": "Superlative adjectives take the definite article 'the' (e.g., 'the highest mountain')."
+      },
+      {
+        "question_id": 120,
+        "question": "Identify the option with a DOUBLE COMPARATIVE error:",
+        "options": [
+          "A) She runs faster than her sister.",
+          "B) She runs more fast than her sister.",
+          "C) She runs much faster than her sister.",
+          "D) She runs slightly faster than her sister."
+        ],
+        "correct_answer": "B) She runs more fast than her sister.",
+        "explanation": "Short adjectives take '-er'; combining 'more' with 'fast' is grammatically incorrect."
+      }
+    ],
+    "source_book_and_page": [
+      "Scholastic Success with Grammar Grade 4, Pages 44–49",
+      "Scholastic Success with Grammar Grade 5, Page 57",
+      "Understanding Semantics Second Edition, Pages 74–78, 117–119"
+    ]
+  },
+  {
+    "topic_id": 13,
+    "topic_name": "Adverbs & Adverbial Modifiers",
+    "cefr_level": "Estimated CEFR: A2",
+    "cefr_level_status": "Estimated mapping based on Grade 4–5 primary sources",
+    "english_explanation": "Adverbs modify action verbs, adjectives, or other adverbs. They answer 'How?' (manner), 'When?' (time), 'Where?' (place), or 'To what extent / How much?' (degree). Many manner adverbs end in -ly (e.g., quickly, softly, eagerly). Adverbs of degree (e.g., very, extremely, quite, so) intensify adjectives or other adverbs.",
+    "arabic_explanation": "تُستخدم الظروف (Adverbs) لتعديل ووصف الأفعال الحركية، أو الصفات، أو ظروف أخرى. وتجيب الظروف عن الأسئلة: (كيف؟ لظروف الهيئة Manner)، (متى؟ لظروف الزمان Time)، (أين؟ لظروف المكان Place)، (إلى أي مدى؟ لظروف الدرجة Degree). تنتهي معظم ظروف الهيئة بـ -ly (مثل: quickly, softly). وتعمل ظروف الدرجة (مثل: very, extremely, quite) على تقوية الصفات والظروف.",
+    "grammar_structure_and_formulas": {
+      "adverb_modifying_verb": "[Subject] + [Verb] + [Adverb (answers How/When/Where)]",
+      "adverb_modifying_adjective": "[Subject] + [Linking Verb] + [Adverb of Degree] + [Adjective]",
+      "adverb_modifying_adverb": "[Subject] + [Verb] + [Adverb of Degree] + [Adverb of Manner]"
+    },
+    "forms": {
+      "positive_form": "Modifying Verb: 'He ran quickly.' | Modifying Adjective: 'She is extremely smart.' | Modifying Adverb: 'He ran very fast.'",
+      "negative_form": "'He did not run quickly.'",
+      "question_form": "'Did he run quickly?'"
+    },
+    "when_and_how_to_use": [
+      "Use adverbs of manner ending in -ly to describe how an action is performed.",
+      "Use adverbs of degree directly before the adjectives or adverbs they intensify.",
+      "Distinguish adjectives (modifying nouns) from adverbs (modifying verbs/adjectives)."
+    ],
+    "common_mistakes": [
+      "Using adjectives instead of adverbs to modify action verbs (e.g., writing 'He drove safe' instead of 'He drove safely').",
+      "Confusing 'good' (adjective) with 'well' (adverb) when describing action performance.",
+      "Creating double negative errors by combining negative adverbs like 'hardly' or 'scarcely' with negative auxiliaries."
+    ],
+    "examples": [
+      "Adverb of Manner (How): The rain crashed loudly against the windowpane.",
+      "Adverb of Time (When): Later, the newsboys shouted the forecast.",
+      "Adverb of Place (Where): Snow fell everywhere across the city.",
+      "Adverb Modifying Adjective: The temperature was extremely cold.",
+      "Adverb Modifying Adverb: The athlete ran very fast."
+    ],
+    "practice_questions": [
+      {
+        "question_id": 121,
+        "question": "In 'The choir sang sweetly during the ceremony,' what does the adverb 'sweetly' modify?",
+        "options": [
+          "A) Noun: choir",
+          "B) Action verb: sang",
+          "C) Preposition: during",
+          "D) Noun: ceremony"
+        ],
+        "correct_answer": "B) Action verb: sang",
+        "explanation": "'sweetly' is a manner adverb answering 'How did they sing?'."
+      },
+      {
+        "question_id": 122,
+        "question": "In 'The soup was extremely hot,' what part of speech is 'extremely'?",
+        "options": [
+          "A) Adjective",
+          "B) Adverb of degree",
+          "C) Action verb",
+          "D) Preposition"
+        ],
+        "correct_answer": "B) Adverb of degree",
+        "explanation": "'extremely' is an adverb of degree modifying the adjective 'hot'."
+      },
+      {
+        "question_id": 123,
+        "question": "Identify the adverb modifying ANOTHER adverb in: 'The boy ran very quickly.'",
+        "options": [
+          "A) boy",
+          "B) ran",
+          "C) very",
+          "D) quickly"
+        ],
+        "correct_answer": "C) very",
+        "explanation": "'very' is an adverb of degree modifying the manner adverb 'quickly'."
+      },
+      {
+        "question_id": 124,
+        "question": "Which word is an ADVERB OF PLACE answering 'Where?'?",
+        "options": [
+          "A) yesterday",
+          "B) everywhere",
+          "C) rapidly",
+          "D) extremely"
+        ],
+        "correct_answer": "B) everywhere",
+        "explanation": "'everywhere' indicates location and answers 'Where?'."
+      },
+      {
+        "question_id": 125,
+        "question": "Choose the sentence that correctly uses the adverb 'well':",
+        "options": [
+          "A) She plays the piano good.",
+          "B) She plays the piano well.",
+          "C) She is a well pianist.",
+          "D) She plays a well song."
+        ],
+        "correct_answer": "B) She plays the piano well.",
+        "explanation": "'well' is the correct adverb modifying the action verb 'plays'."
+      },
+      {
+        "question_id": 126,
+        "question": "Choose the correct comparative adverb form: 'She solved the second problem ___ than the first.'",
+        "options": [
+          "A) more easily",
+          "B) easier",
+          "C) most easily",
+          "D) easy"
+        ],
+        "correct_answer": "A) more easily",
+        "explanation": "Adverbs ending in -ly form comparatives using 'more + adverb'."
+      },
+      {
+        "question_id": 127,
+        "question": "Identify the ADVERB OF TIME answering 'When?' in: 'Yesterday, our class visited the museum.'",
+        "options": [
+          "A) Yesterday",
+          "B) class",
+          "C) visited",
+          "D) museum"
+        ],
+        "correct_answer": "A) Yesterday",
+        "explanation": "'Yesterday' specifies when the action occurred."
+      },
+      {
+        "question_id": 128,
+        "question": "Where are frequency adverbs (always, usually, never) standardly placed relative to main action verbs?",
+        "options": [
+          "A) Directly after the direct object",
+          "B) Directly before the main action verb",
+          "C) At the very end of the sentence only",
+          "D) Between the verb and its direct object"
+        ],
+        "correct_answer": "B) Directly before the main action verb",
+        "explanation": "Frequency adverbs precede main action verbs (e.g., 'She always arrives early')."
+      },
+      {
+        "question_id": 129,
+        "question": "Which sentence contains an error modifying an action verb?",
+        "options": [
+          "A) The child listened carefully.",
+          "B) The driver stopped abruptly.",
+          "C) The student wrote quick.",
+          "D) The dog barked loudly."
+        ],
+        "correct_answer": "C) The student wrote quick.",
+        "explanation": "Action verb 'wrote' requires the adverb 'quickly' instead of adjective 'quick'."
+      },
+      {
+        "question_id": 130,
+        "question": "Which option fixes the DOUBLE NEGATIVE error in: 'I couldn't find no answer.'?",
+        "options": [
+          "A) I couldn't find any answer.",
+          "B) I couldn't find no answers.",
+          "C) I couldn't hardly find no answer.",
+          "D) I couldn't never find no answer."
+        ],
+        "correct_answer": "A) I couldn't find any answer.",
+        "explanation": "Replacing 'no' with 'any' eliminates the double negative error."
+      }
+    ],
+    "source_book_and_page": [
+      "Scholastic Success with Grammar Grade 4, Pages 59–61",
+      "Scholastic Success with Grammar Grade 5, Page 59"
+    ]
+  },
+  {
+    "topic_id": 14,
+    "topic_name": "Subject-Verb Agreement Rules & Irregular Cases",
+    "cefr_level": "Estimated CEFR: A2-B1",
+    "cefr_level_status": "Estimated mapping based on Grade 4–5 primary sources",
+    "english_explanation": "Subjects and present tense verbs must agree in number and person. Singular subjects require singular verb forms (add -s or -es in simple present third-person). Plural subjects require plural verb forms (no -s/es). Compound subjects connected by 'and' take plural verbs. Compound subjects connected by 'or' / 'nor' agree with the closer subject. Indefinite pronouns like 'everyone', 'someone', 'each', and 'nobody' are singular and take singular verbs.",
+    "arabic_explanation": "يجب أن يتطابق الفاعل والفعل في المضارع البسيط في العدد والشخص. الفاعل المفرد يتطلب فعلاً ملمحقًا بـ -s أو -es في الغائب المفرد. الفاعل الجمع يتطلب فعلاً مجردًا من -s/es. الفاعل المركب المربوط بـ (and) يستلزم فعلاً جمعًا، بينما الفاعل المركب المربوط بـ (or/nor) يتطابق فعله مع الفاعل الأقرب له. الضمائر غير المحددة (مثل: everyone, someone, each) تُعامل معاملة المفرد وتأخذ أفعالاً مفردة.",
+    "grammar_structure_and_formulas": {
+      "singular_agreement": "[Singular Subject (He/She/It/Noun)] + [Verb + -s/-es]",
+      "plural_agreement": "[Plural Subject (They/We/Nouns)] + [Base Verb]",
+      "compound_and_formula": "[Subject 1 + and + Subject 2] + [Plural Verb]",
+      "compound_or_formula": "[Subject 1 + or/nor + Subject 2 (closer)] + [Verb agreeing with Subject 2]",
+      "indefinite_pronoun_singular": "[Everyone / Someone / Each / Nobody] + [Singular Verb (+s)]"
+    },
+    "forms": {
+      "positive_form": "Singular: 'The student writes.' | Plural: 'The students write.' | Compound: 'Maria and David write.'",
+      "negative_form": "Singular: 'The student does not write.' | Plural: 'The students do not write.'",
+      "question_form": "Singular: 'Does the student write?' | Plural: 'Do the students write?'"
+    },
+    "when_and_how_to_use": [
+      "Ignore prepositional phrases coming between subject and verb when deciding agreement (e.g., 'The box of chocolates IS on the table').",
+      "Use singular verbs with indefinite pronouns ending in -one, -body, -thing, and 'each'.",
+      "With 'there is / there are', match the verb to the noun that follows."
+    ],
+    "common_mistakes": [
+      "Matching the verb to the object of an intervening prepositional phrase instead of the true sentence subject.",
+      "Using plural verbs with singular indefinite pronouns (e.g., writing 'Everyone are here' instead of 'Everyone is here').",
+      "Failing to apply subject proximity rules with 'either... or' constructions."
+    ],
+    "examples": [
+      "Intervening Phrase: The box of heavy books is on the counter.",
+      "Compound Subject (and): The teacher and her students are in the auditorium.",
+      "Compound Subject (or - Proximity): Neither the manager nor the workers were present.",
+      "Indefinite Pronoun: Everyone in the class understands the rule.",
+      "Inverted Sentence: There are three apples remaining on the plate."
+    ],
+    "practice_questions": [
+      {
+        "question_id": 131,
+        "question": "Which verb correctly completes: 'The box of shiny toys ___ on the shelf.'?",
+        "options": [
+          "A) is",
+          "B) are",
+          "C) were",
+          "D) remain"
+        ],
+        "correct_answer": "A) is",
+        "explanation": "The simple subject is singular 'box' (ignoring phrase 'of shiny toys'), requiring 'is'."
+      },
+      {
+        "question_id": 132,
+        "question": "Choose the verb that agrees with the indefinite pronoun: 'Everyone in the auditorium ___ quietly.'",
+        "options": [
+          "A) listen",
+          "B) listens",
+          "C) are listening",
+          "D) listenings"
+        ],
+        "correct_answer": "B) listens",
+        "explanation": "Indefinite pronoun 'Everyone' is singular and requires 3rd person verb 'listens'."
+      },
+      {
+        "question_id": 133,
+        "question": "Which sentence maintains correct Subject-Verb Agreement?",
+        "options": [
+          "A) The dogs barks loudly.",
+          "B) The dog bark loudly.",
+          "C) The dogs bark loudly.",
+          "D) The dogs is barking."
+        ],
+        "correct_answer": "C) The dogs bark loudly.",
+        "explanation": "Plural subject 'dogs' agrees with plural base verb 'bark'."
+      },
+      {
+        "question_id": 134,
+        "question": "In 'Neither the director nor the actors ___ satisfied with the rehearsal,' which verb agrees?",
+        "options": [
+          "A) was",
+          "B) were",
+          "C) is",
+          "D) has been"
+        ],
+        "correct_answer": "B) were",
+        "explanation": "When subjects are joined by 'nor', the verb agrees with the closer subject ('actors' -> were)."
+      },
+      {
+        "question_id": 135,
+        "question": "Choose the correct verb for the inverted sentence: 'There ___ three books on the desk.'",
+        "options": [
+          "A) is",
+          "B) are",
+          "C) was",
+          "D) has been"
+        ],
+        "correct_answer": "B) are",
+        "explanation": "In 'there is/are' structures, the verb agrees with following noun 'books' (plural -> are)."
+      },
+      {
+        "question_id": 136,
+        "question": "Which verb agrees with 'Each': 'Each of the girls ___ her own pencil.'?",
+        "options": [
+          "A) have",
+          "B) has",
+          "C) having",
+          "D) possess"
+        ],
+        "correct_answer": "B) has",
+        "explanation": "Indefinite pronoun 'Each' is singular and takes singular verb 'has'."
+      },
+      {
+        "question_id": 137,
+        "question": "Select the sentence with CORRECT subject-verb agreement:",
+        "options": [
+          "A) The list of items were lost.",
+          "B) The list of items is lost.",
+          "C) The list of items are lost.",
+          "D) The list of items have been lost."
+        ],
+        "correct_answer": "B) The list of items is lost.",
+        "explanation": "The core subject is singular 'list', taking singular verb 'is'."
+      },
+      {
+        "question_id": 138,
+        "question": "Which verb form completes: 'Ten dollars ___ a reasonable price for the book.'?",
+        "options": [
+          "A) is",
+          "B) are",
+          "C) were",
+          "D) remain"
+        ],
+        "correct_answer": "A) is",
+        "explanation": "Expressions of money, time, and distance represent single total amounts and take singular verbs ('is')."
+      },
+      {
+        "question_id": 139,
+        "question": "Choose the verb agreeing with compound subject joined by 'and': 'My aunt and uncle ___ visiting us.'",
+        "options": [
+          "A) is",
+          "B) are",
+          "C) was",
+          "D) has been"
+        ],
+        "correct_answer": "B) are",
+        "explanation": "Subjects joined by 'and' form a plural subject requiring 'are'."
+      },
+      {
+        "question_id": 140,
+        "question": "Identify the sentence containing a Subject-Verb Agreement ERROR:",
+        "options": [
+          "A) She works hard every day.",
+          "B) They study in the library.",
+          "C) The captain of the ships remain at port.",
+          "D) The boys play football after school."
+        ],
+        "correct_answer": "C) The captain of the ships remain at port.",
+        "explanation": "Singular subject 'captain' requires singular verb 'remains', not plural 'remain'."
+      }
+    ],
+    "source_book_and_page": [
+      "Scholastic Success with Grammar Grade 4, Pages 53–55",
+      "Scholastic Success with Grammar Grade 5, Pages 53–54"
+    ]
+  },
+  {
+    "topic_id": 15,
+    "topic_name": "Sentence Diagramming & Structural Analysis Basics",
+    "cefr_level": "Estimated CEFR: B1",
+    "cefr_level_status": "Estimated mapping based on Grade 5 & Understanding Semantics primary sources",
+    "english_explanation": "Sentence diagramming visually maps the grammatical architecture of sentences, revealing how words relate structurally. The core sentence spine consists of a horizontal baseline divided by vertical line breaks: a line intersecting the baseline separates the complete subject from the complete predicate; a vertical line stopping at the baseline separates the verb from its direct object; a slanted line pointing toward the subject separates a linking verb from a predicate adjective or noun. Modifiers (adjectives, articles, adverbs) are placed on slanted lines attached beneath the words they modify.",
+    "arabic_explanation": "يقوم التخطيط الهيكلي للجملة (Sentence Diagramming) برسم وتفكيك البنية النحوية للجملة بصريًا. يتكون المحور الأساسي للجملة من خط أفقي تنقسم عليه المكونات الرئيسية: يقطع خط رأسي مكتمل الخط الأفقي ليفصل الفاعل الكامل عن الخبر الكامل؛ ويقف خط رأسي آخر عند الخط الأفقي ليفصل الفعل عن المفعول به المباشر؛ بينما يُفصل فعل الربط عن الصفة أو الاسم الخبري بخط مائل ينحني نحو الفاعل. تُوضع الصفات والظروف وأدوات التعريف على خطوط مائلة أسفل الكلمات التي تصفها.",
+    "grammar_structure_and_formulas": {
+      "core_baseline": "Subject | Verb | Direct Object OR Subject | Linking Verb \\ Predicate Adjective",
+      "modifier_slanted_lines": "Slanted line beneath Noun = Article / Adjective | Slanted line beneath Verb = Adverb",
+      "prepositional_phrase_branch": "Slanted line (Preposition) + Horizontal line (Object of Preposition) attached beneath modified word"
+    },
+    "forms": {
+      "positive_form": "Core Diagram Spine: '[Subject] | [Verb] | [Direct Object]'",
+      "negative_form": "Negative adverb 'not' placed on a slanted line attached beneath the auxiliary verb.",
+      "question_form": "Diagrammed in standard declarative word order: '[Subject] | [Auxiliary + Verb] | [Object]'"
+    },
+    "when_and_how_to_use": [
+      "Use structural analysis to identify sentence heads, modifiers, and complements.",
+      "Place articles and adjectives on slanted lines directly beneath the nouns they modify.",
+      "Place adverbs on slanted lines directly beneath verbs, adjectives, or adverbs they modify.",
+      "Separate direct objects with a straight vertical line stopping at the baseline; separate predicate adjectives/nouns with a slanted line leaning toward the subject."
+    ],
+    "common_mistakes": [
+      "Confusing the straight vertical line (direct object divider) with the slanted line (predicate adjective/noun divider).",
+      "Attaching adverbs to nouns or adjectives to verbs in structural trees.",
+      "Misplacing objects of prepositions on the main baseline."
+    ],
+    "examples": [
+      "Simple Subject + Action Verb + Direct Object: 'The dancer made a movement.' -> Subject: dancer | Verb: made | Direct Object: movement.",
+      "Modifiers Added: 'The tiny cricket slowly ate the green leaf.' -> Modifiers 'The', 'tiny' beneath cricket; 'slowly' beneath ate; 'the', 'green' beneath leaf.",
+      "Predicate Adjective Diagram: 'The soup was hot.' -> Subject: soup | Linking Verb: was \\ Predicate Adjective: hot.",
+      "Diagramming Prepositional Phrase: 'The dog ran into the house.' -> Phrase 'into the house' branches beneath 'ran'.",
+      "Compound Sentence Diagramming: Two parallel baselines joined by a step line containing the coordinating conjunction."
+    ],
+    "practice_questions": [
+      {
+        "question_id": 141,
+        "question": "In standard sentence diagramming, what line separates the Simple Subject from the Simple Predicate on the baseline?",
+        "options": [
+          "A) A slanted line leaning backward",
+          "B) A vertical line that completely intersects the baseline",
+          "C) A horizontal dotted line",
+          "D) A vertical line that stops at the baseline"
+        ],
+        "correct_answer": "B) A vertical line that completely intersects the baseline",
+        "explanation": "A full intersecting vertical line divides the subject section from the predicate section on the baseline."
+      },
+      {
+        "question_id": 142,
+        "question": "How is a DIRECT OBJECT separated from its action verb on the diagram baseline?",
+        "options": [
+          "A) By a vertical line that completely intersects the baseline",
+          "B) By a vertical line that stops at the baseline without intersecting",
+          "C) By a slanted line leaning left toward the subject",
+          "D) By a dashed curved line"
+        ],
+        "correct_answer": "B) By a vertical line that stops at the baseline without intersecting",
+        "explanation": "Direct objects follow a vertical line that touches but does not cross below the baseline."
+      },
+      {
+        "question_id": 143,
+        "question": "In diagramming 'The soup was hot', how is the PREDICATE ADJECTIVE 'hot' separated from linking verb 'was'?",
+        "options": [
+          "A) By a vertical line intersecting the baseline",
+          "B) By a slanted line leaning left toward the subject",
+          "C) By a straight horizontal line",
+          "D) By a dotted vertical line"
+        ],
+        "correct_answer": "B) By a slanted line leaning left toward the subject",
+        "explanation": "Predicate adjectives and nouns are separated by a slanted line leaning back toward the subject."
+      },
+      {
+        "question_id": 144,
+        "question": "Where are ARTICLES (a, an, the) and ADJECTIVES placed in sentence diagrams?",
+        "options": [
+          "A) On the main horizontal baseline after the verb",
+          "B) On slanted lines drawn beneath the noun they modify",
+          "C) Above the subject noun on a top shelf",
+          "D) On parallel horizontal baselines"
+        ],
+        "correct_answer": "B) On slanted lines drawn beneath the noun they modify",
+        "explanation": "Modifiers branch downward on slanted lines beneath their target nouns."
+      },
+      {
+        "question_id": 145,
+        "question": "Where is an ADVERB modifying a verb positioned in a diagram?",
+        "options": [
+          "A) On a slanted line directly beneath the verb it modifies",
+          "B) On the baseline next to the direct object",
+          "C) Above the verb on a vertical riser",
+          "D) On a horizontal line following a preposition"
+        ],
+        "correct_answer": "A) On a slanted line directly beneath the verb it modifies",
+        "explanation": "Adverbs attach to slanted lines extending beneath the verb."
+      },
+      {
+        "question_id": 146,
+        "question": "In the diagram of 'The clever dog quickly fetched the red ball', what three words sit on the main BASELINE?",
+        "options": [
+          "A) clever | fetched | red",
+          "B) dog | fetched | ball",
+          "C) The | dog | ball",
+          "D) dog | quickly | ball"
+        ],
+        "correct_answer": "B) dog | fetched | ball",
+        "explanation": "The baseline contains subject ('dog'), verb ('fetched'), and direct object ('ball')."
+      },
+      {
+        "question_id": 147,
+        "question": "In structural analysis, what term defines the central head noun around which articles and adjectives cluster?",
+        "options": [
+          "A) Noun Phrase Head",
+          "B) Prepositional Object",
+          "C) Verb Complement",
+          "D) Adverbial Modifier"
+        ],
+        "correct_answer": "A) Noun Phrase Head",
+        "explanation": "The simple subject noun functions as the structural head of the complete noun phrase."
+      },
+      {
+        "question_id": 148,
+        "question": "How are COMPOUND SENTENCES diagrammed structurally?",
+        "options": [
+          "A) On a single continuous baseline with multiple slashes",
+          "B) On two parallel baselines connected by a step line containing the conjunction",
+          "C) Inside circular Venn diagram branches",
+          "D) On vertical columns side by side"
+        ],
+        "correct_answer": "B) On two parallel baselines connected by a step line containing the conjunction",
+        "explanation": "Each independent clause gets its own baseline, linked vertically by a dotted step line for the conjunction."
+      },
+      {
+        "question_id": 149,
+        "question": "In diagramming a prepositional phrase, where is the PREPOSITION written?",
+        "options": [
+          "A) On a horizontal baseline",
+          "B) On a slanted line leading down from the modified word",
+          "C) On a vertical line intersecting the main verb",
+          "D) Above the object noun"
+        ],
+        "correct_answer": "B) On a slanted line leading down from the modified word",
+        "explanation": "The preposition sits on a slanted line connecting the modified head word to the horizontal object line."
+      },
+      {
+        "question_id": 150,
+        "question": "Which core element sits on the baseline after a linking verb in 'Dr. Blackwell became a physician'?",
+        "options": [
+          "A) Direct object: physician",
+          "B) Predicate noun: physician (after a slanted line leaning left)",
+          "C) Prepositional phrase: physician",
+          "D) Adverbial modifier: physician"
+        ],
+        "correct_answer": "B) Predicate noun: physician (after a slanted line leaning left)",
+        "explanation": "'physician' is a predicate noun placed on the baseline separated by a slanted line leaning left."
+      }
+    ],
+    "source_book_and_page": [
+      "Scholastic Success with Grammar Grade 5, Page 61",
+      "Understanding Semantics Second Edition, Pages 106–107"
+    ]
+  },
+  {
+    "topic_id": 16,
+    "topic_name": "Punctuation Mechanics (Commas, Semicolons, Colons, Quotation Marks & Capitalization)",
+    "cefr_level": "Estimated CEFR: B1",
+    "cefr_level_status": "Estimated mapping based on Grade 4–5 sources & original educational content",
+    "english_explanation": "Punctuation mechanics regulate sentence flow, separate structural units, and clarify meaning. Commas manage introductory clauses, items in a series, appositives, and direct address. Semicolons join closely related independent clauses without a coordinating conjunction. Colons introduce lists, formal explanations, or direct quotes after a complete independent clause. Quotation marks enclose direct speech, with commas and periods traditionally placed inside the quotation marks in standard writing.",
+    "arabic_explanation": "تُنظم قواعد الترقيم تدفق الجمل وتفصل بين الوحدات الهيكلية لتوضيح المعنى. تُستخدم الفاصلة (Comma) للفصل بين العبارات التمهيدية، وعناصر القوائم، والجمل المعترضة (Appositives)، والمخاطب المباشر. تُربط الجمل المستقلة المترابطة معنويًا باستخدام الفاصلة المنقوطة (Semicolon) دون الحاجة لأداة عطف. وتُستخدم النقطتان الرأسيتان (Colon) لتقديم قائمة أو شرح تفصيلي بعد جملة مستقلة كاملة. وتُحيط علامات التنصيص (Quotation Marks) بالكلام المباشر مع وضع الفواصل والنقاط داخل العلامات وفق التنسيق القياسي.",
+    "grammar_structure_and_formulas": {
+      "introductory_phrase_comma": "[Introductory Phrase / Dependent Clause] + , + [Independent Clause]",
+      "semicolon_clause": "[Independent Clause 1] + ; + [Independent Clause 2]",
+      "colon_list": "[Complete Independent Clause] + : + [List / Explanation]",
+      "direct_speech_quotation": "[Reporting Clause] + , + \"[Capitalized Direct Quote] . / ? / !\""
+    },
+    "forms": {
+      "positive_form": "Semicolon: 'The weather was freezing; however, we went hiking.' | Colon: 'Bring three items: a pen, paper, and a ruler.'",
+      "negative_form": "Semicolon Negative: 'She did not like the main course; nevertheless, she ate dessert.'",
+      "question_form": "Quotation Question: '\"Did you submit the assignment?\" asked the teacher.'"
+    },
+    "when_and_how_to_use": [
+      "Use commas after introductory adverbial clauses or prepositional phrases longer than four words.",
+      "Use semicolons to connect two closely related independent clauses when no FANBOYS conjunction is used.",
+      "Use colons only after complete independent clauses to introduce lists, summaries, or explanations.",
+      "Place commas and periods inside quotation marks in standard direct quotation formatting."
+    ],
+    "common_mistakes": [
+      "Using a colon after a verb or preposition (e.g., writing 'The ingredients are: flour, eggs, and milk' instead of 'The ingredients are flour, eggs, and milk').",
+      "Creating comma splices by joining independent clauses with commas instead of semicolons (e.g., 'I ran fast, I missed the bus').",
+      "Placing periods outside quotation marks in standard direct dialogue."
+    ],
+    "examples": [
+      "Introductory Comma: After finishing her research project, Maya presented her findings.",
+      "Semicolon Usage: The test was challenging; however, every student passed.",
+      "Colon Usage: The student needed one essential item: a reliable laptop.",
+      "Quotation Marks: \"Practice makes perfect,\" declared the coach.",
+      "Appositive Comma: Mr. Davis, our English teacher, wrote a textbook."
+    ],
+    "practice_questions": [
+      {
+        "question_id": 151,
+        "question": "Which sentence correctly places a comma after an introductory dependent clause?",
+        "options": [
+          "A) After finishing her homework Maria went out to play.",
+          "B) After finishing her homework, Maria went out to play.",
+          "C) After, finishing her homework Maria went out to play.",
+          "D) After finishing her homework Maria, went out to play."
+        ],
+        "correct_answer": "B) After finishing her homework, Maria went out to play.",
+        "explanation": "An introductory dependent clause must be followed by a comma before the main clause."
+      },
+      {
+        "question_id": 152,
+        "question": "Which sentence correctly uses a SEMICOLON to join two independent clauses?",
+        "options": [
+          "A) The weather was freezing, however; we went hiking.",
+          "B) The weather was freezing; however, we went hiking.",
+          "C) The weather was freezing; however we went hiking.",
+          "D) The weather was freezing, however, we went hiking."
+        ],
+        "correct_answer": "B) The weather was freezing; however, we went hiking.",
+        "explanation": "Joining two independent clauses with a conjunctive adverb ('however') requires a semicolon before it and a comma after it."
+      },
+      {
+        "question_id": 153,
+        "question": "Which sentence uses a COLON correctly?",
+        "options": [
+          "A) Please buy: milk, eggs, and bread.",
+          "B) The market sells: fresh fruit and vegetables.",
+          "C) Please buy the following items: milk, eggs, and bread.",
+          "D) My favorite colors are: blue, green, and red."
+        ],
+        "correct_answer": "C) Please buy the following items: milk, eggs, and bread.",
+        "explanation": "A colon must follow a complete independent clause ('Please buy the following items')."
+      },
+      {
+        "question_id": 154,
+        "question": "Choose the correctly formatted DIRECT QUOTATION:",
+        "options": [
+          "A) \"I love reading\" said Maya.",
+          "B) \"I love reading,\" said Maya.",
+          "C) \"I love reading\", said Maya.",
+          "D) \"I love reading.\" Said Maya."
+        ],
+        "correct_answer": "B) \"I love reading,\" said Maya.",
+        "explanation": "The comma separating direct speech from the reporting verb belongs inside the quotation marks."
+      },
+      {
+        "question_id": 155,
+        "question": "Which sentence correctly punctuates an APPOSITIVE noun phrase?",
+        "options": [
+          "A) Mr. Davis our English teacher wrote a book.",
+          "B) Mr. Davis, our English teacher wrote a book.",
+          "C) Mr. Davis, our English teacher, wrote a book.",
+          "D) Mr. Davis our English teacher, wrote a book."
+        ],
+        "correct_answer": "C) Mr. Davis, our English teacher, wrote a book.",
+        "explanation": "Non-essential appositive phrases ('our English teacher') must be enclosed by commas on both sides."
+      },
+      {
+        "question_id": 156,
+        "question": "Which sentence contains a CAPITALIZATION error?",
+        "options": [
+          "A) Last Tuesday, we visited the museum.",
+          "B) My uncle speaks french and Spanish.",
+          "C) We live near the Mississippi River.",
+          "D) Dr. Smith treats patients in July."
+        ],
+        "correct_answer": "B) My uncle speaks french and Spanish.",
+        "explanation": "Proper adjectives derived from language names ('French') must be capitalized."
+      },
+      {
+        "question_id": 157,
+        "question": "Where is the OXFORD COMMA placed in a series list?",
+        "options": [
+          "A) After the first item only",
+          "B) Immediately before the conjunction 'and' in a list of three or more items",
+          "C) After the final item in the list",
+          "D) Before the first item in the list"
+        ],
+        "correct_answer": "B) Immediately before the conjunction 'and' in a list of three or more items",
+        "explanation": "The Oxford comma is placed right before the final coordinating conjunction in a series (e.g., 'apples, oranges, and bananas')."
+      },
+      {
+        "question_id": 158,
+        "question": "Which option corrects the COMMA SPLICE: 'She studied hard, she passed the test.'?",
+        "options": [
+          "A) She studied hard she passed the test.",
+          "B) She studied hard; she passed the test.",
+          "C) She studied hard, so, she passed the test.",
+          "D) She studied, hard she passed the test."
+        ],
+        "correct_answer": "B) She studied hard; she passed the test.",
+        "explanation": "Replacing the comma with a semicolon correctly fixes a comma splice error."
+      },
+      {
+        "question_id": 159,
+        "question": "Which sentence correctly punctuates DIRECT ADDRESS?",
+        "options": [
+          "A) Thank you for your help Sarah.",
+          "B) Thank you, for your help Sarah.",
+          "C) Thank you for your help, Sarah.",
+          "D) Thank you for, your help Sarah."
+        ],
+        "correct_answer": "C) Thank you for your help, Sarah.",
+        "explanation": "Nouns used in direct address ('Sarah') are separated from the rest of the sentence by a comma."
+      },
+      {
+        "question_id": 160,
+        "question": "Which sentence uses a COLON to introduce an explanatory statement?",
+        "options": [
+          "A) There is only one logical solution: we must start over.",
+          "B) There is: only one logical solution.",
+          "C) We must: start over as a solution.",
+          "D) Only one solution: is available to us."
+        ],
+        "correct_answer": "A) There is only one logical solution: we must start over.",
+        "explanation": "A colon can link a complete independent clause to an explanatory clause that amplifies it."
+      }
+    ],
+    "source_book_and_page": [
+      "Scholastic Success with Grammar Grade 4, Pages 56–58",
+      "Scholastic Success with Grammar Grade 5, Pages 60–62"
+    ]
+  },
+  {
+    "topic_id": 17,
+    "topic_name": "Complex Sentences & Subordinating Conjunctions",
+    "cefr_level": "Estimated CEFR: B1",
+    "cefr_level_status": "Estimated mapping based on Grade 4–5, Everybody Up 6 & original educational content",
+    "english_explanation": "A complex sentence combines one independent clause with at least one dependent (subordinate) clause. Dependent clauses are introduced by subordinating conjunctions expressing cause (because, since), contrast (although, even though), condition (if, unless), or time (when, while, after, before). When the dependent clause opens the sentence, a comma must separate it from the main clause; when the independent clause comes first, no comma is required.",
+    "arabic_explanation": "تتكون الجملة المعقدة (Complex Sentence) من جملة واحدة مستقلة (Independent Clause) وجملة واحدة على الأقل تابعة (Dependent Clause). تُبدأ الجملة التابعة بأداة ربط تبعية (Subordinating Conjunction) تُعبر عن السبب (because, since)، أو التناقض (although, even though)، أو الشرط (if, unless)، أو الزمان (when, while, after, before). عندما تبدأ الجملة بالجملة التابعة، يجب وضع فاصلة للفصل بينها وبين الجملة المستقلة؛ أما إذا بدأت بالجملة المستقلة، فلا تلزم الفاصلة.",
+    "grammar_structure_and_formulas": {
+      "dependent_first_formula": "[Subordinating Conjunction + Subject + Verb ...] + , + [Independent Clause]",
+      "independent_first_formula": "[Independent Clause] + [Subordinating Conjunction + Subject + Verb ...]",
+      "subordinating_categories": {
+        "Cause": "because, since, as",
+        "Contrast": "although, even though, though",
+        "Condition": "if, unless, provided that",
+        "Time": "when, while, after, before, until, as soon as"
+      }
+    },
+    "forms": {
+      "positive_form": "Dependent First: 'Although it rained, we went out.' | Independent First: 'We went out although it rained.'",
+      "negative_form": "Condition Negative: 'Unless you study, you will not pass the exam.'",
+      "question_form": "Question: 'Will you call me when you arrive?'"
+    },
+    "when_and_how_to_use": [
+      "Use complex sentences to establish logical, conditional, or temporal relationships between ideas.",
+      "Place a comma after the dependent clause when it comes at the beginning of the sentence.",
+      "Do not use a comma before subordinating conjunctions when the main clause comes first (in standard cause/time structures)."
+    ],
+    "common_mistakes": [
+      "Inserting a comma when the independent clause precedes a standard subordinating clause (e.g., writing 'We stayed inside, because it rained').",
+      "Confusing 'unless' (which means 'if... not') with 'if' in conditional clauses.",
+      "Creating sentence fragments by leaving dependent clauses standing alone without an independent clause."
+    ],
+    "examples": [
+      "Cause (because): Because he prepared thoroughly, Alex passed his driving test.",
+      "Contrast (although): Although the morning was chilly, we enjoyed our walk.",
+      "Condition (unless): Unless it rains tomorrow, the picnic will proceed as scheduled.",
+      "Time (when): She will text us as soon as her plane lands.",
+      "Condition (if): If you complete your assignment early, you may read a novel."
+    ],
+    "practice_questions": [
+      {
+        "question_id": 161,
+        "question": "Identify the DEPENDENT CLAUSE in: 'Although it was raining heavily, we played soccer.'",
+        "options": [
+          "A) we played soccer",
+          "B) Although it was raining heavily",
+          "C) raining heavily",
+          "D) played soccer"
+        ],
+        "correct_answer": "B) Although it was raining heavily",
+        "explanation": "'Although it was raining heavily' begins with a subordinating conjunction and cannot stand alone as a sentence."
+      },
+      {
+        "question_id": 162,
+        "question": "Which sentence is punctuated CORRECTLY?",
+        "options": [
+          "A) Because he studied diligently he scored top marks.",
+          "B) Because he studied diligently, he scored top marks.",
+          "C) He scored top marks, because he studied diligently.",
+          "D) Because, he studied diligently he scored top marks."
+        ],
+        "correct_answer": "B) Because he studied diligently, he scored top marks.",
+        "explanation": "When a dependent clause introduces a sentence, a comma must separate it from the main clause."
+      },
+      {
+        "question_id": 163,
+        "question": "Choose the correct subordinating conjunction to show CONTRAST: '___ it was cold, she didn't wear a coat.'",
+        "options": [
+          "A) Because",
+          "B) Although",
+          "C) Unless",
+          "D) Since"
+        ],
+        "correct_answer": "B) Although",
+        "explanation": "'Although' expresses contrast between the cold weather and her choice of clothing."
+      },
+      {
+        "question_id": 164,
+        "question": "Which conjunction means 'if... not': 'You will not pass the exam ___ you study diligently.'?",
+        "options": [
+          "A) because",
+          "B) when",
+          "C) unless",
+          "D) although"
+        ],
+        "correct_answer": "C) unless",
+        "explanation": "'unless' introduces a negative condition meaning 'if you do not study diligently'."
+      },
+      {
+        "question_id": 165,
+        "question": "Select the correct complex sentence showing TIME relationship:",
+        "options": [
+          "A) Call me when you arrive at the station.",
+          "B) Call me, when you arrive at the station.",
+          "C) When you arrive at the station call me.",
+          "D) Call me so you arrive at the station."
+        ],
+        "correct_answer": "A) Call me when you arrive at the station.",
+        "explanation": "Option A correctly structures an independent clause followed by a time dependent clause without an unnecessary comma."
+      },
+      {
+        "question_id": 166,
+        "question": "What structural difference distinguishes a COMPLEX sentence from a COMPOUND sentence?",
+        "options": [
+          "A) Complex sentences use FANBOYS; compound sentences use subordinating conjunctions.",
+          "B) Complex sentences contain a dependent clause; compound sentences join independent clauses.",
+          "C) Complex sentences cannot contain action verbs.",
+          "D) Compound sentences must always end with exclamation marks."
+        ],
+        "correct_answer": "B) Complex sentences contain a dependent clause; compound sentences join independent clauses.",
+        "explanation": "Complex sentences consist of independent + dependent clauses; compound sentences join two independent clauses."
+      },
+      {
+        "question_id": 167,
+        "question": "Choose the subordinating conjunction expressing REASON: '___ we arrived late, we missed the intro.'",
+        "options": [
+          "A) Since",
+          "B) Although",
+          "C) Unless",
+          "D) While"
+        ],
+        "correct_answer": "A) Since",
+        "explanation": "'Since' functions as a causal subordinating conjunction meaning 'because'."
+      },
+      {
+        "question_id": 168,
+        "question": "Which option is a SENTENCE FRAGMENT?",
+        "options": [
+          "A) We stayed indoors all afternoon.",
+          "B) Because the thunderstorm knocked out power.",
+          "C) It rained heavily throughout the night.",
+          "D) The sun came out after lunch."
+        ],
+        "correct_answer": "B) Because the thunderstorm knocked out power.",
+        "explanation": "Option B is a dependent clause left standing alone without an independent clause."
+      },
+      {
+        "question_id": 169,
+        "question": "Choose the sentence where no comma is needed:",
+        "options": [
+          "A) Before you leave turn off the lights.",
+          "B) If it snows we will build a snowman.",
+          "C) We stayed indoors because it was raining.",
+          "D) Although she was tired she finished reading."
+        ],
+        "correct_answer": "C) We stayed indoors because it was raining.",
+        "explanation": "When an independent clause comes first, no comma is needed before 'because'."
+      },
+      {
+        "question_id": 170,
+        "question": "In 'While Sarah played the violin, her brother practiced piano,' the word 'While' indicates:",
+        "options": [
+          "A) Cause",
+          "B) Simultaneous time",
+          "C) Negative condition",
+          "D) Result"
+        ],
+        "correct_answer": "B) Simultaneous time",
+        "explanation": "'While' shows two actions taking place simultaneously."
+      }
+    ],
+    "source_book_and_page": [
+      "Scholastic Success with Grammar Grade 4, Pages 14–16",
+      "Scholastic Success with Grammar Grade 5, Pages 17–19",
+      "Everybody Up 6 Workbook, Pages 15, 37, 85"
+    ]
+  },
+  {
+    "topic_id": 18,
+    "topic_name": "Relative Clauses & Relative Pronouns",
+    "cefr_level": "Estimated CEFR: B1-B2",
+    "cefr_level_status": "Estimated mapping based on Grade 5, Understanding Semantics & original educational content",
+    "english_explanation": "Relative clauses modify nouns, adding essential or descriptive details. Relative pronouns introduce these clauses: 'who' (subject people), 'whom' (object people), 'whose' (possessive), 'which' (animals/things), and 'that' (things/people in defining clauses). Restrictive (defining) clauses are essential to sentence identity and take no commas. Non-restrictive (non-defining) clauses supply extra, non-essential details and must be set off by commas; 'that' cannot introduce non-restrictive clauses.",
+    "arabic_explanation": "تُصاغ جمل الصلة (Relative Clauses) لتعديل وتوضيح الأسماء. وتُبدأ بضمائر الوصل: (who) للفاعل العاقل، (whom) للمفعول به العاقل، (whose) للملكية، (which) لغير العاقل، و(that) للعاقل وغير العاقل في الجمل المحددة. الجمل المحددة (Restrictive/Defining) أساسية لتحديد الاسم ولا تُحاط بفاصلات. أما الجمل غير المحددة (Non-restrictive/Non-defining) فتقدم معلومات إضافية غير جوهرية وتُحاط بفاصلات دائمًا، ولا يجوز استخدام (that) معها.",
+    "grammar_structure_and_formulas": {
+      "restrictive_clause_formula": "[Noun] + [who / which / that + Clause] (No commas)",
+      "non_restrictive_clause_formula": "[Noun] + , + [who / which / whose + Clause] + , + [Main Predicate]",
+      "possessive_relative_formula": "[Noun] + whose + [Possessed Noun] + [Verb]"
+    },
+    "forms": {
+      "positive_form": "Restrictive: 'The scientist who discovered the cure won an award.' | Non-restrictive: 'Dr. Smith, who lives next door, is a chemist.'",
+      "negative_form": "'The book that I did not read is on the shelf.'",
+      "question_form": "'Do you know the boy whose dog ran away?'"
+    },
+    "when_and_how_to_use": [
+      "Use 'who' when the relative pronoun acts as the subject performing the clause verb.",
+      "Use 'whom' after prepositions or as a direct object pronoun referring to humans in formal contexts.",
+      "Use 'whose' to replace possessive pronouns/adjectives (his, her, their) for people or objects.",
+      "Enclose non-restrictive clauses with commas and use 'which' or 'who' (never 'that')."
+    ],
+    "common_mistakes": [
+      "Using 'that' in non-restrictive clauses surrounded by commas (e.g., writing 'Paris, that is in France, is beautiful' instead of 'Paris, which is in France, is beautiful').",
+      "Confusing possessive relative pronoun 'whose' with the contraction 'who's' (who is).",
+      "Omitting commas around non-restrictive clauses that provide extra, non-essential background details."
+    ],
+    "examples": [
+      "Subject (who): The professor who gave the lecture is a renowned physicist.",
+      "Object (whom): The author to whom you addressed the letter has responded.",
+      "Possessive (whose): We met a writer whose latest novel became a bestseller.",
+      "Non-restrictive (which): Mount Everest, which sits in the Himalayas, is Earth's highest peak.",
+      "Restrictive (that): The car that won the race was built in Germany."
+    ],
+    "practice_questions": [
+      {
+        "question_id": 171,
+        "question": "Which relative pronoun correctly completes: 'The scientist ___ discovered the vaccine received a prize.'?",
+        "options": [
+          "A) who",          "B) which",
+          "C) whose",
+          "D) whom"
+        ],
+        "correct_answer": "A) who",
+        "explanation": "'who' is the subject relative pronoun referring to the human noun 'scientist'."
+      },
+      {
+        "question_id": 172,
+        "question": "Which sentence correctly punctuates a NON-RESTRICTIVE relative clause?",
+        "options": [
+          "A) My older brother who lives in London is a surgeon.",
+          "B) My older brother, who lives in London, is a surgeon.",
+          "C) My older brother, that lives in London is a surgeon.",
+          "D) My older brother who lives in London, is a surgeon."
+        ],
+        "correct_answer": "B) My older brother, who lives in London, is a surgeon.",
+        "explanation": "Extra non-essential information ('who lives in London') must be enclosed in commas."
+      },
+      {
+        "question_id": 173,
+        "question": "Choose the correct POSSESSIVE relative pronoun: 'The boy ___ bicycle was stolen reported it to police.'",
+        "options": [
+          "A) who's",
+          "B) whom",
+          "C) whose",
+          "D) which"
+        ],
+        "correct_answer": "C) whose",
+        "explanation": "'whose' indicates possession of the bicycle by the boy."
+      },
+      {
+        "question_id": 174,
+        "question": "Which relative pronoun CANNOT be used in a non-restrictive clause set off by commas?",
+        "options": [
+          "A) which",
+          "B) who",
+          "C) whose",
+          "D) that"
+        ],
+        "correct_answer": "D) that",
+        "explanation": "'that' can only be used in restrictive (defining) clauses without commas."
+      },
+      {
+        "question_id": 175,
+        "question": "Choose the formal OBJECT relative pronoun after a preposition: 'The guide to ___ we spoke was knowledgeable.'",
+        "options": [
+          "A) who",
+          "B) whom",
+          "C) whose",
+          "D) which"
+        ],
+        "correct_answer": "B) whom",
+        "explanation": "Prepositions take object relative pronouns ('to whom')."
+      },
+      {
+        "question_id": 176,
+        "question": "In which sentence can the relative pronoun be SAFELY OMITTED?",
+        "options": [
+          "A) The man who fixed our roof was friendly.",
+          "B) The book that I borrowed from the library is due tomorrow.",
+          "C) The teacher who lives next door retired.",
+          "D) The sun which shines bright warms the earth."
+        ],
+        "correct_answer": "B) The book that I borrowed from the library is due tomorrow.",
+        "explanation": "Relative pronouns acting as object of the clause ('that I borrowed') can be omitted ('The book I borrowed...')."
+      },
+      {
+        "question_id": 177,
+        "question": "Identify the relative pronoun error: 'Paris, that is the capital of France, attracts tourists.'",
+        "options": [
+          "A) 'Paris' should not be capitalized.",
+          "B) 'that' should be replaced with 'which' in a non-restrictive clause.",
+          "C) 'attracts' should be past tense.",
+          "D) 'France' requires an article."
+        ],
+        "correct_answer": "B) 'that' should be replaced with 'which' in a non-restrictive clause.",
+        "explanation": "Non-restrictive clauses enclosed in commas must use 'which' for things, not 'that'."
+      },
+      {
+        "question_id": 178,
+        "question": "Which sentence contains a RESTRICTIVE relative clause that limits the noun's identity?",
+        "options": [
+          "A) Mr. Harrison, who teaches history, enjoys chess.",
+          "B) Students who cheat on exams will fail the course.",
+          "C) Hawaii, which is an island chain, is popular.",
+          "D) My car, which is ten years old, runs well."
+        ],
+        "correct_answer": "B) Students who cheat on exams will fail the course.",
+        "explanation": "'who cheat on exams' restricts the meaning to specific students and cannot be removed without changing the sentence meaning."
+      },
+      {
+        "question_id": 179,
+        "question": "Choose the correct word: '___ backpack is left on the bench?'",
+        "options": [
+          "A) Whose",
+          "B) Who's",
+          "C) Whom",
+          "D) Which's"
+        ],
+        "correct_answer": "A) Whose",
+        "explanation": "'Whose' is the interrogative/relative possessive word ('Who's' = who is)."
+      },
+      {
+        "question_id": 180,
+        "question": "In 'The laptop that she purchased is light,' the relative clause modifies:",
+        "options": [
+          "A) laptop",
+          "B) she",
+          "C) purchased",
+          "D) light"
+        ],
+        "correct_answer": "A) laptop",
+        "explanation": "'that she purchased' is an adjectival relative clause modifying head noun 'laptop'."
+      }
+    ],
+    "source_book_and_page": [
+      "Scholastic Success with Grammar Grade 5, Page 57",
+      "Understanding Semantics Second Edition, Pages 106–107, 117–119"
+    ]
+  },
+  {
+    "topic_id": 19,
+    "topic_name": "Passive Voice vs. Active Voice Across Tenses",
+    "cefr_level": "Estimated CEFR: B1-B2",
+    "cefr_level_status": "Estimated mapping based on Grade 5, Everybody Up 6 & original educational content",
+    "english_explanation": "In active voice, the subject performs the verb action. In passive voice, the subject receives the action, shifting narrative focus onto the outcome, receiver, or process. Passive voice is formed using an appropriate tense form of auxiliary 'be' followed by the past participle (V3) of a transitive verb. The original doer is introduced using a 'by + agent' phrase only when essential or known.",
+    "arabic_explanation": "في المبني للمعلوم (Active Voice)، يقوم فاعل الجملة بالفعل. أما في المبني للمجهول (Passive Voice)، يتلقى الفاعل النحوي الفعل، مما ينقل التركيز إلى النتيجة أو المتلقي. يُصاغ المبني للمجهول باستخدام الشكل الزمني المناسب من الفعل المساعد (be) متبوعًا بالتصريف الثالث (Past Participle - V3) للفعل المتعدي الرئيسي. يُذكر الفاعل الأصلي (Agent) باستخدام (by + agent) فقط عندما يكون مهمًا أو غير معروف من السياق.",
+    "grammar_structure_and_formulas": {
+      "simple_present_passive": "[Subject/Receiver] + am / is / are + [Past Participle (V3)] (+ by Agent)",
+      "simple_past_passive": "[Subject/Receiver] + was / were + [Past Participle (V3)] (+ by Agent)",
+      "present_perfect_passive": "[Subject/Receiver] + has / have + been + [Past Participle (V3)]",
+      "modal_passive": "[Subject/Receiver] + Modal (can/must/will) + be + [Past Participle (V3)]"
+    },
+    "forms": {
+      "positive_form": "Active: 'The chef prepares dinner.' -> Passive: 'Dinner is prepared by the chef.'",
+      "negative_form": "Active: 'The chef did not prepare dinner.' -> Passive: 'Dinner was not prepared by the chef.'",
+      "question_form": "Active: 'Did the chef prepare dinner?' -> Passive: 'Was dinner prepared by the chef?'"
+    },
+    "when_and_how_to_use": [
+      "Use passive voice when the action's recipient is more important than the doer.",
+      "Use passive voice when the doer is unknown, obvious, or intentionally anonymous (e.g., scientific reports).",
+      "Omit 'by + agent' when the doer is obvious (e.g., 'The thief was arrested').",
+      "Only transitive action verbs taking direct objects can be converted into passive voice."
+    ],
+    "common_mistakes": [
+      "Attempting to turn intransitive verbs into passive voice (e.g., trying to convert 'He arrived early').",
+      "Using the wrong participle form (e.g., writing 'was broke' instead of 'was broken').",
+      "Overusing passive voice in general prose where active voice is clearer and more direct."
+    ],
+    "examples": [
+      "Simple Present Passive: Millions of emails are sent across the globe every minute.",
+      "Simple Past Passive: The telephone was invented by Alexander Graham Bell in 1876.",
+      "Present Perfect Passive: All the final reports have been submitted to the board.",
+      "Modal Passive: Safety guidelines must be followed at all times in the laboratory.",
+      "Future Passive: The new suspension bridge will be completed next spring."
+    ],
+    "practice_questions": [
+      {
+        "question_id": 181,
+        "question": "Convert into PASSIVE VOICE: 'The chef prepares a delicious meal every evening.'",
+        "options": [
+          "A) A delicious meal is prepared by the chef every evening.",
+          "B) A delicious meal was prepared by the chef every evening.",
+          "C) A delicious meal has been prepared by the chef.",
+          "D) The chef is prepared a delicious meal."
+        ],
+        "correct_answer": "A) A delicious meal is prepared by the chef every evening.",
+        "explanation": "Simple Present active ('prepares') converts to Simple Present passive ('is prepared')."
+      },
+      {
+        "question_id": 182,
+        "question": "Convert into PASSIVE VOICE: 'Alexander Bell invented the telephone.'",
+        "options": [
+          "A) The telephone is invented by Alexander Bell.",
+          "B) The telephone was invented by Alexander Bell.",
+          "C) The telephone has invented Alexander Bell.",
+          "D) The telephone was invent by Alexander Bell."
+        ],
+        "correct_answer": "B) The telephone was invented by Alexander Bell.",
+        "explanation": "Simple Past active ('invented') converts to Simple Past passive ('was invented')."
+      },
+      {
+        "question_id": 183,
+        "question": "Identify the PRESENT PERFECT PASSIVE sentence:",
+        "options": [
+          "A) The documents were signed yesterday.",
+          "B) The documents have been signed by the director.",
+          "C) The documents are being signed now.",
+          "D) The documents will be signed tomorrow."
+        ],
+        "correct_answer": "B) The documents have been signed by the director.",
+        "explanation": "'have been signed' forms the Present Perfect passive."
+      },
+      {
+        "question_id": 184,
+        "question": "Which sentence forms a MODAL PASSIVE correctly?",
+        "options": [
+          "A) The rules must follow by everyone.",
+          "B) The rules must be followed by everyone.",
+          "C) The rules must being followed by everyone.",
+          "D) The rules must be follow by everyone."
+        ],
+        "correct_answer": "B) The rules must be followed by everyone.",
+        "explanation": "Modal passives require 'modal + be + past participle (V3)'."
+      },
+      {
+        "question_id": 185,
+        "question": "In which sentence is the 'by + agent' phrase unnecessary and typically omitted?",
+        "options": [
+          "A) The portrait was painted by Leonardo da Vinci.",
+          "B) The novel was written by George Orwell.",
+          "C) The bank robber was arrested by police officers.",
+          "D) The song was composed by Beethoven."
+        ],
+        "correct_answer": "C) The bank robber was arrested by police officers.",
+        "explanation": "Because police officers are the obvious authority who arrest robbers, mentioning the agent is redundant."
+      },
+      {
+        "question_id": 186,
+        "question": "Why CANNOT the sentence 'The sun rose at six o'clock' be converted into passive voice?",
+        "options": [
+          "A) Because it is in the simple past tense.",
+          "B) Because 'rose' is an intransitive verb with no direct object.",
+          "C) Because 'sun' is a proper noun.",
+          "D) Because six o'clock is an adverb."
+        ],
+        "correct_answer": "B) Because 'rose' is an intransitive verb with no direct object.",
+        "explanation": "Only transitive verbs taking direct objects can undergo passive transformation."
+      },
+      {
+        "question_id": 187,
+        "question": "Choose the correct FUTURE SIMPLE PASSIVE sentence:",
+        "options": [
+          "A) The new library will build next year.",
+          "B) The new library will be built next year.",
+          "C) The new library will being built next year.",
+          "D) The new library is built next year."
+        ],
+        "correct_answer": "B) The new library will be built next year.",
+        "explanation": "'will be built' represents future simple passive structure."
+      },
+      {
+        "question_id": 188,
+        "question": "Identify the PAST PROGRESSIVE PASSIVE tense in:",
+        "options": [
+          "A) The road was repaired yesterday.",
+          "B) The road was being repaired when the storm hit.",
+          "C) The road had been repaired before winter.",
+          "D) The road is being repaired."
+        ],
+        "correct_answer": "B) The road was being repaired when the storm hit.",
+        "explanation": "'was being repaired' represents past progressive passive."
+      },
+      {
+        "question_id": 189,
+        "question": "Choose the correct passive past participle form: 'The glass window was ___ by the storm.'",
+        "options": [
+          "A) break",
+          "B) broke",
+          "C) broken",
+          "D) breaking"
+        ],
+        "correct_answer": "C) broken",
+        "explanation": "Passive voice requires the past participle form V3 ('broken')."
+      },
+      {
+        "question_id": 190,
+        "question": "Which active sentence corresponds to: 'The trophy was won by Maya'?",
+        "options": [
+          "A) Maya won the trophy.",
+          "B) Maya wins the trophy.",
+          "C) Maya has won the trophy.",
+          "D) Maya was winning the trophy."
+        ],
+        "correct_answer": "A) Maya won the trophy.",
+        "explanation": "Simple past passive ('was won') corresponds to simple past active ('won')."
+      }
+    ],
+    "source_book_and_page": [
+      "Scholastic Success with Grammar Grade 5, Page 37",
+      "Everybody Up 6 Workbook, Pages 47, 59"
+    ]
+  },
+  {
+    "topic_id": 20,
+    "topic_name": "Direct vs. Reported (Indirect) Speech & Backshifting",
+    "cefr_level": "Estimated CEFR: B1-B2",
+    "cefr_level_status": "Estimated mapping based on Grade 5, Everybody Up 6 & original educational content",
+    "english_explanation": "Reported (indirect) speech relates what someone said without quoting their exact words. When the reporting verb is in the past tense (e.g., 'said', 'told'), verbs in the reported clause backshift one tense into the past (Simple Present -> Simple Past, Present Continuous -> Past Continuous, Present Perfect / Simple Past -> Past Perfect, Will -> Would). Pronouns, possessive adjectives, and expressions of time/place also shift contextually (e.g., 'now' -> 'then', 'today' -> 'that day', 'here' -> 'there').",
+    "arabic_explanation": "يُستخدم الكلام المنقول (Reported/Indirect Speech) لنقل ما قاله شخص ما دون اقتباس كلماته بالنص. عندما يكون فعل النقل في الماضي (مثل: said, told)، تتراجع الأزمنة داخل الجملة المنقولة خطوة إلى الماضي (Backshifting): (المضارع البسيط -> الماضي البسيط، المضارع المستمر -> الماضي المستمر، المضارع التام/الماضي البسيط -> الماضي التام، will -> would). كما تتغير الضمائر وظروف الزمان والمكان حسب السياق (مثل: now -> then، today -> that day).",
+    "grammar_structure_and_formulas": {
+      "backshift_rules": {
+        "Simple Present -> Simple Past": "Direct: \"I work.\" -> Reported: He said he worked.",
+        "Present Continuous -> Past Continuous": "Direct: \"I am working.\" -> Reported: He said he was working.",
+        "Present Perfect / Past Simple -> Past Perfect": "Direct: \"I finished / have finished.\" -> Reported: He said he had finished.",
+        "Will -> Would": "Direct: \"I will go.\" -> Reported: He said he would go."
+      },
+      "reporting_verb_syntax": "[Subject] + said + (that) + [Backshifted Clause] OR [Subject] + told + [Object Noun/Pronoun] + (that) + [Backshifted Clause]",
+      "time_place_shifts": "now -> then | today -> that day | tomorrow -> the next day | here -> there"
+    },
+    "forms": {
+      "positive_form": "Direct: 'She said, \"I like reading.\"' -> Reported: 'She said that she liked reading.'",
+      "negative_form": "Direct: 'He said, \"I don't know.\"' -> Reported: 'He said that he did not know.'",
+      "question_form": "Direct Question: 'She asked, \"Are you ready?\"' -> Reported Question: 'She asked if I was ready.'"
+    },
+    "when_and_how_to_use": [
+      "Backshift tenses when the reporting verb is in the simple past tense ('said', 'told', 'asked').",
+      "Use 'told' only when followed directly by a personal object (e.g., 'He told ME', not 'He told that').",
+      "Convert reported questions into declarative word order without question marks (e.g., 'asked if I was ready').",
+      "Do not backshift when reporting universal scientific truths that remain eternally true (e.g., 'The teacher said Earth revolves around the sun')."
+    ],
+    "common_mistakes": [
+      "Using 'told' without a personal object (e.g., writing 'He told that he was tired' instead of 'He said that he was tired').",
+      "Maintaining question word order in reported questions (e.g., writing 'He asked where was I' instead of 'He asked where I was').",
+      "Forgetting to backshift modal verbs ('will' -> 'would', 'can' -> 'could')."
+    ],
+    "examples": [
+      "Simple Present Backshift: Direct: \"I live in Cairo,\" said Ahmed. -> Reported: Ahmed said that he lived in Cairo.",
+      "Present Continuous Backshift: Direct: \"We are studying,\" said the boys. -> Reported: The boys said they were studying.",
+      "Will Backshift: Direct: \"I will call you tomorrow,\" promised Sarah. -> Reported: Sarah promised she would call me the next day.",
+      "Reported Question: Direct: \"Where do you live?\" asked the officer. -> Reported: The officer asked where I lived.",
+      "Unshifted Scientific Truth: Direct: \"Water boils at 100°C,\" said the teacher. -> Reported: The teacher said that water boils at 100°C."
+    ],
+    "practice_questions": [
+      {
+        "question_id": 191,
+        "question": "Convert to REPORTED SPEECH: 'Ahmed said, \"I live in Cairo.\"'",
+        "options": [
+          "A) Ahmed said that he lives in Cairo.",
+          "B) Ahmed said that he lived in Cairo.",
+          "C) Ahmed told that he lived in Cairo.",
+          "D) Ahmed says that he lived in Cairo."
+        ],
+        "correct_answer": "B) Ahmed said that he lived in Cairo.",
+        "explanation": "Simple present 'live' backshifts to simple past 'lived' after past reporting verb 'said'."
+      },
+      {
+        "question_id": 192,
+        "question": "Convert to REPORTED SPEECH: 'The boys said, \"We are playing soccer now.\"'",
+        "options": [
+          "A) The boys said that they were playing soccer then.",
+          "B) The boys said that we are playing soccer now.",
+          "C) The boys told that they were playing soccer then.",
+          "D) The boys said that they are playing soccer then."
+        ],
+        "correct_answer": "A) The boys said that they were playing soccer then.",
+        "explanation": "Present continuous 'are playing' backshifts to 'were playing', and time adverb 'now' shifts to 'then'."
+      },
+      {
+        "question_id": 193,
+        "question": "Which sentence correctly distinguishes 'SAID' from 'TOLD'?",
+        "options": [
+          "A) He told that he was ready.",
+          "B) He said me that he was ready.",
+          "C) He told me that he was ready.",
+          "D) He said to me that he was ready."
+        ],
+        "correct_answer": "C) He told me that he was ready.",
+        "explanation": "'told' must be followed directly by a personal receiver object ('me')."
+      },
+      {
+        "question_id": 194,
+        "question": "Convert 'will' in REPORTED SPEECH: 'Sarah said, \"I will help you tomorrow.\"'",
+        "options": [
+          "A) Sarah said that she will help me tomorrow.",
+          "B) Sarah said that she would help me the next day.",
+          "C) Sarah said that she helped me the next day.",
+          "D) Sarah told that she would help me tomorrow."
+        ],
+        "correct_answer": "B) Sarah said that she would help me the next day.",
+        "explanation": "'will' backshifts to 'would', and 'tomorrow' shifts to 'the next day'."
+      },
+      {
+        "question_id": 195,
+        "question": "How does the time expression 'today' shift in reported speech under past reporting?",
+        "options": [
+          "A) the day before",
+          "B) that day",
+          "C) the next day",
+          "D) now"
+        ],
+        "correct_answer": "B) that day",
+        "explanation": "'today' contextually shifts to 'that day' in reported speech."
+      },
+      {
+        "question_id": 196,
+        "question": "Convert Present Perfect: 'Mark said, \"I have finished my homework.\"'",
+        "options": [
+          "A) Mark said that he has finished his homework.",
+          "B) Mark said that he had finished his homework.",
+          "C) Mark said that he finished his homework.",
+          "D) Mark told that he had finished his homework."
+        ],
+        "correct_answer": "B) Mark said that he had finished his homework.",
+        "explanation": "Present Perfect 'have finished' backshifts to Past Perfect 'had finished'."
+      },
+      {
+        "question_id": 197,
+        "question": "Choose the correctly structured REPORTED QUESTION: 'She asked me, \"Are you ready?\"'",
+        "options": [
+          "A) She asked me was I ready.",
+          "B) She asked me if I was ready.",
+          "C) She asked me if was I ready.",
+          "D) She asked me that I was ready."
+        ],
+        "correct_answer": "B) She asked me if I was ready.",
+        "explanation": "Reported yes/no questions use 'if/whether' and take standard declarative word order ('I was ready')."
+      },
+      {
+        "question_id": 198,
+        "question": "Convert an IMPERATIVE command: 'The teacher said, \"Close your books.\"'",
+        "options": [
+          "A) The teacher told us to close our books.",
+          "B) The teacher said us that close our books.",
+          "C) The teacher told that we close our books.",
+          "D) The teacher asked us close your books."
+        ],
+        "correct_answer": "A) The teacher told us to close our books.",
+        "explanation": "Direct imperatives convert to indirect reported structures using 'told + object + to + base verb'."
+      },
+      {
+        "question_id": 199,
+        "question": "Choose the sentence where BACKSHIFTING IS NOT APPLIED due to a universal scientific fact:",
+        "options": [
+          "A) The teacher said that water boils at 100 degrees Celsius.",
+          "B) The teacher said that water boiled at 100 degrees Celsius.",
+          "C) The teacher told that water boils at 100 degrees Celsius.",
+          "D) The teacher said that water had boiled at 100 degrees Celsius."
+        ],
+        "correct_answer": "A) The teacher said that water boils at 100 degrees Celsius.",
+        "explanation": "Universal scientific facts remain in the simple present tense even after past reporting verbs."
+      },
+      {
+        "question_id": 200,
+        "question": "Convert direct question: 'He asked, \"Where do you live?\"'",
+        "options": [
+          "A) He asked where did I live.",
+          "B) He asked where I lived.",
+          "C) He asked where do I live.",
+          "D) He asked where I live."
+        ],
+        "correct_answer": "B) He asked where I lived.",
+        "explanation": "Wh- questions in reported speech retain the question word ('where') followed by subject + backshifted verb ('I lived')."
+      }
+    ],
+    "source_book_and_page": [
+      "Scholastic Success with Grammar Grade 5, Page 61",
+      "Everybody Up 6 Workbook, Pages 71, 86"
+    ]
+  },
+  {
+    "topic_id": 21,
+    "topic_name": "Conditionals (Zero, First, Second & Third Conditionals)",
+    "cefr_level": "Estimated CEFR: B1-B2",
+    "cefr_level_status": "Estimated mapping based on Grade 5 sources, Everybody Up 6 & original educational content",
+    "english_explanation": "Conditional sentences express a condition and its consequence across different real, future, hypothetical, or unreal past scenarios. Zero conditional expresses general scientific truths and habits (If + present, present). First conditional expresses real or probable future possibilities (If + present, will + base verb). Second conditional expresses hypothetical or unreal present/future situations (If + simple past, would + base verb). Third conditional expresses unreal past situations and regrets (If + past perfect, would have + past participle).",
+    "arabic_explanation": "تُعبر الجمل الشرطية (Conditionals) عن شرط ونتيجته عبر مواقف واقعية أو مستقبلية أو افتراضية أو مستحيلة في الماضي. يُستخدم الشرط الصفري (Zero Conditional) للحقائق العلمية والعادات العامة (If + مضارع بسيط، مضارع بسيط). ويُستخدم الشرط الأول (First Conditional) للمواقف المستقبلية المحتملة والواقعية (If + مضارع بسيط، will + الفعل المجرد). ويُستخدم الشرط الثاني (Second Conditional) للمواقف الافتراضية غير الواقعية في الحاضر أو المستقبل (If + ماضي بسيط، would + الفعل المجرد). بينما يُستخدم الشرط الثالث (Third Conditional) للمواقف المستحيلة والندم في الماضي (If + ماضي تام، would have + التصريف الثالث).",
+    "grammar_structure_and_formulas": {
+      "zero_conditional": "If / When + [Simple Present] + , + [Simple Present]",
+      "first_conditional": "If + [Simple Present] + , + [will / can / may + Base Verb]",
+      "second_conditional": "If + [Simple Past] + , + [would / could / might + Base Verb]",
+      "third_conditional": "If + [Past Perfect (had + V3)] + , + [would have / could have + Past Participle (V3)]"
+    },
+    "forms": {
+      "positive_form": "Zero: 'If you heat ice, it melts.' | First: 'If it rains, we will stay home.' | Second: 'If I won the lottery, I would buy a house.' | Third: 'If she had studied, she would have passed.'",
+      "negative_form": "First: 'If it does not rain, we will go out.' | Third: 'If she had not missed the bus, she would not have been late.'",
+      "question_form": "First: 'What will you do if it rains?' | Second: 'Where would you live if you could choose anywhere?' | Third: 'Would you have gone if you had known?'"
+    },
+    "when_and_how_to_use": [
+      "Use Zero Conditional for universal scientific facts, cause-and-effect laws, and recurring personal habits.",
+      "Use First Conditional when predicting real, achievable future outcomes based on realistic present conditions.",
+      "Use Second Conditional for imaginary scenarios, improbable future hopes, or unreal present states (using 'were' for all persons in formal style: 'If I were you').",
+      "Use Third Conditional to reflect on past events that cannot be changed, expressing regret or alternative past possibilities.",
+      "Use commas when the 'if-clause' precedes the main clause; omit commas when the main clause comes first."
+    ],
+    "common_mistakes": [
+      "Using 'will' inside the 'if-clause' in first conditional sentences (e.g., writing 'If it will rain, we will stay home' instead of 'If it rains, we will stay home').",
+      "Using 'would' inside the 'if-clause' in second conditional sentences (e.g., writing 'If I would have money, I would buy it' instead of 'If I had money, I would buy it').",
+      "Confusing second and third conditionals by mixing simple past with 'would have + V3'.",
+      "Using 'was' instead of formal subjunctive 'were' in second conditional 'if-clauses' in standardized academic contexts (e.g., writing 'If I was you' instead of 'If I were you')."
+    ],
+    "examples": [
+      "Zero Conditional: If water reaches 100 degrees Celsius, it boils.",
+      "First Conditional: If you study hard, you will pass the English exam.",
+      "Second Conditional: If I had a spacecraft, I would travel to Mars.",
+      "Second Conditional (Subjunctive): If I were the school principal, I would reduce homework.",
+      "Third Conditional: If they had left ten minutes earlier, they would have caught the train."
+    ],
+    "practice_questions": [
+      {
+        "question_id": 201,
+        "question": "Which sentence represents a ZERO CONDITIONAL expressing a universal fact?",
+        "options": [
+          "A) If you heat water to 100°C, it boils.",
+          "B) If you heat water to 100°C, it will boil.",
+          "C) If you heated water to 100°C, it would boil.",
+          "D) If you had heated water to 100°C, it would have boiled."
+        ],
+        "correct_answer": "A) If you heat water to 100°C, it boils.",
+        "explanation": "Zero conditional uses Simple Present in both clauses ('heat' / 'boils') for universal physical facts."
+      },
+      {
+        "question_id": 202,
+        "question": "Choose the correctly structured FIRST CONDITIONAL sentence:",
+        "options": [
+          "A) If it will rain tomorrow, we stay at home.",
+          "B) If it rains tomorrow, we will stay at home.",
+          "C) If it rained tomorrow, we will stay at home.",
+          "D) If it would rain tomorrow, we stayed at home."
+        ],
+        "correct_answer": "B) If it rains tomorrow, we will stay at home.",
+        "explanation": "First conditional requires Simple Present in the 'if-clause' ('rains') and 'will + base verb' in the result clause ('will stay')."
+      },
+      {
+        "question_id": 203,
+        "question": "Complete the SECOND CONDITIONAL: 'If I ___ more free time, I would learn Spanish.'",
+        "options": [
+          "A) have",
+          "B) had",
+          "C) would have",
+          "D) had had"
+        ],
+        "correct_answer": "B) had",
+        "explanation": "Second conditional requires Simple Past ('had') in the 'if-clause' to express a hypothetical present situation."
+      },
+      {
+        "question_id": 204,
+        "question": "Complete the THIRD CONDITIONAL: 'If she ___ the warning sign, she would not have fallen.'",
+        "options": [
+          "A) sees",
+          "B) saw",
+          "C) had seen",
+          "D) would see"
+        ],
+        "correct_answer": "C) had seen",
+        "explanation": "Third conditional requires Past Perfect ('had seen') in the 'if-clause' to describe an unreal past event."
+      },
+      {
+        "question_id": 205,
+        "question": "Choose the formal subjunctive form in SECOND CONDITIONAL: 'If I ___ you, I would apologize immediately.'",
+        "options": [
+          "A) am",
+          "B) was",
+          "C) were",
+          "D) be"
+        ],
+        "correct_answer": "C) were",
+        "explanation": "In formal academic English, the subjunctive 'were' is used for all subject pronouns in second conditional 'if-clauses'."
+      },
+      {
+        "question_id": 206,
+        "question": "Which option contains a grammatical ERROR in conditional structure?",
+        "options": [
+          "A) If you work hard, you will achieve your goals.",
+          "B) If I win the prize, I would buy a car.",
+          "C) If he practiced more, he could play better.",
+          "D) If we had left earlier, we would have arrived on time."
+        ],
+        "correct_answer": "B) If I win the prize, I would buy a car.",
+        "explanation": "Mixing present 'win' in the 'if-clause' with hypothetical 'would buy' is incorrect; it should be 'If I win... I will buy' or 'If I won... I would buy'."
+      },
+      {
+        "question_id": 207,
+        "question": "Identify the conditional type of: 'Where would you travel if you had a million dollars?'",
+        "options": [
+          "A) Zero Conditional",
+          "B) First Conditional",
+          "C) Second Conditional",
+          "D) Third Conditional"
+        ],
+        "correct_answer": "C) Second Conditional",
+        "explanation": "Simple past 'had' in the 'if-clause' + 'would + travel' in the question clause forms a Second Conditional."
+      },
+      {
+        "question_id": 208,
+        "question": "What is the meaning of: 'If I had known about the meeting, I would have attended.'?",
+        "options": [
+          "A) I knew about the meeting and I attended.",
+          "B) I know about the meeting and I will attend.",
+          "C) I did not know about the meeting, so I did not attend.",
+          "D) I will attend the meeting if you tell me."
+        ],
+        "correct_answer": "C) I did not know about the meeting, so I did not attend.",
+        "explanation": "Third conditional expresses an unreal past scenario: the speaker did not know and therefore did not attend."
+      },
+      {
+        "question_id": 209,
+        "question": "Which punctuation rule applies when the main clause PRECEDES the 'if-clause'?",
+        "options": [
+          "A) A comma is mandatory before 'if'.",
+          "B) A semicolon must precede 'if'.",
+          "C) No comma is placed before 'if'.",
+          "D) A colon must be placed before 'if'."
+        ],
+        "correct_answer": "C) No comma is placed before 'if'.",
+        "explanation": "When the main clause comes first (e.g., 'We will stay home if it rains'), no comma is used before the 'if-clause'."
+      },
+      {
+        "question_id": 210,
+        "question": "Complete the result clause: 'If they don't hurry, they ___ the flight.'",
+        "options": [
+          "A) miss",
+          "B) will miss",
+          "C) would miss",
+          "D) would have missed"
+        ],
+        "correct_answer": "B) will miss",
+        "explanation": "First conditional 'if-clause' in negative present ('don't hurry') pairs with 'will + base verb' ('will miss')."
+      }
+    ],
+    "source_book_and_page": [
+      "Scholastic Success with Grammar Grade 5, Page 60",
+      "Everybody Up 6 Workbook, Pages 47, 59, 85",
+      "Original Educational Content"
+    ]
+  },
+  {
+    "topic_id": 22,
+    "topic_name": "Modal Verbs of Deduction, Obligation, Advice & Ability",
+    "cefr_level": "Estimated CEFR: B1-B2",
+    "cefr_level_status": "Estimated mapping based on Grade 4–5 sources, Everybody Up 6 & original educational content",
+    "english_explanation": "Modal auxiliary verbs modify main verbs to express certainty, probability, necessity, obligation, permission, advice, or ability. Present/future deduction ranges from strong certainty ('must' = 95%+ sure, 'can't' = impossible) to possibility ('may', 'might', 'could'). Obligation and necessity are expressed by 'must' (internal/strong) and 'have to' (external rule), while advice is expressed by 'should' or 'ought to'. Past deductions use 'modal + have + past participle (V3)' (e.g., 'must have been', 'could have left', 'should have studied').",
+    "arabic_explanation": "تعدل الأفعال الناقصة (Modal Verbs) الأفعال الرئيسية للتعبير عن اليقين، والاحتمال، والضرورة، والالتزام، والإذن، والنصيحة، والقدرة. يتدرج الاستنتاج في الحاضر والمستقبل من اليقين القوي (must للموجب المؤكد، can't للمستحيل المنفي) إلى الاحتمالية (may, might, could). وتُعبر (must) و(have to) عن الإلزام والضرورة، بينما تُستخدم (should) للنصيحة. وتُصاغ الاستنتاجات في الماضي باستخدام (modal + have + V3) مثل (must have been, could have left, should have studied).",
+    "grammar_structure_and_formulas": {
+      "present_deduction_certainty": "[Subject] + must / can't + [Bare Base Verb] (95%+ certainty / logical impossibility)",
+      "present_deduction_possibility": "[Subject] + may / might / could + [Bare Base Verb] (50% possibility)",
+      "past_deduction_formula": "[Subject] + must / can't / might / could + have + [Past Participle (V3)]",
+      "past_regret_advice": "[Subject] + should / shouldn't + have + [Past Participle (V3)]"
+    },
+    "forms": {
+      "positive_form": "Deduction: 'He has three cars; he must be rich.' | Past Modal: 'She must have forgotten her keys.' | Obligation: 'You must wear a helmet.'",
+      "negative_form": "Deduction Negative: 'It can't be true.' | Past Advice Negative: 'You shouldn't have said that.'",
+      "question_form": "Deduction Question: 'Could he be at the library?' | Past Advice Question: 'Should I have brought an umbrella?'"
+    },
+    "when_and_how_to_use": [
+      "Use 'must + base verb' when logical evidence makes a present statement almost certain.",
+      "Use 'can't + base verb' when logical evidence makes a present statement impossible (never use 'mustn't' for negative deduction).",
+      "Use 'might / may / could + base verb' when expressing possibility without certainty.",
+      "Use 'must have + V3' for strong logical conclusions about past events; use 'should have + V3' for past regrets or unfulfilled advice.",
+      "Follow all modal verbs directly with bare infinitive verbs without 'to' (except 'ought to' and 'have to')."
+    ],
+    "common_mistakes": [
+      "Using 'mustn't' for negative deduction instead of 'can't' (e.g., writing 'He mustn't be at home' instead of 'He can't be at home').",
+      "Adding 'to' after standard modals (e.g., writing 'I must to go' instead of 'I must go').",
+      "Using simple past after modals when making past deductions (e.g., writing 'He must went' instead of 'He must have gone').",
+      "Confusing external requirement ('have to') with internal personal determination ('must') in past tenses (note: past of both is 'had to')."
+    ],
+    "examples": [
+      "Present Deduction (Certainty): Look at the heavy snow outside; it must be freezing.",
+      "Present Deduction (Impossibility): He just ate a huge lunch; he can't be hungry already.",
+      "Present Deduction (Possibility): Where is Sarah? She might be in the school laboratory.",
+      "Past Deduction: The streets are soaking wet; it must have rained during the night.",
+      "Past Regret (Advice): I failed the exam; I should have studied more diligently."
+    ],
+    "practice_questions": [
+      {
+        "question_id": 211,
+        "question": "Which modal verb best completes the PRESENT DEDUCTION: 'The lights are off and no one answers the door; they ___ be at home.'?",
+        "options": [
+          "A) must",
+          "B) can't",
+          "C) should",
+          "D) must not"
+        ],
+        "correct_answer": "B) can't",
+        "explanation": "'can't' expresses logical impossibility in present deduction when evidence indicates they are absent."
+      },
+      {
+        "question_id": 212,
+        "question": "Complete the PAST DEDUCTION: 'He scored 100% on the difficult math exam; he ___ hard.'",
+        "options": [
+          "A) must study",
+          "B) should study",
+          "C) must have studied",
+          "D) could study"
+        ],
+        "correct_answer": "C) must have studied",
+        "explanation": "'must have + past participle' forms strong logical deduction about a past completed action."
+      },
+      {
+        "question_id": 213,
+        "question": "Which modal sentence expresses PAST REGRET over a missed obligation?",
+        "options": [
+          "A) I must have arrived earlier.",
+          "B) I should have arrived earlier.",
+          "C) I might have arrived earlier.",
+          "D) I can't have arrived earlier."
+        ],
+        "correct_answer": "B) I should have arrived earlier.",
+        "explanation": "'should have + V3' expresses past regret or criticism regarding an unfulfilled action."
+      },
+      {
+        "question_id": 214,
+        "question": "Choose the correct sentence expressing PRESENT POSSIBILITY:",
+        "options": [
+          "A) Take an umbrella; it might to rain later.",
+          "B) Take an umbrella; it might rain later.",
+          "C) Take an umbrella; it must rain later.",
+          "D) Take an umbrella; it might raining later."
+        ],
+        "correct_answer": "B) Take an umbrella; it might rain later.",
+        "explanation": "'might' expresses present/future possibility and is followed directly by the bare base verb 'rain'."
+      },
+      {
+        "question_id": 215,
+        "question": "What is the correct PAST TENSE form of both 'must' and 'have to' for expressing obligation?",
+        "options": [
+          "A) musted",
+          "B) had to",
+          "C) must have to",
+          "D) have had to"
+        ],
+        "correct_answer": "B) had to",
+        "explanation": "The past tense of obligation for both 'must' and 'have to' is 'had to' (e.g., 'I had to leave early')."
+      },
+      {
+        "question_id": 216,
+        "question": "Identify the grammatical mistake: 'You mustn't to bring food into the computer lab.'",
+        "options": [
+          "A) 'mustn't' should be 'don't have to'",
+          "B) 'to' after 'mustn't' should be omitted",
+          "C) 'bring' should be 'brought'",
+          "D) 'computer' should be plural"
+        ],
+        "correct_answer": "B) 'to' after 'mustn't' should be omitted",
+        "explanation": "Modal verbs (except 'ought to' and 'have to') are followed directly by bare infinitives without 'to'."
+      },
+      {
+        "question_id": 217,
+        "question": "Which sentence expresses strong logical certainty in the present?",
+        "options": [
+          "A) She has won ten gold medals; she must be an extraordinary athlete.",
+          "B) She has won ten gold medals; she might be an extraordinary athlete.",
+          "C) She has won ten gold medals; she should be an extraordinary athlete.",
+          "D) She has won ten gold medals; she can be an extraordinary athlete."
+        ],
+        "correct_answer": "A) She has won ten gold medals; she must be an extraordinary athlete.",
+        "explanation": "'must' + base verb indicates near-certain logical deduction based on strong present evidence."
+      },
+      {
+        "question_id": 218,
+        "question": "Complete the sentence: 'The museum ticket was free, so we ___ pay anything.'",
+        "options": [
+          "A) mustn't",
+          "B) didn't have to",
+          "C) shouldn't have",
+          "D) couldn't"
+        ],
+        "correct_answer": "B) didn't have to",
+        "explanation": "'didn't have to' expresses lack of necessity in the past."
+      },
+      {
+        "question_id": 219,
+        "question": "Choose the correct past deduction: 'She ___ the email; otherwise, she would have replied.'",
+        "options": [
+          "A) can't receive",
+          "B) shouldn't receive",
+          "C) can't have received",
+          "D) mustn't receive"
+        ],
+        "correct_answer": "C) can't have received",
+        "explanation": "'can't have + past participle' expresses logical impossibility in the past."
+      },
+      {
+        "question_id": 220,
+        "question": "Which modal verb structure expresses advice or recommendation in the present?",
+        "options": [
+          "A) You must to consult a doctor.",
+          "B) You should consult a doctor.",
+          "C) You might have consulted a doctor.",
+          "D) You had to consult a doctor."
+        ],
+        "correct_answer": "B) You should consult a doctor.",
+        "explanation": "'should + base verb' is standard for giving present advice or recommendations."
+      }
+    ],
+    "source_book_and_page": [
+      "Scholastic Success with Grammar Grade 4, Pages 38–40",
+      "Scholastic Success with Grammar Grade 5, Pages 50–52",
+      "Everybody Up 6 Workbook, Page 86",
+      "Original Educational Content"
+    ]
+  },
+  {
+    "topic_id": 23,
+    "topic_name": "Gerunds vs. Infinitives & Verb Complement Patterns",
+    "cefr_level": "Estimated CEFR: B1-B2",
+    "cefr_level_status": "Estimated mapping based on Grade 4–5 sources, Everybody Up 6 & original educational content",
+    "english_explanation": "A gerund is the -ing form of a verb functioning as a noun (e.g., 'Swimming is fun'). An infinitive is 'to + base verb' (e.g., 'I want to learn'). Certain verbs require gerund complements (enjoy, avoid, suggest, consider, finish, admit), others require to-infinitives (decide, hope, agree, plan, promise, offer), and some accept bare infinitives (make, let, help). Certain key verbs change meaning depending on whether they take a gerund or an infinitive (remember, stop, try, forget). Prepositions are always followed by gerunds.",
+    "arabic_explanation": "اسم الفاعل/المصدر (Gerund) هو صيغة الفعل المنتهية بـ -ing والتي تعمل كاسم (مثل: \"Swimming is fun\"). والمصدر المزود بـ to (Infinitive) يتكون من (to + الفعل المجرد). تتطلب بعض الأفعال مفعولاً من اسم الفاعل (enjoy, avoid, suggest, finish)، وتتطلب أفعال أخرى مصدراً بـ to (decide, hope, agree, plan)، بينما تأخذ أفعال أخرى المصدر المجرد بدون to (make, let). وهناك أفعال يتغير معناها تماماً حسب استخدام اسم الفاعل أو المصدر (remember, stop, try, forget). وتأتي حروف الجر دائمًا متبوعة باسم الفاعل (Gerund).",
+    "grammar_structure_and_formulas": {
+      "verb_plus_gerund": "[Verb (enjoy/avoid/finish/suggest...)] + [Verb-ing]",
+      "verb_plus_infinitive": "[Verb (decide/hope/plan/promise...)] + [to + Base Verb]",
+      "preposition_plus_gerund": "[Preposition (in/on/at/of/about/without)] + [Verb-ing]",
+      "bare_infinitive_formula": "[Verb (make/let)] + [Object] + [Bare Base Verb]"
+    },
+    "forms": {
+      "positive_form": "Gerund: 'She enjoys reading historical novels.' | Infinitive: 'He decided to study engineering.' | Bare Infinitive: 'She made him clean his room.'",
+      "negative_form": "Negative Gerund: 'He admitted to not knowing the answer.' | Negative Infinitive: 'She promised not to be late.'",
+      "question_form": "Gerund Question: 'Do you mind opening the window?' | Infinitive Question: 'Did you agree to help them?'"
+    },
+    "when_and_how_to_use": [
+      "Use gerunds as subjects of sentences (e.g., 'Learning English opens opportunities').",
+      "Use gerunds after all prepositions (e.g., 'interested in learning', 'good at solving', 'instead of waiting').",
+      "Use to-infinitives to state purpose or reason for an action (e.g., 'He went to the library to study').",
+      "Note meaning changes: 'stop doing' (cease an activity) vs 'stop to do' (pause in order to do something); 'remember doing' (past memory) vs 'remember to do' (duty/task)."
+    ],
+    "common_mistakes": [
+      "Using an infinitive directly after a preposition (e.g., writing 'interested in to learn' instead of 'interested in learning').",
+      "Using 'to' after causation verbs 'make' and 'let' (e.g., writing 'She made him to study' instead of 'She made him study').",
+      "Confusing verbs taking gerunds with those taking infinitives (e.g., writing 'I enjoy to read' instead of 'I enjoy reading')."
+    ],
+    "examples": [
+      "Gerund Complement: They finished building the bridge after six months.",
+      "Infinitive Complement: We decided to postpone the outdoor athletic competition.",
+      "Preposition + Gerund: Maya is passionate about environmental protection and recycling.",
+      "Bare Infinitive (let): The teacher let the students leave five minutes early.",
+      "Meaning Shift (stop): He stopped smoking (quit habit) vs He stopped to smoke (paused to smoke)."
+    ],
+    "practice_questions": [
+      {
+        "question_id": 221,
+        "question": "Which verb pattern correctly follows 'enjoy'?",
+        "options": [
+          "A) She enjoys to read mystery novels.",
+          "B) She enjoys reading mystery novels.",
+          "C) She enjoys read mystery novels.",
+          "D) She enjoys for reading mystery novels."
+        ],
+        "correct_answer": "B) She enjoys reading mystery novels.",
+        "explanation": "'enjoy' is followed by a gerund (-ing form)."
+      },
+      {
+        "question_id": 222,
+        "question": "Which verb pattern correctly follows 'decide'?",
+        "options": [
+          "A) They decided going to London.",
+          "B) They decided go to London.",
+          "C) They decided to go to London.",
+          "D) They decided for going to London."
+        ],
+        "correct_answer": "C) They decided to go to London.",
+        "explanation": "'decide' requires a to-infinitive complement."
+      },
+      {
+        "question_id": 223,
+        "question": "Complete the prepositional phrase: 'She is interested in ___ computer science.'",
+        "options": [
+          "A) study",
+          "B) to study",
+          "C) studying",
+          "D) studied"
+        ],
+        "correct_answer": "C) studying",
+        "explanation": "Prepositions ('in') must always be followed by gerunds (-ing forms)."
+      },
+      {
+        "question_id": 224,
+        "question": "Choose the sentence with the correct BARE INFINITIVE following 'make':",
+        "options": [
+          "A) The coach made us to run three miles.",
+          "B) The coach made us running three miles.",
+          "C) The coach made us run three miles.",
+          "D) The coach made us to running three miles."
+        ],
+        "correct_answer": "C) The coach made us run three miles.",
+        "explanation": "Causative verb 'make' takes an object followed by a bare infinitive without 'to'."
+      },
+      {
+        "question_id": 225,
+        "question": "What is the difference in meaning between 'He stopped smoking' (1) and 'He stopped to smoke' (2)?",
+        "options": [
+          "A) (1) means he paused his walk to smoke; (2) means he quit the habit.",
+          "B) (1) means he quit the habit; (2) means he paused an activity in order to smoke.",
+          "C) Both sentences mean he quit smoking entirely.",
+          "D) Both sentences mean he is currently smoking."
+        ],
+        "correct_answer": "B) (1) means he quit the habit; (2) means he paused an activity in order to smoke.",
+        "explanation": "'stop + gerund' means quit an action; 'stop + infinitive' means pause in order to perform an action."
+      },
+      {
+        "question_id": 226,
+        "question": "Identify the sentence where a GERUND acts as the SUBJECT of the sentence:",
+        "options": [
+          "A) She loves swimming in the ocean.",
+          "B) Swimming in the ocean is her favorite activity.",
+          "C) She went to the beach to swim.",
+          "D) While swimming, she saw a dolphin."
+        ],
+        "correct_answer": "B) Swimming in the ocean is her favorite activity.",
+        "explanation": "In option B, the gerund phrase 'Swimming in the ocean' acts as the subject noun phrase of the verb 'is'."
+      },
+      {
+        "question_id": 227,
+        "question": "Which verb requires a TO-INFINITIVE complement?",
+        "options": [
+          "A) avoid",
+          "B) consider",
+          "C) promise",
+          "D) suggest"
+        ],
+        "correct_answer": "C) promise",
+        "explanation": "'promise' takes a to-infinitive (e.g., 'promise to come'); avoid, consider, and suggest take gerunds."
+      },
+      {
+        "question_id": 228,
+        "question": "Choose the correct negative infinitive structure: 'The doctor advised him ___ sugar.'",
+        "options": [
+          "A) to not eat",
+          "B) not to eat",
+          "C) don't eat",
+          "D) not eating"
+        ],
+        "correct_answer": "B) not to eat",
+        "explanation": "Negative infinitives are formed by placing 'not' immediately before 'to + base verb'."
+      },
+      {
+        "question_id": 229,
+        "question": "Complete the purpose structure: 'He saved money ___ a new bicycle.'",
+        "options": [
+          "A) for buy",
+          "B) to buy",
+          "C) buying",
+          "D) for to buy"
+        ],
+        "correct_answer": "B) to buy",
+        "explanation": "An infinitive of purpose ('to buy') explains why an action was performed."
+      },
+      {
+        "question_id": 230,
+        "question": "Identify the grammatical mistake: 'My father let me to drive his car.'",
+        "options": [
+          "A) 'let' should be 'allowed'",
+          "B) 'to' before 'drive' must be omitted",
+          "C) 'drive' should be 'driving'",
+          "D) 'his' should be 'him'"
+        ],
+        "correct_answer": "B) 'to' before 'drive' must be omitted",
+        "explanation": "'let' takes an object + bare infinitive without 'to' ('let me drive')."
+      }
+    ],
+    "source_book_and_page": [
+      "Scholastic Success with Grammar Grade 4, Pages 29–31",
+      "Scholastic Success with Grammar Grade 5, Pages 35–37",
+      "Everybody Up 6 Workbook, Pages 15, 86",
+      "Original Educational Content"
+    ]
+  },
+  {
+    "topic_id": 24,
+    "topic_name": "Present Perfect Simple vs. Present Perfect Continuous",
+    "cefr_level": "Estimated CEFR: B1-B2",
+    "cefr_level_status": "Estimated mapping based on Grade 5 sources, Everybody Up 6 & original educational content",
+    "english_explanation": "Present Perfect Simple (has/have + V3) emphasizes completed past actions connected to the present, total quantities, or permanent results (e.g., 'I have written three essays'). Present Perfect Continuous (has/have + been + V-ing) emphasizes ongoing duration, activity process, or recent continuous actions whose effects are still visible (e.g., 'I have been writing for three hours'). Non-action (stative) verbs (know, believe, belong, like, possess) are used only in Present Perfect Simple.",
+    "arabic_explanation": "يُركس المضارع التام البسيط (Present Perfect Simple: has/have + V3) على الأفعال المكتملة المترابطة بالحاضر، أو عدد المرات، أو النتائج النهائية (مثل: \"I have written three essays\"). بينما يُركز المضارع التام المستمر (Present Perfect Continuous: has/have + been + V-ing) على استمرارية الحدث والمدة الزمنية أو العملية الجارية التي ما زالت آثارها واضحة (مثل: \"I have been writing for three hours\"). الأفعال التقريرية (Stative Verbs) مثل (know, believe, like) تُستخدم فقط في المضارع التام البسيط ولا تأتي في الصيغة المستمرة.",
+    "grammar_structure_and_formulas": {
+      "present_perfect_simple": "[Subject] + has / have + [Past Participle (V3)]",
+      "present_perfect_continuous": "[Subject] + has / have + been + [Verb-ing]",
+      "time_markers_simple": "already, yet, just, ever, never, (number of times / completed count)",
+      "time_markers_continuous": "for (duration), since (starting point), how long, all morning / all day"
+    },
+    "forms": {
+      "positive_form": "Simple: 'She has painted two bedrooms.' | Continuous: 'She has been painting all morning.'",
+      "negative_form": "Simple: 'She has not finished yet.' | Continuous: 'She has not been feeling well lately.'",
+      "question_form": "Simple: 'How many books have you read?' | Continuous: 'How long have you been waiting?'"
+    },
+    "when_and_how_to_use": [
+      "Use Present Perfect Simple when focusing on the result, completion, or quantity of an action ('how many / how much').",
+      "Use Present Perfect Continuous when focusing on the activity process, side effects, or duration ('how long').",
+      "Use 'for' with periods of duration (for three hours, for five years); use 'since' with specific starting points (since 2010, since 8 AM).",
+      "Never use stative verbs in continuous forms (e.g., write 'I have known him for years', never 'I have been knowing him')."
+    ],
+    "common_mistakes": [
+      "Using Present Perfect Continuous with stative verbs (e.g., writing 'I have been knowing her since childhood' instead of 'I have known her since childhood').",
+      "Confusing 'for' and 'since' (e.g., writing 'since three hours' instead of 'for three hours').",
+      "Using Simple Past with 'since' when expressing ongoing time up to the present."
+    ],
+    "examples": [
+      "Simple Result (Quantity): He has run three miles this morning.",
+      "Continuous Duration (Process): He is exhausted because he has been running for two hours.",
+      "Stative Verb in Simple: We have lived in London since 2015 and have known our neighbors for years.",
+      "Visible Present Effect: Her hands are covered in paint because she has been decorating.",
+      "Time Markers: She has already completed her project, but he hasn't started yet."
+    ],
+    "practice_questions": [
+      {
+        "question_id": 231,
+        "question": "Which sentence correctly emphasizes the COMPLETED RESULT and quantity?",
+        "options": [
+          "A) She has been writing three letters this morning.",
+          "B) She has written three letters this morning.",
+          "C) She writes three letters this morning.",
+          "D) She was writing three letters this morning."
+        ],
+        "correct_answer": "B) She has written three letters this morning.",
+        "explanation": "Present Perfect Simple ('has written') is used when focusing on completed quantity ('three letters')."
+      },
+      {
+        "question_id": 232,        "question": "Which sentence correctly emphasizes ONGOING DURATION?",
+        "options": [
+          "A) They have been studying for three hours.",
+          "B) They have studied three hours.",
+          "C) They are study for three hours.",
+          "D) They have been studied for three hours."
+        ],
+        "correct_answer": "A) They have been studying for three hours.",
+        "explanation": "Present Perfect Continuous ('have been studying') emphasizes the continuous duration of an ongoing action."
+      },
+      {
+        "question_id": 233,
+        "question": "Choose the correct verb form for a STATIVE verb: 'I ___ my best friend since primary school.'",
+        "options": [
+          "A) have been knowing",
+          "B) have known",
+          "C) am knowing",
+          "D) knowed"
+        ],
+        "correct_answer": "B) have known",
+        "explanation": "Stative verbs like 'know' cannot take continuous -ing forms; Present Perfect Simple ('have known') is required."
+      },
+      {
+        "question_id": 234,
+        "question": "Select the correct TIME PREPOSITION: 'She has worked at the university ___ 2018.'",
+        "options": [
+          "A) for",
+          "B) since",
+          "C) during",
+          "D) from"
+        ],
+        "correct_answer": "B) since",
+        "explanation": "'since' introduces a specific starting point in time ('2018')."
+      },
+      {
+        "question_id": 235,
+        "question": "Select the correct TIME PREPOSITION: 'She has worked at the university ___ six years.'",
+        "options": [
+          "A) for",
+          "B) since",
+          "C) during",
+          "D) from"
+        ],
+        "correct_answer": "A) for",
+        "explanation": "'for' introduces a period or length of duration ('six years')."
+      },
+      {
+        "question_id": 236,
+        "question": "Identify the sentence showing a VISIBLE PRESENT EFFECT of a recent continuous activity:",
+        "options": [
+          "A) The ground is wet because it has been raining.",
+          "B) The ground is wet because it rained yesterday.",
+          "C) The ground is wet because it rains.",
+          "D) The ground is wet because it will rain."
+        ],
+        "correct_answer": "A) The ground is wet because it has been raining.",
+        "explanation": "Present Perfect Continuous ('has been raining') explains a present physical outcome resulting from a recent activity."
+      },
+      {
+        "question_id": 237,
+        "question": "Complete the question: '___ pages of the report have you read so far?'",
+        "options": [
+          "A) How long",
+          "B) How many times",
+          "C) How many",
+          "D) How much time"
+        ],
+        "correct_answer": "C) How many",
+        "explanation": "'How many' asks for countable completed quantity associated with Present Perfect Simple."
+      },
+      {
+        "question_id": 238,
+        "question": "Identify the grammatical mistake: 'I have been possessing this bicycle for five years.'",
+        "options": [
+          "A) 'for' should be 'since'",
+          "B) 'possessing' should be replaced by Present Perfect Simple 'possessed'",
+          "C) 'have' should be 'had'",
+          "D) 'years' should be singular"
+        ],
+        "correct_answer": "B) 'possessing' should be replaced by Present Perfect Simple 'possessed'",
+        "explanation": "Stative verb 'possess' cannot be used in continuous tenses; it must read 'I have possessed'."
+      },
+      {
+        "question_id": 239,
+        "question": "Which time adverbial is standardly paired with negative Present Perfect Simple sentences?",
+        "options": [
+          "A) already",
+          "B) yet",
+          "C) just",
+          "D) ever"
+        ],
+        "correct_answer": "B) yet",
+        "explanation": "'yet' is standardly used at the end of negative Present Perfect sentences (e.g., 'I haven't finished yet')."
+      },
+      {
+        "question_id": 240,
+        "question": "Choose the correct sentence: 'Look! Someone ___ my chocolate cake.'",
+        "options": [
+          "A) has been eating",
+          "B) has eaten half of",
+          "C) has ate",
+          "D) is eating half"
+        ],
+        "correct_answer": "B) has eaten half of",
+        "explanation": "Present Perfect Simple ('has eaten') directly highlights the completed consumption result."
+      }
+    ],
+    "source_book_and_page": [
+      "Scholastic Success with Grammar Grade 5, Pages 41–43",
+      "Everybody Up 6 Workbook, Pages 11, 23, 35, 71, 84",
+      "Original Educational Content"
+    ]
+  },
+  {
+    "topic_id": 25,
+    "topic_name": "Past Perfect Simple & Past Perfect Continuous",
+    "cefr_level": "Estimated CEFR: B1-B2",
+    "cefr_level_status": "Estimated mapping based on Grade 5 sources, Everybody Up 6 & original educational content",
+    "english_explanation": "Past Perfect Simple (had + V3) establishes that an action occurred and finished before another past action or specific past time point (e.g., 'When we arrived, the train had left'). Past Perfect Continuous (had + been + V-ing) establishes that an ongoing action had been in progress up until another past moment (e.g., 'He had been studying for two hours when the power went out'). Both tenses clarify narrative sequencing in complex past contexts.",
+    "arabic_explanation": "يُبين الماضي التام البسيط (Past Perfect Simple: had + V3) أن حدثًا قد اكتمل وانتهى قبل وقوع حدث آخر في الماضي أو قبل نقطة زمنية محددة في الماضي (مثل: \"When we arrived, the train had left\"). بينما يُبين الماضي التام المستمر (Past Perfect Continuous: had + been + V-ing) أن حدثًا مستمرًا كان جاريًا حتى لحظة وقوع حدث آخر في الماضي (مثل: \"He had been studying for two hours when the power went out\"). يُستخدم الكلا لتوضيح التسلسل الزمني للأحداث في الماضي.",
+    "grammar_structure_and_formulas": {
+      "past_perfect_simple": "[Subject] + had + [Past Participle (V3)]",
+      "past_perfect_continuous": "[Subject] + had + been + [Verb-ing]",
+      "narrative_clause_structure": "[Past Perfect Clause (earlier action)] + before / when / by the time + [Simple Past Clause (later action)]"
+    },
+    "forms": {
+      "positive_form": "Simple: 'The train had left when we arrived.' | Continuous: 'They had been waiting for an hour before the bus came.'",
+      "negative_form": "Simple: 'She had not seen the movie before yesterday.' | Continuous: 'He had not been working long when he quit.'",
+      "question_form": "Simple: 'Had you ever visited Paris before 2020?' | Continuous: 'Had it been raining long before the match was canceled?'"
+    },
+    "when_and_how_to_use": [
+      "Use Past Perfect Simple for the earlier completed event when two past events are compared.",
+      "Use Past Perfect Continuous to show the duration of an activity leading directly up to a specific past event.",
+      "Use time conjunctions 'by the time', 'before', 'after', and 'when' to structure past timeline relationships.",
+      "Do not use Past Perfect unless establishing sequence relative to another past event or fixed past reference point."
+    ],
+    "common_mistakes": [
+      "Overusing Past Perfect for simple sequential past events where 'before' or 'after' makes the order clear (e.g., 'I ate dinner then slept' does not require Past Perfect).",
+      "Using Present Perfect ('have had') instead of Past Perfect ('had had') when looking back from a past point.",
+      "Confusing the past participle form V3 after 'had'."
+    ],
+    "examples": [
+      "Simple Sequence: By the time the fire brigade arrived, the neighbors had extinguished the fire.",
+      "Continuous Duration: She was exhausted because she had been working all night.",
+      "Unrealized Past Intent: I had hoped to visit the museum, but it was closed.",
+      "Stative Past Perfect: They had known each other for ten years before they became business partners.",
+      "Clear Timeline: After he had completed the experiment, he published his scientific findings."
+    ],
+    "practice_questions": [
+      {
+        "question_id": 241,
+        "question": "Which action happened FIRST: 'When we arrived at the cinema, the movie had already started.'?",
+        "options": [
+          "A) We arrived at the cinema.",
+          "B) The movie started.",
+          "C) Both happened simultaneously.",
+          "D) Neither happened."
+        ],
+        "correct_answer": "B) The movie started.",
+        "explanation": "Past Perfect ('had started') marks the earlier action taking place before the Simple Past action ('arrived')."
+      },
+      {
+        "question_id": 242,
+        "question": "Complete the PAST PERFECT SIMPLE sentence: 'By the time the police arrived, the burglar ___.'",
+        "options": [
+          "A) escaped",
+          "B) has escaped",
+          "C) had escaped",
+          "D) was escaping"
+        ],
+        "correct_answer": "C) had escaped",
+        "explanation": "'had escaped' correctly indicates an action completed before the past reference point ('arrived')."
+      },
+      {
+        "question_id": 243,
+        "question": "Choose the PAST PERFECT CONTINUOUS form emphasizing DURATION before a past event:",
+        "options": [
+          "A) He had been driving for five hours when his car broke down.",
+          "B) He had driven for five hours when his car broke down.",
+          "C) He has been driving for five hours when his car broke down.",
+          "D) He was driving for five hours when his car broke down."
+        ],
+        "correct_answer": "A) He had been driving for five hours when his car broke down.",
+        "explanation": "'had been driving' highlights the ongoing duration up until the past interruption ('car broke down')."
+      },
+      {
+        "question_id": 244,
+        "question": "Complete the sentence with the correct past tenses: 'After she ___ her project, she ___ to bed.'",
+        "options": [
+          "A) finished / had gone",
+          "B) had finished / went",
+          "C) has finished / went",
+          "D) was finishing / had gone"
+        ],
+        "correct_answer": "B) had finished / went",
+        "explanation": "'had finished' (earlier action in Past Perfect) precedes 'went' (subsequent action in Simple Past)."
+      },
+      {
+        "question_id": 245,
+        "question": "Identify the correct question form for PAST PERFECT SIMPLE:",
+        "options": [
+          "A) Did you had seen the film before last night?",
+          "B) Had you seen the film before last night?",
+          "C) Have you seen the film before last night?",
+          "D) Were you seen the film before last night?"
+        ],
+        "correct_answer": "B) Had you seen the film before last night?",
+        "explanation": "Past Perfect questions invert auxiliary 'Had' with the subject ('Had you seen...')."
+      },
+      {
+        "question_id": 246,
+        "question": "Why is Past Perfect Continuous NOT used in: 'They had known each other for five years before marrying.'?",
+        "options": [
+          "A) Because 'marrying' is a gerund.",
+          "B) Because 'know' is a stative verb that cannot take continuous form.",
+          "C) Because five years is too short a duration.",
+          "D) Because 'before' forces simple past."
+        ],
+        "correct_answer": "B) Because 'know' is a stative verb that cannot take continuous form.",
+        "explanation": "Stative verbs like 'know' cannot take continuous -ing forms, so Past Perfect Simple ('had known') is required."
+      },
+      {
+        "question_id": 247,
+        "question": "Which sentence contains a PAST PERFECT error?",
+        "options": [
+          "A) I had lived in Madrid before I moved to London.",
+          "B) By 2010, he had earned his doctorate degree.",
+          "C) She has had finished her homework before her mother arrived.",
+          "D) Had they prepared the venue before the guests arrived?"
+        ],
+        "correct_answer": "C) She has had finished her homework before her mother arrived.",
+        "explanation": "'has had finished' is a double auxiliary error; it should be 'had finished'."
+      },
+      {
+        "question_id": 248,
+        "question": "Complete the sentence: 'The athlete was breathless because he ___.'",
+        "options": [
+          "A) had been running",
+          "B) has been running",
+          "C) was run",
+          "D) runs"
+        ],
+        "correct_answer": "A) had been running",
+        "explanation": "'had been running' explains a past physical state ('was breathless') resulting from an earlier continuous activity."
+      },
+      {
+        "question_id": 249,
+        "question": "Which phrase introduces a past time limit commonly triggering Past Perfect?",
+        "options": [
+          "A) By the time",
+          "B) Right now",
+          "C) Nowadays",
+          "D) In the future"
+        ],
+        "correct_answer": "A) By the time",
+        "explanation": "'By the time' specifies a past deadline before which another action occurred."
+      },
+      {
+        "question_id": 250,
+        "question": "Choose the correct past sequence: 'I realized that I ___ my keys at home.'",
+        "options": [
+          "A) leave",
+          "B) have left",
+          "C) had left",
+          "D) am leaving"
+        ],
+        "correct_answer": "C) had left",
+        "explanation": "Leaving the keys ('had left') happened before realizing it in the simple past ('realized')."
+      }
+    ],
+    "source_book_and_page": [
+      "Scholastic Success with Grammar Grade 5, Pages 41–43",
+      "Everybody Up 6 Workbook, Pages 11, 23, 71, 86",
+      "Original Educational Content"
+    ]
+  }
+]
