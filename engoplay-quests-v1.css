@@ -350,6 +350,15 @@
   box-shadow:0 1px 4px rgba(139,91,91,.045)!important;
 }
 .wp-card .wp-option.is-wrong>small{background:#f5e6e4!important;color:#9b6d6b!important}
+.wp-match-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:20px 0;direction:ltr}
+.wp-match-column{display:grid;gap:9px;align-content:start}
+.wp-match-tile{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:58px;padding:12px 14px;border:1px solid #e7e1f0;border-radius:14px;background:#fff;color:#3e3850;text-align:start;font:inherit;font-size:13px;font-weight:700;line-height:1.5;overflow-wrap:anywhere;cursor:pointer}
+.wp-match-tile:hover:not(:disabled){border-color:#b7a8ef;background:#fcfbff}
+.wp-match-tile.is-selected{border-color:#9b88ed;background:#f5f1ff;box-shadow:0 0 0 2px #9b88ed22}
+.wp-match-tile.is-matched{border-color:#cce6d5;background:#f3faf5;color:#49715b;cursor:default}
+.wp-match-tile.is-wrong{border-color:#e6a0a5;background:#fff0f1;color:#9e3441}
+.wp-match-tile:disabled{opacity:.68;cursor:default}
+@media(max-width:520px){.wp-match-grid{gap:8px}.wp-match-tile{padding:10px 9px;font-size:12px;min-height:62px}}
 .wp-card .wp-feedback-status{transition:background .12s ease,border-color .12s ease,color .12s ease}
 .wp-card:has(.wp-next-row button[data-wp-next]) .wp-feedback-status{
   border-color:#d7e6d9!important;
