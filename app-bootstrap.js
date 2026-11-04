@@ -1,6 +1,6 @@
 (async()=>{
   try{
-    const V='74';
+    const V='75';
     const res=await fetch(`/legacy.html?v=${V}`,{cache:'no-store',headers:{'Cache-Control':'no-cache'}});
     if(!res.ok)throw new Error('Legacy app failed to load');
     let html=await res.text();
@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="/english-tatoeba-explorer-v1.css?v=${V}"/>
 <link rel="stylesheet" href="/english-mistakes-bank-v1.css?v=${V}"/>
 <link rel="stylesheet" href="/english-grammar-examples-v1.css?v=${V}"/>
+<link rel="stylesheet" href="/english-voice-library-v1.css?v=${V}"/>
 <link rel="stylesheet" href="/engoplay-v19.css?v=${V}"/>
 <link rel="stylesheet" href="/engoplay-quests-v1.css?v=${V}"/>
 <link rel="stylesheet" href="/workflow-v21.css?v=${V}"/>
@@ -135,6 +136,7 @@ html.serag-ready #seragBootScreen{display:none!important}
 <script src="/english-mistakes-bank-v1.js?v=${V}"></script>
 <script src="/english-grammar-examples-v1.js?v=${V}"></script>
 <script src="/engoplay-grammar-batch-bank-v1.js?v=${V}"></script>
+<script src="/english-voice-library-v1.js?v=${V}"></script>
 <script src="/english-academy-v12.js?v=${V}"></script>
 <script src="/engoplay-quests-v1.js?v=${V}"></script>
 <script src="/english-reading-library-v1.js?v=${V}"></script>
