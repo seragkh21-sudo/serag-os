@@ -85,6 +85,30 @@ test('end-to-end: start() opens the journey with the most overdue practised word
   assert.doesNotMatch(firstCard, /FRESH-MEANING/, 'a fresh word must not displace a due review');
 });
 
+test('reopening without answering skips words already shown in the previous session', () => {
+  const ctx = boot();
+  ctx.user = { id: 'repeat-check' };
+  ctx.SERAG_ENGLISH_V9 = { vocabulary: Array.from({ length: 16 }, (_, i) => [
+    `fresh phrase ${i}`, `FRESH-MEANING-${i}`, 'Everyday', `We use fresh phrase ${i} at work.`, 'neutral',
+  ]) };
+  ctx.window.ENGOPLAY = ctx.ENGOPLAY = {
+    reviewStatus: id => id === 'vocab:fresh phrase 0' ? {
+      due_at: new Date(Date.now() - DAY).toISOString(),
+      updated_at: new Date(Date.now() - 2 * DAY).toISOString(),
+    } : null,
+  };
+  const api = ctx.SERAG_WORD_PRACTICE;
+  api.start();
+  const shownFirst = new Set(Object.entries(api.progress()).filter(([, row]) => row.last_presented_at).map(([phrase]) => phrase));
+  assert.equal(shownFirst.size, 4, 'starting a session records the four vocabulary prompts that were shown');
+  assert.ok(Object.values(api.progress()).every(row => !row.attempts), 'a shown question is not counted as an answer');
+
+  api.start();
+  const shownAfterReopen = Object.entries(api.progress()).filter(([, row]) => row.last_presented_at).map(([phrase]) => phrase);
+  const newlyPresented = shownAfterReopen.filter(phrase => !shownFirst.has(phrase));
+  assert.equal(newlyPresented.length, 4, 'the next session should draw four unseen prompts before reusing prior ones');
+});
+
 test('regression: choosing a specific word still puts it first, even when reviews are due', () => {
   const ctx = boot();
   const rows = Array.from({ length: 20 }, (_, i) => [`plain phrase ${i}`, `PLAIN-MEANING-${i}`, 'Everyday', `We say plain phrase ${i} often.`, 'neutral']);
