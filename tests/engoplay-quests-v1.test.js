@@ -147,3 +147,14 @@ test('challenge keeps an explicit Check action and does not auto-submit on the f
   assert.match(source, /Arrange the words, then select Check answer/);
   assert.match(source, /window\.ENGOPLAY\.track/);
 });
+
+test('sentence drills reject imported form explanations and keep one manageable sentence',()=>{
+ const game=loadModule();
+ const rows=[
+  {id:'valid',sentence:'I had finished the design before the meeting started.'},
+  {id:'metadata',sentence:"Form — question_form: Simple: 'Had you ever visited Paris before 2020?' | Continuous: 'Had it been raining long?'"},
+  {id:'formula',sentence:'Form — positive_form: Subject + had + past participle'},
+  {id:'long',sentence:'Although the team had already reviewed every detail of the presentation carefully, the manager still requested several important changes.'}
+ ];
+ assert.deepEqual(Array.from(game.pickDailyExamples(rows,'a','2026-11-04')),['valid']);
+});

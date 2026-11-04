@@ -59,13 +59,17 @@
       .replace(/[.!?…]+$/g, '')
       .toLocaleLowerCase();
   }
+  function isPracticeExample(row) {
+    if (!row || row.id == null || typeof row.sentence !== 'string') return false;
+    var text = row.sentence.trim(), length = tokensFromSentence(text).length;
+    // A drill needs one complete sentence, never a grammar formula, paired examples or instructions.
+    return length >= 5 && length <= 16 && text.length <= 140 &&
+      !/[|_→=+]|\.{3,}|[\u0600-\u06ff]/.test(text) &&
+      !/^(?:form|formula|example|question|negative|positive|simple|continuous)\s*(?:[—:–-]|_form)/i.test(text) &&
+      !/\b(?:question_form|positive_form|negative_form|Simple:|Continuous:)/i.test(text);
+  }
   function pickDailyExamples(examples, owner, day, excludeIds) {
-    var usable = (Array.isArray(examples) ? examples : []).filter(function (row) {
-      return row && row.id != null && typeof row.sentence === 'string' &&
-        tokensFromSentence(row.sentence).length >= 5 &&
-        tokensFromSentence(row.sentence).length <= 24 &&
-        row.sentence.length <= 180 && ! /_{2,}|\.{3,}/.test(row.sentence);
-    });
+    var usable = (Array.isArray(examples) ? examples : []).filter(isPracticeExample);
     usable.sort(function (a, b) {
       var ka = hash(day + '|' + owner + '|' + a.id);
       var kb = hash(day + '|' + owner + '|' + b.id);
@@ -107,7 +111,7 @@
   function examples() {
     var bank = window.SERAG_GRAMMAR_EXAMPLES_V1;
     if (!bank || typeof bank.getExamples !== 'function') return [];
-    try { return bank.getExamples() || []; } catch (_) { return []; }
+    try { return (bank.getExamples() || []).filter(isPracticeExample); } catch (_) { return []; }
   }
   function getDailyPracticeQuestions(level, limit) {
     var bundle = getState(), rows = bundle.rows;
@@ -222,6 +226,7 @@
       state.recentExampleIds = state.recentExampleIds.concat(previousIds).filter(function (id, index, all) { return all.lastIndexOf(id) === index; }).slice(-90);
       state.daily = emptyState(owner, day, rows, state.recentExampleIds).daily;
     }
+    if (!state.daily.completed && state.daily.ids.some(function (id) { return !rows.some(function (row) { return String(row.id) === String(id); }); })) state.daily = emptyState(owner, day, rows, state.recentExampleIds).daily;
     if (!Array.isArray(state.daily.bank)) state.daily.bank = [];
     if (!Array.isArray(state.daily.selected)) state.daily.selected = [];
     if (!Array.isArray(state.daily.ids) || !state.daily.ids.length) state.daily.ids = pickDailyExamples(rows, owner, day, state.recentExampleIds);
