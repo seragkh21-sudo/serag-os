@@ -52,6 +52,17 @@ test('orderPool: missing or invalid due_at falls back to local-state tiers witho
   assert.ok(out.indexOf('fresh') < out.indexOf('seen'), 'fresh stays before practised');
 });
 
+test('orderPool: prompts shown on another device are deferred behind unseen prompts', () => {
+  const wp = boot().SERAG_WORD_PRACTICE;
+  const list = ['fresh one', 'fresh two', 'shown one', 'shown two'].map(word);
+  const shownAt = new Date(NOW - 60_000).toISOString();
+  const exposures = new Set(['vocab:shown one', 'vocab:shown two']);
+  const status = (id) => exposures.has(id) ? { shown_at: shownAt } : null;
+  const out = ids(wp.orderPool(list, status, {}, NOW));
+  assert.deepEqual(out.slice(0, 2).sort(), ['fresh one', 'fresh two']);
+  assert.deepEqual(out.slice(2).sort(), ['shown one', 'shown two']);
+});
+
 test('orderPool: does not mutate its input and works without a status function', () => {
   const wp = boot().SERAG_WORD_PRACTICE;
   const list = ['a', 'b', 'c'].map(word);
