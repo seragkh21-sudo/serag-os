@@ -32,12 +32,12 @@
 
   function speakLocalMicrosoft(text,{word=false}={}){
     const value=String(text||'').trim();
-    const voice=microsoftVoice()||(window.SERAG_ENGLISH_FREE_ONLY?allVoices().find(v=>/^en/i.test(v.lang||'')):null);
-    if(!value||!voice||!('speechSynthesis' in window))return false;
+    const voice=microsoftVoice()||allVoices().find(v=>/^en/i.test(v.lang||''))||null;
+    if(!value||!('speechSynthesis' in window)||typeof SpeechSynthesisUtterance==='undefined')return false;
     stopCurrent();
     const utter=new SpeechSynthesisUtterance(value);
-    utter.lang=voice.lang||'en-US';
-    utter.voice=voice;
+    utter.lang=voice?.lang||'en-US';
+    if(voice)utter.voice=voice;
     utter.rate=word?.94:.98;
     utter.pitch=1.02;
     window.speechSynthesis.speak(utter);
@@ -137,7 +137,7 @@
     return review?.querySelector('.english-review-word')?.textContent?.trim()||'';
   }
 
-  function providerReady(){return azureAvailable||Boolean(microsoftVoice())}
+  function providerReady(){return azureAvailable||('speechSynthesis' in window&&typeof SpeechSynthesisUtterance!=='undefined')}
 
   function bindArticleButton(){
     const btn=document.getElementById('articleReadBtn');
@@ -160,7 +160,7 @@
       e.stopImmediatePropagation();
       const text=sentenceButton.getAttribute('data-speak-text')||'';
       if(!text)return;
-      if(!providerReady()){sentenceButton.title='لا يوجد صوت إنجليزي متاح في المتصفح';return}
+      if(!providerReady()){sentenceButton.title='ميزة الصوت غير مدعومة في هذا المتصفح';return}
       speakMicrosoft(text,{word:false,button:sentenceButton});
       return;
     }
