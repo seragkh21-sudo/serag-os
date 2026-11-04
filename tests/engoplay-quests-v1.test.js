@@ -151,6 +151,7 @@ test('challenge keeps an explicit Check action and does not auto-submit on the f
 test('sentence drills reject imported form explanations and keep one manageable sentence',()=>{
  const game=loadModule();
  const rows=[
+  {id:'timeline-label',sentence:'Clear Timeline: After he had completed the experiment, he published his scientific findings.'},
   {id:'valid',sentence:'I had finished the design before the meeting started.'},
   {id:'metadata',sentence:"Form — question_form: Simple: 'Had you ever visited Paris before 2020?' | Continuous: 'Had it been raining long?'"},
   {id:'formula',sentence:'Form — positive_form: Subject + had + past participle'},
