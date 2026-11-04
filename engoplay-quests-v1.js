@@ -64,7 +64,7 @@
     var text = row.sentence.trim(), length = tokensFromSentence(text).length;
     // A drill needs one complete sentence, never a grammar formula, paired examples or instructions.
     return length >= 5 && length <= 16 && text.length <= 140 &&
-      !/[|_→=+]|\.{3,}|[\u0600-\u06ff]/.test(text) &&
+      !/[|_:→=+—]|\.{3,}|[\u0600-\u06ff]/.test(text) &&
       !/^(?:form|formula|example|question|negative|positive|simple|continuous)\s*(?:[—:–-]|_form)/i.test(text) &&
       !/\b(?:question_form|positive_form|negative_form|Simple:|Continuous:)/i.test(text);
   }
