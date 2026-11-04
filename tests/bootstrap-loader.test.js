@@ -6,7 +6,8 @@ test('index uses the replacement bootstrap and legacy loads the pinned Supabase 
   const html=fs.readFileSync('index.html','utf8');
   const legacy=fs.readFileSync('legacy.html','utf8');
   assert.equal(html.includes('cdn.jsdelivr.net/npm/@supabase/supabase-js'),false);
-  assert.ok(html.includes('app-bootstrap.js?v=66'));
+  const version=fs.readFileSync('app-bootstrap.js','utf8').match(/const V='(\d+)'/)[1];
+  assert.ok(html.includes('app-bootstrap.js?v='+version));
   assert.equal(html.includes('shell-loader.js'),false);
   assert.ok(legacy.includes('@supabase/supabase-js@2.116.0'));
 });
@@ -29,8 +30,19 @@ test('app publishes Supabase client and authenticated user on window',()=>{
 
 test('bootstrap cache-busts every local asset from one version constant',()=>{
   const source=fs.readFileSync('app-bootstrap.js','utf8');
-  assert.ok(source.includes("const V='66'"));
+  const version=source.match(/const V='(\d+)'/)[1];
+  assert.ok(fs.readFileSync('index.html','utf8').includes('app-bootstrap.js?v='+version));
+  assert.ok(fs.readFileSync('sw.js','utf8').includes('static-v'+version));
   assert.ok(source.includes('app.js?v=${V}'));
   assert.equal(source.includes('.js?v=64'),false);
   assert.equal(source.includes('.css?v=64'),false);
+});
+
+test('fixture preview includes the production feature scripts and styles at the same build version',()=>{
+  const loader=fs.readFileSync('app-bootstrap.js','utf8'),preview=fs.readFileSync('workspace-preview-content.html','utf8');
+  const version=loader.match(/const V='(\d+)'/)[1];
+  const assets=[...loader.matchAll(/(?:src|href)="(\/[^"?]+\.(?:js|css))\?v=\$\{V\}"/g)].map(x=>x[1]);
+  for(const path of assets)assert.ok(preview.includes(path+'?v='+version),'missing current asset: '+path);
+  assert.ok(preview.includes('/workspace-preview-v18.js?v='+version));
+  assert.equal(/<script[^>]+src="https:\/\/cdn\.jsdelivr\.net\/npm\/@supabase/.test(preview),false);
 });

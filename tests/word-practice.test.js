@@ -103,3 +103,23 @@ test('daily sentence-builder questions come from the existing grammar examples a
  assert.equal(tracked[0].topic,'sentence-builder');
  assert.equal(tracked[0].correct,true);
 });
+
+test('hints can reveal every letter instead of stopping at an escaped character class',()=>{
+ const {api}=app();api.start('catch up');for(let i=0;i<4;i++){api.reveal();api.next()}
+ const q=api.currentQuestion();for(let i=0;i<q.answer.length;i++)api.showHint();
+ assert.ok(api.html().includes(api.hint(q.answer,q.answer.length)));
+ assert.doesNotMatch(api.html(),/<p class="wp-hint"[^>]*>[^<]*_/);
+});
+test('sentence building waits for every tile and number shortcuts never crash it',()=>{
+ const {api,c,events}=app();
+ const build={id:'sentence-builder:test',tokens:['finished','I','today.'],answer:'I finished today.',prompt:'Arrange the words.',explanation:'Past simple.'};
+ api.startJourney([],"Today's practice",[build],true);
+ while(api.currentQuestion()?.kind!=='build'){api.reveal();api.next()}
+ assert.match(api.html(),/data-wp-build-check disabled/);
+ c.document.querySelector=()=>({getClientRects:()=>[{}]});
+ assert.doesNotThrow(()=>events.keydown[0]({target:{tagName:'DIV'},key:'1',preventDefault(){}}));
+ const button=index=>({target:{closest:()=>({dataset:{wpBuildWord:String(index)},hasAttribute:name=>name==='data-wp-build-word'})}});
+ for(let i=0;i<build.tokens.length-1;i++)events.click[0](button(i));
+ assert.match(api.html(),/data-wp-build-check disabled/);
+ events.click[0](button(build.tokens.length-1));assert.doesNotMatch(api.html(),/data-wp-build-check disabled/);
+});
