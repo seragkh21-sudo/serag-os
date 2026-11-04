@@ -116,6 +116,14 @@
     if (!eligible.length && wanted === 'C1') eligible = rows.filter(function (row) { return row.level === 'B2'; });
     if (!eligible.length && wanted === 'C2') eligible = rows.filter(function (row) { return row.level === 'B2'; });
     if (!eligible.length) eligible = rows.filter(function (row) { return row.level === 'B1'; });
+    // Sentence Builder is a sentence-formation drill, not a paragraph-ordering task.
+    // Keep useful B1-B2 examples, but exclude unusually long or malformed source sentences.
+    eligible = eligible.filter(function (row) {
+      var sentence = String(row && row.sentence || '').trim();
+      var count = tokensFromSentence(sentence).length;
+      return count >= 5 && count <= 14 && sentence.length <= 120 &&
+        ! /_{2,}|\\.{3,}/.test(sentence);
+    });
     var stats = sharedProgress() && window.ENGOPLAY && typeof window.ENGOPLAY.stats === 'function' ? window.ENGOPLAY.stats() : {};
     var answered = stats && stats.answeredToday instanceof Set ? Array.from(stats.answeredToday) : (stats && Array.isArray(stats.answeredToday) ? stats.answeredToday : []);
     var lastAt = stats && stats.lastAnsweredAt instanceof Map ? stats.lastAnsweredAt : new Map();
