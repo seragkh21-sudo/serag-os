@@ -91,6 +91,12 @@ test('reopening without answering skips words already shown in the previous sess
   ctx.SERAG_ENGLISH_V9 = { vocabulary: Array.from({ length: 16 }, (_, i) => [
     `fresh phrase ${i}`, `FRESH-MEANING-${i}`, 'Everyday', `We use fresh phrase ${i} at work.`, 'neutral',
   ]) };
+  ctx.window.ENGOPLAY = ctx.ENGOPLAY = {
+    reviewStatus: id => id === 'vocab:fresh phrase 0' ? {
+      due_at: new Date(Date.now() - DAY).toISOString(),
+      updated_at: new Date(Date.now() - 2 * DAY).toISOString(),
+    } : null,
+  };
   const api = ctx.SERAG_WORD_PRACTICE;
   api.start();
   const shownFirst = new Set(Object.entries(api.progress()).filter(([, row]) => row.last_presented_at).map(([phrase]) => phrase));
