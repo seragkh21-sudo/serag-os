@@ -74,3 +74,42 @@
 .wp-build-controls .wp-primary.disabled{opacity:.45;pointer-events:none}
 .wp-build-tile.is-selected{background:var(--soft,#f7f7fa)}
 @media(max-width:600px){.wp-build-tile{min-height:44px;padding:9px 12px;font-size:14px}.wp-build-answer{min-height:64px}}
+
+
+/* Learning lobby: readable tools, balanced columns and quieter action depth. */
+.ep-lobby .ep-welcome h2{max-width:22ch;font-size:clamp(28px,3vw,36px);line-height:1.22;letter-spacing:-.035em}
+.ep-lobby .ep-welcome p{color:#655d63;font-size:14px;line-height:1.7}
+.ep-lobby .ep-button.primary{background:#302c32;border-color:#302c32;color:#fff;box-shadow:none}
+.ep-lobby .ep-tabs{align-items:center;gap:8px;margin:24px 0;padding:14px 0;border-block:1px solid #e5dedf}
+.ep-lobby .ep-tabs>strong{width:100%;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#655d63;margin-bottom:2px}
+.ep-lobby .ep-tabs>button{margin:0;padding:10px 14px;min-height:44px;border:1px solid #e5dedf;border-radius:12px;background:#fffdfa;color:#514b53;font-size:13px}
+.ep-lobby .ep-tabs>button:hover{background:#f7ecef;border-color:#d6b9c2}
+.ep-lobby .ep-play-grid{grid-template-columns:minmax(0,1.65fr) minmax(270px,1fr);gap:24px}
+.ep-lobby .ep-path,.ep-lobby .ep-side{min-width:0}
+.ep-lobby .ep-path .wp-intro{margin:0 0 28px}
+.ep-lobby .ep-path-step p{font-size:13px;line-height:1.7;max-width:48ch;color:#655d63}
+.ep-lobby .ep-path-step small,.ep-lobby .ep-step-progress span{font-size:11px;color:#736770}
+.ep-lobby .ep-quest strong{font-size:12px;line-height:1.5;color:#514b53}
+.ep-lobby .ep-hud small{font-size:12px;color:#655d63}
+.ep-lobby .ep-note{font-size:12px!important;color:#736770!important}
+.ep-lobby .ep-toolbox button{font-size:13px;color:#514b53}
+@media(max-width:900px){
+ .ep-lobby .ep-play-grid{grid-template-columns:minmax(0,1fr)}
+ .ep-lobby .ep-side{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .ep-lobby .ep-quest-card{grid-row:span 2}
+}
+@media(max-width:600px){
+ .ep-lobby .ep-welcome{padding:22px;gap:14px;align-items:flex-start}
+ .ep-lobby .ep-welcome h2{font-size:28px;max-width:20ch}
+ .ep-lobby .ep-welcome p{font-size:13px;max-width:none}
+ .ep-lobby .ep-hero-character{width:70px;flex:0 0 70px}
+ .ep-lobby .ep-hero-character>.ep-character{width:70px}
+ .ep-lobby .ep-tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:20px 0}
+ .ep-lobby .ep-tabs>strong{grid-column:1/-1}
+ .ep-lobby .ep-tabs>button{text-align:left;font-size:12px;padding:10px;min-width:0}
+ .ep-lobby .ep-side{grid-template-columns:minmax(0,1fr)}
+ .ep-lobby .ep-quest-card{grid-row:auto}
+ .ep-lobby .ep-path{padding:18px}
+ .ep-lobby .ep-hud{padding:16px 8px}
+ .ep-lobby .ep-hud small{font-size:11px}
+}
