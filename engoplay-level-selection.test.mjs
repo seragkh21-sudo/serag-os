@@ -63,8 +63,10 @@ test('level persists through the existing profile preference flow',()=>{
 });
 
 test('fresh English assets use consistent version',()=>{
-  assert.match(source('app-bootstrap.js'),/const V='79'/);
-  assert.match(source('index.html'),/app-bootstrap\.js\?v=79/);
-  assert.match(source('sw.js'),/serag-os-static-v79/);
-  assert.match(source('workspace-preview.html'),/workspace-preview-v18\.js\?v=79/);
+ const match=source('app-bootstrap.js').match(/const V='([0-9]+)'/);
+ assert.ok(match);
+ const version=match[1];
+ assert.ok(source('index.html').includes('app-bootstrap.js?v='+version));
+ assert.ok(source('sw.js').includes('serag-os-static-v'+version));
+ assert.ok(source('workspace-preview.html').includes('workspace-preview-v18.js?v='+version));
 });
