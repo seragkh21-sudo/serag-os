@@ -106,10 +106,10 @@ test('boot and level-aware Today’s Practice route both batches into mixed roun
  assert.deepEqual(startFor('B1').ids,['01B1']);
 });
 
-test('app and preview assets all point to cache version 80',()=>{
- assert.match(bootstrap,/const V='80'/);
- assert.match(read('index.html'),/app-bootstrap\.js\?v=80/);
- assert.match(read('sw.js'),/serag-os-static-v80/);
- assert.match(read('workspace-preview.html'),/workspace-preview-v18\.js\?v=80/);
- assert.match(read('workspace-preview-content.html'),/engoplay-advanced-batch-02-v1\.js\?v=80/);
+test('app and preview assets use the bootstrap cache version',()=>{
+ const version=bootstrap.match(/const V='(\d+)'/)[1];
+ assert.ok(read('index.html').includes('app-bootstrap.js?v='+version));
+ assert.ok(read('sw.js').includes('serag-os-static-v'+version));
+ assert.ok(read('workspace-preview.html').includes('workspace-preview-v18.js?v='+version));
+ assert.ok(read('workspace-preview-content.html').includes('engoplay-advanced-batch-02-v1.js?v='+version));
 });
