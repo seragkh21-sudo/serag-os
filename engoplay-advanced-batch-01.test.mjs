@@ -93,5 +93,5 @@ test('boot order and daily practice route the pilot into existing engines',()=>{
   assert.match(practice,/q\?\.sourceBatch==='advanced01'/);
   assert.match(practice,/q\.acceptedAnswers\.some/);
   assert.match(engoplay,/advanced\?\.sentenceBuild/);
-  assert.match(engoplay,/advanced\.questions\.map/);
+  assert.match(engoplay,/pilotQuestions\.map/);
 });
