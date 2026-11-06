@@ -34,7 +34,7 @@ test('known pedagogical corrections are present',()=>{
   const by=n=>data.items.find(item=>item.id.endsWith(String(n).padStart(3,'0')));
   assert.match(by(15).incorrect_sentence,/follow up to the client/);
   assert.match(by(15).correct_sentence,/follow up with the client/);
-  assert.match(by(15).explanation,/follow up about.*acceptable/);
+  assert.match(by(15).explanation,/follow up about.*acceptable/i);
   assert.match(by(21).correct_answer,/were fully restored by 6:00 AM and remain operational/);
   assert.match(by(24).correct_answer,/by the board/);
   assert.match(by(2).prompt,/yesterday's board meeting/);
@@ -92,6 +92,6 @@ test('boot order and daily practice route the pilot into existing engines',()=>{
   assert.match(practice,/q\.sourceQuestionType==='error_correction'\?'correction':'grammar'/);
   assert.match(practice,/q\?\.sourceBatch==='advanced01'/);
   assert.match(practice,/q\.acceptedAnswers\.some/);
-  assert.match(engoplay,/advanced\.sentenceBuild/);
+  assert.match(engoplay,/advanced\?\.sentenceBuild/);
   assert.match(engoplay,/advanced\.questions\.map/);
 });
