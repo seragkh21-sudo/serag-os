@@ -539,6 +539,7 @@
       save(bundle);
       update();
     } else if (button.hasAttribute('data-eq-audio')) {
+      if(row&&window.seragMicrosoftTTS){void window.seragMicrosoftTTS.speak(row.sentence);return;}
       if (!row || !window.speechSynthesis || typeof window.SpeechSynthesisUtterance !== 'function') {
         var note = document.querySelector('.eq-source-note');
         if (note) note.textContent = 'Audio is not available in this browser.';

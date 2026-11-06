@@ -98,6 +98,7 @@
   }
 
   async function speakMicrosoft(text,{word=false,button=null}={}){
+    if(window.SERAG_NATURAL_AUDIO&&!window.SERAG_NATURAL_AUDIO.deviceOnly)return window.SERAG_NATURAL_AUDIO.speak(text,{word,button});
     const value=String(text||'').trim();
     if(!value)return false;
 

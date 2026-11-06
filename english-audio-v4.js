@@ -151,6 +151,7 @@
     if(!audioRow?.audio_storage_path)return;
     const audio=q('articleCustomAudio');if(!audio)return;
     e.preventDefault();e.stopImmediatePropagation();
+    window.seragMicrosoftTTS?.stop();
     window.speechSynthesis?.cancel?.();
     if(audio.paused)audio.play().catch(()=>toast('مش قادر أشغّل الملف'));else audio.pause();
   }

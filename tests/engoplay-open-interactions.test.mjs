@@ -27,7 +27,8 @@ test('matching is added to mixed EngoPlay rounds and records each owner-scoped p
  const round=api.buildRound(api.items().slice(0,4),[],4,[],true);
  assert.equal(round.filter(q=>q.kind==='match').length,1);
  api.startJourney([],"Today's practice",[],true);
- while(api.currentQuestion()?.kind!=='match'){api.reveal();api.next()}
+ for(let steps=0;steps<30&&api.currentQuestion()?.kind!=='match';steps++){api.reveal();api.next()}
+ assert.equal(api.currentQuestion()?.kind,'match');
  let q=api.currentQuestion();assert.match(api.html(),/wp-match-grid/);assert.equal(q.pairs.length,4);
  api.chooseMatchWord(0);assert.equal(api.chooseMatchMeaning(q.meaningOrder.indexOf(1)),false);assert.equal(api.currentQuestion().kind,'match');
  for(let index=0;index<4;index++){api.chooseMatchWord(index);api.chooseMatchMeaning(q.meaningOrder.indexOf(index))}
@@ -50,11 +51,12 @@ test('the shared practice UI renders a broken sentence and routes its correction
  const grammar={id:'grammar:present-simple',answer:'goes',prompt:'She ___ to work every day.',options:['go','goes'],explanation:'Use -s with a singular third-person subject.'};
  c.SERAG_ACADEMY_V12={questions:()=>[grammar],selectQuestions:rows=>rows,homeAnswer:(id,value)=>answered.push([id,value])};
  api.startJourney([grammar.id],'Grammar practice');
- while(api.currentQuestion()?.kind!=='correction'){
-  if(api.currentQuestion()?.kind==='match')for(let index=0;index<4;index++){api.chooseMatchWord(index);api.chooseMatchMeaning(index)}
+ for(let steps=0;steps<30&&api.currentQuestion()?.kind!=='correction';steps++){
+  if(api.currentQuestion()?.kind==='match')for(let index=0;index<4;index++){api.chooseMatchWord(index);api.chooseMatchMeaning(api.currentQuestion().meaningOrder.indexOf(index))}
   else api.reveal();
   api.next();
  }
+ assert.equal(api.currentQuestion()?.kind,'correction');
  assert.match(api.html(),/Fix the grammar mistake/);assert.match(api.html(),/She go to work every day/);
  api.respond('goes');assert.deepEqual(answered.at(-1),[grammar.id,'goes']);
 });

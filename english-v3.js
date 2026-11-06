@@ -9,7 +9,7 @@
   let ev3ReviewIndex=0,ev3ActiveArticleId=null,ev3EditingWordId=null;
   const ev3PronunciationAttempts=new Set();
 
-  function ev3Speak(text,{word=false}={}){
+  function ev3Speak(text,{word=false}={}){if(window.seragMicrosoftTTS)return window.seragMicrosoftTTS.speak(text,{word});
     const value=String(text||'').trim();
     if(!value||!('speechSynthesis' in window))return toast('الصوت غير مدعوم على المتصفح ده');
     window.speechSynthesis.cancel();
@@ -274,7 +274,7 @@
     q('articleViewPane').textContent=a.content||'';
     document.querySelector('[data-english-modal]').classList.remove('english-hidden');document.body.style.overflow='hidden';
   }
-  function ev3CloseArticle(){window.speechSynthesis?.cancel?.();document.querySelector('[data-english-modal]')?.classList.add('english-hidden');document.body.style.overflow='';ev3ActiveArticleId=null;ev3CancelArticleEdit()}
+  function ev3CloseArticle(){window.seragMicrosoftTTS?.stop();window.speechSynthesis?.cancel?.();document.querySelector('[data-english-modal]')?.classList.add('english-hidden');document.body.style.overflow='';ev3ActiveArticleId=null;ev3CancelArticleEdit()}
   function ev3StartArticleEdit(){const a=ev3Writing.find(x=>String(x.id)===String(ev3ActiveArticleId));if(!a)return;q('articleEditTitle').value=a.title||'';q('articleEditContent').value=a.content||'';q('articleViewPane').classList.add('english-hidden');q('articleEditPane').classList.remove('english-hidden');q('articleEditBtn').classList.add('english-hidden');q('articleReadBtn').classList.add('english-hidden');q('articleCopyBtn').classList.add('english-hidden');q('articleCancelEditBtn').classList.remove('english-hidden');q('articleSaveEditBtn').classList.remove('english-hidden')}
   function ev3CancelArticleEdit(){q('articleViewPane')?.classList.remove('english-hidden');q('articleEditPane')?.classList.add('english-hidden');q('articleEditBtn')?.classList.remove('english-hidden');q('articleReadBtn')?.classList.remove('english-hidden');q('articleCopyBtn')?.classList.remove('english-hidden');q('articleCancelEditBtn')?.classList.add('english-hidden');q('articleSaveEditBtn')?.classList.add('english-hidden')}
   async function ev3SaveArticleEdit(){if(!ev3ActiveArticleId)return;const id=ev3ActiveArticleId,title=q('articleEditTitle').value.trim()||'Untitled Article',content=q('articleEditContent').value.trim();if(!content)return toast('المقال فاضي');const {error}=await sb.from('english_writing').update({title,content,updated_at:new Date().toISOString()}).eq('id',id);if(error)return toast(error.message);toast('المقال اتعدل');await ev3LoadEnglish();ev3OpenArticle(id)}

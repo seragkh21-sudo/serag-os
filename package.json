@@ -8,6 +8,10 @@
   },
   "dependencies": {
     "ai": "^6.0.0",
+    "kokoro-js": "1.2.1",
     "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.12"
   }
 }
