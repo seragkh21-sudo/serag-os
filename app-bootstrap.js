@@ -1,6 +1,6 @@
 (async()=>{
   try{
-    const V='77';
+    const V='78';
     const res=await fetch(`/legacy.html?v=${V}`,{cache:'no-store',headers:{'Cache-Control':'no-cache'}});
     if(!res.ok)throw new Error('Legacy app failed to load');
     let html=await res.text();
@@ -137,6 +137,7 @@ html.serag-ready #seragBootScreen{display:none!important}
 <script src="/english-mistakes-bank-v1.js?v=${V}"></script>
 <script src="/english-grammar-examples-v1.js?v=${V}"></script>
 <script src="/engoplay-grammar-batch-bank-v1.js?v=${V}"></script>
+<script src="/engoplay-advanced-batch-01-v1.js?v=${V}"></script>
 <script src="/english-voice-library-v1.js?v=${V}"></script>
 <script src="/english-academy-v12.js?v=${V}"></script>
 <script src="/engoplay-quests-v1.js?v=${V}"></script>
@@ -217,6 +218,7 @@ html.serag-ready #seragBootScreen{display:none!important}
       /^\/english-tatoeba-explorer-v1\.js(?:\?|$)/,
       /^\/english-grammar-examples-v1\.js(?:\?|$)/,
       /^\/engoplay-grammar-batch-bank-v1\.js(?:\?|$)/,
+      /^\/engoplay-advanced-batch-01-v1\.js(?:\?|$)/,
       /^\/english-dictionary-v1\.js(?:\?|$)/,
       /^\/voice-commands-v1\.js(?:\?|$)/
     ];
@@ -240,6 +242,10 @@ html.serag-ready #seragBootScreen{display:none!important}
         if (scriptSrc.startsWith('/engoplay-grammar-batch-bank-v1.js')) {
           const bankReady = window.SERAG_GRAMMAR_BATCH_BANK_V1_READY;
           if (bankReady && typeof bankReady.then === 'function') await bankReady;
+        }
+        if (scriptSrc.startsWith('/engoplay-advanced-batch-01-v1.js')) {
+          const pilotReady = window.SERAG_ADVANCED_BATCH01_V1_READY;
+          if (pilotReady && typeof pilotReady.then === 'function') await pilotReady;
         }
       } catch (scriptError) {
         if (!isOptional) throw scriptError;
