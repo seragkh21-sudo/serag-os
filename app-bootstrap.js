@@ -1,6 +1,6 @@
 (async()=>{
   try{
-    const V='76';
+    const V='77';
     const res=await fetch(`/legacy.html?v=${V}`,{cache:'no-store',headers:{'Cache-Control':'no-cache'}});
     if(!res.ok)throw new Error('Legacy app failed to load');
     let html=await res.text();
@@ -40,6 +40,7 @@
 </style>
 <link rel="stylesheet" href="/english-video-v17.css?v=${V}"/>
 <link rel="stylesheet" href="/english-pathways-v1.css?v=${V}"/>
+<link rel="stylesheet" href="/english-natural-audio-v1.css?v=${V}"/>
 <style id="serag-boot-guard">
 #seragBootScreen{display:none;position:fixed;inset:0;z-index:2147483647;align-items:center;justify-content:center;background:#fff;color:#273044;font:600 14px system-ui,sans-serif}
 html.serag-booting #seragBootScreen{display:flex}
@@ -116,6 +117,7 @@ html.serag-ready #seragBootScreen{display:none!important}
 <script src="/english-audio-v4.js?v=${V}"></script>
 <script>window.SERAG_ENGLISH_FREE_ONLY=true;</script>
 <script src="/microsoft-tts-v1.js?v=${V}"></script>
+<script src="/english-natural-audio-v1.js?v=${V}"></script>
 <script src="/serag-v5.js?v=${V}"></script>
 <script src="/english-content-v9.js?v=${V}"></script>
 <script src="/english-vocab-v24.js?v=${V}"></script>

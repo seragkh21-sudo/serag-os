@@ -71,7 +71,7 @@
     const current = recorder; recorder = null;
     if (current) { current.onstop = null; current.ondataavailable = null; try { if (current.state !== 'inactive') current.stop(); } catch (_) {} }
     requestingMic = false; stopRecognition(true); releaseMic(); releaseUrl();
-    if (modelSpeaking) { window.speechSynthesis?.cancel(); modelSpeaking = false; }
+    if (modelSpeaking) { window.seragMicrosoftTTS?.stop(); window.speechSynthesis?.cancel(); modelSpeaking = false; }
     $('#evlAudio')?.pause(); const audio = $('#evlAudio'); if (audio) { audio.removeAttribute('src'); audio.load(); }
     draft = null;
   }
@@ -164,7 +164,7 @@
       if (draft !== current || uid() !== current.owner) { media.getTracks().forEach(track => track.stop()); return; }
       stream = media;
       $('#evlAudio')?.pause();
-      if (modelSpeaking) { window.speechSynthesis?.cancel(); modelSpeaking = false; }
+      if (modelSpeaking) { window.seragMicrosoftTTS?.stop(); window.speechSynthesis?.cancel(); modelSpeaking = false; }
       const mime = chooseMime(), rec = mime ? new MediaRecorder(media, {mimeType:mime}) : new MediaRecorder(media), chunks = [];
       recorder = rec;
       let bytes = 0;
@@ -292,6 +292,7 @@
     else if (button.hasAttribute('data-evl-model') && draft) {
       readFields(); if (!draft.practice_text.trim()) { message('Add an English text to practise first.'); return; }
       if (recorder || requestingMic) { message('Stop recording before playing the practice text.'); return; }
+      if(window.seragMicrosoftTTS){modelSpeaking=true;void window.seragMicrosoftTTS.speak(draft.practice_text).finally(()=>{modelSpeaking=false});return;}
       if (!window.speechSynthesis) { message('Read-aloud is unavailable in this browser.'); return; }
       speechSynthesis.cancel(); const utterance = new SpeechSynthesisUtterance(draft.practice_text); utterance.lang = draft.language; utterance.rate = .85; modelSpeaking = true; utterance.onend = utterance.onerror = () => { modelSpeaking = false; }; speechSynthesis.speak(utterance);
     }
