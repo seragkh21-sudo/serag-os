@@ -9,11 +9,12 @@
   function chunks(text){const words=String(text).replace(/\s+/g,' ').trim().split(' '),out=[];let part='';for(const word of words){if(part.length+word.length>220&&part){out.push(part);part=''}part+=(part?' ':'')+word;if(/[.!?]$/.test(word)&&part.length>70){out.push(part);part=''}}if(part)out.push(part);return out}
   function ensureWorker(){
     if(worker)return worker;
-    worker=new Worker('/assets/natural-voice/worker.js',{type:'module'});
-    worker.onmessage=({data})=>{const p=jobs.get(data.id);if(!p)return;if(data.type==='progress'){if(p.token===sequence)status(data.status==='progress'?`Downloading voice: ${Math.round(data.progress||0)}%`:'Preparing natural voice…');return}clearTimeout(p.timer);jobs.delete(data.id);data.type==='audio'?p.resolve(data.blob):p.reject(new Error(data.message));};
+    worker=new Worker('/assets/natural-voice/worker.js?v=82',{type:'module'});
+    worker.onmessage=({data})=>{const p=jobs.get(data.id);if(data.type==='ready'){if(pendingText)status('Natural voice ready.');return}if(!p)return;if(data.type==='progress'){if(p.token===sequence)status(data.status==='progress'?`Downloading voice: ${Math.round(data.progress||0)}%`:'Preparing natural voice…');return}clearTimeout(p.timer);jobs.delete(data.id);data.type==='audio'?p.resolve(data.blob):p.reject(new Error(data.message));};
     worker.onerror=()=>{for(const p of jobs.values()){clearTimeout(p.timer);p.reject(new Error('Natural voice could not start.'))}jobs.clear();worker?.terminate();worker=null;};return worker;
   }
   function generate(text,token){return new Promise((resolve,reject)=>{const id=++job;const w=ensureWorker();const timer=setTimeout(()=>{jobs.delete(id);reject(new Error('Voice preparation took too long. Try again or use device voice.'));w.terminate();worker=null;for(const p of jobs.values()){clearTimeout(p.timer);p.reject(new Error('Voice preparation stopped.'))}jobs.clear()},180000);jobs.set(id,{resolve,reject,timer,token});w.postMessage({id,text,voice:accent})})}
+  function warm(){if(mode!=='natural')return;try{const w=ensureWorker();w.postMessage({id:++job,warm:true})}catch{}}
   async function play(blob,token){if(token!==sequence)return;objectUrl=URL.createObjectURL(blob);currentAudio=new Audio(objectUrl);const audio=currentAudio;await new Promise((resolve,reject)=>{finishPlayback=resolve;audio.onended=resolve;audio.onerror=()=>reject(new Error('Audio playback failed.'));audio.play().catch(()=>reject(new Error('Tap Listen again to allow audio playback.')))});if(currentAudio===audio){currentAudio=null;if(objectUrl)URL.revokeObjectURL(objectUrl);objectUrl=null;finishPlayback=null}}
   async function speak(text,options={}){
     const value=String(text||'').trim();if(!value)return false;
@@ -31,7 +32,7 @@
   document.addEventListener('click',e=>{const b=e.target.closest?.('[data-speak-text],[data-word-sound],#articleReadBtn,[data-ena-settings]');if(!b)return;if(b.hasAttribute('data-ena-settings')){settings();return}let text=b.getAttribute('data-speak-text');if(b.hasAttribute('data-word-sound'))text=b.closest('.english-word-card')?.querySelector('.english-word-name')?.textContent||b.closest('#englishReviewBox')?.querySelector('.english-review-word')?.textContent;if(b.id==='articleReadBtn')text=document.getElementById('articleViewPane')?.innerText;if(!text)return;e.preventDefault();e.stopImmediatePropagation();void speak(text,{word:!text.trim().includes(' ')});},true);
   document.addEventListener('click',e=>{if(e.target.closest?.('[data-page],[data-v5-page],[data-so-page],[data-ea-tab],[data-ea-end],#enaStop'))stop()},true);
   function bindAuth(){if(typeof sb!=='undefined'&&sb.auth?.onAuthStateChange)sb.auth.onAuthStateChange(event=>{if(event==='SIGNED_OUT'||event==='SIGNED_IN'){stop();pendingText='';pendingOptions={};document.getElementById('enaDialog')?.close()}})}
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bindAuth,{once:true});else bindAuth();
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>{bindAuth();if(mode==='natural')warm()},{once:true});else{bindAuth();if(mode==='natural'){const start=()=>warm();if('requestIdleCallback'in window)requestIdleCallback(start,{timeout:2500});else setTimeout(start,1200)}}
   window.addEventListener('pagehide',()=>{stop();worker?.terminate()});
   window.SERAG_NATURAL_AUDIO={speak,stop,settings,chunks};
   window.seragMicrosoftTTS={...legacy,speak,stop};
