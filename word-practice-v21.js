@@ -32,7 +32,7 @@
  function isWorkItem(item){const group=String(item?.group||'');const prompts=window.SERAG_ENGLISH_V9?.workPractice?.wordPrompts||{};return /work|creative|design|client|marketing|job|interview|professional|office|project|motion/i.test(group)||Object.prototype.hasOwnProperty.call(prompts,norm(item?.phrase))}
  function applicationQuestion(item,assisted=false){const plan=window.SERAG_ENGLISH_V9?.workPractice,custom=plan?.wordPrompts?.[norm(item.phrase)],work=isWorkItem(item),length=assisted?'one clear sentence':'2–3 sentences';let situation;if(custom?.prompt)situation=custom.prompt;else if(work&&/creative|design|motion/i.test(String(item.group||'')))situation='You are reviewing a design or video with your manager. Explain the situation clearly.';else if(work)situation='Think of a work or project situation where you need to give a concise, professional update about a work task.';else situation='Think of a real situation from your life where this expression fits.';let prompt=situation+' Use “'+item.phrase+'” naturally in '+length+'.';if(custom?.starter)prompt+=' You can start with: '+custom.starter;return {kind:'application',item,answer:item.phrase,prompt,assisted,sentence:custom?.example||(item.examples||[item.example]).find(Boolean)||'',workRelated:work,skill:custom?.skill||(work?'work-communication':'personal-application')}}
  function hint(answer,count){let letters=0;return [...answer].map(c=>/[\p{L}\p{N}]/u.test(c)?(++letters<=count?c:'_'):c).join('')}
- function check(q,value){if(q.kind==='grammar')return String(value)===String(q.answer);const answer=norm(q.answer),given=norm(value);return q.kind==='application'?!!answer&&given.includes(answer):given===answer}
+ function check(q,value){if(q.kind==='grammar')return String(value)===String(q.answer);if(q.kind==='build'&&Array.isArray(q.acceptedAnswers)&&q.acceptedAnswers.length)return q.acceptedAnswers.some(answer=>norm(answer)===norm(value));const answer=norm(q.answer),given=norm(value);return q.kind==='application'?!!answer&&given.includes(answer):given===answer}
  function shuffle(rows){const list=[...rows];for(let i=list.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[list[i],list[j]]=[list[j],list[i]]}return list}
  function buildRound(words,grammar=[],size=4,sentenceBuild=[],dailyMode=false){
   const selected=words.slice(0,dailyMode?4:Math.max(4,Math.min(6,size))),all=items();
@@ -48,7 +48,7 @@
   });
   const grammarLimit=dailyMode?2:3;
   const grammarPool=window.SERAG_ACADEMY_V12?.selectQuestions?window.SERAG_ACADEMY_V12.selectQuestions(freshGrammar,'daily',grammarLimit):freshGrammar.slice(0,grammarLimit);
-  const fillers=grammarPool.map(q=>({kind:'grammar',grammar:q,answer:q.answer,options:q.options}));
+  const fillers=grammarPool.map(q=>({kind:q.sourceQuestionType==='error_correction'?'correction':'grammar',grammar:q,incorrectSentence:q.incorrectSentence||null,answer:q.answer,options:q.options}));
   const correction=window.SERAG_ENGOPLAY_INTERACTIONS_V1?.correction?.(grammarPool[0]);
   if(correction)fillers.push(correction);
   const buildPool=sentenceBuild.filter(q=>{
@@ -77,7 +77,7 @@
   if(q.kind==='recall'&&(!old.last_recall_day||old.last_recall_day!==new Date().toDateString())){s[key].last_recall_day=new Date().toDateString();try{localStorage.setItem('seragSentenceV21:'+id,JSON.stringify(s))}catch{}window.ENGOPLAY?.scheduleWord?.(q.item.id,correct&&!assisted)}
   const prefix=q.kind==='recognition'?'recognition:':q.kind==='match'?'match:':q.kind==='application'?'application:':'sentence:';if(!assisted)window.ENGOPLAY?.track({id:prefix+key,topic:q.kind==='recognition'?'vocabulary-recognition':q.kind==='match'?'vocabulary-matching':q.kind==='application'?(isWorkItem(q.item)?'work-application':'vocabulary-application'):'vocabulary-sentence',correct,answer:correct?(q.kind==='application'?(session?.input||''):q.answer):(session?.input||''),at:Date.now()});
  }
- function saveBuildAttempt(q,correct,assisted){if(assisted)return;window.SERAG_ENGOPLAY_QUESTS_V1?.recordPracticeAttempt?.(q,session?.input||'',correct,session?.index||0);}
+ function saveBuildAttempt(q,correct,assisted){if(assisted)return;if(q?.sourceBatch==='advanced01'){window.ENGOPLAY?.track?.({id:q.id,topic:q.topic,correct,answer:session?.input||'',at:Date.now()});return}window.SERAG_ENGOPLAY_QUESTS_V1?.recordPracticeAttempt?.(q,session?.input||'',correct,session?.index||0);}
  // Review order: due reviews (most overdue first) -> fresh words -> practised but unscheduled -> scheduled for later.
  // Pure and exported so it can be tested. status(id) returns {due_at} or null; seen is the local per-user state map.
  function orderPool(list,status=()=>null,seen={},now=Date.now()){const key=w=>{const prior=seen[norm(w.phrase)],r=status(w.id),dueAt=r?Date.parse(r.due_at):NaN,lastShown=Math.max(Date.parse(prior?.last_presented_at||prior?.at||'')||0,Date.parse(r?.last_presented_at||r?.shown_at||'')||0),reviewedAt=Date.parse(r?.updated_at||'')||0,shownSinceReview=lastShown>0&&lastShown>reviewedAt;if(Number.isFinite(dueAt)&&dueAt<=now&&!shownSinceReview)return [0,dueAt];if(Number.isFinite(dueAt)&&dueAt>now)return [3,dueAt];if(!lastShown&&!prior)return [1,0];return [2,lastShown||reviewedAt||0]};return shuffle(list).sort((a,b)=>{const x=key(a),y=key(b);return x[0]-y[0]||x[1]-y[1]})}
