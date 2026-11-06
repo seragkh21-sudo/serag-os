@@ -94,13 +94,16 @@
     floating = $('#edSelectionTrigger');
   }
   function setStatus(text) { const el = $('#edStatus'); if (el) el.textContent = text; }
+  function manualEntry(phrase) {
+    return '<div class="ed-manual-entry"><p>تقدر تضيف الكلمة أو التعبير بنفسك:</p><input id="edCustomMeaning" maxlength="240" placeholder="المعنى بالعربي (اختياري)" aria-label="المعنى بالعربي (اختياري)"><textarea id="edCustomExample" maxlength="600" placeholder="مثال أو سياق (اختياري)" aria-label="مثال أو سياق (اختياري)">'+esc(activeContext||phrase)+'</textarea></div>';
+  }
   function render(data, phrase) {
     const result = $('#edResult');
     const save = $('#edSave');
     if (!result) return;
     if (data.notFound) {
-      result.innerHTML = '<div class="ed-empty"><strong>ملقيناش تعريف للكلمة دي.</strong><p>جرّب كلمة واحدة، أو راجع كتابة التعبير. بعض التعابير المركبة مش موجودة في القاموس.</p></div>';
-      if (save) save.disabled = true;
+      result.innerHTML = '<div class="ed-empty"><strong>ملقيناش تعريف للكلمة دي.</strong><p>جرّب كلمة واحدة، أو راجع كتابة التعبير. بعض التعابير المركبة مش موجودة في القاموس.</p></div>' + manualEntry(phrase);
+      if (save) save.disabled = false;
       return;
     }
     const audio = data.audio ? '<button type="button" class="ed-audio" data-ed-audio aria-label="استمع للنطق">▶ <span>اسمع النطق</span></button>' : '';
@@ -149,8 +152,8 @@
     } catch (error) {
       if (token !== requestToken || !$('#edDialog').open) return;
       setStatus(error && error.name === 'AbortError' ? 'البحث أخد وقت طويل. جرّب تاني.' : 'القاموس الخارجي مش متاح حاليًا. جرّب بعد شوية.');
-      $('#edResult').innerHTML = '<div class="ed-empty"><strong>تعذر تحميل القاموس.</strong><p>ده مش معناه إن الكلمة غلط. تقدر تكمل القراءة وتحاول تاني لاحقًا.</p><button type="button" data-ed-retry>إعادة المحاولة</button></div>';
-      $('#edSave').disabled = true;
+      $('#edResult').innerHTML = '<div class="ed-empty"><strong>تعذر تحميل القاموس.</strong><p>تقدر تضيف الكلمة أو التعبير لبنك الكلمات يدويًا.</p><button type="button" data-ed-retry>إعادة المحاولة</button></div>' + manualEntry(activePhrase);
+      $('#edSave').disabled = false;
     }
   }
   async function save() {
@@ -160,13 +163,15 @@
     if (!owner || !client) { setStatus('سجّل دخولك الأول علشان تحفظ الكلمة.'); return; }
     if (!activePhrase) return;
     button.disabled = true;
+    const customMeaning = $('#edCustomMeaning')?.value.trim() || '';
+    const customExample = $('#edCustomExample')?.value.trim() || activeContext || activePhrase;
     button.textContent = 'جاري الحفظ…';
     try {
       const existing = await client.from('english_words').select('word').eq('user_id', owner).ilike('word', activePhrase).limit(1);
       if (existing.error) throw existing.error;
       if (!existing.data || !existing.data.length) {
         const inserted = await client.from('english_words').insert({
-          user_id: owner, word: activePhrase, meaning: '', example: activeContext || activePhrase
+          user_id: owner, word: activePhrase, meaning: customMeaning, example: customExample
         });
         if (inserted.error) throw inserted.error;
       }
