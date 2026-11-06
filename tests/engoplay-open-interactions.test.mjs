@@ -31,7 +31,7 @@ test('matching is added to mixed EngoPlay rounds and records each owner-scoped p
  let q=api.currentQuestion();assert.match(api.html(),/wp-match-grid/);assert.equal(q.pairs.length,4);
  api.chooseMatchWord(0);assert.equal(api.chooseMatchMeaning(q.meaningOrder.indexOf(1)),false);assert.equal(api.currentQuestion().kind,'match');
  for(let index=0;index<4;index++){api.chooseMatchWord(index);api.chooseMatchMeaning(q.meaningOrder.indexOf(index))}
- assert.match(api.html(),/Matched\. Review the pairs you missed/);assert.equal(tracked.length,0); // an imperfect round is practice, not an independent success
+ assert.match(api.html(),/All 4 pairs matched after 1 retry/);assert.equal(tracked.length,0); // an imperfect round is practice, not an independent success
  const saved=JSON.parse(store.get('seragSentenceV21:user-a'));
  assert.equal(Object.values(saved).filter(x=>x.last_stage==='match').length,4);
  assert.ok(Object.values(saved).every(x=>x.last_assisted===true));
