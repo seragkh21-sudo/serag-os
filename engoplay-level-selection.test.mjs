@@ -42,7 +42,7 @@ test('daily questions and word-order tasks follow the selected practice level',(
     const outcome=startFor(level,pilot,existing,prior);
     assert.deepEqual(outcome.ids,[expected[level][0]]);
     assert.deepEqual(outcome.sentences.map(x=>x.id),[expected[level][1]]);
-    assert.ok(outcome.title.startsWith(level));
+    assert.equal(outcome.title,'Today’s practice');
     assert.equal(outcome.daily,true);
   }
 });
