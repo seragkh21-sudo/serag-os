@@ -1,0 +1,1340 @@
+{
+  "batch_id": "BATCH-002-B2-VOCAB-COLLOCATIONS",
+  "schema_version": "2.1-reviewed",
+  "topic_id": "DIP-B2-01_DIP-B2-02",
+  "level": "B2",
+  "title": "B2 Advanced Vocabulary, Natural Collocations, and Workplace Phrasal Verbs",
+  "target_distribution": "100% B2 Core Advancement",
+  "items": [
+    {
+      "id": "ENG-B2-031",
+      "question_type": "multiple_choice",
+      "cefr": "B2.1",
+      "difficulty": "medium",
+      "skill_tags": [
+        "phrasal_verbs",
+        "workplace_communication",
+        "idiomatic_precision"
+      ],
+      "prompt": "Select the correct phrasal verb to complete the sprint retrospective update: 'Before launching the new app update, our development team needs to _______ a few minor user experience bugs.'",
+      "arabic_translation_hint": "قبل إطلاق التحديث الجديد للتطبيق، يحتاج فريق التطوير لدينا إلى تسوية بعض الأخطاء التجميلية في تجربة المستخدم.",
+      "options": [
+        "iron out",
+        "rule out",
+        "phase out",
+        "burn out"
+      ],
+      "correct_answer": "iron out",
+      "explanation": "In product management and workplace English, 'iron out problems/bugs' means to resolve remaining minor flaws before release.",
+      "source_references_unverified": [
+        "CEFR-J B2.1 Vocabulary Profile",
+        "ELLLO B2 Views"
+      ]
+    },
+    {
+      "id": "ENG-B2-032",
+      "question_type": "multiple_choice",
+      "cefr": "B2.1",
+      "difficulty": "medium",
+      "skill_tags": [
+        "phrasal_verbs",
+        "meetings",
+        "discourse_markers"
+      ],
+      "prompt": "At the start of tomorrow's budget meeting, I would like to _______ the server bandwidth issue for the first time so the team can discuss it.",
+      "arabic_translation_hint": "في بداية اجتماع الميزانية غدًا، أود طرح موضوع سعة اتصال الخادم لأول مرة لمناقشته مع الفريق.",
+      "options": [
+        "bring up",
+        "follow up on",
+        "sum up",
+        "look into"
+      ],
+      "correct_answer": "bring up",
+      "explanation": "'Bring up' introduces a new topic into a discussion. 'Follow up on' revisits an earlier matter, 'sum up' summarizes a discussion, and 'look into' means investigate.",
+      "source_references_unverified": [
+        "CEFR-J B2.1 Grammar Profile",
+        "British Council Business Hub"
+      ]
+    },
+    {
+      "id": "ENG-B2-033",
+      "question_type": "sentence_building",
+      "cefr": "B2.1",
+      "difficulty": "medium",
+      "skill_tags": [
+        "sentence_syntax",
+        "phrasal_verbs",
+        "customer_service"
+      ],
+      "prompt": "Reconstruct the customer support resolution statement using the exact tokens provided:",
+      "arabic_translation_hint": "أعد بناء بيان حل دعم العملاء باستخدام الكلمات المحددة بالضبط:",
+      "token_array": [
+        "Our",
+        "technical",
+        "specialists",
+        "will",
+        "look",
+        "into",
+        "the",
+        "database",
+        "latency",
+        "issue",
+        "immediately",
+        "."
+      ],
+      "accepted_sentences": [
+        "Our technical specialists will look into the database latency issue immediately."
+      ],
+      "explanation": "Phrasal verb structure: Subject ('Our technical specialists') + modal ('will') + inseparable phrasal verb ('look into') + noun phrase object ('the database latency issue') + adverb ('immediately').",
+      "source_references_unverified": [
+        "CEFR-J B2.1 Grammar Profile",
+        "Grammar Gretel Drag&Drop"
+      ]
+    },
+    {
+      "id": "ENG-B2-034",
+      "question_type": "error_correction",
+      "cefr": "B2.1",
+      "difficulty": "medium",
+      "skill_tags": [
+        "error_repair",
+        "phrasal_verb_particles",
+        "workplace"
+      ],
+      "prompt": "Identify and correct the inappropriate phrasal verb particle in this operations report:",
+      "arabic_translation_hint": "حدد وصحح حرف الجر غير المناسب مع الفعل المركب في هذا التقرير التشغيلي:",
+      "incorrect_sentence": "The QA department will carry through a complete security review next week.",
+      "correct_sentence": "The QA department will carry out a complete security review next week.",
+      "error_tag": "PHRASAL_VERB_PARTICLE_ERROR",
+      "explanation": "The correct phrasal verb meaning to conduct or perform a test/review is 'carry out', not 'carry through'.",
+      "source_references_unverified": [
+        "Diagnostic Gap Study Section 4",
+        "CTSEG ID 215"
+      ]
+    },
+    {
+      "id": "ENG-B2-035",
+      "question_type": "paraphrase_transformation",
+      "cefr": "B2.1",
+      "difficulty": "hard",
+      "skill_tags": [
+        "paraphrasing",
+        "phrasal_verbs",
+        "executive_register"
+      ],
+      "prompt": "Choose the most accurate paraphrase: 'We reduced our shortlist of potential software vendors from ten candidates to two finalists.'",
+      "arabic_translation_hint": "اختر الجملة التي تعيد صياغة النص بدقة مع استخدام فعل مركب مناسب:",
+      "options": [
+        "We narrowed down our potential software vendors from ten candidates to two finalists.",
+        "We phased out ten existing software suppliers before renewing two contracts.",
+        "We postponed evaluating all ten vendors until two proposals were submitted.",
+        "We expanded our vendor shortlist from two candidates to ten finalists."
+      ],
+      "correct_answer": "We narrowed down our potential software vendors from ten candidates to two finalists.",
+      "explanation": "'Narrow down' means reduce a set of possibilities to a shorter list; the other choices describe replacement, postponement or expansion rather than shortlisting.",
+      "source_references_unverified": [
+        "CEFR-J B2.2 Profile",
+        "Octanove B2"
+      ]
+    },
+    {
+      "id": "ENG-B2-036",
+      "question_type": "vocabulary_matching",
+      "cefr": "B2.1",
+      "difficulty": "medium",
+      "skill_tags": [
+        "collocations",
+        "contextual_meaning",
+        "business"
+      ],
+      "prompt": "Match the target word 'spearhead' to its correct contextual meaning in this sentence: 'Sami was chosen to spearhead the regional market expansion initiative.'",
+      "arabic_translation_hint": "طابق الكلمة المستهدفة 'spearhead' بمعناها السياقي الصحيح في هذه الجملة:",
+      "options": [
+        "To lead and take the initiative in an organized effort.",
+        "To audit financial statements for errors.",
+        "To delay execution until further notice.",
+        "To reduce operational costs by cutting headcount."
+      ],
+      "correct_answer": "To lead and take the initiative in an organized effort.",
+      "explanation": "To 'spearhead' an initiative means to act as the primary leader driving its execution.",
+      "source_references_unverified": [
+        "CEFR-J Collocation Dataset",
+        "Open Language Profiles B2"
+      ]
+    },
+    {
+      "id": "ENG-B2-037",
+      "question_type": "multiple_choice",
+      "cefr": "B2.2",
+      "difficulty": "medium",
+      "skill_tags": [
+        "collocations",
+        "business_strategy",
+        "adjective_noun"
+      ],
+      "prompt": "Select the natural adjective collocate: 'Entering the European SaaS market was a _______ risk, but our thorough research paid off.'",
+      "arabic_translation_hint": "اختر نعت التلازم الطبيعي: 'كان الدخول إلى سوق البرمجيات الأوروبي بمثابة مجازفة محسوبة، لكن بحثنا الدقيق أتى بثماره.'",
+      "options": [
+        "calculated",
+        "estimated",
+        "counted",
+        "numbered"
+      ],
+      "correct_answer": "calculated",
+      "explanation": "'Calculated risk' is a fixed B2 business collocation describing a decision made after evaluating potential downside.",
+      "source_references_unverified": [
+        "CEFR-J Collocation Dataset",
+        "British Council Business Hub"
+      ]
+    },
+    {
+      "id": "ENG-B2-038",
+      "question_type": "sentence_building",
+      "cefr": "B2.2",
+      "difficulty": "hard",
+      "skill_tags": [
+        "sentence_syntax",
+        "phrasal_verbs",
+        "financial_planning"
+      ],
+      "prompt": "Arrange the tokens to construct a financial planning statement:",
+      "arabic_translation_hint": "رتب الكلمات لبناء بيان تخطيط مالي:",
+      "token_array": [
+        "We",
+        "must",
+        "factor",
+        "in",
+        "unexpected",
+        "licensing",
+        "fees",
+        "when",
+        "setting",
+        "our",
+        "annual",
+        "budget",
+        "."
+      ],
+      "accepted_sentences": [
+        "We must factor in unexpected licensing fees when setting our annual budget."
+      ],
+      "explanation": "Phrasal verb structure: 'factor in' (meaning include as a variable) + noun phrase ('unexpected licensing fees') + temporal clause ('when setting our annual budget').",
+      "source_references_unverified": [
+        "CEFR-J B2.2 Profile",
+        "Grammar Gretel Latency"
+      ]
+    },
+    {
+      "id": "ENG-B2-039",
+      "question_type": "error_correction",
+      "cefr": "B2.2",
+      "difficulty": "hard",
+      "skill_tags": [
+        "error_repair",
+        "verb_noun_collocation",
+        "workplace_design"
+      ],
+      "prompt": "Fix the awkward verb choice in this office culture guidelines draft:",
+      "arabic_translation_hint": "أصلح اختيار الفعل غير الطبيعي في مسودة إرشادات ثقافة العمل هذه:",
+      "incorrect_sentence": "Good managers must hit a balance between team autonomy and operational oversight.",
+      "correct_sentence": "Good managers must strike a balance between team autonomy and operational oversight.",
+      "error_tag": "VERB_NOUN_COLLOCATION_ERROR",
+      "explanation": "The idiomatic professional expression is 'strike a balance' (not 'hit a balance').",
+      "source_references_unverified": [
+        "Diagnostic Gap Analysis Figure 4",
+        "CTSEG ID 204"
+      ]
+    },
+    {
+      "id": "ENG-B2-040",
+      "question_type": "paraphrase_transformation",
+      "cefr": "B2.2",
+      "difficulty": "hard",
+      "skill_tags": [
+        "paraphrasing",
+        "idiomatic_phrasal_verbs",
+        "project_management"
+      ],
+      "prompt": "Choose the best idiomatic paraphrase: 'Despite severe staffing shortages, the event team successfully executed the product launch on schedule.'",
+      "arabic_translation_hint": "اختر أفضل إعادة صياغة اصطلاحية تتضمن فعلاً مركباً متقدماً:",
+      "options": [
+        "Despite severe staffing shortages, the event team pulled off the product launch on schedule.",
+        "Despite severe staffing shortages, the event team carried away the product launch on schedule.",
+        "Despite severe staffing shortages, the event team took over the product launch on schedule.",
+        "Despite severe staffing shortages, the event team brought about the product launch on schedule."
+      ],
+      "correct_answer": "Despite severe staffing shortages, the event team pulled off the product launch on schedule.",
+      "explanation": "'Pull off' is the natural B2 phrasal verb meaning to achieve a complex or challenging feat.",
+      "source_references_unverified": [
+        "ELLLO B2 Views",
+        "Octanove B2 Profile"
+      ]
+    },
+    {
+      "id": "ENG-B2-041",
+      "question_type": "multiple_choice",
+      "cefr": "B2.1",
+      "difficulty": "medium",
+      "skill_tags": [
+        "collocations",
+        "workplace_efficiency",
+        "business"
+      ],
+      "prompt": "Select the correct verb to complete the executive summary: 'By automating invoice approval workflows, the company managed to _______ its financial operations.'",
+      "arabic_translation_hint": "من خلال أتمتة مسارات الموافقة على الفواتير، تمكنت الشركة من تبسيط عملياتها المالية.",
+      "options": [
+        "streamline",
+        "straighten",
+        "flatten",
+        "unify"
+      ],
+      "correct_answer": "streamline",
+      "explanation": "'Streamline operations/processes' is a high-frequency B2 collocation for removing friction from business procedures.",
+      "source_references_unverified": [
+        "CEFR-J Collocation Dataset",
+        "British Council Business Hub"
+      ]
+    },
+    {
+      "id": "ENG-B2-042",
+      "question_type": "multiple_choice",
+      "cefr": "B2.1",
+      "difficulty": "medium",
+      "skill_tags": [
+        "phrasal_verbs",
+        "contingency_planning",
+        "workplace"
+      ],
+      "prompt": "Choose the correct phrasal verb: 'If the primary payment gateway fails during peak sale hours, our system will _______ a secondary processing provider.'",
+      "arabic_translation_hint": "إذا تعطلت بوابة الدفع الأساسية خلال ساعات الذروة، فسيستند نظامنا إلى مزود معالجة ثانوي.",
+      "options": [
+        "fall back on",
+        "fall out with",
+        "fall behind on",
+        "fall through with"
+      ],
+      "correct_answer": "fall back on",
+      "explanation": "'Fall back on' is the standard phrasal verb for relying on a contingency reserve or backup option.",
+      "source_references_unverified": [
+        "CEFR-J B2.1 Vocabulary Profile",
+        "ELLLO B2 Views"
+      ]
+    },
+    {
+      "id": "ENG-B2-043",
+      "question_type": "sentence_building",
+      "cefr": "B2.1",
+      "difficulty": "medium",
+      "skill_tags": [
+        "sentence_syntax",
+        "business_strategy",
+        "collocations"
+      ],
+      "prompt": "Arrange the tokens to build a business strategy sentence:",
+      "arabic_translation_hint": "رتب الكلمات لبناء جملة استراتيجية أعمال:",
+      "token_array": [
+        "Innovative",
+        "startups",
+        "leverage",
+        "AI",
+        "analytics",
+        "to",
+        "gain",
+        "a",
+        "competitive",
+        "edge",
+        "."
+      ],
+      "accepted_sentences": [
+        "Innovative startups leverage AI analytics to gain a competitive edge."
+      ],
+      "explanation": "Collocation structure: Subject ('Innovative startups') + verb ('leverage') + object ('AI analytics') + purpose clause ('to gain a competitive edge').",
+      "source_references_unverified": [
+        "CEFR-J Collocation Dataset",
+        "Grammar Gretel Drag&Drop"
+      ]
+    },
+    {
+      "id": "ENG-B2-044",
+      "question_type": "error_correction",
+      "cefr": "B2.1",
+      "difficulty": "medium",
+      "skill_tags": [
+        "error_repair",
+        "make_vs_do_conduct",
+        "academic_business"
+      ],
+      "prompt": "Correct the unnatural verb choice in this project proposal:",
+      "arabic_translation_hint": "صحح اختيار الفعل غير الطبيعي في مقترح المشروع هذا:",
+      "incorrect_sentence": "Our UX designers need to make market research before finalizing the layout.",
+      "correct_sentence": "Our UX designers need to conduct market research before finalizing the layout.",
+      "error_tag": "MAKE_VS_CONDUCT_COLLOCATION_ERROR",
+      "explanation": "In professional and academic English, one 'conducts research' or 'carries out research', rather than 'makes research'.",
+      "source_references_unverified": [
+        "Diagnostic Gap Analysis Section 4",
+        "CTSEG ID 155"
+      ]
+    },
+    {
+      "id": "ENG-B2-045",
+      "question_type": "paraphrase_transformation",
+      "cefr": "B2.1",
+      "difficulty": "medium",
+      "skill_tags": [
+        "paraphrasing",
+        "idiomatic_expressions",
+        "workplace_ethics"
+      ],
+      "prompt": "Select the sentence that accurately paraphrases: 'To meet the launch deadline, the team compromised on quality standards by skipping compliance testing.'",
+      "arabic_translation_hint": "اختر الجملة التي تعيد صياغة النص بدقة باستخدام تعبير اصطلاحي مناسب:",
+      "options": [
+        "To meet the launch deadline, the team cut corners on compliance testing.",
+        "To meet the launch deadline, the team completed all compliance checks ahead of schedule.",
+        "To meet the launch deadline, the team increased spending on external compliance testing.",
+        "To meet the launch deadline, the team delayed the release until every compliance test passed."
+      ],
+      "correct_answer": "To meet the launch deadline, the team cut corners on compliance testing.",
+      "explanation": "'Cut corners' means skip necessary steps to save time or money, which preserves the original statement about compromising standards. The alternatives maintain or expand testing, or delay the launch.",
+      "source_references_unverified": [
+        "CEFR-J B2 Profile",
+        "Octanove B2"
+      ]
+    },
+    {
+      "id": "ENG-B2-046",
+      "question_type": "vocabulary_matching",
+      "cefr": "B2.1",
+      "difficulty": "medium",
+      "skill_tags": [
+        "vocabulary_matching",
+        "workplace_terminology",
+        "operations"
+      ],
+      "prompt": "Match the term 'bottleneck' to its precise operational definition in this workflow report: 'Manual data entry created a severe bottleneck in our procurement process.'",
+      "arabic_translation_hint": "طابق المصطلح 'bottleneck' بتعريفه التشغيلي الدقيق:",
+      "options": [
+        "A point of congestion that slows down an entire process or workflow.",
+        "A sudden surge in quarterly sales revenue.",
+        "A legal contract clause outlining termination terms.",
+        "A software integration tool that automates reporting."
+      ],
+      "correct_answer": "A point of congestion that slows down an entire process or workflow.",
+      "explanation": "In business operations, a 'bottleneck' refers to a stage that restricts overall throughput or speed.",
+      "source_references_unverified": [
+        "CEFR-J B2.1 Vocabulary Profile",
+        "Open Language Profiles"
+      ]
+    },
+    {
+      "id": "ENG-B2-047",
+      "question_type": "multiple_choice",
+      "cefr": "B2.2",
+      "difficulty": "medium",
+      "skill_tags": [
+        "phrasal_verbs",
+        "decision_making",
+        "executive"
+      ],
+      "prompt": "Choose the best phrasal verb for strategic planning: 'The executive committee needs to _______ the pros and cons of acquiring the regional competitor.'",
+      "arabic_translation_hint": "اختر أفضل فعل مركب للتخطيط الاستراتيجي: 'تحتاج اللجنة التنفيذية إلى تقييم إيجابيات وسلبيات الاستحواذ على المنافس الإقليمي.'",
+      "options": [
+        "weigh up",
+        "sum up",
+        "clear up",
+        "take up"
+      ],
+      "correct_answer": "weigh up",
+      "explanation": "'Weigh up options/pros and cons' is the established phrasal verb for evaluative decision-making.",
+      "source_references_unverified": [
+        "CEFR-J B2.2 Vocabulary Profile",
+        "ELLLO B2 Views"
+      ]
+    },
+    {
+      "id": "ENG-B2-048",
+      "question_type": "sentence_building",
+      "cefr": "B2.2",
+      "difficulty": "hard",
+      "skill_tags": [
+        "sentence_syntax",
+        "phrasal_verbs",
+        "cost_control"
+      ],
+      "prompt": "Reconstruct the financial advisory sentence using the exact tokens provided:",
+      "arabic_translation_hint": "أعد بناء جملة الاستشارات المالية باستخدام الكلمات المحددة بالضبط:",
+      "token_array": [
+        "The",
+        "CFO",
+        "urged",
+        "department",
+        "heads",
+        "to",
+        "rein",
+        "in",
+        "discretionary",
+        "spending",
+        "this",
+        "quarter",
+        "."
+      ],
+      "accepted_sentences": [
+        "The CFO urged department heads to rein in discretionary spending this quarter."
+      ],
+      "explanation": "Phrasal verb structure: 'rein in' (meaning control or limit) + adjective phrase ('discretionary spending') + time modifier ('this quarter').",
+      "source_references_unverified": [
+        "CEFR-J B2.2 Profile",
+        "Grammar Gretel Latency"
+      ]
+    },
+    {
+      "id": "ENG-B2-049",
+      "question_type": "error_correction",
+      "cefr": "B2.1",
+      "difficulty": "medium",
+      "skill_tags": [
+        "error_repair",
+        "verb_preposition_collocation"
+      ],
+      "prompt": "Correct the single preposition error in this design feedback note:",
+      "arabic_translation_hint": "صحح حرف الجر غير الصحيح في الملاحظة المتعلقة بإمكانية الوصول.",
+      "incorrect_sentence": "Engineers should pay close attention on user accessibility feedback.",
+      "correct_sentence": "Engineers should pay close attention to user accessibility feedback.",
+      "error_tag": "PREPOSITION_COLLOCATION_ERROR",
+      "explanation": "The fixed expression is 'pay close attention to' something, not 'pay close attention on'.",
+      "source_references_unverified": [
+        "Diagnostic Gap Study Figure 3",
+        "CTSEG ID 62"
+      ]
+    },
+    {
+      "id": "ENG-B2-050",
+      "question_type": "paraphrase_transformation",
+      "cefr": "B2.1",
+      "difficulty": "medium",
+      "skill_tags": [
+        "paraphrasing",
+        "idiomatic_business",
+        "workplace_communication"
+      ],
+      "prompt": "Select the sentence that accurately paraphrases: 'Let us briefly communicate next week to confirm the deployment timeline.'",
+      "arabic_translation_hint": "اختر الجملة التي تعيد صياغة النص بدقة باستخدام تعبير أعمال اصطلاحي طبيعي:",
+      "options": [
+        "Let us touch base next week to confirm the deployment timeline.",
+        "Let us postpone our discussion until the deployment has finished.",
+        "Let us reassess the project's financial feasibility before discussing deployment.",
+        "Let us finalize the deployment today without another meeting."
+      ],
+      "correct_answer": "Let us touch base next week to confirm the deployment timeline.",
+      "explanation": "'Touch base' means make brief contact to check in or coordinate. The other options change when or why the team communicates.",
+      "source_references_unverified": [
+        "British Council Business Hub",
+        "Octanove B2"
+      ]
+    },
+    {
+      "id": "ENG-B2-051",
+      "question_type": "multiple_choice",
+      "cefr": "B2.1",
+      "difficulty": "medium",
+      "skill_tags": [
+        "tech_vocabulary",
+        "collocations",
+        "software_engineering"
+      ],
+      "prompt": "Demand could multiply tenfold after launch. We need _______ cloud infrastructure that can expand capacity as traffic grows without redesigning the system.",
+      "arabic_translation_hint": "تعتمد منصتنا على بنية تحتية قابلة للتوسع قادرة على التعامل مع الارتفاعات المفاجئة في حركة المستخدمين.",
+      "options": [
+        "scalable",
+        "resilient",
+        "redundant",
+        "secure"
+      ],
+      "correct_answer": "scalable",
+      "explanation": "'Scalable infrastructure' can increase capacity as demand rises. 'Resilient' stresses recovery, 'redundant' backup components, and 'secure' protection.",
+      "source_references_unverified": [
+        "ELLLO B2 Views (Tech & Robots)",
+        "Octanove B2 Profile"
+      ]
+    },
+    {
+      "id": "ENG-B2-052",
+      "question_type": "multiple_choice",
+      "cefr": "B2.1",
+      "difficulty": "medium",
+      "skill_tags": [
+        "phrasal_verbs",
+        "data_privacy",
+        "user_rights"
+      ],
+      "prompt": "In the app's privacy settings, users can choose to _______ promotional analytics tracking.",
+      "arabic_translation_hint": "بموجب قواعد حماية البيانات العامة المحدثة، يمكن للمستهلكين التخلي بسهولة عن تتبع البيانات الترويجية.",
+      "options": [
+        "opt out of",
+        "back out of",
+        "drop out of",
+        "step out of"
+      ],
+      "correct_answer": "opt out of",
+      "explanation": "'Opt out of' means explicitly decline participation. This describes an application setting, not a claim about a specific law or regulatory change.",
+      "source_references_unverified": [
+        "CEFR-J B2.1 Vocabulary Profile",
+        "British Council Online"
+      ]
+    },
+    {
+      "id": "ENG-B2-053",
+      "question_type": "sentence_building",
+      "cefr": "B2.1",
+      "difficulty": "medium",
+      "skill_tags": [
+        "sentence_syntax",
+        "agile_workplace",
+        "collocations"
+      ],
+      "prompt": "Arrange the tokens to build an Agile workplace statement:",
+      "arabic_translation_hint": "رتب الكلمات لبناء بيان بيئة عمل أجايل (Agile):",
+      "token_array": [
+        "Cross-functional",
+        "collaboration",
+        "accelerates",
+        "product",
+        "delivery",
+        "in",
+        "agile",
+        "environments",
+        "."
+      ],
+      "accepted_sentences": [
+        "Cross-functional collaboration accelerates product delivery in agile environments."
+      ],
+      "explanation": "Collocation structure: Subject ('Cross-functional collaboration') + verb ('accelerates') + object ('product delivery') + prepositional phrase ('in agile environments').",
+      "source_references_unverified": [
+        "CEFR-J Collocations",
+        "Grammar Gretel Drag&Drop"
+      ]
+    },
+    {
+      "id": "ENG-B2-054",
+      "question_type": "error_correction",
+      "cefr": "B2.1",
+      "difficulty": "medium",
+      "skill_tags": [
+        "error_repair",
+        "verb_collocation",
+        "management"
+      ],
+      "prompt": "Fix the unnatural verb-noun pairing in this management memo (one target error):",
+      "arabic_translation_hint": "أصلح المزاوجة غير الطبيعية بين الفعل والاسم في مذكرة الإدارة هذه:",
+      "incorrect_sentence": "The executive board agreed to make action on the compliance audit findings.",
+      "correct_sentence": "The executive board agreed to take action on the compliance audit findings.",
+      "error_tag": "MAKE_ACTION_COLLOCATION_ERROR",
+      "explanation": "The usual collocation is 'take action on' a problem or findings. 'Make action' is not natural here.",
+      "source_references_unverified": [
+        "Diagnostic Gap Study Section 4",
+        "CTSEG ID 155"
+      ]
+    },
+    {
+      "id": "ENG-B2-055",
+      "question_type": "paraphrase_transformation",
+      "cefr": "B2.1",
+      "difficulty": "medium",
+      "skill_tags": [
+        "paraphrasing",
+        "tech_vocabulary",
+        "product_description"
+      ],
+      "prompt": "Choose the paraphrase that preserves both the smooth connection and the fact that no custom coding is needed: 'Our software connects smoothly with third-party CRM tools without requiring custom code.'",
+      "arabic_translation_hint": "اختر الجملة التي تعيد صياغة النص بدقة مع استخدام متلازمة تقنية طبيعية:",
+      "options": [
+        "Our software integrates seamlessly with third-party CRM tools without custom code.",
+        "Our software connects to third-party CRM tools after some custom development.",
+        "Our software offers stable CRM connections, although configuration requires bespoke scripts.",
+        "Our software requires proprietary connectors to work with third-party CRM systems."
+      ],
+      "correct_answer": "Our software integrates seamlessly with third-party CRM tools without custom code.",
+      "explanation": "'Integrates seamlessly ... without custom code' preserves the smooth connection and no-code requirement. Each other option introduces custom development or a dependency missing from the original.",
+      "source_references_unverified": [
+        "CEFR-J B2 Profile",
+        "Octanove B2"
+      ]
+    },
+    {
+      "id": "ENG-B2-056",
+      "question_type": "vocabulary_matching",
+      "cefr": "B2.2",
+      "difficulty": "hard",
+      "skill_tags": [
+        "vocabulary_matching",
+        "system_reliability",
+        "tech"
+      ],
+      "prompt": "Match the term 'redundancy' to its correct technical meaning in this system architecture brief: 'We built dual data backups to ensure server redundancy.'",
+      "arabic_translation_hint": "طابق المصطلح 'redundancy' بتعريفه الفني الصحيح في موجز بنية النظام هذا:",
+      "options": [
+        "The inclusion of duplicate components to guarantee functionality if a primary component fails.",
+        "The layoff of employees due to budget cutbacks.",
+        "The accumulation of outdated code in a software repository.",
+        "The process of speeding up network data transmission."
+      ],
+      "correct_answer": "The inclusion of duplicate components to guarantee functionality if a primary component fails.",
+      "explanation": "In IT and system engineering, 'redundancy' refers to duplicate backup systems that maintain operations during outages.",
+      "source_references_unverified": [
+        "CEFR-J B2.2 Vocabulary Profile",
+        "Open Language Profiles"
+      ]
+    },
+    {
+      "id": "ENG-B2-057",
+      "question_type": "multiple_choice",
+      "cefr": "B2.2",
+      "difficulty": "medium",
+      "skill_tags": [
+        "collocations",
+        "innovation",
+        "business_strategy"
+      ],
+      "prompt": "Select the correct adjective collocate: 'Generative AI represents a _______ innovation that is transforming creative industries.'",
+      "arabic_translation_hint": "يمثل الذكاء الاصطناعي التوليدي ابتكارًا قد يغيّر قواعد السوق ويؤثر في الصناعات الإبداعية.",
+      "options": [
+        "disruptive",
+        "disturbing",
+        "disrupting",
+        "disordered"
+      ],
+      "correct_answer": "disruptive",
+      "explanation": "'Disruptive innovation' is a core B2 business/tech concept coined for market-transforming advances.",
+      "source_references_unverified": [
+        "CEFR-J Collocation Dataset",
+        "ELLLO B2 Views"
+      ]
+    },
+    {
+      "id": "ENG-B2-058",
+      "question_type": "sentence_building",
+      "cefr": "B2.2",
+      "difficulty": "hard",
+      "skill_tags": [
+        "sentence_syntax",
+        "product_design",
+        "collocations"
+      ],
+      "prompt": "Arrange the tokens to construct a product design principle sentence:",
+      "arabic_translation_hint": "رتب الكلمات لبناء جملة حول مبادئ تصميم المنتجات:",
+      "token_array": [
+        "Product",
+        "teams",
+        "rely",
+        "on",
+        "continuous",
+        "user",
+        "feedback",
+        "for",
+        "iterative",
+        "improvements",
+        "."
+      ],
+      "accepted_sentences": [
+        "Product teams rely on continuous user feedback for iterative improvements."
+      ],
+      "explanation": "Sentence structure: Subject ('Product teams') + verb + preposition ('rely on') + object noun phrase ('continuous user feedback') + prepositional clause ('for iterative improvements').",
+      "source_references_unverified": [
+        "CEFR-J B2.2 Profile",
+        "Grammar Gretel Latency"
+      ]
+    },
+    {
+      "id": "ENG-B2-059",
+      "question_type": "error_correction",
+      "cefr": "B2.1",
+      "difficulty": "medium",
+      "skill_tags": [
+        "error_repair",
+        "idiomatic_prepositions"
+      ],
+      "prompt": "Fix the preposition error in this meeting reflection:",
+      "arabic_translation_hint": "أصلح خطأ حرف الجر في ملاحظة الانطباع عن الاجتماع هذه:",
+      "incorrect_sentence": "We were so focused on brainstorming that we lost track on time.",
+      "correct_sentence": "We were so focused on brainstorming that we lost track of time.",
+      "error_tag": "IDIOM_PREPOSITION_ERROR",
+      "explanation": "The idiomatic expression for failing to notice the passage of time is 'lose track of time' (not 'on time').",
+      "source_references_unverified": [
+        "Diagnostic Gap Analysis Figure 3",
+        "CTSEG ID 62"
+      ]
+    },
+    {
+      "id": "ENG-B2-060",
+      "question_type": "paraphrase_transformation",
+      "cefr": "B2.2",
+      "difficulty": "medium",
+      "skill_tags": [
+        "paraphrasing",
+        "idiomatic_phrases",
+        "consideration"
+      ],
+      "prompt": "Choose the sentence that accurately paraphrases: 'Please consider our budget limitations when recommending new software tools.'",
+      "arabic_translation_hint": "اختر الجملة التي تعيد صياغة النص بدقة مع استخدام تعبير اصطلاحي مناسب:",
+      "options": [
+        "Please bear in mind our budget limitations when recommending new software tools.",
+        "Please set aside our budget limitations when recommending new software tools.",
+        "Please mention our budget limitations after choosing the new software tools.",
+        "Please calculate our budget limitations only once the new software tools have been purchased."
+      ],
+      "correct_answer": "Please bear in mind our budget limitations when recommending new software tools.",
+      "explanation": "'Bear in mind' means remember and take something into account during a decision. The alternatives ignore constraints or address them too late.",
+      "source_references_unverified": [
+        "British Council Business Hub",
+        "Octanove B2"
+      ]
+    },
+    {
+      "id": "ENG-B2-061",
+      "question_type": "multiple_choice",
+      "cefr": "B2.1",
+      "difficulty": "medium",
+      "skill_tags": [
+        "conversational_english",
+        "pragmatics",
+        "discourse_markers"
+      ],
+      "prompt": "Select the discourse phrase that fits naturally in casual adult discussion: '_______, I think your design proposal was much clearer than the agency's version.'",
+      "arabic_translation_hint": "اختر العبارة الخطابية التي تناسب النقاش الودي الطبيعي بين الكبار: 'مهما كانت قيمة رأيي، أظن أن مقترح التصميم الخاص بك كان أوضح بكثير من نسخة الوكالة.'",
+      "options": [
+        "For what it's worth",
+        "At all costs",
+        "By all means",
+        "For the time being"
+      ],
+      "correct_answer": "For what it's worth",
+      "explanation": "'For what it's worth' is a natural conversational phrase used when offering a personal view or opinion.",
+      "source_references_unverified": [
+        "ELLLO B2 Views",
+        "British Council Online"
+      ]
+    },
+    {
+      "id": "ENG-B2-062",
+      "question_type": "multiple_choice",
+      "cefr": "B2.1",
+      "difficulty": "medium",
+      "skill_tags": [
+        "phrasal_verbs",
+        "learning_skills",
+        "professional_dev"
+      ],
+      "prompt": "Choose the correct phrasal verb: 'Before traveling to the Tokyo tech conference, Tariq decided to _______ his conversational Japanese.'",
+      "arabic_translation_hint": "قبل السفر إلى مؤتمر طوكيو للتكنولوجيا، قرر طارق إنعاش معلوماته في اللغة اليابانية المحكية.",
+      "options": [
+        "brush up on",
+        "catch up with",
+        "make up for",
+        "keep up with"
+      ],
+      "correct_answer": "brush up on",
+      "explanation": "'Brush up on' is the standard B2 phrasal verb for refreshing rusty skills or knowledge.",
+      "source_references_unverified": [
+        "CEFR-J B2.1 Profile",
+        "BeforePlay Subtitle Pipeline"
+      ]
+    },
+    {
+      "id": "ENG-B2-063",
+      "question_type": "sentence_building",
+      "cefr": "B2.1",
+      "difficulty": "medium",
+      "skill_tags": [
+        "sentence_syntax",
+        "idioms",
+        "risk_management"
+      ],
+      "prompt": "Assemble the tokens into a natural sentence about risk management:",
+      "arabic_translation_hint": "جمع الكلمات في جملة طبيعية عن إدارة المخاطر:",
+      "token_array": [
+        "Instead",
+        "of",
+        "gambling",
+        "on",
+        "untested",
+        "vendors",
+        ",",
+        "we",
+        "decided",
+        "to",
+        "play",
+        "it",
+        "safe",
+        "."
+      ],
+      "accepted_sentences": [
+        "Instead of gambling on untested vendors, we decided to play it safe."
+      ],
+      "explanation": "Idiomatic structure: Dependent phrase ('Instead of gambling on untested vendors') + main clause with idiom ('we decided to play it safe').",
+      "source_references_unverified": [
+        "CEFR-J Grammar Profile B2.1",
+        "Grammar Gretel Drag&Drop"
+      ]
+    },
+    {
+      "id": "ENG-B2-064",
+      "question_type": "error_correction",
+      "cefr": "B2.1",
+      "difficulty": "medium",
+      "skill_tags": [
+        "error_repair",
+        "idiomatic_preposition",
+        "finance"
+      ],
+      "prompt": "Fix the preposition error in this investment strategy summary:",
+      "arabic_translation_hint": "أصلح خطأ حرف الجر في ملخص استراتيجية الاستثمار هذا:",
+      "incorrect_sentence": "Investing in automated QA testing will save money on the long run.",
+      "correct_sentence": "Investing in automated QA testing will save money in the long run.",
+      "error_tag": "LONG_RUN_PREPOSITION_ERROR",
+      "explanation": "The correct fixed prepositional phrase for referring to future extended time horizons is 'in the long run' (not 'on the long run').",
+      "source_references_unverified": [
+        "Diagnostic Gap Analysis Figure 4",
+        "CTSEG ID 62"
+      ]
+    },
+    {
+      "id": "ENG-B2-065",
+      "question_type": "paraphrase_transformation",
+      "cefr": "B2.2",
+      "difficulty": "hard",
+      "skill_tags": [
+        "paraphrasing",
+        "conversational_idioms",
+        "spontaneous_speech"
+      ],
+      "prompt": "Select the sentence that accurately paraphrases: 'Without checking the exact accounting spreadsheet right now, I estimate Q3 sales were around $400,000.'",
+      "arabic_translation_hint": "اختر الجملة التي تعيد صياغة النص بدقة باستخدام تعبير اصطلاحي شفهي طبيعي:",
+      "options": [
+        "Off the top of my head, Q3 sales were around $400,000.",
+        "According to the finalized accounts, Q3 sales were exactly $400,000.",
+        "Without a doubt, Q3 sales exceeded $400,000.",
+        "After reviewing the spreadsheet, I can confirm Q3 sales were $400,000."
+      ],
+      "correct_answer": "Off the top of my head, Q3 sales were around $400,000.",
+      "explanation": "'Off the top of my head' presents an approximate, memory-based estimate. The other choices claim verified facts or unwarranted certainty.",
+      "source_references_unverified": [
+        "ELLLO B2 Views",
+        "Octanove B2"
+      ]
+    },
+    {
+      "id": "ENG-B2-066",
+      "question_type": "vocabulary_matching",
+      "cefr": "B2.2",
+      "difficulty": "medium",
+      "skill_tags": [
+        "vocabulary_matching",
+        "decision_analysis",
+        "business"
+      ],
+      "prompt": "Match the term 'trade-off' to its precise contextual definition in this engineering meeting: 'Choosing a faster deployment timeline involved a trade-off with initial feature richness.'",
+      "arabic_translation_hint": "طابق المصطلح 'trade-off' بتعريفه السياقي الدقيق في اجتماع الهندسة هذا:",
+      "options": [
+        "A situational decision where accepting one desirable benefit requires forfeiting another.",
+        "A financial bonus awarded to sales staff at year-end.",
+        "A breach of security protocols resulting in server shutdown.",
+        "A formal dispute between union workers and management."
+      ],
+      "correct_answer": "A situational decision where accepting one desirable benefit requires forfeiting another.",
+      "explanation": "A 'trade-off' refers to giving up one advantage in order to gain another competing advantage.",
+      "source_references_unverified": [
+        "CEFR-J B2.2 Profile",
+        "ELLLO B2 Views"
+      ]
+    },
+    {
+      "id": "ENG-B2-067",
+      "question_type": "multiple_choice",
+      "cefr": "B2.2",
+      "difficulty": "medium",
+      "skill_tags": [
+        "collocations",
+        "persuasion",
+        "adjective_noun"
+      ],
+      "prompt": "Select the persuasive adjective collocate: 'The product manager made a _______ case for expanding our customer support team.'",
+      "arabic_translation_hint": "اختر نعت التلازم المقنع: 'قدم مدير المنتج حجة قوية (مقنعة) لتوسيع فريق دعم العملاء لدينا.'",
+      "options": [
+        "compelling",
+        "propelling",
+        "impelling",
+        "repelling"
+      ],
+      "correct_answer": "compelling",
+      "explanation": "'Compelling case/argument' is a high-frequency adjective-noun collocation in academic and executive English.",
+      "source_references_unverified": [
+        "CEFR-J Collocation Dataset",
+        "Octanove B2 Profile"
+      ]
+    },
+    {
+      "id": "ENG-B2-068",
+      "question_type": "sentence_building",
+      "cefr": "B2.2",
+      "difficulty": "hard",
+      "skill_tags": [
+        "sentence_syntax",
+        "business_idioms",
+        "finance"
+      ],
+      "prompt": "Arrange the tokens to form a financial summary statement:",
+      "arabic_translation_hint": "رتب الكلمات لتشكيل بيان ملخص مالي:",
+      "token_array": [
+        "At",
+        "the",
+        "end",
+        "of",
+        "the",
+        "day",
+        ",",
+        "customer",
+        "retention",
+        "directly",
+        "impacts",
+        "our",
+        "bottom",
+        "line",
+        "."
+      ],
+      "accepted_sentences": [
+        "At the end of the day, customer retention directly impacts our bottom line."
+      ],
+      "explanation": "Idiomatic opening ('At the end of the day') + main clause explaining financial outcome ('customer retention directly impacts our bottom line').",
+      "source_references_unverified": [
+        "CEFR-J B2.2 Profile",
+        "Grammar Gretel Latency"
+      ]
+    },
+    {
+      "id": "ENG-B2-069",
+      "question_type": "error_correction",
+      "cefr": "B2.1",
+      "difficulty": "medium",
+      "skill_tags": [
+        "error_repair",
+        "transitive_verbs",
+        "preposition_redundancy"
+      ],
+      "prompt": "Correct the redundant preposition in this meeting invitation:",
+      "arabic_translation_hint": "صحح حرف الجر الزائد في دعوة الاجتماع هذه:",
+      "incorrect_sentence": "We need to discuss about the Q3 marketing budget during tomorrow's call.",
+      "correct_sentence": "We need to discuss the Q3 marketing budget during tomorrow's call.",
+      "error_tag": "DISCUSS_ABOUT_REDUNDANCY",
+      "explanation": "'Discuss' is a transitive verb that takes a direct object without the preposition 'about'.",
+      "source_references_unverified": [
+        "Diagnostic Gap Study Table 4",
+        "CTSEG ID 62"
+      ]
+    },
+    {
+      "id": "ENG-B2-070",
+      "question_type": "paraphrase_transformation",
+      "cefr": "B2.2",
+      "difficulty": "hard",
+      "skill_tags": [
+        "paraphrasing",
+        "branding",
+        "idiomatic_phrases"
+      ],
+      "prompt": "Select the sentence that accurately paraphrases: 'Our brand needs to distinguish itself noticeably from competitors in a saturated market.'",
+      "arabic_translation_hint": "اختر الجملة التي تعيد صياغة النص بدقة مع استخدام تعبير اصطلاحي مناسب للتسويق:",
+      "options": [
+        "Our brand needs to stand out from the crowd in a saturated market.",
+        "Our brand needs to blend in with established competitors in a saturated market.",
+        "Our brand needs to match competitors' visual identities in a saturated market.",
+        "Our brand needs to retain its current market share without changing its positioning."
+      ],
+      "correct_answer": "Our brand needs to stand out from the crowd in a saturated market.",
+      "explanation": "'Stand out from the crowd' means be noticeably different. The alternatives favor similarity or maintaining the status quo.",
+      "source_references_unverified": [
+        "British Council Business Hub",
+        "Octanove B2"
+      ]
+    },
+    {
+      "id": "ENG-B2-071",
+      "question_type": "multiple_choice",
+      "cefr": "B2.2",
+      "difficulty": "medium",
+      "skill_tags": [
+        "collocations",
+        "leadership",
+        "business_impact"
+      ],
+      "prompt": "Select the natural noun collocate: 'Technological innovation has been the driving _______ behind our company's revenue growth.'",
+      "arabic_translation_hint": "كان الابتكار التكنولوجي القوة الدافعة وراء نمو إيرادات الشركة.",
+      "options": [
+        "force",
+        "power",
+        "engine",
+        "impulse"
+      ],
+      "correct_answer": "force",
+      "explanation": "'Driving force behind [something]' is a fixed B2 business/academic collocation.",
+      "source_references_unverified": [
+        "CEFR-J Collocation Dataset",
+        "Octanove B2"
+      ]
+    },
+    {
+      "id": "ENG-B2-072",
+      "question_type": "multiple_choice",
+      "cefr": "B2.2",
+      "difficulty": "hard",
+      "skill_tags": [
+        "phrasal_verbs",
+        "focus",
+        "data_analysis"
+      ],
+      "prompt": "Choose the precise phrasal verb for data analysis: 'After evaluating overall survey data, the analysts began to _______ the root causes of customer churn.'",
+      "arabic_translation_hint": "اختر الفعل المركب الدقيق لتحليل البيانات: 'بعد تقييم بيانات الاستطلاع الإجمالية، بدأ المحللون يركزون بدقة على الأسباب الجذرية لتسرب العملاء.'",
+      "options": [
+        "zero in on",
+        "zoom out on",
+        "narrow up to",
+        "lock out of"
+      ],
+      "correct_answer": "zero in on",
+      "explanation": "'Zero in on' means to pinpoint or focus attention specifically on a target problem.",
+      "source_references_unverified": [
+        "CEFR-J B2.2 Profile",
+        "ELLLO B2 Views"
+      ]
+    },
+    {
+      "id": "ENG-B2-073",
+      "question_type": "sentence_building",
+      "cefr": "B2.2",
+      "difficulty": "hard",
+      "skill_tags": [
+        "sentence_syntax",
+        "phrasal_verbs",
+        "tech_trends"
+      ],
+      "prompt": "Arrange the tokens to build a statement on industry adaptation:",
+      "arabic_translation_hint": "رتب الكلمات لبناء بيان حول التكيف الصناعي:",
+      "token_array": [
+        "Traditional",
+        "retailers",
+        "must",
+        "adapt",
+        "quickly",
+        "to",
+        "keep",
+        "pace",
+        "with",
+        "e-commerce",
+        "trends",
+        "."
+      ],
+      "accepted_sentences": [
+        "Traditional retailers must adapt quickly to keep pace with e-commerce trends."
+      ],
+      "explanation": "Collocation phrase 'keep pace with' (meaning match the speed of change) integrated into a modal sentence.",
+      "source_references_unverified": [
+        "CEFR-J B2.2 Profile",
+        "Grammar Gretel Drag&Drop"
+      ]
+    },
+    {
+      "id": "ENG-B2-074",
+      "question_type": "error_correction",
+      "cefr": "B2.1",
+      "difficulty": "medium",
+      "skill_tags": [
+        "error_repair",
+        "transitive_preposition_error"
+      ],
+      "prompt": "Fix the preposition error in this meeting summary:",
+      "arabic_translation_hint": "أصلح خطأ حرف الجر في ملخص الاجتماع هذا:",
+      "incorrect_sentence": "The committee spent two hours trying to reach to a consensus on the new policy.",
+      "correct_sentence": "The committee spent two hours trying to reach a consensus on the new policy.",
+      "error_tag": "REACH_TO_CONSENSUS_ERROR",
+      "explanation": "'Reach' takes a direct object without 'to' in the phrase 'reach a consensus' (not 'reach to a consensus').",
+      "source_references_unverified": [
+        "Diagnostic Gap Study Table 4",
+        "CTSEG ID 155"
+      ]
+    },
+    {
+      "id": "ENG-B2-075",
+      "question_type": "paraphrase_transformation",
+      "cefr": "B2.2",
+      "difficulty": "hard",
+      "skill_tags": [
+        "paraphrasing",
+        "temporal_expressions",
+        "business_planning"
+      ],
+      "prompt": "Select the sentence that accurately paraphrases: 'Shortcuts taken in current software development will cause costly maintenance issues at a future stage.'",
+      "arabic_translation_hint": "اختر الجملة التي تعيد صياغة النص بدقة مع استخدام تعبير زمني اصطلاحي:",
+      "options": [
+        "Shortcuts taken in current software development will cause costly maintenance issues down the line.",
+        "Shortcuts taken in current software development will cause costly maintenance issues off the line.",
+        "Shortcuts taken in current software development will cause costly maintenance issues over the line.",
+        "Shortcuts taken in current software development will cause costly maintenance issues across the line."
+      ],
+      "correct_answer": "Shortcuts taken in current software development will cause costly maintenance issues down the line.",
+      "explanation": "'Down the line' is the modern business expression for 'in the future' or 'at a later stage'.",
+      "source_references_unverified": [
+        "British Council Business Hub",
+        "Octanove B2"
+      ]
+    },
+    {
+      "id": "ENG-B2-076",
+      "question_type": "vocabulary_matching",
+      "cefr": "B2.2",
+      "difficulty": "hard",
+      "skill_tags": [
+        "vocabulary_matching",
+        "executive_concepts",
+        "strategy"
+      ],
+      "prompt": "Match the term 'paradigm shift' to its correct conceptual definition: 'The move to cloud computing represented a major paradigm shift in IT management.'",
+      "arabic_translation_hint": "طابق المصطلح 'paradigm shift' بتعريفه المفهومي الصحيح:",
+      "options": [
+        "A fundamental change in basic concepts, assumptions, and operational methods.",
+        "A temporary drop in market share due to seasonal fluctuations.",
+        "A minor patch released to fix code errors.",
+        "A legal dispute over brand trademark rights."
+      ],
+      "correct_answer": "A fundamental change in basic concepts, assumptions, and operational methods.",
+      "explanation": "A 'paradigm shift' describes a fundamental shift in underlying models or industry practices.",
+      "source_references_unverified": [
+        "CEFR-J B2.2 Profile",
+        "Octanove B2 Profile"
+      ]
+    },
+    {
+      "id": "ENG-B2-077",
+      "question_type": "multiple_choice",
+      "cefr": "B2.2",
+      "difficulty": "medium",
+      "skill_tags": [
+        "collocations",
+        "financial_reporting",
+        "adjective_noun"
+      ],
+      "prompt": "The fintech platform experienced _______ growth, reaching levels the company had never seen before as digital payments surged.",
+      "arabic_translation_hint": "اختر نعت التلازم المناسب: 'شهدت منصة التكنولوجيا المالية نمواً غير مسبوق خلال الجائحة مع ارتفاع المدفوعات الرقمية.'",
+      "options": [
+        "unprecedented",
+        "unpredicted",
+        "unprepared",
+        "unprocessed"
+      ],
+      "correct_answer": "unprecedented",
+      "explanation": "'Unprecedented growth' means growth on a scale not previously experienced, supported by 'levels ... never seen before'. 'Unpredicted' would mean not forecast, which the sentence does not establish.",
+      "source_references_unverified": [
+        "CEFR-J Collocation Dataset",
+        "British Council Hub"
+      ]
+    },
+    {
+      "id": "ENG-B2-078",
+      "question_type": "sentence_building",
+      "cefr": "B2.2",
+      "difficulty": "hard",
+      "skill_tags": [
+        "sentence_syntax",
+        "idioms",
+        "career_dev"
+      ],
+      "prompt": "Arrange the tokens to form a career development statement:",
+      "arabic_translation_hint": "رتب الكلمات لتشكيل بيان التطوير المهني:",
+      "token_array": [
+        "Our",
+        "lead",
+        "architect",
+        "has",
+        "what",
+        "it",
+        "takes",
+        "to",
+        "steer",
+        "this",
+        "enterprise",
+        "transformation",
+        "."
+      ],
+      "accepted_sentences": [
+        "Our lead architect has what it takes to steer this enterprise transformation."
+      ],
+      "explanation": "Idiomatic phrase 'has what it takes' (possesses necessary capabilities) combined with infinitive clause ('to steer this enterprise transformation').",
+      "source_references_unverified": [
+        "CEFR-J B2.2 Profile",
+        "Grammar Gretel Latency"
+      ]
+    },
+    {
+      "id": "ENG-B2-079",
+      "question_type": "error_correction",
+      "cefr": "B2.1",
+      "difficulty": "medium",
+      "skill_tags": [
+        "error_repair",
+        "transitive_vs_intransitive",
+        "workplace"
+      ],
+      "prompt": "Fix the ungrammatical verb construction in this meeting feedback note:",
+      "arabic_translation_hint": "أصلح تركيب الفعل غير النحوي في ملاحظة الاجتماع هذه:",
+      "incorrect_sentence": "During the sync, the developer raised up a concern regarding data security.",
+      "correct_sentence": "During the sync, the developer raised a concern regarding data security.",
+      "error_tag": "RAISE_UP_REDUNDANCY",
+      "explanation": "'Raise' is transitive and does not take the particle 'up' when used in the context of introducing a question or concern ('raise a concern/issue').",
+      "source_references_unverified": [
+        "Diagnostic Gap Study Table 4",
+        "CTSEG ID 155"
+      ]
+    },
+    {
+      "id": "ENG-B2-080",
+      "question_type": "paraphrase_transformation",
+      "cefr": "B2.1",
+      "difficulty": "medium",
+      "skill_tags": [
+        "paraphrasing",
+        "summary_idioms",
+        "executive_briefing"
+      ],
+      "prompt": "Select the sentence that accurately paraphrases: 'To state our key quarterly findings concisely, revenue increased while operating costs dropped.'",
+      "arabic_translation_hint": "اختر الجملة التي تعيد صياغة النص بدقة مع استخدام تعبير اصطلاحي مناسب للملخصات:",
+      "options": [
+        "In a nutshell, revenue increased while operating costs dropped.",
+        "By and large, revenue increased while operating costs dropped.",
+        "To put it mildly, revenue increased while operating costs dropped.",
+        "For the time being, revenue increased while operating costs dropped."
+      ],
+      "correct_answer": "In a nutshell, revenue increased while operating costs dropped.",
+      "explanation": "'In a nutshell' introduces a concise summary. The other expressions signal a general tendency, understatement, or temporary condition.",
+      "source_references_unverified": [
+        "British Council Business Hub",
+        "Octanove B2"
+      ]
+    }
+  ],
+  "source_citations_unverified": [
+    {
+      "source_title": "Accurate but Natural? Diagnosing Grammatical and Idiomatic Gaps in Japanese EFL Writing",
+      "citation_anchor": "Section 4.2 & Figure 4 (Idiomatic Gap Analysis: verb-noun and phrasal verb collocations)"
+    },
+    {
+      "source_title": "B2 Intermediate English Listening Lessons",
+      "citation_anchor": "ELLLO B2 Views Index (Authentic Adult Topics: AI, Workplace Dynamics, Tech & Lifestyle)"
+    },
+    {
+      "source_title": "openlanguageprofiles/olp-en-cefrj: Open Language Profiles — English profile datasets from CEFR-J",
+      "citation_anchor": "CEFR-J B2.1/B2.2 Vocabulary Profile & 385k Collocation Dataset"
+    },
+    {
+      "source_title": "Question Type, Cognitive Load, and CEFR Alignment: Evaluating LLM-Generated EFL Grammar Drill Exercises",
+      "citation_anchor": "Section 4 (Cognitive Load Hierarchy across Task Types)"
+    }
+  ],
+  "source_verification": "NotebookLM source anchors were not independently verified; do not present as validated citations.",
+  "editorial_status": "Reviewed and revised for constructible tokens, collocation ambiguity, meaning preservation, single-error corrections, and plausible alternatives. This is an original practice dataset, not a CEFR certification."
+}

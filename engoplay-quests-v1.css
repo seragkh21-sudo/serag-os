@@ -509,3 +509,16 @@
  .wp-intro .wp-picker-controls input{flex:auto;width:100%}
  .wp-intro .wp-picker-controls button{width:100%}
 }
+
+/* EngoPlay matching v2: independent columns, nuanced clues and a readable review. */
+.wp-match-heading{display:block;min-height:18px;padding:0 3px;margin-bottom:3px;color:#76717e;font-size:11px;font-weight:750;letter-spacing:.03em}
+.wp-match-grid .wp-match-column{min-width:0}
+.wp-match-grid .wp-match-tile{height:auto;min-width:0;line-height:1.55}
+.wp-match-grid .wp-match-tile[lang="en"]{text-align:left}
+.wp-match-grid .wp-match-tile[lang="ar"]{text-align:right;font-weight:600}
+.wp-match-grid .wp-match-tile:focus-visible{outline:3px solid #ad9bdb;outline-offset:2px}
+.wp-match-review{display:grid;gap:7px;margin-top:9px}
+.wp-match-review>div{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);gap:12px;align-items:center;padding:9px 11px;border:1px solid #e7e4ed;border-radius:10px;font-size:12px;line-height:1.6}
+.wp-match-review b{font-weight:750;text-align:left}
+.wp-match-review span{text-align:right;color:#615d6b}
+@media(max-width:520px){.wp-match-review>div{gap:8px;padding:8px;font-size:11px}.wp-match-heading{font-size:10px}}

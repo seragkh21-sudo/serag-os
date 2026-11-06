@@ -1,0 +1,807 @@
+{
+  "batch_id": "BATCH-001-ADVANCED-BRIDGING",
+  "schema_version": "2.0",
+  "topic_id": "GL-B1P-01_DIP-B1P-01",
+  "level": "B1+_to_B2",
+  "title": "B1+ to B2 Advanced Bridging: Aspectual Precision, Workplace Phrasal Verbs, and Pragmatic Softening",
+  "target_distribution": "20% B1+ Remediation / 80% B2 Advancement",
+  "items": [
+    {
+      "id": "ENG-B1P-001",
+      "question_type": "multiple_choice",
+      "cefr": "B1+",
+      "difficulty": "medium",
+      "skill_tags": [
+        "grammar_accuracy",
+        "time_adverbials",
+        "present_perfect"
+      ],
+      "prompt": "Complete this project update: 'Since January, our engineering team _______ three major infrastructure migrations without any server downtime, and the work continues.'",
+      "arabic_translation_hint": "على مدى الأرباع الثلاثة الماضية، أتم فريق الهندسة لدينا ثلاث عمليات نقل رئيسية للبنية التحتية دون أي تعطل في الخادم.",
+      "options": [
+        "completed",
+        "has completed",
+        "was completing",
+        "completes"
+      ],
+      "correct_answer": "has completed",
+      "explanation": "Use the Present Perfect ('has completed') for achievements in a time period beginning in the past and extending to now ('since January').",
+      "source_references_unverified": [
+        "CTSEG ID 62",
+        "Diagnostic Study Figure 3"
+      ]
+    },
+    {
+      "id": "ENG-B1P-002",
+      "question_type": "multiple_choice",
+      "cefr": "B1+",
+      "difficulty": "medium",
+      "skill_tags": [
+        "aspectual_contrast",
+        "specific_past",
+        "past_simple"
+      ],
+      "prompt": "Choose the correct verb form: 'The compliance officer has reviewed the data privacy policy several times. She _______ the final draft during yesterday's board meeting.'",
+      "arabic_translation_hint": "على الرغم من أن مسؤول الامتثال الرئيسي قد راجع سياسة خصوصية البيانات عدة مرات، فقد اعتمد المسودة النهائية خلال اجتماع مجلس الإدارة يوم أمس.",
+      "options": [
+        "has approved",
+        "approved",
+        "had been approving",
+        "approves"
+      ],
+      "correct_answer": "approved",
+      "explanation": "Use Simple Past ('approved') for an action at a specified finished time ('during yesterday's board meeting'), regardless of the tense used in a preceding sentence.",
+      "source_references_unverified": [
+        "CTSEG ID 65",
+        "CEFR-J TA.PAST.do.AFF"
+      ]
+    },
+    {
+      "id": "ENG-B1P-003",
+      "question_type": "multiple_choice",
+      "cefr": "B2.1",
+      "difficulty": "medium",
+      "skill_tags": [
+        "phrasal_verbs",
+        "workplace_communication",
+        "collocations"
+      ],
+      "prompt": "Complete the status report: 'We need to _______ our customer acquisition strategy to focus more on mobile app engagement.'",
+      "arabic_translation_hint": "نحتاج إلى إعادة توجيه استراتيجية اكتساب العملاء لدينا للتركيز بشكل أكبر على التفاعل عبر تطبيق الهاتف المحمول.",
+      "options": [
+        "pivot",
+        "phase out",
+        "scale back",
+        "follow through"
+      ],
+      "correct_answer": "pivot",
+      "explanation": "In contemporary business English, to 'pivot' an acquisition strategy means to alter its operational focus.",
+      "source_references_unverified": [
+        "CEFR-J Collocation Dataset",
+        "Octanove B2 Profile"
+      ]
+    },
+    {
+      "id": "ENG-B1P-004",
+      "question_type": "multiple_choice",
+      "cefr": "B2.1",
+      "difficulty": "hard",
+      "skill_tags": [
+        "pragmatic_softening",
+        "modals",
+        "workplace_interaction"
+      ],
+      "prompt": "Select the most diplomatically phrased disagreement for an executive meeting:",
+      "arabic_translation_hint": "اختر العبارة الأكثر دبلوماسية للتعبير عن عدم الاتفاق في اجتماع تنفيذي:",
+      "options": [
+        "I disagree with your proposal because the budget calculations are completely wrong.",
+        "While I see your point, we might want to reconsider the timeline given our resource constraints.",
+        "You can't launch the product in Q3 because the software isn't ready.",
+        "Your timeline is impossible and nobody on my team will support it."
+      ],
+      "correct_answer": "While I see your point, we might want to reconsider the timeline given our resource constraints.",
+      "explanation": "Advanced business communication relies on concessive phrases and modal softening ('might want to') to navigate disagreement diplomatically.",
+      "source_references_unverified": [
+        "Diagnostic Modal Avoidance Study",
+        "British Council Business Hub"
+      ]
+    },
+    {
+      "id": "ENG-B1P-005",
+      "question_type": "multiple_choice",
+      "cefr": "B2.1",
+      "difficulty": "hard",
+      "skill_tags": [
+        "phrasal_verb_particles",
+        "separable_verbs"
+      ],
+      "prompt": "Choose the sentence with correct phrasal verb object placement:",
+      "arabic_translation_hint": "اختر الجملة التي تحتوي على موضع صحيح للمفعول به مع الفعل المركب:",
+      "options": [
+        "The manager decided to call off it due to poor registration numbers.",
+        "The manager decided to call it off due to poor registration numbers.",
+        "The manager decided to call it on due to poor registration numbers.",
+        "The manager decided to call it over due to poor registration numbers."
+      ],
+      "correct_answer": "The manager decided to call it off due to poor registration numbers.",
+      "explanation": "With separable phrasal verbs, pronoun objects ('it', 'them') must be placed between the verb and the particle.",
+      "source_references_unverified": [
+        "CEFR-J Grammar Profile B2.1",
+        "CTSEG ID 155"
+      ]
+    },
+    {
+      "id": "ENG-B1P-006",
+      "question_type": "multiple_choice",
+      "cefr": "B2.2",
+      "difficulty": "hard",
+      "skill_tags": [
+        "business_collocations",
+        "precision"
+      ],
+      "prompt": "Identify the natural verb collocate: 'In order to _______ financial exposure during market volatility, hedge funds diversify their assets.'",
+      "arabic_translation_hint": "من أجل التخفيف من التعرض للمخاطر المالية أثناء تقلبات السوق، تقوم صناديق التحوط بتنويع أصولها.",
+      "options": [
+        "mitigate",
+        "anticipate",
+        "measure",
+        "absorb"
+      ],
+      "correct_answer": "mitigate",
+      "explanation": "'Mitigate' is the precise academic and professional verb that collocates with 'exposure' or 'risk'.",
+      "source_references_unverified": [
+        "CEFR-J Collocation Dataset",
+        "Octanove B2"
+      ]
+    },
+    {
+      "id": "ENG-B1P-007",
+      "question_type": "multiple_choice",
+      "cefr": "B2.2",
+      "difficulty": "hard",
+      "skill_tags": [
+        "for_vs_since",
+        "completed_vs_ongoing"
+      ],
+      "prompt": "Which sentence correctly contrasts a completed past role with an ongoing one?",
+      "arabic_translation_hint": "أي جملة تقارن بشكل صحيح بين دور سابق مكتمل ودور حالي مستمر؟",
+      "options": [
+        "I lived in Tokyo for four years, but I have lived in Singapore since 2022.",
+        "I have lived in Tokyo for four years, but I lived in Singapore since 2022.",
+        "I was living in Tokyo since four years, but I am living in Singapore for 2022.",
+        "I live in Tokyo for four years ago, but I have lived in Singapore since 2022."
+      ],
+      "correct_answer": "I lived in Tokyo for four years, but I have lived in Singapore since 2022.",
+      "explanation": "Simple Past ('lived ... for') expresses a completed duration in the past, while Present Perfect ('have lived ... since') expresses an ongoing state.",
+      "source_references_unverified": [
+        "Diagnostic Gap Analysis Section 4.2",
+        "CTSEG ID 62"
+      ]
+    },
+    {
+      "id": "ENG-B1P-008",
+      "question_type": "sentence_building",
+      "cefr": "B1+",
+      "difficulty": "medium",
+      "skill_tags": [
+        "sentence_syntax",
+        "phrasal_verbs",
+        "workplace"
+      ],
+      "prompt": "Reconstruct the sentence by ordering the tokens correctly:",
+      "arabic_translation_hint": "أعد بناء الجملة بترتيب الكلمات بشكل صحيح:",
+      "token_array": [
+        "Our",
+        "team",
+        "has",
+        "already",
+        "followed",
+        "up",
+        "on",
+        "all",
+        "client",
+        "inquiries",
+        "."
+      ],
+      "accepted_sentences": [
+        "Our team has already followed up on all client inquiries."
+      ],
+      "explanation": "Present Perfect phrasal verb word order: Subject ('Our team') + auxiliary ('has') + adverb ('already') + phrasal verb ('followed up on') + object ('all client inquiries').",
+      "source_references_unverified": [
+        "CEFR-J Grammar Profile B1.2",
+        "Grammar Gretel Drag&Drop"
+      ]
+    },
+    {
+      "id": "ENG-B1P-009",
+      "question_type": "sentence_building",
+      "cefr": "B2.1",
+      "difficulty": "medium",
+      "skill_tags": [
+        "subordinate_clauses",
+        "contrast",
+        "syntax"
+      ],
+      "prompt": "Arrange the tokens to form a complex sentence expressing a commercial contrast:",
+      "arabic_translation_hint": "رتب الكلمات لتكوين جملة معقدة تعبر عن تباين تجاري:",
+      "token_array": [
+        "Although",
+        "costs",
+        "increased",
+        ",",
+        "the",
+        "startup",
+        "has",
+        "maintained",
+        "its",
+        "profitability",
+        "."
+      ],
+      "accepted_sentences": [
+        "Although costs increased, the startup has maintained its profitability."
+      ],
+      "explanation": "Concessive clause structure: 'Although' + dependent clause (Simple Past 'costs increased') + main clause (Present Perfect 'has maintained profitability').",
+      "source_references_unverified": [
+        "CEFR-J CL_although",
+        "CTSEG ID 155"
+      ]
+    },
+    {
+      "id": "ENG-B1P-010",
+      "question_type": "sentence_building",
+      "cefr": "B2.1",
+      "difficulty": "hard",
+      "skill_tags": [
+        "passive_voice",
+        "corporate_reporting"
+      ],
+      "prompt": "Assemble the tokens into a formal passive reporting sentence:",
+      "arabic_translation_hint": "جمع الكلمات في جملة تقرير رسمية للمبني للمجهول:",
+      "token_array": [
+        "It",
+        "has",
+        "been",
+        "confirmed",
+        "that",
+        "the",
+        "merger",
+        "will",
+        "take",
+        "place",
+        "next",
+        "month",
+        "."
+      ],
+      "accepted_sentences": [
+        "It has been confirmed that the merger will take place next month."
+      ],
+      "explanation": "Impersonal passive construction: 'It has been confirmed that' + subordinate clause detailing future corporate action.",
+      "source_references_unverified": [
+        "CEFR-J Passive Profile",
+        "Grammar Gretel Latency"
+      ]
+    },
+    {
+      "id": "ENG-B1P-011",
+      "question_type": "sentence_building",
+      "cefr": "B2.2",
+      "difficulty": "hard",
+      "skill_tags": [
+        "collocations",
+        "phrasal_verbs",
+        "executive"
+      ],
+      "prompt": "Arrange the tokens to form an executive statement about risk mitigation:",
+      "arabic_translation_hint": "رتب الكلمات لتكوين بيان تنفيذي حول التخفيف من المخاطر:",
+      "token_array": [
+        "To",
+        "mitigate",
+        "potential",
+        "risks",
+        ",",
+        "we",
+        "have",
+        "phased",
+        "out",
+        "legacy",
+        "systems",
+        "."
+      ],
+      "accepted_sentences": [
+        "To mitigate potential risks, we have phased out legacy systems."
+      ],
+      "explanation": "Purpose infinitive clause ('To mitigate potential risks') paired with main clause in Present Perfect with phrasal verb ('phased out legacy systems').",
+      "source_references_unverified": [
+        "Octanove B2 Profile",
+        "CTSEG ID 215"
+      ]
+    },
+    {
+      "id": "ENG-B1P-012",
+      "question_type": "sentence_building",
+      "cefr": "B2.2",
+      "difficulty": "hard",
+      "skill_tags": [
+        "time_framing",
+        "duration",
+        "aspect"
+      ],
+      "prompt": "Reconstruct the sentence detailing professional longevity:",
+      "arabic_translation_hint": "أعد بناء الجملة التي توضح تفاصيل الاستمرارية المهنية:",
+      "token_array": [
+        "He",
+        "has",
+        "spearheaded",
+        "the",
+        "cybersecurity",
+        "division",
+        "since",
+        "it",
+        "was",
+        "founded",
+        "."
+      ],
+      "accepted_sentences": [
+        "He has spearheaded the cybersecurity division since it was founded."
+      ],
+      "explanation": "Main clause in Present Perfect ('has spearheaded') linked by 'since' to a passive Simple Past event clause ('it was founded').",
+      "source_references_unverified": [
+        "CTSEG ID 62",
+        "CEFR-J TA.PRPF.AFF"
+      ]
+    },
+    {
+      "id": "ENG-B1P-013",
+      "question_type": "sentence_building",
+      "cefr": "B2.2",
+      "difficulty": "hard",
+      "skill_tags": [
+        "pragmatic_softening",
+        "modal_syntax"
+      ],
+      "prompt": "Build a diplomatically softened recommendation:",
+      "arabic_translation_hint": "ابنِ توصية مخففة بطريقة دبلوماسية:",
+      "token_array": [
+        "We",
+        "might",
+        "want",
+        "to",
+        "delay",
+        "the",
+        "product",
+        "launch",
+        "until",
+        "testing",
+        "is",
+        "complete",
+        "."
+      ],
+      "accepted_sentences": [
+        "We might want to delay the product launch until testing is complete."
+      ],
+      "explanation": "Diplomatic suggestion structure: 'We might want to' + infinitive ('delay') + temporal clause ('until testing is complete').",
+      "source_references_unverified": [
+        "Diagnostic Modal Avoidance Study",
+        "CTSEG ID 219"
+      ]
+    },
+    {
+      "id": "ENG-B1P-014",
+      "question_type": "error_correction",
+      "cefr": "B1+",
+      "difficulty": "medium",
+      "skill_tags": [
+        "error_repair",
+        "aspectual_mismatch"
+      ],
+      "prompt": "Identify and fix the aspectual error in this operational update:",
+      "arabic_translation_hint": "حدد الخطأ في زمن الفعل وأصلحه في هذا التحديث التشغيلي:",
+      "incorrect_sentence": "Our DevOps team has updated the core security protocols two days ago.",
+      "correct_sentence": "Our DevOps team updated the core security protocols two days ago.",
+      "error_tag": "PRESENT_PERFECT_WITH_AGO",
+      "explanation": "The time marker 'two days ago' indicates a finished past moment and cannot be paired with Present Perfect ('has updated'). Change to Simple Past ('updated').",
+      "source_references_unverified": [
+        "CTSEG Minimal Pair ID 65",
+        "Diagnostic Study Table 4"
+      ]
+    },
+    {
+      "id": "ENG-B1P-015",
+      "question_type": "error_correction",
+      "cefr": "B2.1",
+      "difficulty": "medium",
+      "skill_tags": [
+        "error_repair",
+        "phrasal_verb_idiom"
+      ],
+      "prompt": "Correct the ungrammatical phrasal verb particle usage:",
+      "arabic_translation_hint": "صحح استخدام حرف الجر غير النحوي مع الفعل المركب:",
+      "incorrect_sentence": "We need to follow up to the client about the pending invoice before Friday.",
+      "correct_sentence": "We need to follow up with the client about the pending invoice before Friday.",
+      "error_tag": "PHRASAL_VERB_PARTICLE_ERROR",
+      "explanation": "Use 'follow up with' when naming the person you will contact and 'follow up on' for an issue. 'Follow up about' can be acceptable for the topic; 'follow up to the client' is incorrect here.",
+      "source_references_unverified": [
+        "CEFR-J Collocation Dataset",
+        "Diagnostic Gap Study"
+      ]
+    },
+    {
+      "id": "ENG-B1P-016",
+      "question_type": "error_correction",
+      "cefr": "B2.1",
+      "difficulty": "hard",
+      "skill_tags": [
+        "error_repair",
+        "unnecessary_passive"
+      ],
+      "prompt": "Fix the unnatural passive construction in this status report:",
+      "arabic_translation_hint": "أصلح صياغة المبني للمجهول غير الطبيعية في هذا التقرير:",
+      "incorrect_sentence": "The new software update was appeared on the server yesterday.",
+      "correct_sentence": "The new software update appeared on the server yesterday.",
+      "error_tag": "INTRANSITIVE_PASSIVE_ERROR",
+      "explanation": "'Appear' is an intransitive verb and cannot be made passive. Use active Simple Past ('appeared').",
+      "source_references_unverified": [
+        "CTSEG ID 180",
+        "AES IRT Model"
+      ]
+    },
+    {
+      "id": "ENG-B1P-017",
+      "question_type": "error_correction",
+      "cefr": "B2.2",
+      "difficulty": "hard",
+      "skill_tags": [
+        "error_repair",
+        "modal_aspect_mismatch"
+      ],
+      "prompt": "Correct the modal past structure in this retrospective analysis:",
+      "arabic_translation_hint": "صحح تركيب الماضي مع الفعل الناقص في هذا التحليل الاسترجاعي:",
+      "incorrect_sentence": "We should have launch the marketing campaign earlier in the quarter.",
+      "correct_sentence": "We should have launched the marketing campaign earlier in the quarter.",
+      "error_tag": "MODAL_PAST_PARTICIPLE_MISSING",
+      "explanation": "Modal perfect constructions ('should have') require the past participle form ('launched'), not the base verb.",
+      "source_references_unverified": [
+        "Diagnostic Typology Section 4.2",
+        "CTSEG ID 215"
+      ]
+    },
+    {
+      "id": "ENG-B1P-018",
+      "question_type": "error_correction",
+      "cefr": "B2.2",
+      "difficulty": "hard",
+      "skill_tags": [
+        "error_repair",
+        "collocation_mismatch"
+      ],
+      "prompt": "Fix the unnatural verb collocation in this executive summary:",
+      "arabic_translation_hint": "أصلح المتلازمة اللفظية غير الطبيعية في هذا الملخص التنفيذي:",
+      "incorrect_sentence": "The company decided to do a major strategic shift in Q4.",
+      "correct_sentence": "The company decided to make a major strategic shift in Q4.",
+      "error_tag": "DO_MAKE_COLLOCATION_ERROR",
+      "explanation": "In corporate English, one 'makes a strategic shift' or 'makes a decision', rather than 'does a shift'.",
+      "source_references_unverified": [
+        "Octanove B2 Profile",
+        "CEFR-J Collocations"
+      ]
+    },
+    {
+      "id": "ENG-B1P-019",
+      "question_type": "scenario_based",
+      "cefr": "B1+",
+      "difficulty": "medium",
+      "skill_tags": [
+        "workplace_scenario",
+        "email_writing"
+      ],
+      "scenario_text": "You have just attached the completed security audit report to your email and want to give the client a concise professional update.",
+      "prompt": "Which opening line strikes the right balance of accuracy and professionalism?",
+      "arabic_translation_hint": "أي سطر افتتاح يربط بين الدقة والمهنية؟",
+      "audio_text": "I have just attached the finalized security audit report for your review.",
+      "options": [
+        "I have just attached the finalized security audit report for your review.",
+        "I attached the security audit report 20 minutes ago and it is finished.",
+        "I attach the security audit report yesterday for your review.",
+        "I was attaching the security audit report right now."
+      ],
+      "correct_answer": "I have just attached the finalized security audit report for your review.",
+      "explanation": "'I have just attached...' uses Present Perfect with 'just' to introduce a recently completed email action.",
+      "source_references_unverified": [
+        "British Council Business Hub",
+        "CEFR B1+ Descriptors"
+      ]
+    },
+    {
+      "id": "ENG-B1P-020",
+      "question_type": "scenario_based",
+      "cefr": "B2.1",
+      "difficulty": "medium",
+      "skill_tags": [
+        "workplace_scenario",
+        "negotiation"
+      ],
+      "scenario_text": "Scenario: In a vendor price negotiation, the vendor proposes a 15% rate increase. You want to decline politely while keeping negotiations open.",
+      "prompt": "Choose the response that politely declines the proposed 15% increase AND suggests a concrete, collaborative next step:",
+      "arabic_translation_hint": "اختر الاستجابة الشفهية الأكثر فعالية:",
+      "audio_text": "While we appreciate your position, a 15% increase exceeds our allocated budget. Could we explore a tiered volume discount instead?",
+      "options": [
+        "While we appreciate your position, a 15% increase exceeds our allocated budget. Could we explore a tiered volume discount instead?",
+        "Thank you for the updated quote. We'll discuss the increase internally and get back to you once a decision is made.",
+        "We understand your pricing, but we can only move forward if the original rate remains unchanged.",
+        "We appreciate the explanation, but we'll have to explore alternative suppliers if the quoted rate increases."
+      ],
+      "correct_answer": "While we appreciate your position, a 15% increase exceeds our allocated budget. Could we explore a tiered volume discount instead?",
+      "explanation": "Professional counter-offers combine diplomatic acknowledgement, objective constraints, and modal questions.",
+      "source_references_unverified": [
+        "ELLLO B2 Views",
+        "Diagnostic Modal Avoidance"
+      ]
+    },
+    {
+      "id": "ENG-B1P-021",
+      "question_type": "scenario_based",
+      "cefr": "B2.2",
+      "difficulty": "hard",
+      "skill_tags": [
+        "workplace_scenario",
+        "crisis_management"
+      ],
+      "prompt": "Which update accurately distinguishes the completed incident, the restoration deadline, and the current status?",
+      "arabic_translation_hint": "أي بيان يعرض الوضوح والدقة التنفيذية؟",
+      "audio_text": "The primary server cluster crashed at 2:00 AM due to a memory leak; core services were fully restored by 6:00 AM and remain operational.",
+      "options": [
+        "The primary server cluster crashed at 2:00 AM due to a memory leak; core services were fully restored by 6:00 AM and remain operational.",
+        "The primary server cluster has crashed at 2:00 AM, but our team restored core services right now.",
+        "The primary server cluster crashed at 2:00 AM, but our team has been restoring core services since yesterday.",
+        "The primary server cluster was crashing at 2:00 AM, so we restored core services since four hours."
+      ],
+      "correct_answer": "The primary server cluster crashed at 2:00 AM due to a memory leak; core services were fully restored by 6:00 AM and remain operational.",
+      "explanation": "Use Simple Past for the time-specific crash and completed restoration ('crashed', 'were restored by 6:00 AM'); use Present Simple for services that are still operational ('remain operational').",
+      "scenario_text": "At 9:00 AM, you are briefing leadership about an outage that began at 2:00 AM. Core services were completely restored by 6:00 AM and remain operational.",
+      "source_references_unverified": [
+        "British Council Business English",
+        "CEFR B2 Production"
+      ]
+    },
+    {
+      "id": "ENG-B1P-022",
+      "question_type": "scenario_based",
+      "cefr": "B2.2",
+      "difficulty": "hard",
+      "skill_tags": [
+        "workplace_scenario",
+        "performance_review"
+      ],
+      "prompt": "Which response uses advanced workplace collocations correctly?",
+      "arabic_translation_hint": "أي إجابة تستخدم المتلازمات اللفظية المتقدمة في مكان العمل بشكل صحيح؟",
+      "audio_text": "We expanded our infrastructure to accommodate peak traffic and successfully mitigated operational bottlenecks.",
+      "options": [
+        "We expanded our infrastructure to accommodate peak traffic and successfully mitigated operational bottlenecks.",
+        "We made bigger our servers to take peak traffic and deleted bottlenecks.",
+        "We have expanded our infrastructure in 2023 to catch peak traffic and destroy bottlenecks.",
+        "We grow our infrastructure to hold peak traffic and solved bottlenecks yesterday."
+      ],
+      "correct_answer": "We expanded our infrastructure to accommodate peak traffic and successfully mitigated operational bottlenecks.",
+      "explanation": "'Accommodate traffic' and 'mitigate bottlenecks' represent high-level executive collocations suitable for reviews.",
+      "source_references_unverified": [
+        "Octanove B2 Profile",
+        "CEFR B2 Descriptors"
+      ]
+    },
+    {
+      "id": "ENG-B1P-023",
+      "question_type": "paraphrase_transformation",
+      "cefr": "B2.1",
+      "difficulty": "hard",
+      "skill_tags": [
+        "paraphrasing",
+        "register_shift",
+        "syntactic_flexibility"
+      ],
+      "prompt": "Paraphrase the informal sentence into a formal business sentence: 'We stopped using the old software because it had too many security bugs.'",
+      "arabic_translation_hint": "أعد صياغة الجملة غير الرسمية إلى جملة أعمال رسمية:",
+      "options": [
+        "We discontinued the old software because of serious security vulnerabilities.",
+        "We canceled the old software because it was buggy.",
+        "We have stopped the past software owing to bugs.",
+        "We deleted the software since it had security problems."
+      ],
+      "correct_answer": "We discontinued the old software because of serious security vulnerabilities.",
+      "explanation": "'Discontinued' preserves the meaning of no longer using the software; 'security vulnerabilities' is a more professional description of security bugs. 'Phased out' could incorrectly imply a gradual transition.",
+      "source_references_unverified": [
+        "CTSEG ID 204",
+        "Octanove B2"
+      ]
+    },
+    {
+      "id": "ENG-B1P-024",
+      "question_type": "paraphrase_transformation",
+      "cefr": "B2.2",
+      "difficulty": "hard",
+      "skill_tags": [
+        "paraphrasing",
+        "passive_transformation"
+      ],
+      "prompt": "Rewrite this statement as an impersonal passive, explicitly preserving who holds the belief: 'The board believes that the revenue targets are realistic.'",
+      "arabic_translation_hint": "أعد كتابة الجملة بنمط المبني للمجهول غير الشخصي:",
+      "options": [
+        "It is believed by the board that the revenue targets are realistic.",
+        "It is believed that the revenue targets are realistic.",
+        "The revenue targets are believed by the board to be realistic.",
+        "It was believed by the board that the revenue targets were realistic."
+      ],
+      "correct_answer": "It is believed by the board that the revenue targets are realistic.",
+      "explanation": "The impersonal passive has dummy subject 'It' + 'is believed' + 'that' clause. 'By the board' must be retained to preserve the source of the belief; dropping it changes the information.",
+      "source_references_unverified": [
+        "CEFR-J Grammar Profile B2.1",
+        "CTSEG ID 180"
+      ]
+    },
+    {
+      "id": "ENG-B1P-025",
+      "question_type": "paraphrase_transformation",
+      "cefr": "B2.2",
+      "difficulty": "hard",
+      "skill_tags": [
+        "paraphrasing",
+        "conditional_inversion"
+      ],
+      "prompt": "Select the correct inverted conditional paraphrase: 'If you require any further technical clarification, please contact our support desk.'",
+      "arabic_translation_hint": "اختر إعادة الصياغة الشرطية المقلوبة الصحيحة:",
+      "options": [
+        "Should you require any further technical clarification, please contact our support desk.",
+        "Were you to require any technical clarification, please contacting our support desk.",
+        "Had you required technical clarification, please contact our support desk.",
+        "If you should have required technical clarification, please contact our support desk."
+      ],
+      "correct_answer": "Should you require any further technical clarification, please contact our support desk.",
+      "explanation": "Inverting formal first conditionals ('Should you require...') elevates written executive communications.",
+      "source_references_unverified": [
+        "CTSEG ID 215",
+        "Cambridge Intonation"
+      ]
+    },
+    {
+      "id": "ENG-B1P-026",
+      "question_type": "mixed_review",
+      "cefr": "B1+",
+      "difficulty": "medium",
+      "skill_tags": [
+        "mixed_review",
+        "cloze_fill"
+      ],
+      "prompt": "Fill in the missing verb forms: 'Although our startup _______ (fail) to secure venture funding last year, we _______ (grow) our recurring revenue by 40% since then.'",
+      "arabic_translation_hint": "املأ أشكال الأفعال المفقودة:",
+      "options": [
+        "failed / have grown",
+        "has failed / grew",
+        "failed / grew",
+        "has failed / have grown"
+      ],
+      "correct_answer": "failed / have grown",
+      "explanation": "First clause: 'last year' mandates Simple Past ('failed'). Second clause: 'since then' mandates Present Perfect ('have grown').",
+      "source_references_unverified": [
+        "Grammar Gretel Cloze Study",
+        "CTSEG ID 62"
+      ]
+    },
+    {
+      "id": "ENG-B1P-027",
+      "question_type": "mixed_review",
+      "cefr": "B2.1",
+      "difficulty": "hard",
+      "skill_tags": [
+        "mixed_review",
+        "proofreading",
+        "idiomatic_gap"
+      ],
+      "prompt": "Identify the clause containing a grammatical or idiomatic error:\n'(A) Since we launched the updated platform in Q2, (B) user engagement has increased significantly. (C) However, we haven't resolved the database latency issue already, (D) so our engineers are working overtime.'",
+      "arabic_translation_hint": "حدد الجملة التي تحتوي على خطأ نحوي أو اصطلاحي:",
+      "options": [
+        "(A) Since we launched the updated platform in Q2",
+        "(B) user engagement has increased significantly",
+        "(C) However, we haven't resolved the database latency issue already",
+        "(D) so our engineers are working overtime"
+      ],
+      "correct_answer": "(C) However, we haven't resolved the database latency issue already",
+      "explanation": "In negative Present Perfect statements indicating pending tasks, 'yet' must be used instead of 'already'.",
+      "source_references_unverified": [
+        "Diagnostic Gap Study Figure 4",
+        "CTSEG ID 155"
+      ]
+    },
+    {
+      "id": "ENG-B1P-028",
+      "question_type": "mixed_review",
+      "cefr": "B2.2",
+      "difficulty": "hard",
+      "skill_tags": [
+        "mixed_review",
+        "dialogue_completion"
+      ],
+      "prompt": "Select the option that correctly completes both blanks in the corporate exchange:\nVP: '_______ (you / manage) to finish the risk assessment report yet?'\nLead Analyst: 'Yes, I _______ (submit) it to the committee yesterday afternoon.'",
+      "arabic_translation_hint": "اختر الخيار الذي يكمل الفراغين بشكل صحيح في التبادل بين الشركات:",
+      "options": [
+        "Have you managed / submitted",
+        "Did you manage / have submitted",
+        "Have you managed / have submitted",
+        "Did you manage / submit"
+      ],
+      "correct_answer": "Have you managed / submitted",
+      "explanation": "'Have you managed ... yet?' is a natural way to ask about completion up to now. 'Submitted' is necessary with 'yesterday afternoon'. In some varieties of English, 'Did you manage ... yet?' is also acceptable, but no competing option here correctly completes the second blank.",
+      "source_references_unverified": [
+        "ELLLO B2 Views",
+        "CTSEG ID 215"
+      ]
+    },
+    {
+      "id": "ENG-B1P-029",
+      "question_type": "mixed_review",
+      "cefr": "B2.2",
+      "difficulty": "hard",
+      "skill_tags": [
+        "mixed_review",
+        "collocation_aspect_blend"
+      ],
+      "prompt": "Complete the executive statement with the most appropriate verb forms:\n'Our firm _______ (spearhead) several clean energy initiatives over the past decade, and we _______ (mitigate) carbon emissions by 30% to date.'",
+      "arabic_translation_hint": "أكمل البيان التنفيذي بأشكال الأفعال الأنسب:",
+      "options": [
+        "has spearheaded / have mitigated",
+        "spearheaded / mitigated",
+        "was spearheading / have mitigated",
+        "has spearheaded / mitigated"
+      ],
+      "correct_answer": "has spearheaded / have mitigated",
+      "explanation": "Both clauses feature ongoing cumulative duration markers ('over the past decade', 'to date'), requiring Present Perfect.",
+      "source_references_unverified": [
+        "CEFR-J Collocations",
+        "Octanove B2"
+      ]
+    },
+    {
+      "id": "ENG-B1P-030",
+      "question_type": "mixed_review",
+      "cefr": "B2.2",
+      "difficulty": "hard",
+      "skill_tags": [
+        "mixed_review",
+        "error_spotting",
+        "phrasal_verbs"
+      ],
+      "prompt": "Spot the ungrammatical line in this project retro:\n'We have (A) scaled up our infrastructure, (B) phased out legacy tools, and (C) carried about a full audit (D) over the last quarter.'",
+      "arabic_translation_hint": "اكتشف السطر غير النحوي في هذا التقرير الاسترجاعي للمشروع:",
+      "options": [
+        "(A) scaled up our infrastructure",
+        "(B) phased out legacy tools",
+        "(C) carried about a full audit",
+        "(D) over the last quarter"
+      ],
+      "correct_answer": "(C) carried about a full audit",
+      "explanation": "The phrasal verb meaning to execute or perform an audit is 'carry out', not 'carry about'.",
+      "source_references_unverified": [
+        "Diagnostic Gap Analysis Section 4",
+        "CTSEG ID 215"
+      ]
+    }
+  ],
+  "source_citations_unverified": [
+    {
+      "source_title": "Accurate but Natural? Diagnosing Grammatical and Idiomatic Gaps in Japanese EFL Writing",
+      "citation_anchor": "Section 4.2 (TA.PRPF.AFF +13.71 idiomatic underuse gap and modal avoidance)"
+    },
+    {
+      "source_title": "Targeted Syntactic Evaluation for Grammatical Error Correction",
+      "citation_anchor": "CTSEG Item IDs 62, 65, 155, and 215 (CEFR-J B1/B2 syntactic minimal pairs)"
+    },
+    {
+      "source_title": "Question Type, Cognitive Load, and CEFR Alignment: Evaluating LLM-Generated EFL Grammar Drill Exercises",
+      "citation_anchor": "Section 4 (Cognitive Load Latency Hierarchy: MCQ 3.6s, Drag&Drop 7.5s, Cloze 6.3s-8.5s)"
+    },
+    {
+      "source_title": "Using corpora for reference level descriptions of the CEFR and the CEFR-J",
+      "citation_anchor": "CEFR-J Collocation Dataset (385k+ pairs) & CVLA Readability Model"
+    }
+  ],
+  "source_verification": "NotebookLM-generated exercises; research/source anchors have not been independently verified, and are not displayed as confirmed citations.",
+  "editorial_status": "Pilot corrected for grammatical ambiguity, syntax, timestamps and source-preservation issues; human review recommended for remaining nuanced alternatives."
+}
