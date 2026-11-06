@@ -57,7 +57,7 @@ test('level persists through the existing profile preference flow',()=>{
   assert.match(academy,/window\.ENGOPLAY\?\.setPracticeLevel\?\.\(state\.level\)/);
   assert.match(engoplay,/setPracticeLevel\(value\)/);
   assert.match(engoplay,/preference\('english_level',value\)/);
-  assert.match(academy,/querySelectorAll\('\[data-ea-level-pick\]'\)/);
+  assert.ok(academy.includes("querySelectorAll?.('[data-ea-level-pick]')"));
   assert.match(css,/\.epath-level-options button\[aria-pressed="true"\]/);
   assert.match(css,/@media\(max-width:600px\)\{\.epath \.epath-level-switch/);
 });
