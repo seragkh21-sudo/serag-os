@@ -29,7 +29,9 @@
   function settings(){ensureUI();pendingText='';stop();document.getElementById('enaDialog').showModal()}
   // Capture the shared pronunciation controls before older handlers run.
   document.addEventListener('click',e=>{const b=e.target.closest?.('[data-speak-text],[data-word-sound],#articleReadBtn,[data-ena-settings]');if(!b)return;if(b.hasAttribute('data-ena-settings')){settings();return}let text=b.getAttribute('data-speak-text');if(b.hasAttribute('data-word-sound'))text=b.closest('.english-word-card')?.querySelector('.english-word-name')?.textContent||b.closest('#englishReviewBox')?.querySelector('.english-review-word')?.textContent;if(b.id==='articleReadBtn')text=document.getElementById('articleViewPane')?.innerText;if(!text)return;e.preventDefault();e.stopImmediatePropagation();void speak(text,{word:!text.trim().includes(' ')});},true);
-  document.addEventListener('click',e=>{if(e.target.closest?.('[data-page],[data-v5-page],[data-ea-tab],[data-ea-end],#enaStop'))stop()},true);
+  document.addEventListener('click',e=>{if(e.target.closest?.('[data-page],[data-v5-page],[data-so-page],[data-ea-tab],[data-ea-end],#enaStop'))stop()},true);
+  function bindAuth(){if(typeof sb!=='undefined'&&sb.auth?.onAuthStateChange)sb.auth.onAuthStateChange(event=>{if(event==='SIGNED_OUT'||event==='SIGNED_IN'){stop();pendingText='';pendingOptions={};document.getElementById('enaDialog')?.close()}})}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bindAuth,{once:true});else bindAuth();
   window.addEventListener('pagehide',()=>{stop();worker?.terminate()});
   window.SERAG_NATURAL_AUDIO={speak,stop,settings,chunks};
   window.seragMicrosoftTTS={...legacy,speak,stop};

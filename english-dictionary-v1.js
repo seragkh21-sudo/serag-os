@@ -210,6 +210,7 @@
     if (t.hasAttribute('data-ed-audio')) {
       const key = norm(activePhrase), data = cached(key);
       if (!data || !data.audio) return;
+      window.seragMicrosoftTTS?.stop();
       const audio = new Audio(data.audio);
       audio.play().catch(() => setStatus('تعذر تشغيل ملف النطق على هذا الجهاز.'));
       return;
