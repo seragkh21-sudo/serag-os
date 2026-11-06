@@ -77,5 +77,6 @@
       ]
     }
   ],
-  "buildCommand": "node scripts/build-natural-audio.mjs"
+  "buildCommand": "node scripts/build-natural-audio.mjs",
+  "outputDirectory": "."
 }
