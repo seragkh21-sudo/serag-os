@@ -42,8 +42,8 @@ test('original lessons and writing models have coherent coverage and references'
   for(const d of a.w.SERAG_WRITING_V13.drills){assert.ok(ids.has(d.topic));if(d.id!=='discussion')assert.ok(a.w.SERAG_WRITING_V13.count(d.model)>=d.min,d.id)}
 });
 
-test('question-first home and B1 to C2 paths offer questions for each level',()=>{
- const a=app();assert.ok(a.root.innerHTML.indexOf('Question hub')<a.root.innerHTML.indexOf('English sections'));
+test('four-path home keeps level practice inside Grammar',()=>{
+ const a=app();assert.equal((a.root.innerHTML.match(/class="epath-card"/g)||[]).length,4);assert.ok(!a.root.innerHTML.includes('data-ea-tab="levels"'));a.click({eaTab:'path-grammar'});assert.ok(a.root.innerHTML.includes('data-ea-tab="levels"'));
  a.click({eaTab:'levels'});
  for(const level of ['B1','B2','C1','C2']){
   a.click({eaTab:'levels'});a.click({eaLevelPick:level});assert.equal(a.read().level,level);
@@ -70,4 +70,6 @@ test('each level separates rules from contextual topics and runs a 12-question e
  }
 });
 
- test('Engoplay uses one focused B2 question at a time and returns to the path',()=>{const a=app(true),api=a.w.SERAG_ACADEMY_V12,pool=api.questions().filter(q=>(q.level||api.lessons().find(g=>g.id===q.topic)?.level)==='B2');assert.ok(a.root.innerHTML.includes('SERAG ENGLISH'));api.open('play');assert.ok(a.root.innerHTML.includes('Engoplay lobby'));assert.equal(api.playSet(pool.map(q=>q.id),5,'Daily','B2'),true);assert.ok(a.root.innerHTML.includes('1/5'));assert.ok(!a.root.innerHTML.includes('EXPLORE'));const q=pool.find(q=>a.root.innerHTML.includes(q.prompt));assert.ok(q);a.click({eaAnswer:q.answer},['data-ea-answer']);assert.equal(a.w.ENGOPLAY.last.id,q.id);assert.equal(a.w.ENGOPLAY.last.correct,true);a.click({},['data-ea-end']);assert.ok(a.root.innerHTML.includes('Engoplay lobby'));assert.equal(a.read().attempts.length,1);api.open('today');assert.ok(a.root.innerHTML.includes('SERAG ENGLISH'));assert.ok(!a.root.innerHTML.includes('Engoplay lobby'))});
+ test('Engoplay uses one focused B2 question at a time and returns to the path',()=>{const a=app(true),api=a.w.SERAG_ACADEMY_V12,pool=api.questions().filter(q=>(q.level||api.lessons().find(g=>g.id===q.topic)?.level)==='B2');assert.ok(a.root.innerHTML.includes('YOUR ENGLISH SPACE'));api.open('play');assert.ok(a.root.innerHTML.includes('Engoplay lobby'));assert.equal(api.playSet(pool.map(q=>q.id),5,'Daily','B2'),true);assert.ok(a.root.innerHTML.includes('1/5'));assert.ok(!a.root.innerHTML.includes('EXPLORE'));const q=pool.find(q=>a.root.innerHTML.includes(q.prompt));assert.ok(q);a.click({eaAnswer:q.answer},['data-ea-answer']);assert.equal(a.w.ENGOPLAY.last.id,q.id);assert.equal(a.w.ENGOPLAY.last.correct,true);a.click({},['data-ea-end']);assert.ok(a.root.innerHTML.includes('Engoplay lobby'));assert.equal(a.read().attempts.length,1);api.open('today');assert.ok(a.root.innerHTML.includes('YOUR ENGLISH SPACE'));assert.ok(!a.root.innerHTML.includes('Engoplay lobby'))});
+
+ test('path navigation preserves feature activation and voice library placement',()=>{const a=app();a.click({eaTab:'path-speaking'});assert.ok(a.root.innerHTML.includes('data-ea-tab="voice"'));assert.ok(!a.root.innerHTML.includes('data-ea-tab="grammar"'));a.click({eaTab:'reading'});assert.match(a.root.innerHTML,/data-ea-tab="reading" aria-current="page" aria-pressed="true"/);a.click({eaTab:'sentences'});assert.match(a.root.innerHTML,/data-ea-tab="sentences" aria-current="page" aria-pressed="true"/);a.click({eaTab:'overview'});assert.equal((a.root.innerHTML.match(/class="epath-card"/g)||[]).length,4)});

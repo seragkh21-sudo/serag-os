@@ -312,3 +312,6 @@ When a decision changes, update this file.
 - Consolidated prior website discussions into one dedicated project.
 - Set clean/static/not-crowded visual direction.
 - Confirmed cross-device persistent sync as a core requirement.
+
+### 2026-11-06 — Four English pathways
+English navigation is consolidated into Words & Practice, Read & Write, Listen & Speak, and Grammar. The overview prioritizes daily practice; progress and mistake review are secondary actions. Existing learning engines, libraries, voice recordings and account data remain in place. EngoPlay is a practice tool inside English.

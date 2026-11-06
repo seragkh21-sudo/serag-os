@@ -1,6 +1,6 @@
 (async()=>{
   try{
-    const V='75';
+    const V='76';
     const res=await fetch(`/legacy.html?v=${V}`,{cache:'no-store',headers:{'Cache-Control':'no-cache'}});
     if(!res.ok)throw new Error('Legacy app failed to load');
     let html=await res.text();
@@ -39,6 +39,7 @@
 @media(max-width:820px){.v5-resource-toolbar{position:sticky;top:6px;z-index:5;background:var(--bg,#fff);padding:6px;border-radius:12px}.resource-category-head{margin-top:12px}}
 </style>
 <link rel="stylesheet" href="/english-video-v17.css?v=${V}"/>
+<link rel="stylesheet" href="/english-pathways-v1.css?v=${V}"/>
 <style id="serag-boot-guard">
 #seragBootScreen{display:none;position:fixed;inset:0;z-index:2147483647;align-items:center;justify-content:center;background:#fff;color:#273044;font:600 14px system-ui,sans-serif}
 html.serag-booting #seragBootScreen{display:flex}

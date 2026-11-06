@@ -11,3 +11,9 @@ Verification: automated history, no-double-count, writing persistence, content r
 ## v15 contextual level sections
 
 Each selected B1–C2 level has separate Grammar and Questions/Exams selectors. Eight contemporary fictional themes offer three original multiple-choice tasks per level (96 new questions). Creative work is one of eight themes; most themes cover everyday life. The mixed 12-question practice exam gives feedback after each item, so it is a formative practice test rather than a secure proficiency assessment. Context sessions prioritize unseen/due items; exam ordering changes with attempt history. Both reuse existing answer history and no-double-count logic.
+
+## Four-path workspace (build 76)
+
+English now opens a calm daily-practice hero and four primary paths: Words & Practice, Read & Write, Listen & Speak, and Grammar. Tools appear inside their selected path, with breadcrumbs back to the path or English overview. Voice library is under Listen & Speak. Grammar retains lessons, examples, maps, topic questions, level practice, correction exercises and answer history. Progress and due mistake review remain secondary overview actions. The daily CTA invokes the existing EngoPlay daily journey; no demonstration metrics are displayed.
+
+EngoPlay remains available within Words & Practice and existing entry links, but is no longer a separate desktop/mobile navigation destination. Reading and sentence-library activation markers remain on the current breadcrumb to preserve existing feature mounting. All database schemas, owner-scoped history and recording storage are unchanged.
