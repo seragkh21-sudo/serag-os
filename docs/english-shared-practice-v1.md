@@ -1,5 +1,7 @@
 # Shared English practice — build 84
 
+Historical build 84 notes. For the current ready-audio default introduced in build 85, see [Free English resources and ready speech](free-english-services-v1.md). The shared-practice recency contract below remains applicable.
+
 English and EngoPlay read the same academy question bank and vocabulary deck. The original expansion pack contains 64 vocabulary entries with Arabic meanings and natural examples, plus 40 contextual grammar questions across B1–C2. Deduplication adds **47 distinct vocabulary items** to the current production deck (319 → 366); the other entries overlap existing terms. Levels are instructional groupings, not certification.
 
 Daily practice adds the eligible level bank to both advanced batches instead of replacing it with a small pilot. Sentence builders also combine existing and advanced sources. No historical question IDs, answers, XP, streaks or review rows are reset.
