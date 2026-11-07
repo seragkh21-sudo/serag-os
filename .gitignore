@@ -7,3 +7,4 @@ node_modules/
 .DS_Store
 
 assets/natural-voice/
+.egm/upstream/
