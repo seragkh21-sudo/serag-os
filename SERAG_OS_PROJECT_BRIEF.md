@@ -315,3 +315,6 @@ When a decision changes, update this file.
 
 ### 2026-11-06 — Four English pathways
 English navigation is consolidated into Words & Practice, Read & Write, Listen & Speak, and Grammar. The overview prioritizes daily practice; progress and mistake review are secondary actions. Existing learning engines, libraries, voice recordings and account data remain in place. EngoPlay is a practice tool inside English.
+
+### 2026-11-07 — Shared practice and response improvements (build 84)
+English and EngoPlay share expanded vocabulary and grammar sources, account-scoped 24-hour automatic-repeat protection and history readiness checks. Device speech is the fast default when no preference exists; optional natural speech gains visible-question preparation and bounded in-memory replay caching. See `docs/english-shared-practice-v1.md` for scope, validation and synchronization limitations. This entry describes the implementation; deployment must be verified separately.
