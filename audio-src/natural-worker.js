@@ -13,7 +13,7 @@ async function loadModel(id=0){
 async function run(data){
   const {id,text,voice}=data;
   try{
-    if(!data.warm&&id<latest)return;
+    if(!data.warm&&!data.background&&id<latest)return;
     const tts=await loadModel(id);
     if(data.warm){self.postMessage({id,type:'ready'});return}
     const audio=await tts.generate(text,{voice:voice==='uk'?'bf_emma':'af_heart',speed:1});

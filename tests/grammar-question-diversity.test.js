@@ -133,7 +133,7 @@ test('word-practice only repeats an answered grammar question when its review is
   assert.equal(allScheduled.length,0,'do not repeat a not-yet-due question just to fill a grammar slot');
 });
 
-test('normal practice avoids the last ten answered questions until the eligible bank is exhausted',()=>{
+test('normal practice never reuses just-answered questions when the eligible bank is exhausted',()=>{
   const {api,store}=academy();
   const now=Date.now();
   const attempts=Array.from({length:10},(_,i)=>({id:'recent-'+i,topic:'recent',correct:true,at:now-i*1000}));
@@ -150,7 +150,7 @@ test('normal practice avoids the last ten answered questions until the eligible 
   const picked=api.practicePool(rows,now);
   assert.deepEqual(Array.from(picked,q=>q.id),['fresh-a','fresh-b']);
   const exhausted=api.practicePool(rows.slice(0,10),now);
-  assert.equal(exhausted.length,10,'cooldown questions are a fallback only when the bank is exhausted');
+  assert.equal(exhausted.length,0,'show an empty state instead of reusing recently answered questions');
 });
 
 test('adaptive selection uses synced cross-device error rates when ranking due questions',()=>{

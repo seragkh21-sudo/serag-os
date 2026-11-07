@@ -40,7 +40,7 @@ test('daily questions and word-order tasks follow the selected practice level',(
   const expected={B1:['p1','s1'],B2:['p2','s2'],C1:['legacy-C1','sentence-C1'],C2:['legacy-C2','sentence-C2']};
   for(const level of ['B1','B2','C1','C2']){
     const outcome=startFor(level,pilot,existing,prior);
-    assert.deepEqual(outcome.ids,[expected[level][0]]);
+    assert.deepEqual(outcome.ids,level==='B1'||level==='B2'?['legacy-'+level,expected[level][0]]:[expected[level][0]]);
     assert.deepEqual(outcome.sentences.map(x=>x.id),[expected[level][1]]);
     assert.equal(outcome.title,'Today’s practice');
     assert.equal(outcome.daily,true);

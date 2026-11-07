@@ -104,9 +104,8 @@
   }
   function selectQuizQuestion(recent=recentQuizKeys,seen=sessionQuizKeys){
     if(!quizQueue.length)quizQueue=shuffle(buildQuizBank(),seed(today()+String(window.user?.id||'guest')));
-    const fresh=quizQueue.filter(q=>!recent.has(q.key)&&!seen.has(q.key));
-    const fallback=quizQueue.filter(q=>!seen.has(q.key));
-    return fresh[0]||fallback[0]||quizQueue[0];
+    const fresh=quizQueue.filter(q=>!recent.has(q.key)&&!seen.has(q.key)&&!window.SERAG_PRACTICE_STATE?.recent({...q,answer:q.correct,id:q.key}));
+    return fresh[0]||null;
   }
   function currentQuiz(){currentQuizItem=selectQuizQuestion();return currentQuizItem;}
   function saveRecentQuizKey(key){
@@ -137,6 +136,7 @@
   function renderQuiz(){
     if(!quizHistoryReady){$('#el9Quiz').innerHTML='<div class="el9-card-head"><h3>Loading question history…</h3></div><p class="el6-muted">Preparing a new practice set based on your recent answers.</p>';return}
     const q=currentQuiz(),label=state.answers<10?`${state.answers+1}/10`:`Bonus ${state.answers-9}`;
+    if(!q){$('#el9Quiz').innerHTML='<p>You’re up to date. Try another practice path or return when your reviews are due.</p>';return}
     $('#el9Quiz').innerHTML=`<div class="el9-card-head"><div><div class="el6-muted">${q.title} · ${label}</div><h3>${esc(q.prompt)}</h3></div><span class="el9-pill">${score} correct</span></div><div class="el9-quiz-options">${q.options.map(x=>`<button data-quiz-answer="${esc(x)}" data-correct="${esc(q.correct)}" data-question-key="${esc(q.key)}">${esc(x)}</button>`).join('')}</div><div class="el6-muted">A varied question bank. Your 10 most recent questions are excluded; after the first 10, you can continue with bonus questions.</div>`;
   }
   function renderArticle(){
@@ -236,7 +236,7 @@
       const sound=e.target.closest('[data-speak]');if(sound)return speak(sound.dataset.speak);
       const save=e.target.closest('[data-save-word]');if(save)return saveWord(save.dataset.saveWord,save.dataset.meaning,save.dataset.example);
       const r=e.target.closest('.el9-reveal');if(r){if(r.dataset.reveal!==undefined){const i=Number(r.dataset.reveal);state.revealed=state.revealed.includes(i)?state.revealed.filter(x=>x!==i):[...state.revealed,i];if(state.revealed.length>=10)complete(0);else sync();renderWords()}else r.classList.toggle('revealed');return}
-      const qa=e.target.closest('[data-quiz-answer]');if(qa&&!answered){answered=true;const ok=qa.dataset.quizAnswer===qa.dataset.correct;qa.classList.add(ok?'correct':'wrong');qa.closest('.el9-quiz-options')?.querySelectorAll('button').forEach(x=>{if(x.dataset.quizAnswer===qa.dataset.correct)x.classList.add('correct')});const questionKey=qa.dataset.questionKey||currentQuizItem?.key;if(questionKey){sessionQuizKeys.add(questionKey);saveRecentQuizKey(questionKey)}state.answers++;if(ok){score++;state.correct++}sync();if(state.answers>=10)complete(1);setTimeout(()=>{gameIndex++;answered=false;renderQuiz()},850);return}
+      const qa=e.target.closest('[data-quiz-answer]');if(qa&&!answered){answered=true;if(currentQuizItem)window.SERAG_PRACTICE_STATE?.remember({...currentQuizItem,answer:currentQuizItem.correct,id:currentQuizItem.key});const ok=qa.dataset.quizAnswer===qa.dataset.correct;qa.classList.add(ok?'correct':'wrong');qa.closest('.el9-quiz-options')?.querySelectorAll('button').forEach(x=>{if(x.dataset.quizAnswer===qa.dataset.correct)x.classList.add('correct')});const questionKey=qa.dataset.questionKey||currentQuizItem?.key;if(questionKey){sessionQuizKeys.add(questionKey);saveRecentQuizKey(questionKey)}state.answers++;if(ok){score++;state.correct++}sync();if(state.answers>=10)complete(1);setTimeout(()=>{gameIndex++;answered=false;renderQuiz()},850);return}
       if(e.target.closest('[data-read-article]'))return speak(dailyArticle().text);
       if(e.target.closest('[data-article-done]')){completeArticle(dailyArticle().title);return;}
       if(e.target.closest('[data-check-article]')){const answer=$('#el9ArticleAnswer').value.trim(),a=dailyArticle();if(!answer){$('#el9ArticleFeedback').textContent='Write a short answer first.';return}const stop=new Set(['this','that','with','from','have','were','what','when','where','which','their','there','about','because','should','could','would','into','than','then','they','them','your','after','before','does','while','only','also','more','most','some','many','very','been','being','each','such','will','must','need','work']);const keyWords=[...new Set(String(a.answer||'').toLowerCase().replace(/[^a-z0-9\s-]/g,' ').split(/\s+/).filter(w=>w.length>3&&!stop.has(w)))].slice(0,7),written=answer.toLowerCase().replace(/[^a-z0-9\s-]/g,' '),matched=keyWords.filter(w=>written.includes(w)),pct=keyWords.length?Math.round(matched.length/keyWords.length*100):0;$('#el9ArticleFeedback').textContent='Quick content check: your answer includes '+matched.length+' of '+keyWords.length+' key terms ('+pct+'%). Compare the idea and meaning, not the exact wording. Sample answer: '+a.answer;return}
