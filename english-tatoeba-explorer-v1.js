@@ -39,7 +39,7 @@
     const row = list[index % list.length];
     card.innerHTML = '<article class="te-sentence-card">' +
       '<div class="te-label">ENGLISH</div>' +
-      '<p class="te-english" lang="en" dir="ltr">' + esc(row.english) + '</p>' +
+      '<p class="te-english" lang="en" dir="ltr">' + esc(row.english) + '</p>' + '<button type="button" class="ea12-btn" data-speak-text="'+esc(row.english)+'">Listen</button>' +
       (revealed
         ? '<div class="te-label">Arabic meaning</div><p class="te-arabic" lang="ar" dir="rtl">' + esc(row.arabic) + '</p>'
         : '<p class="te-hidden-translation" dir="rtl">Try to understand the sentence first, then reveal the translation.</p>') +

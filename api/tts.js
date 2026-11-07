@@ -55,8 +55,9 @@ export default async function handler(req,res){
 
   if(!await allowUsage(req,res,'tts',text.length))return;
 
+  const voice=body.accent==='uk'?'en-GB-SoniaNeural':VOICE;
   const rate=mode==='word'?'-12%':'-3%';
-  const ssml=`<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="en-US"><voice name="${VOICE}"><prosody rate="${rate}">${escapeXml(text)}</prosody></voice></speak>`;
+  const ssml=`<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="en-US"><voice name="${voice}"><prosody rate="${rate}">${escapeXml(text)}</prosody></voice></speak>`;
 
   try{
     const upstream=await fetch(`https://${region}.tts.speech.microsoft.com/cognitiveservices/v1`,{
@@ -78,7 +79,7 @@ export default async function handler(req,res){
     const bytes=Buffer.from(await upstream.arrayBuffer());
     res.setHeader('Content-Type','audio/mpeg');
     res.setHeader('Content-Length',String(bytes.length));
-    res.setHeader('X-Serag-TTS-Voice',VOICE);
+    res.setHeader('X-Serag-TTS-Voice',voice);
     res.setHeader('Cache-Control','private, no-store');
     return res.status(200).send(bytes);
   }catch(error){
