@@ -40,9 +40,10 @@
   }
   function flatten(data) {
     const entries = Array.isArray(data) ? data : [];
-    const result = { word: '', phonetic: '', audio: '', meanings: [], origin: '' };
+    const result = { word: '', phonetic: '', audio: '', meanings: [], origin: '', sources: [] };
     const seen = new Set();
     for (const entry of entries) {
+      if(entry.source?.url&&!result.sources.some(s=>s.url===entry.source.url))result.sources.push(entry.source);
       result.word ||= entry.word || '';
       result.phonetic ||= entry.phonetic || (entry.phonetics || []).find(x => x && x.text)?.text || '';
       result.audio ||= (entry.phonetics || []).find(x => x && typeof x.audio === 'string' && x.audio.trim())?.audio || '';
@@ -106,7 +107,7 @@
       if (save) save.disabled = false;
       return;
     }
-    const audio = data.audio ? '<button type="button" class="ed-audio" data-ed-audio aria-label="استمع للنطق">▶ <span>اسمع النطق</span></button>' : '';
+    const audio = '<button type="button" class="ed-audio" data-ed-audio aria-label="استمع للنطق">▶ <span>اسمع النطق</span></button>';
     const meanings = data.meanings.slice(0, 5).map(group =>
       '<section class="ed-meaning"><span class="ed-pos">' + esc(group.partOfSpeech) + '</span>' +
       '<ol>' + group.definitions.slice(0, 4).map(d =>
@@ -116,7 +117,7 @@
         (d.antonyms.length ? '<div class="ed-related"><b>Antonyms</b> ' + esc(d.antonyms.slice(0, 8).join(' · ')) + '</div>' : '') +
         '</li>').join('') + '</ol></section>').join('');
     result.innerHTML = '<div class="ed-wordline"><div><h3>' + esc(data.word || phrase) + '</h3><span class="ed-ipa">' + esc(data.phonetic || 'النطق الصوتي غير متاح') + '</span></div>' + audio + '</div>' +
-      meanings + (data.origin ? '<details class="ed-origin"><summary>أصل الكلمة</summary><p>' + esc(data.origin) + '</p></details>' : '') +
+      meanings + (data.sources||[]).map(source=>{let url='';try{const u=new URL(source.url);if(['https:','http:'].includes(u.protocol))url=u.href}catch{}return '<p class="ed-note">Source: '+esc(source.name||'Wiktionary')+' · '+esc(source.license||'')+' '+(url?'<a href="'+esc(url)+'" target="_blank" rel="noopener">Original entry</a>':'')+' · <a href="https://freedictionaryapi.com/" target="_blank" rel="noopener">FreeDictionaryAPI.com</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">License</a></p>'}).join('') + (data.origin ? '<details class="ed-origin"><summary>أصل الكلمة</summary><p>' + esc(data.origin) + '</p></details>' : '') +
       '<p class="ed-note">التعريف بالإنجليزية. القاموس لا يوفر ترجمة عربية موثوقة؛ تقدر تضيف المعنى العربي بنفسك في بنك الكلمات.</p>';
     if (save) save.disabled = false;
   }
@@ -214,7 +215,8 @@
     if (t.id === 'edSelectionTrigger') { const phrase=t.dataset.phrase, context=t.dataset.context; hideFloating(); return void open(phrase, context); }
     if (t.hasAttribute('data-ed-audio')) {
       const key = norm(activePhrase), data = cached(key);
-      if (!data || !data.audio) return;
+      if (!data) return;
+      if(!data.audio){void window.seragMicrosoftTTS?.speak(data.word||activePhrase,{word:true});return}
       window.seragMicrosoftTTS?.stop();
       const audio = new Audio(data.audio);
       audio.play().catch(() => setStatus('تعذر تشغيل ملف النطق على هذا الجهاز.'));

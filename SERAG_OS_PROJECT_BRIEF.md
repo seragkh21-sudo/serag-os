@@ -318,3 +318,6 @@ English navigation is consolidated into Words & Practice, Read & Write, Listen &
 
 ### 2026-11-07 — Shared practice and response improvements (build 84)
 English and EngoPlay share expanded vocabulary and grammar sources, account-scoped 24-hour automatic-repeat protection and history readiness checks. Device speech is the fast default when no preference exists; optional natural speech gains visible-question preparation and bounded in-memory replay caching. See `docs/english-shared-practice-v1.md` for scope, validation and synchronization limitations. This entry describes the implementation; deployment must be verified separately.
+
+### 2026-11-07 — Ready speech and free English sources (build 85)
+Published Kokoro recordings, a 270-term attributed dictionary subset, dictionary fallback and live Tatoeba/Datamuse exploration are available through the shared English/EngoPlay interface. Optional Azure/VoiceRSS/Google/self-hosted voice adapters show their actual configuration status. No external voice accounts or billing were created; see `docs/free-english-services-v1.md` for setup, licensing and validation.

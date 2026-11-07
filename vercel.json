@@ -75,6 +75,15 @@
           "value": "no-store"
         }
       ]
+    },
+    {
+      "source": "/assets/english-audio/:clip.mp3",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, s-maxage=31536000, immutable"
+        }
+      ]
     }
   ],
   "buildCommand": "node scripts/build-natural-audio.mjs",
