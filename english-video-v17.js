@@ -70,6 +70,12 @@ function studyTools(root,state,current,h){
   }catch(err){say(err.message)}setBusy(false);
  };
  if(state.videoJobs?.[current.id]?.expires>Date.now())say('A transcript job is pending. Click Get transcript to resume checking it.');pane.addEventListener('click',click);
+ fetch('/api/video-study',{signal:AbortSignal.timeout(6000)}).then(r=>r.ok?r.json():null).then(async config=>{
+  if(!alive()||!config)return;
+  if(!config.transcriptsConfigured){pane.querySelectorAll('[data-study-action="transcript"],[data-study-action="generate"]').forEach(b=>{b.disabled=true;b.title='Automatic transcripts need provider setup';});say('Automatic transcripts need provider setup. Import SRT/VTT to use the study tools now.');return}
+  if(current.youtube&&state.videoAutoFetch===current.youtube&&!h.cues().length){delete state.videoAutoFetch;h.save();setBusy(true);say('Fetching available timed captions…');try{const finished=await transcript(false);if(finished)setBusy(false)}catch(e){say(e.message);setBusy(false)}}
+ }).catch(()=>{});
+
  const wordClick=e=>{const w=e.target.closest('[data-v17-word]');if(!w)return;e.stopImmediatePropagation();const phrase=w.textContent;const line=w.closest('[data-v17-cue]');h.pause();window.SERAG_DICTIONARY_V1?.open(phrase,h.cues()[Number(line?.dataset.v17Cue)]?.text||'')};
  root.addEventListener('click',wordClick,true);
  const keydown=e=>{if(e.target.closest('input,textarea,select,button,[contenteditable]')||e.ctrlKey||e.metaKey||e.altKey)return;const key=e.key.toLowerCase();if(!['a','s','d'].includes(key)||!h.cues().length)return;e.preventDefault();h.select(h.selected()+(key==='a'?-1:key==='d'?1:0))};root.addEventListener('keydown',keydown);
@@ -92,7 +98,7 @@ if(!native)api().then(()=>{if(disposed)return;yt=new YT.Player('ev17Youtube',{ev
 const tick=setInterval(()=>{if(disposed||(!native&&!ready)||!cues.length)return;const t=time(),playing=native?!native.paused:yt?.getPlayerState?.()===1,i=cues.findIndex(c=>t>=c.start&&t<c.end);if(playing&&autopause&&t>=cues[selected].end&&t<cues[selected].end+2&&lastPause!==selected){lastPause=selected;pause();seek(Math.max(cues[selected].start,cues[selected].end-.02));return}if(i!==active){active=i;if(i>=0&&!loop)selected=i;root.querySelectorAll('[data-v17-cue]').forEach(b=>b.classList.toggle('ev17-active',Number(b.dataset.v17Cue)===i))}if(playing&&t>=cues[selected].end&&t<cues[selected].end+2){if(loop)seek(cues[selected].start);else if(autopause&&lastPause!==selected){pause();lastPause=selected}}},150);
 const listener=async e=>{const b=e.target.closest('button');if(!b)return;
 if(b.dataset.v17Video){state.videoStudioId=b.dataset.v17Video;save();rerender();return}
-if(b.hasAttribute('data-v17-load')){const text=$('[data-v17-url]').value.trim(),id=youtubeId(text);if(!id){status('استخدم رابط فيديو YouTube صالحًا.');return}state.videoStudioId='custom';state.videoStudioYoutube=id;state.videoStudioUrl=text;state.videoCues??={};save();rerender();return}
+if(b.hasAttribute('data-v17-load')){const text=$('[data-v17-url]').value.trim(),id=youtubeId(text);if(!id){status('استخدم رابط فيديو YouTube صالحًا.');return}state.videoStudioId='custom';state.videoStudioYoutube=id;state.videoAutoFetch=id;state.videoStudioUrl=text;state.videoCues??={};save();rerender();return}
 if(b.dataset.v17Cue!==undefined)select(Number(b.dataset.v17Cue));
 if(b.hasAttribute('data-v17-play')){if(native?native.paused:yt?.getPlayerState?.()!==1)play();else pause()}
 if(b.hasAttribute('data-v17-prev')&&cues.length)select(selected-1);if(b.hasAttribute('data-v17-next')&&cues.length)select(selected+1);if(b.hasAttribute('data-v17-repeat')&&cues.length)select(selected);
