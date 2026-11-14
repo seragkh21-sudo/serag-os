@@ -18,3 +18,5 @@
 .epath .epath-level-options button:hover:not([aria-pressed="true"]){background:#f8f1ee;border-color:#a98994}
 @media(max-width:600px){.epath .epath-level-switch{padding:14px;margin:0 0 16px;gap:12px}.epath .epath-level-options{flex-basis:100%;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}.epath .epath-level-options button{min-width:0;padding:8px 3px;min-height:54px}.epath .epath-level-options button strong{font-size:14px}.epath .epath-level-options button span{font-size:9px}}
 @media(prefers-reduced-motion:reduce){.epath .epath-level-options button{transition:none}}
+
+.epath-word-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:14px 0}.epath-word-actions .epath-link{min-height:44px;padding:10px 16px;border:1px solid var(--line,#ded8d2);border-radius:10px;background:var(--card,#fff);cursor:pointer}.epath-word-actions .epath-link:focus-visible{outline:2px solid #9d5868;outline-offset:3px}
