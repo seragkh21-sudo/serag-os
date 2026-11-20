@@ -23,7 +23,7 @@
   let state={date:today(),steps:Array(6).fill(false),xp:0,answers:0,correct:0,revealed:[],videoUrl:'',videoPhrase:'',videoMeaning:'',videoNotes:'',videoFeedback:'',speakingPromptOffset:0,speakingTranscript:'',speakingFeedback:'',grammarPractice:'',grammarFeedback:'',grammarCompleted:[],grammarBookmarks:[],grammarActiveId:''};
   let archive=[],syncId=null,gameIndex=0,score=0,answered=false,grammarFilter='All',grammarSearch='',recognition=null,isRecording=false;
   let quizBank=null,quizQueue=[],quizHistoryOwner=null,quizHistoryReady=false,currentQuizItem=null;
-  let recentQuizKeys=new Set(),sessionQuizKeys=new Set();
+  let recentQuizKeys=new Set(),sessionQuizKeys=new Set(),quizLastAt=new Map();
 
   const readingProgressKey=()=>window.user?.id?'seragReadingProgressV1:'+window.user.id:null;
   function completedArticles(){
@@ -104,31 +104,39 @@
   }
   function selectQuizQuestion(recent=recentQuizKeys,seen=sessionQuizKeys){
     if(!quizQueue.length)quizQueue=shuffle(buildQuizBank(),seed(today()+String(window.user?.id||'guest')));
-    const fresh=quizQueue.filter(q=>!recent.has(q.key)&&!seen.has(q.key)&&!window.SERAG_PRACTICE_STATE?.recent({...q,answer:q.correct,id:q.key}));
-    return fresh[0]||null;
+    const shared=window.SERAG_PRACTICE_STATE;
+    const candidates=quizQueue.map(q=>({...q,id:q.key,answer:q.correct}));
+    const pool=shared?shared.pool(candidates,{lastAt:q=>Math.max(shared.last(q),quizLastAt.get(q.key)||0),wasSeen:q=>recent.has(q.key)}):candidates.filter(q=>!recent.has(q.key));
+    return pool.find(q=>!seen.has(q.key))||null;
   }
   function currentQuiz(){currentQuizItem=selectQuizQuestion();return currentQuizItem;}
   function saveRecentQuizKey(key){
     if(!key)return;recentQuizKeys.delete(key);recentQuizKeys.add(key);
-    while(recentQuizKeys.size>10)recentQuizKeys.delete(recentQuizKeys.values().next().value);
+    quizLastAt.set(key,Date.now());
     try{localStorage.setItem('seragDailyQuizRecentV1:'+(window.user?.id||'guest'),JSON.stringify([...recentQuizKeys]))}catch{}
   }
   async function loadQuizHistory(){
     const owner=window.user?.id||'guest';
     if(quizHistoryOwner===owner&&quizHistoryReady)return;
     quizHistoryOwner=owner;quizHistoryReady=false;quizQueue=[];sessionQuizKeys=new Set();answered=false;gameIndex=0;score=0;currentQuizItem=null;renderQuiz();
-    let local=[];try{const saved=JSON.parse(localStorage.getItem('seragDailyQuizRecentV1:'+owner)||'[]');if(Array.isArray(saved))local=saved.filter(x=>typeof x==='string').slice(-10).reverse()}catch{}
-    recentQuizKeys=new Set(local);
+    let local=[];try{const saved=JSON.parse(localStorage.getItem('seragDailyQuizRecentV1:'+owner)||'[]');if(Array.isArray(saved))local=saved.filter(x=>typeof x==='string').reverse()}catch{}
+    recentQuizKeys=new Set(local);quizLastAt=new Map();
     if(owner!=='guest'&&window.sb){
       try{
-        const result=await window.sb.from('english_quiz_attempts').select('prompt,question_type,correct_answer,metadata,created_at').eq('user_id',owner).eq('source','daily_quiz').order('created_at',{ascending:false}).limit(10);
-        if(window.user?.id!==owner)return;
-        if(!result.error){
-          const remote=(result.data||[]).map(row=>row.metadata?.question_key||quizQuestionKey({title:row.question_type||'',prompt:row.prompt||'',correct:row.correct_answer||''})).filter(Boolean);
-          recentQuizKeys=new Set([...new Set([...local,...remote])].slice(0,10));
-          try{localStorage.setItem('seragDailyQuizRecentV1:'+owner,JSON.stringify([...recentQuizKeys]))}catch{}
-        }else console.warn('Daily quiz history could not be loaded',result.error);
-      }catch(error){console.warn('Daily quiz history could not be loaded',error)}
+        const history=[];
+        for(let offset=0;;offset+=500){
+          const result=await window.sb.from('english_quiz_attempts').select('prompt,question_type,correct_answer,metadata,created_at').eq('user_id',owner).eq('source','daily_quiz').order('created_at',{ascending:true}).order('id',{ascending:true}).range(offset,offset+499);
+          if(window.user?.id!==owner)return;
+          if(result.error)throw result.error;
+          history.push(...(result.data||[]));
+          if((result.data||[]).length<500)break;
+        }
+        for(const row of history){
+          const key=row.metadata?.question_key||quizQuestionKey({title:row.question_type||'',prompt:row.prompt||'',correct:row.correct_answer||''});
+          if(key){recentQuizKeys.add(key);quizLastAt.set(key,Math.max(quizLastAt.get(key)||0,Date.parse(row.created_at)||0))}
+        }
+        try{localStorage.setItem('seragDailyQuizRecentV1:'+owner,JSON.stringify([...recentQuizKeys]))}catch{}
+      }catch(error){console.warn('Daily quiz history could not be loaded',error);return}
     }
     if((window.user?.id||'guest')!==owner)return;
     quizHistoryReady=true;renderQuiz();
@@ -137,7 +145,7 @@
     if(!quizHistoryReady){$('#el9Quiz').innerHTML='<div class="el9-card-head"><h3>Loading question history…</h3></div><p class="el6-muted">Preparing a new practice set based on your recent answers.</p>';return}
     const q=currentQuiz(),label=state.answers<10?`${state.answers+1}/10`:`Bonus ${state.answers-9}`;
     if(!q){$('#el9Quiz').innerHTML='<p>You’re up to date. Try another practice path or return when your reviews are due.</p>';return}
-    $('#el9Quiz').innerHTML=`<div class="el9-card-head"><div><div class="el6-muted">${q.title} · ${label}</div><h3>${esc(q.prompt)}</h3></div><span class="el9-pill">${score} correct</span></div><div class="el9-quiz-options">${q.options.map(x=>`<button data-quiz-answer="${esc(x)}" data-correct="${esc(q.correct)}" data-question-key="${esc(q.key)}">${esc(x)}</button>`).join('')}</div><div class="el6-muted">A varied question bank. Your 10 most recent questions are excluded; after the first 10, you can continue with bonus questions.</div>`;
+    $('#el9Quiz').innerHTML=`<div class="el9-card-head"><div><div class="el6-muted">${q.title} · ${label}</div><h3>${esc(q.prompt)}</h3></div><span class="el9-pill">${score} correct</span></div><div class="el9-quiz-options">${q.options.map(x=>`<button data-quiz-answer="${esc(x)}" data-correct="${esc(q.correct)}" data-question-key="${esc(q.key)}">${esc(x)}</button>`).join('')}</div><div class="el6-muted">A varied question bank. Unseen questions come first. Earlier questions return after this bank is exhausted; after the first 10, you can continue with bonus questions.</div>`;
   }
   function renderArticle(){
     const a=dailyArticle(),finished=completedArticles(),readCount=finished.filter(title=>data.articles.some(x=>x.title===title)).length;

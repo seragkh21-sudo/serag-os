@@ -54,14 +54,13 @@
   const fillers=grammarPool.map(q=>({kind:q.sourceQuestionType==='error_correction'?'correction':'grammar',grammar:q,incorrectSentence:q.incorrectSentence||null,answer:q.answer,options:q.options}));
   const correction=window.SERAG_ENGOPLAY_INTERACTIONS_V1?.correction?.(grammarPool[0]);
   if(correction)fillers.splice(0,1,correction);
-  const buildPool=sentenceBuild.filter(q=>{
-    if(answeredToday.has(q.id))return false;
-    const last=Number(lastAt.get(q.id))||0,stats=questionStats.get(q.id);
-    if(!last)return true;
-    const wait=Number(stats?.correct)>0?3*86400000:86400000;
-    return now-last>=wait;
-  });
-  const builds=shuffle(buildPool).slice(0,dailyMode?2:3).map(q=>({...q,kind:'build',words:shuffle([...q.tokens])}));
+  const shared=window.SERAG_PRACTICE_STATE;
+  const buildPool=shared?shared.pool(sentenceBuild,{
+   lastAt:q=>Math.max(Number(lastAt.get(q.id))||0,shared.last(q)),
+   wasSeen:q=>activity.answeredKeys?.has?.(q.id)||answeredToday.has(q.id),
+   available:q=>{const last=Number(lastAt.get(q.id))||0;return !last||now-last>=(Number(questionStats.get(q.id)?.correct)>0?3:1)*86400000}
+  },now):sentenceBuild.filter(q=>!answeredToday.has(q.id)&&(!lastAt.get(q.id)||now-lastAt.get(q.id)>=(Number(questionStats.get(q.id)?.correct)>0?3:1)*86400000)).sort((a,b)=>(lastAt.get(a.id)||0)-(lastAt.get(b.id)||0));
+  const builds=buildPool.slice(0,dailyMode?2:3).map(q=>({...q,kind:'build',words:shuffle([...q.tokens])}));
   const matching=window.SERAG_ENGOPLAY_INTERACTIONS_V1?.matching?.(selected);
   // Today's Practice is one short mixed session: one exposure per vocabulary item,
   // grammar in context, and sentence-building tasks from the existing grammar examples.
@@ -70,7 +69,7 @@
    for(let i=0;i<choices.length;i++){mixed.push(choices[i]);if(extras.length)mixed.push(extras.shift())}
    return mixed.concat(extras);
   }
-  // Preserve the due-review order of vocabulary; place grammar/building between exposure and recall.
+  // Preserve the unseen-first order of vocabulary; place grammar/building between exposure and recall.
   const firstExposure=[...choices,...shuffle([...fillers,...builds,...(matching?[matching]:[])])];
   return [...firstExposure,...shuffle(choices.map(q=>({...q,kind:'recall',options:undefined})))];
  }
@@ -81,11 +80,40 @@
   const prefix=q.kind==='recognition'?'recognition:':q.kind==='match'?'match:':q.kind==='application'?'application:':'sentence:';if(!assisted)window.ENGOPLAY?.track({id:prefix+key,topic:q.kind==='recognition'?'vocabulary-recognition':q.kind==='match'?'vocabulary-matching':q.kind==='application'?(isWorkItem(q.item)?'work-application':'vocabulary-application'):'vocabulary-sentence',correct,answer:correct?(q.kind==='application'?(session?.input||''):q.answer):(session?.input||''),at:Date.now()});
  }
  function saveBuildAttempt(q,correct,assisted){if(assisted)return;if(q?.sourceBatch==='advanced01'||q?.sourceBatch==='advanced02'){window.ENGOPLAY?.track?.({id:q.id,topic:q.topic,correct,answer:session?.input||'',at:Date.now()});return}window.SERAG_ENGOPLAY_QUESTS_V1?.recordPracticeAttempt?.(q,session?.input||'',correct,session?.index||0);}
- // Review order: due reviews (most overdue first) -> fresh words -> practised but unscheduled -> scheduled for later.
- // Pure and exported so it can be tested. status(id) returns {due_at} or null; seen is the local per-user state map.
- function orderPool(list,status=()=>null,seen={},now=Date.now()){const key=w=>{const prior=seen[norm(w.phrase)],r=status(w.id),dueAt=r?Date.parse(r.due_at):NaN,lastShown=Math.max(Date.parse(prior?.last_presented_at||prior?.at||'')||0,Date.parse(r?.last_presented_at||r?.shown_at||'')||0),reviewedAt=Date.parse(r?.updated_at||'')||0,shownSinceReview=lastShown>0&&lastShown>reviewedAt;if(Number.isFinite(dueAt)&&dueAt<=now&&!shownSinceReview)return [0,dueAt];if(Number.isFinite(dueAt)&&dueAt>now)return [3,dueAt];if(!lastShown&&!prior)return [1,0];return [2,lastShown||reviewedAt||0]};return shuffle(list).sort((a,b)=>{const x=key(a),y=key(b);return x[0]-y[0]||x[1]-y[1]})}
+ // Normal practice exhausts unseen vocabulary before due reviews, then rotates oldest first.
+ function orderPool(list,status=()=>null,seen={},now=Date.now(),allowRepeat=true){
+  const shared=window.SERAG_PRACTICE_STATE,meta=new Map();
+  for(const w of list){
+   const prior=seen[norm(w.phrase)],r=status(w.id),due=Date.parse(r?.due_at||'');
+   const at=Math.max(shared?.wordLast(w)||0,Date.parse(prior?.at||'')||0,Date.parse(prior?.last_presented_at||'')||0,Date.parse(r?.last_presented_at||r?.shown_at||'')||0,Date.parse(r?.updated_at||'')||0);
+   meta.set(w,{at,seen:!!prior||Number.isFinite(due),available:!Number.isFinite(due)||due<=now});
+  }
+  const rows=shuffle(list);
+  if(shared)return shared.pool(rows,{identify:w=>norm(w.phrase),lastAt:w=>meta.get(w).at,wasSeen:w=>meta.get(w).seen,available:w=>meta.get(w).available,allowRepeat},now);
+  const fresh=rows.filter(w=>!meta.get(w).at&&!meta.get(w).seen);
+  return fresh.length?fresh:!allowRepeat?[]:rows.filter(w=>(!meta.get(w).at||now-meta.get(w).at>=86400000)&&meta.get(w).available).sort((a,b)=>meta.get(a).at-meta.get(b).at);
+ }
  function markPresented(list){const id=uid();if(!id)return;const s=state(),at=new Date().toISOString(),presented=[];for(const q of list||[]){if(q.kind==='grammar'||q.kind==='correction'){window.SERAG_PRACTICE_STATE?.remember(q.grammar);continue}if(q.kind==='build'){window.SERAG_PRACTICE_STATE?.remember(q);continue}if(q.kind!=='recognition'||!q.item?.phrase)continue;const key=norm(q.item.phrase);s[key]={...(s[key]||{}),last_presented_at:at};window.SERAG_PRACTICE_STATE?.rememberWord(q.item);if(q.item.id)presented.push(q.item.id)}try{localStorage.setItem('seragSentenceV21:'+id,JSON.stringify(s))}catch{}window.ENGOPLAY?.recordPresented?.(presented,at)}
- function start(word=null,grammarIds=null,title='My learning path',sentenceBuild=[],dailyMode=false){if(window.ENGOPLAY?.isReady===false){const id=uid();return window.ENGOPLAY.ensureReady().then(()=>{if(uid()===id&&window.ENGOPLAY.isReady)start(word,grammarIds,title,sentenceBuild,dailyMode)})}const list=items();if(list.length<4)return;const eligible=word?list:list.filter(w=>!window.SERAG_PRACTICE_STATE?.recentWord(w));const pool=orderPool(eligible,id=>{const review=window.ENGOPLAY?.reviewStatus?.(id),exposure=window.ENGOPLAY?.exposureStatus?.(id);return review||exposure?{...(review||{}),last_presented_at:exposure?.shown_at||exposure?.last_presented_at}:null},state());if(word){const at=pool.findIndex(w=>norm(w.phrase)===norm(word));if(at>=0)pool.unshift(...pool.splice(at,1))}const grammar=grammarIds?[...(window.SERAG_ACADEMY_V12?.questions()||[]),...(window.SERAG_ENGOPLAY_MEDIA_BANK_V1?.questions||[])].filter(q=>grammarIds.includes(q.id)) : [];session={owner:uid(),title,grammarIds,sentenceBuild,dailyMode,list:buildRound(pool,grammar,4,sentenceBuild,dailyMode),index:0,hints:0,revealed:false,done:false,wrong:false,lastWrong:'',input:'',buildSelected:[],matchSelectedWord:-1,matchedPairs:[],matchWrong:false,matchMisses:0,matchError:null,correct:0,applicationAdded:[]};markPresented(session.list);paint()}
+ function start(word=null,grammarIds=null,title='My learning path',sentenceBuild=[],dailyMode=false){
+  if(window.ENGOPLAY?.isReady===false){const id=uid();return window.ENGOPLAY.ensureReady().then(()=>{if(uid()===id&&window.ENGOPLAY.isReady)start(word,grammarIds,title,sentenceBuild,dailyMode)})}
+  const list=items();if(list.length<4)return;
+  const status=id=>{const review=window.ENGOPLAY?.reviewStatus?.(id),exposure=window.ENGOPLAY?.exposureStatus?.(id);return review||exposure?{...(review||{}),last_presented_at:exposure?.shown_at||exposure?.last_presented_at}:null};
+  const prior=state();let pool=orderPool(list,status,prior);
+  if(word){const target=list.find(w=>norm(w.phrase)===norm(word));if(target){const at=pool.indexOf(target);if(at>=0)pool.splice(at,1);pool.unshift(target)}}
+  let grammar=grammarIds?[...(window.SERAG_ACADEMY_V12?.questions()||[]),...(window.SERAG_ENGOPLAY_MEDIA_BANK_V1?.questions||[])].filter(q=>grammarIds.includes(q.id)) : [];
+  let builders=sentenceBuild;
+  const shared=window.SERAG_PRACTICE_STATE;
+  if(!word&&shared){
+   const activity=window.ENGOPLAY?.stats?.()||{},lastAt=activity.lastAnsweredAt;
+   const unseenWords=orderPool(list,status,prior,Date.now(),false);
+   const unseenGrammar=window.SERAG_ACADEMY_V12?.selectQuestions?.(grammar,'daily',grammar.length,false)||[];
+   const unseenBuild=shared.pool(sentenceBuild,{allowRepeat:false,wasSeen:q=>activity.answeredKeys?.has?.(q.id),lastAt:q=>Math.max(shared.last(q),Number(lastAt?.get?.(q.id)??lastAt?.[q.id])||0)});
+   // A small exercise family must not start repeating while another part of this
+   // mixed session still has unused material. Shorter sessions are intentional.
+   if(unseenWords.length||unseenGrammar.length||unseenBuild.length){pool=unseenWords;grammar=unseenGrammar;builders=unseenBuild}
+  }
+  session={owner:uid(),title,grammarIds,sentenceBuild,dailyMode,list:buildRound(pool,grammar,4,builders,dailyMode),index:0,hints:0,revealed:false,done:false,wrong:false,lastWrong:'',input:'',buildSelected:[],matchSelectedWord:-1,matchedPairs:[],matchWrong:false,matchMisses:0,matchError:null,correct:0,applicationAdded:[]};markPresented(session.list);paint()
+ }
  function recordMatch(){const q=session?.list?.[session.index];if(!q||q.kind!=='match')return;for(const pair of q.pairs)saveAttempt({kind:'match',item:pair.item,answer:pair.meaning},true,session.matchWrong)}
  function chooseMatchWord(index){const q=session?.list?.[session.index];if(!q||q.kind!=='match'||session.done||!Number.isInteger(index)||!q.pairs[index]||session.matchedPairs.includes(index))return false;session.matchSelectedWord=index;paint();return true}
  function chooseMatchMeaning(index){

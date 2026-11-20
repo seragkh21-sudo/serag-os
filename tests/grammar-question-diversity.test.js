@@ -9,7 +9,7 @@ function academy(){
   const c={document,localStorage:{getItem:k=>store.get(k)||null,setItem:(k,v)=>store.set(k,v)},setInterval(){},clearInterval(){},addEventListener(){},Date,Math,console,user:{id:'test-user'}};
   c.window=c;
   vm.createContext(c);
-  for(const file of ['english-content-v9.js','english-grammar-v10.js','english-c1-advanced-v1.js','english-supplement-v13.js','english-levels-v14.js','english-source-curriculum-v1.js','english-grammar-examples-v1.js','english-academy-v12.js']){
+  for(const file of ['english-practice-state-v1.js','english-content-v9.js','english-grammar-v10.js','english-c1-advanced-v1.js','english-supplement-v13.js','english-levels-v14.js','english-source-curriculum-v1.js','english-grammar-examples-v1.js','english-academy-v12.js']){
     vm.runInContext(fs.readFileSync(file,'utf8'),c,{filename:file});
   }
   return {api:c.SERAG_ACADEMY_V12,store,context:c};
@@ -47,7 +47,7 @@ test('daily selection interleaves grammar topics instead of clustering one rule'
   assert.equal(new Set(picked.map(q=>q.topic)).size,8);
 });
 
-test('overdue grammar reviews come before fresh questions while scheduled questions stay out',()=>{
+test('unseen grammar questions come before overdue reviews and scheduled questions stay out',()=>{
   const {api,store}=academy();
   const now=Date.now();
   store.set('seragAcademyV12:test-user',JSON.stringify({
@@ -61,8 +61,8 @@ test('overdue grammar reviews come before fresh questions while scheduled questi
     {id:'scheduled',topic:'scheduled-topic',prompt:'Scheduled question',answer:'yes',options:['yes','no']},
     {id:'overdue',topic:'review-topic',prompt:'Overdue question',answer:'yes',options:['yes','no']}
   ];
-  assert.deepEqual(Array.from(api.practicePool(pool,now),q=>q.id),['overdue','fresh']);
-  assert.deepEqual(Array.from(api.selectQuestions(pool,'daily',3),q=>q.id),['overdue','fresh']);
+  assert.deepEqual(Array.from(api.practicePool(pool,now),q=>q.id),['fresh']);
+  assert.deepEqual(Array.from(api.selectQuestions(pool,'daily',3),q=>q.id),['fresh']);
 });
 
 test('review ordering prioritizes the oldest previously attempted questions when none are due',()=>{

@@ -2,22 +2,21 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { findRoot, loadFiles, norm } from './helpers/english-harness.mjs';
 
-// Behaviour under test: in the Words / EngoPlay journey, reviews that are DUE come first
-// (most overdue first), then fresh words, then practised-but-unscheduled, then words scheduled for later.
+// Normal practice exhausts unseen words before repeats; explicit word practice can bypass rotation.
 // Read-only: loads word-practice-v21.js into an isolated vm sandbox with stubbed browser APIs.
 const root = findRoot();
 const DAY = 24 * 60 * 60 * 1000;
 const NOW = Date.UTC(2026, 9, 24, 12, 0, 0);
 
 function boot() {
-  const { ctx, errors } = loadFiles(root, ['word-practice-v21.js']);
+  const { ctx, errors } = loadFiles(root, ['english-practice-state-v1.js','word-practice-v21.js']);
   assert.deepEqual(errors, [], 'word-practice-v21.js must load in the sandbox');
   return ctx;
 }
 const word = (phrase) => ({ phrase, id: `vocab:${norm(phrase)}`, meaning: `meaning of ${phrase}`, group: 'Test', examples: [`I like ${phrase} a lot.`] });
 const ids = (list) => Array.from(list, (w) => w.phrase);
 
-test('orderPool: due first (most overdue first), then fresh, then practised, then scheduled for later', () => {
+test('orderPool: an unseen batch is never padded with due or practised words', () => {
   const wp = boot().SERAG_WORD_PRACTICE;
   assert.equal(typeof wp.orderPool, 'function', 'orderPool must be exported');
   const list = ['fresh a', 'due new', 'due old', 'practised', 'later'].map(word);
@@ -28,18 +27,19 @@ test('orderPool: due first (most overdue first), then fresh, then practised, the
   };
   for (let i = 0; i < 25; i += 1) {
     const out = ids(wp.orderPool(list, (id) => reviews[id] || null, { practised: { attempts: 1 } }, NOW));
-    assert.deepEqual(out, ['due old', 'due new', 'fresh a', 'practised', 'later']);
+    assert.deepEqual(out, ['fresh a']);
   }
 });
 
-test('orderPool: a due review outranks fresh words even when hundreds of fresh words exist', () => {
+test('orderPool: hundreds of unseen words stay ahead of overdue reviews', () => {
   const wp = boot().SERAG_WORD_PRACTICE;
   const fresh = Array.from({ length: 300 }, (_, i) => word(`fresh ${i}`));
   const due = ['due 1', 'due 2', 'due 3'].map(word);
   const reviews = Object.fromEntries(due.map((w, i) => [w.id, { due_at: new Date(NOW - (i + 1) * DAY).toISOString() }]));
   for (let i = 0; i < 20; i += 1) {
     const out = ids(wp.orderPool([...fresh, ...due], (id) => reviews[id] || null, {}, NOW));
-    assert.deepEqual(out.slice(0, 3), ['due 3', 'due 2', 'due 1']);
+    assert.equal(out.length, 300);
+    assert.ok(out.every(phrase => phrase.startsWith('fresh ')));
   }
 });
 
@@ -48,8 +48,8 @@ test('orderPool: missing or invalid due_at falls back to local-state tiers witho
   const list = ['broken', 'seen', 'fresh'].map(word);
   const status = (id) => (id === 'vocab:broken' ? { due_at: 'not a date' } : null);
   const out = ids(wp.orderPool(list, status, { seen: { attempts: 1 } }, NOW));
-  assert.deepEqual(out.slice().sort(), ['broken', 'fresh', 'seen']);
-  assert.ok(out.indexOf('fresh') < out.indexOf('seen'), 'fresh stays before practised');
+  assert.deepEqual(out.slice().sort(), ['broken', 'fresh']);
+  assert.ok(!out.includes('seen'), 'practised words wait until all unseen words are used');
 });
 
 test('orderPool: prompts shown on another device are deferred behind unseen prompts', () => {
@@ -60,7 +60,7 @@ test('orderPool: prompts shown on another device are deferred behind unseen prom
   const status = (id) => exposures.has(id) ? { shown_at: shownAt } : null;
   const out = ids(wp.orderPool(list, status, {}, NOW));
   assert.deepEqual(out.slice(0, 2).sort(), ['fresh one', 'fresh two']);
-  assert.deepEqual(out.slice(2).sort(), ['shown one', 'shown two']);
+  assert.equal(out.length, 2, 'do not fill a short batch with prompts already shown');
 });
 
 test('orderPool: does not mutate its input and works without a status function', () => {
@@ -72,7 +72,7 @@ test('orderPool: does not mutate its input and works without a status function',
   assert.equal(out.length, 3);
 });
 
-test('end-to-end: start() opens the journey with the most overdue practised word, not a fresh one', () => {
+test('end-to-end: start() uses unseen words even when overdue reviews exist', () => {
   const ctx = boot();
   // 60 fresh words + 2 words practised earlier that are now due. Meanings are unique so the first card identifies the pick.
   const rows = Array.from({ length: 60 }, (_, i) => [`fresh phrase ${i}`, `FRESH-MEANING-${i}`, 'Everyday', `We say fresh phrase ${i} often.`, 'neutral']);
@@ -92,8 +92,8 @@ test('end-to-end: start() opens the journey with the most overdue practised word
   };
   ctx.SERAG_WORD_PRACTICE.start();
   const firstCard = ctx.SERAG_WORD_PRACTICE.html();
-  assert.match(firstCard, /OLD-DUE-MEANING/, 'the first card should be the most overdue review');
-  assert.doesNotMatch(firstCard, /FRESH-MEANING/, 'a fresh word must not displace a due review');
+  assert.match(firstCard, /FRESH-MEANING/, 'normal practice should start with an unseen word');
+  assert.doesNotMatch(firstCard, /OLD-DUE-MEANING/, 'reviews must wait for the unseen inventory');
 });
 
 test('reopening without answering skips words already shown in the previous session', () => {

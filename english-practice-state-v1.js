@@ -1,7 +1,7 @@
-/* Shared recency for English and EngoPlay. Exposure never awards answers or XP. */
+/* Shared practice rotation for English and EngoPlay. Exposure never awards XP. */
 (()=>{
   'use strict';
-  const DAY=86400000,MAX=6000;
+  const DAY=86400000;
   const owner=()=>window.user?.id||null;
   const normalize=s=>String(s||'').normalize('NFKC').toLowerCase().replace(/_+/g,' blank ').replace(/[^\p{L}\p{N}]+/gu,' ').trim();
   const wordKey=s=>String(s||'').normalize('NFKC').toLowerCase().replace(/[’‘]/g,"'").replace(/[.,!?;:]/g,'').replace(/\s+/g,' ').trim();
@@ -36,34 +36,43 @@
     for(const id of [q.id,key(q)]){
       if(!id)continue;
       const exposure=window.ENGOPLAY?.exposureStatus?.(id);
-      at=Math.max(at,Number(local[id])||0,Date.parse(exposure?.shown_at||'')||0,Number(remote?.lastAnsweredAt?.get?.(id))||0);
+      at=Math.max(at,Number(local[id])||0,Date.parse(exposure?.shown_at||'')||0,Number(remote?.lastAnsweredAt?.get?.(id)??remote?.lastAnsweredAt?.[id])||0);
     }
     return at;
   }
   function recent(q,now=Date.now()){const at=last(q);return at>0&&now-at<DAY}
+  function pool(list,{identify=key,lastAt=last,wasSeen=()=>false,available=()=>true,allowRepeat=true}={},now=Date.now()){
+    const groups=new Map(),fresh=[],seen=[];
+    for(const q of list){
+      const id=identify(q),old=groups.get(id),at=Number(lastAt(q))||0;
+      groups.set(id,{q:old?.q||q,at:Math.max(old?.at||0,at),seen:!!old?.seen||!!at||wasSeen(q),available:(old?.available??true)&&available(q)});
+    }
+    for(const row of groups.values()){
+      if(!row.seen)fresh.push(row.q);
+      else if((!row.at||now-row.at>=DAY)&&row.available)seen.push(row);
+    }
+    // Never fill a short unseen batch with reviews. Once exhausted, rotate oldest first.
+    return fresh.length?fresh:!allowRepeat?[]:seen.sort((a,b)=>a.at-b.at).map(row=>row.q);
+  }
   function remember(q){
     if(!owner()||!q)return;
     snapshot=null;
     const at=Date.now(),rows={...readObject(storage())},ids=[q.id,key(q)].filter(Boolean);
     for(const id of ids)rows[id]=at;
-    const pruned=Object.fromEntries(Object.entries(rows)
-      .filter(([,v])=>Number.isFinite(v)&&at-v<7*DAY)
-      .sort((a,b)=>b[1]-a[1]).slice(0,MAX));
+    // This is also the durable seen index. Expiring it makes old prompts look new.
+    const pruned=Object.fromEntries(Object.entries(rows).filter(([,v])=>Number.isFinite(v)));
     try{localStorage.setItem(storage(),JSON.stringify(pruned))}catch{}
     // Reuse the existing owner-only exposure table/queue; do not reset answer history.
     window.ENGOPLAY?.recordPresented?.(ids,new Date(at).toISOString());
   }
   const wordQuestion=w=>({id:w.id,prompt:'vocabulary '+normalize(w.phrase),answer:normalize(w.phrase)});
-  function recentWord(w){
-    if(recent(wordQuestion(w)))return true;
+  function wordLast(w){
     const phrase=wordKey(w.phrase),prior=readObject('seragSentenceV21:'+owner())[phrase];
-    const at=Math.max(Date.parse(prior?.at||'')||0,Date.parse(prior?.last_presented_at||'')||0);
-    if(at>0&&Date.now()-at<DAY)return true;
+    let at=Math.max(last(wordQuestion(w)),Date.parse(prior?.at||'')||0,Date.parse(prior?.last_presented_at||'')||0);
     const remote=activity();
-    return ['recognition:','sentence:','application:','match:'].some(prefix=>{
-      const last=Number(remote?.lastAnsweredAt?.get?.(prefix+phrase))||0;
-      return last>0&&Date.now()-last<DAY;
-    });
+    for(const prefix of ['recognition:','sentence:','application:','match:'])at=Math.max(at,Number(remote?.lastAnsweredAt?.get?.(prefix+phrase)??remote?.lastAnsweredAt?.[prefix+phrase])||0);
+    return at;
   }
-  window.SERAG_PRACTICE_STATE={key,recent,remember,recentWord,rememberWord(w){remember(wordQuestion(w))}};
+  function recentWord(w,now=Date.now()){const at=wordLast(w);return at>0&&now-at<DAY}
+  window.SERAG_PRACTICE_STATE={key,last,pool,recent,remember,wordLast,recentWord,rememberWord(w){remember(wordQuestion(w))}};
 })();

@@ -132,9 +132,6 @@
     const answered=remote.answeredKeys instanceof Set?remote.answeredKeys:new Set(remote.answeredKeys||[]);
     const remoteLast=remote.lastAnsweredAt;
     const lastAt=id=>Math.max(lastSeen.get(id)||0,remoteLast instanceof Map?Number(remoteLast.get(id))||0:Number(remoteLast?.[id])||0);
-    const recentIds=new Set((state?.attempts||[]).slice(-10).map(attempt=>String(attempt.id||'')).filter(Boolean));
-    const remoteRecent=remoteLast instanceof Map?[...remoteLast.entries()]:Object.entries(remoteLast||{});
-    remoteRecent.sort((a,b)=>(Number(b[1])||0)-(Number(a[1])||0)).slice(0,10).forEach(([id])=>recentIds.add(String(id)));
     const stats=new Map();
     const remoteQuestionStats=remote.questionStats instanceof Map?remote.questionStats:new Map(Object.entries(remote.questionStats||{}));
     // Synced history is the cross-device source of truth; local attempts fill gaps while sync is pending.
@@ -148,27 +145,24 @@
       stats.set(String(attempt.id),row);
     }
     const errorRate=id=>{const row=stats.get(String(id));return row?.total?row.wrong/row.total:0};
-    return {lastSeen,answered,lastAt,recentIds,errorRate,cards:state?.cards||{},salt:String((state?.attempts||[]).length)+(state?.sessions||[]).length};
+    return {lastSeen,answered,lastAt,errorRate,cards:state?.cards||{},salt:String((state?.attempts||[]).length)+(state?.sessions||[]).length};
   }
-  function practicePool(list,now=Date.now(),history=questionHistory()){
-    const fresh=[],due=[],cooldown=[];
-    for(const q of list){
-      if(!q?.id)continue;
-      const card=history.cards[q.id],last=history.lastAt(q.id),seen=!!card||history.lastSeen.has(q.id)||history.answered.has(q.id);
-      const isDue=(card&&Number(card.due)<=now)||(!card&&last&&now-last>=86400000);
-      // Keep recent due questions as a fallback, but never use a future-scheduled card early.
-      if(last&&now-last<86400000)continue;
-      if(history.recentIds.has(String(q.id))){if(!card||isDue)cooldown.push(q);continue}
-      if(!seen){fresh.push(q);continue}
-      if(isDue)due.push(q);
-    }
-    const orderedDue=due.sort((a,b)=>history.lastAt(a.id)-history.lastAt(b.id)||hash(a.id+history.salt)-hash(b.id+history.salt));
-    // Due reviews first, then unseen material. Cooldown questions are a last-resort fallback.
-    return [...orderedDue,...fresh,...(orderedDue.length||fresh.length?[]:cooldown)];
+  function practicePool(list,now=Date.now(),history=questionHistory(),allowRepeat=true){
+    const shared=window.SERAG_PRACTICE_STATE;
+    const lastAt=q=>Math.max(history.lastAt(q.id),shared?.last(q)||0);
+    const wasSeen=q=>!!history.cards[q.id]||history.lastSeen.has(q.id)||history.answered.has(q.id);
+    const available=q=>!history.cards[q.id]||Number(history.cards[q.id].due)<=now;
+    if(shared)return shared.pool([...list].sort((a,b)=>history.errorRate(b.id)-history.errorRate(a.id)),{lastAt,wasSeen,available,allowRepeat},now);
+    // Compatibility for isolated/legacy embeds without the shared adapter.
+    const fresh=list.filter(q=>!lastAt(q)&&!wasSeen(q));
+    return fresh.length?fresh:!allowRepeat?[]:list.filter(q=>(!lastAt(q)||now-lastAt(q)>=86400000)&&available(q)).sort((a,b)=>lastAt(a)-lastAt(b)||history.errorRate(b.id)-history.errorRate(a.id));
   }
-  function selectQuestions(list,kind='daily',limit=state?.mode||8){
+  function selectQuestions(list,kind='daily',limit=state?.mode||8,allowRepeat=true){
     const history=questionHistory(),now=Date.now();
-    const candidates=kind==='review'?list:practicePool(list,now,history).filter(q=>!window.SERAG_PRACTICE_STATE?.recent(q,now));
+    const candidates=kind==='review'?list:practicePool(list,now,history,allowRepeat);
+    // After exhaustion preserve oldest-first rotation; topic/error ranking must not
+    // repeatedly pull the same due items ahead of the rest of the bank.
+    if(kind!=='review'&&candidates.some(q=>history.lastAt(q.id)||history.cards[q.id]||history.answered.has(q.id)||window.SERAG_PRACTICE_STATE?.last(q)))return candidates.slice(0,limit);
     const priority=q=>(history.cards[q.id]&&Number(history.cards[q.id].due)<=now)||(!history.cards[q.id]&&history.lastAt(q.id)&&now-history.lastAt(q.id)>=86400000)?0:1;
     const ordered=[...candidates].sort((a,b)=>priority(a)-priority(b)||history.errorRate(b.id)-history.errorRate(a.id)||(history.lastSeen.get(a.id)||0)-(history.lastSeen.get(b.id)||0)||hash(a.id+history.salt)-hash(b.id+history.salt));
     if(kind!=='daily')return ordered.slice(0,limit);
@@ -195,15 +189,10 @@
     if(kind==='phrases')list=window.SERAG_PHRASES_V16?.questions||[];
     if(kind==='level')list=list.filter(q=>(q.level||lesson(q.topic)?.level)===state.level);
     if(kind==='context'||kind==='exam')list=(window.SERAG_CONTEXT_V15?.questions||[]).filter(q=>q.level===state.level&&(kind==='exam'||q.theme===state.examTheme));
-    if(kind==='context'||kind==='exam'){const eligible=list.filter(q=>!state.cards[q.id]||state.cards[q.id].due<=Date.now());if(eligible.length&&kind==='context')list=eligible;list.sort((a,b)=>hash(a.id+String(state.attempts.length))-hash(b.id+String(state.attempts.length)));}
     if(kind==='placement')list=questions().filter(q=>q.id.startsWith('lesson:')).slice(0,18);
     if(kind==='daily')list=list.filter(q=>!['zero-first-conditionals','second-conditional','third-conditional','mixed-conditionals','condition-linkers'].includes(q.topic));
     if(kind==='daily'||kind==='topic'||kind==='level'){
-      const eligible=list.filter(q=>!state.cards[q.id]||state.cards[q.id].due<=Date.now());
-      if(eligible.length)list=eligible;
-      const priorities=weak().map(([id])=>id);
-      list.sort((a,b)=>{const pa=priorities.indexOf(a.topic),pb=priorities.indexOf(b.topic);return (pa<0?999:pa)-(pb<0?999:pb)});
-      // Level practice uses the same fresh/due filtering and topic interleaving as daily practice.
+      // Normal practice exhausts unseen material before returning to old questions.
       list=selectQuestions(list,kind==='topic'?'topic':'daily',kind==='topic'?list.length:state.mode);
     }
     if(['context','exam','phrases'].includes(kind))list=selectQuestions(list,'daily',kind==='exam'?12:list.length);
@@ -212,7 +201,7 @@
   function restoreAnswer(){const a=session.answers[session.index];session.answered=!!a;session.answer=a?.answer;selected=null}
   function hash(s){return [...s].reduce((n,c)=>(n*31+c.charCodeAt(0))>>>0,0)}
   function buttons(){return `<div class="ea12-actions"><button class="ea12-btn primary" data-ea-start="daily">Start grammar practice</button><button class="ea12-btn" data-ea-start="review">Review due (${due().length})</button><button class="ea12-btn" data-ea-start="placement">Grammar level check</button></div>`}
-  function todayHTML(){return `<div class="ea14-question-head"><div><small>START HERE · Question hub</small><h3>Choose a practice mode and start with one question</h3><p>All grammar questions in one place, with feedback and answer history.</p></div><span class="ea14-count">${questions().length}<small>questions</small></span></div>${session?sessionHTML():`<div class="ea14-training"><button class="ea14-start" data-ea-start="daily"><b>Mixed practice</b><span>${state.mode} questions · Unanswered and due questions first</span></button><button class="ea14-start" data-ea-start="level"><b>${state.level} practice</b><span>Questions from the selected level</span></button><button class="ea14-start" data-ea-start="review"><b>Review mistakes</b><span>${due().length} questions due</span></button></div><div class="ea14-controls"><label>Level <select data-ea-level>${['B1','B2','C1','C2'].map(l=>`<option ${state.level===l?'selected':''}>${l}</option>`).join('')}</select></label><label>Session size <select data-ea-mode>${[5,8,12].map(n=>`<option value="${n}" ${state.mode===n?'selected':''}>${n} questions</option>`).join('')}</select></label><button class="ea12-btn" data-ea-tab="bank">Choose a specific topic</button><button class="ea12-btn" data-ea-tab="history">Answer history</button></div>`}`}
+  function todayHTML(){return `<div class="ea14-question-head"><div><small>START HERE · Question hub</small><h3>Choose a practice mode and start with one question</h3><p>All grammar questions in one place, with feedback and answer history.</p></div><span class="ea14-count">${questions().length}<small>questions</small></span></div>${session?sessionHTML():`<div class="ea14-training"><button class="ea14-start" data-ea-start="daily"><b>Mixed practice</b><span>${state.mode} questions · Unseen questions before repeats</span></button><button class="ea14-start" data-ea-start="level"><b>${state.level} practice</b><span>Questions from the selected level</span></button><button class="ea14-start" data-ea-start="review"><b>Review mistakes</b><span>${due().length} questions due</span></button></div><div class="ea14-controls"><label>Level <select data-ea-level>${['B1','B2','C1','C2'].map(l=>`<option ${state.level===l?'selected':''}>${l}</option>`).join('')}</select></label><label>Session size <select data-ea-mode>${[5,8,12].map(n=>`<option value="${n}" ${state.mode===n?'selected':''}>${n} questions</option>`).join('')}</select></label><button class="ea12-btn" data-ea-tab="bank">Choose a specific topic</button><button class="ea12-btn" data-ea-tab="history">Answer history</button></div>`}`}
   function levelsHTML(){const current=state.level||'B1',desc={B1:'Use grammar confidently in everyday situations.',B2:'Explain opinions and discuss possibilities.',C1:'Express ideas precisely and connect arguments.',C2:'Use precise and flexible language.'},list=lessons().filter(g=>g.level===current),part=state.levelPart||'grammar',themes=window.SERAG_CONTEXT_V15?.themes||[];return `<div class="ea14-level-tabs">${Object.keys(desc).map(l=>`<button data-ea-level-pick="${l}" aria-pressed="${current===l}"><b>${l}</b><span>${desc[l]}</span></button>`).join('')}</div><div class="ea14-section-head"><div><h3>${current} learning path</h3><p>Review grammar, then apply it to a different topic. This is a practice path, not a CEFR certification.</p></div></div><nav class="ea15-parts" aria-label="Level sections"><button data-ea-level-part="grammar" aria-pressed="${part==='grammar'}"><b>01 · Grammar</b><span>${list.length} lessons · Explanations and examples</span></button><button data-ea-level-part="exams" aria-pressed="${part==='exams'}"><b>02 · Questions & exams</b><span>8 topics · Contextual practice and mixed exams</span></button></nav>${part==='grammar'?`<div class="ea14-lesson-grid">${list.map((g,i)=>`<button class="ea12-node" data-ea-lesson="${g.id}"><small>Lesson ${i+1} · ${g.level}</small><b>${esc(g.title)}</b><span class="ea12-en">${esc(g.title)}</span></button>`).join('')}</div><details class="ea14-foundation"><summary>Review the foundations? A1 / A2</summary><div class="ea14-lesson-grid">${lessons().filter(g=>['A1','A2'].includes(g.level)).map(g=>`<button class="ea12-node" data-ea-lesson="${g.id}"><b>${esc(g.title)}</b><small>${g.level} · ${esc(g.title)}</small></button>`).join('')}</div></details>`:`<div class="ea15-exam-hero"><div><small>LEVEL ${current} · MIXED CHALLENGE</small><h3>Real-life exam</h3><p>12 questions across different topics, applying ${current} grammar in context. Review feedback after each answer and see your score at the end.</p></div><button class="ea12-btn primary" data-ea-start="exam">Start exam</button></div><div class="ea14-lesson-grid">${themes.map(t=>`<article class="ea12-card"><small>${esc(t.title)}</small><h4>${esc(t.title)}</h4><p>${esc(t.description)}</p><small>3 questions · Level ${current}</small><button class="ea12-btn" data-ea-context="${t.id}">Practise this topic</button></article>`).join('')}</div><p>Original scenarios inspired by everyday life, not copied news. Unanswered questions appear first, and your answers remain in your review history.</p>`}`}
   function libraryHTML(){return `<div class="ea14-section-head"><div><h3>Grammar library</h3><p>Search by topic or follow your level path.</p></div><button class="ea12-btn" data-ea-tab="levels">B1–C2 learning path</button></div><label class="ea14-search">Search grammar topics <input data-ea-search placeholder="e.g. conditionals, perfect tenses, negatives" value="${esc(state.lessonSearch||'')}"></label><div class="ea14-lesson-grid">${lessons().filter(g=>[g.title,g.titleAr,g.summary].join(' ').toLowerCase().includes((state.lessonSearch||'').toLowerCase())).map(g=>`<button class="ea12-node" data-ea-lesson="${g.id}"><small>${g.level||'B1'}</small><b>${esc(g.title)}</b><span class="ea12-en">${esc(g.title)}</span></button>`).join('')||'<p>No results. Try another search.</p>'}</div>`}
   const sections=[['levels','01','B1–C2 learning path','Learn by level'],['grammar','02','Grammar','All lessons and search'],['examples','03','Grammar examples','Search examples by topic'],['maps','04','Grammar maps','Connect grammar topics'],['words','05','Vocabulary','Daily words and vocabulary bank'],['sentences','06','Sentence library','12,574 searchable sentence pairs'],['corrections','07','Mistake bank','Correct sentences and understand the reason'],['reading','08','Reading','Articles and reading comprehension'],['writing','09','Writing / IELTS','Writing practice and review'],['practice','10','Speaking & video','Practice and recording'],['voice','11','Voice library','Record, transcribe and review'],['progress','12','Progress & library','Results and saved items']];
@@ -273,7 +262,7 @@
   document.addEventListener('click',e=>{const b=e.target.closest('[data-ea-external-topic]');if(b&&root){state.practiceTopic=b.dataset.eaExternalTopic;selected=null;save();start('topic');root.scrollIntoView({block:'start',behavior:'smooth'})}});
   const timer=setInterval(()=>{if(mount()){organizeLegacy();disablePaid();if(owner!==uid()){stop();load();render()} }},1200);window.addEventListener('pagehide',()=>{stop();if(audioUrl)URL.revokeObjectURL(audioUrl);clearInterval(timer)});
   function homeState(){if(!state||owner!==uid())load();return state}
-  function homeQuestion(){homeState();if(window.ENGOPLAY?.isReady===false)return null;const pool=questions().filter(q=>q.options.length<=3&&(q.level||lesson(q.topic)?.level)===state.level);return selectQuestions(pool,'daily',1)[0]||null}
+  function homeQuestion(){homeState();if(window.ENGOPLAY?.isReady===false)return null;const pool=questions().filter(q=>(q.level||lesson(q.topic)?.level)===state.level);return selectQuestions(pool,'daily',1)[0]||null}
   function homeAnswer(id,answer){homeState();const q=questions().find(x=>x.id===id);if(!q||!q.options.includes(answer))return null;record(q,answer);return {correct:answer===q.answer,answer:q.answer,explanation:q.explanation}}
   function openFromHome(section='today',kind=null){if(!mount())return false;homeState();stop();if(!['play','overview'].includes(section)&&session?.kind==='engoplay')session=null;tab=section;selected=null;render();if(kind)start(kind);return true}
   function setLevel(value){if(!['B1','B2','C1','C2'].includes(value))return;homeState();state.level=value;save();root?.querySelectorAll?.('[data-ea-level-pick]')?.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.eaLevelPick===value)))}
