@@ -219,24 +219,6 @@ const rows=[
     "answerReview": "independently-checked"
   },
   {
-    "id": "telegram:message12341",
-    "level": "B1",
-    "topic": "questions",
-    "prompt": "What is the past tense of the regular verb \"walk\"?",
-    "options": [
-      "Walks",
-      "Walked",
-      "Walking",
-      "Walk"
-    ],
-    "answer": "Walked",
-    "explanation": "Compare the grammar, meaning, and natural usage of each option. Answer: Walked.",
-    "source": "telegram-english-courses",
-    "sourceMessageId": "message12341",
-    "sourceFile": "messages12.html",
-    "answerReview": "independently-checked"
-  },
-  {
     "id": "telegram:message3359",
     "level": "B1",
     "topic": "comparatives",
@@ -389,24 +371,6 @@ const rows=[
     "source": "telegram-english-courses",
     "sourceMessageId": "message3866",
     "sourceFile": "messages4.html",
-    "answerReview": "independently-checked"
-  },
-  {
-    "id": "telegram:message17238",
-    "level": "B1",
-    "topic": "questions",
-    "prompt": "They are ________ for their final exams now.",
-    "options": [
-      "prepare",
-      "prepared",
-      "prepares",
-      "preparing"
-    ],
-    "answer": "preparing",
-    "explanation": "Compare the grammar, meaning, and natural usage of each option. Answer: preparing.",
-    "source": "telegram-english-courses",
-    "sourceMessageId": "message17238",
-    "sourceFile": "messages17.html",
     "answerReview": "independently-checked"
   },
   {
@@ -998,24 +962,6 @@ const rows=[
     "answerReview": "independently-checked"
   },
   {
-    "id": "telegram:message17261",
-    "level": "B1",
-    "topic": "vocabulary",
-    "prompt": "Which word is spelled CORRECTLY?",
-    "options": [
-      "Dictionery",
-      "Dictionry",
-      "Dictionary",
-      "Dictionari"
-    ],
-    "answer": "Dictionary",
-    "explanation": "Learn the expression and its meaning in context. Answer: Dictionary.",
-    "source": "telegram-english-courses",
-    "sourceMessageId": "message17261",
-    "sourceFile": "messages17.html",
-    "answerReview": "independently-checked"
-  },
-  {
     "id": "telegram:message11936",
     "level": "B1",
     "topic": "conditionals",
@@ -1205,24 +1151,6 @@ const rows=[
     "explanation": "Learn the expression and its meaning in context. Answer: Throw.",
     "source": "telegram-english-courses",
     "sourceMessageId": "message12492",
-    "sourceFile": "messages12.html",
-    "answerReview": "independently-checked"
-  },
-  {
-    "id": "telegram:message12342",
-    "level": "B1",
-    "topic": "questions",
-    "prompt": "Choose the sentence that is a question:",
-    "options": [
-      "She likes ice cream.",
-      "Does she like ice cream?",
-      "She is liking ice cream.",
-      "She liked ice cream."
-    ],
-    "answer": "Does she like ice cream?",
-    "explanation": "Compare the grammar, meaning, and natural usage of each option. Answer: Does she like ice cream?.",
-    "source": "telegram-english-courses",
-    "sourceMessageId": "message12342",
     "sourceFile": "messages12.html",
     "answerReview": "independently-checked"
   },
@@ -1526,24 +1454,6 @@ const rows=[
     "answerReview": "independently-checked"
   },
   {
-    "id": "telegram:message12501",
-    "level": "B1",
-    "topic": "questions",
-    "prompt": "You have to take _ of your younger brother. (A2)",
-    "options": [
-      "look after",
-      "care",
-      "watch",
-      "know"
-    ],
-    "answer": "care",
-    "explanation": "Compare the grammar, meaning, and natural usage of each option. Answer: care.",
-    "source": "telegram-english-courses",
-    "sourceMessageId": "message12501",
-    "sourceFile": "messages12.html",
-    "answerReview": "independently-checked"
-  },
-  {
     "id": "telegram:message3046",
     "level": "B2",
     "topic": "questions",
@@ -1558,24 +1468,6 @@ const rows=[
     "source": "telegram-english-courses",
     "sourceMessageId": "message3046",
     "sourceFile": "messages3.html",
-    "answerReview": "independently-checked"
-  },
-  {
-    "id": "telegram:message15585",
-    "level": "B1",
-    "topic": "questions",
-    "prompt": "Which of the following is a countable noun?",
-    "options": [
-      "Water",
-      "Sand",
-      "Idea",
-      "information"
-    ],
-    "answer": "Idea",
-    "explanation": "Compare the grammar, meaning, and natural usage of each option. Answer: Idea.",
-    "source": "telegram-english-courses",
-    "sourceMessageId": "message15585",
-    "sourceFile": "messages15.html",
     "answerReview": "independently-checked"
   },
   {
@@ -1611,24 +1503,6 @@ const rows=[
     "explanation": "Use the appropriate conditional tense for the hypothetical or real situation. Answer: were.",
     "source": "telegram-english-courses",
     "sourceMessageId": "message17665",
-    "sourceFile": "messages17.html",
-    "answerReview": "independently-checked"
-  },
-  {
-    "id": "telegram:message17076",
-    "level": "B1",
-    "topic": "questions",
-    "prompt": "I have ___ my homework.",
-    "options": [
-      "do",
-      "does",
-      "did",
-      "done"
-    ],
-    "answer": "done",
-    "explanation": "Compare the grammar, meaning, and natural usage of each option. Answer: done.",
-    "source": "telegram-english-courses",
-    "sourceMessageId": "message17076",
     "sourceFile": "messages17.html",
     "answerReview": "independently-checked"
   },
@@ -1951,24 +1825,6 @@ const rows=[
     "explanation": "Learn the expression and its meaning in context. Answer: Bundle up..",
     "source": "telegram-english-courses",
     "sourceMessageId": "message16961",
-    "sourceFile": "messages17.html",
-    "answerReview": "independently-checked"
-  },
-  {
-    "id": "telegram:message17036",
-    "level": "B1",
-    "topic": "vocabulary",
-    "prompt": "What is the synonym of 'happy'?",
-    "options": [
-      "Sad",
-      "Joyful",
-      "Angry",
-      "Tired"
-    ],
-    "answer": "Joyful",
-    "explanation": "Learn the expression and its meaning in context. Answer: Joyful.",
-    "source": "telegram-english-courses",
-    "sourceMessageId": "message17036",
     "sourceFile": "messages17.html",
     "answerReview": "independently-checked"
   },
