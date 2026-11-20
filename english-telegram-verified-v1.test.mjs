@@ -18,7 +18,7 @@ test('reviewed Telegram batch is valid, unique and source-traceable',()=>{
   assert.equal(rows.length,104);
   assert.equal(new Set(rows.map(q=>q.id)).size,rows.length);
   for(const q of rows){
-    assert.match(q.id,/^telegram:message\\d+$/);
+    assert.match(q.id,/^telegram:message\d+$/);
     assert.ok(['B1','B2'].includes(q.level));
     assert.ok(typeof q.prompt==='string'&&q.prompt.length>12);
     assert.ok(Array.isArray(q.options)&&q.options.length>=2);
@@ -26,7 +26,7 @@ test('reviewed Telegram batch is valid, unique and source-traceable',()=>{
     assert.ok(q.explanation.includes(q.answer));
     assert.ok(q.sourceFile.startsWith('messages')&&q.sourceFile.endsWith('.html'));
     assert.equal(q.sourceMessageId,q.id.slice('telegram:'.length));
-    assert.ok(!/[\\u0600-\\u06ff]/u.test(q.prompt));
+    assert.ok(!/[\u0600-\u06ff]/u.test(q.prompt));
   }
 });
 
