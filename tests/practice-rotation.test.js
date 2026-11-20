@@ -129,3 +129,15 @@ test('a small builder or vocabulary bank never recycles while mixed grammar rema
  assert.equal(shown.length,2,'do not top up a new grammar batch with old words or builders');
  assert.ok(shown.every(q=>q.kind==='grammar'));
 });
+
+test('after mixed exhaustion younger builders cannot displace older grammar or vocabulary',()=>{
+ const h=harness();h.load('english-content-v9.js');h.load('english-academy-v12.js');h.load('word-practice-v21.js');
+ const grammar=rows(12),builder={...rows(1)[0],id:'younger-builder',tokens:['We','can','practise','this','sentence']};
+ h.c.SERAG_ENGLISH_EXPANSION_V1={questions:grammar};h.c.SERAG_ACADEMY_V12.homeState();
+ for(const q of grammar)h.c.SERAG_PRACTICE_STATE.remember(q);
+ h.advance(10);for(const w of h.c.SERAG_WORD_PRACTICE.items())h.c.SERAG_PRACTICE_STATE.rememberWord(w);
+ h.advance(10);h.c.SERAG_PRACTICE_STATE.remember(builder);h.advance(7);
+ const wp=h.c.SERAG_WORD_PRACTICE;wp.startJourney(grammar.map(q=>q.id),'Mixed review',[builder],true);
+ const picked=[];while(wp.currentQuestion()){picked.push(wp.currentQuestion());wp.reveal();wp.next()}
+ assert.equal(picked.length,2);assert.ok(picked.every(q=>q.kind==='grammar'),'oldest-first applies across exercise types after the first full pass');
+});

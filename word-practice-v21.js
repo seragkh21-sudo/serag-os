@@ -111,6 +111,19 @@
    // A small exercise family must not start repeating while another part of this
    // mixed session still has unused material. Shorter sessions are intentional.
    if(unseenWords.length||unseenGrammar.length||unseenBuild.length){pool=unseenWords;grammar=unseenGrammar;builders=unseenBuild}
+   else{
+    // After exhaustion compare ages across families too, so a tiny builder bank
+    // cannot cycle repeatedly ahead of older words or grammar.
+    const answered=q=>Number(lastAt?.get?.(q.id)??lastAt?.[q.id])||0;
+    const localAttempts=new Map((window.SERAG_ACADEMY_V12?.homeState?.().attempts||[]).map(q=>[q.id,Number(q.at)||0]));
+    const at=q=>Math.max(shared.last(q),answered(q),localAttempts.get(q.id)||0);
+    grammar=window.SERAG_ACADEMY_V12?.selectQuestions?.(grammar,'daily',grammar.length)||[];
+    builders=shared.pool(sentenceBuild,{lastAt:at,wasSeen:q=>activity.answeredKeys?.has?.(q.id),available:q=>!answered(q)||Date.now()-answered(q)>=(Number(activity.questionStats?.get?.(q.id)?.correct)>0?3:1)*86400000});
+    const ranked=[...pool.map(q=>({kind:'word',q,at:Math.max(shared.wordLast(q),Date.parse(status(q.id)?.updated_at||'')||0)})),...grammar.map(q=>({kind:'grammar',q,at:at(q)})),...builders.map(q=>({kind:'build',q,at:at(q)}))].sort((a,b)=>a.at-b.at).slice(0,dailyMode?8:10);
+    const allowed=kind=>new Set(ranked.filter(row=>row.kind===kind).map(row=>row.q));
+    const words=allowed('word'),questions=allowed('grammar'),sentences=allowed('build');
+    pool=pool.filter(q=>words.has(q));grammar=grammar.filter(q=>questions.has(q));builders=builders.filter(q=>sentences.has(q));
+   }
   }
   session={owner:uid(),title,grammarIds,sentenceBuild,dailyMode,list:buildRound(pool,grammar,4,builders,dailyMode),index:0,hints:0,revealed:false,done:false,wrong:false,lastWrong:'',input:'',buildSelected:[],matchSelectedWord:-1,matchedPairs:[],matchWrong:false,matchMisses:0,matchError:null,correct:0,applicationAdded:[]};markPresented(session.list);paint()
  }
