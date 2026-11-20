@@ -8,7 +8,7 @@ function dailyQuiz(){
   const context={console,Date,Math,document:{querySelector(){return null},addEventListener(){}},localStorage:{getItem:k=>storage.get(k)||null,setItem:(k,v)=>storage.set(k,v)},setInterval(){return 0},clearInterval(){}};
   context.window=context;
   vm.createContext(context);
-  for(const file of ['english-content-v9.js','english-vocab-v24.js','english-learning-v6.js'])vm.runInContext(fs.readFileSync(file,'utf8'),context,{filename:file});
+  for(const file of ['english-practice-state-v1.js','english-content-v9.js','english-vocab-v24.js','english-learning-v6.js'])vm.runInContext(fs.readFileSync(file,'utf8'),context,{filename:file});
   return context.SERAG_DAILY_QUIZ_V6;
 }
 
@@ -37,7 +37,8 @@ test('daily quiz reads the owner-scoped attempt table and sends stable question 
   assert.match(source,/from\('english_quiz_attempts'\)/);
   assert.match(source,/eq\('user_id',owner\)/);
   assert.match(source,/eq\('source','daily_quiz'\)/);
-  assert.match(source,/order\('created_at',\{ascending:false\}\)\.limit\(10\)/);
+  assert.match(source,/order\('created_at',\{ascending:true\}\)\.order\('id',\{ascending:true\}\)\.range\(offset,offset\+499\)/);
+  assert.doesNotMatch(source,/while\(recentQuizKeys.size>10\)/);
   assert.match(source,/data-question-key=/);
   assert.match(sync,/question_key:button\.dataset\.questionKey/);
   assert.doesNotMatch(source,/gameIndex=\(gameIndex\+1\)%10/);

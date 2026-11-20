@@ -82,7 +82,7 @@ test('EngoPlay cannot report ready before remote history arrives or when it fail
   c.document.readyState='loading';c.Intl=Intl;c.crypto={randomUUID:()=> 'event-id'};
   c.sb={rpc:async()=>({data:[],error:null}),from(table){
    let patch;
-   const q={select(){return q},eq(){return q},order(){return q},limit(){return q},maybeSingle(){return q},upsert(rows){patch=rows;if(table==='engoplay_question_exposures')exposureWrites.push(rows);return q},
+   const q={select(){return q},eq(){return q},order(){return q},limit(){return q},range(){return q},maybeSingle(){return q},upsert(rows){patch=rows;if(table==='engoplay_question_exposures')exposureWrites.push(rows);return q},
     then(resolve,reject){
      const value=patch?Promise.resolve({data:[],error:null}):table==='engoplay_activity'?history:Promise.resolve({data:table==='profiles'?{username:'tester',display_name:'Tester',avatar_id:'curly',onboarding_completed_at:'2026-01-01'}:[],error:null});
      return value.then(resolve,reject);

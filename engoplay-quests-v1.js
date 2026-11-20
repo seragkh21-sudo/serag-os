@@ -113,19 +113,19 @@
     if (!bank || typeof bank.getExamples !== 'function') return [];
     try { return (bank.getExamples() || []).filter(isPracticeExample); } catch (_) { return []; }
   }
-  function getDailyPracticeQuestions(level, limit) {
+  function getDailyPracticeQuestions(level, limit, all) {
     var bundle = getState(), rows = bundle.rows;
     var wanted = String(level || 'B1');
     var eligible = rows.filter(function (row) { return row.level === wanted; });
-    if (!eligible.length && wanted === 'C1') eligible = rows.filter(function (row) { return row.level === 'B2'; });
-    if (!eligible.length && wanted === 'C2') eligible = rows.filter(function (row) { return row.level === 'B2'; });
-    if (!eligible.length) eligible = rows.filter(function (row) { return row.level === 'B1'; });
+    if (!all && !eligible.length && wanted === 'C1') eligible = rows.filter(function (row) { return row.level === 'B2'; });
+    if (!all && !eligible.length && wanted === 'C2') eligible = rows.filter(function (row) { return row.level === 'B2'; });
+    if (!all && !eligible.length) eligible = rows.filter(function (row) { return row.level === 'B1'; });
     var stats = sharedProgress() && window.ENGOPLAY && typeof window.ENGOPLAY.stats === 'function' ? window.ENGOPLAY.stats() : {};
     var answered = stats && stats.answeredToday instanceof Set ? Array.from(stats.answeredToday) : (stats && Array.isArray(stats.answeredToday) ? stats.answeredToday : []);
     var lastAt = stats && stats.lastAnsweredAt instanceof Map ? stats.lastAnsweredAt : new Map();
     var questionStats = stats && stats.questionStats instanceof Map ? stats.questionStats : new Map();
     var now = Date.now();
-    eligible = eligible.filter(function (row) {
+    if (!all) eligible = eligible.filter(function (row) {
       var key = 'sentence-builder:' + String(row.id), last = Number(lastAt.get(key)) || 0;
       if (!last) return true;
       var result = questionStats.get(key), cooldown = Number(result && result.correct) > 0 ? 3 * 86400000 : 86400000;
@@ -135,8 +135,8 @@
       var prefix = 'sentence-builder:';
       return String(id).indexOf(prefix) === 0 ? String(id).slice(prefix.length) : String(id);
     }));
-    var ids = pickDailyExamples(eligible, bundle.owner, bundle.state.daily.date, excluded);
-    var count = Math.max(1, Math.min(3, Number(limit) || 2));
+    var ids = all ? eligible.map(function (row) { return String(row.id); }) : pickDailyExamples(eligible, bundle.owner, bundle.state.daily.date, excluded);
+    var count = all ? ids.length : Math.max(1, Math.min(3, Number(limit) || 2));
     return ids.slice(0, count).map(function (id) {
       var row = eligible.find(function (item) { return String(item.id) === String(id); });
       if (!row) return null;
@@ -577,6 +577,7 @@
     recordChallengeAttempt: recordChallengeAttempt,
     injectQuestMarkup: function (html) { return html; },
     getDailyPracticeQuestions: getDailyPracticeQuestions,
+    getPracticeQuestions: function (level) { return getDailyPracticeQuestions(level, null, true); },
     recordPracticeAttempt: recordPracticeAttempt
   };
 

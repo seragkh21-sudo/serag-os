@@ -44,7 +44,7 @@ test('every new vocabulary row has a complete existing-schema tuple and unique n
     assert.ok(row.every(value => typeof value === 'string' && value.trim()));
     assert.ok(row[1].length >= 2, `Missing Arabic meaning for ${row[0]}`);
     assert.ok(row[3].split(/\s+/).length >= 5, `Context sentence too short for ${row[0]}`);
-    assert.ok(['Everyday','Work & Office','Marketing & Sales','Design & Motion'].includes(row[2]), `Unexpected category: ${row[2]}`);
+    assert.ok(['Everyday','Work & Office','Marketing & Sales','Design & Motion','Grammar & Everyday'].includes(row[2]), `Unexpected category: ${row[2]}`);
     assert.ok(['neutral','natural','formal','technical'].includes(row[4]), `Unexpected register: ${row[4]}`);
   }
   const all = window.SERAG_ENGLISH_V9.vocabulary.map(row => norm(row[0]));
