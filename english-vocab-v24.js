@@ -5,10 +5,10 @@
   'use strict';
   const additions = [
     ["can't believe","لا أستطيع أن أصدق / من الصعب تصديق","Everyday","I can't believe the client approved the concept so quickly.","natural"],
-    ["be going to","سوف / يخطط أو يتوقع حدوث شيء قريبًا","Grammar & Everyday","I am going to review the final files tonight.","natural"],
+    ["be going to","سوف / يخطط أو يتوقع حدوث شيء قريبًا","Everyday","I am going to review the final files tonight.","natural"],
     ["steal","يسرق","Everyday","Someone tried to steal my backpack on the bus.","neutral"],
     ["stolen","مُسرَق / تمّت سرقته","Everyday","My wallet was stolen on the way home.","neutral"],
-    ["have something stolen","يتعرّض لسرقة شيء / have + object + past participle","Grammar & Everyday","I do not want to have my files stolen from the shared drive.","natural"],
+    ["have something stolen","يتعرّض لسرقة شيء / have + object + past participle","Everyday","I do not want to have my files stolen from the shared drive.","natural"],
     ['clarify','يوضّح','Work & Office','Could you clarify which version the client approved?','neutral'],
     ['align on','نتفق على / نوحّد فهمنا بشأن','Work & Office','Let’s align on the deadline before we start.','natural'],
     ['keep someone posted','يُبقي شخصًا على اطلاع','Work & Office','I’ll keep you posted when the files are ready.','natural'],
