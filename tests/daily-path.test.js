@@ -21,7 +21,7 @@ test('daily plan uses actual history, exposes one primary action and explains th
  assert.equal(plan.model().answers,2);
  assert.equal(plan.model().action,'Start today’s practice');
  assert.equal((plan.html().match(/data-ep-daily/g)||[]).length,1);
- assert.match(plan.html(),/Recall comes after other questions/);
+ assert.match(plan.html(),/separate recall session/);
  c.ENGOPLAY.stats=()=>({today:{answers:5,goal:5}});
  assert.equal(plan.model().action,'Start optional practice');
  c.ENGOPLAY.isReady=false;

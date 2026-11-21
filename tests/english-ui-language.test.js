@@ -3,6 +3,10 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 
 const uiFiles = [
+  'english-skill-evidence-v1.js',
+  'english-skill-evidence-v1.css',
+  'english-daily-path-v1.js',
+  'english-daily-path-v1.css',
   'engoplay-v19.js',
   'engoplay-quests-v1.js',
   'word-practice-v21.js',
