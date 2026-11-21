@@ -1,0 +1,895 @@
+{
+  "batch_id": "batch-003",
+  "sources": [
+    {
+      "id": "src-01",
+      "title": "English grammar in use red book.pdf",
+      "unreadable_pages": [],
+      "readability_status": "not_independently_verified"
+    },
+    {
+      "id": "src-02",
+      "title": "collins Intermediate grammar.pdf",
+      "unreadable_pages": [],
+      "readability_status": "not_independently_verified"
+    },
+    {
+      "id": "src-03",
+      "title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+      "unreadable_pages": [],
+      "readability_status": "not_independently_verified"
+    },
+    {
+      "id": "src-04",
+      "title": "Grammar_Dimensions_4th_4_Students_Book.pdf",
+      "unreadable_pages": [],
+      "readability_status": "not_independently_verified"
+    },
+    {
+      "id": "src-05",
+      "title": "Scholastic_Success_with_Grammar_Grade_3_Scholastic_z_library_sk.pdf",
+      "unreadable_pages": [],
+      "readability_status": "not_independently_verified"
+    }
+  ],
+  "units": [
+    {
+      "id": "u6",
+      "title": "Unit 6: Subject, Object and Reflexive Pronouns",
+      "objective": "Choose ordinary formal pronoun case and distinguish reflexive, emphatic and by-pronoun patterns.",
+      "prerequisites": [
+        "u1",
+        "u4",
+        "u5"
+      ],
+      "lessons": [
+        {
+          "id": "u6-l1",
+          "title": "Lesson 6.1: Subject and Object Pronouns",
+          "explanation_en": "Subject pronouns are I, you, he, she, it, we and they. Object pronouns are me, you, him, her, it, us and them. In ordinary formal written English, use a subject form as a clause subject and an object form as a verb object or after a preposition. In a coordinated phrase, temporarily remove the other person to check the case: The director invited John and me becomes The director invited me. Compare He and I wrote the report with The director spoke to him and me. Subject does not always mean an agent doing an action, and an object does not always receive a physical action.",
+          "clarification_ar": "ضمائر الفاعل I وyou وhe وshe وit وwe وthey، وضمائر المفعول me وyou وhim وher وit وus وthem. في الكتابة الرسمية المعتادة نستخدم صيغة المفعول بعد حرف الجر أو كمفعول للفعل. عند العطف احذف الاسم الآخر مؤقتًا للاختبار: invited John and me تصبح invited me. موقع الفاعل لا يعني دائمًا أنه الشخص الذي ينفذ الفعل.",
+          "form": "Subject: He and I wrote the report. | Verb object: invited him and me | After a preposition: with him / between you and me",
+          "examples": [
+            "She presented the results to us.",
+            "The manager invited Mr. Davis and me to the meeting.",
+            "He and I wrote the report.",
+            "Between you and me, the plan needs more work."
+          ],
+          "common_mistakes": [
+            "For the formal object construction, write invited John and me rather than invited John and I.",
+            "For a formal clause subject, use He and I wrote the report. Other case patterns occur in informal speech."
+          ],
+          "source_refs": [
+            {
+              "source_id": "src-01",
+              "source_title": "English grammar in use red book.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "verification_status": "unverified"
+            },
+            {
+              "source_id": "src-02",
+              "source_title": "collins Intermediate grammar.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "verification_status": "unverified"
+            }
+          ],
+          "reported_source_refs": [
+            {
+              "source_title": "English grammar in use red book.pdf",
+              "pdf_page": 122,
+              "printed_page": 122
+            },
+            {
+              "source_title": "collins Intermediate grammar.pdf",
+              "pdf_page": 32,
+              "printed_page": 32
+            }
+          ]
+        },
+        {
+          "id": "u6-l2",
+          "title": "Lesson 6.2: Reflexive Pronouns",
+          "explanation_en": "Reflexive forms are myself, yourself, himself, herself, itself, ourselves, yourselves and themselves. Yourself addresses one person; yourselves addresses more than one. A reflexive can refer back to the subject: The system updates itself. An intensive use adds emphasis: The CEO herself signed the contract; the CEO signed it herself. By ourselves can mean without other people or without outside help, depending on context. In the ordinary object construction Please contact John or me, me is the straightforward formal choice; myself is not a general replacement for me. Reflexive usage has additional patterns and dialect differences beyond this lesson.",
+          "clarification_ar": "الضمائر المنعكسة تشمل yourself للمخاطب المفرد وyourselves للجمع، إلى جانب myself وhimself وherself وitself وourselves وthemselves. تعود على الفاعل أو تؤكد عليه. by ourselves قد تعني بمفردنا أو دون مساعدة خارجية بحسب السياق. في Please contact John or me نختار me كضمير مفعول عادي ولا نستبدله تلقائيًا بـmyself.",
+          "form": "Reflexive: The system updates itself. | Emphasis: The CEO herself signed it. | Alone / without outside help: by ourselves",
+          "examples": [
+            "The system updates itself overnight.",
+            "The engineers completed the audit by themselves.",
+            "The CEO herself signed the contract.",
+            "Please introduce yourself to the group."
+          ],
+          "common_mistakes": [
+            "Use themselves as the standard plural form in these formal exercises; theirselves is a dialectal form, not the target here.",
+            "Do not assume every object referring to a person requires a reflexive. Compare She helped him with She helped herself."
+          ],
+          "source_refs": [
+            {
+              "source_id": "src-01",
+              "source_title": "English grammar in use red book.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "verification_status": "unverified"
+            },
+            {
+              "source_id": "src-03",
+              "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "verification_status": "unverified"
+            }
+          ],
+          "reported_source_refs": [
+            {
+              "source_title": "English grammar in use red book.pdf",
+              "pdf_page": 130,
+              "printed_page": 130
+            },
+            {
+              "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+              "pdf_page": 162,
+              "printed_page": 162
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "u7",
+      "title": "Unit 7: Possessive Determiners, Pronouns and Apostrophes",
+      "objective": "Distinguish possessive forms, contractions and singular/plural owner apostrophes.",
+      "prerequisites": [
+        "u6"
+      ],
+      "lessons": [
+        {
+          "id": "u7-l1",
+          "title": "Lesson 7.1: Possessive Adjectives and Pronouns",
+          "explanation_en": "Possessive determiners, often called possessive adjectives, are my, your, his, her, its, our and their. They introduce a noun phrase: my book, my new book. Independent possessive pronouns include mine, yours, his, hers, ours and theirs: This book is mine. His has the same form in both patterns. Possessive its has no apostrophe. It's contracts it is or it has, as in It's ready and It's been checked. An independent possessive can replace a noun phrase, but the context must make the referent clear.",
+          "clarification_ar": "صفات أو محددات الملكية مثل my وour وits تأتي ضمن تركيب اسمي: my book أوmy new book. ضمائر الملكية المستقلة مثل mine وours وtheirs تستبدل تركيبًا اسميًا دون اسم بعدها في هذا الاستعمال. its للملكية دون فاصلة عليا، أما it's فاختصار it is أوit has. السياق يحدد ما الذي يستبدله الضمير.",
+          "form": "Possessive determiner + noun phrase: our new proposal | Independent pronoun: The proposal is ours. | its: possession / it's: it is or it has",
+          "examples": [
+            "Our department has finished its proposal; their department has not finished theirs.",
+            "This desk is hers; mine is near the window.",
+            "It's clear that the company needs to update its website."
+          ],
+          "common_mistakes": [
+            "Write its proposal for possession; use it's only when it is or it has fits.",
+            "Write my book or This book is mine, rather than mine book."
+          ],
+          "source_refs": [
+            {
+              "source_id": "src-01",
+              "source_title": "English grammar in use red book.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "verification_status": "unverified"
+            },
+            {
+              "source_id": "src-02",
+              "source_title": "collins Intermediate grammar.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "verification_status": "unverified"
+            }
+          ],
+          "reported_source_refs": [
+            {
+              "source_title": "English grammar in use red book.pdf",
+              "pdf_page": 126,
+              "printed_page": 126
+            },
+            {
+              "source_title": "collins Intermediate grammar.pdf",
+              "pdf_page": 40,
+              "printed_page": 40
+            }
+          ]
+        },
+        {
+          "id": "u7-l2",
+          "title": "Lesson 7.2: Possessive Apostrophes ('s and s')",
+          "explanation_en": "For an ordinary singular owner, add apostrophe-s: the manager's decision. For an irregular plural not ending in s, also add apostrophe-s: the women's committee. For a regular plural already ending in s, add an apostrophe after s: the clients' records. Ordinary plurals have no possessive apostrophe: The managers met yesterday. For a shared item, mark the final owner: Smith and Miller's joint presentation. For separate items, mark both: Smith's and Miller's separate offices. Style conventions can vary for singular names ending in s; those cases are outside these exercises.",
+          "clarification_ar": "نضيف فاصلة عليا ثم s للمفرد وللجمع الشاذ الذي لا ينتهي بـs مثل manager's وwomen's. مع الجمع المنتظم المنتهي بـs نضع الفاصلة بعدها مثل clients' records. الجمع العادي دون ملكية لا يحتاج فاصلة. للشيء المشترك نعلّم الاسم الأخير، وللملكية المنفصلة نعلّم كل مالك.",
+          "form": "Singular: manager's | Irregular plural: women's | Regular plural: clients' | Shared: Smith and Miller's presentation | Separate: Smith's and Miller's offices",
+          "examples": [
+            "The auditor checked the two clients' records.",
+            "The women's forum meets every month.",
+            "We attended Smith and Miller's joint presentation.",
+            "The managers met yesterday."
+          ],
+          "common_mistakes": [
+            "Place the apostrophe according to the number of owners, not the number of owned objects.",
+            "Do not add an apostrophe to an ordinary plural such as managers in The managers met yesterday."
+          ],
+          "source_refs": [
+            {
+              "source_id": "src-01",
+              "source_title": "English grammar in use red book.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "verification_status": "unverified"
+            },
+            {
+              "source_id": "src-04",
+              "source_title": "Grammar_Dimensions_4th_4_Students_Book.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "verification_status": "unverified"
+            }
+          ],
+          "reported_source_refs": [
+            {
+              "source_title": "English grammar in use red book.pdf",
+              "pdf_page": 128,
+              "printed_page": 128
+            },
+            {
+              "source_title": "Grammar_Dimensions_4th_4_Students_Book.pdf",
+              "pdf_page": 92,
+              "printed_page": 92
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "q33",
+      "canonical_id": "serag-notebook-course-v1:batch-003:q33",
+      "batch_id": "batch-003",
+      "unit_id": "u6",
+      "lesson_id": "u6-l1",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "For ordinary formal written English, choose the sentence using an ordinary object pronoun in the compound object.",
+      "options": [
+        "The board invited the senior consultant and I to the annual conference.",
+        "The board invited the senior consultant and me to the annual conference.",
+        "The board invited the senior consultant and myself to the annual conference.",
+        "The board invited he and I to the annual conference."
+      ],
+      "answer": "The board invited the senior consultant and me to the annual conference.",
+      "accepted_answers": [
+        "The board invited the senior consultant and me to the annual conference."
+      ],
+      "explanation": "The pronoun is an object of invited. Removing the other invited person leaves invited me. The ordinary object form here is me.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": 122,
+          "printed_page": 122
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q34",
+      "canonical_id": "serag-notebook-course-v1:batch-003:q34",
+      "batch_id": "batch-003",
+      "unit_id": "u6",
+      "lesson_id": "u6-l2",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "Which sentence uses the standard plural intensive pronoun to emphasize who prepared the report?",
+      "options": [
+        "The department managers prepared the entire compliance report theirselves.",
+        "The department managers prepared the entire compliance report themselves.",
+        "The department managers prepared the entire compliance report theirself.",
+        "The department managers prepared the entire compliance report by them."
+      ],
+      "answer": "The department managers prepared the entire compliance report themselves.",
+      "accepted_answers": [
+        "The department managers prepared the entire compliance report themselves."
+      ],
+      "explanation": "Themselves is the standard plural form for this formal exercise. Theirselves is dialectal rather than the target standard form; by them does not supply the requested intensive pronoun.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-03",
+          "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+          "pdf_page": 162,
+          "printed_page": 162
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q35",
+      "canonical_id": "serag-notebook-course-v1:batch-003:q35",
+      "batch_id": "batch-003",
+      "unit_id": "u7",
+      "lesson_id": "u7-l1",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "Our team and their team each wrote one proposal. Treat our team as one unit. Complete: 'Our team completed ___ proposal on time, but ___ was submitted late.'",
+      "options": [
+        "its / theirs",
+        "it's / their",
+        "its / their",
+        "it's / theirs"
+      ],
+      "answer": "its / theirs",
+      "accepted_answers": [
+        "its / theirs"
+      ],
+      "explanation": "Its introduces the noun proposal. Theirs replaces the other team's proposal; it is an independent possessive pronoun.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": 126,
+          "printed_page": 126
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q36",
+      "canonical_id": "serag-notebook-course-v1:batch-003:q36",
+      "batch_id": "batch-003",
+      "unit_id": "u7",
+      "lesson_id": "u7-l2",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "Choose the sentence that uses a regular plural possessive to refer to the union of the engineers as a group.",
+      "options": [
+        "The engineer's union negotiated a comprehensive benefits package for all 200 members.",
+        "The engineers' union negotiated a comprehensive benefits package for all 200 members.",
+        "The engineers union's negotiated a comprehensive benefits package for all 200 members.",
+        "The engineers's union negotiated a comprehensive benefits package for all 200 members."
+      ],
+      "answer": "The engineers' union negotiated a comprehensive benefits package for all 200 members.",
+      "accepted_answers": [
+        "The engineers' union negotiated a comprehensive benefits package for all 200 members."
+      ],
+      "explanation": "The owner word engineers is plural and already ends in s, so the possessive apostrophe follows that s.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-04",
+          "source_title": "Grammar_Dimensions_4th_4_Students_Book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "Grammar_Dimensions_4th_4_Students_Book.pdf",
+          "pdf_page": 92,
+          "printed_page": 92
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q37",
+      "canonical_id": "serag-notebook-course-v1:batch-003:q37",
+      "batch_id": "batch-003",
+      "unit_id": "u6",
+      "lesson_id": "u6-l1",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "Choose the ordinary object pronoun after between: 'Please keep this information between the lead auditor and ___.'",
+      "options": [
+        "he",
+        "him",
+        "himself",
+        "his"
+      ],
+      "answer": "him",
+      "accepted_answers": [
+        "him"
+      ],
+      "explanation": "Him is the ordinary object form of he. In the requested formal construction it follows the preposition between.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-02",
+          "source_title": "collins Intermediate grammar.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "collins Intermediate grammar.pdf",
+          "pdf_page": 32,
+          "printed_page": 32
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q38",
+      "canonical_id": "serag-notebook-course-v1:batch-003:q38",
+      "batch_id": "batch-003",
+      "unit_id": "u6",
+      "lesson_id": "u6-l1",
+      "type": "fill_blank",
+      "skill": "controlled_application",
+      "prompt": "Choose he or him: 'The director called Ms. Harrison and ___ to review the contract.'",
+      "options": [],
+      "answer": "him",
+      "accepted_answers": [
+        "him"
+      ],
+      "explanation": "The pronoun is an object of called, so choose him.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": 122,
+          "printed_page": 122
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q39",
+      "canonical_id": "serag-notebook-course-v1:batch-003:q39",
+      "batch_id": "batch-003",
+      "unit_id": "u6",
+      "lesson_id": "u6-l2",
+      "type": "fill_blank",
+      "skill": "controlled_application",
+      "prompt": "Use a reflexive pronoun referring to the system: 'After the outage, the system restarted ___ automatically.'",
+      "options": [],
+      "answer": "itself",
+      "accepted_answers": [
+        "itself"
+      ],
+      "explanation": "The system is the singular subject referred to by it; the corresponding reflexive is itself. Restart can be used transitively here; The system restarted automatically is also grammatical, but this exercise requests a reflexive.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-03",
+          "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+          "pdf_page": 162,
+          "printed_page": 162
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q40",
+      "canonical_id": "serag-notebook-course-v1:batch-003:q40",
+      "batch_id": "batch-003",
+      "unit_id": "u7",
+      "lesson_id": "u7-l1",
+      "type": "fill_blank",
+      "skill": "controlled_application",
+      "prompt": "Choose our or ours to mean our division: 'Her division met its target, whereas ___ fell short.'",
+      "options": [],
+      "answer": "ours",
+      "accepted_answers": [
+        "ours"
+      ],
+      "explanation": "Ours independently replaces our division. Our needs a following noun phrase.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": 126,
+          "printed_page": 126
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q41",
+      "canonical_id": "serag-notebook-course-v1:batch-003:q41",
+      "batch_id": "batch-003",
+      "unit_id": "u7",
+      "lesson_id": "u7-l2",
+      "type": "fill_blank",
+      "skill": "controlled_application",
+      "prompt": "Use the possessive form of women: 'The board established a new ___ leadership initiative.'",
+      "options": [],
+      "answer": "women's",
+      "accepted_answers": [
+        "women's"
+      ],
+      "explanation": "Women is an irregular plural without a final s. Add apostrophe-s to form women's.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": 128,
+          "printed_page": 128
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q42",
+      "canonical_id": "serag-notebook-course-v1:batch-003:q42",
+      "batch_id": "batch-003",
+      "unit_id": "u6",
+      "lesson_id": "u6-l1",
+      "type": "error_correction",
+      "skill": "controlled_application",
+      "prompt": "For ordinary formal written English, correct only I/me and keep the rest: 'The managing director sent the updated meeting schedule to John and I yesterday.'",
+      "options": [],
+      "answer": "The managing director sent the updated meeting schedule to John and me yesterday.",
+      "accepted_answers": [
+        "The managing director sent the updated meeting schedule to John and me yesterday."
+      ],
+      "explanation": "The pronoun follows to; the ordinary object form is me.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-02",
+          "source_title": "collins Intermediate grammar.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "collins Intermediate grammar.pdf",
+          "pdf_page": 32,
+          "printed_page": 32
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q43",
+      "canonical_id": "serag-notebook-course-v1:batch-003:q43",
+      "batch_id": "batch-003",
+      "unit_id": "u6",
+      "lesson_id": "u6-l2",
+      "type": "error_correction",
+      "skill": "controlled_application",
+      "prompt": "Use the standard formal plural reflexive and keep the rest: 'The senior software engineers designed the new security protocol by theirselves.'",
+      "options": [],
+      "answer": "The senior software engineers designed the new security protocol by themselves.",
+      "accepted_answers": [
+        "The senior software engineers designed the new security protocol by themselves."
+      ],
+      "explanation": "The target standard plural form is themselves. The context means the engineers worked without outside help.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-03",
+          "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+          "pdf_page": 162,
+          "printed_page": 162
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q44",
+      "canonical_id": "serag-notebook-course-v1:batch-003:q44",
+      "batch_id": "batch-003",
+      "unit_id": "u7",
+      "lesson_id": "u7-l1",
+      "type": "error_correction",
+      "skill": "controlled_application",
+      "prompt": "Correct only its/it's and keep the rest: 'The technology firm announced it's new data privacy framework today.'",
+      "options": [],
+      "answer": "The technology firm announced its new data privacy framework today.",
+      "accepted_answers": [
+        "The technology firm announced its new data privacy framework today."
+      ],
+      "explanation": "Its marks possession and has no apostrophe. It is or it has does not fit before new data privacy framework.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": 126,
+          "printed_page": 126
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q45",
+      "canonical_id": "serag-notebook-course-v1:batch-003:q45",
+      "batch_id": "batch-003",
+      "unit_id": "u7",
+      "lesson_id": "u7-l2",
+      "type": "error_correction",
+      "skill": "controlled_application",
+      "prompt": "Correct only the possessive form for two clients and keep the rest: 'The internal auditor reviewed the two client's financial records.'",
+      "options": [],
+      "answer": "The internal auditor reviewed the two clients' financial records.",
+      "accepted_answers": [
+        "The internal auditor reviewed the two clients' financial records."
+      ],
+      "explanation": "Two clients is plural and ends in s; place the possessive apostrophe after s.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-04",
+          "source_title": "Grammar_Dimensions_4th_4_Students_Book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "Grammar_Dimensions_4th_4_Students_Book.pdf",
+          "pdf_page": 92,
+          "printed_page": 92
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q46",
+      "canonical_id": "serag-notebook-course-v1:batch-003:q46",
+      "batch_id": "batch-003",
+      "unit_id": "u6",
+      "lesson_id": "u6-l1",
+      "type": "sentence_order",
+      "skill": "controlled_application",
+      "prompt": "Use every tile once. Start with The director, keep her and me (or me and her) together, and put to the conference at the end.",
+      "options": [],
+      "answer": "The director invited her and me to the conference.",
+      "accepted_answers": [
+        "The director invited her and me to the conference.",
+        "The director invited me and her to the conference."
+      ],
+      "explanation": "Her and me, or me and her, are the coordinated object of invited. Both supplied object orders are accepted.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-02",
+          "source_title": "collins Intermediate grammar.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "collins Intermediate grammar.pdf",
+          "pdf_page": 32,
+          "printed_page": 32
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed.",
+      "tokens": [
+        "the",
+        "invited",
+        "director",
+        "her",
+        "and",
+        "me",
+        "conference",
+        "to",
+        "the"
+      ]
+    },
+    {
+      "id": "q47",
+      "canonical_id": "serag-notebook-course-v1:batch-003:q47",
+      "batch_id": "batch-003",
+      "unit_id": "u6",
+      "lesson_id": "u6-l2",
+      "type": "sentence_order",
+      "skill": "controlled_application",
+      "prompt": "Use every tile once. Start with The research analysts and end with by themselves.",
+      "options": [],
+      "answer": "The research analysts solved the complex problem by themselves.",
+      "accepted_answers": [
+        "The research analysts solved the complex problem by themselves."
+      ],
+      "explanation": "By themselves refers to the analysts working without outside help. Both noun phrases have their own the.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-03",
+          "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+          "pdf_page": 162,
+          "printed_page": 162
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed.",
+      "tokens": [
+        "analysts",
+        "solved",
+        "problem",
+        "by",
+        "the",
+        "complex",
+        "research",
+        "themselves",
+        "the"
+      ]
+    },
+    {
+      "id": "q48",
+      "canonical_id": "serag-notebook-course-v1:batch-003:q48",
+      "batch_id": "batch-003",
+      "unit_id": "u7",
+      "lesson_id": "u7-l2",
+      "type": "sentence_order",
+      "skill": "controlled_application",
+      "prompt": "Use every tile once. Start with The board and keep the senior executives' employment contracts together.",
+      "options": [],
+      "answer": "The board renewed the senior executives' employment contracts.",
+      "accepted_answers": [
+        "The board renewed the senior executives' employment contracts."
+      ],
+      "explanation": "Executives is a regular plural owner word, so its possessive ends in s followed by an apostrophe. Employment contracts is the owned noun phrase.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": 128,
+          "printed_page": 128
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed.",
+      "tokens": [
+        "board",
+        "the",
+        "executives'",
+        "contracts",
+        "employment",
+        "renewed",
+        "senior",
+        "the"
+      ]
+    }
+  ],
+  "writing_tasks": [
+    {
+      "id": "wt3",
+      "batch_id": "batch-003",
+      "unit_id": "u6",
+      "lesson_ids": [
+        "u6-l1",
+        "u6-l2",
+        "u7-l1",
+        "u7-l2"
+      ],
+      "word_range": "60–90",
+      "prompt": "Write a formal email excerpt (60–90 words) reporting on a joint project. Include an ordinary compound object pronoun phrase, a by + reflexive phrase for independence, a possessive determiner before a noun, and a regular plural possessive ending in s'.",
+      "model_response": "Dear Ms. Sterling,\n\nI am pleased to report that the project team completed the financial audit ahead of schedule. The division head assigned Mr. Davis and me to review the clients' account statements. We verified all transaction records by ourselves and identified key cost-saving opportunities. Our department will present its final recommendations during tomorrow's executive briefing.\n\nSincerely,\nDavid Vance",
+      "review_criteria": [
+        "Check ordinary formal object case in a coordinated object, such as assigned Mr. Davis and me.",
+        "Use a by + reflexive phrase referring clearly to the people working independently.",
+        "Use possessive determiners appropriately; distinguish its from the contraction it's.",
+        "Place the apostrophe after s for regular plural owners, such as clients' statements.",
+        "Aim for 60–90 words and a clear professional message. Word count alone is not a writing-quality assessment."
+      ],
+      "assessment_type": "rubric_guided_review_not_automatic_grade"
+    }
+  ],
+  "conflicts": [],
+  "next_batch_topics": [
+    "Demonstratives and quantifiers",
+    "Prepositions of time and dates",
+    "Prepositions of place and movement"
+  ],
+  "review": {
+    "language_review_status": "editorially_reviewed",
+    "source_verification_status": "unverified_original_pdfs_unavailable",
+    "publication_status": "published_editorial_review_source_pages_unverified",
+    "input_format": "user_inline_json",
+    "note": "Editorial adaptation, not a verbatim archive. Supplied page claims remain in reported_source_refs, not verified citations. Empty unreadable_pages does not establish full-book readability."
+  }
+}
