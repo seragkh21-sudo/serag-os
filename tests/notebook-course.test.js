@@ -46,6 +46,7 @@ test('combined course keeps batch one stable and batch two answers possible with
  assert.equal(second.questions.filter(q=>q.type==='fill_blank').length,4);
  assert.equal(second.questions.filter(q=>q.type==='error_correction').length,4);
  assert.equal(second.questions.filter(q=>q.type==='sentence_order').length,3);
+ for(const q of second.questions.filter(q=>q.type==='sentence_order'))assert.notEqual(api.normalize(q.tokens.join(' ')),api.normalize(q.answer),'Order exercises must not arrive already solved');
  const impossible=structuredClone(published);impossible.questions.find(q=>q.id==='q32').accepted_answers.push('Major damage to city infrastructure is caused by earthquakes.');
  assert.throws(()=>api.validate(impossible),/tokens/);
  const duplicate=structuredClone(published);duplicate.units[0].lessons.push(duplicate.units[0].lessons[0]);assert.throws(()=>api.validate(duplicate),/Duplicate/);
