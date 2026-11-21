@@ -6,6 +6,7 @@
   ['recognition','Recognise meanings','Choosing or matching a meaning.'],
   ['recall','Recall from memory','Typing an expression without hints or an earlier error.'],
   ['grammar','Grammar & usage choices','Choosing a form or meaning in a sentence; this does not measure free writing.'],
+  ['grammar-production','Written grammar practice','Typing a supplied form or correcting a sentence against reviewed answers; not free-writing assessment.'],
   ['building','Sentence building','Ordering supplied words into a sentence.'],
   ['expression','Expression use checks','Checks target-expression use only, not grammar or writing quality.']
  ];

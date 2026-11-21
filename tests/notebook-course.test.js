@@ -1,0 +1,35 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import vm from 'node:vm';
+const batch=JSON.parse(fs.readFileSync(new URL('../curriculum-data/batch-001.json',import.meta.url)));
+const source=fs.readFileSync(new URL('../english-notebook-course-v1.js',import.meta.url),'utf8');
+async function fixture({eligible=true,ready=true}={}){
+ const events={},tracks=[],skills=[];
+ const window={user:{id:'owner-a'},addEventListener(){},ENGOPLAY:{isReady:ready,ensureReady:async()=>{},stats:()=>({answeredKeys:new Set()}),track:r=>tracks.push(r)},SERAG_ACADEMY_V12:{selectQuestions:list=>eligible?list:[]},SERAG_SKILL_EVIDENCE:{record:r=>skills.push(r)}};
+ const document={addEventListener:(name,fn)=>events[name]=fn,querySelector:()=>null};
+ vm.runInNewContext(source,{window,document,fetch:async()=>({ok:true,json:async()=>structuredClone(batch)}),AbortSignal,localStorage:{getItem:()=>null},setInterval:()=>0,clearInterval});
+ await window.SERAG_NOTEBOOK_COURSE_READY;
+ return {api:window.SERAG_NOTEBOOK_COURSE,window,tracks,skills,events};
+}
+test('published batch retains all four formats, distinct IDs, valid ordering and unverified citations',async()=>{
+ const {api}=await fixture();assert.equal(api.data.questions.length,16);
+ assert.equal(new Set(batch.questions.map(q=>q.type)).size,4);
+ assert.equal(batch.units.length,1);assert.equal(batch.units[0].lessons.length,4);
+ for(const q of batch.questions){for(const ref of q.source_refs){assert.equal(ref.pdf_page,null);assert.equal(ref.verification_status,'unverified')}
+  if(q.type==='sentence_order')for(const answer of q.accepted_answers)assert.deepEqual(api.normalize(answer).split(' ').sort(),Array.from(q.tokens,t=>api.normalize(t)).sort());
+ }
+ assert.throws(()=>api.validate({...batch,questions:[{...batch.questions[0],options:['broken']}]}));
+});
+test('wrong first submission stays wrong in synced history and revision cannot earn independent success',async()=>{
+ const {api,tracks,skills}=await fixture();await api.start();
+ const q=api.currentQuestion();assert.equal(api.respond('unreviewed wrong answer'),false);assert.equal(api.respond(q.answer),true);
+ assert.equal(tracks.length,1);assert.equal(tracks[0].correct,false);assert.equal(skills[1].assisted,true);
+ assert.match(api.html(),/Correct after revision/);api.next();
+ const before=tracks.length;api.reveal();assert.equal(tracks.length,before);assert.equal(api.respond(api.currentQuestion().answer),false);
+});
+test('recent-history exclusion, missing history and owner changes cannot leak or record a stale session',async()=>{
+ const empty=await fixture({eligible:false});await empty.api.start();assert.equal(empty.api.currentQuestion(),null);assert.match(empty.api.html(),/No eligible questions/);
+ const blocked=await fixture({ready:false});assert.equal(await blocked.api.start(),false);assert.equal(blocked.tracks.length,0);
+ const active=await fixture();await active.api.start();const q=active.api.currentQuestion();active.window.user={id:'owner-b'};assert.equal(active.api.respond(q.answer),false);assert.equal(active.api.reveal(),false);assert.equal(active.tracks.length,0);
+});
