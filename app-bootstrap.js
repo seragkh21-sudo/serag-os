@@ -1,6 +1,6 @@
 (async()=>{
   try{
-    const V='92';
+    const V='93';
     const res=await fetch(`/legacy.html?v=${V}`,{cache:'no-store',headers:{'Cache-Control':'no-cache'}});
     if(!res.ok)throw new Error('Legacy app failed to load');
     let html=await res.text();
@@ -132,7 +132,7 @@ html.serag-ready #seragBootScreen{display:none!important}
 <script src="/english-supplement-v13.js?v=${V}"></script>
 <script src="/english-writing-v13.js?v=${V}"></script>
 <script src="/english-levels-v14.js?v=${V}"></script>
-<script src="/english-source-curriculum-v1.js?v=${V}"></script><script src="/english-open-sentences-v1.js?v=${V}"></script><script src="/english-context-v15.js?v=${V}"></script><script src="/english-phrases-v16.js?v=${V}"></script><script src="/english-video-v17.js?v=${V}"></script>
+<script src="/english-source-curriculum-v1.js?v=${V}"></script><script src="/english-grammar-focus-v1.js?v=${V}"></script><script src="/english-open-sentences-v1.js?v=${V}"></script><script src="/english-context-v15.js?v=${V}"></script><script src="/english-phrases-v16.js?v=${V}"></script><script src="/english-video-v17.js?v=${V}"></script>
 <script src="/english-learning-v6.js?v=${V}"></script>
 <script src="/english-review-v10-data.js?v=${V}"></script>
 <script src="/english-review-v10.js?v=${V}"></script>
@@ -220,6 +220,7 @@ html.serag-ready #seragBootScreen{display:none!important}
       /^\/english-audio-v4\.js(?:\?|$)/,
       /^\/microsoft-tts-v1\.js(?:\?|$)/,
       /^\/english-source-curriculum-v1\.js(?:\?|$)/,
+      /^\/english-grammar-focus-v1\.js(?:\?|$)/,
       /^\/english-open-sentences-v1\.js(?:\?|$)/,
       /^\/english-context-v15\.js(?:\?|$)/,
       /^\/english-phrases-v16\.js(?:\?|$)/,
