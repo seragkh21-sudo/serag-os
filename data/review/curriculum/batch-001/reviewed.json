@@ -1,0 +1,982 @@
+{
+  "batch_id": "batch-001",
+  "sources": [
+    {
+      "id": "src-01",
+      "title": "English grammar in use red book.pdf",
+      "unreadable_pages": [],
+      "coverage_verification_status": "not_verified_against_original_PDF"
+    },
+    {
+      "id": "src-02",
+      "title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+      "unreadable_pages": [],
+      "coverage_verification_status": "not_verified_against_original_PDF"
+    },
+    {
+      "id": "src-03",
+      "title": "Scholastic_Success_with_Grammar_Grade_3_Scholastic_z_library_sk.pdf",
+      "unreadable_pages": [],
+      "coverage_verification_status": "not_verified_against_original_PDF"
+    },
+    {
+      "id": "src-04",
+      "title": "collins Intermediate grammar.pdf",
+      "unreadable_pages": [],
+      "coverage_verification_status": "not_verified_against_original_PDF"
+    },
+    {
+      "id": "src-05",
+      "title": "Understanding_Semantics,_Second_Edition_Understanding_Language_Series.pdf",
+      "unreadable_pages": [],
+      "coverage_verification_status": "not_verified_against_original_PDF"
+    }
+  ],
+  "units": [
+    {
+      "id": "u1",
+      "title": "Unit 1: Foundations of English Sentence Structure & Present Tenses",
+      "objective": "Identify basic sentence patterns, choose present forms of be, form Present Simple statements and questions, and distinguish current activities from states.",
+      "prerequisites": [],
+      "lessons": [
+        {
+          "id": "u1-l1",
+          "title": "Lesson 1.1: Basic English Sentence Structure (Subject - Verb - Object)",
+          "explanation_en": "A common pattern in a basic affirmative English clause is Subject–Verb–Object when the verb takes an object. Other complete patterns include Subject–Verb (The train arrived.) and Subject–Verb–Complement (The report is ready.). The subject is what the clause is about; it is not always an agent performing an action. A simple subject is the head noun or pronoun; a complete subject includes its modifiers.",
+          "clarification_ar": "الجملة الإنجليزية الكاملة لا تحتاج دائمًا إلى مفعول به: قد تكون فاعلًا وفعلًا فقط، أو فاعلًا وفعلًا ومفعولًا، أو فاعلًا وفعل ربط ومكمّل. الفاعل البسيط هو الاسم الأساسي أو الضمير، والفاعل الكامل يشمل الكلمات التي تصفه.",
+          "form": "S + V | S + V + O | S + be/linking verb + complement",
+          "examples": [
+            "The train arrived.",
+            "The student reads the textbook.",
+            "The report is ready."
+          ],
+          "common_mistakes": [
+            "Omitting a required subject: use It is important to study, rather than Is important to study, in this ordinary declarative sentence.",
+            "Assuming every verb needs an object: The train arrived is already complete.",
+            "Use ordinary subject-first order when practising the basic pattern. Object fronting can be grammatical in a suitable context; The book I read must not be labelled universally ungrammatical."
+          ],
+          "source_refs": [
+            {
+              "source_id": "src-04",
+              "source_title": "collins Intermediate grammar.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "verification_status": "unverified"
+            },
+            {
+              "source_id": "src-03",
+              "source_title": "Scholastic_Success_with_Grammar_Grade_3_Scholastic_z_library_sk.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "verification_status": "unverified"
+            }
+          ],
+          "reported_source_refs": [
+            {
+              "source_title": "collins Intermediate grammar.pdf",
+              "pdf_page": 4,
+              "printed_page": 4
+            },
+            {
+              "source_title": "Scholastic_Success_with_Grammar_Grade_3_Scholastic_z_library_sk.pdf",
+              "pdf_page": 52,
+              "printed_page": 52
+            }
+          ]
+        },
+        {
+          "id": "u1-l2",
+          "title": "Lesson 1.2: The Verb 'To Be' in Present Simple",
+          "explanation_en": "The verb 'to be' connects a subject to a noun, adjective, or location. It changes form according to the subject: 'I am', 'he/she/it is', and 'we/you/they are'.",
+          "clarification_ar": "فعل الكينونة (to be) يُستخدم للتعريف بالحالة أو المهنة أو الصفة أو المكان. يتغير شكله بحسب الفاعل: am مع الضمير I، و is مع المفرد الغائب، و are مع الجمع والضمير you.",
+          "form": "Affirmative: Subject + am/is/are | Negative: Subject + am/is/are + not | Question: Am/Is/Are + Subject...?",
+          "examples": [
+            "I am a project supervisor.",
+            "The report is not ready yet.",
+            "Are you available for the presentation?"
+          ],
+          "common_mistakes": [
+            "Confusing 'is' and 'are' with plural or compound subjects (e.g., *The results is clear* instead of *The results are clear*).",
+            "Dropping the verb 'be' altogether in nominal predicate sentences (e.g., *He teacher* instead of *He is a teacher*)."
+          ],
+          "source_refs": [
+            {
+              "source_id": "src-01",
+              "source_title": "English grammar in use red book.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "verification_status": "unverified"
+            },
+            {
+              "source_id": "src-02",
+              "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "verification_status": "unverified"
+            }
+          ],
+          "reported_source_refs": [
+            {
+              "source_title": "English grammar in use red book.pdf",
+              "pdf_page": 1,
+              "printed_page": 1
+            },
+            {
+              "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+              "pdf_page": 8,
+              "printed_page": 8
+            }
+          ]
+        },
+        {
+          "id": "u1-l3",
+          "title": "Lesson 1.3: Present Simple Tense and Subject-Verb Agreement",
+          "explanation_en": "The Present Simple describes habitual actions, general truths, and permanent situations. When the subject is third-person singular (he, she, it, or a singular noun), add '-s' or '-es' to the base verb.",
+          "clarification_ar": "يُستخدم المضارع البسيط للتعبير عن العادات والحقائق والحالات المستقرة. يضاف s أو es مع المفرد الغائب، ويتغير y إلى ies بعد حرف ساكن في مثل study → studies. يُستخدم do أو does في النفي وتكوين الأسئلة مع الأفعال الأساسية، ويعود الفعل بعدها إلى المصدر دون s.",
+          "form": "Affirmative: S + Base Verb (-s/-es for he/she/it) | Negative: S + do not/does not + Base Verb | Question: Do/Does + S + Base Verb...?",
+          "examples": [
+            "Dr. Miller conducts research every semester.",
+            "They do not work on weekends.",
+            "Does the course start at nine o'clock?"
+          ],
+          "common_mistakes": [
+            "Adding '-s' to the verb after 'does' or 'doesn't' (e.g., *He doesn't likes coffee* instead of *He doesn't like coffee*).",
+            "Forgetting the '-s' suffix for third-person singular subjects (e.g., *She work in London* instead of *She works in London*)."
+          ],
+          "source_refs": [
+            {
+              "source_id": "src-01",
+              "source_title": "English grammar in use red book.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "verification_status": "unverified"
+            },
+            {
+              "source_id": "src-02",
+              "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "verification_status": "unverified"
+            }
+          ],
+          "reported_source_refs": [
+            {
+              "source_title": "English grammar in use red book.pdf",
+              "pdf_page": 5,
+              "printed_page": 5
+            },
+            {
+              "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+              "pdf_page": 12,
+              "printed_page": 12
+            }
+          ]
+        },
+        {
+          "id": "u1-l4",
+          "title": "Lesson 1.4: Present Continuous Tense & State vs. Action Verbs",
+          "explanation_en": "Use the Present Continuous for an activity happening now or a temporary situation around the present: am/is/are + verb-ing. Verbs such as know, own and belong normally use a simple form when they express a state. This is a meaning-based tendency, not a ban on every continuous use of every verb sometimes called stative. For example, I think this plan is useful expresses an opinion; I am thinking about the plan describes an activity.",
+          "clarification_ar": "يتكوّن المضارع المستمر من am/is/are مع فعل ينتهي بـ ing، ويُستخدم للنشاط الحالي أو الوضع المؤقت. أفعال مثل know وown وbelong تستخدم عادةً زمنًا بسيطًا عندما تعبّر عن حالة. بعض الأفعال يتغير استخدامها إذا تغيّر المعنى، مثل think للرأي مقابل التفكير كنشاط.",
+          "form": "Affirmative: S + am/is/are + Verb-ing | Negative: S + am/is/are + not + Verb-ing | Question: Am/Is/Are + S + Verb-ing...?",
+          "examples": [
+            "The researcher is checking the data now.",
+            "I am staying in London for three months.",
+            "I understand the rule.",
+            "I think this plan is useful. / I am thinking about the plan."
+          ],
+          "common_mistakes": [
+            "Using stative verbs in progressive tenses (e.g., *I am knowing the answer* instead of *I know the answer*).",
+            "Omitting the auxiliary verb 'be' (e.g., *They studying in the library* instead of *They are studying in the library*)."
+          ],
+          "source_refs": [
+            {
+              "source_id": "src-01",
+              "source_title": "English grammar in use red book.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "verification_status": "unverified"
+            },
+            {
+              "source_id": "src-02",
+              "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "verification_status": "unverified"
+            }
+          ],
+          "reported_source_refs": [
+            {
+              "source_title": "English grammar in use red book.pdf",
+              "pdf_page": 3,
+              "printed_page": 3
+            },
+            {
+              "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+              "pdf_page": 16,
+              "printed_page": 16
+            }
+          ]
+        }
+      ],
+      "status": "language_reviewed_sources_pending"
+    },
+    {
+      "id": "u2",
+      "title": "Unit 2: Past Tenses & Narrative Sentence Structures",
+      "objective": "Understand Past Simple, Past Continuous, irregular verbs, and narrative connectors.",
+      "prerequisites": [
+        "u1"
+      ],
+      "lessons": [],
+      "status": "outline_only"
+    },
+    {
+      "id": "u3",
+      "title": "Unit 3: Perfect Tenses & Time Expressions (For, Since, Already, Yet)",
+      "objective": "Master Present Perfect Simple and Continuous aspects in academic context.",
+      "prerequisites": [
+        "u1",
+        "u2"
+      ],
+      "lessons": [],
+      "status": "outline_only"
+    },
+    {
+      "id": "u4",
+      "title": "Unit 4: Modal Verbs & Conditional Sentence Patterns",
+      "objective": "Apply modal auxiliaries for necessity, permission, advice, and conditional hypotheses.",
+      "prerequisites": [
+        "u1",
+        "u2",
+        "u3"
+      ],
+      "lessons": [],
+      "status": "outline_only"
+    }
+  ],
+  "questions": [
+    {
+      "id": "q01",
+      "unit_id": "u1",
+      "lesson_id": "u1-l1",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "Identify the simple subject in the sentence: 'The dedicated instructor explains the English grammar lesson clearly.'",
+      "options": [
+        "The dedicated instructor",
+        "instructor",
+        "explains",
+        "lesson"
+      ],
+      "answer": "instructor",
+      "accepted_answers": [
+        "instructor"
+      ],
+      "explanation": "The simple subject is the single noun or pronoun that performs the verb's action without its modifiers. Here, 'instructor' is the simple subject.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-03",
+          "source_title": "Scholastic_Success_with_Grammar_Grade_3_Scholastic_z_library_sk.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Language reviewed; original PDF/page attribution remains unverified.",
+      "canonical_id": "serag-notebook-course-v1:batch-001:q01",
+      "reported_source_refs": [
+        {
+          "source_title": "Scholastic_Success_with_Grammar_Grade_3_Scholastic_z_library_sk.pdf",
+          "pdf_page": 52,
+          "printed_page": 52
+        }
+      ]
+    },
+    {
+      "id": "q02",
+      "unit_id": "u1",
+      "lesson_id": "u1-l2",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "Which sentence correctly uses the present simple form of the verb 'to be' with a plural subject?",
+      "options": [
+        "The students is in the classroom.",
+        "The students am in the classroom.",
+        "The students are in the classroom.",
+        "The students be in the classroom."
+      ],
+      "answer": "The students are in the classroom.",
+      "accepted_answers": [
+        "The students are in the classroom."
+      ],
+      "explanation": "Plural noun subjects like 'students' require the plural form of the verb 'be' in the present tense, which is 'are'.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Language reviewed; original PDF/page attribution remains unverified.",
+      "canonical_id": "serag-notebook-course-v1:batch-001:q02",
+      "reported_source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": 1,
+          "printed_page": 1
+        }
+      ]
+    },
+    {
+      "id": "q03",
+      "unit_id": "u1",
+      "lesson_id": "u1-l3",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "Choose the correct Present Simple form: 'The assistant usually ___ the weekly report on Fridays.'",
+      "options": [
+        "submits",
+        "submit",
+        "submitting",
+        "are submitting"
+      ],
+      "answer": "submits",
+      "accepted_answers": [
+        "submits"
+      ],
+      "explanation": "The assistant is a third-person singular subject, so the affirmative Present Simple verb takes -s: submits.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-02",
+          "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Language reviewed; original PDF/page attribution remains unverified.",
+      "canonical_id": "serag-notebook-course-v1:batch-001:q03",
+      "reported_source_refs": [
+        {
+          "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+          "pdf_page": 71,
+          "printed_page": 71
+        }
+      ]
+    },
+    {
+      "id": "q04",
+      "unit_id": "u1",
+      "lesson_id": "u1-l4",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "Choose the sentence that uses 'understand' in the Present Simple.",
+      "options": [
+        "I am understanding the explanation now.",
+        "I understand the explanation now.",
+        "I am understood the explanation now.",
+        "I understands the explanation now."
+      ],
+      "answer": "I understand the explanation now.",
+      "accepted_answers": [
+        "I understand the explanation now."
+      ],
+      "explanation": "I understand uses the Present Simple form. It is the conventional form for this state of comprehension; the question tests the specified tense rather than declaring all progressive uses impossible.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Language reviewed; original PDF/page attribution remains unverified.",
+      "canonical_id": "serag-notebook-course-v1:batch-001:q04",
+      "reported_source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": 8,
+          "printed_page": 8
+        }
+      ]
+    },
+    {
+      "id": "q05",
+      "unit_id": "u1",
+      "lesson_id": "u1-l2",
+      "type": "fill_blank",
+      "skill": "recall",
+      "prompt": "Complete the sentence with the correct negative form of 'be': 'She ___ available for meetings on Friday afternoons.'",
+      "options": [],
+      "answer": "is not",
+      "accepted_answers": [
+        "is not",
+        "isn't"
+      ],
+      "explanation": "The third-person singular negative form of 'be' is 'is not' or its contraction 'isn't'.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Language reviewed; original PDF/page attribution remains unverified.",
+      "canonical_id": "serag-notebook-course-v1:batch-001:q05",
+      "reported_source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": 1,
+          "printed_page": 1
+        }
+      ]
+    },
+    {
+      "id": "q06",
+      "unit_id": "u1",
+      "lesson_id": "u1-l3",
+      "type": "fill_blank",
+      "skill": "recall",
+      "prompt": "Fill in the blank with the correct Present Simple form of 'study': 'My colleague usually ___ English grammar for two hours every evening.'",
+      "options": [],
+      "answer": "studies",
+      "accepted_answers": [
+        "studies"
+      ],
+      "explanation": "For verbs ending in a consonant + 'y' with a third-person singular subject ('my colleague'), drop the 'y' and add '-ies' to form 'studies'.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Language reviewed; original PDF/page attribution remains unverified.",
+      "canonical_id": "serag-notebook-course-v1:batch-001:q06",
+      "reported_source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": 5,
+          "printed_page": 5
+        }
+      ]
+    },
+    {
+      "id": "q07",
+      "unit_id": "u1",
+      "lesson_id": "u1-l4",
+      "type": "fill_blank",
+      "skill": "controlled_application",
+      "prompt": "Complete the sentence with the Present Continuous form of 'write': 'At this moment, the researcher ___ a new report.'",
+      "options": [],
+      "answer": "is writing",
+      "accepted_answers": [
+        "is writing"
+      ],
+      "explanation": "The researcher is an unambiguously singular subject. Use is + writing for the current activity.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-02",
+          "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Language reviewed; original PDF/page attribution remains unverified.",
+      "canonical_id": "serag-notebook-course-v1:batch-001:q07",
+      "reported_source_refs": [
+        {
+          "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+          "pdf_page": 16,
+          "printed_page": 16
+        }
+      ]
+    },
+    {
+      "id": "q08",
+      "unit_id": "u1",
+      "lesson_id": "u1-l3",
+      "type": "fill_blank",
+      "skill": "recall",
+      "prompt": "Complete the negative sentence using 'do/does': 'They ___ live near the city center, so they commute by train.'",
+      "options": [],
+      "answer": "do not",
+      "accepted_answers": [
+        "do not",
+        "don't"
+      ],
+      "explanation": "Plural subjects ('they') require 'do not' or 'don't' followed by the base verb in negative Present Simple sentences.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Language reviewed; original PDF/page attribution remains unverified.",
+      "canonical_id": "serag-notebook-course-v1:batch-001:q08",
+      "reported_source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": 6,
+          "printed_page": 6
+        }
+      ]
+    },
+    {
+      "id": "q09",
+      "unit_id": "u1",
+      "lesson_id": "u1-l3",
+      "type": "error_correction",
+      "skill": "controlled_application",
+      "prompt": "Correct the grammatical error in this sentence: 'Dr. Miller teach business communication at the university on Mondays.'",
+      "options": [],
+      "answer": "Dr. Miller teaches business communication at the university on Mondays.",
+      "accepted_answers": [
+        "Dr. Miller teaches business communication at the university on Mondays."
+      ],
+      "explanation": "'Dr. Miller' is a singular subject (he/she), so the verb ending in '-ch' must take the '-es' suffix: 'teaches'.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Language reviewed; original PDF/page attribution remains unverified.",
+      "canonical_id": "serag-notebook-course-v1:batch-001:q09",
+      "reported_source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": 5,
+          "printed_page": 5
+        }
+      ]
+    },
+    {
+      "id": "q10",
+      "unit_id": "u1",
+      "lesson_id": "u1-l4",
+      "type": "error_correction",
+      "skill": "controlled_application",
+      "prompt": "Correct the stative verb misuse in this sentence: 'Right now, I am owning three different English reference dictionaries.'",
+      "options": [],
+      "answer": "Right now, I own three different English reference dictionaries.",
+      "accepted_answers": [
+        "Right now, I own three different English reference dictionaries.",
+        "I own three different English reference dictionaries right now."
+      ],
+      "explanation": "'Own' is a stative verb indicating possession and should be used in the Present Simple tense ('own') rather than the continuous form.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-02",
+          "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Language reviewed; original PDF/page attribution remains unverified.",
+      "canonical_id": "serag-notebook-course-v1:batch-001:q10",
+      "reported_source_refs": [
+        {
+          "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+          "pdf_page": 126,
+          "printed_page": 126
+        }
+      ]
+    },
+    {
+      "id": "q11",
+      "unit_id": "u1",
+      "lesson_id": "u1-l2",
+      "type": "error_correction",
+      "skill": "controlled_application",
+      "prompt": "Correct the verb agreement error: 'The results of the preliminary assessment is available in the online portal.'",
+      "options": [],
+      "answer": "The results of the preliminary assessment are available in the online portal.",
+      "accepted_answers": [
+        "The results of the preliminary assessment are available in the online portal."
+      ],
+      "explanation": "The head noun of the subject phrase is the plural noun 'results', not the singular object of the preposition 'assessment'. Therefore, the verb must be 'are'.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-02",
+          "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Language reviewed; original PDF/page attribution remains unverified.",
+      "canonical_id": "serag-notebook-course-v1:batch-001:q11",
+      "reported_source_refs": [
+        {
+          "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+          "pdf_page": 172,
+          "printed_page": 172
+        }
+      ]
+    },
+    {
+      "id": "q12",
+      "unit_id": "u1",
+      "lesson_id": "u1-l3",
+      "type": "error_correction",
+      "skill": "controlled_application",
+      "prompt": "Correct the auxiliary verb error in the question: 'Does your colleagues attend the weekly professional development workshop?'",
+      "options": [],
+      "answer": "Do your colleagues attend the weekly professional development workshop?",
+      "accepted_answers": [
+        "Do your colleagues attend the weekly professional development workshop?"
+      ],
+      "explanation": "'Your colleagues' is a plural subject (they), requiring the auxiliary 'Do' rather than 'Does' in Present Simple questions.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Language reviewed; original PDF/page attribution remains unverified.",
+      "canonical_id": "serag-notebook-course-v1:batch-001:q12",
+      "reported_source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": 7,
+          "printed_page": 7
+        }
+      ]
+    },
+    {
+      "id": "q13",
+      "unit_id": "u1",
+      "lesson_id": "u1-l1",
+      "type": "sentence_order",
+      "skill": "controlled_application",
+      "prompt": "Reorder the supplied words into a natural sentence. Use every word once; add suitable capitalization and punctuation.",
+      "options": [],
+      "answer": "She always reads online articles carefully in the evening.",
+      "accepted_answers": [
+        "She always reads online articles carefully in the evening.",
+        "In the evening, she always reads online articles carefully."
+      ],
+      "explanation": "Standard English word order places the subject ('She') first, followed by the frequency adverb ('always'), main verb ('reads'), direct object ('online articles'), manner adverb ('carefully'), and time adverbial ('in the evening').",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Language reviewed; original PDF/page attribution remains unverified.",
+      "tokens": [
+        "always",
+        "online",
+        "articles",
+        "reads",
+        "carefully",
+        "she",
+        "evening",
+        "in",
+        "the"
+      ],
+      "canonical_id": "serag-notebook-course-v1:batch-001:q13",
+      "reported_source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": 94,
+          "printed_page": 94
+        }
+      ]
+    },
+    {
+      "id": "q14",
+      "unit_id": "u1",
+      "lesson_id": "u1-l2",
+      "type": "sentence_order",
+      "skill": "controlled_application",
+      "prompt": "Reorder the supplied words into an uncontracted negative question. Use every word once; add suitable capitalization and punctuation.",
+      "options": [],
+      "answer": "Why is the report not ready for the presentation?",
+      "accepted_answers": [
+        "Why is the report not ready for the presentation?"
+      ],
+      "explanation": "Use Why + is + the report + not + ready + for the presentation. The supplied tiles do not contain a contracted form.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Language reviewed; original PDF/page attribution remains unverified.",
+      "tokens": [
+        "why",
+        "is",
+        "the",
+        "report",
+        "not",
+        "ready",
+        "for",
+        "the",
+        "presentation"
+      ],
+      "canonical_id": "serag-notebook-course-v1:batch-001:q14",
+      "reported_source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": 44,
+          "printed_page": 44
+        }
+      ]
+    },
+    {
+      "id": "q15",
+      "unit_id": "u1",
+      "lesson_id": "u1-l4",
+      "type": "sentence_order",
+      "skill": "controlled_application",
+      "prompt": "Reorder the supplied words into a Present Continuous statement. Use every word once; add suitable capitalization and punctuation.",
+      "options": [],
+      "answer": "We are currently implementing new strategies in our department.",
+      "accepted_answers": [
+        "We are currently implementing new strategies in our department.",
+        "Currently, we are implementing new strategies in our department."
+      ],
+      "explanation": "Subject ('We') + auxiliary 'be' ('are') + mid-position adverb ('currently') + main verb-ing ('implementing') + object ('new strategies') + place adverbial ('in our department').",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-02",
+          "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Language reviewed; original PDF/page attribution remains unverified.",
+      "tokens": [
+        "currently",
+        "new",
+        "strategies",
+        "implementing",
+        "we",
+        "are",
+        "in",
+        "our",
+        "department"
+      ],
+      "canonical_id": "serag-notebook-course-v1:batch-001:q15",
+      "reported_source_refs": [
+        {
+          "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+          "pdf_page": 16,
+          "printed_page": 16
+        }
+      ]
+    },
+    {
+      "id": "q16",
+      "unit_id": "u1",
+      "lesson_id": "u1-l4",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "Which of the following verbs is a stative verb that is typically NOT used in the continuous form when expressing possession?",
+      "options": [
+        "belong",
+        "run",
+        "prepare",
+        "discuss"
+      ],
+      "answer": "belong",
+      "accepted_answers": [
+        "belong"
+      ],
+      "explanation": "'Belong' is a stative verb indicating ownership/possession and does not take continuous aspect.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-04",
+          "source_title": "collins Intermediate grammar.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Language reviewed; original PDF/page attribution remains unverified.",
+      "canonical_id": "serag-notebook-course-v1:batch-001:q16",
+      "reported_source_refs": [
+        {
+          "source_title": "collins Intermediate grammar.pdf",
+          "pdf_page": 124,
+          "printed_page": 124
+        }
+      ]
+    }
+  ],
+  "writing_tasks": [
+    {
+      "id": "wt1",
+      "unit_id": "u1",
+      "prompt": "Write a concise personal introduction paragraph (50–80 words) describing your profession, daily work routines, and one project you are currently working on. You MUST include at least two sentences in the Present Simple tense and two sentences in the Present Continuous tense.",
+      "model_response": "I work as a designer at a small company. I usually create posters and discuss ideas with my colleagues every morning. At the moment, I am preparing a short presentation for a new client. This week, I am also learning how to explain my design choices more clearly during our meetings.",
+      "review_criteria": [
+        "At least two sentences use the Present Simple appropriately for a role or routine.",
+        "At least two sentences use the Present Continuous appropriately for a current or temporary activity.",
+        "Check subject–verb agreement and required auxiliary verbs.",
+        "Aim for 50–80 words with a clear connection between sentences; word count alone does not establish writing quality."
+      ],
+      "assessment_type": "rubric_guided_review_not_automatic_grade"
+    }
+  ],
+  "conflicts": [],
+  "next_batch_topics": [
+    "Unit 2: Past Simple vs. Past Continuous & Sequential Time Markers",
+    "Unit 3: Present Perfect vs. Past Simple in Professional Contexts",
+    "Unit 4: Modals of Obligation, Permission, and Professional Advice"
+  ],
+  "collection_id": "serag-notebook-course-v1",
+  "review": {
+    "date": "2026-11-22",
+    "language_review_status": "editorially_reviewed",
+    "source_page_status": "unverified_original_PDFs_not_supplied",
+    "publication_status": "staged_not_published",
+    "source_file_sha256": "cc54b1234ec8c6c9cd79713d5c4cd7809edb45e9c712514c701a020ec5e3ffbf",
+    "current_site_importer_support": {
+      "multiple_choice": 5,
+      "other_question_formats_require_curriculum_adapter": 11
+    },
+    "notes": [
+      "No original source PDFs were supplied with this batch.",
+      "Empty unreadable_pages lists do not establish full-file review.",
+      "Units u2–u4 are outlines only.",
+      "The source list includes Understanding Semantics, but no lesson/question cites it.",
+      "Source citations remain pending even where the language has been corrected."
+    ],
+    "changes": [
+      {
+        "target": "u1-l1",
+        "reason": "Corrected the SVO-only generalization, added SV/SVC and simple-versus-complete subjects, and removed the false blanket rejection of object fronting."
+      },
+      {
+        "target": "u1-l3",
+        "reason": "Fixed the Arabic wording and made consonant+y and auxiliary/base-verb rules explicit."
+      },
+      {
+        "target": "u1-l4",
+        "reason": "Clarified state/action meanings and replaced a potentially ambiguous duration example with a clear temporary situation."
+      },
+      {
+        "target": "q03",
+        "reason": "Replaced an advanced neither/nor agreement item with an ordinary third-person agreement item aligned to this lesson."
+      },
+      {
+        "target": "q04",
+        "reason": "Made the requested tense explicit instead of treating a context-sensitive progressive alternative as universally ungrammatical."
+      },
+      {
+        "target": "q05",
+        "reason": "Removed the detached contraction that would not fit the blank as spaced in the sentence."
+      },
+      {
+        "target": "q07",
+        "reason": "Replaced collective team with singular researcher so a valid British-English plural agreement is not rejected; removed a detached contraction."
+      },
+      {
+        "target": "question skills",
+        "reason": "Separated choice-based recognition from written correction/application; choice questions do not establish independent production."
+      },
+      {
+        "target": "q13–q15",
+        "reason": "Added structured tokens and checked every accepted answer uses exactly the available words. Removed the unavailable contraction in q14."
+      },
+      {
+        "target": "wt1",
+        "reason": "Simplified the model and retained a four-sentence, 50–80-word task with separate language and meaning checks."
+      }
+    ]
+  },
+  "course_mapping": [
+    {
+      "external_lesson_id": "u1-l1",
+      "draft_course_unit_id": "unit-01",
+      "existing_lesson_topics": [
+        "sentence-parts",
+        "word-order"
+      ]
+    },
+    {
+      "external_lesson_id": "u1-l2",
+      "draft_course_unit_id": "unit-02",
+      "existing_lesson_topics": [
+        "be-basics",
+        "subject-object-pronouns"
+      ]
+    },
+    {
+      "external_lesson_id": "u1-l3",
+      "draft_course_unit_id": "unit-04",
+      "existing_lesson_topics": [
+        "present-simple",
+        "frequency-adverbs"
+      ]
+    },
+    {
+      "external_lesson_id": "u1-l4",
+      "draft_course_unit_id": "unit-05",
+      "existing_lesson_topics": [
+        "present-continuous",
+        "stative-verbs"
+      ]
+    }
+  ]
+}
