@@ -65,7 +65,8 @@ test('monitoring is production-root only, fails open, disables rich collection a
 
 test('production SDK is same-origin and CSP retains existing service permissions', () => {
   const html = readFileSync('index.html', 'utf8');
-  assert.match(html, /src="\/assets\/monitoring\/sentry.js\?v=94" async/);
+  const version = readFileSync('app-bootstrap.js', 'utf8').match(/const V='(\d+)'/)[1];
+  assert.ok(html.includes('src="/assets/monitoring/sentry.js?v=' + version + '" async'));
   const config = JSON.parse(readFileSync('vercel.json', 'utf8'));
   const csp = config.headers.flatMap(g => g.headers).find(h => h.key === 'Content-Security-Policy').value;
   for (const source of ['https://*.sentry.io', 'https://*.hf.co', 'https://www.youtube.com/iframe_api', "'wasm-unsafe-eval'"]) assert.ok(csp.includes(source));
