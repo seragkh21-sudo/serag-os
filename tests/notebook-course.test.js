@@ -33,3 +33,20 @@ test('recent-history exclusion, missing history and owner changes cannot leak or
  const blocked=await fixture({ready:false});assert.equal(await blocked.api.start(),false);assert.equal(blocked.tracks.length,0);
  const active=await fixture();await active.api.start();const q=active.api.currentQuestion();active.window.user={id:'owner-b'};assert.equal(active.api.respond(q.answer),false);assert.equal(active.api.reveal(),false);assert.equal(active.tracks.length,0);
 });
+
+test('combined course keeps batch one stable and batch two answers possible with supplied tiles',async()=>{
+ const published=JSON.parse(fs.readFileSync(new URL('../curriculum-data/course-v1.json',import.meta.url)));
+ const second=JSON.parse(fs.readFileSync(new URL('../curriculum-data/batch-002.json',import.meta.url)));
+ const {api}=await fixture();api.validate(published);
+ assert.deepEqual(published.questions,[...batch.questions.map(q=>({...q,batch_id:'batch-001'})),...second.questions.map(q=>({...q,batch_id:'batch-002'}))]);
+ assert.equal(published.questions.length,32);assert.equal(published.units.flatMap(u=>u.lessons).length,8);
+ for(const q of batch.questions){const live=published.questions.find(row=>row.canonical_id===q.canonical_id);for(const key of ['id','canonical_id','prompt','answer','accepted_answers'])assert.deepEqual(live[key],q[key])}
+ for(const q of second.questions){assert.match(q.canonical_id,/^serag-notebook-course-v1:batch-002:q/);for(const ref of q.source_refs)assert.equal(ref.pdf_page,null)}
+ assert.equal(second.questions.filter(q=>q.type==='multiple_choice').length,5);
+ assert.equal(second.questions.filter(q=>q.type==='fill_blank').length,4);
+ assert.equal(second.questions.filter(q=>q.type==='error_correction').length,4);
+ assert.equal(second.questions.filter(q=>q.type==='sentence_order').length,3);
+ const impossible=structuredClone(published);impossible.questions.find(q=>q.id==='q32').accepted_answers.push('Major damage to city infrastructure is caused by earthquakes.');
+ assert.throws(()=>api.validate(impossible),/tokens/);
+ const duplicate=structuredClone(published);duplicate.units[0].lessons.push(duplicate.units[0].lessons[0]);assert.throws(()=>api.validate(duplicate),/Duplicate/);
+});
