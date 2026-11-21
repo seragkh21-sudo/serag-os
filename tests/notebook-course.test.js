@@ -34,12 +34,13 @@ test('recent-history exclusion, missing history and owner changes cannot leak or
  const active=await fixture();await active.api.start();const q=active.api.currentQuestion();active.window.user={id:'owner-b'};assert.equal(active.api.respond(q.answer),false);assert.equal(active.api.reveal(),false);assert.equal(active.tracks.length,0);
 });
 
-test('combined course keeps batch one stable and batch two answers possible with supplied tiles',async()=>{
+test('combined course retains prior batches and all word-order answers remain constructible',async()=>{
  const published=JSON.parse(fs.readFileSync(new URL('../curriculum-data/course-v1.json',import.meta.url)));
  const second=JSON.parse(fs.readFileSync(new URL('../curriculum-data/batch-002.json',import.meta.url)));
+ const third=JSON.parse(fs.readFileSync(new URL('../curriculum-data/batch-003.json',import.meta.url)));
  const {api}=await fixture();api.validate(published);
- assert.deepEqual(published.questions,[...batch.questions.map(q=>({...q,batch_id:'batch-001'})),...second.questions.map(q=>({...q,batch_id:'batch-002'}))]);
- assert.equal(published.questions.length,32);assert.equal(published.units.flatMap(u=>u.lessons).length,8);
+ assert.deepEqual(published.questions,[...batch.questions.map(q=>({...q,batch_id:'batch-001'})),...second.questions.map(q=>({...q,batch_id:'batch-002'})),...third.questions.map(q=>({...q,batch_id:'batch-003'}))]);
+ assert.equal(published.questions.length,48);assert.equal(published.units.flatMap(u=>u.lessons).length,12);
  for(const q of batch.questions){const live=published.questions.find(row=>row.canonical_id===q.canonical_id);for(const key of ['id','canonical_id','prompt','answer','accepted_answers'])assert.deepEqual(live[key],q[key])}
  for(const q of second.questions){assert.match(q.canonical_id,/^serag-notebook-course-v1:batch-002:q/);for(const ref of q.source_refs)assert.equal(ref.pdf_page,null)}
  assert.equal(second.questions.filter(q=>q.type==='multiple_choice').length,5);
@@ -47,6 +48,12 @@ test('combined course keeps batch one stable and batch two answers possible with
  assert.equal(second.questions.filter(q=>q.type==='error_correction').length,4);
  assert.equal(second.questions.filter(q=>q.type==='sentence_order').length,3);
  for(const q of second.questions.filter(q=>q.type==='sentence_order'))assert.notEqual(api.normalize(q.tokens.join(' ')),api.normalize(q.answer),'Order exercises must not arrive already solved');
+ for(const q of third.questions){assert.match(q.canonical_id,/^serag-notebook-course-v1:batch-003:q/);for(const ref of q.source_refs)assert.equal(ref.pdf_page,null)}
+ for(const kind of ['multiple_choice','fill_blank','error_correction','sentence_order'])assert.equal(third.questions.filter(q=>q.type===kind).length,second.questions.filter(q=>q.type===kind).length);
+ for(const q of third.questions.filter(q=>q.type==='sentence_order'))assert.notEqual(api.normalize(q.tokens.join(' ')),api.normalize(q.answer));
+ assert.equal(api.normalize('women’s'),api.normalize("women's"));
+ assert.notEqual(api.normalize('its'),api.normalize("it's"));
+ const missingTile=structuredClone(published);missingTile.questions.find(q=>q.id==='q47').tokens.pop();assert.throws(()=>api.validate(missingTile),/tokens/);
  const impossible=structuredClone(published);impossible.questions.find(q=>q.id==='q32').accepted_answers.push('Major damage to city infrastructure is caused by earthquakes.');
  assert.throws(()=>api.validate(impossible),/tokens/);
  const duplicate=structuredClone(published);duplicate.units[0].lessons.push(duplicate.units[0].lessons[0]);assert.throws(()=>api.validate(duplicate),/Duplicate/);
