@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test"
+    "test": "node --test",
+    "pretest": "node scripts/build-importer.mjs"
   },
   "dependencies": {
     "@babel/parser": "8.1.3",

@@ -30,6 +30,8 @@ The CLI created the migration file; its filename was aligned with the actual ser
 
 ## Verification boundaries
 
-Unit checks cover missingness, valid choices/levels, aliases, conflicts, same-file duplicates, similar wording, safe JS parsing and bounds. Loading checks cover paginated history, incomplete reads and account races. Chromium fixture uses actual bundled UI/parser/PDF worker plus the existing mock Supabase adapter, covering preview/edit/save, shared questions, reading articles, duplicate retry, reload, account switch and undo at 393px. Text PDF extraction and image-only/empty PDF rejection are exercised. These fixture checks do not claim a file upload from the owner's real signed-in account.
+Unit checks cover missingness, valid choices/levels, aliases, conflicts, same-file duplicates, similar wording, safe JS parsing and bounds. Loading checks cover paginated history, incomplete reads and account races. Chromium fixture uses actual bundled UI/parser/PDF worker plus the existing mock Supabase adapter, covering preview/edit/save, shared questions, reading articles, duplicate retry, reload, account switch and undo at 393px. Text PDF extraction is exercised; an empty PDF checks the OCR-needed error path. These fixture checks do not claim a file upload from the owner's real signed-in account.
+
+`npm test` builds the deterministic importer assets in its pretest step, so checks also work in a clean checkout without generated files.
 
 Completed local validation: 255 Node tests, production importer/monitoring/natural-audio builds, and the full 393px Chromium fixture import flow passed. Batch-level practice and direct Reading Studio access are included. No horizontal overflow or page errors in the checked flow. Production deployment/served assets are checked separately before reporting publication.
