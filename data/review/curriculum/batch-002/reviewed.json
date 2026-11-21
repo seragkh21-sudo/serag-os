@@ -1,0 +1,894 @@
+{
+  "batch_id": "batch-002",
+  "sources": [
+    {
+      "id": "src-01",
+      "title": "English grammar in use red book.pdf",
+      "unreadable_pages": [],
+      "readability_status": "not_independently_verified"
+    },
+    {
+      "id": "src-02",
+      "title": "collins Intermediate grammar.pdf",
+      "unreadable_pages": [],
+      "readability_status": "not_independently_verified"
+    },
+    {
+      "id": "src-03",
+      "title": "First_Masterclass_Students_Book.pdf",
+      "unreadable_pages": [],
+      "readability_status": "not_independently_verified"
+    },
+    {
+      "id": "src-04",
+      "title": "Grammar_Dimensions_4th_4_Students_Book.pdf",
+      "unreadable_pages": [],
+      "readability_status": "not_independently_verified"
+    },
+    {
+      "id": "src-05",
+      "title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+      "unreadable_pages": [],
+      "readability_status": "not_independently_verified"
+    }
+  ],
+  "units": [
+    {
+      "id": "u4",
+      "title": "Unit 4: Nouns: Singular, Plural and Countability",
+      "objective": "Form common plurals and distinguish countable and uncountable meanings in everyday adult communication.",
+      "prerequisites": [
+        "u1"
+      ],
+      "lessons": [
+        {
+          "id": "u4-l1",
+          "title": "Lesson 4.1: Regular and Irregular Plurals",
+          "explanation_en": "Plural count nouns usually refer to more than one item. Most add -s. Many nouns ending in s, sh, ch, x or z add -es; nouns ending in consonant + y usually change y to -ies. Spellings have exceptions: check unfamiliar words. Learn irregular plurals individually: woman/women, child/children, analysis/analyses, crisis/crises, criterion/criteria. Some nouns, such as sheep and series, have the same singular and plural form. Scissors and trousers normally take plural agreement; a pair of scissors refers to one complete item, and two pairs refers to two items.",
+          "clarification_ar": "الجمع يدل عادةً على أكثر من عنصر. نضيف غالبًا s أو es، ونحوّل y إلى ies بعد حرف ساكن. احفظ الجمع الشاذ مثل woman/women وcriterion/criteria؛ ولا تعمم قاعدة واحدة على كل الكلمات. نقول a pair of scissors لأداة مقص كاملة وtwo pairs لأداتين.",
+          "form": "Most nouns: +s | Many s/sh/ch/x/z endings: +es | Consonant+y: -ies | Irregular examples: woman/women; criterion/criteria | a pair of scissors",
+          "examples": [
+            "The supervisors reviewed several reports.",
+            "The analysts compared two analyses.",
+            "A pair of scissors is in the drawer."
+          ],
+          "common_mistakes": [
+            "Use children and women, not childrens and womens, for ordinary plurals.",
+            "For one complete cutting tool, use a pair of scissors rather than a scissors.",
+            "Criterion has the plural criteria; do not add -s to criteria."
+          ],
+          "source_refs": [
+            {
+              "source_id": "src-01",
+              "source_title": "English grammar in use red book.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "verification_status": "unverified"
+            },
+            {
+              "source_id": "src-02",
+              "source_title": "collins Intermediate grammar.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "verification_status": "unverified"
+            }
+          ],
+          "reported_source_refs": [
+            {
+              "source_title": "English grammar in use red book.pdf",
+              "pdf_page": 142,
+              "printed_page": 142
+            },
+            {
+              "source_title": "collins Intermediate grammar.pdf",
+              "pdf_page": 26,
+              "printed_page": 26
+            }
+          ]
+        },
+        {
+          "id": "u4-l2",
+          "title": "Lesson 4.2: Countable and Uncountable Nouns",
+          "explanation_en": "Countable uses refer to separate items and allow singular and plural forms: a report, two reports. In their ordinary mass meanings, advice, information, equipment, furniture and progress are uncountable, take singular agreement and do not combine directly with a/an or a number. Use a piece of advice, three pieces of equipment or three reams of paper to specify amounts. Many and a few go with plural count nouns; much and a little go with uncountable nouns. Some and a lot of can go with either. Much is common in negatives and questions; a lot of is usually more natural in ordinary affirmative statements. Countability can change with meaning: paper as material, a paper as an article; water as a substance, a water as a serving in a suitable ordering context.",
+          "clarification_ar": "الأسماء المعدودة لها مفرد وجمع. في معانيها المعتادة لا نجمع advice وinformation وequipment ولا نضع قبلها a/an مباشرة. نقول a piece of advice أوthree pieces of equipment. نستخدم many مع الجمع المعدود وmuch مع غير المعدود، وغالبًا a lot of في الإثبات العادي. قد يتغير العدّ بتغير المعنى؛ a water قد تعني حصة ماء عند الطلب.",
+          "form": "Countable: a report / two reports | Uncountable: information is useful | Amounts: a piece of advice / three pieces of equipment | many reports / much information",
+          "examples": [
+            "The consultant provided useful advice.",
+            "We ordered three pieces of equipment.",
+            "There was not much progress yesterday.",
+            "We received a lot of information about the project."
+          ],
+          "common_mistakes": [
+            "Use information and equipment without a plural -s in their ordinary mass meanings.",
+            "Use advice or a piece of advice, not an advice.",
+            "Do not assume that a noun has the same countability in every meaning."
+          ],
+          "source_refs": [
+            {
+              "source_id": "src-01",
+              "source_title": "English grammar in use red book.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "verification_status": "unverified"
+            },
+            {
+              "source_id": "src-03",
+              "source_title": "First_Masterclass_Students_Book.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "verification_status": "unverified"
+            }
+          ],
+          "reported_source_refs": [
+            {
+              "source_title": "English grammar in use red book.pdf",
+              "pdf_page": 144,
+              "printed_page": 144
+            },
+            {
+              "source_title": "First_Masterclass_Students_Book.pdf",
+              "pdf_page": 36,
+              "printed_page": 36
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "u5",
+      "title": "Unit 5: Articles: A, An, The and No Article",
+      "objective": "Choose articles by sound and distinguish general from identifiable reference in clear contexts.",
+      "prerequisites": [
+        "u4"
+      ],
+      "lessons": [
+        {
+          "id": "u5-l1",
+          "title": "Lesson 5.1: A or An — Follow the Sound",
+          "explanation_en": "Use a or an with a singular count noun when introducing an unspecified example. Choose by the initial sound of the following spoken word, including any adjective: a university and a European company start with /j/, while an hour and an honest answer start with a vowel sound because h is silent. MBA starts with the spoken letter name M, /em/, so use an MBA. Letter names can vary between speakers; a question about H should specify its pronunciation. A/an does not directly modify a plural noun or a noun used in an uncountable meaning. A serving meaning, such as a water in an order, is a different countable use.",
+          "clarification_ar": "نختار a أوan حسب أول صوت في الكلمة التالية، بما فيها الصفة، وليس حسب أول حرف مكتوب. نقول a university وa European company لأن الصوت الأول /j/، وan hour وan honest answer لأن h صامت. لا نضعهما قبل جمع أو معنى غير معدود؛ أما الحصة مثل a water في طلب مشروب فهي استعمال معدود مختلف.",
+          "form": "a + consonant sound: a university / a European company | an + vowel sound: an hour / an honest answer / an MBA",
+          "examples": [
+            "He earned an MBA at a European university.",
+            "We waited for an hour before the interview.",
+            "She works as an architect."
+          ],
+          "common_mistakes": [
+            "Choose by sound: an hour and a university.",
+            "Use a/an with a singular countable meaning; servings can make an otherwise mass noun countable."
+          ],
+          "source_refs": [
+            {
+              "source_id": "src-01",
+              "source_title": "English grammar in use red book.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "verification_status": "unverified"
+            },
+            {
+              "source_id": "src-02",
+              "source_title": "collins Intermediate grammar.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "verification_status": "unverified"
+            }
+          ],
+          "reported_source_refs": [
+            {
+              "source_title": "English grammar in use red book.pdf",
+              "pdf_page": 140,
+              "printed_page": 140
+            },
+            {
+              "source_title": "collins Intermediate grammar.pdf",
+              "pdf_page": 52,
+              "printed_page": 52
+            }
+          ]
+        },
+        {
+          "id": "u5-l2",
+          "title": "Lesson 5.2: The or No Article — General and Specific Reference",
+          "explanation_en": "Use the when the intended referent is identifiable in context, for example because it was mentioned before or both people know which item is meant. Plural count nouns and uncountable nouns often take no article when used generally: Engineers solve problems; water is essential. Compare water in general with the water in this pitcher, when referring to all the identifiable water there. A following phrase does not automatically require the: Engineers who design bridges need training can still describe a group generally. Languages and subjects normally take no article in ordinary uses. Proper names and other patterns have exceptions beyond this lesson. The symbol Ø marks an omitted article in exercises; it is not a word to insert in ordinary writing.",
+          "clarification_ar": "نستخدم the عندما يكون المقصود محددًا ويمكن معرفته من السياق. عند التعميم نترك الأداة مع الجمع المعدود وغير المعدود: Engineers solve problems وWater is essential. هذا هو Zero Article ورمزه Ø في التمارين فقط. وجود وصف بعد الاسم لا يفرض the تلقائيًا؛ المهم هل المرجع محدد أم عام.",
+          "form": "the + identifiable noun | No article + generic plural or uncountable noun | Ø is an exercise symbol, not a written word",
+          "examples": [
+            "Water is essential for health. The water in this pitcher is filtered.",
+            "The engineers who designed our prototype are here for the meeting.",
+            "Engineers who design bridges need specialist training.",
+            "She studies economics and speaks French."
+          ],
+          "common_mistakes": [
+            "For the general concept, write Life is beautiful, without the.",
+            "Do not treat every modifying phrase as proof that the is required.",
+            "Do not insert the symbol Ø into normal sentences."
+          ],
+          "source_refs": [
+            {
+              "source_id": "src-01",
+              "source_title": "English grammar in use red book.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "verification_status": "unverified"
+            },
+            {
+              "source_id": "src-04",
+              "source_title": "Grammar_Dimensions_4th_4_Students_Book.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "verification_status": "unverified"
+            }
+          ],
+          "reported_source_refs": [
+            {
+              "source_title": "English grammar in use red book.pdf",
+              "pdf_page": 148,
+              "printed_page": 148
+            },
+            {
+              "source_title": "Grammar_Dimensions_4th_4_Students_Book.pdf",
+              "pdf_page": 84,
+              "printed_page": 84
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "q17",
+      "canonical_id": "serag-notebook-course-v1:batch-002:q17",
+      "batch_id": "batch-002",
+      "unit_id": "u4",
+      "lesson_id": "u4-l1",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "Identify the plural form of 'analysis'.",
+      "options": [
+        "analysiss",
+        "analyses",
+        "analysises",
+        "analysi"
+      ],
+      "answer": "analyses",
+      "accepted_answers": [
+        "analyses"
+      ],
+      "explanation": "The plural of analysis is analyses; crisis similarly becomes crises. Learn these forms rather than applying the change to every word ending in -is.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-02",
+          "source_title": "collins Intermediate grammar.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "collins Intermediate grammar.pdf",
+          "pdf_page": 26,
+          "printed_page": 26
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q18",
+      "canonical_id": "serag-notebook-course-v1:batch-002:q18",
+      "batch_id": "batch-002",
+      "unit_id": "u4",
+      "lesson_id": "u4-l1",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "Which phrase refers to one complete cutting tool normally called 'scissors'?",
+      "options": [
+        "a scissor",
+        "one scissor",
+        "a pair of scissors",
+        "a scissors"
+      ],
+      "answer": "a pair of scissors",
+      "accepted_answers": [
+        "a pair of scissors"
+      ],
+      "explanation": "In ordinary usage, one complete item is a pair of scissors; two items are two pairs of scissors.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": 142,
+          "printed_page": 142
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q19",
+      "canonical_id": "serag-notebook-course-v1:batch-002:q19",
+      "batch_id": "batch-002",
+      "unit_id": "u4",
+      "lesson_id": "u4-l2",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "Choose the sentence that correctly treats 'equipment' as an uncountable noun.",
+      "options": [
+        "The company purchased several new equipments.",
+        "The company purchased a new equipment.",
+        "The company purchased three pieces of new equipment.",
+        "The company purchased many equipments for the lab."
+      ],
+      "answer": "The company purchased three pieces of new equipment.",
+      "accepted_answers": [
+        "The company purchased three pieces of new equipment."
+      ],
+      "explanation": "Equipment has no ordinary plural -s in this meaning. Use pieces of equipment to count individual items.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-03",
+          "source_title": "First_Masterclass_Students_Book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "First_Masterclass_Students_Book.pdf",
+          "pdf_page": 36,
+          "printed_page": 36
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q20",
+      "canonical_id": "serag-notebook-course-v1:batch-002:q20",
+      "batch_id": "batch-002",
+      "unit_id": "u5",
+      "lesson_id": "u5-l1",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "Choose a or an when HR is pronounced 'aitch ar' (/eɪtʃ ɑː/): 'She is ___ HR manager at a large company.'",
+      "options": [
+        "a",
+        "an",
+        "the",
+        "Ø"
+      ],
+      "answer": "an",
+      "accepted_answers": [
+        "an"
+      ],
+      "explanation": "With the specified pronunciation aitch, the first sound is a vowel, so use an HR manager. H has other pronunciations in some varieties; the prompt fixes the pronunciation.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-02",
+          "source_title": "collins Intermediate grammar.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "collins Intermediate grammar.pdf",
+          "pdf_page": 52,
+          "printed_page": 52
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q21",
+      "canonical_id": "serag-notebook-course-v1:batch-002:q21",
+      "batch_id": "batch-002",
+      "unit_id": "u5",
+      "lesson_id": "u5-l2",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "Which sentence talks about coffee generally, then about the particular coffee in the speaker's cup?",
+      "options": [
+        "The coffee is a popular beverage, but coffee in my cup is cold.",
+        "Coffee is a popular beverage, but the coffee in my cup is cold.",
+        "A coffee is a popular beverage, but a coffee in my cup is cold.",
+        "The coffee is a popular beverage, but a coffee in my cup is cold."
+      ],
+      "answer": "Coffee is a popular beverage, but the coffee in my cup is cold.",
+      "accepted_answers": [
+        "Coffee is a popular beverage, but the coffee in my cup is cold."
+      ],
+      "explanation": "Coffee has no article for the general beverage. The coffee in my cup identifies the particular coffee being discussed.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-04",
+          "source_title": "Grammar_Dimensions_4th_4_Students_Book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "Grammar_Dimensions_4th_4_Students_Book.pdf",
+          "pdf_page": 84,
+          "printed_page": 84
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q22",
+      "canonical_id": "serag-notebook-course-v1:batch-002:q22",
+      "batch_id": "batch-002",
+      "unit_id": "u4",
+      "lesson_id": "u4-l1",
+      "type": "fill_blank",
+      "skill": "controlled_application",
+      "prompt": "Complete with the plural of criterion: 'The committee established clear ___ for evaluating the proposals.'",
+      "options": [],
+      "answer": "criteria",
+      "accepted_answers": [
+        "criteria"
+      ],
+      "explanation": "Criterion is singular; criteria is plural.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-02",
+          "source_title": "collins Intermediate grammar.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "collins Intermediate grammar.pdf",
+          "pdf_page": 26,
+          "printed_page": 26
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q23",
+      "canonical_id": "serag-notebook-course-v1:batch-002:q23",
+      "batch_id": "batch-002",
+      "unit_id": "u4",
+      "lesson_id": "u4-l2",
+      "type": "fill_blank",
+      "skill": "controlled_application",
+      "prompt": "Fill the blank with much or many: 'There was not ___ progress yesterday.'",
+      "options": [],
+      "answer": "much",
+      "accepted_answers": [
+        "much"
+      ],
+      "explanation": "Progress is uncountable in this meaning, so use much rather than many. Much is natural in this negative sentence.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": 144,
+          "printed_page": 144
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q24",
+      "canonical_id": "serag-notebook-course-v1:batch-002:q24",
+      "batch_id": "batch-002",
+      "unit_id": "u5",
+      "lesson_id": "u5-l1",
+      "type": "fill_blank",
+      "skill": "controlled_application",
+      "prompt": "Fill the blank with a or an: 'She works for ___ European company.'",
+      "options": [],
+      "answer": "a",
+      "accepted_answers": [
+        "a"
+      ],
+      "explanation": "European begins with the consonant sound /j/, so use a even though the written word starts with E.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": 140,
+          "printed_page": 140
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q25",
+      "canonical_id": "serag-notebook-course-v1:batch-002:q25",
+      "batch_id": "batch-002",
+      "unit_id": "u5",
+      "lesson_id": "u5-l2",
+      "type": "fill_blank",
+      "skill": "controlled_application",
+      "prompt": "Fill the blank with the, or type Ø / no article for zero article. Refer to honesty as a quality in general: '___ honesty is valued in our workplace.'",
+      "options": [],
+      "answer": "Ø",
+      "accepted_answers": [
+        "Ø",
+        "no article",
+        "zero article"
+      ],
+      "explanation": "Honesty is an abstract uncountable noun used generally here, so no article is needed. Ø is an exercise symbol.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-04",
+          "source_title": "Grammar_Dimensions_4th_4_Students_Book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "Grammar_Dimensions_4th_4_Students_Book.pdf",
+          "pdf_page": 84,
+          "printed_page": 84
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q26",
+      "canonical_id": "serag-notebook-course-v1:batch-002:q26",
+      "batch_id": "batch-002",
+      "unit_id": "u4",
+      "lesson_id": "u4-l1",
+      "type": "error_correction",
+      "skill": "controlled_application",
+      "prompt": "Correct only the plural noun and keep the rest: 'Several womens joined the senior executive board this year.'",
+      "options": [],
+      "answer": "Several women joined the senior executive board this year.",
+      "accepted_answers": [
+        "Several women joined the senior executive board this year."
+      ],
+      "explanation": "The ordinary plural of woman is women, without an added -s.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": 142,
+          "printed_page": 142
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q27",
+      "canonical_id": "serag-notebook-course-v1:batch-002:q27",
+      "batch_id": "batch-002",
+      "unit_id": "u4",
+      "lesson_id": "u4-l2",
+      "type": "error_correction",
+      "skill": "controlled_application",
+      "prompt": "Correct the advice phrase and keep the rest: 'The manager gave me an advice about improving my presentation skills.'",
+      "options": [],
+      "answer": "The manager gave me a piece of advice about improving my presentation skills.",
+      "accepted_answers": [
+        "The manager gave me a piece of advice about improving my presentation skills.",
+        "The manager gave me advice about improving my presentation skills.",
+        "The manager gave me some advice about improving my presentation skills."
+      ],
+      "explanation": "Advice is uncountable in this meaning. Use a piece of advice or omit the article.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-03",
+          "source_title": "First_Masterclass_Students_Book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "First_Masterclass_Students_Book.pdf",
+          "pdf_page": 36,
+          "printed_page": 36
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q28",
+      "canonical_id": "serag-notebook-course-v1:batch-002:q28",
+      "batch_id": "batch-002",
+      "unit_id": "u5",
+      "lesson_id": "u5-l1",
+      "type": "error_correction",
+      "skill": "controlled_application",
+      "prompt": "Correct only a/an and keep the rest: 'The auditor conducted a honest evaluation of the company finances.'",
+      "options": [],
+      "answer": "The auditor conducted an honest evaluation of the company finances.",
+      "accepted_answers": [
+        "The auditor conducted an honest evaluation of the company finances."
+      ],
+      "explanation": "The h in honest is silent; the first sound is a vowel, so use an honest evaluation.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": 140,
+          "printed_page": 140
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q29",
+      "canonical_id": "serag-notebook-course-v1:batch-002:q29",
+      "batch_id": "batch-002",
+      "unit_id": "u5",
+      "lesson_id": "u5-l2",
+      "type": "error_correction",
+      "skill": "controlled_application",
+      "prompt": "Remove the unnecessary article and keep the rest of this general statement: 'The inflation affects purchasing power across all economic sectors.'",
+      "options": [],
+      "answer": "Inflation affects purchasing power across all economic sectors.",
+      "accepted_answers": [
+        "Inflation affects purchasing power across all economic sectors."
+      ],
+      "explanation": "Inflation refers to the general economic concept here and takes no article.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-04",
+          "source_title": "Grammar_Dimensions_4th_4_Students_Book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "Grammar_Dimensions_4th_4_Students_Book.pdf",
+          "pdf_page": 84,
+          "printed_page": 84
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q30",
+      "canonical_id": "serag-notebook-course-v1:batch-002:q30",
+      "batch_id": "batch-002",
+      "unit_id": "u4",
+      "lesson_id": "u4-l2",
+      "type": "sentence_order",
+      "skill": "controlled_application",
+      "prompt": "Use every tile once. Start with The consultant and put on the project at the end.",
+      "options": [],
+      "answer": "The consultant provided some important information on the project.",
+      "accepted_answers": [
+        "The consultant provided some important information on the project."
+      ],
+      "explanation": "Some works with the uncountable noun information. Much is possible in formal affirmative statements, but some or a lot of is generally more natural in everyday affirmative language.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": 144,
+          "printed_page": 144
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed.",
+      "tokens": [
+        "provided",
+        "important",
+        "the",
+        "consultant",
+        "information",
+        "some",
+        "on",
+        "project",
+        "the"
+      ]
+    },
+    {
+      "id": "q31",
+      "canonical_id": "serag-notebook-course-v1:batch-002:q31",
+      "batch_id": "batch-002",
+      "unit_id": "u5",
+      "lesson_id": "u5-l1",
+      "type": "sentence_order",
+      "skill": "controlled_application",
+      "prompt": "Use every tile once. Start with A European engineer.",
+      "options": [],
+      "answer": "A European engineer introduced an innovative system.",
+      "accepted_answers": [
+        "A European engineer introduced an innovative system."
+      ],
+      "explanation": "A goes before European because its first sound is /j/. An goes before innovative because it begins with a vowel sound.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": 140,
+          "printed_page": 140
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed.",
+      "tokens": [
+        "a",
+        "European",
+        "engineer",
+        "introduced",
+        "an",
+        "innovative",
+        "system"
+      ]
+    },
+    {
+      "id": "q32",
+      "canonical_id": "serag-notebook-course-v1:batch-002:q32",
+      "batch_id": "batch-002",
+      "unit_id": "u5",
+      "lesson_id": "u5-l2",
+      "type": "sentence_order",
+      "skill": "controlled_application",
+      "prompt": "Use every tile once. Start with Earthquakes and keep city infrastructure together.",
+      "options": [],
+      "answer": "Earthquakes cause major damage to city infrastructure.",
+      "accepted_answers": [
+        "Earthquakes cause major damage to city infrastructure."
+      ],
+      "explanation": "Earthquakes is a generic plural; damage is uncountable here. Both have no article in this general statement.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-04",
+          "source_title": "Grammar_Dimensions_4th_4_Students_Book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "Grammar_Dimensions_4th_4_Students_Book.pdf",
+          "pdf_page": 84,
+          "printed_page": 84
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed.",
+      "tokens": [
+        "earthquakes",
+        "cause",
+        "major",
+        "damage",
+        "to",
+        "city",
+        "infrastructure"
+      ]
+    }
+  ],
+  "writing_tasks": [
+    {
+      "id": "wt2",
+      "batch_id": "batch-002",
+      "unit_id": "u4",
+      "lesson_ids": [
+        "u4-l1",
+        "u4-l2",
+        "u5-l1",
+        "u5-l2"
+      ],
+      "word_range": "60–90",
+      "prompt": "Write a professional supply request memo (60–90 words) to your office administrator. Include at least two plural count nouns, two uncountable nouns with suitable partitives or quantifiers, and examples of a/an and the where appropriate.",
+      "model_response": "Dear Sarah,\n\nI am writing to request additional office supplies for our department. We need a new printer for the main office and two pairs of scissors for the design team. In addition, please order three reams of paper and a box of pens. We also require some advice regarding the delivery schedule for the new computer equipment. Thank you for your assistance with this matter.\n\nBest regards,\nMark",
+      "review_criteria": [
+        "Check ordinary plural forms, including supplies, pairs and pens.",
+        "Use suitable amounts with uncountable nouns, such as three reams of paper and some advice.",
+        "Choose a/an by sound and the for identifiable references.",
+        "Aim for 60–90 words and a clear professional request. Word count alone does not measure writing quality."
+      ],
+      "assessment_type": "rubric_guided_review_not_automatic_grade"
+    }
+  ],
+  "conflicts": [],
+  "next_batch_topics": [
+    "Pronouns: subject, object and reflexive",
+    "Possessive adjectives, pronouns and apostrophes",
+    "Demonstratives and quantifiers"
+  ],
+  "review": {
+    "language_review_status": "editorially_reviewed",
+    "source_verification_status": "unverified_original_pdfs_unavailable",
+    "publication_status": "published_editorial_review_source_pages_unverified",
+    "input_format": "user_inline_json",
+    "note": "Editorial adaptation of the supplied batch; this file is not an unchanged copy of the submission. Original claimed pages are preserved as reported_source_refs. Empty unreadable_pages does not establish full-book readability. Unit IDs are supplied curriculum labels, not a claim that units u2/u3 are separately published."
+  }
+}

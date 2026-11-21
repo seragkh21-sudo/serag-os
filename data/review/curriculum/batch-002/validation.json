@@ -1,0 +1,14 @@
+{
+  "comparison": "normalized prompt/answer exact matches against 1282 current public-bank questions and 16 batch-001 questions; excludes private imports and semantic equivalence",
+  "compared_questions": 1298,
+  "new_questions": 16,
+  "exact_matches": [],
+  "token_similarity_candidates": [],
+  "source_pages_verified": false,
+  "reviewed_formats": {
+    "multiple_choice": 5,
+    "fill_blank": 4,
+    "error_correction": 4,
+    "sentence_order": 3
+  }
+}
