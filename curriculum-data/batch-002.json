@@ -801,13 +801,13 @@
       "needs_review": true,
       "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed.",
       "tokens": [
-        "a",
-        "European",
-        "engineer",
-        "introduced",
-        "an",
         "innovative",
-        "system"
+        "engineer",
+        "an",
+        "introduced",
+        "European",
+        "system",
+        "a"
       ]
     },
     {
@@ -845,13 +845,13 @@
       "needs_review": true,
       "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed.",
       "tokens": [
-        "earthquakes",
-        "cause",
+        "infrastructure",
         "major",
-        "damage",
         "to",
+        "cause",
         "city",
-        "infrastructure"
+        "earthquakes",
+        "damage"
       ]
     }
   ],
