@@ -324,3 +324,6 @@ Published Kokoro recordings, a 270-term attributed dictionary subset, dictionary
 
 ### Guided daily path — build 95
 English overview and EngoPlay share one daily card with a concrete practice aim and a single start/continue/result action. Existing mixed sessions explain each exercise's purpose, pause back to the overview and resume the same question within the current tab. Completion offers result, explicit review and return to the daily plan. Progress/XP remain sourced from existing answers; empty pools do not claim completion. See `docs/egm/2026-11-21-daily-path.md` for scope and same-tab limits. No new curriculum, assessment, model service or database migration is introduced.
+
+### Skills beyond XP — build 96
+A shared skills report separates recognition, typed recall, grammar/usage choices, sentence ordering and limited expression-use checks. New first-check/assistance metadata produces transparent practice indicators; legacy history, XP and review schedules remain intact. Evidence is account-scoped on the current browser, bounded to 2,000 checks / 90 days; it is not a calibrated mastery or CEFR assessment and does not sync across devices. Daily cards link to the report and a separate existing delayed-recall session. See `docs/egm/2026-11-21-skill-evidence.md`.
