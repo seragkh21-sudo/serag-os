@@ -321,3 +321,6 @@ English and EngoPlay share expanded vocabulary and grammar sources, account-scop
 
 ### 2026-11-07 — Ready speech and free English sources (build 85)
 Published Kokoro recordings, a 270-term attributed dictionary subset, dictionary fallback and live Tatoeba/Datamuse exploration are available through the shared English/EngoPlay interface. Optional Azure/VoiceRSS/Google/self-hosted voice adapters show their actual configuration status. No external voice accounts or billing were created; see `docs/free-english-services-v1.md` for setup, licensing and validation.
+
+### Guided daily path — build 95
+English overview and EngoPlay share one daily card with a concrete practice aim and a single start/continue/result action. Existing mixed sessions explain each exercise's purpose, pause back to the overview and resume the same question within the current tab. Completion offers result, explicit review and return to the daily plan. Progress/XP remain sourced from existing answers; empty pools do not claim completion. See `docs/egm/2026-11-21-daily-path.md` for scope and same-tab limits. No new curriculum, assessment, model service or database migration is introduced.

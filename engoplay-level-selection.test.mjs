@@ -9,7 +9,7 @@ const overviewCode=academy.slice(academy.indexOf('function overviewHTML()'),acad
 const startDailyCode=engoplay.slice(engoplay.indexOf('function startDaily()'),engoplay.indexOf('function startPractice(',engoplay.indexOf('function startDaily()')));
 
 function renderHome(level){
-  return new Function('state','session','pathways','due',overviewCode+';return overviewHTML()')({level},null,[],()=>[]);
+  return new Function('state','session','pathways','due','window',overviewCode+';return overviewHTML()')({level},null,[],()=>[],{});
 }
 function startFor(level,pilot,available,building=[]){
   let received;
