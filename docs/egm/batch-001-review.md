@@ -7,8 +7,8 @@ Input: user-supplied JSON pasted text. The original data is retained under `data
 - Four developed lessons and 16 questions: five multiple-choice, four fill-in, four written corrections, three word-order tasks; one writing task.
 - Units u2–u4 are deliberate outlines, not completed units.
 - No exact normalized prompt/answer duplicates were found against the inspected public bank snapshot from `e9931211ee63cbcc4307376abe56a35f43680049`. Private user imports and semantic duplicates were not covered by that exact-match result. Existing topics substantially overlap; new wording is not a new skill.
-- The current site importer supports the five MCQs. The other eleven formats require a curriculum adapter that preserves typed retrieval/correction and ordering; they must not be turned into MCQs merely to pass its schema.
-- This batch is staged on the curriculum draft branch and is not published or presented as a completed course.
+- The file importer still supports MCQs; the dedicated Foundations course adapter now preserves all sixteen questions, including typed forms, corrections and word ordering.
+- The owner authorized publication on 22 November 2026. Build 98 publishes this first batch as four Foundations lesson sessions; the remaining 24-unit curriculum plan stays a draft.
 
 ## Editorial corrections
 
@@ -38,6 +38,6 @@ Review references for the specific grammar issues:
 
 ## Course placement
 
-The supplied unit is broad enough for four separate lesson sessions. Existing draft mappings are: u1-l1 → unit-01 (sentence foundations), u1-l2 → unit-02 (identity/be), u1-l3 → unit-04 (routines/questions), u1-l4 → unit-05 (now/states). This is a placement proposal, not a change to the live learning path or historical question IDs.
+The supplied unit is broad enough for four separate lesson sessions. Existing draft mappings are: u1-l1 → unit-01 (sentence foundations), u1-l2 → unit-02 (identity/be), u1-l3 → unit-04 (routines/questions), u1-l4 → unit-05 (now/states). This remains a draft placement proposal. The first batch has a separate Foundations entry shared by English and EngoPlay, without changing historical question IDs.
 
-Validation checks: JSON parsing, stable/unique IDs, unit/lesson reference integrity, MCQ answer membership and distinct choices, accepted-answer token multisets, writing-model length, unverified-page handling, and exact-match comparison to the inspected public bank. No application code or database records were changed; no full runtime suite was needed for this data-only review.
+Validation checks: JSON parsing, stable/unique IDs, unit/lesson reference integrity, MCQ answer membership and distinct choices, accepted-answer token multisets, writing-model length, unverified-page handling, and exact-match comparison to the inspected public bank. That initial staging review changed no runtime or database rows. Publication additionally includes Node tests and mobile fixture checks of all sixteen answers, shared EngoPlay answer history, recent-question exclusion, model reveal without XP, and browser-local writing drafts across reload and owner changes. These are fixture checks, not a real-account end-to-end test.
