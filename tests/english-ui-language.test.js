@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 
 const uiFiles = [
+  'import-src/browser.js',
+  'english-content-import-v1.css',
   'english-skill-evidence-v1.js',
   'english-skill-evidence-v1.css',
   'english-daily-path-v1.js',

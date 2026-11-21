@@ -1,6 +1,6 @@
 (async()=>{
   try{
-    const V='96';
+    const V='97';
     const res=await fetch(`/legacy.html?v=${V}`,{cache:'no-store',headers:{'Cache-Control':'no-cache'}});
     if(!res.ok)throw new Error('Legacy app failed to load');
     let html=await res.text();
@@ -28,6 +28,7 @@
 <link rel="stylesheet" href="/engoplay-v19.css?v=${V}"/>
 <link rel="stylesheet" href="/english-daily-path-v1.css?v=${V}"/>
 <link rel="stylesheet" href="/english-skill-evidence-v1.css?v=${V}"/>
+<link rel="stylesheet" href="/english-content-import-v1.css?v=${V}"/>
 <link rel="stylesheet" href="/engoplay-quests-v1.css?v=${V}"/>
 <link rel="stylesheet" href="/workflow-v21.css?v=${V}"/>
 <link rel="stylesheet" href="/creative-workspace.css?v=${V}"/>
@@ -141,6 +142,7 @@ html.serag-ready #seragBootScreen{display:none!important}
 <script src="/english-review-v10-fallback.js?v=${V}"></script>
 <script src="/english-attempt-sync-v11.js?v=${V}"></script>
 <script src="/engoplay-open-interactions-v1.js?v=${V}"></script>
+<script src="/assets/importer/ui.js?v=${V}"></script>
 <script src="/english-skill-evidence-v1.js?v=${V}"></script>
 <script src="/english-daily-path-v1.js?v=${V}"></script>
 <script src="/word-practice-v21.js?v=${V}"></script>

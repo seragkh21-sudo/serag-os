@@ -86,6 +86,6 @@
       ]
     }
   ],
-  "buildCommand": "node scripts/build-monitoring.mjs && node scripts/build-natural-audio.mjs",
+  "buildCommand": "node scripts/build-importer.mjs && node scripts/build-monitoring.mjs && node scripts/build-natural-audio.mjs",
   "outputDirectory": "."
 }
