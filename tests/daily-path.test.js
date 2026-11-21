@@ -72,7 +72,7 @@ test('ordinary word practice is not offered as a resumable daily plan',()=>{
 
 test('both entry points render the same daily plan and startDaily tries resume before selection',()=>{
  for(const file of ['english-academy-v12.js','engoplay-v19.js'])assert.ok(fs.readFileSync(file,'utf8').includes('SERAG_DAILY_PATH?.html()'));
- assert.match(fs.readFileSync('engoplay-v19.js','utf8'),/function startDaily\(\)\{if\(window.SERAG_WORD_PRACTICE\?\.resumeDaily\?\.\(\)\)return/);
+ assert.match(fs.readFileSync('engoplay-v19.js','utf8'),/function startDaily\(\)\{[\s\S]*?if\(window.SERAG_WORD_PRACTICE\?\.resumeDaily\?\.\(\)\)return/);
 });
 
 

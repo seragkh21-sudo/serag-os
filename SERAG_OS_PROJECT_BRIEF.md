@@ -327,3 +327,6 @@ English overview and EngoPlay share one daily card with a concrete practice aim 
 
 ### Skills beyond XP — build 96
 A shared skills report separates recognition, typed recall, grammar/usage choices, sentence ordering and limited expression-use checks. New first-check/assistance metadata produces transparent practice indicators; legacy history, XP and review schedules remain intact. Evidence is account-scoped on the current browser, bounded to 2,000 checks / 90 days; it is not a calibrated mastery or CEFR assessment and does not sync across devices. Daily cards link to the report and a separate existing delayed-recall session. See `docs/egm/2026-11-21-skill-evidence.md`.
+
+### Private content import — build 97
+English and EngoPlay now offer local file extraction, content comparison, editable preview and explicit owner-scoped import of questions/articles. A shared imported question bank feeds both practice entry points; articles use Reading Studio. Exact duplicates/conflicting answers are blocked, similar wording needs explicit review, and batch undo preserves answer/XP history. Supported text PDF, TXT/MD, JSON, CSV and static JS/JSX/TSX data; image-only PDF needs OCR first. No automatic question generation or Adobe runtime API is introduced. See `docs/content-import-v1.md` and the additive import migration.

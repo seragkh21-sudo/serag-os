@@ -95,6 +95,7 @@
  }
  function markPresented(list){const id=uid();if(!id)return;const s=state(),at=new Date().toISOString(),presented=[];for(const q of list||[]){if(q.kind==='grammar'||q.kind==='correction'){window.SERAG_PRACTICE_STATE?.remember(q.grammar);continue}if(q.kind==='build'){window.SERAG_PRACTICE_STATE?.remember(q);continue}if(q.kind!=='recognition'||!q.item?.phrase)continue;const key=norm(q.item.phrase);s[key]={...(s[key]||{}),last_presented_at:at};window.SERAG_PRACTICE_STATE?.rememberWord(q.item);if(q.item.id)presented.push(q.item.id)}try{localStorage.setItem('seragSentenceV21:'+id,JSON.stringify(s))}catch{}window.ENGOPLAY?.recordPresented?.(presented,at)}
  function start(word=null,grammarIds=null,title='My learning path',sentenceBuild=[],dailyMode=false){
+  if(window.SERAG_CONTENT_IMPORTER?.isReady===false){const id=uid();return window.SERAG_CONTENT_IMPORTER.ensureReady().then(ok=>{if(ok&&uid()===id)start(word,grammarIds,title,sentenceBuild,dailyMode)})}
   if(window.ENGOPLAY?.isReady===false){const id=uid();return window.ENGOPLAY.ensureReady().then(()=>{if(uid()===id&&window.ENGOPLAY.isReady)start(word,grammarIds,title,sentenceBuild,dailyMode)})}
   const list=items();if(list.length<4)return;
   const status=id=>{const review=window.ENGOPLAY?.reviewStatus?.(id),exposure=window.ENGOPLAY?.exposureStatus?.(id);return review||exposure?{...(review||{}),last_presented_at:exposure?.shown_at||exposure?.last_presented_at}:null};
