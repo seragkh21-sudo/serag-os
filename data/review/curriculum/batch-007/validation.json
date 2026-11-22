@@ -1,0 +1,30 @@
+{
+  "comparison": "normalized prompt/answer exact matches against current public bank plus six prior Foundations batches; excludes private imports and semantic equivalence",
+  "compared_questions": 1378,
+  "new_questions": 16,
+  "exact_matches": [],
+  "token_similarity_candidates": [
+    [
+      "q112",
+      "q62",
+      0.667,
+      "Use every tile once. Start the question with Could you and put for the client at the end."
+    ]
+  ],
+  "source_pages_verified": false,
+  "reviewed_formats": {
+    "multiple_choice": 5,
+    "fill_blank": 4,
+    "error_correction": 4,
+    "sentence_order": 3
+  },
+  "similarity_review": {
+    "disposition": "q112/q62 share generic question-order instructions and a client noun. The target is a past did question about calling yesterday rather than a could request for coffee. No exact duplicate; overlapping question-building practice is intentional.",
+    "pairs": [
+      [
+        "q112",
+        "q62"
+      ]
+    ]
+  }
+}
