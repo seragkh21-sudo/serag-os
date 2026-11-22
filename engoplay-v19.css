@@ -5,7 +5,7 @@
 @media(prefers-reduced-motion:reduce){.ep-lobby *,.ep-dialog *{transition:none!important;scroll-behavior:auto!important}}
 
 /* English library and Engoplay remain separate neighboring destinations. */
-.so-main-spaces>.so-creative{grid-column:1/-1}.so-english-library{background:#edf0e7}.so-english-library .so-letter-art{color:#88976c}.so-english-library .so-space-cta{background:#dfe6d3}.so-main-spaces>.so-english .so-space-links{display:none}.so-main-spaces>.so-english .so-space-cta{margin-top:auto}.so-main-spaces>.so-space{display:flex;flex-direction:column}.so-main-spaces>.so-english-library .so-space-cta{margin-top:auto}
+.so-main-spaces>.so-creative .so-space-cta{margin-top:auto}.so-english-library{background:#edf0e7}.so-english-library .so-letter-art{color:#88976c}.so-english-library .so-space-cta{background:#dfe6d3}.so-main-spaces>.so-english .so-space-links{display:none}.so-main-spaces>.so-english .so-space-cta{margin-top:auto}.so-main-spaces>.so-space{display:flex;flex-direction:column}.so-main-spaces>.so-english-library .so-space-cta{margin-top:auto}
 @media(max-width:650px){.so-main-spaces .ep-home-chick{width:78px;height:80px}.so-main-spaces .ep-home-brand{font-size:23px!important}.so-main-spaces .so-english .so-label{flex-wrap:wrap}.so-main-spaces .ep-home-streak{margin-inline-start:0}.so-main-spaces .so-english-library .so-space-links{flex-wrap:wrap}}
 
 /* Supplied nine-character sheet: CSS viewports preserve the original artwork. */

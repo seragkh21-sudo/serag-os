@@ -242,7 +242,7 @@
   function studyRoutesHTML(){
     const focus=[['B2','Talk about past possibilities and explain how outcomes could have changed.'],['C1','Use inversion and participle clauses to express ideas precisely.']];
     return `<section aria-label="English study routes"><div class="epath-section-title"><h3>Choose what to study</h3></div>
-      <div class="epath-tools">${focus.map(([level,description])=>`<article class="ea12-card"><h4>${level} · General English</h4><p>${description}</p><button class="ea12-btn primary" data-ea-start="focus-${level.toLowerCase()}">Practise ${level}</button> <button class="ea12-btn" data-ea-study-level="${level}">Browse ${level} lessons</button></article>`).join('')}
+      <div class="epath-tools english-study-routes">${focus.map(([level,description])=>`<article class="ea12-card"><h4>${level} · General English</h4><p>${description}</p><button class="ea12-btn primary" data-ea-start="focus-${level.toLowerCase()}">Practise ${level}</button> <button class="ea12-btn" data-ea-study-level="${level}">Browse ${level} lessons</button></article>`).join('')}
       <button class="epath-tool" data-ea-tab="course"><strong>Foundations course</strong><span>32 lessons and 128 exercises, from sentence basics to past events.</span></button>
       <button class="epath-tool" data-ea-tab="play"><strong>Practice progress</strong><span>See your streak, daily goal and topic progress.</span></button></div></section>`;
   }
