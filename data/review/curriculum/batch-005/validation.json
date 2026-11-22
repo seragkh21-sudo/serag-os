@@ -1,0 +1,30 @@
+{
+  "comparison": "normalized prompt/answer exact matches against current public bank plus four prior Foundations batches; excludes private imports and semantic equivalence",
+  "compared_questions": 1346,
+  "new_questions": 16,
+  "exact_matches": [],
+  "token_similarity_candidates": [
+    [
+      "q80",
+      "q64",
+      0.6,
+      "Use every tile once. Start with The team and keep to finish the report together at the end."
+    ]
+  ],
+  "source_pages_verified": false,
+  "reviewed_formats": {
+    "multiple_choice": 5,
+    "fill_blank": 4,
+    "error_correction": 4,
+    "sentence_order": 3
+  },
+  "similarity_review": {
+    "disposition": "The q80/q64 candidate shares generic order instructions. The targets differ: a two-hour discussion of a strategy versus little time to finish a report. No exact duplicate; overlapping time-related grammar practice is intentional.",
+    "pairs": [
+      [
+        "q80",
+        "q64"
+      ]
+    ]
+  }
+}

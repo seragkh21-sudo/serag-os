@@ -1,0 +1,891 @@
+{
+  "batch_id": "batch-005",
+  "sources": [
+    {
+      "id": "src-01",
+      "title": "English grammar in use red book.pdf",
+      "unreadable_pages": [],
+      "readability_status": "not_independently_verified"
+    },
+    {
+      "id": "src-02",
+      "title": "collins Intermediate grammar.pdf",
+      "unreadable_pages": [],
+      "readability_status": "not_independently_verified"
+    },
+    {
+      "id": "src-03",
+      "title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+      "unreadable_pages": [],
+      "readability_status": "not_independently_verified"
+    },
+    {
+      "id": "src-04",
+      "title": "Grammar_Dimensions_4th_4_Students_Book.pdf",
+      "unreadable_pages": [],
+      "readability_status": "not_independently_verified"
+    },
+    {
+      "id": "src-05",
+      "title": "First_Masterclass_Students_Book.pdf",
+      "unreadable_pages": [],
+      "readability_status": "not_independently_verified"
+    }
+  ],
+  "units": [
+    {
+      "id": "u9",
+      "title": "Unit 9: Time Reference, Boundaries and Duration",
+      "objective": "Choose time expressions by their clock/calendar reference, event sequence, deadline, continuing limit or length.",
+      "prerequisites": [
+        "u1",
+        "u4",
+        "u5",
+        "u8"
+      ],
+      "lessons": [
+        {
+          "id": "u9-l1",
+          "title": "Lesson 9.1: At, In and On for Time",
+          "explanation_en": "Use at for clock times and expressions such as at noon and at night. In goes with months, years, seasons and general parts of the day: in May, in 2026, in summer, in the morning. On goes with days and dates, including a named day plus part of that day: on Monday, on 15 May, on Monday morning. At Christmas refers to the holiday period; on Christmas Day refers to the day. At the weekend is usual in British English and on the weekend in American English. These patterns include idioms; at night is not the same pattern as in the morning. Time phrases beginning next, last, this or every commonly take no at/in/on: next Monday, this morning, every Friday. Present simple can describe a timetable: The meeting starts on Monday.",
+          "clarification_ar": "نستخدم at مع الساعة وتعبيرات مثل at noon وat night، وin مع الشهور والسنوات والفصول وأجزاء اليوم العامة. نستخدم on مع اليوم أو التاريخ وكذلك on Monday morning. نقول at Christmas لفترة العطلة وon Christmas Day لليوم نفسه. at the weekend شائعة بريطانيًا وon the weekend أمريكيًا. غالبًا لا نضيف حرف جر قبل next أوlast أوthis أوevery في تعبيرات الوقت.",
+          "form": "at nine / at noon / at night | in May / in 2026 / in the morning | on Monday / on Monday morning | next Monday: no preposition",
+          "examples": [
+            "The board meeting starts at nine on Monday.",
+            "The calendar includes a training event in 2026.",
+            "We review the plan at the weekend. (British English)",
+            "We review the plan on the weekend. (American English)",
+            "The workshop starts next Monday."
+          ],
+          "common_mistakes": [
+            "Use on Monday and at nine, rather than in Monday or in nine.",
+            "Accept both at the weekend and on the weekend in their usual varieties.",
+            "A longer phrase can change the pattern: in the morning but on Monday morning."
+          ],
+          "source_refs": [
+            {
+              "source_id": "src-01",
+              "source_title": "English grammar in use red book.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "verification_status": "unverified"
+            },
+            {
+              "source_id": "src-02",
+              "source_title": "collins Intermediate grammar.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "verification_status": "unverified"
+            }
+          ],
+          "reported_source_refs": [
+            {
+              "source_title": "English grammar in use red book.pdf",
+              "pdf_page": 214,
+              "printed_page": 214
+            },
+            {
+              "source_title": "collins Intermediate grammar.pdf",
+              "pdf_page": 112,
+              "printed_page": 112
+            }
+          ]
+        },
+        {
+          "id": "u9-l2",
+          "title": "Lesson 9.2: Before and After",
+          "explanation_en": "Before means earlier than the reference event; after means later. Both can be followed by a noun phrase or pronoun: before the meeting, after it. A following verb in the preposition pattern takes an -ing form: before sending the report, after checking the figures. The person understood to perform that -ing action normally matches the subject or understood subject of the main instruction: Check the figures before sending the report. Before and after can also introduce a full clause with its own subject: before you leave, after the meeting ends. Do not confuse that full-clause pattern with a bare verb directly after the preposition. The sequence must come from context, not from assuming that scheduling an event happens after an earlier task.",
+          "clarification_ar": "before تعني قبل الحدث المرجعي وafter تعني بعده. يمكن أن يتبعهما اسم أوضمير أوصيغة ing: before sending the report. في هذا النمط يكون الشخص المفهوم للفعل ing عادة هو فاعل الجملة أوالمخاطب في التعليمات. يمكن أيضًا أن يتبعهما فاعل وفعل في جملة كاملة: before you leave. التوقيت الفعلي للسياق هو الذي يحدد قبل أم بعد؛ جدولة اجتماع لاحق لا تعني أن الجدولة نفسها حدثت بعده.",
+          "form": "before / after + noun phrase: before the meeting | + -ing: after checking | Full clause: before you leave",
+          "examples": [
+            "Please check the figures before sending the report.",
+            "We review the results after finishing the tests.",
+            "Please call me before you leave.",
+            "The team takes a break after the meeting."
+          ],
+          "common_mistakes": [
+            "In the -ing pattern, write before leaving, not before leave or before to leave.",
+            "Before you leave is grammatical because you leave is a full clause.",
+            "State the intended order of events clearly when choosing before or after."
+          ],
+          "source_refs": [
+            {
+              "source_id": "src-01",
+              "source_title": "English grammar in use red book.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "verification_status": "unverified"
+            },
+            {
+              "source_id": "src-03",
+              "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "verification_status": "unverified"
+            }
+          ],
+          "reported_source_refs": [
+            {
+              "source_title": "English grammar in use red book.pdf",
+              "pdf_page": 216,
+              "printed_page": 216
+            },
+            {
+              "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+              "pdf_page": 234,
+              "printed_page": 234
+            }
+          ]
+        },
+        {
+          "id": "u9-l3",
+          "title": "Lesson 9.3: From…To, Until and By",
+          "explanation_en": "From…to marks a starting and ending time: from eight to five. From…until is also possible for an interval. Until, or till, describes a situation continuing up to a reference point: The office stays open until five. By expresses a deadline, at or before a time: Please send the report by Friday. A deadline does not require the action to continue through that whole period. Compare Stay here until five with Arrive here by five. Until can also introduce a clause, as in Stay until the meeting ends. By and until have other patterns, but these exercises focus on ordinary deadlines and continuing situations.",
+          "clarification_ar": "تحدد from…to بداية الفترة ونهايتها، ويمكن استخدام from…until أيضًا. تشير until أوtill إلى استمرار حالة حتى وقت معين: يبقى المكتب مفتوحًا حتى الخامسة. تشير by إلى موعد أقصى، أي في ذلك الوقت أو قبله: أرسل التقرير بحلول الجمعة. قارن البقاء حتى الخامسة مع الوصول في الخامسة أو قبلها.",
+          "form": "Interval: from eight to five / from eight until five | Continuing situation: open until five | Deadline: send by Friday",
+          "examples": [
+            "The office is open from eight to five.",
+            "The assistants stay at the desk until five.",
+            "Please send the report by Friday afternoon.",
+            "Please stay until the meeting ends."
+          ],
+          "common_mistakes": [
+            "For an ordinary one-time submission deadline, use send the report by Friday.",
+            "For staying continuously up to five, use stay until five.",
+            "A deadline expressed with by includes the reference time, unless context states a stricter cutoff."
+          ],
+          "source_refs": [
+            {
+              "source_id": "src-01",
+              "source_title": "English grammar in use red book.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "verification_status": "unverified"
+            },
+            {
+              "source_id": "src-04",
+              "source_title": "Grammar_Dimensions_4th_4_Students_Book.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "verification_status": "unverified"
+            }
+          ],
+          "reported_source_refs": [
+            {
+              "source_title": "English grammar in use red book.pdf",
+              "pdf_page": 218,
+              "printed_page": 218
+            },
+            {
+              "source_title": "Grammar_Dimensions_4th_4_Students_Book.pdf",
+              "pdf_page": 142,
+              "printed_page": 142
+            }
+          ]
+        },
+        {
+          "id": "u9-l4",
+          "title": "Lesson 9.4: During, While and For",
+          "explanation_en": "During is followed by a noun phrase and locates something within a period or event: during the meeting. It does not by itself specify how long the action lasts or guarantee that it lasts through the whole event. While commonly introduces a clause with a subject and verb: while she writes the report. In a reduced clause, while can also precede an -ing form: while checking the figures. For with a length of time answers how long: for two hours. In the intended ordinary duration use, choose for six months rather than during six months. Other during phrases can identify a period, such as during the next six months; these must not be treated as universally impossible. Since and perfect tenses are deferred to later lessons.",
+          "clarification_ar": "تتبع during بتركيب اسمي لتحديد الفترة التي يقع فيها الحدث، دون أن تعني بالضرورة استمراره طوال الفترة. تتبع while غالبًا بفاعل وفعل، ويمكن أن تأتي بعدها صيغة ing في جملة مختصرة. تستخدم for مع طول المدة مثل for two hours. تعبير during the next six months ممكن لتحديد فترة؛ لذلك لا نعمم منع during مع كل تعبير يحتوي على رقم. نؤجل since والأزمنة التامة لدروسها.",
+          "form": "When within an event: during + noun phrase | Simultaneous clause: while + subject + verb | How long: for + length of time",
+          "examples": [
+            "Please keep your phone silent during the presentation.",
+            "She writes the report while her colleague checks the figures.",
+            "The team meets for two hours every Tuesday.",
+            "Please take notes while checking the figures."
+          ],
+          "common_mistakes": [
+            "For a specified length, write work for six months. For an identified period, during the next six months can be appropriate.",
+            "Use while she works, not during she works, for the full-clause pattern.",
+            "Do not equate during an event with for the entire duration of that event."
+          ],
+          "source_refs": [
+            {
+              "source_id": "src-01",
+              "source_title": "English grammar in use red book.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "verification_status": "unverified"
+            },
+            {
+              "source_id": "src-02",
+              "source_title": "collins Intermediate grammar.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "verification_status": "unverified"
+            }
+          ],
+          "reported_source_refs": [
+            {
+              "source_title": "English grammar in use red book.pdf",
+              "pdf_page": 220,
+              "printed_page": 220
+            },
+            {
+              "source_title": "collins Intermediate grammar.pdf",
+              "pdf_page": 116,
+              "printed_page": 116
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "q65",
+      "canonical_id": "serag-notebook-course-v1:batch-005:q65",
+      "batch_id": "batch-005",
+      "unit_id": "u9",
+      "lesson_id": "u9-l1",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "Choose the timetable sentence with the usual prepositions for a named day and clock time.",
+      "options": [
+        "The press conference starts at Monday in 10:00 AM.",
+        "The press conference starts on Monday at 10:00 AM.",
+        "The press conference starts in Monday on 10:00 AM.",
+        "The press conference starts at Monday on 10:00 AM."
+      ],
+      "answer": "The press conference starts on Monday at 10:00 AM.",
+      "accepted_answers": [
+        "The press conference starts on Monday at 10:00 AM."
+      ],
+      "explanation": "Use on with Monday and at with 10:00 AM.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": 214,
+          "printed_page": 214
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q66",
+      "canonical_id": "serag-notebook-course-v1:batch-005:q66",
+      "batch_id": "batch-005",
+      "unit_id": "u9",
+      "lesson_id": "u9-l2",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "Choose the sentence using the before + -ing pattern, with the person signing also understood as the person leaving.",
+      "options": [
+        "Please sign the contract before leave the office.",
+        "Please sign the contract before leaving the office.",
+        "Please sign the contract before to leave the office.",
+        "Please sign the contract before left the office."
+      ],
+      "answer": "Please sign the contract before leaving the office.",
+      "accepted_answers": [
+        "Please sign the contract before leaving the office."
+      ],
+      "explanation": "Leaving is the -ing form after before in this construction. Before you leave is also grammatical, but none of the other supplied choices contains that full clause.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": 216,
+          "printed_page": 216
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q67",
+      "canonical_id": "serag-notebook-course-v1:batch-005:q67",
+      "batch_id": "batch-005",
+      "unit_id": "u9",
+      "lesson_id": "u9-l3",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "Choose the ordinary deadline instruction meaning that every proposal must arrive no later than Friday at five.",
+      "options": [
+        "Please submit every proposal by 5:00 PM on Friday.",
+        "Please submit every proposal until 5:00 PM on Friday.",
+        "Please submit every proposal from 5:00 PM on Friday.",
+        "Please submit every proposal during 5:00 PM on Friday."
+      ],
+      "answer": "Please submit every proposal by 5:00 PM on Friday.",
+      "accepted_answers": [
+        "Please submit every proposal by 5:00 PM on Friday."
+      ],
+      "explanation": "By means at or before the stated deadline. Until does not supply the intended ordinary one-time submission deadline.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": 218,
+          "printed_page": 218
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q68",
+      "canonical_id": "serag-notebook-course-v1:batch-005:q68",
+      "batch_id": "batch-005",
+      "unit_id": "u9",
+      "lesson_id": "u9-l4",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "Choose the sentence using during followed by a named event, rather than a duration length or full clause.",
+      "options": [
+        "The screen goes dark during three hours.",
+        "The screen goes dark during we are presenting.",
+        "The screen goes dark during the morning presentation.",
+        "The screen goes dark while the morning presentation."
+      ],
+      "answer": "The screen goes dark during the morning presentation.",
+      "accepted_answers": [
+        "The screen goes dark during the morning presentation."
+      ],
+      "explanation": "The morning presentation is a noun phrase identifying the event. During locates the screen problem within that event; it does not state the length of the problem.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-02",
+          "source_title": "collins Intermediate grammar.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "collins Intermediate grammar.pdf",
+          "pdf_page": 116,
+          "printed_page": 116
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q69",
+      "canonical_id": "serag-notebook-course-v1:batch-005:q69",
+      "batch_id": "batch-005",
+      "unit_id": "u9",
+      "lesson_id": "u9-l4",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "Choose the sentence with for + length of time and while + full simultaneous clause.",
+      "options": [
+        "She studies for two hours while her manager prepares the meeting agenda.",
+        "She studies during two hours while her manager prepares the meeting agenda.",
+        "She studies for two hours during her manager prepares the meeting agenda.",
+        "She studies while two hours for her manager prepares the meeting agenda."
+      ],
+      "answer": "She studies for two hours while her manager prepares the meeting agenda.",
+      "accepted_answers": [
+        "She studies for two hours while her manager prepares the meeting agenda."
+      ],
+      "explanation": "For two hours gives the length of studying. While introduces the simultaneous clause her manager prepares the meeting agenda.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": 220,
+          "printed_page": 220
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q70",
+      "canonical_id": "serag-notebook-course-v1:batch-005:q70",
+      "batch_id": "batch-005",
+      "unit_id": "u9",
+      "lesson_id": "u9-l1",
+      "type": "fill_blank",
+      "skill": "controlled_application",
+      "prompt": "Choose at, in or on: 'Our training calendar includes an event ___ 2026.'",
+      "options": [],
+      "answer": "in",
+      "accepted_answers": [
+        "in"
+      ],
+      "explanation": "Use in with a year in this calendar-time expression.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": 214,
+          "printed_page": 214
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q71",
+      "canonical_id": "serag-notebook-course-v1:batch-005:q71",
+      "batch_id": "batch-005",
+      "unit_id": "u9",
+      "lesson_id": "u9-l2",
+      "type": "fill_blank",
+      "skill": "controlled_application",
+      "prompt": "First the team finishes the tests. Then it reviews the results. Choose before or after: 'The team reviews the results ___ finishing the tests.'",
+      "options": [],
+      "answer": "after",
+      "accepted_answers": [
+        "after"
+      ],
+      "explanation": "The explicitly stated sequence places the review after finishing. Scheduling a review could occur before or after testing, so the original scheduling context alone would not determine the answer.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-03",
+          "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+          "pdf_page": 234,
+          "printed_page": 234
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q72",
+      "canonical_id": "serag-notebook-course-v1:batch-005:q72",
+      "batch_id": "batch-005",
+      "unit_id": "u9",
+      "lesson_id": "u9-l3",
+      "type": "fill_blank",
+      "skill": "controlled_application",
+      "prompt": "Choose until or by for a continuing opening period: 'The office stays open ___ six in the evening.'",
+      "options": [],
+      "answer": "until",
+      "accepted_answers": [
+        "until"
+      ],
+      "explanation": "Until marks the endpoint of the continuing open state; by expresses a deadline rather than that continuing period.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": 218,
+          "printed_page": 218
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q73",
+      "canonical_id": "serag-notebook-course-v1:batch-005:q73",
+      "batch_id": "batch-005",
+      "unit_id": "u9",
+      "lesson_id": "u9-l4",
+      "type": "fill_blank",
+      "skill": "controlled_application",
+      "prompt": "Choose during, while or for to state the length of the discussion: 'We discuss the budget ___ two hours every Monday.'",
+      "options": [],
+      "answer": "for",
+      "accepted_answers": [
+        "for"
+      ],
+      "explanation": "For two hours states how long the discussion lasts.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-02",
+          "source_title": "collins Intermediate grammar.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "collins Intermediate grammar.pdf",
+          "pdf_page": 116,
+          "printed_page": 116
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q74",
+      "canonical_id": "serag-notebook-course-v1:batch-005:q74",
+      "batch_id": "batch-005",
+      "unit_id": "u9",
+      "lesson_id": "u9-l1",
+      "type": "error_correction",
+      "skill": "controlled_application",
+      "prompt": "Correct only the time preposition and keep the rest: 'The strategic planning workshop starts in 9:00 AM.'",
+      "options": [],
+      "answer": "The strategic planning workshop starts at 9:00 AM.",
+      "accepted_answers": [
+        "The strategic planning workshop starts at 9:00 AM."
+      ],
+      "explanation": "Use at with a specific clock time.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": 214,
+          "printed_page": 214
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q75",
+      "canonical_id": "serag-notebook-course-v1:batch-005:q75",
+      "batch_id": "batch-005",
+      "unit_id": "u9",
+      "lesson_id": "u9-l3",
+      "type": "error_correction",
+      "skill": "controlled_application",
+      "prompt": "Replace until with the deadline preposition meaning no later than Friday afternoon; keep the rest: 'Please send the signed contract until Friday afternoon.'",
+      "options": [],
+      "answer": "Please send the signed contract by Friday afternoon.",
+      "accepted_answers": [
+        "Please send the signed contract by Friday afternoon."
+      ],
+      "explanation": "By gives the intended ordinary deadline for sending one signed contract.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": 218,
+          "printed_page": 218
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q76",
+      "canonical_id": "serag-notebook-course-v1:batch-005:q76",
+      "batch_id": "batch-005",
+      "unit_id": "u9",
+      "lesson_id": "u9-l4",
+      "type": "error_correction",
+      "skill": "controlled_application",
+      "prompt": "Choose during, while or for to correct only the time word and state the length of the regular stay: 'The director works in Paris during six months each year.'",
+      "options": [],
+      "answer": "The director works in Paris for six months each year.",
+      "accepted_answers": [
+        "The director works in Paris for six months each year."
+      ],
+      "explanation": "For six months gives the length of time. During can instead identify a period, as in during the next six months; it is not banned before all phrases containing numbers.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-02",
+          "source_title": "collins Intermediate grammar.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "collins Intermediate grammar.pdf",
+          "pdf_page": 116,
+          "printed_page": 116
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q77",
+      "canonical_id": "serag-notebook-course-v1:batch-005:q77",
+      "batch_id": "batch-005",
+      "unit_id": "u9",
+      "lesson_id": "u9-l4",
+      "type": "error_correction",
+      "skill": "controlled_application",
+      "prompt": "Choose during, while or for to correct only the time linker before the simultaneous full clause: 'Please keep the office quiet during the IT specialist is updating the software.'",
+      "options": [],
+      "answer": "Please keep the office quiet while the IT specialist is updating the software.",
+      "accepted_answers": [
+        "Please keep the office quiet while the IT specialist is updating the software."
+      ],
+      "explanation": "While introduces the full clause the IT specialist is updating the software. During needs a noun phrase in the pattern taught here.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": 220,
+          "printed_page": 220
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q78",
+      "canonical_id": "serag-notebook-course-v1:batch-005:q78",
+      "batch_id": "batch-005",
+      "unit_id": "u9",
+      "lesson_id": "u9-l1",
+      "type": "sentence_order",
+      "skill": "controlled_application",
+      "prompt": "Use every tile once. Start with The conference or On Monday, keep at nine o'clock together, and keep The conference as the subject.",
+      "options": [],
+      "answer": "The conference starts at nine o'clock on Monday.",
+      "accepted_answers": [
+        "The conference starts at nine o'clock on Monday.",
+        "The conference starts on Monday at nine o'clock.",
+        "On Monday the conference starts at nine o'clock."
+      ],
+      "explanation": "At nine o'clock identifies the clock time and on Monday identifies the day. O'clock contains an apostrophe; Monday is capitalized in the model. A starting On Monday phrase and either final time-phrase order are accepted.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": 214,
+          "printed_page": 214
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed.",
+      "tokens": [
+        "conference",
+        "nine",
+        "at",
+        "on",
+        "starts",
+        "o'clock",
+        "Monday",
+        "the"
+      ]
+    },
+    {
+      "id": "q79",
+      "canonical_id": "serag-notebook-course-v1:batch-005:q79",
+      "batch_id": "batch-005",
+      "unit_id": "u9",
+      "lesson_id": "u9-l3",
+      "type": "sentence_order",
+      "skill": "controlled_application",
+      "prompt": "Use every tile once. Start with Please submit, keep the financial report together, and end with by five PM.",
+      "options": [],
+      "answer": "Please submit the financial report by five PM.",
+      "accepted_answers": [
+        "Please submit the financial report by five PM."
+      ],
+      "explanation": "By five PM marks the deadline. PM is a conventional abbreviation for the afternoon/evening time.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": 218,
+          "printed_page": 218
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed.",
+      "tokens": [
+        "financial",
+        "report",
+        "by",
+        "PM",
+        "submit",
+        "please",
+        "the",
+        "five"
+      ]
+    },
+    {
+      "id": "q80",
+      "canonical_id": "serag-notebook-course-v1:batch-005:q80",
+      "batch_id": "batch-005",
+      "unit_id": "u9",
+      "lesson_id": "u9-l4",
+      "type": "sentence_order",
+      "skill": "controlled_application",
+      "prompt": "Use every tile once. Start with The team, keep the strategy together, and end with for two hours.",
+      "options": [],
+      "answer": "The team discusses the strategy for two hours.",
+      "accepted_answers": [
+        "The team discusses the strategy for two hours."
+      ],
+      "explanation": "For two hours states the length of the discussion. Discusses matches the team treated as a singular unit in this controlled sentence.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-02",
+          "source_title": "collins Intermediate grammar.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "collins Intermediate grammar.pdf",
+          "pdf_page": 116,
+          "printed_page": 116
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed.",
+      "tokens": [
+        "strategy",
+        "discusses",
+        "team",
+        "for",
+        "hours",
+        "the",
+        "two",
+        "the"
+      ]
+    }
+  ],
+  "writing_tasks": [
+    {
+      "id": "wt5",
+      "batch_id": "batch-005",
+      "unit_id": "u9",
+      "lesson_ids": [
+        "u9-l1",
+        "u9-l2",
+        "u9-l3",
+        "u9-l4"
+      ],
+      "word_range": "60–90",
+      "prompt": "Write a short project schedule email (60–90 words). Include a clock time with at and a day with on, a deadline with by, a continuing situation with until, and a length of time with for. You may also use during for an event. Use present-simple timetables, current situations and polite instructions; future forms and since are not required.",
+      "model_response": "Dear Ms. Vance,\n\nHere is our project schedule. The planning meeting starts on Monday at ten. We discuss the design for two hours during the morning session. The office stays open until six, so there is time to check the notes. Please send your comments by five on Friday. Before sending them, please check the dates and names in the report. Thank you for your help with this project.\n\nBest regards,\nMark",
+      "review_criteria": [
+        "Use at with the clock time and on with the named day.",
+        "Distinguish the by deadline from a situation continuing until an endpoint.",
+        "Use for to state a length, and during to identify an event if included.",
+        "Use clear timetable/current forms or instructions; advanced tenses are not needed.",
+        "Aim for 60–90 words and a clear schedule. Word count alone does not establish writing quality."
+      ],
+      "assessment_type": "rubric_guided_review_not_automatic_grade"
+    }
+  ],
+  "conflicts": [],
+  "next_batch_topics": [
+    "Prepositions of place and movement",
+    "Past simple and common irregular verbs",
+    "Past continuous and past simple"
+  ],
+  "review": {
+    "language_review_status": "editorially_reviewed",
+    "source_verification_status": "unverified_original_pdfs_unavailable",
+    "publication_status": "published_editorial_review_source_pages_unverified",
+    "input_format": "user_inline_json",
+    "note": "Editorial adaptation, not a verbatim archive. Supplied page claims remain in reported_source_refs; original PDF page verification and full-book readability have not been established."
+  }
+}
