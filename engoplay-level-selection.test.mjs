@@ -5,7 +5,7 @@ import {readFileSync} from 'node:fs';
 const source=name=>readFileSync(new URL('./'+name,import.meta.url),'utf8');
 const academy=source('english-academy-v12.js'),engoplay=source('engoplay-v19.js');
 const css=source('english-pathways-v1.css');
-const overviewCode=academy.slice(academy.indexOf('function overviewHTML()'),academy.indexOf('function pathHTML('));
+const overviewCode=academy.slice(academy.indexOf('function studyRoutesHTML()'),academy.indexOf('function pathHTML('));
 const startDailyCode=engoplay.slice(engoplay.indexOf('function startDaily()'),engoplay.indexOf('function startPractice(',engoplay.indexOf('function startDaily()')));
 
 function renderHome(level){

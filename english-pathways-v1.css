@@ -20,3 +20,10 @@
 @media(prefers-reduced-motion:reduce){.epath .epath-level-options button{transition:none}}
 
 .epath-word-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:14px 0}.epath-word-actions .epath-link{min-height:44px;padding:10px 16px;border:1px solid var(--line,#ded8d2);border-radius:10px;background:var(--card,#fff);cursor:pointer}.epath-word-actions .epath-link:focus-visible{outline:2px solid #9d5868;outline-offset:3px}
+
+.english-study-routes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.english-study-routes .ea12-card { display: flex; flex-direction: column; align-items: flex-start; gap: .5rem; }
+.english-study-routes .ea12-card p { flex: 1; }
+@media (max-width: 560px) {
+  .english-study-routes { grid-template-columns: minmax(0, 1fr); }
+}
