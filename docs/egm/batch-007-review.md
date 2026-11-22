@@ -15,7 +15,7 @@ The uploaded fenced JSON is preserved semantically in `original.json`; `reviewed
 - Added last spring to q103 for an explicitly finished past interval. Q105 originally allowed finishing yesterday but submitting today; submission time alone cannot establish a negative. The revised context states the report was unfinished last night and finished this morning. Both didn't and did not are accepted.
 - Narrowed written corrections to the named feature while retaining contracted/uncontracted q108 alternatives. MCQs are recognition; typed forms/rewrites and ordering are controlled application.
 - Added atomic unsolved tokens to q110–q112. Q111 was missing a second the, and its regular verb signed was incorrectly assigned to the irregular lesson; it now belongs to regular verbs. Both yesterday-first and yesterday-last orders remain accepted for q110/q111. Q112 explicitly requests a did-you yes/no question with yesterday last.
-- The original writing model supplied only one affirmative lexical irregular verb (wrote) despite requiring two, and added an undeveloped future form. The revised 67-word past summary includes wrote, made and left, regular verbs, was and a didn't negative. The rubric explicitly asks for two lexical irregulars besides was/were; no automatic quality score is claimed.
+- The original writing model had wrote plus was: both are irregular, but the separate be/irregular requirements were ambiguous about whether be counted. It also added an undeveloped future form. The revised 67-word past summary includes wrote, made and left, regular verbs, was and a didn't negative. The rubric explicitly asks for two lexical irregulars besides was/were; no automatic quality score is claimed.
 
 ## Duplicate comparison
 
