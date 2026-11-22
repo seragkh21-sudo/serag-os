@@ -208,6 +208,35 @@
           "readability_status": "not_independently_verified"
         }
       ]
+    },
+    {
+      "batch_id": "batch-007",
+      "sources": [
+        {
+          "id": "src-01",
+          "title": "English grammar in use red book.pdf",
+          "unreadable_pages": [],
+          "readability_status": "not_independently_verified"
+        },
+        {
+          "id": "src-02",
+          "title": "collins Intermediate grammar.pdf",
+          "unreadable_pages": [],
+          "readability_status": "not_independently_verified"
+        },
+        {
+          "id": "src-03",
+          "title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+          "unreadable_pages": [],
+          "readability_status": "not_independently_verified"
+        },
+        {
+          "id": "src-04",
+          "title": "Grammar_Dimensions_4th_4_Students_Book.pdf",
+          "unreadable_pages": [],
+          "readability_status": "not_independently_verified"
+        }
+      ]
     }
   ],
   "units": [
@@ -1346,6 +1375,129 @@
         }
       ],
       "batch_id": "batch-006"
+    },
+    {
+      "id": "u11",
+      "title": "Unit 11: Past Simple & Irregular Verbs",
+      "objective": "Form and apply the past simple tense using 'was/were', regular verbs with correct -ed spelling rules, common irregular verbs, and negatives/questions using 'did/didn't' in clear past time contexts.",
+      "prerequisites": [
+        "u1",
+        "u4",
+        "u5",
+        "u8",
+        "u9",
+        "u10"
+      ],
+      "lessons": [
+        {
+          "id": "u11-l1",
+          "title": "Lesson 11.1: Past Simple of Be: Was and Were",
+          "explanation_en": "For the ordinary past simple of be, use was with I/he/she/it and singular noun phrases, and were with you/we/they and plural noun phrases. You takes were for one person as well as several people. Negatives are was not/wasn't and were not/weren't. Invert be and the subject for ordinary questions: Was he here? Were you busy? These basic past-be questions and negatives do not use did. Other constructions and dialect patterns are outside these drills.",
+          "clarification_ar": "في الماضي البسيط المعتاد لـbe نستخدم was مع I/he/she/it والمفرد، وwere مع you/we/they والجمع. تأخذ you الصيغة were للمخاطب المفرد والجمع. نضيف not للنفي ونقدم was/were على الفاعل للسؤال. لا نستخدم did في هذا النمط الأساسي لسؤال أو نفي be.",
+          "form": "Affirmative: Subject + 'was'/'were' | Negative: Subject + 'wasn't'/'weren't' | Question: 'Was'/'Were' + Subject + ...?",
+          "examples": [
+            "The manager was in the office yesterday.",
+            "The clients were not happy with the schedule last week.",
+            "Were you at the meeting yesterday?"
+          ],
+          "common_mistakes": [
+            "Using 'did' with 'be' in questions or negatives (e.g., *Did you be at the meeting?* instead of *Were you at the meeting?*).",
+            "Confusing subject agreement (e.g., *We was busy* instead of *We were busy*)."
+          ],
+          "source_refs": [
+            {
+              "source_title": "English grammar in use red book.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "source_id": "src-01",
+              "verification_status": "unverified"
+            }
+          ],
+          "batch_id": "batch-007"
+        },
+        {
+          "id": "u11-l2",
+          "title": "Lesson 11.2: Regular Past Simple Verbs and -ed Spelling Rules",
+          "explanation_en": "Regular past verbs normally add -ed: work/worked. After final e, add d: live/lived. After consonant+y, change y to i before ed: study/studied; vowel+y keeps y: play/played. In a one-syllable verb ending in one vowel letter representing a short vowel, followed by one final consonant letter, commonly double that consonant: plan/planned, stop/stopped. Do not double final w, x or y: snow/snowed, fix/fixed, play/played. Longer verbs depend on stress and sometimes spelling variety; they are not covered by a universal short-verb rule. In affirmative past-simple statements, these forms are the same for I, you, he, she, it, we and they.",
+          "clarification_ar": "نضيف ed عادةً، أوd بعد e. نحول y إلى i بعد حرف ساكن: study/studied، ونحتفظ بها بعد حرف علة: play/played. في أفعال المقطع الواحد ذات حرف علة قصير واحد ثم حرف ساكن نهائي واحد، نضاعف الساكن غالبًا مثل plan/planned وstop/stopped، باستثناء w وx وy. للأفعال الأطول قواعد تعتمد على النبر وأحيانًا على تنوع الإملاء؛ لا نعمم المضاعفة على كل فعل قصير.",
+          "form": "Base Verb + '-ed' / '-d' / '-ied' / doubled consonant + '-ed'",
+          "examples": [
+            "The team worked late yesterday.",
+            "She planned the budget last month.",
+            "He studied the report yesterday morning.",
+            "We played a short training game last Friday."
+          ],
+          "common_mistakes": [
+            "The past of plan is planned. Planed exists as the past of the different verb plane; it is not the past of plan.",
+            "Write studied, not studyed, for study; write played, not plaied, for play.",
+            "Do not double every final consonant: fix becomes fixed, not fixxed."
+          ],
+          "source_refs": [
+            {
+              "source_title": "collins Intermediate grammar.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "source_id": "src-02",
+              "verification_status": "unverified"
+            }
+          ],
+          "batch_id": "batch-007"
+        },
+        {
+          "id": "u11-l3",
+          "title": "Lesson 11.3: Common Irregular Past Simple Verbs",
+          "explanation_en": "Common irregular verbs do not form their ordinary past simple with -ed. Learn go/went, see/saw, have/had, make/made, take/took, write/wrote, buy/bought, come/came, give/gave, say/said and meet/met. Use the past form in an affirmative statement with a clear past context. In these standard written exercises, use I saw for the ordinary simple past, not I seen. Regular verbs such as sign/signed belong to the regular pattern instead. Leave becomes left, as in I left the table unfinished.",
+          "clarification_ar": "للأفعال الشاذة صيغ ماضٍ نحتاج تعلمها، مثل go/went وhave/had وwrite/wrote وbuy/bought وmeet/met. نستخدم صيغة الماضي في الإثبات مع سياق ماضٍ واضح. في الكتابة القياسية المعتادة نقول I saw للماضي البسيط. أما sign/signed فهو فعل منتظم.",
+          "form": "Subject + Irregular Past Verb (e.g., went / saw / had / made)",
+          "examples": [
+            "The director went to London last week.",
+            "We bought new equipment last Tuesday.",
+            "She wrote the report and made a task list yesterday.",
+            "I left the table unfinished yesterday."
+          ],
+          "common_mistakes": [
+            "Use went and bought for the ordinary past of go and buy, rather than adding -ed.",
+            "In these standard written past-simple exercises, use I saw rather than I seen."
+          ],
+          "source_refs": [
+            {
+              "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "source_id": "src-03",
+              "verification_status": "unverified"
+            }
+          ],
+          "batch_id": "batch-007"
+        },
+        {
+          "id": "u11-l4",
+          "title": "Lesson 11.4: Negatives and Questions with Did/Didn't (vs. Was/Were)",
+          "explanation_en": "For ordinary past-simple negatives with lexical verbs, use did not/didn't plus the base form: I didn't go. Most yes/no and object questions use did + subject + base form: Did you meet her? Why did they change the plan? Be uses was/were directly in the basic past patterns: Was she present? She wasn't present. Do not put was/were after did in these patterns. Subject questions such as Who called? are a different pattern and do not normally need did; they are not assessed in this batch.",
+          "clarification_ar": "في نفي الماضي البسيط مع الأفعال العادية نستخدم did not أوdidn't ثم الفعل الأساسي. وفي معظم أسئلة نعم/لا وأسئلة المفعول نستخدم did ثم الفاعل والفعل الأساسي. أما be ففي هذه الأنماط نسأل وننفي مباشرةً بـwas/were. أسئلة الفاعل مثل Who called? نمط آخر لا يحتاج عادةً إلى did وليس موضع التقييم هنا.",
+          "form": "Negative: Subject + 'didn't' + Base Verb | Question: 'Did' + Subject + Base Verb ...?",
+          "examples": [
+            "The engineer didn't attend the safety brief yesterday.",
+            "Did you send the contract to the legal team last night?",
+            "Why did they change the project schedule last week?"
+          ],
+          "common_mistakes": [
+            "Using a past tense verb after 'did' or 'didn't' (e.g., *I didn't went* instead of *I didn't go*).",
+            "Using 'did' with 'was/were' (e.g., *Did she was present?* instead of *Was she present?*)."
+          ],
+          "source_refs": [
+            {
+              "source_title": "Grammar_Dimensions_4th_4_Students_Book.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "source_id": "src-04",
+              "verification_status": "unverified"
+            }
+          ],
+          "batch_id": "batch-007"
+        }
+      ],
+      "batch_id": "batch-007"
     }
   ],
   "questions": [
@@ -4960,6 +5112,509 @@
         "go",
         "the"
       ]
+    },
+    {
+      "id": "q97",
+      "unit_id": "u11",
+      "lesson_id": "u11-l1",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "Choose the sentence that correctly uses 'was' or 'were' in a past context.",
+      "options": [
+        "The sales managers was in Paris for a workshop last week.",
+        "The sales managers were in Paris for a workshop last week.",
+        "The sales managers did be in Paris for a workshop last week.",
+        "The sales managers were be in Paris for a workshop last week."
+      ],
+      "answer": "The sales managers were in Paris for a workshop last week.",
+      "accepted_answers": [
+        "The sales managers were in Paris for a workshop last week."
+      ],
+      "explanation": "Plural subject ('The sales managers') requires the plural past verb 'were'.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "source_id": "src-01",
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Editorial language and answer review completed; original source provenance remains unverified.",
+      "canonical_id": "serag-notebook-course-v1:batch-007:q97",
+      "batch_id": "batch-007"
+    },
+    {
+      "id": "q98",
+      "unit_id": "u11",
+      "lesson_id": "u11-l2",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "Which sentence uses the correct past simple spelling of plan?",
+      "options": [
+        "The company planed a major product launch last month.",
+        "The company planned a major product launch last month.",
+        "The company plannd a major product launch last month.",
+        "The company planied a major product launch last month."
+      ],
+      "answer": "The company planned a major product launch last month.",
+      "accepted_answers": [
+        "The company planned a major product launch last month."
+      ],
+      "explanation": "Plan becomes planned: double its final n before -ed. This is the applicable one-syllable spelling pattern, not a rule to double every final consonant. Planed is a form of the different verb plane.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_title": "collins Intermediate grammar.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "source_id": "src-02",
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Editorial language and answer review completed; original source provenance remains unverified.",
+      "canonical_id": "serag-notebook-course-v1:batch-007:q98",
+      "batch_id": "batch-007"
+    },
+    {
+      "id": "q99",
+      "unit_id": "u11",
+      "lesson_id": "u11-l3",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "Select the sentence with the correct past simple of buy.",
+      "options": [
+        "The accountant buyed new software yesterday morning.",
+        "The accountant bought new software yesterday morning.",
+        "The accountant buied new software yesterday morning.",
+        "The accountant buying new software yesterday morning."
+      ],
+      "answer": "The accountant bought new software yesterday morning.",
+      "accepted_answers": [
+        "The accountant bought new software yesterday morning."
+      ],
+      "explanation": "The past simple of the irregular verb 'buy' is 'bought'.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "source_id": "src-03",
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Editorial language and answer review completed; original source provenance remains unverified.",
+      "canonical_id": "serag-notebook-course-v1:batch-007:q99",
+      "batch_id": "batch-007"
+    },
+    {
+      "id": "q100",
+      "unit_id": "u11",
+      "lesson_id": "u11-l4",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "Select the sentence that correctly uses 'didn't' with a base verb.",
+      "options": [
+        "We didn't received the updated invoice yesterday.",
+        "We didn't receive the updated invoice yesterday.",
+        "We didn't receiving the updated invoice yesterday.",
+        "We weren't receive the updated invoice yesterday."
+      ],
+      "answer": "We didn't receive the updated invoice yesterday.",
+      "accepted_answers": [
+        "We didn't receive the updated invoice yesterday."
+      ],
+      "explanation": "After 'didn't', the main verb must return to its base form ('receive'), not the past form ('received').",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_title": "Grammar_Dimensions_4th_4_Students_Book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "source_id": "src-04",
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Editorial language and answer review completed; original source provenance remains unverified.",
+      "canonical_id": "serag-notebook-course-v1:batch-007:q100",
+      "batch_id": "batch-007"
+    },
+    {
+      "id": "q101",
+      "unit_id": "u11",
+      "lesson_id": "u11-l4",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "Which question correctly distinguishes a past main action from 'was/were'?",
+      "options": [
+        "Did you meet the client at the exhibition yesterday?",
+        "Were you meet the client at the exhibition yesterday?",
+        "Did you met the client at the exhibition yesterday?",
+        "Was you meet the client at the exhibition yesterday?"
+      ],
+      "answer": "Did you meet the client at the exhibition yesterday?",
+      "accepted_answers": [
+        "Did you meet the client at the exhibition yesterday?"
+      ],
+      "explanation": "This ordinary yes/no past question uses Did + subject + base verb meet. Basic past be questions use was/were instead.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "source_id": "src-01",
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Editorial language and answer review completed; original source provenance remains unverified.",
+      "canonical_id": "serag-notebook-course-v1:batch-007:q101",
+      "batch_id": "batch-007"
+    },
+    {
+      "id": "q102",
+      "unit_id": "u11",
+      "lesson_id": "u11-l1",
+      "type": "fill_blank",
+      "skill": "controlled_application",
+      "prompt": "Fill in the blank with 'was' or 'were': 'The senior executive ___ present at the board meeting last Friday.'",
+      "options": [],
+      "answer": "was",
+      "accepted_answers": [
+        "was"
+      ],
+      "explanation": "Singular subject ('The senior executive') takes 'was'.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "source_id": "src-01",
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Editorial language and answer review completed; original source provenance remains unverified.",
+      "canonical_id": "serag-notebook-course-v1:batch-007:q102",
+      "batch_id": "batch-007"
+    },
+    {
+      "id": "q103",
+      "unit_id": "u11",
+      "lesson_id": "u11-l2",
+      "type": "fill_blank",
+      "skill": "controlled_application",
+      "prompt": "Fill the blank with the past simple of study: 'The research team ___ the market data for two months last spring.'",
+      "options": [],
+      "answer": "studied",
+      "accepted_answers": [
+        "studied"
+      ],
+      "explanation": "'Study' ends in consonant + 'y', so 'y' changes to 'i' before adding '-ed' ('studied').",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_title": "collins Intermediate grammar.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "source_id": "src-02",
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Editorial language and answer review completed; original source provenance remains unverified.",
+      "canonical_id": "serag-notebook-course-v1:batch-007:q103",
+      "batch_id": "batch-007"
+    },
+    {
+      "id": "q104",
+      "unit_id": "u11",
+      "lesson_id": "u11-l3",
+      "type": "fill_blank",
+      "skill": "controlled_application",
+      "prompt": "Fill in the blank with the past simple form of 'write': 'The HR manager ___ an email to all staff yesterday.'",
+      "options": [],
+      "answer": "wrote",
+      "accepted_answers": [
+        "wrote"
+      ],
+      "explanation": "The irregular past simple form of 'write' is 'wrote'.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "source_id": "src-03",
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Editorial language and answer review completed; original source provenance remains unverified.",
+      "canonical_id": "serag-notebook-course-v1:batch-007:q104",
+      "batch_id": "batch-007"
+    },
+    {
+      "id": "q105",
+      "unit_id": "u11",
+      "lesson_id": "u11-l4",
+      "type": "fill_blank",
+      "skill": "controlled_application",
+      "prompt": "The report was still unfinished last night. They finished it this morning. Choose did or didn't (did not is also accepted): 'They ___ finish the report yesterday.'",
+      "options": [],
+      "answer": "didn't",
+      "accepted_answers": [
+        "didn't",
+        "did not"
+      ],
+      "explanation": "The explicit unfinished state last night requires didn't/did not, not emphatic affirmative did. Finishing yesterday and submitting today would also be possible in a different context, so submission time alone would not establish the negative.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_title": "Grammar_Dimensions_4th_4_Students_Book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "source_id": "src-04",
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Editorial language and answer review completed; original source provenance remains unverified.",
+      "canonical_id": "serag-notebook-course-v1:batch-007:q105",
+      "batch_id": "batch-007"
+    },
+    {
+      "id": "q106",
+      "unit_id": "u11",
+      "lesson_id": "u11-l1",
+      "type": "error_correction",
+      "skill": "controlled_application",
+      "prompt": "Correct only the past verb error and keep the rest: 'The clients was happy with the final presentation.'",
+      "options": [],
+      "answer": "The clients were happy with the final presentation.",
+      "accepted_answers": [
+        "The clients were happy with the final presentation."
+      ],
+      "explanation": "Plural subject 'The clients' requires 'were' instead of 'was'.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "source_id": "src-01",
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Editorial language and answer review completed; original source provenance remains unverified.",
+      "canonical_id": "serag-notebook-course-v1:batch-007:q106",
+      "batch_id": "batch-007"
+    },
+    {
+      "id": "q107",
+      "unit_id": "u11",
+      "lesson_id": "u11-l3",
+      "type": "error_correction",
+      "skill": "controlled_application",
+      "prompt": "Correct only the verb error and keep the rest: 'She goed to the headquarters office yesterday morning.'",
+      "options": [],
+      "answer": "She went to the headquarters office yesterday morning.",
+      "accepted_answers": [
+        "She went to the headquarters office yesterday morning."
+      ],
+      "explanation": "'Go' is irregular in the past simple; its past form is 'went', not 'goed'.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "source_id": "src-03",
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Editorial language and answer review completed; original source provenance remains unverified.",
+      "canonical_id": "serag-notebook-course-v1:batch-007:q107",
+      "batch_id": "batch-007"
+    },
+    {
+      "id": "q108",
+      "unit_id": "u11",
+      "lesson_id": "u11-l4",
+      "type": "error_correction",
+      "skill": "controlled_application",
+      "prompt": "Correct only the past negative error and keep the rest: 'The team didn't called the customer yesterday.'",
+      "options": [],
+      "answer": "The team didn't call the customer yesterday.",
+      "accepted_answers": [
+        "The team didn't call the customer yesterday.",
+        "The team did not call the customer yesterday."
+      ],
+      "explanation": "After 'didn't', the main verb must be in base form ('call'), not past form ('called').",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_title": "Grammar_Dimensions_4th_4_Students_Book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "source_id": "src-04",
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Editorial language and answer review completed; original source provenance remains unverified.",
+      "canonical_id": "serag-notebook-course-v1:batch-007:q108",
+      "batch_id": "batch-007"
+    },
+    {
+      "id": "q109",
+      "unit_id": "u11",
+      "lesson_id": "u11-l4",
+      "type": "error_correction",
+      "skill": "controlled_application",
+      "prompt": "Correct only the past question error and keep the rest: 'Did you attended the department briefing last week?'",
+      "options": [],
+      "answer": "Did you attend the department briefing last week?",
+      "accepted_answers": [
+        "Did you attend the department briefing last week?"
+      ],
+      "explanation": "Auxiliary 'Did' requires the base form of the verb ('attend').",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "source_id": "src-01",
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Editorial language and answer review completed; original source provenance remains unverified.",
+      "canonical_id": "serag-notebook-course-v1:batch-007:q109",
+      "batch_id": "batch-007"
+    },
+    {
+      "id": "q110",
+      "unit_id": "u11",
+      "lesson_id": "u11-l1",
+      "type": "sentence_order",
+      "skill": "controlled_application",
+      "prompt": "Use every tile once. Keep the manager and at the office together; place yesterday either first or last.",
+      "options": [],
+      "answer": "The manager was at the office yesterday.",
+      "accepted_answers": [
+        "The manager was at the office yesterday.",
+        "Yesterday the manager was at the office."
+      ],
+      "explanation": "Subject ('The manager') + Past verb ('was') + Location ('at the office') + Time adverb ('yesterday').",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "source_id": "src-01",
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Editorial language and answer review completed; original source provenance remains unverified.",
+      "canonical_id": "serag-notebook-course-v1:batch-007:q110",
+      "batch_id": "batch-007",
+      "tokens": [
+        "yesterday",
+        "the",
+        "manager",
+        "at",
+        "was",
+        "office",
+        "the"
+      ]
+    },
+    {
+      "id": "q111",
+      "unit_id": "u11",
+      "lesson_id": "u11-l2",
+      "type": "sentence_order",
+      "skill": "controlled_application",
+      "prompt": "Use every tile once. Keep the directors and the new contract together; place yesterday either first or last.",
+      "options": [],
+      "answer": "The directors signed the new contract yesterday.",
+      "accepted_answers": [
+        "The directors signed the new contract yesterday.",
+        "Yesterday the directors signed the new contract."
+      ],
+      "explanation": "Signed is the regular past of sign and belongs in the regular-verbs lesson. The subject and object each need their own the. Either supplied yesterday position is accepted.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_title": "collins Intermediate grammar.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "source_id": "src-02",
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Editorial language and answer review completed; original source provenance remains unverified.",
+      "canonical_id": "serag-notebook-course-v1:batch-007:q111",
+      "batch_id": "batch-007",
+      "tokens": [
+        "contract",
+        "new",
+        "signed",
+        "directors",
+        "the",
+        "yesterday",
+        "the"
+      ]
+    },
+    {
+      "id": "q112",
+      "unit_id": "u11",
+      "lesson_id": "u11-l4",
+      "type": "sentence_order",
+      "skill": "controlled_application",
+      "prompt": "Use every tile once. Start the yes/no question with Did you, keep the client together and put yesterday at the end.",
+      "options": [],
+      "answer": "Did you call the client yesterday?",
+      "accepted_answers": [
+        "Did you call the client yesterday?"
+      ],
+      "explanation": "Auxiliary ('Did') + Subject ('you') + Base verb ('call') + Object ('the client') + Time adverb ('yesterday').",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "source_id": "src-03",
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Editorial language and answer review completed; original source provenance remains unverified.",
+      "canonical_id": "serag-notebook-course-v1:batch-007:q112",
+      "batch_id": "batch-007",
+      "tokens": [
+        "did",
+        "call",
+        "client",
+        "the",
+        "yesterday",
+        "you"
+      ]
     }
   ],
   "writing_tasks": [
@@ -5085,6 +5740,28 @@
         "Describe the route with through/across consistently; do not assume one mandatory preposition per noun.",
         "Aim for 60–90 words and clear usable directions. Word count alone is not a writing-quality score."
       ],
+      "assessment_type": "rubric_guided_review_not_automatic_grade"
+    },
+    {
+      "id": "wt7",
+      "unit_id": "u11",
+      "prompt": "Write a 60–90-word summary email about your work yesterday. Include was/were, at least two regular affirmative past verbs, at least two irregular affirmative past verbs other than was/were, and a negative sentence with didn't or did not. Do not use past continuous or perfect tenses.",
+      "model_response": "Dear Mr. Davis,\n\nHere is a summary of my work yesterday. I arrived at the office early and checked the urgent emails. I was in a team meeting for two hours. Later, I called two clients, wrote the weekly report and made a new task list. I didn't receive the revised budget, so I left that table unfinished and asked my colleague for help.\n\nBest regards,\nAlex",
+      "review_criteria": [
+        "Match was/were to the intended subject; you takes were for singular and plural addressees.",
+        "Use at least two regular affirmative past verbs, such as arrived, checked or called.",
+        "Use at least two irregular affirmative past verbs other than was/were, such as wrote and made.",
+        "Use did not or didn't followed by a base verb for the negative.",
+        "Aim for 60–90 words and a clear past-time summary. Word count alone does not establish writing quality."
+      ],
+      "batch_id": "batch-007",
+      "lesson_ids": [
+        "u11-l1",
+        "u11-l2",
+        "u11-l3",
+        "u11-l4"
+      ],
+      "word_range": "60–90",
       "assessment_type": "rubric_guided_review_not_automatic_grade"
     }
   ]

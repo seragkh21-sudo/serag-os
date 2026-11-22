@@ -41,9 +41,10 @@ test('combined course retains prior batches and all word-order answers remain co
  const fourth=JSON.parse(fs.readFileSync(new URL('../curriculum-data/batch-004.json',import.meta.url)));
  const fifth=JSON.parse(fs.readFileSync(new URL('../curriculum-data/batch-005.json',import.meta.url)));
  const sixth=JSON.parse(fs.readFileSync(new URL('../curriculum-data/batch-006.json',import.meta.url)));
+ const seventh=JSON.parse(fs.readFileSync(new URL('../curriculum-data/batch-007.json',import.meta.url)));
  const {api}=await fixture();api.validate(published);
- assert.deepEqual(published.questions,[...batch.questions.map(q=>({...q,batch_id:'batch-001'})),...second.questions.map(q=>({...q,batch_id:'batch-002'})),...third.questions.map(q=>({...q,batch_id:'batch-003'})),...fourth.questions.map(q=>({...q,batch_id:'batch-004'})),...fifth.questions.map(q=>({...q,batch_id:'batch-005'})),...sixth.questions.map(q=>({...q,batch_id:'batch-006'}))]);
- assert.equal(published.questions.length,96);assert.equal(published.units.flatMap(u=>u.lessons).length,24);
+ assert.deepEqual(published.questions,[...batch.questions.map(q=>({...q,batch_id:'batch-001'})),...second.questions.map(q=>({...q,batch_id:'batch-002'})),...third.questions.map(q=>({...q,batch_id:'batch-003'})),...fourth.questions.map(q=>({...q,batch_id:'batch-004'})),...fifth.questions.map(q=>({...q,batch_id:'batch-005'})),...sixth.questions.map(q=>({...q,batch_id:'batch-006'})),...seventh.questions.map(q=>({...q,batch_id:'batch-007'}))]);
+ assert.equal(published.questions.length,112);assert.equal(published.units.flatMap(u=>u.lessons).length,28);
  for(const q of batch.questions){const live=published.questions.find(row=>row.canonical_id===q.canonical_id);for(const key of ['id','canonical_id','prompt','answer','accepted_answers'])assert.deepEqual(live[key],q[key])}
  for(const q of second.questions){assert.match(q.canonical_id,/^serag-notebook-course-v1:batch-002:q/);for(const ref of q.source_refs)assert.equal(ref.pdf_page,null)}
  assert.equal(second.questions.filter(q=>q.type==='multiple_choice').length,5);
@@ -68,6 +69,11 @@ test('combined course retains prior batches and all word-order answers remain co
  for(const q of sixth.questions.filter(q=>q.type==='sentence_order'))assert.notEqual(api.normalize(q.tokens.join(' ')),api.normalize(q.answer));
  assert.deepEqual(sixth.questions.find(q=>q.id==='q86').accepted_answers,['at','on']);assert.deepEqual(sixth.questions.find(q=>q.id==='q89').accepted_answers,['through','along']);
  const extraTile=structuredClone(published);extraTile.questions.find(q=>q.id==='q95').tokens.push('the');assert.throws(()=>api.validate(extraTile),/tokens/);
+ for(const q of seventh.questions){assert.match(q.canonical_id,/^serag-notebook-course-v1:batch-007:q/);for(const ref of q.source_refs)assert.equal(ref.verification_status,'unverified');if(q.type==='multiple_choice')assert.equal(new Set(q.options.map(api.normalize)).size,q.options.length)}
+ for(const kind of ['multiple_choice','fill_blank','error_correction','sentence_order'])assert.equal(seventh.questions.filter(q=>q.type===kind).length,second.questions.filter(q=>q.type===kind).length);
+ for(const q of seventh.questions.filter(q=>q.type==='sentence_order'))assert.notEqual(api.normalize(q.tokens.join(' ')),api.normalize(q.answer));
+ assert.equal(seventh.questions.find(q=>q.id==='q111').lesson_id,'u11-l2');assert.deepEqual(seventh.questions.find(q=>q.id==='q105').accepted_answers,["didn't",'did not']);
+ const missingPastTile=structuredClone(published);missingPastTile.questions.find(q=>q.id==='q111').tokens.pop();assert.throws(()=>api.validate(missingPastTile),/tokens/);
  assert.equal(api.normalize('women’s'),api.normalize("women's"));
  assert.notEqual(api.normalize('its'),api.normalize("it's"));
  const missingTile=structuredClone(published);missingTile.questions.find(q=>q.id==='q47').tokens.pop();assert.throws(()=>api.validate(missingTile),/tokens/);
