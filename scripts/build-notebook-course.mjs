@@ -1,6 +1,6 @@
 /* Deterministic shared publication; keep archived batches and history IDs unchanged. */
 import fs from 'node:fs';
-const batches=['batch-001','batch-002','batch-003','batch-004'].map(id=>JSON.parse(fs.readFileSync(`curriculum-data/${id}.json`,'utf8')));
+const batches=['batch-001','batch-002','batch-003','batch-004','batch-005'].map(id=>JSON.parse(fs.readFileSync(`curriculum-data/${id}.json`,'utf8')));
 const course={batch_id:'course-v1',review:{language_review_status:'editorially_reviewed',source_verification_status:'unverified_original_pdfs_unavailable'},batches:batches.map(b=>({batch_id:b.batch_id,sources:b.sources})),units:[],questions:[],writing_tasks:[]};
 for(const batch of batches){
  if(batch.review?.language_review_status!=='editorially_reviewed')throw Error('Unreviewed batch');
