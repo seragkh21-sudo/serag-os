@@ -1,0 +1,706 @@
+{
+  "batch_id": "batch-006",
+  "sources": [
+    {
+      "id": "src-01",
+      "title": "English grammar in use red book.pdf",
+      "unreadable_pages": [],
+      "readability_status": "not_independently_verified"
+    },
+    {
+      "id": "src-02",
+      "title": "collins Intermediate grammar.pdf",
+      "unreadable_pages": [],
+      "readability_status": "not_independently_verified"
+    },
+    {
+      "id": "src-03",
+      "title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+      "unreadable_pages": [],
+      "readability_status": "not_independently_verified"
+    },
+    {
+      "id": "src-04",
+      "title": "Grammar_Dimensions_4th_4_Students_Book.pdf",
+      "unreadable_pages": [],
+      "readability_status": "not_independently_verified"
+    }
+  ],
+  "units": [
+    {
+      "id": "u10",
+      "title": "Unit 10: Place and Movement",
+      "objective": "Describe locations and routes using an explicit spatial context, accepting legitimate differences of emphasis.",
+      "prerequisites": [
+        "u1",
+        "u4",
+        "u5",
+        "u8",
+        "u9"
+      ],
+      "lessons": [
+        {
+          "id": "u10-l1",
+          "title": "Lesson 10.1: In, On and At for Place",
+          "explanation_en": "In often describes being inside a space or within a city or country: in the office, in Paris. On often describes contact with a surface: on the desk; it also occurs in patterns such as on the second floor. At can identify a point, activity or site: at the entrance, at the office, at the conference. At the office and in the office can both be natural, with different emphasis. A package at the reception desk can be at that service point, while a package on the reception desk rests on its surface. Context matters: do not assume that each place noun always takes exactly one preposition. Street expressions also vary by variety and context.",
+          "clarification_ar": "تشيع in للوجود داخل مساحة أوفي مدينة أودولة، وon لملامسة سطح ولتعبيرات مثل on the second floor. قد تشير at إلى نقطة أوموقع أونشاط. يمكن أن تصح at the office وin the office مع اختلاف التركيز. والطرد at the reception desk موجود عند نقطة الاستقبال، أما on the reception desk فيستقر على سطح المكتب. السياق هو الذي يحدد المعنى؛ لا نفرض حرف جر واحدًا لكل اسم مكان.",
+          "form": "Inside: in the office | City: in Paris | Surface: on the desk | Site or point: at the entrance / at the office",
+          "examples": [
+            "The manager is working at her desk in the office.",
+            "The reports are on the table.",
+            "The package is at the reception desk. It is resting on the desk.",
+            "The CEO lives in Paris."
+          ],
+          "common_mistakes": [
+            "For ordinary residence in a city, write lives in Paris.",
+            "At the office and in the office can both be correct; state the intended meaning.",
+            "Do not treat a surface and a functional service point as the same spatial description."
+          ],
+          "source_refs": [
+            {
+              "source_id": "src-01",
+              "source_title": "English grammar in use red book.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "verification_status": "unverified"
+            }
+          ]
+        },
+        {
+          "id": "u10-l2",
+          "title": "Lesson 10.2: Under, Behind, Next To and Between",
+          "explanation_en": "Under places something below another object; behind places it at the back relative to the stated viewpoint. Next to means adjacent to, and beside is often similar. Between can describe a position with distinct things on different sides; it does not require an exact midpoint. Although basic examples often use two objects, between is not restricted to exactly two participants in every use. A diagram or explicit arrangement is needed to determine spatial relationships: the noun names alone do not tell you where a printer stands.",
+          "clarification_ar": "تشير under إلى موضع أسفل شيء، وbehind إلى ما يقع خلفه من وجهة النظر المحددة. تعني next to المجاورة. قد تصف between موضعًا تحيط به أشياء مميزة من جهات مختلفة ولا تشترط المنتصف الدقيق. وهي ليست مقصورة دائمًا على شيئين في كل استعمال. نحتاج ترتيبًا مكانيًا واضحًا لاختيار الإجابة، وليس مجرد أسماء الأثاث.",
+          "form": "Below: under the desk | At the back: behind reception | Adjacent: next to John | Distinct flanking objects: between the cabinet and the shelf",
+          "examples": [
+            "The spare cables are under the desk.",
+            "The archive room is behind reception.",
+            "Sarah sits next to John.",
+            "In the row cabinet – printer – bookshelf, the printer is between the other two items."
+          ],
+          "common_mistakes": [
+            "Use next to in this ordinary adjacency pattern, not next alone.",
+            "Do not claim that between is always wrong with more than two participants.",
+            "Check the stated viewpoint and layout before choosing a position word."
+          ],
+          "source_refs": [
+            {
+              "source_id": "src-02",
+              "source_title": "collins Intermediate grammar.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "verification_status": "unverified"
+            }
+          ]
+        },
+        {
+          "id": "u10-l3",
+          "title": "Lesson 10.3: To, Into and Out Of",
+          "explanation_en": "To marks a destination in patterns such as go to the office. Into explicitly describes movement from outside to inside: walk into the room. Out of describes movement from inside to outside: take the laptop out of the bag. In can also occur naturally with movement verbs in some constructions, such as put it in the box or step in. Into is useful when the task specifically asks for explicit entry; do not label every dynamic in construction an error. Out from also has legitimate uses in other patterns, so it is not universally forbidden.",
+          "clarification_ar": "تحدد to الوجهة في تراكيب مثل go to the office. وتوضح into الانتقال من الخارج إلى الداخل، بينما توضح out of الانتقال من الداخل إلى الخارج. يمكن أن تصح in مع بعض أفعال الحركة مثل put it in the box أوstep in؛ لذلك لا نصف كل استعمال حركي لها بالخطأ. نختار into عندما نريد إبراز الدخول صراحة.",
+          "form": "Destination: go to the office | Explicit entry: walk into the room | Removal: take the laptop out of the bag",
+          "examples": [
+            "The manager walks into the building and goes to the meeting room.",
+            "On work trips, we drive to the hotel and stay in our room.",
+            "She takes the laptop out of her bag and puts it on the desk.",
+            "Please step into the elevator."
+          ],
+          "common_mistakes": [
+            "Do not equate in with a universal absence of movement.",
+            "To the building names a destination; into the building explicitly describes entry.",
+            "Read the starting and ending positions when choosing into or out of."
+          ],
+          "source_refs": [
+            {
+              "source_id": "src-03",
+              "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "verification_status": "unverified"
+            }
+          ]
+        },
+        {
+          "id": "u10-l4",
+          "title": "Lesson 10.4: Through, Across and Along",
+          "explanation_en": "Through often focuses on passing within a space or passage, possibly entering and emerging: through a tunnel, through a gate, through a park. The space need not be fully enclosed. Across focuses on reaching the other side: across the street or across an open bridge. Along focuses on following the length or course of a path. Through and along can both describe travel in a tunnel or corridor, with different emphasis. A street can also occur with different path words depending on the route. Describe the intended route rather than assigning a single mandatory preposition to each noun.",
+          "clarification_ar": "تركز through غالبًا على المرور داخل مساحة أوممر وربما الدخول من طرف والخروج من الآخر، ولا تشترط مساحة مغلقة تمامًا. وتركز across على الانتقال إلى الجانب الآخر، بينما تركز along على اتباع طول مسار. قد يصح through وalong مع النفق أوالممر بمعنيين متقاربين لكن بتركيز مختلف؛ لذا نوضح الطريق المقصود ولا نفرض حرف جر واحدًا على اسم المكان.",
+          "form": "Within a passage: through the tunnel | To the other side: across the street | Following a length: along the corridor",
+          "examples": [
+            "They walk across the street from one pavement to the other.",
+            "Please go through the main gate.",
+            "The guide walks along the corridor.",
+            "The officer travels through the tunnel; along the tunnel can also describe following its length."
+          ],
+          "common_mistakes": [
+            "Do not call every through the street or through the bridge phrase ungrammatical without a route context.",
+            "A covered passage and an open crossing can invite different descriptions.",
+            "Along a tunnel and through a tunnel may both be valid; explain the emphasis."
+          ],
+          "source_refs": [
+            {
+              "source_id": "src-04",
+              "source_title": "Grammar_Dimensions_4th_4_Students_Book.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "verification_status": "unverified"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "q81",
+      "canonical_id": "serag-notebook-course-v1:batch-006:q81",
+      "batch_id": "batch-006",
+      "unit_id": "u10",
+      "lesson_id": "u10-l1",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "Choose the offered sentence describing a laptop resting on a desk surface at a workplace.",
+      "options": [
+        "The laptop is on the desk at the office.",
+        "The laptop is in the desk on the office.",
+        "The laptop is at the desk to the office.",
+        "The laptop is on the desk into the office."
+      ],
+      "answer": "The laptop is on the desk at the office.",
+      "accepted_answers": [
+        "The laptop is on the desk at the office."
+      ],
+      "explanation": "On the desk describes the surface. At the office describes the workplace site. In the office would also be grammatical, but that complete sentence is not among these choices.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q82",
+      "canonical_id": "serag-notebook-course-v1:batch-006:q82",
+      "batch_id": "batch-006",
+      "unit_id": "u10",
+      "lesson_id": "u10-l2",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "Seats run left to right: Director A, Sarah, John, Director B. Choose the sentence stating that Sarah is adjacent to John and within the interval between the directors.",
+      "options": [
+        "Sarah sits next to John, between the two senior directors.",
+        "Sarah sits next John among two senior directors.",
+        "Sarah sits behind to John under two senior directors.",
+        "Sarah sits between John next to two senior directors."
+      ],
+      "answer": "Sarah sits next to John, between the two senior directors.",
+      "accepted_answers": [
+        "Sarah sits next to John, between the two senior directors."
+      ],
+      "explanation": "Next to states adjacency to John. Between the directors places Sarah within their interval, not necessarily at its exact midpoint.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-02",
+          "source_title": "collins Intermediate grammar.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q83",
+      "canonical_id": "serag-notebook-course-v1:batch-006:q83",
+      "batch_id": "batch-006",
+      "unit_id": "u10",
+      "lesson_id": "u10-l3",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "Choose the sentence explicitly describing entry from outside the building, followed by travel to the meeting room.",
+      "options": [
+        "The manager walks into the building and goes to the meeting room.",
+        "The manager walks out of the building and goes into the meeting room.",
+        "The manager walks to the building and goes out of the meeting room.",
+        "The manager walks into the building and goes out of the meeting room."
+      ],
+      "answer": "The manager walks into the building and goes to the meeting room.",
+      "accepted_answers": [
+        "The manager walks into the building and goes to the meeting room."
+      ],
+      "explanation": "Into makes entry explicit, while to marks the destination room. The other options describe different movements; they are not all universally ungrammatical.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-03",
+          "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q84",
+      "canonical_id": "serag-notebook-course-v1:batch-006:q84",
+      "batch_id": "batch-006",
+      "unit_id": "u10",
+      "lesson_id": "u10-l4",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "Choose the sentence using across for crossing a street to the opposite side, then along for following the length of a corridor.",
+      "options": [
+        "They walk across the street and then along the long corridor.",
+        "They walk through the street and then across the long corridor.",
+        "They walk along the street and then through the long corridor.",
+        "They walk into the street and then out of the long corridor."
+      ],
+      "answer": "They walk across the street and then along the long corridor.",
+      "accepted_answers": [
+        "They walk across the street and then along the long corridor."
+      ],
+      "explanation": "Across describes the specified crossing; along describes following the corridor. Through a corridor is grammatical too, but it is not the requested along pattern.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-04",
+          "source_title": "Grammar_Dimensions_4th_4_Students_Book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q85",
+      "canonical_id": "serag-notebook-course-v1:batch-006:q85",
+      "batch_id": "batch-006",
+      "unit_id": "u10",
+      "lesson_id": "u10-l3",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "Choose the sentence describing travel to a hotel, followed by staying inside a room.",
+      "options": [
+        "We drive to the hotel and stay in our room.",
+        "We drive into the hotel and stay on our room.",
+        "We drive at the hotel and stay to our room.",
+        "We drive out of the hotel and stay at our room."
+      ],
+      "answer": "We drive to the hotel and stay in our room.",
+      "accepted_answers": [
+        "We drive to the hotel and stay in our room."
+      ],
+      "explanation": "To marks the hotel destination; in describes being inside the room. At our room does not give the requested inside-room meaning.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q86",
+      "canonical_id": "serag-notebook-course-v1:batch-006:q86",
+      "batch_id": "batch-006",
+      "unit_id": "u10",
+      "lesson_id": "u10-l1",
+      "type": "fill_blank",
+      "skill": "controlled_application",
+      "prompt": "Choose at, in or on. The package is to be left at the reception service point or on its open counter, not inside the furniture: 'Please leave the package ___ the reception desk.'",
+      "options": [],
+      "answer": "at",
+      "accepted_answers": [
+        "at",
+        "on"
+      ],
+      "explanation": "At describes the reception point; on specifies its surface. Both fit the explicitly permitted locations. In would describe storage inside the furniture, which this task excludes.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q87",
+      "canonical_id": "serag-notebook-course-v1:batch-006:q87",
+      "batch_id": "batch-006",
+      "unit_id": "u10",
+      "lesson_id": "u10-l2",
+      "type": "fill_blank",
+      "skill": "controlled_application",
+      "prompt": "The objects are in one row at the same level: cabinet – printer – bookshelf. Choose between, under or behind: 'The printer is ___ the file cabinet and the bookshelf.'",
+      "options": [],
+      "answer": "between",
+      "accepted_answers": [
+        "between"
+      ],
+      "explanation": "Between describes the printer in the stated gap, with one object on each side. Under and behind do not describe this row layout.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-02",
+          "source_title": "collins Intermediate grammar.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q88",
+      "canonical_id": "serag-notebook-course-v1:batch-006:q88",
+      "batch_id": "batch-006",
+      "unit_id": "u10",
+      "lesson_id": "u10-l3",
+      "type": "fill_blank",
+      "skill": "controlled_application",
+      "prompt": "The laptop starts inside the bag. The engineer removes it and puts it on the desk. Choose into or out of: 'The engineer takes the laptop ___ his bag.'",
+      "options": [],
+      "answer": "out of",
+      "accepted_answers": [
+        "out of"
+      ],
+      "explanation": "Out of describes removal from inside the bag to outside it.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-03",
+          "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q89",
+      "canonical_id": "serag-notebook-course-v1:batch-006:q89",
+      "batch_id": "batch-006",
+      "unit_id": "u10",
+      "lesson_id": "u10-l4",
+      "type": "fill_blank",
+      "skill": "controlled_application",
+      "prompt": "The officer enters one end of the tunnel, follows its length inside and emerges at the other end. Choose through, across or along: 'The officer walks ___ the tunnel.'",
+      "options": [],
+      "answer": "through",
+      "accepted_answers": [
+        "through",
+        "along"
+      ],
+      "explanation": "Through emphasizes passage inside from one opening to another. Along also fits following its length and is accepted. Across would suggest crossing a width rather than this specified longitudinal route.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-04",
+          "source_title": "Grammar_Dimensions_4th_4_Students_Book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q90",
+      "canonical_id": "serag-notebook-course-v1:batch-006:q90",
+      "batch_id": "batch-006",
+      "unit_id": "u10",
+      "lesson_id": "u10-l1",
+      "type": "error_correction",
+      "skill": "controlled_application",
+      "prompt": "For ordinary residence in the city, correct only the preposition and keep the rest: 'The CEO lives at Paris.'",
+      "options": [],
+      "answer": "The CEO lives in Paris.",
+      "accepted_answers": [
+        "The CEO lives in Paris."
+      ],
+      "explanation": "For this ordinary residential city reference, use in Paris. This does not ban every at + place-name pattern in other contexts.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q91",
+      "canonical_id": "serag-notebook-course-v1:batch-006:q91",
+      "batch_id": "batch-006",
+      "unit_id": "u10",
+      "lesson_id": "u10-l2",
+      "type": "error_correction",
+      "skill": "controlled_application",
+      "prompt": "Use the full next to pattern for ordinary adjacency and keep the rest: 'The new employee sits next the supervisor.'",
+      "options": [],
+      "answer": "The new employee sits next to the supervisor.",
+      "accepted_answers": [
+        "The new employee sits next to the supervisor."
+      ],
+      "explanation": "Next to is the target ordinary adjacency pattern in this exercise.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-02",
+          "source_title": "collins Intermediate grammar.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q92",
+      "canonical_id": "serag-notebook-course-v1:batch-006:q92",
+      "batch_id": "batch-006",
+      "unit_id": "u10",
+      "lesson_id": "u10-l3",
+      "type": "error_correction",
+      "skill": "controlled_application",
+      "prompt": "Rewrite in as into to make entry explicit; keep the rest: 'The director steps in the elevator and goes up to the fifth floor.'",
+      "options": [],
+      "answer": "The director steps into the elevator and goes up to the fifth floor.",
+      "accepted_answers": [
+        "The director steps into the elevator and goes up to the fifth floor."
+      ],
+      "explanation": "Into makes the outside-to-inside movement explicit. In can occur with movement verbs, so the original is not being declared universally ungrammatical.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-03",
+          "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q93",
+      "canonical_id": "serag-notebook-course-v1:batch-006:q93",
+      "batch_id": "batch-006",
+      "unit_id": "u10",
+      "lesson_id": "u10-l4",
+      "type": "error_correction",
+      "skill": "controlled_application",
+      "prompt": "The bridge is open and uncovered. We cross its deck from one riverbank to the other. Choose through, across or into to replace through and keep the rest: 'We walk through the bridge to reach the north side of the river.'",
+      "options": [],
+      "answer": "We walk across the bridge to reach the north side of the river.",
+      "accepted_answers": [
+        "We walk across the bridge to reach the north side of the river."
+      ],
+      "explanation": "Across expresses the specified open-deck crossing. Through could fit some covered passage contexts, which are not the route given here.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-04",
+          "source_title": "Grammar_Dimensions_4th_4_Students_Book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q94",
+      "canonical_id": "serag-notebook-course-v1:batch-006:q94",
+      "batch_id": "batch-006",
+      "unit_id": "u10",
+      "lesson_id": "u10-l1",
+      "type": "sentence_order",
+      "skill": "controlled_application",
+      "prompt": "Use every tile once. Start with The manager is working and keep at her desk and in the office as complete phrases.",
+      "options": [],
+      "answer": "The manager is working at her desk in the office.",
+      "accepted_answers": [
+        "The manager is working at her desk in the office.",
+        "The manager is working in the office at her desk."
+      ],
+      "explanation": "At her desk specifies the working point; in the office specifies the containing space. Either final location-phrase order is accepted.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source provenance remains unverified; editorial language and answer review completed.",
+      "tokens": [
+        "in",
+        "working",
+        "the",
+        "desk",
+        "manager",
+        "is",
+        "her",
+        "office",
+        "at",
+        "the"
+      ]
+    },
+    {
+      "id": "q95",
+      "canonical_id": "serag-notebook-course-v1:batch-006:q95",
+      "batch_id": "batch-006",
+      "unit_id": "u10",
+      "lesson_id": "u10-l3",
+      "type": "sentence_order",
+      "skill": "controlled_application",
+      "prompt": "Use every tile once. Start with She walks, describe entry into the building first, then finish with goes to the third floor.",
+      "options": [],
+      "answer": "She walks into the building and goes to the third floor.",
+      "accepted_answers": [
+        "She walks into the building and goes to the third floor."
+      ],
+      "explanation": "Into describes explicit entry and to marks the floor destination. Only two the tiles are needed, one for the building and one for the floor.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-03",
+          "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source provenance remains unverified; editorial language and answer review completed.",
+      "tokens": [
+        "to",
+        "building",
+        "floor",
+        "into",
+        "walks",
+        "third",
+        "she",
+        "the",
+        "goes",
+        "and",
+        "the"
+      ]
+    },
+    {
+      "id": "q96",
+      "canonical_id": "serag-notebook-course-v1:batch-006:q96",
+      "batch_id": "batch-006",
+      "unit_id": "u10",
+      "lesson_id": "u10-l4",
+      "type": "sentence_order",
+      "skill": "controlled_application",
+      "prompt": "Use every tile once. Start with They walk, describe crossing the street first, then finish with go through the main gate.",
+      "options": [],
+      "answer": "They walk across the street and go through the main gate.",
+      "accepted_answers": [
+        "They walk across the street and go through the main gate."
+      ],
+      "explanation": "Across describes the street crossing and through describes passing the gate opening.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-04",
+          "source_title": "Grammar_Dimensions_4th_4_Students_Book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source provenance remains unverified; editorial language and answer review completed.",
+      "tokens": [
+        "street",
+        "through",
+        "the",
+        "across",
+        "walk",
+        "main",
+        "and",
+        "they",
+        "gate",
+        "go",
+        "the"
+      ]
+    }
+  ],
+  "writing_tasks": [
+    {
+      "id": "wt6",
+      "batch_id": "batch-006",
+      "unit_id": "u10",
+      "lesson_ids": [
+        "u10-l1",
+        "u10-l2",
+        "u10-l3",
+        "u10-l4"
+      ],
+      "word_range": "60–90",
+      "prompt": "Write a workplace location message (60–90 words) giving a colleague directions to a meeting. Include at or in for location, next to or between for relative position, into or out of for entry/exit, and through or across for a route. Use simple present and instructions. Describe the route clearly.",
+      "model_response": "Hello Mark,\n\nOur meeting is in Room 302 at the main office. Please walk through the lobby and across the open courtyard to the west wing. Take the elevator to the third floor. Room 302 is next to the staff lounge. Step into the room when you arrive. I am waiting at the table near the window with the meeting notes.\n\nBest regards,\nSarah",
+      "review_criteria": [
+        "Use at/in to describe the intended location; more than one emphasis can be valid.",
+        "Make next to/between relationships clear from the layout.",
+        "Use into/out of for the intended explicit entry or exit.",
+        "Describe the route with through/across consistently; do not assume one mandatory preposition per noun.",
+        "Aim for 60–90 words and clear usable directions. Word count alone is not a writing-quality score."
+      ],
+      "assessment_type": "rubric_guided_review_not_automatic_grade"
+    }
+  ],
+  "conflicts": [],
+  "next_batch_topics": [
+    "Past simple and common irregular verbs",
+    "Past continuous and past simple",
+    "Past habits; perfect tenses and since later in the curriculum"
+  ],
+  "review": {
+    "language_review_status": "editorially_reviewed",
+    "source_verification_status": "unverified_original_pdfs_unavailable",
+    "publication_status": "published_editorial_review_source_pages_unverified",
+    "input_format": "user_inline_json",
+    "note": "Editorial adaptation, not a verbatim archive. Supplied page fields were already null. Null pages and empty unreadable-page arrays do not establish source verification or full-book readability."
+  }
+}
