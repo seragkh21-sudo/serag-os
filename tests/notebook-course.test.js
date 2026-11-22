@@ -38,9 +38,10 @@ test('combined course retains prior batches and all word-order answers remain co
  const published=JSON.parse(fs.readFileSync(new URL('../curriculum-data/course-v1.json',import.meta.url)));
  const second=JSON.parse(fs.readFileSync(new URL('../curriculum-data/batch-002.json',import.meta.url)));
  const third=JSON.parse(fs.readFileSync(new URL('../curriculum-data/batch-003.json',import.meta.url)));
+ const fourth=JSON.parse(fs.readFileSync(new URL('../curriculum-data/batch-004.json',import.meta.url)));
  const {api}=await fixture();api.validate(published);
- assert.deepEqual(published.questions,[...batch.questions.map(q=>({...q,batch_id:'batch-001'})),...second.questions.map(q=>({...q,batch_id:'batch-002'})),...third.questions.map(q=>({...q,batch_id:'batch-003'}))]);
- assert.equal(published.questions.length,48);assert.equal(published.units.flatMap(u=>u.lessons).length,12);
+ assert.deepEqual(published.questions,[...batch.questions.map(q=>({...q,batch_id:'batch-001'})),...second.questions.map(q=>({...q,batch_id:'batch-002'})),...third.questions.map(q=>({...q,batch_id:'batch-003'})),...fourth.questions.map(q=>({...q,batch_id:'batch-004'}))]);
+ assert.equal(published.questions.length,64);assert.equal(published.units.flatMap(u=>u.lessons).length,16);
  for(const q of batch.questions){const live=published.questions.find(row=>row.canonical_id===q.canonical_id);for(const key of ['id','canonical_id','prompt','answer','accepted_answers'])assert.deepEqual(live[key],q[key])}
  for(const q of second.questions){assert.match(q.canonical_id,/^serag-notebook-course-v1:batch-002:q/);for(const ref of q.source_refs)assert.equal(ref.pdf_page,null)}
  assert.equal(second.questions.filter(q=>q.type==='multiple_choice').length,5);
@@ -51,6 +52,10 @@ test('combined course retains prior batches and all word-order answers remain co
  for(const q of third.questions){assert.match(q.canonical_id,/^serag-notebook-course-v1:batch-003:q/);for(const ref of q.source_refs)assert.equal(ref.pdf_page,null)}
  for(const kind of ['multiple_choice','fill_blank','error_correction','sentence_order'])assert.equal(third.questions.filter(q=>q.type===kind).length,second.questions.filter(q=>q.type===kind).length);
  for(const q of third.questions.filter(q=>q.type==='sentence_order'))assert.notEqual(api.normalize(q.tokens.join(' ')),api.normalize(q.answer));
+ for(const q of fourth.questions){assert.match(q.canonical_id,/^serag-notebook-course-v1:batch-004:q/);for(const ref of q.source_refs)assert.equal(ref.pdf_page,null)}
+ for(const kind of ['multiple_choice','fill_blank','error_correction','sentence_order'])assert.equal(fourth.questions.filter(q=>q.type===kind).length,second.questions.filter(q=>q.type===kind).length);
+ for(const q of fourth.questions.filter(q=>q.type==='sentence_order'))assert.notEqual(api.normalize(q.tokens.join(' ')),api.normalize(q.answer));
+ assert.deepEqual(fourth.questions.find(q=>q.id==='q55').accepted_answers,['some','any']);
  assert.equal(api.normalize('women’s'),api.normalize("women's"));
  assert.notEqual(api.normalize('its'),api.normalize("it's"));
  const missingTile=structuredClone(published);missingTile.questions.find(q=>q.id==='q47').tokens.pop();assert.throws(()=>api.validate(missingTile),/tokens/);

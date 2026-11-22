@@ -109,6 +109,41 @@
           "readability_status": "not_independently_verified"
         }
       ]
+    },
+    {
+      "batch_id": "batch-004",
+      "sources": [
+        {
+          "id": "src-01",
+          "title": "English grammar in use red book.pdf",
+          "unreadable_pages": [],
+          "readability_status": "not_independently_verified"
+        },
+        {
+          "id": "src-02",
+          "title": "collins Intermediate grammar.pdf",
+          "unreadable_pages": [],
+          "readability_status": "not_independently_verified"
+        },
+        {
+          "id": "src-03",
+          "title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+          "unreadable_pages": [],
+          "readability_status": "not_independently_verified"
+        },
+        {
+          "id": "src-04",
+          "title": "Grammar_Dimensions_4th_4_Students_Book.pdf",
+          "unreadable_pages": [],
+          "readability_status": "not_independently_verified"
+        },
+        {
+          "id": "src-05",
+          "title": "First_Masterclass_Students_Book.pdf",
+          "unreadable_pages": [],
+          "readability_status": "not_independently_verified"
+        }
+      ]
     }
   ],
   "units": [
@@ -717,6 +752,206 @@
         }
       ],
       "batch_id": "batch-003"
+    },
+    {
+      "id": "u8",
+      "title": "Unit 8: Demonstratives and Quantifiers",
+      "objective": "Match demonstrative number and reference, and choose quantity expressions with attention to countability and meaning.",
+      "prerequisites": [
+        "u1",
+        "u4",
+        "u5"
+      ],
+      "lessons": [
+        {
+          "id": "u8-l1",
+          "title": "Lesson 8.1: This, That, These and Those",
+          "explanation_en": "This and that go with a singular count noun or an uncountable use; these and those go with plural count nouns. In a simple pointing situation, this/these usually indicate something nearer the speaker, and that/those something farther away. Context can also establish psychological distance, current discussion or earlier reference; distance is not a rigid rule for every use. This information is useful treats information as uncountable. On the phone, This is Sarah introduces the speaker. Demonstratives can introduce a noun phrase or stand independently: These files are ready; these are ready.",
+          "clarification_ar": "نستخدم this وthat مع المفرد المعدود أو المعنى غير المعدود، وthese وthose مع الجمع المعدود. في الإشارة المكانية البسيطة this/these للقريب وthat/those للأبعد، لكن السياق قد يحدد قرب الموضوع أو بعده معنويًا. نقول this information لأن information غير معدود هنا. ويمكن لاسم الإشارة أن يأتي وحده أو قبل تركيب اسمي.",
+          "form": "Near in a pointing context: this file / these files | Farther away: that file / those files | Uncountable: this information",
+          "examples": [
+            "This report is on my desk; that report is on the shelf across the room.",
+            "These charts beside me are ready.",
+            "Please bring those files from the shelf across the room.",
+            "Hello, this is Mark speaking."
+          ],
+          "common_mistakes": [
+            "Match number: these documents, not this documents.",
+            "With information in its ordinary uncountable meaning, use this or that, not these or those.",
+            "Do not decide distance from a shelf position alone; use the stated speaker context."
+          ],
+          "source_refs": [
+            {
+              "source_id": "src-01",
+              "source_title": "English grammar in use red book.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "verification_status": "unverified"
+            },
+            {
+              "source_id": "src-03",
+              "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "verification_status": "unverified"
+            }
+          ],
+          "reported_source_refs": [
+            {
+              "source_title": "English grammar in use red book.pdf",
+              "pdf_page": 148,
+              "printed_page": 148
+            },
+            {
+              "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+              "pdf_page": 178,
+              "printed_page": 178
+            }
+          ],
+          "batch_id": "batch-004"
+        },
+        {
+          "id": "u8-l2",
+          "title": "Lesson 8.2: Some and Any in Statements, Offers and Requests",
+          "explanation_en": "With plural count nouns and uncountable uses, some often introduces an unspecified amount in an affirmative sentence: We have some files. Any is usual in neutral availability questions and in negatives meaning none: Do you have any files? We do not have any files. Some is common in offers and requests that anticipate a positive response: Would you like some water? Could I have some information? These are patterns, not absolute grammatical bans. Any can occur in offers or requests with a different emphasis; a coffee can mean a serving. Some can remain under a negative to refer to a particular subset: We did not receive some of the replies means some replies were missing, not necessarily all. Affirmative free-choice any, such as Choose any folder, is another use.",
+          "clarification_ar": "تشيع some للكميات غير المحددة في الإثبات وفي عروض وطلبات نتوقع فيها ردًا إيجابيًا. وتشيع any في السؤال المحايد عن التوفر وفي النفي بمعنى لا شيء. هذه أنماط وليست قواعد منع مطلقة؛ يمكن استخدام any في بعض الطلبات والعروض، كما قد تأتي some مع النفي للدلالة على جزء محدد لم يتحقق. قارن لم تصل أي ردود مع لم يصل بعض الردود.",
+          "form": "An unspecified amount: some files / some water | Neutral question: any files? | None: not any files | Common offer: Would you like some water?",
+          "examples": [
+            "We have some spare folders.",
+            "Would you like some water?",
+            "Could you send me some details?",
+            "We did not receive any replies.",
+            "We did not receive some of the replies; the rest arrived."
+          ],
+          "common_mistakes": [
+            "Do not call every offer with any ungrammatical; some and any can carry different expectations.",
+            "For no replies at all, use did not receive any replies. Some under a negative can mean only a subset was missing."
+          ],
+          "source_refs": [
+            {
+              "source_id": "src-01",
+              "source_title": "English grammar in use red book.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "verification_status": "unverified"
+            },
+            {
+              "source_id": "src-02",
+              "source_title": "collins Intermediate grammar.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "verification_status": "unverified"
+            }
+          ],
+          "reported_source_refs": [
+            {
+              "source_title": "English grammar in use red book.pdf",
+              "pdf_page": 152,
+              "printed_page": 152
+            },
+            {
+              "source_title": "collins Intermediate grammar.pdf",
+              "pdf_page": 58,
+              "printed_page": 58
+            }
+          ],
+          "batch_id": "batch-004"
+        },
+        {
+          "id": "u8-l3",
+          "title": "Lesson 8.3: Much, Many and A Lot Of",
+          "explanation_en": "Much goes with uncountable uses; many goes with plural count nouns. Much is especially common in negatives and questions: not much time; how much money? Many is possible in affirmative sentences too: Many people work here. A lot of and lots of work with both types and are common in everyday affirmative sentences: a lot of files; a lot of time. Affirmative much can be grammatical, especially in formal contexts or with modifiers such as too much and so much; it is not universally wrong. Countability depends on the meaning in the sentence.",
+          "clarification_ar": "نستخدم much مع غير المعدود وmany مع الجمع المعدود. تشيع much في السؤال والنفي، ويمكن استخدام many في الإثبات أيضًا. تصلح a lot of وlots of للنوعين وتشيعان في الإثبات اليومي. استخدام much في الإثبات ليس خطأ مطلقًا، خصوصًا في الأسلوب الرسمي أو مع too وso.",
+          "form": "Uncountable: much time / much advice | Plural count: many files | Both: a lot of files / a lot of time",
+          "examples": [
+            "We do not have much time.",
+            "How many people attended the meeting?",
+            "Many people use this office.",
+            "We received a lot of useful advice."
+          ],
+          "common_mistakes": [
+            "Use many employees, not much employees.",
+            "Use much advice or a lot of advice, not many advice, for the uncountable meaning.",
+            "A lot of is often more natural than unmodified much in an ordinary affirmative sentence; this is a usage tendency."
+          ],
+          "source_refs": [
+            {
+              "source_id": "src-01",
+              "source_title": "English grammar in use red book.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "verification_status": "unverified"
+            },
+            {
+              "source_id": "src-02",
+              "source_title": "collins Intermediate grammar.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "verification_status": "unverified"
+            }
+          ],
+          "reported_source_refs": [
+            {
+              "source_title": "English grammar in use red book.pdf",
+              "pdf_page": 166,
+              "printed_page": 166
+            },
+            {
+              "source_title": "collins Intermediate grammar.pdf",
+              "pdf_page": 60,
+              "printed_page": 60
+            }
+          ],
+          "batch_id": "batch-004"
+        },
+        {
+          "id": "u8-l4",
+          "title": "Lesson 8.4: A Few, Few, A Little and Little",
+          "explanation_en": "A few and few go with plural count nouns; a little and little go with uncountable uses. A few and a little introduce a small amount, often with a more positive focus on what exists. They do not guarantee that the amount is sufficient: We have a little money, but not enough for the tickets. Few and little emphasize a low amount, often less than hoped or needed; they do not necessarily mean zero. Contrast We have a few helpers with We have few helpers, and We have a little time with We have little time. Context determines whether any amount is enough.",
+          "clarification_ar": "تأتي a few وfew مع الجمع المعدود، وa little وlittle مع غير المعدود. وجود a يركز غالبًا على وجود كمية قليلة، لكنه لا يضمن أنها كافية: معنا قليل من المال لكنه لا يكفي للتذاكر. دون a يكون التركيز غالبًا على القلة أو النقص، وليس بالضرورة انعدام الكمية تمامًا. يحدد السياق إن كانت الكمية كافية.",
+          "form": "Plural count: a few helpers / few helpers | Uncountable: a little help / little help | A small amount does not automatically mean enough",
+          "examples": [
+            "A few colleagues offered to help.",
+            "We have few volunteers, so we need more.",
+            "We have a little time, but not enough to finish.",
+            "There is little hope of finishing today."
+          ],
+          "common_mistakes": [
+            "Use a little advice rather than a few advice for the ordinary uncountable meaning.",
+            "Do not equate a little with enough, or little with zero in every context."
+          ],
+          "source_refs": [
+            {
+              "source_id": "src-01",
+              "source_title": "English grammar in use red book.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "verification_status": "unverified"
+            },
+            {
+              "source_id": "src-04",
+              "source_title": "Grammar_Dimensions_4th_4_Students_Book.pdf",
+              "pdf_page": null,
+              "printed_page": null,
+              "verification_status": "unverified"
+            }
+          ],
+          "reported_source_refs": [
+            {
+              "source_title": "English grammar in use red book.pdf",
+              "pdf_page": 170,
+              "printed_page": 170
+            },
+            {
+              "source_title": "Grammar_Dimensions_4th_4_Students_Book.pdf",
+              "pdf_page": 104,
+              "printed_page": 104
+            }
+          ],
+          "batch_id": "batch-004"
+        }
+      ],
+      "batch_id": "batch-004"
     }
   ],
   "questions": [
@@ -2578,6 +2813,628 @@
         "senior",
         "the"
       ]
+    },
+    {
+      "id": "q49",
+      "canonical_id": "serag-notebook-course-v1:batch-004:q49",
+      "batch_id": "batch-004",
+      "unit_id": "u8",
+      "lesson_id": "u8-l1",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "Choose the sentence that matches this with one nearby report and these with several nearby charts.",
+      "options": [
+        "This report includes these detailed financial charts.",
+        "These report includes this detailed financial charts.",
+        "This report includes this detailed financial charts.",
+        "These report includes these detailed financial charts."
+      ],
+      "answer": "This report includes these detailed financial charts.",
+      "accepted_answers": [
+        "This report includes these detailed financial charts."
+      ],
+      "explanation": "This matches singular report; these matches plural charts. Nearby reference is specified here; other contexts can use that and those.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": 148,
+          "printed_page": 148
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q50",
+      "canonical_id": "serag-notebook-course-v1:batch-004:q50",
+      "batch_id": "batch-004",
+      "unit_id": "u8",
+      "lesson_id": "u8-l2",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "Which offer uses the some + uncountable noun pattern taught in this lesson? Other offers may also be grammatical.",
+      "options": [
+        "Would you like some coffee before the meeting begins?",
+        "Would you like any coffee before the meeting begins?",
+        "Do you don't want some coffee before the meeting begins?",
+        "Would you like a coffee before the meeting begins?"
+      ],
+      "answer": "Would you like some coffee before the meeting begins?",
+      "accepted_answers": [
+        "Would you like some coffee before the meeting begins?"
+      ],
+      "explanation": "This option uses some coffee, a common offer pattern. Would you like any coffee can be possible with a different emphasis, and a coffee can mean a serving; those are not the requested some pattern.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": 152,
+          "printed_page": 152
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q51",
+      "canonical_id": "serag-notebook-course-v1:batch-004:q51",
+      "batch_id": "batch-004",
+      "unit_id": "u8",
+      "lesson_id": "u8-l2",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "Choose the ordinary did not + base verb sentence using any to say the manager provided no updates at all.",
+      "options": [
+        "The manager did not provide any updates regarding the restructuring.",
+        "The manager did not provide some updates regarding the restructuring.",
+        "The manager provided not any updates regarding the restructuring.",
+        "The manager did not provided any updates regarding the restructuring."
+      ],
+      "answer": "The manager did not provide any updates regarding the restructuring.",
+      "accepted_answers": [
+        "The manager did not provide any updates regarding the restructuring."
+      ],
+      "explanation": "Did not provide any updates expresses no updates in this context. Some under a negative can instead refer to particular missing updates; it is not universally ungrammatical.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-02",
+          "source_title": "collins Intermediate grammar.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "collins Intermediate grammar.pdf",
+          "pdf_page": 58,
+          "printed_page": 58
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q52",
+      "canonical_id": "serag-notebook-course-v1:batch-004:q52",
+      "batch_id": "batch-004",
+      "unit_id": "u8",
+      "lesson_id": "u8-l3",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "Choose the quantifier for the uncountable meaning of time: 'The team does not have ___ time before the deadline.'",
+      "options": [
+        "many",
+        "much",
+        "a few",
+        "several"
+      ],
+      "answer": "much",
+      "accepted_answers": [
+        "much"
+      ],
+      "explanation": "Time is uncountable here. Much fits; many, a few and several require plural count nouns in these uses.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": 166,
+          "printed_page": 166
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q53",
+      "canonical_id": "serag-notebook-course-v1:batch-004:q53",
+      "batch_id": "batch-004",
+      "unit_id": "u8",
+      "lesson_id": "u8-l4",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "Which sentence focuses on some help being available, with the result showing that it was enough in this particular situation?",
+      "options": [
+        "Fortunately, we received a little help from the IT department, so we finished on time.",
+        "Unfortunately, we received little help from the IT department, so we missed the deadline.",
+        "We received few help from the IT department.",
+        "We received a few help from the IT department."
+      ],
+      "answer": "Fortunately, we received a little help from the IT department, so we finished on time.",
+      "accepted_answers": [
+        "Fortunately, we received a little help from the IT department, so we finished on time."
+      ],
+      "explanation": "A little help focuses on a small amount being available. The result clause establishes sufficiency here; a little alone does not always mean enough. Help is uncountable in this meaning.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-04",
+          "source_title": "Grammar_Dimensions_4th_4_Students_Book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "Grammar_Dimensions_4th_4_Students_Book.pdf",
+          "pdf_page": 104,
+          "printed_page": 104
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q54",
+      "canonical_id": "serag-notebook-course-v1:batch-004:q54",
+      "batch_id": "batch-004",
+      "unit_id": "u8",
+      "lesson_id": "u8-l1",
+      "type": "fill_blank",
+      "skill": "controlled_application",
+      "prompt": "Use this, that, these or those for plural files across the room, far from the speaker: 'Please archive ___ files on the shelf across the room.'",
+      "options": [],
+      "answer": "those",
+      "accepted_answers": [
+        "those"
+      ],
+      "explanation": "Those matches plural files and the explicitly distant pointing context. A top shelf alone would not establish the distance.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": 148,
+          "printed_page": 148
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q55",
+      "canonical_id": "serag-notebook-course-v1:batch-004:q55",
+      "batch_id": "batch-004",
+      "unit_id": "u8",
+      "lesson_id": "u8-l2",
+      "type": "fill_blank",
+      "skill": "controlled_application",
+      "prompt": "Use some or any in this polite request: 'Could you please email me ___ additional details about the schedule?'",
+      "options": [],
+      "answer": "some",
+      "accepted_answers": [
+        "some",
+        "any"
+      ],
+      "explanation": "Some is the model choice for a request anticipating available details. Any is also accepted when asking for whatever additional details may be available; it is not an English error.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": 152,
+          "printed_page": 152
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q56",
+      "canonical_id": "serag-notebook-course-v1:batch-004:q56",
+      "batch_id": "batch-004",
+      "unit_id": "u8",
+      "lesson_id": "u8-l3",
+      "type": "fill_blank",
+      "skill": "controlled_application",
+      "prompt": "Use many or much: 'How ___ people attended the meeting?'",
+      "options": [],
+      "answer": "many",
+      "accepted_answers": [
+        "many"
+      ],
+      "explanation": "People is plural and countable here, so use many.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-02",
+          "source_title": "collins Intermediate grammar.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "collins Intermediate grammar.pdf",
+          "pdf_page": 60,
+          "printed_page": 60
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q57",
+      "canonical_id": "serag-notebook-course-v1:batch-004:q57",
+      "batch_id": "batch-004",
+      "unit_id": "u8",
+      "lesson_id": "u8-l4",
+      "type": "fill_blank",
+      "skill": "controlled_application",
+      "prompt": "Choose few or a few to emphasize scarcity rather than the positive existence of some: 'Regrettably, ___ candidates had the required certificate, so we need more applicants.'",
+      "options": [],
+      "answer": "few",
+      "accepted_answers": [
+        "few"
+      ],
+      "explanation": "Few emphasizes a low number and the shortage in this context. It need not mean that there were no qualified candidates.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": 170,
+          "printed_page": 170
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q58",
+      "canonical_id": "serag-notebook-course-v1:batch-004:q58",
+      "batch_id": "batch-004",
+      "unit_id": "u8",
+      "lesson_id": "u8-l1",
+      "type": "error_correction",
+      "skill": "controlled_application",
+      "prompt": "Correct only the demonstrative and keep the rest; the documents are plural and beside the speaker: 'This documents on my desk need your signature.'",
+      "options": [],
+      "answer": "These documents on my desk need your signature.",
+      "accepted_answers": [
+        "These documents on my desk need your signature."
+      ],
+      "explanation": "These matches plural documents in the explicitly nearby context.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-03",
+          "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+          "pdf_page": 178,
+          "printed_page": 178
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q59",
+      "canonical_id": "serag-notebook-course-v1:batch-004:q59",
+      "batch_id": "batch-004",
+      "unit_id": "u8",
+      "lesson_id": "u8-l2",
+      "type": "error_correction",
+      "skill": "controlled_application",
+      "prompt": "Change only some/any to mean that no responses arrived at all, and keep the rest: 'We didn't receive some responses to our customer survey.'",
+      "options": [],
+      "answer": "We didn't receive any responses to our customer survey.",
+      "accepted_answers": [
+        "We didn't receive any responses to our customer survey.",
+        "We did not receive any responses to our customer survey."
+      ],
+      "explanation": "Any gives the requested zero-response meaning. The original with some could mean that particular responses were missing, so the task changes the intended meaning rather than banning some in every negative.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": 152,
+          "printed_page": 152
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q60",
+      "canonical_id": "serag-notebook-course-v1:batch-004:q60",
+      "batch_id": "batch-004",
+      "unit_id": "u8",
+      "lesson_id": "u8-l3",
+      "type": "error_correction",
+      "skill": "controlled_application",
+      "prompt": "Replace many with a lot of or lots of and keep the rest: 'The director gave many advice during yesterday's meeting.'",
+      "options": [],
+      "answer": "The director gave a lot of advice during yesterday's meeting.",
+      "accepted_answers": [
+        "The director gave a lot of advice during yesterday's meeting.",
+        "The director gave lots of advice during yesterday's meeting."
+      ],
+      "explanation": "Advice is uncountable here; a lot of and lots of both fit. Some advice and formal much advice are possible other phrasings, but this controlled task specifically requests a lot of or lots of.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-02",
+          "source_title": "collins Intermediate grammar.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "collins Intermediate grammar.pdf",
+          "pdf_page": 60,
+          "printed_page": 60
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q61",
+      "canonical_id": "serag-notebook-course-v1:batch-004:q61",
+      "batch_id": "batch-004",
+      "unit_id": "u8",
+      "lesson_id": "u8-l4",
+      "type": "error_correction",
+      "skill": "controlled_application",
+      "prompt": "Replace a few with a little or some to express a small positive amount of progress; keep the rest: 'We made a few progress on the proposal today.'",
+      "options": [],
+      "answer": "We made a little progress on the proposal today.",
+      "accepted_answers": [
+        "We made a little progress on the proposal today.",
+        "We made some progress on the proposal today."
+      ],
+      "explanation": "Progress is uncountable here, so a few does not fit. A little or some fits the requested positive amount; the sentence does not establish whether the progress was enough.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": 170,
+          "printed_page": 170
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed."
+    },
+    {
+      "id": "q62",
+      "canonical_id": "serag-notebook-course-v1:batch-004:q62",
+      "batch_id": "batch-004",
+      "unit_id": "u8",
+      "lesson_id": "u8-l2",
+      "type": "sentence_order",
+      "skill": "controlled_application",
+      "prompt": "Use every tile once. Start the question with Could you and put for the client at the end.",
+      "options": [],
+      "answer": "Could you bring some coffee for the client?",
+      "accepted_answers": [
+        "Could you bring some coffee for the client?"
+      ],
+      "explanation": "Could you + bring forms the request. Some coffee is a common request pattern. Tiles check word order; the model supplies the question mark.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": 152,
+          "printed_page": 152
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed.",
+      "tokens": [
+        "client",
+        "some",
+        "you",
+        "the",
+        "bring",
+        "coffee",
+        "could",
+        "for"
+      ]
+    },
+    {
+      "id": "q63",
+      "canonical_id": "serag-notebook-course-v1:batch-004:q63",
+      "batch_id": "batch-004",
+      "unit_id": "u8",
+      "lesson_id": "u8-l3",
+      "type": "sentence_order",
+      "skill": "controlled_application",
+      "prompt": "Use every tile once. Start with The company and end with on the project.",
+      "options": [],
+      "answer": "The company did not spend much money on the project.",
+      "accepted_answers": [
+        "The company did not spend much money on the project."
+      ],
+      "explanation": "Money is uncountable in this meaning; much is natural in this negative statement. Did not is followed by the base verb spend.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-02",
+          "source_title": "collins Intermediate grammar.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "collins Intermediate grammar.pdf",
+          "pdf_page": 60,
+          "printed_page": 60
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed.",
+      "tokens": [
+        "money",
+        "the",
+        "project",
+        "spend",
+        "did",
+        "company",
+        "on",
+        "not",
+        "the",
+        "much"
+      ]
+    },
+    {
+      "id": "q64",
+      "canonical_id": "serag-notebook-course-v1:batch-004:q64",
+      "batch_id": "batch-004",
+      "unit_id": "u8",
+      "lesson_id": "u8-l4",
+      "type": "sentence_order",
+      "skill": "controlled_application",
+      "prompt": "Use every tile once. Start with The team and keep to finish the report together at the end.",
+      "options": [],
+      "answer": "The team had little time to finish the report.",
+      "accepted_answers": [
+        "The team had little time to finish the report."
+      ],
+      "explanation": "Little time emphasizes a low amount of time, often less than desired. It does not necessarily mean no time at all.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_id": "src-01",
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null,
+          "verification_status": "unverified"
+        }
+      ],
+      "reported_source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": 170,
+          "printed_page": 170
+        }
+      ],
+      "needs_review": true,
+      "review_reason": "Source-page provenance remains unverified; editorial language and answer review completed.",
+      "tokens": [
+        "report",
+        "time",
+        "the",
+        "finish",
+        "little",
+        "team",
+        "to",
+        "the",
+        "had"
+      ]
     }
   ],
   "writing_tasks": [
@@ -2636,6 +3493,28 @@
         "Use possessive determiners appropriately; distinguish its from the contraction it's.",
         "Place the apostrophe after s for regular plural owners, such as clients' statements.",
         "Aim for 60–90 words and a clear professional message. Word count alone is not a writing-quality assessment."
+      ],
+      "assessment_type": "rubric_guided_review_not_automatic_grade"
+    },
+    {
+      "id": "wt4",
+      "batch_id": "batch-004",
+      "unit_id": "u8",
+      "lesson_ids": [
+        "u8-l1",
+        "u8-l2",
+        "u8-l3",
+        "u8-l4"
+      ],
+      "word_range": "60–90",
+      "prompt": "Write a project status email (60–90 words). Include this or these for current work, some in an offer or request, much or many in a negative statement, and a few or a little for a small quantity. Use simple adult workplace language.",
+      "model_response": "Dear Mr. Vance,\n\nI am writing to update you on our current progress. This week, our team completed the preliminary market analysis. We did not encounter many difficulties during the testing phase. However, we still need a little time to finalize the technical documentation. Could you please send us some feedback on these draft slides when you are available?\n\nBest regards,\nSarah",
+      "review_criteria": [
+        "Match demonstrative number and the intended reference, such as this week or these slides.",
+        "Use some naturally in the requested offer or request; other contexts may allow any.",
+        "Match much/many with the intended uncountable/plural count meaning in the negative statement.",
+        "Use a few or a little for a small amount; do not assume this automatically means enough.",
+        "Aim for 60–90 words and a clear update. Word count alone does not measure writing quality."
       ],
       "assessment_type": "rubric_guided_review_not_automatic_grade"
     }

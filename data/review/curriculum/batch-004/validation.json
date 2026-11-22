@@ -1,0 +1,60 @@
+{
+  "comparison": "normalized prompt/answer exact matches against current public bank plus three prior Foundations batches; excludes private imports and semantic equivalence",
+  "compared_questions": 1330,
+  "new_questions": 16,
+  "exact_matches": [],
+  "token_similarity_candidates": [
+    [
+      "q62",
+      "q30",
+      0.579,
+      "Use every tile once. Start with The consultant and put on the project at the end."
+    ],
+    [
+      "q63",
+      "q30",
+      0.733,
+      "Use every tile once. Start with The consultant and put on the project at the end."
+    ],
+    [
+      "q63",
+      "q47",
+      0.562,
+      "Use every tile once. Start with The research analysts and end with by themselves."
+    ],
+    [
+      "q64",
+      "q46",
+      0.591,
+      "Use every tile once. Start with The director, keep her and me (or me and her) together, and put to the conference at the end."
+    ]
+  ],
+  "source_pages_verified": false,
+  "reviewed_formats": {
+    "multiple_choice": 5,
+    "fill_blank": 4,
+    "error_correction": 4,
+    "sentence_order": 3
+  },
+  "similarity_review": {
+    "disposition": "All four candidates share generic word-order instructions, not the same target sentence. Target sentences and controlled goals were manually compared; none is an exact question duplicate. Grammar topic overlap is expected.",
+    "pairs": [
+      [
+        "q62",
+        "q30"
+      ],
+      [
+        "q63",
+        "q30"
+      ],
+      [
+        "q63",
+        "q47"
+      ],
+      [
+        "q64",
+        "q46"
+      ]
+    ]
+  }
+}

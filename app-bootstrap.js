@@ -1,6 +1,6 @@
 (async()=>{
   try{
-    const V='100';
+    const V='101';
     const res=await fetch(`/legacy.html?v=${V}`,{cache:'no-store',headers:{'Cache-Control':'no-cache'}});
     if(!res.ok)throw new Error('Legacy app failed to load');
     let html=await res.text();
