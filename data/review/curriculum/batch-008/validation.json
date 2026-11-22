@@ -1,0 +1,30 @@
+{
+  "comparison": "normalized prompt/answer exact matches against current public bank plus seven prior Foundations batches; excludes private imports and semantic equivalence",
+  "compared_questions": 1394,
+  "new_questions": 16,
+  "exact_matches": [],
+  "token_similarity_candidates": [
+    [
+      "q126",
+      "q110",
+      0.565,
+      "Use every tile once. Keep the manager and at the office together; place yesterday either first or last."
+    ]
+  ],
+  "source_pages_verified": false,
+  "reviewed_formats": {
+    "multiple_choice": 5,
+    "fill_blank": 4,
+    "error_correction": 4,
+    "sentence_order": 3
+  },
+  "similarity_review": {
+    "disposition": "q126/q110 share generic word-order instructions, but the targets differ: an engineer testing software at three versus a manager at an office yesterday. The continuous lexical activity and simple-be location tasks are distinct. No exact duplicate.",
+    "pairs": [
+      [
+        "q126",
+        "q110"
+      ]
+    ]
+  }
+}

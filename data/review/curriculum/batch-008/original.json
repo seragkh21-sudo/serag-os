@@ -1,0 +1,574 @@
+{
+  "batch_id": "batch-008",
+  "sources": [
+    {
+      "id": "src-01",
+      "title": "English grammar in use red book.pdf",
+      "unreadable_pages": []
+    },
+    {
+      "id": "src-02",
+      "title": "collins Intermediate grammar.pdf",
+      "unreadable_pages": []
+    },
+    {
+      "id": "src-03",
+      "title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+      "unreadable_pages": []
+    },
+    {
+      "id": "src-04",
+      "title": "Grammar_Dimensions_4th_4_Students_Book.pdf",
+      "unreadable_pages": []
+    }
+  ],
+  "units": [
+    {
+      "id": "u12",
+      "title": "Unit 12: Past Continuous vs. Past Simple",
+      "objective": "Form and apply the Past Continuous tense (was/were + verb-ing), construct negatives, questions, and short answers, and accurately distinguish background actions (Past Continuous) from interrupting events (Past Simple) using when and while.",
+      "prerequisites": [
+        "u1",
+        "u4",
+        "u5",
+        "u8",
+        "u9",
+        "u10",
+        "u11"
+      ],
+      "lessons": [
+        {
+          "id": "u12-l1",
+          "title": "Lesson 12.1: Formation of the Past Continuous Tense",
+          "explanation_en": "The Past Continuous is formed using the past simple of 'be' (was/were) followed by the main verb with an '-ing' suffix (was/were + verb-ing). Use 'was' with singular subjects (I, he, she, it) and 'were' with plural subjects and you (we, you, they). For verbs ending in '-e', drop the '-e' before adding '-ing' (write -> writing); for single-syllable verbs ending in vowel + consonant, double the final consonant (run -> running).",
+          "clarification_ar": "يُصاغ الماضي المستمر باستخدام الماضي من فعل الكينونة (was/were) متبوعاً بالفعل الأساسي مضافاً إليه (-ing). نستخدم (was) مع المفرد (I, he, she, it) و(were) مع الجمع والمخاطب (we, you, they). عند إضافة (-ing): تُحذف الـ (e) في نهاية الفعل (write -> writing)، ويُضاعف الحرف الساكن الأخير في الأفعال القصيرة المنتهية بمتحرك وساكن (run -> running).",
+          "form": "Subject + 'was'/'were' + Verb-ing",
+          "examples": [
+            "The IT manager was updating the security system yesterday afternoon.",
+            "The engineers were reviewing the project plans at 3:00 PM.",
+            "She was writing the quarterly report during the morning shift."
+          ],
+          "common_mistakes": [
+            "Omitting 'was' or 'were' before the -ing verb (e.g., *They working yesterday* instead of *They were working*).",
+            "Using the base form or past form after 'was/were' for continuous action (e.g., *She was work* or *She was worked*)."
+          ],
+          "source_refs": [
+            {
+              "source_title": "English grammar in use red book.pdf",
+              "pdf_page": null,
+              "printed_page": null
+            }
+          ]
+        },
+        {
+          "id": "u12-l2",
+          "title": "Lesson 12.2: Past Continuous Negatives, Questions, and Short Answers",
+          "explanation_en": "To form negatives, place 'not' after 'was/were' ('was not / wasn't', 'were not / weren't') followed by verb-ing. To form questions, invert 'was/were' and the subject ('Was he working...?', 'Were they discussing...?'). For short answers, use subject + 'was/wasn't' or 'were/weren't' without repeating the -ing verb ('Yes, I was.' / 'No, they weren't.'). Do not use 'did' or 'didn't' to form past continuous negatives or questions.",
+          "clarification_ar": "للنفي نضع (not) بعد (was/were) لتصبح (wasn't / weren't + verb-ing). وفي السؤال نعكس بين (was/were) والفاعل (Was he working...?). وفي الإجابات القصيرة نستخدم (was/wasn't) أو (were/weren't) دون تكرار الفعل الأصلي (Yes, I was / No, they weren't). لا تُستخدم (did/didn't) مع الماضي المستمر.",
+          "form": "Negative: Subject + 'wasn't'/'weren't' + Verb-ing | Question: 'Was'/'Were' + Subject + Verb-ing...? | Short Answer: 'Yes, [subject] was/were.' / 'No, [subject] wasn't/weren't.'",
+          "examples": [
+            "The technicians weren't operating the heavy machinery yesterday.",
+            "Were you attending the online training session at 10:00 AM?",
+            "Yes, I was. / No, we weren't."
+          ],
+          "common_mistakes": [
+            "Using 'didn't' for past continuous negative (e.g., *I didn't working* instead of *I wasn't working*).",
+            "Repeating the -ing verb in short answers (e.g., *Yes, I was working* instead of *Yes, I was*)."
+          ],
+          "source_refs": [
+            {
+              "source_title": "collins Intermediate grammar.pdf",
+              "pdf_page": null,
+              "printed_page": null
+            }
+          ]
+        },
+        {
+          "id": "u12-l3",
+          "title": "Lesson 12.3: Past Continuous vs. Past Simple: Background Action and Interruption",
+          "explanation_en": "Use the Past Continuous for an ongoing, background action in progress in the past. Use the Past Simple for a shorter, completed event that interrupted or occurred during that ongoing action. For example: 'While the team was presenting the proposal, the electricity went out.' (Continuous background = presenting; Simple interruption = went out).",
+          "clarification_ar": "نستخدم الماضي المستمر للحدث المستمر في خلفية الماضي (Background action)، ونستخدم الماضي البسيط للحدث القصير أو القاطع الذي وقع أثناءه (Interruption). مثال: (While the team was presenting, the power went out) - العرض المستمر ماضي مستمر، وانقطاع الكهرباء ماضي بسيط.",
+          "form": "Background Action: Past Continuous (was/were + verb-ing) | Interrupting Action: Past Simple (verb-ed / irregular past)",
+          "examples": [
+            "I was inspecting the warehouse when the auditor arrived.",
+            "The system crashed while the data analyst was backing up the files.",
+            "She answered the phone while she was preparing the financial report."
+          ],
+          "common_mistakes": [
+            "Using Past Simple for both actions when one clearly serves as ongoing background context.",
+            "Using Past Continuous for the quick, interrupting event (e.g., *when the auditor was arriving* instead of *arrived*)."
+          ],
+          "source_refs": [
+            {
+              "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+              "pdf_page": null,
+              "printed_page": null
+            }
+          ]
+        },
+        {
+          "id": "u12-l4",
+          "title": "Lesson 12.4: Simultaneous Actions with When and While",
+          "explanation_en": "'While' is usually followed by the Past Continuous to describe an action in progress ('while I was reading'). 'When' is frequently followed by the Past Simple to introduce a specific point of interruption ('when the call came'). However, both 'while' and 'when' can link two simultaneous past continuous actions happening at the same time ('While Mark was checking inventory, Sarah was updating the database'). Do not assume 'while' exclusively requires continuous verbs, as it can also link simple past states depending on sentence structure.",
+          "clarification_ar": "تُتْبَع (while) عادةً بالماضي المستمر لوصف حدث مستمر (while I was reading). وتُتْبَع (when) عادةً بالماضي البسيط لتحديد لحظة وقوع الحدث القاطع (when the phone rang). كما يمكن لـ (while/when) ربط حدثين مستمرين في نفس الوقت في الماضي (While Mark was checking inventory, Sarah was updating the database). تجنب التعميم بأن while ترتبط بالمستمر فقط في جميع السياقات.",
+          "form": "'While' + Past Continuous, Past Continuous (Two simultaneous actions) | 'While' + Past Continuous, Past Simple (Background + Interruption) | 'When' + Past Simple, Past Continuous (Point of time + Background)",
+          "examples": [
+            "While the technicians were repairing the server, the manager was briefing the clients.",
+            "The alarm rang when the guard turned the key.",
+            "When the CEO arrived, the staff were discussing the quarterly targets."
+          ],
+          "common_mistakes": [
+            "Assuming 'while' must strictly be followed by a continuous form in every single context.",
+            "Confusing clause order or tense pairing between background and interrupting actions."
+          ],
+          "source_refs": [
+            {
+              "source_title": "Grammar_Dimensions_4th_4_Students_Book.pdf",
+              "pdf_page": null,
+              "printed_page": null
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "q113",
+      "unit_id": "u12",
+      "lesson_id": "u12-l1",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "Select the sentence that correctly forms the Past Continuous tense for a plural subject.",
+      "options": [
+        "The accountants was reviewing the audit files at 4:00 PM.",
+        "The accountants were reviewing the audit files at 4:00 PM.",
+        "The accountants were review the audit files at 4:00 PM.",
+        "The accountants did reviewing the audit files at 4:00 PM."
+      ],
+      "answer": "The accountants were reviewing the audit files at 4:00 PM.",
+      "accepted_answers": [
+        "The accountants were reviewing the audit files at 4:00 PM."
+      ],
+      "explanation": "Plural subject ('The accountants') takes 'were' + verb-ing ('were reviewing').",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null
+        }
+      ],
+      "needs_review": false,
+      "review_reason": null
+    },
+    {
+      "id": "q114",
+      "unit_id": "u12",
+      "lesson_id": "u12-l2",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "Choose the correct negative sentence in the Past Continuous tense.",
+      "options": [
+        "The operations team didn't working during the night shift.",
+        "The operations team weren't working during the night shift.",
+        "The operations team was not work during the night shift.",
+        "The operations team didn't worked during the night shift."
+      ],
+      "answer": "The operations team weren't working during the night shift.",
+      "accepted_answers": [
+        "The operations team weren't working during the night shift.",
+        "The operations team was not working during the night shift."
+      ],
+      "explanation": "Past Continuous negative is formed with 'wasn't/weren't' + verb-ing, not 'didn't'.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_title": "collins Intermediate grammar.pdf",
+          "pdf_page": null,
+          "printed_page": null
+        }
+      ],
+      "needs_review": false,
+      "review_reason": null
+    },
+    {
+      "id": "q115",
+      "unit_id": "u12",
+      "lesson_id": "u12-l2",
+      "type": "multiple_choice",
+      "skill": "controlled_application",
+      "prompt": "Which question and short answer combination is grammatically correct in the Past Continuous?",
+      "options": [
+        "Was you monitoring the system logs? Yes, I did.",
+        "Were you monitoring the system logs? Yes, I was.",
+        "Did you monitoring the system logs? Yes, I was.",
+        "Were you monitor the system logs? Yes, I monitored."
+      ],
+      "answer": "Were you monitoring the system logs? Yes, I was.",
+      "accepted_answers": [
+        "Were you monitoring the system logs? Yes, I was."
+      ],
+      "explanation": "Questions with 'you' take 'Were you + verb-ing?', and short answers use 'Yes, I was.'",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_title": "collins Intermediate grammar.pdf",
+          "pdf_page": null,
+          "printed_page": null
+        }
+      ],
+      "needs_review": false,
+      "review_reason": null
+    },
+    {
+      "id": "q116",
+      "unit_id": "u12",
+      "lesson_id": "u12-l3",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "Identify the sentence that correctly pairs a Past Continuous background action with a Past Simple interruption.",
+      "options": [
+        "I was drafting the report when the supervisor called me into his office.",
+        "I drafted the report when the supervisor was calling me into his office.",
+        "I was drafting the report when the supervisor was calling me into his office.",
+        "I draft the report when the supervisor called me into his office."
+      ],
+      "answer": "I was drafting the report when the supervisor called me into his office.",
+      "accepted_answers": [
+        "I was drafting the report when the supervisor called me into his office."
+      ],
+      "explanation": "The ongoing background action takes Past Continuous ('was drafting') and the interrupting event takes Past Simple ('called').",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+          "pdf_page": null,
+          "printed_page": null
+        }
+      ],
+      "needs_review": false,
+      "review_reason": null
+    },
+    {
+      "id": "q117",
+      "unit_id": "u12",
+      "lesson_id": "u12-l4",
+      "type": "multiple_choice",
+      "skill": "controlled_application",
+      "prompt": "Select the sentence that correctly describes two simultaneous background actions in the past using 'while'.",
+      "options": [
+        "While the manager was presenting the slides, the assistant was taking meeting notes.",
+        "While the manager presented the slides, the assistant was took meeting notes.",
+        "While the manager was present the slides, the assistant was take meeting notes.",
+        "While the manager did present the slides, the assistant did take meeting notes."
+      ],
+      "answer": "While the manager was presenting the slides, the assistant was taking meeting notes.",
+      "accepted_answers": [
+        "While the manager was presenting the slides, the assistant was taking meeting notes."
+      ],
+      "explanation": "Two simultaneous ongoing past actions both use the Past Continuous linked by 'while'.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_title": "Grammar_Dimensions_4th_4_Students_Book.pdf",
+          "pdf_page": null,
+          "printed_page": null
+        }
+      ],
+      "needs_review": false,
+      "review_reason": null
+    },
+    {
+      "id": "q118",
+      "unit_id": "u12",
+      "lesson_id": "u12-l1",
+      "type": "fill_blank",
+      "skill": "recall",
+      "prompt": "Fill in the blank with the correct past continuous form of 'work': 'At 10:00 AM yesterday, the lead designer ___ on the project layout.'",
+      "options": [],
+      "answer": "was working",
+      "accepted_answers": [
+        "was working"
+      ],
+      "explanation": "Singular subject ('the lead designer') takes 'was working' for a specific past moment in progress.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null
+        }
+      ],
+      "needs_review": false,
+      "review_reason": null
+    },
+    {
+      "id": "q119",
+      "unit_id": "u12",
+      "lesson_id": "u12-l2",
+      "type": "fill_blank",
+      "skill": "recall",
+      "prompt": "Fill in the blank with the negative past continuous form of 'attend': 'The consultants ___ the afternoon workshop yesterday.'",
+      "options": [],
+      "answer": "weren't attending",
+      "accepted_answers": [
+        "weren't attending",
+        "were not attending"
+      ],
+      "explanation": "Plural subject ('The consultants') takes 'weren't attending' or 'were not attending'.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_title": "collins Intermediate grammar.pdf",
+          "pdf_page": null,
+          "printed_page": null
+        }
+      ],
+      "needs_review": false,
+      "review_reason": null
+    },
+    {
+      "id": "q120",
+      "unit_id": "u12",
+      "lesson_id": "u12-l3",
+      "type": "fill_blank",
+      "skill": "controlled_application",
+      "prompt": "Fill in the blank with the correct past simple verb form: 'While the engineers were inspecting the facility, the power failure ___ (occur).'",
+      "options": [],
+      "answer": "occurred",
+      "accepted_answers": [
+        "occurred"
+      ],
+      "explanation": "The interrupting event during an ongoing background action requires the Past Simple ('occurred').",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+          "pdf_page": null,
+          "printed_page": null
+        }
+      ],
+      "needs_review": false,
+      "review_reason": null
+    },
+    {
+      "id": "q121",
+      "unit_id": "u12",
+      "lesson_id": "u12-l4",
+      "type": "fill_blank",
+      "skill": "recall",
+      "prompt": "Fill in the blank with 'when' or 'while': 'The chief executive arrived ___ the committee was discussing the new policy.'",
+      "options": [],
+      "answer": "while",
+      "accepted_answers": [
+        "while",
+        "when"
+      ],
+      "explanation": "Both 'while' and 'when' can introduce an ongoing background action, though 'while' is most typical.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_title": "Grammar_Dimensions_4th_4_Students_Book.pdf",
+          "pdf_page": null,
+          "printed_page": null
+        }
+      ],
+      "needs_review": false,
+      "review_reason": null
+    },
+    {
+      "id": "q122",
+      "unit_id": "u12",
+      "lesson_id": "u12-l1",
+      "type": "error_correction",
+      "skill": "recognition",
+      "prompt": "Correct the past continuous verb error in this sentence: 'She was write the summary report yesterday morning.'",
+      "options": [],
+      "answer": "She was writing the summary report yesterday morning.",
+      "accepted_answers": [
+        "She was writing the summary report yesterday morning."
+      ],
+      "explanation": "The Past Continuous requires the '-ing' verb form ('was writing').",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null
+        }
+      ],
+      "needs_review": false,
+      "review_reason": null
+    },
+    {
+      "id": "q123",
+      "unit_id": "u12",
+      "lesson_id": "u12-l2",
+      "type": "error_correction",
+      "skill": "controlled_application",
+      "prompt": "Correct the negative past continuous error in this sentence: 'They didn't inspecting the building equipment at 2:00 PM.'",
+      "options": [],
+      "answer": "They weren't inspecting the building equipment at 2:00 PM.",
+      "accepted_answers": [
+        "They weren't inspecting the building equipment at 2:00 PM.",
+        "They were not inspecting the building equipment at 2:00 PM."
+      ],
+      "explanation": "Past Continuous negative requires 'weren't' or 'were not', not 'didn't'.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_title": "collins Intermediate grammar.pdf",
+          "pdf_page": null,
+          "printed_page": null
+        }
+      ],
+      "needs_review": false,
+      "review_reason": null
+    },
+    {
+      "id": "q124",
+      "unit_id": "u12",
+      "lesson_id": "u12-l3",
+      "type": "error_correction",
+      "skill": "recognition",
+      "prompt": "Correct the tense error in the interrupting action: 'I was checking my emails when the computer was shutting down.'",
+      "options": [],
+      "answer": "I was checking my emails when the computer shut down.",
+      "accepted_answers": [
+        "I was checking my emails when the computer shut down."
+      ],
+      "explanation": "The interrupting event ('shut down') should be in Past Simple, not Past Continuous.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+          "pdf_page": null,
+          "printed_page": null
+        }
+      ],
+      "needs_review": false,
+      "review_reason": null
+    },
+    {
+      "id": "q125",
+      "unit_id": "u12",
+      "lesson_id": "u12-l4",
+      "type": "error_correction",
+      "skill": "controlled_application",
+      "prompt": "Correct the question error in this past continuous sentence: 'Did you examining the contract when the lawyer arrived?'",
+      "options": [],
+      "answer": "Were you examining the contract when the lawyer arrived?",
+      "accepted_answers": [
+        "Were you examining the contract when the lawyer arrived?"
+      ],
+      "explanation": "Past Continuous questions are formed with 'Were you + verb-ing', not 'Did you'.",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_title": "Grammar_Dimensions_4th_4_Students_Book.pdf",
+          "pdf_page": null,
+          "printed_page": null
+        }
+      ],
+      "needs_review": false,
+      "review_reason": null
+    },
+    {
+      "id": "q126",
+      "unit_id": "u12",
+      "lesson_id": "u12-l1",
+      "type": "sentence_order",
+      "skill": "controlled_application",
+      "prompt": "Reorder the words to form a correct sentence: [testing / software / at / 3:00 / engineer / was / PM / the / the]",
+      "options": [],
+      "answer": "The engineer was testing the software at 3:00 PM.",
+      "accepted_answers": [
+        "The engineer was testing the software at 3:00 PM.",
+        "At 3:00 PM the engineer was testing the software."
+      ],
+      "explanation": "Subject ('The engineer') + Past continuous ('was testing') + Object ('the software') + Time phrase ('at 3:00 PM').",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_title": "English grammar in use red book.pdf",
+          "pdf_page": null,
+          "printed_page": null
+        }
+      ],
+      "needs_review": false,
+      "review_reason": null
+    },
+    {
+      "id": "q127",
+      "unit_id": "u12",
+      "lesson_id": "u12-l3",
+      "type": "sentence_order",
+      "skill": "controlled_application",
+      "prompt": "Reorder the words to form a correct sentence: [working / server / crashed / while / I / the / was]",
+      "options": [],
+      "answer": "The server crashed while I was working.",
+      "accepted_answers": [
+        "The server crashed while I was working.",
+        "While I was working the server crashed."
+      ],
+      "explanation": "Main clause ('The server crashed') + Conjunction ('while') + Background clause ('I was working').",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_title": "Booth_Tom_English_for_Everyone_English_Grammar_Guide_Practice_Book.pdf",
+          "pdf_page": null,
+          "printed_page": null
+        }
+      ],
+      "needs_review": false,
+      "review_reason": null
+    },
+    {
+      "id": "q128",
+      "unit_id": "u12",
+      "lesson_id": "u12-l4",
+      "type": "sentence_order",
+      "skill": "controlled_application",
+      "prompt": "Reorder the words to form a correct sentence: [inspecting / the / phone / rang / when / she / was / warehouse / the]",
+      "options": [],
+      "answer": "She was inspecting the warehouse when the phone rang.",
+      "accepted_answers": [
+        "She was inspecting the warehouse when the phone rang.",
+        "When the phone rang she was inspecting the warehouse."
+      ],
+      "explanation": "Background clause ('She was inspecting the warehouse') + Conjunction ('when') + Interruption ('the phone rang').",
+      "origin": "newly_authored",
+      "source_refs": [
+        {
+          "source_title": "Grammar_Dimensions_4th_4_Students_Book.pdf",
+          "pdf_page": null,
+          "printed_page": null
+        }
+      ],
+      "needs_review": false,
+      "review_reason": null
+    }
+  ],
+  "writing_tasks": [
+    {
+      "id": "wt8",
+      "unit_id": "u12",
+      "prompt": "Write a brief incident report (60–90 words) describing an unexpected event at work yesterday. You MUST include: (1) a background action using the Past Continuous ('was/were + verb-ing'), (2) an interrupting event using the Past Simple, (3) a sentence using 'while' to show simultaneous background activity, and (4) a negative past sentence using 'wasn't' or 'weren't'.",
+      "model_response": "Yesterday afternoon, our team was conducting a client presentation in Room B. While the marketing specialist was showing the slides, the main projector suddenly stopped working. We were not expecting any hardware failures during the session. Fortunately, the technician arrived quickly and replaced the cable. I was taking notes when the meeting resumed smoothly ten minutes later.",
+      "review_criteria": [
+        "Correct formation and usage of the Past Continuous tense for background actions ('was conducting', 'was showing', 'was taking').",
+        "Accurate use of the Past Simple for interrupting events ('stopped', 'arrived', 'replaced', 'resumed').",
+        "Proper placement of 'while' to introduce ongoing background context.",
+        "Correct negative past continuous form ('were not expecting' or 'wasn't/weren't').",
+        "Word count strictly between 60 and 90 words formatted as a clear workplace report."
+      ]
+    }
+  ],
+  "conflicts": [],
+  "next_batch_topics": [
+    "Unit 13: Present Perfect & Time Expressions (since/for)",
+    "Unit 14: Future Tenses (will vs. going to)",
+    "Unit 15: Modal Verbs of Ability & Obligation"
+  ]
+}
