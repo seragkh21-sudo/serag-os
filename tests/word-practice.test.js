@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import vm from 'node:vm';
 import fs from 'node:fs';
-function app(){const store=new Map(),events={},c={user:{id:'a'},window:{addEventListener(){}},document:{addEventListener:(name,fn)=>(events[name]??=[]).push(fn),querySelectorAll:()=>[],getElementById:()=>null},localStorage:{getItem:k=>store.get(k)||null,setItem:(k,v)=>store.set(k,v)},setInterval(){},Date,Math};c.addEventListener=()=>{};c.window=c;vm.createContext(c);for(const f of ['english-content-v9.js','english-phrases-v16.js','engoplay-quests-v1.js','word-practice-v21.js'])vm.runInContext(fs.readFileSync(f,'utf8'),c);return {c,api:c.window.SERAG_WORD_PRACTICE,events,store}}
+function app(){const store=new Map(),events={},ticks=[],c={user:{id:'a'},window:{addEventListener(){}},document:{addEventListener:(name,fn)=>(events[name]??=[]).push(fn),querySelectorAll:()=>[],getElementById:()=>null},localStorage:{getItem:k=>store.get(k)||null,setItem:(k,v)=>store.set(k,v)},setInterval(fn){ticks.push(fn)},Date,Math};c.addEventListener=()=>{};c.window=c;vm.createContext(c);for(const f of ['english-content-v9.js','english-phrases-v16.js','engoplay-quests-v1.js','word-practice-v21.js'])vm.runInContext(fs.readFileSync(f,'utf8'),c);return {c,api:c.window.SERAG_WORD_PRACTICE,events,store,ticks}}
 test('every published vocabulary item has one valid blank, a correct full sentence and unique key',()=>{const {c,api}=app(),items=api.items();assert.ok(items.length>150);assert.equal(new Set(items.map(x=>api.norm(x.phrase))).size,items.length);for(const entry of c.window.SERAG_ENGLISH_V9.vocabulary)assert.ok(items.some(x=>api.norm(x.phrase)===api.norm(entry[0])),entry[0]);const fallback=[];for(const item of items){const q=api.question(item);assert.equal(q.before+q.answer+q.after,q.sentence,item.phrase);assert.ok(q.answer);assert.equal(api.check(q,q.answer.toUpperCase()+'!'),true);assert.equal(api.check(q,'unrelated answer'),false);if(q.fallback)fallback.push(item.phrase)}console.log('Coverage:',items.length,'items; explicit notebook fallbacks:',fallback.join(', '));assert.ok(fallback.length<items.length*.1)});
 test('hints reveal exactly one additional letter and preserve spaces/punctuation',()=>{const {api}=app();assert.equal(api.hint('catch up',0),'_____ __');assert.equal(api.hint('catch up',1),'c____ __');assert.equal(api.hint('catch up',2),'ca___ __');assert.equal(api.hint("can't",3),"can'_");assert.equal(api.hint('catch up',99),'catch up');assert.equal(api.check({answer:'catch up'},' CATCH   UP. '),true);assert.equal(api.question({phrase:'run late',examples:["I'm running late because of traffic."]}).answer,'running late')});
 test('recognition and delayed recall persist separately and remain user-scoped',()=>{const {c,api}=app();api.start('catch up');assert.equal(api.currentQuestion().item.phrase,'catch up');api.respond(api.currentQuestion().answer);assert.equal(api.progress()['catch up'].last_stage,'recognition');api.next();for(let i=0;i<3;i++){api.reveal();api.next()}const recall=api.currentQuestion();assert.equal(recall.kind,'recall');api.respond(recall.answer);assert.equal(api.progress()[api.norm(recall.item.phrase)].last_stage,'recall');api.start('catch up');api.reveal();assert.equal(api.progress()['catch up'].last_correct,false);c.user={id:'b'};assert.equal(Object.keys(api.progress()).length,0)});
@@ -122,4 +122,34 @@ test('sentence building waits for every tile and number shortcuts never crash it
  for(let i=0;i<build.tokens.length-1;i++)events.click[0](button(i));
  assert.match(api.html(),/data-wp-build-check disabled/);
  events.click[0](button(build.tokens.length-1));assert.doesNotMatch(api.html(),/data-wp-build-check disabled/);
+});
+
+test('an emptied practice host always has a way back into a session',()=>{const {api}=app();const markup=api.html();assert.match(markup,/data-wp-start/);assert.match(markup,/Start practice/)});
+
+test('the periodic mount refills a re-rendered empty practice host without replacing a populated one',()=>{
+ const {c,api,ticks}=app(),tick=ticks.at(-1);
+ assert.equal(typeof tick,'function');
+ tick(); // Initialize the owner before exposing the re-rendered host.
+ const host={firstElementChild:null,appendChild(node){this.firstElementChild=node}};
+ const center={querySelector:selector=>selector==='[data-word-practice]'?host:selector==='.ep-path'?{}:null,classList:{toggle(){}}};
+ const expose=()=>{c.document.getElementById=id=>id==='ea12Center'?center:null};
+ c.document.createElement=tag=>{
+  assert.equal(tag,'template');
+  return {content:{firstElementChild:null},set innerHTML(markup){this.content.firstElementChild={outerHTML:markup}}};
+ };
+ expose();
+ tick();
+ assert.match(host.firstElementChild?.outerHTML||'',/data-wp-start/);
+ const original=host.firstElementChild;
+ tick();
+ assert.equal(host.firstElementChild,original);
+ // Start a session while the host is detached, then simulate a mixed-tab re-render.
+ c.document.getElementById=()=>null;
+ api.start('catch up');
+ assert.ok(api.currentQuestion());
+ host.firstElementChild=null;
+ expose();
+ tick();
+ assert.equal(host.firstElementChild?.outerHTML,api.html());
+ assert.doesNotMatch(host.firstElementChild?.outerHTML||'',/class="wp-card wp-intro"/);
 });

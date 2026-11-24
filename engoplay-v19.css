@@ -19,7 +19,7 @@
 
 
 /* Pixel-aligned audio controls and stable answer-state geometry for Engoplay. */
-.wp-sentence-row{align-items:center;gap:10px}
+.wp-sentence-row{align-items:flex-start;gap:10px}
 .wp-sound-button{align-self:center;box-sizing:border-box;display:grid;place-items:center;flex:0 0 32px;width:32px;height:32px;min-width:32px;min-height:32px;padding:0;line-height:0;vertical-align:middle}
 .wp-sound-button svg{display:block;width:17px;height:17px;flex:none;overflow:visible}
 .wp-sound-button.is-placeholder{visibility:hidden;pointer-events:none}
