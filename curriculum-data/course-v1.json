@@ -1671,7 +1671,7 @@
       "accepted_answers": [
         "instructor"
       ],
-      "explanation": "The simple subject is the single noun or pronoun that performs the verb's action without its modifiers. Here, 'instructor' is the simple subject.",
+      "explanation": "The simple subject is the head noun or pronoun of the subject phrase, without its modifiers. Here, 'instructor' is the simple subject.",
       "origin": "newly_authored",
       "source_refs": [
         {
@@ -5198,7 +5198,7 @@
       "accepted_answers": [
         "She walks into the building and goes to the third floor."
       ],
-      "explanation": "Into describes explicit entry and to marks the floor destination. Only two the tiles are needed, one for the building and one for the floor.",
+      "explanation": "Into describes entry into the building, and to marks the floor as the destination. The answer needs two preposition tiles: one for the building and one for the floor.",
       "origin": "newly_authored",
       "source_refs": [
         {
@@ -6278,6 +6278,474 @@
         "warehouse",
         "the"
       ]
+    },
+    {
+      "id": "q129",
+      "canonical_id": "serag-notebook-course-v1:phase-1:q129",
+      "batch_id": "phase-1",
+      "unit_id": "u1",
+      "lesson_id": "u1-l1",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "Which is a complete subject–verb sentence?",
+      "options": [
+        "The train arrived.",
+        "The train.",
+        "Arrived at noon.",
+        "The train at noon."
+      ],
+      "answer": "The train arrived.",
+      "accepted_answers": [
+        "The train arrived."
+      ],
+      "explanation": "A subject and a finite verb make this clause complete.",
+      "origin": "newly_authored",
+      "source_refs": [],
+      "needs_review": false
+    },
+    {
+      "id": "q130",
+      "canonical_id": "serag-notebook-course-v1:phase-1:q130",
+      "batch_id": "phase-1",
+      "unit_id": "u1",
+      "lesson_id": "u1-l1",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "In “The report is ready,” what follows the linking verb?",
+      "options": [
+        "a complement",
+        "a direct object",
+        "another subject",
+        "a past-tense verb"
+      ],
+      "answer": "a complement",
+      "accepted_answers": [
+        "a complement"
+      ],
+      "explanation": "Ready describes the report; it is a subject complement.",
+      "origin": "newly_authored",
+      "source_refs": [],
+      "needs_review": false
+    },
+    {
+      "id": "q131",
+      "canonical_id": "serag-notebook-course-v1:phase-1:q131",
+      "batch_id": "phase-1",
+      "unit_id": "u1",
+      "lesson_id": "u1-l1",
+      "type": "fill_blank",
+      "skill": "production",
+      "prompt": "Complete the clause with the missing subject: “___ is important to check the brief.”",
+      "answer": "It",
+      "accepted_answers": [
+        "It"
+      ],
+      "explanation": "An ordinary declarative clause needs the subject it here.",
+      "origin": "newly_authored",
+      "source_refs": [],
+      "needs_review": false
+    },
+    {
+      "id": "q132",
+      "canonical_id": "serag-notebook-course-v1:phase-1:q132",
+      "batch_id": "phase-1",
+      "unit_id": "u1",
+      "lesson_id": "u1-l1",
+      "type": "error_correction",
+      "skill": "production",
+      "prompt": "Correct the fragment: “The designer finished.” is complete, but “Finished the design yesterday.” needs an explicit subject. Write the corrected second sentence.",
+      "answer": "The designer finished the design yesterday.",
+      "accepted_answers": [
+        "The designer finished the design yesterday."
+      ],
+      "explanation": "The second clause needs a subject before finished.",
+      "origin": "newly_authored",
+      "source_refs": [],
+      "needs_review": false
+    },
+    {
+      "id": "q133",
+      "canonical_id": "serag-notebook-course-v1:phase-1:q133",
+      "batch_id": "phase-1",
+      "unit_id": "u7",
+      "lesson_id": "u7-l1",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "Choose the possessive pronoun: “This folder is ___.”",
+      "options": [
+        "mine",
+        "my",
+        "me",
+        "I"
+      ],
+      "answer": "mine",
+      "accepted_answers": [
+        "mine"
+      ],
+      "explanation": "Mine stands alone; my must come before a noun.",
+      "origin": "newly_authored",
+      "source_refs": [],
+      "needs_review": false
+    },
+    {
+      "id": "q134",
+      "canonical_id": "serag-notebook-course-v1:phase-1:q134",
+      "batch_id": "phase-1",
+      "unit_id": "u7",
+      "lesson_id": "u7-l1",
+      "type": "fill_blank",
+      "skill": "production",
+      "prompt": "Complete with a possessive determiner: “Maya checked ___ notes.”",
+      "answer": "her",
+      "accepted_answers": [
+        "her"
+      ],
+      "explanation": "Her modifies notes; hers would stand alone.",
+      "origin": "newly_authored",
+      "source_refs": [],
+      "needs_review": false
+    },
+    {
+      "id": "q135",
+      "canonical_id": "serag-notebook-course-v1:phase-1:q135",
+      "batch_id": "phase-1",
+      "unit_id": "u7",
+      "lesson_id": "u7-l1",
+      "type": "error_correction",
+      "skill": "production",
+      "prompt": "Correct the possessive form: “This is their's.”",
+      "answer": "This is theirs.",
+      "accepted_answers": [
+        "This is theirs."
+      ],
+      "explanation": "The possessive pronoun theirs has no apostrophe.",
+      "origin": "newly_authored",
+      "source_refs": [],
+      "needs_review": false
+    },
+    {
+      "id": "q136",
+      "canonical_id": "serag-notebook-course-v1:phase-1:q136",
+      "batch_id": "phase-1",
+      "unit_id": "u8",
+      "lesson_id": "u8-l1",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "You are holding one file. Choose: “___ file is ready.”",
+      "options": [
+        "This",
+        "These",
+        "Those",
+        "They"
+      ],
+      "answer": "This",
+      "accepted_answers": [
+        "This"
+      ],
+      "explanation": "This refers to one nearby thing.",
+      "origin": "newly_authored",
+      "source_refs": [],
+      "needs_review": false
+    },
+    {
+      "id": "q137",
+      "canonical_id": "serag-notebook-course-v1:phase-1:q137",
+      "batch_id": "phase-1",
+      "unit_id": "u8",
+      "lesson_id": "u8-l1",
+      "type": "fill_blank",
+      "skill": "production",
+      "prompt": "You are pointing to several distant buildings. Complete: “___ buildings are new.”",
+      "answer": "Those",
+      "accepted_answers": [
+        "Those"
+      ],
+      "explanation": "Those refers to multiple things at a distance.",
+      "origin": "newly_authored",
+      "source_refs": [],
+      "needs_review": false
+    },
+    {
+      "id": "q138",
+      "canonical_id": "serag-notebook-course-v1:phase-1:q138",
+      "batch_id": "phase-1",
+      "unit_id": "u8",
+      "lesson_id": "u8-l1",
+      "type": "error_correction",
+      "skill": "production",
+      "prompt": "Correct the number mismatch: “These report is ready.”",
+      "answer": "This report is ready.",
+      "accepted_answers": [
+        "This report is ready."
+      ],
+      "explanation": "This agrees with the singular noun report.",
+      "origin": "newly_authored",
+      "source_refs": [],
+      "needs_review": false
+    },
+    {
+      "id": "q139",
+      "canonical_id": "serag-notebook-course-v1:phase-1:q139",
+      "batch_id": "phase-1",
+      "unit_id": "u9",
+      "lesson_id": "u9-l2",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "The review happened first; the upload happened later. Choose: “We reviewed the file ___ uploading it.”",
+      "options": [
+        "before",
+        "after",
+        "during",
+        "until"
+      ],
+      "answer": "before",
+      "accepted_answers": [
+        "before"
+      ],
+      "explanation": "Before marks the review as earlier than the upload.",
+      "origin": "newly_authored",
+      "source_refs": [],
+      "needs_review": false
+    },
+    {
+      "id": "q140",
+      "canonical_id": "serag-notebook-course-v1:phase-1:q140",
+      "batch_id": "phase-1",
+      "unit_id": "u9",
+      "lesson_id": "u9-l2",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "Choose the sentence that puts lunch after the meeting.",
+      "options": [
+        "We had lunch after the meeting.",
+        "We had lunch before the meeting.",
+        "We had lunch during the meeting.",
+        "We had lunch until the meeting."
+      ],
+      "answer": "We had lunch after the meeting.",
+      "accepted_answers": [
+        "We had lunch after the meeting."
+      ],
+      "explanation": "After places lunch later than the meeting.",
+      "origin": "newly_authored",
+      "source_refs": [],
+      "needs_review": false
+    },
+    {
+      "id": "q141",
+      "canonical_id": "serag-notebook-course-v1:phase-1:q141",
+      "batch_id": "phase-1",
+      "unit_id": "u9",
+      "lesson_id": "u9-l2",
+      "type": "fill_blank",
+      "skill": "production",
+      "prompt": "Complete the sequence: “First we tested the link. ___ that, we sent it.”",
+      "answer": "After",
+      "accepted_answers": [
+        "After"
+      ],
+      "explanation": "After that points back to the completed test.",
+      "origin": "newly_authored",
+      "source_refs": [],
+      "needs_review": false
+    },
+    {
+      "id": "q142",
+      "canonical_id": "serag-notebook-course-v1:phase-1:q142",
+      "batch_id": "phase-1",
+      "unit_id": "u9",
+      "lesson_id": "u9-l2",
+      "type": "error_correction",
+      "skill": "production",
+      "prompt": "Correct the sequence: “After we sent the file, we checked it first.” Write a sentence that clearly puts checking first.",
+      "answer": "We checked the file before we sent it.",
+      "accepted_answers": [
+        "We checked the file before we sent it."
+      ],
+      "explanation": "Before makes checking earlier than sending.",
+      "origin": "newly_authored",
+      "source_refs": [],
+      "needs_review": false
+    },
+    {
+      "id": "q143",
+      "canonical_id": "serag-notebook-course-v1:phase-1:q143",
+      "batch_id": "phase-1",
+      "unit_id": "u10",
+      "lesson_id": "u10-l2",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "The desk has a chair on each side. The desk is ___ the chairs.",
+      "options": [
+        "between",
+        "under",
+        "behind",
+        "next to"
+      ],
+      "answer": "between",
+      "accepted_answers": [
+        "between"
+      ],
+      "explanation": "Between locates the desk in the space separating the two chairs.",
+      "origin": "newly_authored",
+      "source_refs": [],
+      "needs_review": false
+    },
+    {
+      "id": "q144",
+      "canonical_id": "serag-notebook-course-v1:phase-1:q144",
+      "batch_id": "phase-1",
+      "unit_id": "u10",
+      "lesson_id": "u10-l2",
+      "type": "fill_blank",
+      "skill": "production",
+      "prompt": "Complete: “The bag is directly ___ the desk, not on top of it.”",
+      "answer": "under",
+      "accepted_answers": [
+        "under"
+      ],
+      "explanation": "Under indicates a lower position.",
+      "origin": "newly_authored",
+      "source_refs": [],
+      "needs_review": false
+    },
+    {
+      "id": "q145",
+      "canonical_id": "serag-notebook-course-v1:phase-1:q145",
+      "batch_id": "phase-1",
+      "unit_id": "u10",
+      "lesson_id": "u10-l2",
+      "type": "error_correction",
+      "skill": "production",
+      "prompt": "Use “next to” to correct the location phrase: “The printer is between the desk.”",
+      "answer": "The printer is next to the desk.",
+      "accepted_answers": [
+        "The printer is next to the desk."
+      ],
+      "explanation": "Between needs two reference points; next to works with one.",
+      "origin": "newly_authored",
+      "source_refs": [],
+      "needs_review": false
+    },
+    {
+      "id": "q146",
+      "canonical_id": "serag-notebook-course-v1:phase-1:q146",
+      "batch_id": "phase-1",
+      "unit_id": "u11",
+      "lesson_id": "u11-l2",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "Choose the regular past form of “plan” in “Yesterday, we ___ the shoot.”",
+      "options": [
+        "planned",
+        "planed",
+        "plans",
+        "planning"
+      ],
+      "answer": "planned",
+      "accepted_answers": [
+        "planned"
+      ],
+      "explanation": "A final consonant is doubled in planned.",
+      "origin": "newly_authored",
+      "source_refs": [],
+      "needs_review": false
+    },
+    {
+      "id": "q147",
+      "canonical_id": "serag-notebook-course-v1:phase-1:q147",
+      "batch_id": "phase-1",
+      "unit_id": "u11",
+      "lesson_id": "u11-l2",
+      "type": "fill_blank",
+      "skill": "production",
+      "prompt": "Complete with the past form of “carry”: “She ___ the boxes yesterday.”",
+      "answer": "carried",
+      "accepted_answers": [
+        "carried"
+      ],
+      "explanation": "Consonant + y changes to ied in the past form.",
+      "origin": "newly_authored",
+      "source_refs": [],
+      "needs_review": false
+    },
+    {
+      "id": "q148",
+      "canonical_id": "serag-notebook-course-v1:phase-1:q148",
+      "batch_id": "phase-1",
+      "unit_id": "u11",
+      "lesson_id": "u11-l2",
+      "type": "error_correction",
+      "skill": "production",
+      "prompt": "Correct the past form: “We stoped filming at six.”",
+      "answer": "We stopped filming at six.",
+      "accepted_answers": [
+        "We stopped filming at six."
+      ],
+      "explanation": "The final consonant doubles before -ed in stopped.",
+      "origin": "newly_authored",
+      "source_refs": [],
+      "needs_review": false
+    },
+    {
+      "id": "q149",
+      "canonical_id": "serag-notebook-course-v1:phase-1:q149",
+      "batch_id": "phase-1",
+      "unit_id": "u11",
+      "lesson_id": "u11-l3",
+      "type": "multiple_choice",
+      "skill": "recognition",
+      "prompt": "Choose the past form of “go”: “Last week, we ___ to the studio.”",
+      "options": [
+        "went",
+        "goed",
+        "goes",
+        "going"
+      ],
+      "answer": "went",
+      "accepted_answers": [
+        "went"
+      ],
+      "explanation": "Went is the irregular past form of go.",
+      "origin": "newly_authored",
+      "source_refs": [],
+      "needs_review": false
+    },
+    {
+      "id": "q150",
+      "canonical_id": "serag-notebook-course-v1:phase-1:q150",
+      "batch_id": "phase-1",
+      "unit_id": "u11",
+      "lesson_id": "u11-l3",
+      "type": "fill_blank",
+      "skill": "production",
+      "prompt": "Complete with the past form of “write”: “Yesterday, she ___ the summary.”",
+      "answer": "wrote",
+      "accepted_answers": [
+        "wrote"
+      ],
+      "explanation": "Wrote is the irregular past form of write.",
+      "origin": "newly_authored",
+      "source_refs": [],
+      "needs_review": false
+    },
+    {
+      "id": "q151",
+      "canonical_id": "serag-notebook-course-v1:phase-1:q151",
+      "batch_id": "phase-1",
+      "unit_id": "u11",
+      "lesson_id": "u11-l3",
+      "type": "error_correction",
+      "skill": "production",
+      "prompt": "Correct the past form: “They buyed a new microphone.”",
+      "answer": "They bought a new microphone.",
+      "accepted_answers": [
+        "They bought a new microphone."
+      ],
+      "explanation": "Bought is the irregular past form of buy.",
+      "origin": "newly_authored",
+      "source_refs": [],
+      "needs_review": false
     }
   ],
   "writing_tasks": [
@@ -6449,5 +6917,202 @@
       "word_range": "60–90",
       "assessment_type": "rubric_guided_review_not_automatic_grade"
     }
-  ]
+  ],
+  "manifest": {
+    "version": 1,
+    "lessons": [
+      {
+        "id": "u1-l1",
+        "topic": "sentence-parts",
+        "objective": "Identify complete SV, SVO and SVC clauses.",
+        "order": 0
+      },
+      {
+        "id": "u1-l2",
+        "topic": "be-basics",
+        "objective": "Use am, is and are in statements and questions.",
+        "order": 1
+      },
+      {
+        "id": "u1-l3",
+        "topic": "present-simple",
+        "objective": "Describe routines with correct agreement.",
+        "order": 2
+      },
+      {
+        "id": "u1-l4",
+        "topic": "stative-verbs",
+        "objective": "Distinguish current activity from a state.",
+        "order": 3
+      },
+      {
+        "id": "u4-l1",
+        "topic": "noun-plurals",
+        "objective": "Form regular and common irregular plurals.",
+        "order": 4
+      },
+      {
+        "id": "u4-l2",
+        "topic": "countable",
+        "objective": "Choose forms for countable and uncountable nouns.",
+        "order": 5
+      },
+      {
+        "id": "u5-l1",
+        "topic": "articles",
+        "objective": "Choose a or an from the following sound.",
+        "order": 6
+      },
+      {
+        "id": "u5-l2",
+        "topic": "articles",
+        "objective": "Distinguish specific and general reference.",
+        "order": 7
+      },
+      {
+        "id": "u6-l1",
+        "topic": "pronouns",
+        "objective": "Choose subject and object pronouns.",
+        "order": 8
+      },
+      {
+        "id": "u6-l2",
+        "topic": "reflexive-pronouns",
+        "objective": "Use reflexive pronouns when reference returns to the subject.",
+        "order": 9
+      },
+      {
+        "id": "u7-l1",
+        "topic": "possessives",
+        "objective": "Distinguish possessive determiners and pronouns.",
+        "order": 10
+      },
+      {
+        "id": "u7-l2",
+        "topic": "possessives",
+        "objective": "Use singular and plural possessive apostrophes.",
+        "order": 11
+      },
+      {
+        "id": "u8-l1",
+        "topic": "demonstratives",
+        "objective": "Choose demonstratives by distance and number.",
+        "order": 12
+      },
+      {
+        "id": "u8-l2",
+        "topic": "some-any",
+        "objective": "Use some and any in their contexts.",
+        "order": 13
+      },
+      {
+        "id": "u8-l3",
+        "topic": "countable",
+        "objective": "Choose much, many and a lot of appropriately.",
+        "order": 14
+      },
+      {
+        "id": "u8-l4",
+        "topic": "quantity",
+        "objective": "Distinguish a few, few, a little and little.",
+        "order": 15
+      },
+      {
+        "id": "u9-l1",
+        "topic": "time-prepositions",
+        "objective": "Choose at, in and on for time expressions.",
+        "order": 16
+      },
+      {
+        "id": "u9-l2",
+        "topic": "time-sequence",
+        "objective": "Use before and after for event order.",
+        "order": 17
+      },
+      {
+        "id": "u9-l3",
+        "topic": "time-boundaries",
+        "objective": "Distinguish from, to, until and by.",
+        "order": 18
+      },
+      {
+        "id": "u9-l4",
+        "topic": "duration",
+        "objective": "Distinguish during, while and for.",
+        "order": 19
+      },
+      {
+        "id": "u10-l1",
+        "topic": "place-prepositions",
+        "objective": "Choose in, on and at for place.",
+        "order": 20
+      },
+      {
+        "id": "u10-l2",
+        "topic": "relative-position",
+        "objective": "Describe relative positions clearly.",
+        "order": 21
+      },
+      {
+        "id": "u10-l3",
+        "topic": "movement",
+        "objective": "Distinguish to, into and out of.",
+        "order": 22
+      },
+      {
+        "id": "u10-l4",
+        "topic": "path-movement",
+        "objective": "Distinguish through, across and along.",
+        "order": 23
+      },
+      {
+        "id": "u11-l1",
+        "topic": "past-be",
+        "objective": "Use was and were with the right subject.",
+        "order": 24
+      },
+      {
+        "id": "u11-l2",
+        "topic": "regular-past",
+        "objective": "Form regular past verbs and spelling changes.",
+        "order": 25
+      },
+      {
+        "id": "u11-l3",
+        "topic": "irregular-past",
+        "objective": "Recall common irregular past forms in context.",
+        "order": 26
+      },
+      {
+        "id": "u11-l4",
+        "topic": "past-questions-negatives",
+        "objective": "Form past negatives and questions with did.",
+        "order": 27
+      },
+      {
+        "id": "u12-l1",
+        "topic": "past-continuous",
+        "objective": "Form past continuous statements.",
+        "order": 28
+      },
+      {
+        "id": "u12-l2",
+        "topic": "past-continuous-questions",
+        "objective": "Form past continuous negatives and questions.",
+        "order": 29
+      },
+      {
+        "id": "u12-l3",
+        "topic": "past-background-events",
+        "objective": "Distinguish background actions from interruptions.",
+        "order": 30
+      },
+      {
+        "id": "u12-l4",
+        "topic": "past-simultaneous",
+        "objective": "Describe simultaneous actions with when and while.",
+        "order": 31
+      }
+    ]
+  }
 }
