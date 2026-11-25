@@ -6,13 +6,13 @@ const batch=JSON.parse(fs.readFileSync(new URL('../curriculum-data/batch-001.jso
 const publishedCourse=JSON.parse(fs.readFileSync(new URL('../curriculum-data/course-v1.json',import.meta.url)));
 batch.manifest={version:1,lessons:publishedCourse.manifest.lessons.filter(l=>batch.units.some(u=>u.lessons.some(x=>x.id===l.id)))};
 const source=fs.readFileSync(new URL('../english-notebook-course-v1.js',import.meta.url),'utf8');
-async function fixture({eligible=true,ready=true,course=batch}={}){
+async function fixture({eligible=true,ready=true,course=batch,storage=new Map(),answeredKeys=new Set(),loadFail=false}={}){
  const events={},tracks=[],skills=[];
- const window={user:{id:'owner-a'},addEventListener(){},ENGOPLAY:{isReady:ready,ensureReady:async()=>{},stats:()=>({answeredKeys:new Set()}),track:r=>tracks.push(r)},SERAG_ACADEMY_V12:{selectQuestions:list=>eligible?list:[]},SERAG_SKILL_EVIDENCE:{record:r=>skills.push(r)}};
+ const window={user:{id:'owner-a'},addEventListener(){},ENGOPLAY:{isReady:ready,ensureReady:async()=>{},stats:()=>({answeredKeys}),track:r=>tracks.push(r)},SERAG_ACADEMY_V12:{selectQuestions:list=>eligible?list:[]},SERAG_SKILL_EVIDENCE:{record:r=>skills.push(r)}};
  const document={addEventListener:(name,fn)=>events[name]=fn,querySelector:()=>null};
- vm.runInNewContext(source,{window,document,fetch:async()=>({ok:true,json:async()=>structuredClone(course)}),AbortSignal,localStorage:{getItem:()=>null},setInterval:()=>0,clearInterval});
+ vm.runInNewContext(source,{window,document,fetch:async()=>({ok:!loadFail,json:async()=>structuredClone(course)}),AbortSignal,localStorage:{getItem:key=>storage.get(key)||null,setItem:(key,value)=>storage.set(key,value)},setInterval:()=>0,clearInterval});
  await window.SERAG_NOTEBOOK_COURSE_READY;
- return {api:window.SERAG_NOTEBOOK_COURSE,window,tracks,skills,events};
+ return {api:window.SERAG_NOTEBOOK_COURSE,window,tracks,skills,events,storage,answeredKeys};
 }
 test('published batch retains all four formats, distinct IDs, valid ordering and unverified citations',async()=>{
  const {api}=await fixture();assert.equal(api.data.questions.length,16);
@@ -122,5 +122,50 @@ test('option order is stable per owner and canonical progress keys survive the n
  await api.start();assert.equal(api.currentQuestion().id,original.canonical_id);
  api.respond(api.currentQuestion().answer);assert.equal(tracks[0].id,original.canonical_id);
  window.ENGOPLAY.stats=()=>({answeredKeys:new Set([original.canonical_id])});
- assert.match(api.html(),/1\/2 distinct questions answered/);
+ assert.match(api.html(),/Answered 1 of 2 different questions/);
+});
+
+test('learning path chooses a saved unfinished lesson, then the first unfinished lesson, then review',async()=>{
+ const {api}=await fixture({course:publishedCourse});
+ const first=api.pathModel(publishedCourse,new Set(),'');
+ assert.equal(first.mode,'new');assert.equal(first.target.lesson.id,'u1-l1');assert.equal(first.total,151);
+ const partlyAnswered=new Set([publishedCourse.questions[0].canonical_id]);
+ const saved=api.pathModel(publishedCourse,partlyAnswered,'u8-l2');
+ assert.equal(saved.mode,'continue');assert.equal(saved.target.lesson.id,'u8-l2');
+ const allInSaved=publishedCourse.questions.filter(q=>q.lesson_id==='u8-l2').map(q=>q.canonical_id);
+ const fallback=api.pathModel(publishedCourse,new Set([...partlyAnswered,...allInSaved]),'u8-l2');
+ assert.equal(fallback.target.lesson.id,'u1-l1');
+ const firstDone=new Set(publishedCourse.questions.filter(q=>q.lesson_id==='u1-l1').map(q=>q.canonical_id));
+ assert.equal(api.pathModel(publishedCourse,firstDone,'missing-lesson').target.lesson.id,'u1-l2');
+ const all=new Set(publishedCourse.questions.map(q=>q.canonical_id));
+ const complete=api.pathModel(publishedCourse,all,'u8-l2');
+ assert.equal(complete.mode,'complete');assert.equal(complete.completed,complete.total);
+ assert.match(api.html(),/Start here/);
+});
+
+test('missing objectives, missing questions, failed fetch and unavailable history show an error',async()=>{
+ const {api}=await fixture({course:publishedCourse});
+ const missingObjective=structuredClone(publishedCourse);missingObjective.manifest.lessons[0].objective='';
+ assert.equal(api.pathModel(missingObjective,new Set()).mode,'error');
+ const missingQuestions=structuredClone(publishedCourse);missingQuestions.questions=missingQuestions.questions.filter(q=>q.lesson_id!=='u1-l1');
+ assert.equal(api.pathModel(missingQuestions,new Set()).mode,'error');
+ assert.throws(()=>api.validate(missingQuestions),/no linked questions/);
+ const failed=await fixture({loadFail:true});assert.match(failed.api.html(),/Could not load the course/);assert.match(failed.api.html(),/Retry loading/);
+ const history=await fixture({ready:false});assert.match(history.api.html(),/answer history is not ready/);assert.match(history.api.html(),/Retry loading answer history/);
+});
+
+test('last lesson cursor survives reload locally and never records an answer or XP',async()=>{
+ const storage=new Map(),first=await fixture({course:publishedCourse,storage});
+ first.api.html();
+ const root={dataset:{nbcOwner:'owner-a'}};
+ const button={dataset:{nbcLesson:'u8-l2'},closest:selector=>selector==='[data-nbc-root]'?root:null,hasAttribute:()=>false};
+ first.events.click({target:{closest:selector=>selector==='button'?button:null}});
+ assert.deepEqual(JSON.parse(storage.get('seragNotebookPathV1:owner-a')),{lessonId:'u8-l2'});
+ assert.equal(first.tracks.length,0);
+ const reloaded=await fixture({course:publishedCourse,storage});reloaded.api.html();
+ assert.equal(reloaded.api.pathModel().target.lesson.id,'u8-l2');
+ assert.equal(reloaded.api.pathModel().mode,'continue');
+ reloaded.window.user={id:'owner-b'};reloaded.api.html();
+ assert.equal(reloaded.api.pathModel().target.lesson.id,'u1-l1');
+ assert.equal(reloaded.tracks.length,0);
 });
