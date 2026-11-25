@@ -63,7 +63,7 @@ test('completed daily sessions expose result and review without claiming mastery
  assert.equal(plan.model().action,'See session result');
  assert.match(api.html(),/Back to daily plan/);
  assert.match(api.html(),/data-ep-review/);
- assert.match(api.html(),/not a full level assessment/);
+ assert.match(api.html(),/not mastery or a CEFR level/);
 });
 
 test('ordinary word practice is not offered as a resumable daily plan',()=>{
