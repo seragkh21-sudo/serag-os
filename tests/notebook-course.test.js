@@ -3,12 +3,14 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
 const batch=JSON.parse(fs.readFileSync(new URL('../curriculum-data/batch-001.json',import.meta.url)));
+const publishedCourse=JSON.parse(fs.readFileSync(new URL('../curriculum-data/course-v1.json',import.meta.url)));
+batch.manifest={version:1,lessons:publishedCourse.manifest.lessons.filter(l=>batch.units.some(u=>u.lessons.some(x=>x.id===l.id)))};
 const source=fs.readFileSync(new URL('../english-notebook-course-v1.js',import.meta.url),'utf8');
-async function fixture({eligible=true,ready=true}={}){
+async function fixture({eligible=true,ready=true,course=batch}={}){
  const events={},tracks=[],skills=[];
  const window={user:{id:'owner-a'},addEventListener(){},ENGOPLAY:{isReady:ready,ensureReady:async()=>{},stats:()=>({answeredKeys:new Set()}),track:r=>tracks.push(r)},SERAG_ACADEMY_V12:{selectQuestions:list=>eligible?list:[]},SERAG_SKILL_EVIDENCE:{record:r=>skills.push(r)}};
  const document={addEventListener:(name,fn)=>events[name]=fn,querySelector:()=>null};
- vm.runInNewContext(source,{window,document,fetch:async()=>({ok:true,json:async()=>structuredClone(batch)}),AbortSignal,localStorage:{getItem:()=>null},setInterval:()=>0,clearInterval});
+ vm.runInNewContext(source,{window,document,fetch:async()=>({ok:true,json:async()=>structuredClone(course)}),AbortSignal,localStorage:{getItem:()=>null},setInterval:()=>0,clearInterval});
  await window.SERAG_NOTEBOOK_COURSE_READY;
  return {api:window.SERAG_NOTEBOOK_COURSE,window,tracks,skills,events};
 }
@@ -44,9 +46,11 @@ test('combined course retains prior batches and all word-order answers remain co
  const seventh=JSON.parse(fs.readFileSync(new URL('../curriculum-data/batch-007.json',import.meta.url)));
  const eighth=JSON.parse(fs.readFileSync(new URL('../curriculum-data/batch-008.json',import.meta.url)));
  const {api}=await fixture();api.validate(published);
- assert.deepEqual(published.questions,[...batch.questions.map(q=>({...q,batch_id:'batch-001'})),...second.questions.map(q=>({...q,batch_id:'batch-002'})),...third.questions.map(q=>({...q,batch_id:'batch-003'})),...fourth.questions.map(q=>({...q,batch_id:'batch-004'})),...fifth.questions.map(q=>({...q,batch_id:'batch-005'})),...sixth.questions.map(q=>({...q,batch_id:'batch-006'})),...seventh.questions.map(q=>({...q,batch_id:'batch-007'})),...eighth.questions.map(q=>({...q,batch_id:'batch-008'}))]);
- assert.equal(published.questions.length,128);assert.equal(published.units.flatMap(u=>u.lessons).length,32);
+ const originalExplanations=new Map([batch,...[second,third,fourth,fifth,sixth,seventh,eighth]].flatMap(b=>b.questions.map(q=>[q.id,q.explanation])));
+ assert.deepEqual(published.questions.slice(0,128).map(q=>({...q,explanation:['q01','q95'].includes(q.id)?originalExplanations.get(q.id):q.explanation})),[...batch.questions.map(q=>({...q,batch_id:'batch-001'})),...second.questions.map(q=>({...q,batch_id:'batch-002'})),...third.questions.map(q=>({...q,batch_id:'batch-003'})),...fourth.questions.map(q=>({...q,batch_id:'batch-004'})),...fifth.questions.map(q=>({...q,batch_id:'batch-005'})),...sixth.questions.map(q=>({...q,batch_id:'batch-006'})),...seventh.questions.map(q=>({...q,batch_id:'batch-007'})),...eighth.questions.map(q=>({...q,batch_id:'batch-008'}))]);
+ assert.equal(published.questions.length,151);assert.equal(published.units.flatMap(u=>u.lessons).length,32);
  for(const q of batch.questions){const live=published.questions.find(row=>row.canonical_id===q.canonical_id);for(const key of ['id','canonical_id','prompt','answer','accepted_answers'])assert.deepEqual(live[key],q[key])}
+ assert.match(published.questions[0].explanation,/head noun or pronoun/);
  for(const q of second.questions){assert.match(q.canonical_id,/^serag-notebook-course-v1:batch-002:q/);for(const ref of q.source_refs)assert.equal(ref.pdf_page,null)}
  assert.equal(second.questions.filter(q=>q.type==='multiple_choice').length,5);
  assert.equal(second.questions.filter(q=>q.type==='fill_blank').length,4);
@@ -87,4 +91,36 @@ test('combined course retains prior batches and all word-order answers remain co
  const impossible=structuredClone(published);impossible.questions.find(q=>q.id==='q32').accepted_answers.push('Major damage to city infrastructure is caused by earthquakes.');
  assert.throws(()=>api.validate(impossible),/tokens/);
  const duplicate=structuredClone(published);duplicate.units[0].lessons.push(duplicate.units[0].lessons[0]);assert.throws(()=>api.validate(duplicate),/Duplicate/);
+});
+
+test('manifest replaces the topic map and all seven enriched lessons have retrieval practice',async()=>{
+ const {api}=await fixture({course:publishedCourse});
+ const ids=['u1-l1','u7-l1','u8-l1','u9-l2','u10-l2','u11-l2','u11-l3'];
+ assert.equal(publishedCourse.manifest.lessons.length,32);
+ for(const id of ids){const questions=publishedCourse.questions.filter(q=>q.lesson_id===id);assert.ok(questions.length>=6,id);assert.ok(questions.filter(q=>q.type!=='multiple_choice').length>=2,id)}
+ for(const row of publishedCourse.manifest.lessons){assert.ok(row.topic&&row.objective);assert.equal(api.questionsFor(row.id)[0]?.topic,row.topic)}
+});
+
+test('broken choices, answer keys, references and manifest are rejected',async()=>{
+ const {api}=await fixture();
+ for(const change of [
+  d=>{d.questions[0].options[1]=d.questions[0].options[0]},
+  d=>{d.questions[0].accepted_answers.push('not offered')},
+  d=>{d.questions[0].unit_id='wrong'},
+  d=>{d.manifest.lessons[0].topic=''},
+  d=>{d.questions[0].canonical_id=d.questions[1].canonical_id}
+ ]){const broken=structuredClone(publishedCourse);change(broken);assert.throws(()=>api.validate(broken))}
+});
+
+test('option order is stable per owner and canonical progress keys survive the new manifest',async()=>{
+ const {api,window,tracks}=await fixture();
+ const original=publishedCourse.questions[0];const q=api.questionsFor(original.lesson_id)[0];
+ assert.equal(q.id,original.canonical_id);
+ assert.deepEqual(api.optionsFor(q,'owner-a'),api.optionsFor(q,'owner-a'));
+ assert.deepEqual(new Set(api.optionsFor(q,'owner-a')),new Set(q.options));
+ assert.ok(['owner-b','owner-c','owner-d','owner-e','owner-f'].some(id=>JSON.stringify(api.optionsFor(q,id))!==JSON.stringify(api.optionsFor(q,'owner-a'))));
+ await api.start();assert.equal(api.currentQuestion().id,original.canonical_id);
+ api.respond(api.currentQuestion().answer);assert.equal(tracks[0].id,original.canonical_id);
+ window.ENGOPLAY.stats=()=>({answeredKeys:new Set([original.canonical_id])});
+ assert.match(api.html(),/1\/2 distinct questions answered/);
 });
