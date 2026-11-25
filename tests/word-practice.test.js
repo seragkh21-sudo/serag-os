@@ -153,3 +153,54 @@ test('the periodic mount refills a re-rendered empty practice host without repla
  assert.equal(host.firstElementChild?.outerHTML,api.html());
  assert.doesNotMatch(host.firstElementChild?.outerHTML||'',/class="wp-card wp-intro"/);
 });
+
+test('session summary separates independent checks from retries, hints and revealed models',()=>{
+ const {api}=app();api.startJourney([],'Today’s practice',[],true);
+ let q=api.currentQuestion();assert.equal(q.kind,'recognition');
+ api.respond(q.options.find(option=>option!==q.answer));api.respond(q.answer);api.next();
+ q=api.currentQuestion();api.showHint();api.respond(q.answer);api.next();
+ api.reveal();api.next();
+ q=api.currentQuestion();api.respond(q.answer);api.next();
+ const report=api.resultModel();
+ assert.equal(report.completed,4);assert.equal(report.total,4);
+ assert.equal(report.independent,1);assert.equal(report.review.length,3);
+ assert.equal(report.review[0].reason,'Correct after a retry');
+ assert.equal(report.review[1].reason,'Correct with a hint');
+ assert.equal(report.review[2].reason,'Model viewed');
+ assert.match(api.html(),/What needs review/);
+ assert.match(api.html(),/data-ep-review/);
+ assert.match(api.html(),/not mastery or a CEFR level/);
+});
+
+test('clean session offers written recall and the summary is isolated by account',()=>{
+ const {c,api}=app();api.startJourney([],'Today’s practice',[],true);
+ while(api.currentQuestion()){api.respond(api.currentQuestion().answer);api.next()}
+ assert.equal(api.resultModel().review.length,0);
+ assert.match(api.html(),/No items were flagged for correction/);
+ assert.match(api.html(),/data-ese-recall/);
+ c.user={id:'b'};
+ assert.equal(api.resultModel(),null);
+ assert.doesNotMatch(api.html(),/PRACTICE SUMMARY/);
+});
+
+test('review labels distinguish meaning from delayed written recall',()=>{
+ const {api}=app();api.start('catch up');
+ api.reveal();api.next();
+ for(let i=0;i<3;i++){api.reveal();api.next()}
+ assert.equal(api.currentQuestion().kind,'recall');api.reveal();api.next();
+ const labels=api.resultModel().review.map(row=>row.label);
+ assert.ok(labels.some(label=>label.startsWith('Meaning · ')));
+ assert.ok(labels.some(label=>label.startsWith('Written recall · ')));
+});
+
+test('shared practice choices keep the same answers while changing position',()=>{
+ const {c,api}=app(),words=api.items().slice(0,4);
+ c.Math=Object.create(Math);c.Math.random=()=>0.99;
+ const first=api.buildRound(words,[],4,[],true).find(q=>q.kind==='recognition');
+ c.Math.random=()=>0;
+ const second=api.buildRound(words,[],4,[],true).find(q=>q.kind==='recognition');
+ assert.equal(first.answer,second.answer);
+ assert.notEqual(first.options.indexOf(first.answer),second.options.indexOf(second.answer));
+ assert.equal(new Set(first.options).size,first.options.length);
+ assert.equal(new Set(second.options).size,second.options.length);
+});
